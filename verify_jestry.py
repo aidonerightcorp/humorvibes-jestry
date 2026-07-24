@@ -49,8 +49,10 @@ def ollama_up() -> bool:
 
 @gate("G1 offline pytest suite (full)")
 def g1():
+    # 900s fit the 1.3k-card corpus; the 23k-card supply needs headroom
+    # (16k cards ran 799s GREEN on 2026-07-24) — the tests still must pass
     proc = subprocess.run([sys.executable, "-m", "pytest", "tests/", "-q"],
-                          cwd=ROOT, capture_output=True, text=True, timeout=900)
+                          cwd=ROOT, capture_output=True, text=True, timeout=2400)
     tail = (proc.stdout + proc.stderr).strip().splitlines()[-1]
     assert proc.returncode == 0, tail
     return tail
@@ -127,8 +129,12 @@ def g6():
         raise SkipGate("ollama not answering on 127.0.0.1:11434")
     from jestry import Jestry, WorkSpec
     j = Jestry()
+    # salt the topic per run: a fixed request goes stale the moment the ladder
+    # accepts and preserves a bit for it — every later run then replays that
+    # bit (correct, Law 6) and this gate would never exercise live measurement
+    salt = time.strftime("%H:%M")
     spec = WorkSpec.from_request(
-        "Make a joke about AI project managers shipping agentic products",
+        f"Make a joke about AI project managers shipping agentic products before the {salt} deadline",
         audience="NYC tech meetup", personas="NYC tech meetup",
         preferences="smart, specific, not mean", format_key="one_liner", candidates=2)
     t0 = time.time()
@@ -137,11 +143,32 @@ def g6():
     cands = receipt["candidates"]
     assert cands, f"no candidates produced: {receipt['outcome']}"
     measured = [c for c in cands if c.get("measured")]
-    assert measured, "no candidate carries measured=True signals"
-    assert receipt["truth_boundary"]["teacher_forced_logprobs_measured"] is True
+    outcome = receipt["outcome"]
+    replay_ok = (outcome.get("accepted") and not measured
+                 and "carried" in str(outcome.get("bit_id", "")).lower())
+    if replay_ok:
+        # the ladder found an accepted bit for this request family and replayed
+        # it (Law 6 — correct, zero model calls). The live instrument is then
+        # proven separately below; a replay must still carry its provenance.
+        route = f"replay of {outcome.get('bit_id', '?')[:40]}"
+    else:
+        assert measured, "no candidate carries measured=True signals"
+        assert receipt["truth_boundary"]["teacher_forced_logprobs_measured"] is True
+        route = f"{len(measured)} measured live"
     assert receipt["oracle_usage"]["provider"] in ("gemma2-full-nll", "gemma4-forced-nll")
-    acc = receipt["outcome"]["accepted"]
-    return (f"{len(cands)} candidates, {len(measured)} measured, "
+    # direct instrument probe (always): the certified oracle must measure the
+    # reference joke inside the receipted calibration band, every verify run —
+    # through the same protocol call the calibration itself used
+    from mesh_signals import compute_signals
+    sig = compute_signals(j._oracle(), "I told my therapist about my fear of speed bumps.",
+                          "She said I'm slowly getting over it.")
+    S = round(sig.surprise_mean, 2)
+    cal = json.loads((ROOT / "jestry_out" / "gemma2_full_nll_calibration.json").read_text())
+    lo, hi = cal["derived"]["s_band"]
+    assert sig.measured, "oracle probe not measured"
+    assert lo <= S <= hi, f"probe S={S} outside certified band [{lo},{hi}]"
+    acc = outcome["accepted"]
+    return (f"{len(cands)} candidates ({route}), probe S={S} in band, "
             f"accepted={acc}, wall {wall:.0f}s")
 
 
