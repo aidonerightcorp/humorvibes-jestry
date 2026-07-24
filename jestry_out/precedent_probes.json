@@ -1,8 +1,8 @@
 {
   "receipt_type": "precedent_probes",
-  "ts": "2026-07-24T11:05:47",
+  "ts": "2026-07-24T11:20:17",
   "backend": "ollama:embeddinggemma",
-  "indexed_items": 1356,
+  "indexed_items": 10869,
   "languages": 44,
   "labeled_frames": 230,
   "labeler_usage": {
@@ -292,5 +292,157 @@
         ]
       ]
     }
+  },
+  "probes_at_10k": {
+    "monkey_paraphrase": {
+      "query": "Even the most skilled monkey falls from the tree sometimes.",
+      "verdict": "adjacent_neighborhood: related material exists — worth citing",
+      "top": [
+        [
+          "ko",
+          0.721,
+          "원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreojinda) "
+        ],
+        [
+          "ja",
+          0.702,
+          "猿も木から落ちる (saru mo ki kara ochiru) — Even monkeys f"
+        ],
+        [
+          "en",
+          0.65,
+          "Bike Fall"
+        ]
+      ],
+      "frame_top": []
+    },
+    "man_plans": {
+      "query": "Man plans and God laughs.",
+      "verdict": "surface_match: this wording has been done in the indexed supply",
+      "top": [
+        [
+          "en",
+          1.0,
+          "Man plans and God laughs."
+        ],
+        [
+          "Yiddish",
+          0.849,
+          "Der mentsh trakht un got lakht. — Man plans and Go"
+        ],
+        [
+          "af",
+          0.533,
+          "'n Boer maak 'n plan. — A farmer makes a plan."
+        ]
+      ],
+      "frame_top": []
+    },
+    "experts_slip_novel": {
+      "query": "Even a chess grandmaster hangs a queen now and then.",
+      "verdict": "no_precedent_found within the indexed supply of 10869 items",
+      "top": [
+        [
+          "en",
+          0.562,
+          "So I beat a Russian Grand Master once. With his ow"
+        ],
+        [
+          "en",
+          0.54,
+          "What did the racist chess player say? All Rook sam"
+        ],
+        [
+          "en",
+          0.521,
+          "Two hillbillies were playing chess.."
+        ]
+      ],
+      "frame_top": [
+        [
+          "ta",
+          0.603,
+          "யானைக்கும் அடி சறுக்கும் (yaanaikkum adi sarukkum)"
+        ],
+        [
+          "ko",
+          0.576,
+          "원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreojinda) "
+        ],
+        [
+          "en",
+          0.571,
+          "Bike Fall"
+        ]
+      ]
+    }
+  },
+  "final_census": {
+    "ts": "2026-07-24T12:16:33",
+    "items": 23155,
+    "languages": 46,
+    "non_english": 12378,
+    "top": [
+      [
+        "en",
+        10777
+      ],
+      [
+        "ru",
+        4893
+      ],
+      [
+        "es",
+        2066
+      ],
+      [
+        "de",
+        608
+      ],
+      [
+        "pt",
+        602
+      ],
+      [
+        "ar",
+        601
+      ],
+      [
+        "ro",
+        601
+      ],
+      [
+        "lt",
+        600
+      ],
+      [
+        "sv",
+        597
+      ],
+      [
+        "pl",
+        512
+      ],
+      [
+        "fa",
+        350
+      ],
+      [
+        "hi",
+        311
+      ],
+      [
+        "cs",
+        269
+      ],
+      [
+        "he",
+        146
+      ],
+      [
+        "hu",
+        51
+      ]
+    ]
   }
 }

@@ -5,13 +5,13 @@ A Gemma-powered humor engine for the Build with Gemma: Humor Genome NYC hackatho
 *(Formerly "Punchline Mesh" — a few internal Kaggle slugs keep the old name for stability:
 the `punchline-mesh-src` dataset and already-running kernel sessions.)*
 
-**Theory first**: see `THEORY.md` — a derivative of Karl Friston's "Your Brain Is a Detective
+Theory first: see `THEORY.md`, a derivative of Karl Friston's "Your Brain Is a Detective
 Minimizing Surprise" (youtube.com/watch?v=g69Lj3huRvw). The brain is a mesh of dynamic neural
 networks (weighted edges, sparse ATP-budgeted firing, tunable paths) supervised by a meta-model
-that minimizes surprise. A joke is a **controlled prediction error with a cheap, permitted
-repair**: surprising (S), resolvable through a hidden frame (R), affordable (E), and never
+that minimizes surprise. A joke is a controlled prediction error with a cheap, permitted
+repair: surprising (S), resolvable through a hidden frame (R), affordable (E), and never
 colliding with override-authority meta-meshes (B, the canonical bad-surprise definition below).
-Gemma is used as an **instrument, not an oracle** — S/R/E are read off its logits
+Gemma is an instrument here, not an oracle. S/R/E are read off its logits
 (`mesh_signals.py`), not self-reported.
 
 The prototype implements one loop:

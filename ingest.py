@@ -183,7 +183,9 @@ def imgflip_templates(max_items: int = 40) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 HF_JOKE_DATASETS = {
     # name -> (repo, config, split, text_field, label_field or None)
-    "short_jokes": ("Fraser/short-jokes", "default", "train", "Joke", None),
+    # Fraser/short-jokes 404s on datasets-server (2026-07-24); ysharma mirror
+    # serves the same Kaggle Short Jokes corpus with fields ID/Joke
+    "short_jokes": ("ysharma/short_jokes", "default", "train", "Joke", None),
     "rjokes": ("SocialGrep/one-million-reddit-jokes", "default", "train", "selftext", "score"),  # upvotes = funniness proxy
     "hahackathon": ("SemEvalWorkshop/humicroedit", "subtask-1", "train", "edit", "meanGrade"),   # SemEval humor grades
 }
