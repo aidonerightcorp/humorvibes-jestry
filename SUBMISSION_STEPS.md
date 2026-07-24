@@ -1,5 +1,16 @@
 # Humor Genome NYC — Submission Steps
 
+> **2026-07-24 addendum (Jestry round):** the code now ALSO lives in a PUBLIC
+> GitHub repo — https://github.com/aidonerightcorp/humorvibes-jestry — which
+> satisfies the "public code repo" requirement immediately (no visibility flip
+> needed). A competition-attached wrapper kernel
+> (`taylorsamarel/humorvibes-jestry-demo-github-wrapper`) clones it and ran
+> COMPLETE: charter, replay receipt, measured S=3.19 on the attached Gemma,
+> been-done demo, metric self-test. When creating the Writeup tonight, attach:
+> the GitHub repo URL above, the main measurement notebook, the wrapper demo
+> kernel, and paste WRITEUP.md (+ optionally JESTRY_WRITEUP.md as a section).
+> The private GitHub mirror flip (step 4 below) becomes optional.
+
 **Submission deadline: 2026-07-25 04:00 UTC** (verified from the authenticated Kaggle
 competition API on 2026-07-12). Do not rely on the older 07-19 planning date that previously
 appeared here. Recheck the competition UI before the final click in case organizers publish

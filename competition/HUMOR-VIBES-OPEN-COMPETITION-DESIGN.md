@@ -54,8 +54,9 @@ control and leak guard always on. Model self-ratings are inadmissible.
 
 Given text pairs, classify: `surface_retell` / `same_frame_new_words` /
 `different_bit`. Training pairs are constructible from the multilingual canon (the
-same frame appears across languages by design — e.g. the Korean/Japanese/German
-"chase two rabbits" family) and from Gemma-4-labeled frame clusters. This track
+same frame appears across languages by design — e.g. the German/Japanese
+"chase two rabbits" pair and the Japanese/Korean "monkeys fall from trees"
+pair) and from Gemma-4-labeled frame clusters. This track
 turns the joke-theft-vs-parallel-thinking dispute into a measurable task.
 
 ## Anti-gaming rules (each one is a lesson this repo already paid for)

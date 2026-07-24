@@ -170,11 +170,13 @@ python3 verify_jestry.py                       # ALL GREEN gate (10 gates, live 
   (`jestry_out/receipts.jsonl`), groaner ledger, governed laughter bandit.
 - `gemma4_nll.py` — forced-NLL S/R/E via Ollama top-K logprobs; copy-attractor
   finding + `certified: false` calibration receipt (`jestry_out/gemma4_calibration.json`):
-  this instrument never gates acceptance.
+  uncertified instruments can measure and diagnose but never mint acceptance
+  (`RouteProfile.require_certified`); the certified path is `gemma2_full_nll.py`.
 - `precedent.py` — "has this joke been done?" at surface + frame level, multilingual
   canon (`corpora/proverbs_multilingual.jsonl`), Gemma 4 labeling lane.
 - `harvest_supply.py` — licensing-clean supply growth (ingest lanes + 3 keyless joke
-  APIs + stamped synthetic lane), precedent-deduped, receipted.
+  APIs + stamped synthetic lane + Claude-authored canon lane), receipted; API lanes
+  are precedent-deduped on fetch (the authored canon lane predates its own entries).
 - `live_portal/` — Kaggle kernel that tunnels the portal via trycloudflare
   (same recipe as the studio kernel; new slug `humorvibes-jestry-portal`).
 - `competition/` — hostable "Humor Vibes Open" community-competition pack: design doc,

@@ -60,9 +60,12 @@ only sin.
   instrument (the Kaggle transformers Gemma path). An instrument that documents its
   own disqualification is the credibility covenant working as designed.
 - **Supply growth**: `harvest_supply.py` orchestrates the existing licensing-clean
-  ingest lanes plus three keyless joke APIs and a clearly-stamped synthetic lane
+  ingest lanes plus three keyless joke APIs, a clearly-stamped synthetic lane
   (Gemma 4's own output is indexed for *self*-precedent — the layer catches the
-  generator repeating itself).
+  generator repeating itself), and a session-authored multilingual/industry canon
+  recalled from Claude's training knowledge (provenance "traditional/anonymous
+  (Claude-recalled)", stamped per record; that lane was written before its own
+  entries existed to dedupe against — API lanes are precedent-deduped on fetch).
 
 ## Live portal
 
@@ -85,20 +88,28 @@ readout, whose failed certification stays receipted beside it — is allowed to
 gate acceptance. The first live accepted outcome followed immediately, and it
 landed exactly where the charter predicts: not on frontier generation (whose
 dense one-liners the instrument kept honestly rejecting) but on the **remix
-route** — a licensed canon item, format-transferred by Gemma 4, carrying its
-source's frame and attribution, accepted at `persona_permitted` and preserved as
-a reusable registry card whose precedent annotation names its own source.
-Reuse beat generation, on the record.
+route** — a provenance-carrying canon item (traditional/anonymous, recalled from
+model knowledge and stamped "verify attribution before republication"),
+format-transferred by Gemma 4, carrying its source's frame and attribution,
+accepted and preserved as a reusable registry card whose precedent annotation
+names its own source. Reuse beat generation, on the record. An adversarial
+audit then caught the first acceptance's persona gate passing vacuously (the
+judge model tag was absent); the record was corrected by an append-only
+correction receipt, the gate now requires measured judgments, and the outcome
+was re-earned at `persona_permitted` with four real persona judgments.
 
 ## Verification
 
-`verify_jestry.py` gates the layer: 40 offline deterministic tests (registry census,
-policy gates, ladder selection, carried acceptance, groaner incompatibility edges,
-governed bandit promotion, funnel receipts, forced-NLL discovery/censoring/replay,
-open-world precedent verdicts), registry digest determinism ×2, charter/code sync
-(the 18 laws are pinned by test), a zero-model replay route, receipt schema, live
-gemma4 end-to-end route, live cross-lingual precedent, harvest provenance, portal
-boot, and byte-deterministic notebook builds. Latest run: **ALL GREEN (10/10)**.
+`verify_jestry.py` gates the layer: the full offline test suite (42 tests — 30 pin
+the Jestry layer: registry census, policy gates, ladder selection, carried
+acceptance, groaner incompatibility edges, governed bandit promotion, funnel
+receipts, forced-NLL discovery/censoring/replay, open-world precedent verdicts,
+frame-provenance trust gate; 12 are the pre-existing pinned-evidence suites),
+registry digest determinism ×2, charter/code sync (the 18 laws are pinned by
+test), a zero-model replay route, receipt schema, a live Gemma end-to-end route,
+live cross-lingual precedent, harvest provenance, portal boot, and
+byte-deterministic notebook builds. Every run appends its gate table to
+`jestry_out/verify_receipts.jsonl`, so "ALL GREEN" is a receipt, not a memory.
 
 ## What this adds to HumorVibes
 

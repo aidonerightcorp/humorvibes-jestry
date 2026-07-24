@@ -280,27 +280,34 @@ never generalized beyond stated scope.
    top-K readout — maximal-munch tokenization with degenerate-whitespace
    rejection, path caching for aligned framed/null replays, retry-hardened
    transport (zero errors in the final runs), and per-step censoring flags.
-   Two instrument findings came out of the shakedown, both receipted:
+   Two instrument findings came out of the shakedown, both receipted in
+   `jestry_out/instrument_sweep.jsonl`:
    (a) **the copy-attractor** — gemma4's copy-head parrots a suffix-placed
    frame hint (framed `' the'` = 0.00 nats, all else ≈10), so the provider
    rewrites hint contexts to prefix layout, decoy null included; and
    (b) **certification failure** — under top-20 censoring the reference jokes
    do not separate from controls on R (jokes 0.00/0.31/0.00 vs boring control
    0.73 via a confabulated frame; nonsense 0.00), so
-   `jestry_out/gemma4_calibration.json` records `certified: false` and Jestry
-   never uses this instrument's S/R/E for acceptance decisions. Gemma 4
-   generation, persona-B judging, and labeling remain real and receipted;
-   measured S/R/E **acceptance** stays gated on a certified full-logprob
-   instrument (the Kaggle transformers Gemma path, where the original bands
-   were validated). An earlier same-day smoke that read net R=0.44 for the
-   speed-bumps joke is superseded: its discovery path used the fragmented
-   tokenization later fixed, and it is retained only as version history.
+   `jestry_out/gemma4_calibration.json` records `certified: false`, so this
+   instrument can measure and diagnose but never mint acceptance — enforced
+   in code by `RouteProfile.require_certified` (it did serve as the scoring
+   instrument in three pre-gemma2 route receipts, every candidate rejected).
+   Gemma 4 generation, persona-B judging, and labeling remain real and
+   receipted; the transport is retry-hardened — the certification run
+   measured zero errors, while route runs still see intermittent
+   EOS-boundary hiccups counted per-receipt (`instrument_errors`). An
+   earlier same-day smoke that read net R=0.44 for the speed-bumps joke is
+   superseded and was never receipted (fragmented tokenization, later
+   fixed); it survives only as this corrected sentence.
 2. **Semantic cross-lingual precedent works (L1).** With `embeddinggemma`
-   (125 indexed items), the paraphrase "Even the most senior monkey falls out
-   of the tree sometimes" retrieves the Korean (0.71) and Japanese (0.70)
-   originals as top neighbors; "Man plans and God laughs." resolves as
-   `surface_match` with the Yiddish `Der mentsh trakht un got lakht` at 0.849.
-   Thresholds are calibrated per backend and remain versioned choices.
+   at the 125-item pre-harvest index, the paraphrase "Even the most senior
+   monkey falls out of the tree sometimes" retrieves the Korean (0.71) and
+   Japanese (0.70) originals as top neighbors; "Man plans and God laughs."
+   resolves as `surface_match` with the Yiddish `Der mentsh trakht un got
+   lakht` at 0.849 (at the current post-harvest index its English twin ranks
+   first at 1.00, the Yiddish second). Probe measurements are receipted in
+   `jestry_out/precedent_probes.json`; thresholds are calibrated per backend
+   and remain versioned choices.
 3. **The layer's loop is test-pinned (L0).** 28 offline deterministic tests
    cover the registry census, policy gates, ladder selection, carried
    acceptance on replay, groaner edges steering retrieval, governed bandit

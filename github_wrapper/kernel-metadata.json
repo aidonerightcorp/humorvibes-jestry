@@ -1,0 +1,18 @@
+{
+  "id": "taylorsamarel/humorvibes-jestry-demo",
+  "title": "HumorVibes Jestry Demo (GitHub wrapper)",
+  "code_file": "jestry_demo_notebook.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "competition_sources": [
+    "humor-genome-nyc"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "model_sources": [
+    "google/gemma-2/transformers/gemma-2-2b-it/2"
+  ]
+}

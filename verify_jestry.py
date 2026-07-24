@@ -47,11 +47,10 @@ def ollama_up() -> bool:
         return False
 
 
-@gate("G1 offline pytest suite")
+@gate("G1 offline pytest suite (full)")
 def g1():
-    proc = subprocess.run([sys.executable, "-m", "pytest",
-                           "tests/test_jestry.py", "tests/test_precedent.py", "-q"],
-                          cwd=ROOT, capture_output=True, text=True, timeout=600)
+    proc = subprocess.run([sys.executable, "-m", "pytest", "tests/", "-q"],
+                          cwd=ROOT, capture_output=True, text=True, timeout=900)
     tail = (proc.stdout + proc.stderr).strip().splitlines()[-1]
     assert proc.returncode == 0, tail
     return tail
@@ -214,8 +213,24 @@ def g10():
     return f"{len(cells)} cells, byte-identical rebuild, code compiles"
 
 
+@gate("G11 certified calibration + adversarial scope")
+def g11():
+    path = ROOT / "jestry_out" / "gemma2_full_nll_calibration.json"
+    assert path.exists(), "no full-instrument calibration receipt"
+    cal = json.loads(path.read_text(encoding="utf-8"))
+    assert cal.get("certified") is True, "full instrument not certified"
+    assert cal.get("adversarial_scope", {}).get("mitigation"), \
+        "calibration lacks the adversarial scope clause"
+    assert "SCOPE" in cal.get("rule", ""), "rule missing scope statement"
+    from jestry import trusted_frame_source
+    assert not trusted_frame_source({"license": "random API"})
+    assert trusted_frame_source({"license": "public domain (traditional)"})
+    return (f"certified={cal['certified']}, adversarial probe R="
+            f"{cal['adversarial_scope']['R']}, trust gate enforced")
+
+
 def main() -> int:
-    for fn in (g1, g2, g3, g4, g6, g5, g7, g8, g9, g10):   # g6 before g5: live run feeds receipts
+    for fn in (g1, g2, g3, g4, g6, g5, g7, g8, g9, g10, g11):  # g6 before g5: live run feeds receipts
         fn()
     width = max(len(n) for n, _, _ in RESULTS)
     print("\n" + "=" * 78)
@@ -224,14 +239,20 @@ def main() -> int:
     print("=" * 78)
     reds = [r for r in RESULTS if r[1] == "RED"]
     skips = [r for r in RESULTS if r[1] == "SKIP"]
-    if reds:
-        print(f"RESULT: {len(reds)} RED — not shippable")
-        return 1
-    if skips:
-        print(f"RESULT: GREEN with {len(skips)} SKIP (live gates need Ollama)")
-        return 0
-    print("RESULT: ALL GREEN")
-    return 0
+    verdict = (f"{len(reds)} RED — not shippable" if reds else
+               f"GREEN with {len(skips)} SKIP (live gates need Ollama)" if skips
+               else "ALL GREEN")
+    # every verification run leaves a receipt — "ALL GREEN" is never a memory
+    out = ROOT / "jestry_out"
+    out.mkdir(exist_ok=True)
+    with (out / "verify_receipts.jsonl").open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps({"receipt_type": "jestry_verify", "receipt_version": 1,
+                             "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
+                             "gates": [{"gate": n, "status": s, "detail": d}
+                                       for n, s, d in RESULTS],
+                             "result": verdict}) + "\n")
+    print(f"RESULT: {verdict}")
+    return 1 if reds else 0
 
 
 if __name__ == "__main__":

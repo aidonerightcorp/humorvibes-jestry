@@ -1,0 +1,49 @@
+{
+  "receipt_type": "precedent_probes",
+  "ts": "2026-07-24T10:20:55",
+  "backend": "ollama:embeddinggemma",
+  "indexed_items": 608,
+  "historical_note": "pre-harvest 125-item measurements (ko 0.709/ja 0.699/yi 0.849) were reproduced by the claims auditor 2026-07-24",
+  "probes": {
+    "monkey_paraphrase": {
+      "verdict": "adjacent_neighborhood: related material exists — worth citing",
+      "top": [
+        [
+          "ko",
+          0.709,
+          "원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreoj"
+        ],
+        [
+          "ja",
+          0.699,
+          "猿も木から落ちる (saru mo ki kara ochiru) — Even mon"
+        ],
+        [
+          "en",
+          0.619,
+          "Bike Fall"
+        ]
+      ]
+    },
+    "man_plans": {
+      "verdict": "surface_match: this wording has been done in the indexed supply",
+      "top": [
+        [
+          "en",
+          1.0,
+          "Man plans and God laughs."
+        ],
+        [
+          "yi",
+          0.849,
+          "Der mentsh trakht un got lakht. — Man plans "
+        ],
+        [
+          "en",
+          0.516,
+          "Gru's Plan"
+        ]
+      ]
+    }
+  }
+}
