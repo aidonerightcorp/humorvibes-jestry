@@ -1,31 +1,44 @@
 {
   "receipt_type": "precedent_probes",
-  "ts": "2026-07-24T10:20:55",
+  "ts": "2026-07-24T11:05:47",
   "backend": "ollama:embeddinggemma",
-  "indexed_items": 608,
+  "indexed_items": 1356,
+  "languages": 44,
+  "labeled_frames": 230,
+  "labeler_usage": {
+    "provider": "gemma4-forced-nll",
+    "model": "gemma4",
+    "nll_calls": 0,
+    "generate_calls": 0,
+    "judge_calls": 150,
+    "forced_nll_api_calls": 0
+  },
   "historical_note": "pre-harvest 125-item measurements (ko 0.709/ja 0.699/yi 0.849) were reproduced by the claims auditor 2026-07-24",
   "probes": {
     "monkey_paraphrase": {
+      "query": "Even the most skilled monkey falls from the tree sometimes.",
       "verdict": "adjacent_neighborhood: related material exists — worth citing",
       "top": [
         [
           "ko",
-          0.709,
-          "원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreoj"
+          0.721,
+          "원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreojinda) "
         ],
         [
           "ja",
-          0.699,
-          "猿も木から落ちる (saru mo ki kara ochiru) — Even mon"
+          0.702,
+          "猿も木から落ちる (saru mo ki kara ochiru) — Even monkeys f"
         ],
         [
           "en",
-          0.619,
+          0.65,
           "Bike Fall"
         ]
-      ]
+      ],
+      "frame_top": []
     },
     "man_plans": {
+      "query": "Man plans and God laughs.",
       "verdict": "surface_match: this wording has been done in the indexed supply",
       "top": [
         [
@@ -34,14 +47,248 @@
           "Man plans and God laughs."
         ],
         [
-          "yi",
+          "Yiddish",
           0.849,
-          "Der mentsh trakht un got lakht. — Man plans "
+          "Der mentsh trakht un got lakht. — Man plans and Go"
+        ],
+        [
+          "af",
+          0.533,
+          "'n Boer maak 'n plan. — A farmer makes a plan."
+        ]
+      ],
+      "frame_top": []
+    },
+    "experts_slip_novel": {
+      "query": "Even a chess grandmaster hangs a queen now and then.",
+      "verdict": "no_precedent_found within the indexed supply of 1356 items",
+      "top": [
+        [
+          "en",
+          0.442,
+          "A simile committing suicide is always a depressing"
         ],
         [
           "en",
-          0.516,
+          0.434,
+          "Whiteboards ... are remarkable."
+        ],
+        [
+          "en",
+          0.427,
+          "Why did the burglar hang his mugshot on the wall? "
+        ]
+      ],
+      "frame_top": []
+    },
+    "pit_digger_novel": {
+      "query": "He spent all week rigging a trap for his rival and stepped in it himself on Friday.",
+      "verdict": "no_precedent_found within the indexed supply of 1356 items",
+      "top": [
+        [
+          "de",
+          0.478,
+          "Wer anderen eine Grube gräbt, fällt selbst hinein."
+        ],
+        [
+          "en",
+          0.471,
+          "\"I collected enough,\" he explained. \"There's the n"
+        ],
+        [
+          "en",
+          0.468,
+          "My pet mouse 'Elvis' died last night. He was caugh"
+        ]
+      ],
+      "frame_top": []
+    },
+    "wasted_refinement_novel": {
+      "query": "I performed my best material for the cat; the cat left the room.",
+      "verdict": "no_precedent_found within the indexed supply of 1356 items",
+      "top": [
+        [
+          "en",
+          0.576,
+          "I accidentally took my cats meds last night. Don’t"
+        ],
+        [
+          "en",
+          0.515,
+          "Schrödinger's cat walks into a bar and doesn't."
+        ],
+        [
+          "en",
+          0.501,
+          "My cat was just sick on the carpet, I don’t think "
+        ]
+      ],
+      "frame_top": []
+    }
+  },
+  "previous_receipts": [
+    {
+      "ts": "2026-07-24T10:20:55",
+      "indexed_items": 608,
+      "probes": {
+        "monkey_paraphrase": {
+          "verdict": "adjacent_neighborhood: related material exists — worth citing",
+          "top": [
+            [
+              "ko",
+              0.709,
+              "원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreoj"
+            ],
+            [
+              "ja",
+              0.699,
+              "猿も木から落ちる (saru mo ki kara ochiru) — Even mon"
+            ],
+            [
+              "en",
+              0.619,
+              "Bike Fall"
+            ]
+          ]
+        },
+        "man_plans": {
+          "verdict": "surface_match: this wording has been done in the indexed supply",
+          "top": [
+            [
+              "en",
+              1.0,
+              "Man plans and God laughs."
+            ],
+            [
+              "yi",
+              0.849,
+              "Der mentsh trakht un got lakht. — Man plans "
+            ],
+            [
+              "en",
+              0.516,
+              "Gru's Plan"
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "probes_with_frame_hint": {
+    "experts_slip_novel": {
+      "query": "Even a chess grandmaster hangs a queen now and then.",
+      "frame_hint": "even the most skilled expert sometimes fails at their own specialty; mastery does not prevent the occasional pratfall",
+      "verdict": "no_precedent_found within the indexed supply of 1356 items",
+      "surface_top": [
+        [
+          "en",
+          0.442,
+          "A simile committing suicide is always a depres"
+        ],
+        [
+          "en",
+          0.434,
+          "Whiteboards ... are remarkable."
+        ]
+      ],
+      "frame_top": [
+        [
+          "ta",
+          0.603,
+          "யானைக்கும் அடி சறுக்கும் (yaanaikkum adi saruk"
+        ],
+        [
+          "ko",
+          0.576,
+          "원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreojin"
+        ],
+        [
+          "en",
+          0.571,
+          "Bike Fall"
+        ],
+        [
+          "ja",
+          0.569,
+          "猿も木から落ちる (saru mo ki kara ochiru) — Even monke"
+        ]
+      ]
+    },
+    "pit_digger_novel": {
+      "query": "He spent all week rigging a trap for his rival and stepped in it himself on Friday.",
+      "frame_hint": "a schemer is undone by his own trap; the punishment reuses the crime's own mechanism",
+      "verdict": "no_precedent_found within the indexed supply of 1356 items",
+      "surface_top": [
+        [
+          "de",
+          0.478,
+          "Wer anderen eine Grube gräbt, fällt selbst hin"
+        ],
+        [
+          "en",
+          0.471,
+          "\"I collected enough,\" he explained. \"There's t"
+        ]
+      ],
+      "frame_top": [
+        [
+          "en",
+          0.51,
           "Gru's Plan"
+        ],
+        [
+          "en",
+          0.503,
+          "UNO Draw 25 Cards"
+        ],
+        [
+          "en",
+          0.491,
+          "Doctor, doctor, I keep thinking I'm invisible."
+        ],
+        [
+          "uk",
+          0.482,
+          "Моя хата з краю, нічого не знаю. (Moia khata z"
+        ]
+      ]
+    },
+    "wasted_refinement_novel": {
+      "query": "I performed my best material for the cat; the cat left the room.",
+      "frame_hint": "refinement or treasure offered to an audience incapable of appreciating it; value wasted on the wrong recipient",
+      "verdict": "no_precedent_found within the indexed supply of 1356 items",
+      "surface_top": [
+        [
+          "en",
+          0.576,
+          "I accidentally took my cats meds last night. D"
+        ],
+        [
+          "en",
+          0.515,
+          "Schrödinger's cat walks into a bar and doesn't"
+        ]
+      ],
+      "frame_top": [
+        [
+          "ja",
+          0.491,
+          "猫に小判 (neko ni koban) — Gold coins to a cat."
+        ],
+        [
+          "ar",
+          0.474,
+          "الجمل لا يرى اعوجاج رقبته (al-jamal la yara i'"
+        ],
+        [
+          "en",
+          0.469,
+          "Brain, n. An apparatus with which we think tha"
+        ],
+        [
+          "en",
+          0.466,
+          "Abstainer, n. A weak person who yields to the "
         ]
       ]
     }

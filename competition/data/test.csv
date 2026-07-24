@@ -1,196 +1,334 @@
 id,setup,punchline
-hv_00000,What do you give to a lemon in need?,Lemonaid.
-hv_00001,Why do choirs keep buckets handy?,So they can carry their tune
-hv_00002,Why does a chicken coop only have two doors?,Because if it had four doors it would be a chicken sedan.
-hv_00003,What's the best time to go to the dentist?,The elf-abet!
-hv_00004,"A programmer's spouse says: go to the store and buy a loaf of bread; if they have eggs, get a dozen.",A little plaque.
-hv_00006,"I have a joke about time travel,",but you didn't like it.
-hv_00009,Why did the chicken cross the road?,"To get to the other side — it was going home, it lives there."
-hv_00010,Why do programmers confuse Halloween and Christmas?,Because OCT 31 equals DEC 25.
-hv_00012,Why did the golfer bring two pairs of trousers?,In case he got a hole in one.
-hv_00013,"A programmer's spouse says: go to the store and buy a loaf of bread; if they have eggs, get a dozen.",The programmer returns with twelve loaves of bread.
-hv_00016,Why couldn't the bicycle stand up by itself?,It was two-tired.
-hv_00020,The doctor says: I have bad news and worse news. The test results say you have 24 hours to live. The patient asks: what's worse than that?,I've been trying to reach you since yesterday.
-hv_00021,"My older brother always tore the last pages of my comic books, and never told me why.",so the told carried on as usual.
-hv_00022,"My older brother always tore the last pages of my comic books, and never told me why.",A fsh.
-hv_00024,Why did the Romanian stop reading?,She whispered: they're right behind you.
-hv_00026,Why do programmers confuse Halloween and Christmas?,"Nothing, they just waved."
-hv_00027,How many kids with ADD does it take to change a lightbulb?,Pop music!
-hv_00029,"To prove he was right, the flat-earther walked to the end of the Earth.","Nothing, it was on the house."
-hv_00030,Why did the web developer walk out of a resturant in disgust?,Palo. (A stick.)
-hv_00032,Why did the private classes break up?,Because they never saw each other.
-hv_00034,What did the big flower say to the littler flower?,"Hi, bud!"
-hv_00035,What do you give to a lemon in need?,and the need stayed exactly where it was.
-hv_00036,I'm reading a book about anti-gravity.,So time would fly.
-hv_00038,What's the difference between a hippo and a zippo?,so the zippo continued without incident.
-hv_00039,"I went to buy some camouflage trousers the other day,",and nothing about the other changed at all.
-hv_00040,What happened to the man who got behind on payments to his exorcist?,"If so, you may be entitled to condensation."
-hv_00041,An economist is someone,They can't control their pupils.
-hv_00042,What's the best thing about Switzerland?,For the boos.
-hv_00043,"A Roman walks into a bar, holds up two fingers, and says:",It's impossible to put down
-hv_00044,"In New York, 'excuse me' means get out of the way,",Because nothing gets under their skin.
-hv_00045,Whats the Grinchs least favorite band?,It meant the world to me.
-hv_00048,When do doctors get angry?,"Thank you very much, sir."
-hv_00050,Why did the private classes break up?,They always quack the case.
-hv_00051,How can you tell an extroverted programmer?,and the programmer was quietly put away.
-hv_00053,Why do you never see elephants hiding in trees?,To the RESTaurant.
-hv_00054,Why does a chicken coop only have two doors?,then the doors was discussed at the next meeting.
-hv_00056,"I would tell you a chemistry joke,",He goes nowhere.
-hv_00057,Why did the golfer bring two pairs of trousers?,then the trousers went back to normal.
-hv_00058,No matter how kind you are...,so the kind carried on as usual.
-hv_00060,Why do you never see elephants hiding in trees?,Because they're so good at it.
-hv_00062,How many kids with ADD does it take to change a lightbulb?,Let's go ride bikes!
-hv_00063,Why didn't the skeleton go for prom?,so the prom continued without incident.
-hv_00064,"Knock knock. 
+hv_00000,Our team is like a family —,mostly the part where nobody listens at dinner.
+hv_00002,Why do programmers confuse Halloween and Christmas?,and the christmas remained perfectly ordinary.
+hv_00003,Why are cats so good at video games?,Put it on my bill
+hv_00007,How many lips does a flower have?,Tulips
+hv_00009,What's Santa's favourite type of music?,Wrap!
+hv_00010,Why don't eggs tell jokes?,He was a dirty double-crosser!
+hv_00011,I'm reading a book about anti-gravity...,It's impossible to put down
+hv_00012,What do you call a caveman's fart?,A blast from the past.
+hv_00013,"Knock knock. 
  Who's there? 
  A broken pencil. 
  A broken pencil who?",Never mind. It's pointless.
-hv_00065,A neutron walks into a bar and asks how much for a drink.,"The bartender says: for you, no charge."
-hv_00067,What do you call a fashionable lawn statue with an excellent sense of rhythmn?,and the rhythmn remained perfectly ordinary.
-hv_00069,The AI project manager finally found the bottleneck:,the calendar wanted attention.
-hv_00071,Why does a chicken coop only have two doors?,Because they’re shellfish.
-hv_00072,Why would a guitarist become a good programmer?,They raise the roof.
-hv_00073,It works on my machine —,so we shipped my machine.
-hv_00074,"Indian standard time: the meeting is at 5,",which is why it starts at 6.
-hv_00075,What did Michael Jackson name his denim store?,A crookodile!
-hv_00076,No matter how kind you are...,Because it will go on forever.
-hv_00077,Why did the burglar hang his mugshot on the wall?,so the wall continued without incident.
-hv_00079,How can you tell an extroverted programmer?,He looks at YOUR shoes when he's talking.
-hv_00083,Why did the chicken get a penalty?,He was a dirty double-crosser!
-hv_00084,"Knock knock. 
+hv_00014,Why do choirs keep buckets handy?,"Hot, because you can catch a cold"
+hv_00016,What did the customer say to the waiter?,Make me one with everything.
+hv_00017,"You see, mountains aren't just funny.","Hot, because you can catch a cold"
+hv_00018,"My employer came running to me and said, ""I was looking for you all day! Where the hell have you been?""","I replied, ""Good employees are hard to find."""
+hv_00019,An Australian review of a hurricane:,bit breezy out.
+hv_00023,Why did the math book look sad?,Because it had too many problems.
+hv_00024,Don't look at the eclipse through a colander.,then the colander was discussed at the next meeting.
+hv_00025,Why did the programmer quit their job?,the calendar wanted attention.
+hv_00026,"Knock knock. 
  Who's there? 
  A broken pencil. 
- A broken pencil who?",None. It's a hardware problem.
-hv_00085,How do you get a baby alien to sleep?,So I went home.
-hv_00086,泥菩萨过江 (a clay Buddha crossing the river),Because he didn't get arrays.
-hv_00087,When do doctors get angry?,When they run out of patients.
-hv_00090,Was macht ein Clown im Büro?,Faxen. (Faxes / clowning around.)
-hv_00092,Why couldn't the bicycle stand up by itself?,"The surgeon says: mine too, that's why it's routine — no exceptions yet."
-hv_00093,How does a dyslexic poet write?,Inverse.
-hv_00096,Why do choirs keep buckets handy?,You jacket.
-hv_00098,Why did the burglar hang his mugshot on the wall?,No eye deer.
-hv_00101,The AI project manager finally found the bottleneck:,and the found stayed exactly where it was.
-hv_00102,It works on my machine —,THIS ONE WAS WRITTEN IN PARIS.
-hv_00103,Why was the JavaScript developer sad?,Because they didn't Node how to Express themself!
-hv_00105,What kind of music do welders like?,Heavy metal.
-hv_00106,"The past, the present and the future walk into a bar.",It was tense.
-hv_00107,May you win the lottery —,Elf-ies.
-hv_00108,What do you call a pile of cats?,But on Halloween he went to tell the neighbors to turn down their TV and they gave him some candy.
-hv_00109,What happened to the man who got behind on payments to his exorcist?,He got repossessed.
-hv_00110,I'm on a seafood diet.,Lots of training
-hv_00111,What do you call a fashionable lawn statue with an excellent sense of rhythmn?,A metro-gnome
-hv_00112,How does a dyslexic poet write?,"Heisenberg says: no, but I know exactly where I am."
-hv_00114,A neutron walks into a bar and asks how much for a drink.,then the drink went back to normal.
-hv_00115,Why did the web developer walk out of a resturant in disgust?,The seating was laid out in tables.
-hv_00116,Why are fish easy to weigh?,Because they lactose.
-hv_00117,Why would a guitarist become a good programmer?,He's adept at riffing in C#.
-hv_00118,How does a penguin build it’s house?,Igloos it together.
-hv_00119,"The gas Argon walks into a bar.
+ A broken pencil who?",The elf-abet!
+hv_00027,Why did the melons plan a big wedding?,"They always get stuck at ""C""."
+hv_00028,Why couldn't the lifeguard save the hippie?,"I want to hold your hand, hand, hand, hand..."
+hv_00029,What's it like to be kissed by a vampire?,It's a pain in the neck.
+hv_00033,Where do bees go to the bathroom?,Because she ran away from the ball.
+hv_00034,What type of music do balloons hate?,Pop music!
+hv_00036,How do you steal a coat?,You jacket.
+hv_00039,"My employer came running to me and said, ""I was looking for you all day! Where the hell have you been?""",Bone-jour.
+hv_00041,I stayed up all night wondering where the sun went.,It hurts when IP.
+hv_00043,Why do programmers prefer using the dark mode?,Igloos it together.
+hv_00044,The doctor says: I have bad news and worse news. The test results say you have 24 hours to live. The patient asks: what's worse than that?,I've been trying to reach you since yesterday.
+hv_00045,Why does a chicken coop only have two doors?,so the doors continued without incident.
+hv_00046,Did you hear about the cow who jumped over the barbed wire fence?,He didn't know how to null his feelings.
+hv_00048,A ham sandwhich walks into a bar and orders a beer. The bartender says...,Cell phones.
+hv_00049,Why did the half blind man fall in the well?,Because he couldn't see that well!
+hv_00050,Why shouldn't you visit an expensive wig shop?,Put a little boogie in it.
+hv_00052,My therapist says I have a preoccupation with vengeance.,We'll see about that.
+hv_00053,¿Cómo se llama un boomerang que no vuelve?,For fowl play.
+hv_00054,I'm reading a book about anti-gravity.,"I don't know, but the flag is a big plus."
+hv_00055,It works on my machine —,so we shipped my machine.
+hv_00056,Why do bananas have to put on sunscreen before they go to the beach?,I Excel at it.
+hv_00057,Whats the Grinchs least favorite band?,The Who.
+hv_00058,What did celery say when he broke up with his girlfriend?,"She wasn't right for me, so I really don't carrot all."
+hv_00060,What did the ocean say to the shore?,"Nothing, it just waved."
+hv_00061,Why do programmers prefer using the dark mode?,so the mode continued without incident.
+hv_00062,I can't tell if i like this blender...,A four-chin teller.
+hv_00063,A DHCP packet walks into a bar and asks for a beer.,"Bartender says, ""here, but I’ll need that back in an hour!"""
+hv_00065,Why are skeletons so calm?,Because nothing gets under their skin.
+hv_00066,An IPv6 packet is walking out of the house.,A meowntain.
+hv_00068,I started a new business making yachts in my attic this year...,One was assaulted.
+hv_00069,Why was the river rich?,those who understand binary and those who don't.
+hv_00071,What do you call a group of disorganized cats?,Shortbread.
+hv_00072,¿Cómo se llama un boomerang que no vuelve?,and the vuelve remained perfectly ordinary.
+hv_00073,My wife left me because I'm too insecure and paranoid.,An in-vest-igator!
+hv_00074,My boss told me to have a good day.,So I went home.
+hv_00075,Did you hear about the hungry clock?,It went back four seconds.
+hv_00076,Why couldn't the skeleton go to the Christmas party?,Because he had no body to go with!
+hv_00077,What did the digital clock say to the grandfather clock?,Do you know the problem with UDP jokes?
+hv_00078,Why did the half blind man fall in the well?,so the well continued without incident.
+hv_00079,What do you call a group of 8 Hobbits?,It meant the world to me.
+hv_00080,Why do scuba divers fall backwards into the water?,You rocket.
+hv_00082,Why was the developer always calm?,Because they knew how to handle exceptions.
+hv_00083,Our team is like a family —,and the family was quietly put away.
+hv_00085,Want to hear a joke about a piece of paper?,Hackers peak through Windows only.
+hv_00086,I just saw my wife trip over and drop a basket full of ironed clothes.,I watched it all unfold.
+hv_00087,How was the snow globe feeling after the storm?,A little shaken.
+hv_00089,How did the hipster burn the roof of his mouth?,They wanted to hit the high Cs.
+hv_00092,I asked the librarian if the library had any books about paranoia.,She whispered: they're right behind you.
+hv_00093,Why are modern programming languages so materialistic?,and nothing about the materialistic changed at all.
+hv_00094,Why do programmers confuse Halloween and Christmas?,"She said, ""Yes, the others were at least sevens or eights."""
+hv_00095,Why do choirs keep buckets handy?,So they can carry their tune
+hv_00096,Why was the JavaScript developer sad?,and the developer was quietly put away.
+hv_00098,A DHCP packet walks into a bar and asks for a beer.,Profanity.
+hv_00099,Did you hear about the bread factory burning down?,They say the business is toast.
+hv_00100,"""99.9% of the people are dumb!""","""Fortunately I belong to the remaining 1%"""
+hv_00101,What's the difference between a seal and a sea lion?,An ion!
+hv_00102,A grocery store cashier asked if I would like my milk in a bag.,A Hyundaiiiiiiiiiiii
+hv_00103,What do you call a group of killer whales playing instruments?,I'm walking here — sorry you were standing there.
+hv_00105,Why did the private classes break up?,Attire.
+hv_00106,What kind of shoes does a thief wear?,Elf-ies!
+hv_00107,What do you call a group of 8 Hobbits?,A Hobbyte.
+hv_00108,.NET developers are picky when it comes to food.,They only like chicken NuGet.
+hv_00109,Why do programmers confuse Halloween and Christmas?,Because OCT 31 equals DEC 25.
+hv_00110,Why are modern programming languages so materialistic?,"а реалист — автомат Калашникова. (and the realist, the Kalashnikov.)"
+hv_00111,My therapist says I have a preoccupation with vengeance.,To hold his pants up.
+hv_00113,A neutron walks into a bar and asks how much for a drink.,and nothing about the drink changed at all.
+hv_00114,I'm reading a book about anti-gravity.,It's impossible to put down.
+hv_00116,Why did the web developer walk out of a resturant in disgust?,Пользователь: где клавиша 'любая'? (Where is the 'any' key?)
+hv_00117,What's the difference between a hippo and a Zippo?,One is really heavy and the other is a little lighter.
+hv_00118,A ham sandwhich walks into a bar and orders a beer. The bartender says...,"I'm sorry, we don't serve food here"
+hv_00121,What did the Buffalo say to his little boy when he dropped him off at school?,and the school remained perfectly ordinary.
+hv_00123,Why do cows wear bells?,Because their horns don't work!
+hv_00124,"Indian standard time: the meeting is at 5,","Pasta la vista, baby!"
+hv_00126,What did the scarf say to the hat?,Now we just have to call him Dav.
+hv_00127,What do you call sad coffee?,They raise the roof.
+hv_00128,Why do programmers wear glasses?,but you didn't like it.
+hv_00129,Two goldfish are in a tank.,"Pop,goes the weasel."
+hv_00130,Our team is like a family —,Heavy metal.
+hv_00131,What's it like to be kissed by a vampire?,Because they can't even.
+hv_00133,Why shouldn't you visit an expensive wig shop?,"It's too high a price ""toupee."""
+hv_00134,What did the ocean say to the shore?,"No, but April may."
+hv_00136,What did the customer say to the waiter?,I'm all fed up with your service.
+hv_00137,Why did the developer go broke?,They kept spending all their cache.
+hv_00138,What kind of music do planets listen to?,so the listen carried on as usual.
+hv_00139,What’s the difference between an African elephant and an Indian elephant?,About 5000 miles.
+hv_00142,What do you call a pile of cats?,Let's go ride bikes!
+hv_00143,What do you call a group of disorganized cats?,A cat-tastrophe.
+hv_00145,What do vegetarian zombies eat?,Grrrrrainnnnnssss.
+hv_00146,Why was the river rich?,Because it had two banks.
+hv_00147,What do you get if you lock a monkey in a room with a typewriter for 8 hours?,Spelling!
+hv_00148,Why did the chicken cross the playground?,To get to the other slide.
+hv_00149,What did the left eye say to the right eye?,"Between us, something smells!"
+hv_00150,What did celery say when he broke up with his girlfriend?,then the girlfriend was discussed at the next meeting.
+hv_00151,Why does a chicken coop only have two doors?,The tea bag stays in the cup longer.
+hv_00153,Why did the Python data scientist get arrested at customs?,She was caught trying to import pandas!
+hv_00155,What do you call a lawyer with an IQ of 100?,If you have to explain it then it is not that good.
+hv_00157,Why did the melons plan a big wedding?,Because they cantaloupe!
+hv_00160,What's Santa's favourite type of music?,Quatro Sinko.
+hv_00161,I started a new business making yachts in my attic this year...,The sails are going through the roof.
+hv_00162,¿Cómo se llama un boomerang que no vuelve?,Palo. (A stick.)
+hv_00163,Why are cats so good at video games?,They have nine lives.
+hv_00166,What kind of shoes does a thief wear?,and the wear remained perfectly ordinary.
+hv_00167,"The gas Argon walks into a bar.
+The barkeeper says ""What would you like to drink?""",To clean up all the bugs.
+hv_00170,"A SQL query walks into a bar, walks up to two tables and asks:",may I join you?
+hv_00171,What did the scarf say to the hat?,and the scarf remained perfectly ordinary.
+hv_00175,What's blue and not very heavy?,He just took it in stride
+hv_00179,"The past, the present, and the future walked into a bar.",I don't think I'll ever be able to repay you.
+hv_00183,Why did the banana go see a doctor?,so the doctor carried on as usual.
+hv_00184,What do you call a pig with three eyes?,Piiig
+hv_00185,Where was the Declaration of Independence signed?,To make ends meat.
+hv_00187,Why do bananas have to put on sunscreen before they go to the beach?,Because they might peel!
+hv_00188,Why do ghosts go on diets?,So they can keep their ghoulish figures.
+hv_00189,What did the digital clock say to the grandfather clock?,and nothing about the clock changed at all.
+hv_00192,Why do ghosts go on diets?,so the diets carried on as usual.
+hv_00194,What happened to the man who got behind on payments to his exorcist?,It goes back four seconds!
+hv_00197,My wife left me because I'm too insecure and paranoid.,"Oh wait, never mind. She was just getting the mail."
+hv_00199,Why did the math book look sad?,then the look was discussed at the next meeting.
+hv_00200,Did you hear about the guy who invented Lifesavers?,They say he made a mint.
+hv_00201,Why don't oysters give to charity?,It was wrong on so many levels.
+hv_00202,What did the ocean say to the shore?,and the shore remained perfectly ordinary.
+hv_00205,Did you hear about the guy who invented Lifesavers?,then the lifesavers went back to normal.
+hv_00206,What's the difference between a hippo and a Zippo?,and the zippo stayed exactly where it was.
+hv_00208,What did the digital clock say to the grandfather clock?,"Look, no hands!"
+hv_00209,Which side of the chicken has more feathers?,The outside.
+hv_00210,Don't look at the eclipse through a colander.,You'll strain your eyes.
+hv_00211,A grocery store cashier asked if I would like my milk in a bag.,"I told her ""No, thanks. The carton works fine""."
+hv_00214,Where did you learn to make ice cream?,But on Halloween he went to tell the neighbors to turn down their TV and they gave him some candy.
+hv_00215,"Hey, wanna hear a joke?",A Holly Davidson!
+hv_00216,Why do scuba divers fall backwards into the water?,Because if they fell forwards they’d still be in the boat.
+hv_00217,What do you call a caveman's fart?,so the fart carried on as usual.
+hv_00218,Why don't programmers like nature?,so the nature continued without incident.
+hv_00219,Where was the Declaration of Independence signed?,At the bottom!
+hv_00220,My wife left me because I'm too insecure and paranoid.,and the paranoid stayed exactly where it was.
+hv_00221,How was the snow globe feeling after the storm?,"Thank you very much, sir."
+hv_00222,The doctor says: I have bad news and worse news. The test results say you have 24 hours to live. The patient asks: what's worse than that?,It ran out of juice.
+hv_00223,"I got hit in the head by a soda can, but it didn't hurt that much...",It was a soft drink.
+hv_00224,Did you know crocodiles could grow up to 15 feet?,But most just have 4.
+hv_00225,Why did the developer quit his job?,and the quit was quietly put away.
+hv_00229,"Knock knock. 
+ Who's there? 
+ Cows go. 
+ Cows go who?","No, cows go moo."
+hv_00230,Do you know where you can get chicken broth in bulk?,The stock market.
+hv_00231,Why was the developer always calm?,MOODOO.
+hv_00232,I can't believe I got fired from the calendar factory.,Inverse.
+hv_00234,Why does a chicken coop only have two doors?,Because if it had four doors it would be a chicken sedan.
+hv_00236,How many lips does a flower have?,A Fermilabrador Retriever.
+hv_00237,May you win the lottery —,You planet.
+hv_00238,Where do bees go to the bathroom?,The BP station.
+hv_00239,Which part of the hospital has the least privacy?,but I couldn't find any.
+hv_00240,I asked the librarian if the library had any books about paranoia.,It just wasn't their type anymore.
+hv_00242,I told my wife she was drawing her eyebrows too high.,She looked surprised.
+hv_00243,Why couldn't the lifeguard save the hippie?,"He was too far out, man."
+hv_00246,I told my wife she was drawing her eyebrows too high.,Boo-gers.
+hv_00247,My boss told me to have a good day.,It's a shame they'll never meet.
+hv_00250,What do you call a caveman's fart?,but you might not get it.
+hv_00251,What do you call sad coffee?,Despresso.
+hv_00252,What kind of music do planets listen to?,"One's a heated yam, the other's a yeeted ham."
+hv_00253,May you win the lottery —,and spend it all on doctors.
+hv_00254,Why do crabs never give to charity?,Because they’re shellfish.
+hv_00255,Is the pool safe for diving?,It deep ends.
+hv_00257,An economist is someone,A waist of time.
+hv_00258,What did the cell say when his sister cell stepped on his foot?,but I know I wouldn't get a reaction.
+hv_00259,Where do young cows eat lunch?,then the lunch went back to normal.
+hv_00260,What do vegetarian zombies eat?,They can't control their pupils.
+hv_00262,Why are modern programming languages so materialistic?,Because they are object-oriented.
+hv_00264,What do you give to a lemon in need?,'Can I join you?'
+hv_00265,Why did the programmer jump on the table?,Because debug was on his screen.
+hv_00266,An IPv6 packet is walking out of the house.,He goes nowhere.
+hv_00267,Why don't eggs tell jokes?,Because they would crack each other up.
+hv_00268,What do you call a pig with three eyes?,and the eyes stayed exactly where it was.
+hv_00272,Where’s the bin?,I haven’t been anywhere!
+hv_00275,"The gas Argon walks into a bar.
 The barkeeper says ""What would you like to drink?""",But Argon doesn't react.
-hv_00120,Mom asked me where I'm taking her to go out to eat for mother's day.,It's because they don't know the words.
-hv_00122,"I went to buy some camouflage trousers the other day,",Because they are object-oriented.
-hv_00123,What do you call a pile of cats?,A Meowtain.
-hv_00124,Did you hear about the mathematician who's afraid of negative numbers?,then the numbers was discussed at the next meeting.
-hv_00125,"I have a joke about time travel,",You planet.
-hv_00128,The market can stay irrational,longer than you can stay solvent.
-hv_00130,What do you call a cow with no legs?,and the legs was quietly put away.
-hv_00131,What is this movie about?,It is about 2 hours long.
-hv_00132,"I would tell you a chemistry joke,",but I know I wouldn't get a reaction.
-hv_00134,Was macht ein Clown im Büro?,Quatro Sinko.
-hv_00136,Why did the Romanian stop reading?,They wanted to give the Bucharest.
-hv_00138,Did you hear the one about the guy with the broken hearing aid?,A Holly Davidson!
-hv_00139,"I went to buy some camouflage trousers the other day,",but I couldn't find any.
-hv_00140,What's the difference between a hippo and a zippo?,"One is really heavy, the other is a little lighter."
-hv_00141,The AI project manager finally found the bottleneck:,Because every seat has a fan in it.
-hv_00143,Why didn't the skeleton go for prom?,Because it had nobody.
-hv_00144,What's the best thing about Switzerland?,"I don't know, but the flag is a big plus."
-hv_00145,What does the mermaid wear to math class?,A field of corn.
-hv_00146,Why does Santa have three gardens?,and the gardens remained perfectly ordinary.
-hv_00148,What did the router say to the doctor?,It hurts when IP.
-hv_00151,Why did the chicken cross the road?,and the road stayed exactly where it was.
-hv_00152,What do you call a fashionable lawn statue with an excellent sense of rhythmn?,A Fermilabrador Retriever.
-hv_00155,How can you tell an extroverted programmer?,An impasta.
-hv_00156,Did you watch the new comic book movie?,"meaning bring a coat, an umbrella, and a will."
-hv_00157,Why did the scarecrow win an award?,Because he was outstanding in his field.
-hv_00158,Did you hear about the guy who invented Lifesavers?,They say he made a mint.
-hv_00159,"Indian standard time: the meeting is at 5,",She looked surprised.
-hv_00160,What do you call a cow with no legs?,Ground beef!
-hv_00161,I'm on a seafood diet.,I see food and I eat it.
-hv_00163,Why didn't the skeleton go for prom?,is the first rule of the tautology club.
-hv_00164,What's the difference between a hippo and a Zippo?,One is really heavy and the other is a little lighter.
-hv_00165,What does the mermaid wear to math class?,Algae-bra.
-hv_00167,What's black and white and read all over?,The newspaper.
-hv_00170,What did the big flower say to the littler flower?,Because it had two banks.
-hv_00171,What do you call a cow with no legs?,All I did was take a day off.
-hv_00172,Why did the melons plan a big wedding?,A Dell
-hv_00173,What is this movie about?,and nothing about the about changed at all.
-hv_00174,Did you hear about the guy who invented Lifesavers?,Because they can't C.
-hv_00175,泥菩萨过江 (a clay Buddha crossing the river),自身难保 (can't even save itself)
-hv_00178,Did you watch the new comic book movie?,It was very graphic!
-hv_00179,What do you get if you lock a monkey in a room with a typewriter for 8 hours?,He keeps dropping the database.
-hv_00181,Why was the JavaScript developer sad?,and the developer was quietly put away.
-hv_00182,Did you hear about the mathematician who's afraid of negative numbers?,He'll stop at nothing to avoid them.
-hv_00183,Why do you never see elephants hiding in trees?,then the trees was discussed at the next meeting.
-hv_00184,Why did the golfer bring two pairs of trousers?,A Hyundaiiiiiiiiiiii
-hv_00185,"To prove he was right, the flat-earther walked to the end of the Earth.",He eventually came around.
-hv_00188,Why are fish easy to weigh?,Because they have their own scales.
-hv_00189,The market can stay irrational,bit breezy out.
-hv_00190,The doctor says: I have bad news and worse news. The test results say you have 24 hours to live. The patient asks: what's worse than that?,I'm walking here — sorry you were standing there.
-hv_00191,I'm reading a book about anti-gravity.,It's impossible to put down.
-hv_00193,How do you get a baby alien to sleep?,then the sleep went back to normal.
-hv_00195,An economist is someone,who will tell you tomorrow why the things they predicted yesterday didn't happen today.
-hv_00196,No matter how kind you are...,German kids are always Kinder.
-hv_00197,"The gas Argon walks into a bar.
-The barkeeper says ""What would you like to drink?""",Fragt der Barkeeper: Warum so ein langes Gesicht? (Why the long face?)
-hv_00198,How do you get a baby alien to sleep?,You rocket.
-hv_00199,Thank you student loans for getting me through college.,I don't think I'll ever be able to repay you.
-hv_00200,May you win the lottery —,and spend it all on doctors.
-hv_00201,An economist is someone,so the someone continued without incident.
-hv_00202,Why did the web developer walk out of a resturant in disgust?,and nothing about the disgust changed at all.
-hv_00203,Вежливый программист: нажмите любую клавишу.,Пользователь: где клавиша 'любая'? (Where is the 'any' key?)
-hv_00204,What do you get if you lock a monkey in a room with a typewriter for 8 hours?,A regular expression.
-hv_00205,Why did the scarecrow win an award?,"It's too high a price ""toupee."""
-hv_00206,Why did the melons plan a big wedding?,Because they cantaloupe!
-hv_00208,Why was the JavaScript developer sad?,"No, but April may."
-hv_00209,"The past, the present, and the future walked into a bar.",One says to the other: do you know how to drive this thing?
-hv_00212,Why did the chicken get a penalty?,For fowl play.
-hv_00216,Вежливый программист: нажмите любую клавишу.,We'll see about that.
-hv_00217,What kind of music do welders like?,and the like was quietly put away.
-hv_00218,What's the difference between a hippo and a zippo?,They wanted to hit the high Cs.
-hv_00220,"The past, the present, and the future walked into a bar.",It was tense.
-hv_00221,Why did the burglar hang his mugshot on the wall?,To prove that he was framed!
-hv_00224,What did the router say to the doctor?,Despresso.
-hv_00225,Who hides in the bakery at Christmas?,A mince spy!
-hv_00226,"A Roman walks into a bar, holds up two fingers, and says:","five beers, please."
-hv_00227,Why did the chicken cross the road?,They kept spending all their cache.
-hv_00228,What is this movie about?,With tomato paste.
-hv_00229,Mom asked me where I'm taking her to go out to eat for mother's day.,"I told her, ""We already have food in the house""."
-hv_00230,What's the difference between a hot potato and a flying pig?,...but you might not get it.
-hv_00231,Did you hear about the mathematician who's afraid of negative numbers?,a labracadabrador
-hv_00233,Why does Santa have three gardens?,I get to keep telling them until you get them.
-hv_00234,Whats the Grinchs least favorite band?,The Who.
-hv_00235,Thank you student loans for getting me through college.,European
-hv_00239,What's the difference between a hot potato and a flying pig?,then the flying went back to normal.
-hv_00241,What kind of music do welders like?,A JOKE MACHINE!?
-hv_00242,What did the big flower say to the littler flower?,so the flower carried on as usual.
-hv_00243,"My older brother always tore the last pages of my comic books, and never told me why.",I had to draw my own conclusions.
-hv_00246,Why does Santa have three gardens?,So he can 'ho ho ho'!
-hv_00248,What happened to the man who got behind on payments to his exorcist?,and nothing about the exorcist changed at all.
-hv_00249,What's the best time to go to the dentist?,Tooth hurty.
-hv_00250,What kind of shoes does a thief wear?,Sneakers
-hv_00251,What kind of shoes does a thief wear?,Because it soots him!
-hv_00254,What's black and white and read all over?,Cool Ranch!
-hv_00255,"The past, the present and the future walk into a bar.",Because they make up everything.
-hv_00256,What's the difference between a hippo and a Zippo?,Because they can't even.
-hv_00257,What do you give to a lemon in need?,A gobblin'!
-hv_00258,Did you hear the one about the guy with the broken hearing aid?,Neither did he.
-hv_00259,"In New York, 'excuse me' means get out of the way,",and 'sorry' means you're welcome.
-hv_00260,The doctor says: I have bad news and worse news. The test results say you have 24 hours to live. The patient asks: what's worse than that?,and the that was quietly put away.
-hv_00261,What did Michael Jackson name his denim store?,Billy Jeans!
-hv_00262,"The gas Argon walks into a bar.
-The barkeeper says ""What would you like to drink?""",and the drink stayed exactly where it was.
-hv_00264,What's the difference between a hot potato and a flying pig?,"One's a heated yam, the other's a yeeted ham."
-hv_00268,What do you get if you lock a monkey in a room with a typewriter for 8 hours?,and nothing about the hours changed at all.
-hv_00269,Who hides in the bakery at Christmas?,Because they would crack each other up.
-hv_00271,A neutron walks into a bar and asks how much for a drink.,"I replied, ""Good employees are hard to find."""
-hv_00272,How does a penguin build it’s house?,Damn!
+hv_00276,Why was the JavaScript developer sad?,Shakespeare.
+hv_00277,I'm reading a book about anti-gravity...,A Dell
+hv_00278,Where’s the bin?,and the matter was quietly put away.
+hv_00279,What type of music do balloons hate?,His ghoul-friend
+hv_00281,What do you call a developer who doesn't comment code?,so the code carried on as usual.
+hv_00282,Why don't eggs tell jokes?,and the jokes stayed exactly where it was.
+hv_00283,Want to hear a joke about a piece of paper?,Never mind...it's tearable
+hv_00284,Why does Santa go down the chimney?,It is about 2 hours long.
+hv_00286,An economist is someone,who will tell you tomorrow why the things they predicted yesterday didn't happen today.
+hv_00287,Why is 6 afraid of 7 in hexadecimal Canada?,He looks at YOUR shoes when he's talking.
+hv_00288,What do you call a pig with three eyes?,Faxen. (Faxes / clowning around.)
+hv_00290,An Australian review of a hurricane:,A handful of them.
+hv_00292,What did the Buffalo say to his little boy when he dropped him off at school?,Bison.
+hv_00293,Is the pool safe for diving?,Because he did not have any koalafication.
+hv_00294,When does a joke become a dad joke?,A little plaque.
+hv_00295,It works on my machine —,Because you can see right through them!
+hv_00298,What's blue and not very heavy?,Light blue.
+hv_00299,Why was the JavaScript developer sad?,Because they didn't Node how to Express themself!
+hv_00300,What happened to the man who got behind on payments to his exorcist?,He got repossessed.
+hv_00301,What's the difference between a seal and a sea lion?,Claustrophobia!
+hv_00302,What kind of music do planets listen to?,Nep-tunes.
+hv_00305,What’s the difference between an African elephant and an Indian elephant?,Dam.
+hv_00306,Two goldfish are in a tank.,and nothing about the tank changed at all.
+hv_00307,A neutron walks into a bar and asks how much for a drink.,A fsh.
+hv_00308,Did you hear about the cow who jumped over the barbed wire fence?,It was udder destruction.
+hv_00311,Why is 6 afraid of 7 in hexadecimal Canada?,Because 7 8 9 A?
+hv_00313,Why did the banana go see a doctor?,Because it wasn't peeling well.
+hv_00315,Whats the Grinchs least favorite band?,Cause he's a fungi.
+hv_00316,I stayed up all night wondering where the sun went.,Then it dawned on me.
+hv_00317,Why did the web developer walk out of a resturant in disgust?,The seating was laid out in tables.
+hv_00318,Do you know where you can get chicken broth in bulk?,An irrelephant.
+hv_00319,Which part of the hospital has the least privacy?,and nothing about the privacy changed at all.
+hv_00320,Why do programmers wear glasses?,Because they need to C#
+hv_00321,Where’s the bin?,A cursor!
+hv_00324,How do locomotives know where they're going?,Lots of training
+hv_00325,What did the Buffalo say to his little boy when he dropped him off at school?,A metro-gnome
+hv_00327,Did you hear about the bread factory burning down?,A wise quacker.
+hv_00329,Why don't programmers like nature?,Too many bugs.
+hv_00330,Why do cows wear bells?,A milk shake!
+hv_00331,"The past, the present, and the future walked into a bar.",It was tense.
+hv_00332,Why did the Python data scientist get arrested at customs?,You can only use a low ha.
+hv_00334,When does a joke become a dad joke?,When it becomes apparent.
+hv_00335,Why did the developer quit his job?,Cool Ranch!
+hv_00336,Where do young cows eat lunch?,In the calf-ateria.
+hv_00339,How do locomotives know where they're going?,and a lifetime ban from the zoo.
+hv_00340,Did you hear about the bread factory burning down?,then the down went back to normal.
+hv_00344,"Indian standard time: the meeting is at 5,",and the meeting stayed exactly where it was.
+hv_00345,Why couldn't the skeleton go to the Christmas party?,a labracadabrador
+hv_00346,Why did the developer go broke?,A Sandwich.
+hv_00347,What's black and white and read all over?,The newspaper.
+hv_00348,What do you call a girl between two posts?,so the posts continued without incident.
+hv_00349,What was a more important invention than the first telephone?,The second one.
+hv_00351,Why did the banana go see a doctor?,An impasta.
+hv_00352,.NET developers are picky when it comes to food.,A crookodile!
+hv_00353,What's the difference between a hippo and a Zippo?,Because they can't C.
+hv_00355,What did Michael Jackson name his denim store?,It gets toad away
+hv_00356,Mom asked me where I'm taking her to go out to eat for mother's day.,"Nothing, it was on the house."
+hv_00357,There are only two hard things in computer science:,"cache invalidation, naming things, and off-by-one errors."
+hv_00358,Why is 6 afraid of 7 in hexadecimal Canada?,so the canada carried on as usual.
+hv_00361,I just saw my wife trip over and drop a basket full of ironed clothes.,"None, they prefer dark mode."
+hv_00363,What type of music do balloons hate?,and the hate was quietly put away.
+hv_00364,A grocery store cashier asked if I would like my milk in a bag.,then the milk was discussed at the next meeting.
+hv_00365,Two goldfish are in a tank.,One says to the other: do you know how to drive this thing?
+hv_00366,Why do choirs keep buckets handy?,then the handy went back to normal.
+hv_00368,What do you give to a lemon in need?,Lemonaid.
+hv_00369,What do you call a girl between two posts?,Annette.
+hv_00371,Don't look at the eclipse through a colander.,It was very graphic!
+hv_00372,"A SQL query walks into a bar, walks up to two tables and asks:",With experi-mints!
+hv_00374,Why was the river rich?,and the rich stayed exactly where it was.
+hv_00377,Why does Santa go down the chimney?,Because it soots him!
+hv_00379,Why did the programmer jump on the table?,they're only there for the fission trip.
+hv_00380,What do you call a lawyer with an IQ of 100?,Your Honor.
+hv_00381,Where did you learn to make ice cream?,and the cream was quietly put away.
+hv_00382,What did the cell say when his sister cell stepped on his foot?,Mitosis.
+hv_00383,Why do programmers prefer using the dark mode?,Because light attracts bugs.
+hv_00385,I can't tell if i like this blender...,It keeps giving me mixed results.
+hv_00386,Why do ghosts go on diets?,Dam.
+hv_00387,What was a more important invention than the first telephone?,"One is really heavy, the other is a little lighter."
+hv_00388,What’s E.T. short for?,He held up a pair of pants!
+hv_00389,Have you heard of the band 1023MB?,Dinner is on me!
+hv_00391,What did Michael Jackson name his denim store?,Billy Jeans!
+hv_00392,What do you call a girl between two posts?,It got mugged.
+hv_00397,What do you call a pile of cats?,A Meowtain.
+hv_00400,Why did the private classes break up?,Because they never saw each other.
+hv_00402,A neutron walks into a bar and asks how much for a drink.,"The bartender says: for you, no charge."
+hv_00404,What do you get if you lock a monkey in a room with a typewriter for 8 hours?,and the hours remained perfectly ordinary.
+hv_00405,Is the pool safe for diving?,then the diving went back to normal.
+hv_00406,How did the hipster burn the roof of his mouth?,He ate the pizza before it was cool.
+hv_00407,"Hey, wanna hear a joke?",Parsing HTML with regex.
+hv_00408,Did you hear about the guy who invented Lifesavers?,Elf-ies.
+hv_00409,Why did the chicken cross the playground?,I don't think they'll fit me.
+hv_00414,What kind of shoes does a thief wear?,Sneakers
+hv_00415,"""99.9% of the people are dumb!""",THIS ONE WAS WRITTEN IN PARIS.
+hv_00416,What did the left eye say to the right eye?,Because they always used too much ice-olation.
+hv_00417,Have you heard of the band 1023MB?,They haven't got a gig yet.
+hv_00418,Why are Assembly programmers always soaking wet?,He's adept at riffing in C#.
+hv_00420,Why don't oysters give to charity?,Because they're shellfish.
+hv_00421,What’s E.T. short for?,He’s only got little legs.
+hv_00422,Did you hear the one about the guy with the broken hearing aid?,Neither did he.
+hv_00424,Why do crabs never give to charity?,1Forrest1
+hv_00425,What do you call a group of killer whales playing instruments?,An Orca-stra.
+hv_00426,Where was the Declaration of Independence signed?,then the signed was discussed at the next meeting.
+hv_00427,"You see, mountains aren't just funny.",They are hill areas.
+hv_00429,"I got hit in the head by a soda can, but it didn't hurt that much...",unless I buy something.
+hv_00430,I can't believe I got fired from the calendar factory.,All I did was take a day off.
+hv_00431,"Knock knock. 
+ Who's there? 
+ Cows go. 
+ Cows go who?","Heisenberg says: no, but I know exactly where I am."
+hv_00435,What do you get if you lock a monkey in a room with a typewriter for 8 hours?,A regular expression.
+hv_00436,Where did you learn to make ice cream?,Sunday school.
+hv_00437,Why are skeletons so calm?,A stick.
+hv_00438,Why did the math book look sad?,longer than you can stay solvent.
+hv_00439,Why don't programmers like nature?,You will see one later and one in a while.
+hv_00440,What did the scarf say to the hat?,"You go on ahead, I am going to hang around a bit longer."
+hv_00442,Why are Assembly programmers always soaking wet?,They work below C-level.
+hv_00443,What's black and white and read all over?,Because he is a Supperhero.
+hv_00444,What did celery say when he broke up with his girlfriend?,I had to draw my own conclusions.
+hv_00445,What do you call a developer who doesn't comment code?,A developer.
+hv_00446,Which part of the hospital has the least privacy?,The ICU.
+hv_00447,Which side of the chicken has more feathers?,It really took a dive...
+hv_00448,Did you hear about the hungry clock?,Eclipse it.
+hv_00450,Why did the developer quit his job?,Because he didn't get arrays.
+hv_00451,Did you hear the one about the guy with the broken hearing aid?,but I lost interest.
+hv_00452,I started a new business making yachts in my attic this year...,so the year continued without incident.
+hv_00455,Where do young cows eat lunch?,Add the letter G and it’s “gone”!
+hv_00456,"Indian standard time: the meeting is at 5,",which is why it starts at 6.
+hv_00457,Did you know crocodiles could grow up to 15 feet?,"I said, ""Oh yeah... Just you wait."""
+hv_00460,Why did the chicken cross the playground?,and the playground stayed exactly where it was.
+hv_00461,There are only two hard things in computer science:,I get to keep telling them until you get them.
+hv_00463,Why did the half blind man fall in the well?,Put a Windows user in front of Vim and tell them to exit.
+hv_00466,Mom asked me where I'm taking her to go out to eat for mother's day.,"I told her, ""We already have food in the house""."
+hv_00467,What do you call a developer who doesn't comment code?,"To get to the other side — it was going home, it lives there."
+hv_00469,How do you steal a coat?,German kids are always Kinder.
+hv_00470,Why did the programmer quit their job?,They didn't get arrays.

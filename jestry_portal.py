@@ -197,6 +197,10 @@ TABS.forEach((t,i) => {
 function show(i){ [...nav.children].forEach((b,j)=>b.classList.toggle("on", i===j));
   [...main.children].forEach((s,j)=>s.classList.toggle("on", i===j));
   if (i===0) loadDash(); }
+// deep links for demos/screenshots: #tab=N picks the tab; #demo auto-runs the
+// tab's default query (been-done check / registry census) after load
+const HASH_TAB = parseInt((location.hash.match(/tab=(\d)/) || [])[1] ?? "0", 10);
+const HASH_DEMO = location.hash.includes("demo");
 async function api(path, body){
   const r = await fetch(path, body ? {method:"POST", headers:{"Content-Type":"application/json"},
                                       body: JSON.stringify(body)} : {});
@@ -436,7 +440,12 @@ document.getElementById("grbtn").onclick = async () => {
     <small>${esc(g.failure_mode)}</small></div>`);
   document.getElementById("ledout").innerHTML = html || "<small>no groaners yet</small>"; };
 
-show(0);
+show(Number.isFinite(HASH_TAB) && HASH_TAB < TABS.length ? HASH_TAB : 0);
+if (HASH_DEMO) setTimeout(() => {
+  if (HASH_TAB === 2) document.getElementById("bdbtn").click();
+  if (HASH_TAB === 3) document.getElementById("cenbtn").click();
+  if (HASH_TAB === 5) document.getElementById("stbtn").click();
+}, 400);
 </script>
 """
 

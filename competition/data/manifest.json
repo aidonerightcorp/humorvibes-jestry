@@ -1,23 +1,22 @@
 {
   "seed": 20260723,
-  "genuine": 117,
-  "donors_sacrificed": 117,
-  "items": 273,
+  "genuine": 203,
+  "donors_sacrificed": 203,
+  "items": 474,
   "self_attack": {
     "max_punchline_occurrence": 2,
     "genuine_control_overlap": 0,
-    "distinct_boring_tails": 39
+    "distinct_boring_tails": 67
   },
-  "train": 87,
-  "test": 186,
-  "test_genuine": 78,
-  "test_controls": 108,
-  "public": 113,
+  "train": 155,
+  "test": 319,
+  "test_genuine": 136,
+  "test_controls": 183,
+  "public": 195,
   "licenses": [
     "JokeAPI (jokes submitted by users; safe-mode filtered)",
     "derived",
     "public API (github: 15Dkatz/official_joke_api)",
-    "repo",
     "traditional folk humor; session-curated"
   ]
 }
