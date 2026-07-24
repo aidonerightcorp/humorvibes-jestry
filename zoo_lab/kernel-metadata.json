@@ -1,0 +1,19 @@
+{
+  "id": "taylorsamarel/humorvibes-mesh-zoo-lab",
+  "title": "HumorVibes Mesh Zoo Lab",
+  "code_file": "zoo_lab.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "competition_sources": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "model_sources": [
+    "google/gemma-2/transformers/gemma-2-2b-it/2",
+    "google/gemma-3/transformers/gemma-3-1b-it/1",
+    "metaresearch/llama-3.2/transformers/3b-instruct/1",
+    "qwen-lm/qwen2.5/transformers/1.5b-instruct/1"
+  ]
+}

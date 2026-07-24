@@ -1,0 +1,88 @@
+id,setup,punchline,is_genuine,control_type,source,license
+hv_00005,What did the cell say when his sister cell stepped on his foot?,the rest of them will write Perl,0,shuffled,constructed control,derived
+hv_00007,Want to hear a joke about a piece of paper?,"OK, I'll tell you a TCP joke.",0,shuffled,constructed control,derived
+hv_00008,Why did the golfer bring two pairs of pants?,those who understand binary and those who don't.,0,shuffled,constructed control,derived
+hv_00011,What's it like to be kissed by a vampire?,but I lost interest.,0,shuffled,constructed control,derived
+hv_00014,What's the difference between a poorly dressed man on a unicycle and a well dressed man on a bicycle?,Because debug was on his screen.,0,shuffled,constructed control,derived
+hv_00015,A ham sandwhich walks into a bar and orders a beer. The bartender says...,It's a shame they'll never meet.,0,shuffled,constructed control,derived
+hv_00017,What do you call a lawyer with an IQ of 100?,Cause he's a fungi.,0,shuffled,constructed control,derived
+hv_00018,Why couldn't the skeleton go to the Christmas party?,The BP station.,0,shuffled,constructed control,derived
+hv_00019,Why is Linux safe?,A four-chin teller.,0,shuffled,constructed control,derived
+hv_00023,A ham sandwhich walks into a bar and orders a beer. The bartender says...,so the says carried on as usual.,0,boring,constructed control,derived
+hv_00025,When does a joke become a dad joke?,Put it on my bill,0,shuffled,constructed control,derived
+hv_00028,Why couldn't the skeleton go to the Christmas party?,Because he had no body to go with!,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00031,What did the cell say when his sister cell stepped on his foot?,Mitosis.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00033,¿Qué le dijo un semáforo a otro?,"No me mires, me estoy cambiando. (Don't look, I'm changing.)",1,,traditional Spanish wordplay (Claude-recalled),traditional folk humor; session-curated
+hv_00037,Why did the golfer bring two pairs of pants?,In case he got a hole in one.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00046,"Hey, wanna hear a joke?",Parsing HTML with regex.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00047,I just watched a documentary about beavers.,It was the best dam show I ever saw,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00049,What is the least spoken language in the world?,Sign language.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00052,I just got fired from my job at the keyboard factory.,Do you get a laughing stock?,0,shuffled,constructed control,derived
+hv_00055,The rotation of Earth,really makes my day.,1,,traditional/anonymous (Claude-recalled),traditional folk humor; session-curated
+hv_00059,A lawyer's motto:,It deep ends.,0,shuffled,constructed control,derived
+hv_00061,I told my therapist about my fear of speed bumps.,Now I'm dealing with emotional baggage.,0,shuffled,constructed control,derived
+hv_00066,Why do programmers confuse Halloween and Christmas?,then the christmas went back to normal.,0,boring,constructed control,derived
+hv_00068,Two guys walked into a bar.,may I join you?,0,shuffled,constructed control,derived
+hv_00070,I just got fired from my job at the keyboard factory.,They told me I wasn't putting in enough shifts.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00078,Did you hear about the crime in the parking garage?,and the garage stayed exactly where it was.,0,boring,constructed control,derived
+hv_00080,¿Qué le dijo un semáforo a otro?,//,0,shuffled,constructed control,derived
+hv_00081,The rotation of Earth,The ICU.,0,shuffled,constructed control,derived
+hv_00082,What do you get when you cross a rabbit with a water hose?,but you might not get it.,0,shuffled,constructed control,derived
+hv_00088,I can't tell if i like this blender...,It keeps giving me mixed results.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00089,Our team is like a family —,mostly the part where nobody listens at dinner.,1,,traditional/anonymous (Claude-recalled),traditional folk humor; session-curated
+hv_00091,Why did the programmer bring a broom to work?,"cache invalidation, naming things, and off-by-one errors.",0,shuffled,constructed control,derived
+hv_00094,When does a joke become a dad joke?,When it becomes apparent.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00095,Why is Linux safe?,Hackers peak through Windows only.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00097,I told my therapist about my fear of speed bumps.,She said I'm slowly getting over it.,1,,canonical reference,repo
+hv_00099,What did the Buffalo say to his little boy when he dropped him off at school?,Bison.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00100,How do you get two whales in a car?,Cell phones.,0,shuffled,constructed control,derived
+hv_00104,Did you hear about the submarine industry?,Add the letter G and it’s “gone”!,0,shuffled,constructed control,derived
+hv_00113,Why did the Python programmer not respond to the foreign mails he got?,Then it dawned on me.,0,shuffled,constructed control,derived
+hv_00121,Finally realized why my plant sits around doing nothing all day...,He loves his pot.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00126,What says Oh Oh Oh?,Santa walking backwards!,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00127,There are three kinds of people:,those who can count and those who can't.,1,,traditional/anonymous (Claude-recalled),traditional folk humor; session-curated
+hv_00129,"A weasel walks into a bar. The bartender says, ""Wow, I've never served a weasel before. What can I get for you?""","Pop,goes the weasel.",1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00133,Did you hear about the crime in the parking garage?,It was wrong on so many levels.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00135,Two guys walked into a bar.,The third guy ducked.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00137,"Why can't you use ""Beef stew""as a password?",Because it's not stroganoff.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00142,A lawyer's motto:,and the matter remained perfectly ordinary.,0,boring,constructed control,derived
+hv_00147,Why do pirates not know the alphabet?,Frostbite.,0,shuffled,constructed control,derived
+hv_00149,A lawyer's motto:,a verbal contract isn't worth the paper it's written on.,1,,traditional/anonymous (Claude-recalled),traditional folk humor; session-curated
+hv_00150,"Hey, wanna hear a joke?",Parce que sinon ils tombent dans le bateau. (Otherwise they'd fall into the boat.),0,shuffled,constructed control,derived
+hv_00153,Did you hear about the submarine industry?,It really took a dive...,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00154,Why do pirates not know the alphabet?,"They always get stuck at ""C"".",1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00162,What's the difference between a poorly dressed man on a unicycle and a well dressed man on a bicycle?,Attire.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00166,Why was the JavaScript developer sad?,He didn't know how to null his feelings.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00168,Why do pirates not know the alphabet?,and the alphabet remained perfectly ordinary.,0,boring,constructed control,derived
+hv_00169,Did you hear about the crime in the parking garage?,//,0,shuffled,constructed control,derived
+hv_00176,"My mother said, ""You won't amount to anything because you always procrastinate.""",and a lifetime ban from the zoo.,0,shuffled,constructed control,derived
+hv_00177,Why was the JavaScript developer sad?,"а реалист — автомат Калашникова. (and the realist, the Kalashnikov.)",0,shuffled,constructed control,derived
+hv_00180,I just watched a documentary about beavers.,I couldn’t turn it down.,0,shuffled,constructed control,derived
+hv_00186,Why are Assembly programmers always soaking wet?,It went back four seconds.,0,shuffled,constructed control,derived
+hv_00187,What lies at the bottom of the ocean and twitches?,they're only there for the fission trip.,0,shuffled,constructed control,derived
+hv_00192,Our team is like a family —,She had one-to-many relationships.,0,shuffled,constructed control,derived
+hv_00194,Why is Linux safe?,then the safe was discussed at the next meeting.,0,boring,constructed control,derived
+hv_00207,What says Oh Oh Oh?,unless I buy something.,0,shuffled,constructed control,derived
+hv_00210,Why did the Python programmer not respond to the foreign mails he got?,Because his interpreter was busy collecting garbage.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00211,What is the least spoken language in the world?,Because they might peel!,0,shuffled,constructed control,derived
+hv_00213,Why do programmers confuse Halloween and Christmas?,Because Oct 31 = Dec 25,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00214,How do you get two whales in a car?,Start in England and drive West.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00215,What lies at the bottom of the ocean and twitches?,A nervous wreck.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00219,I can't tell if i like this blender...,European,0,shuffled,constructed control,derived
+hv_00222,There are three kinds of people:,"She said, ""Yes, the others were at least sevens or eights.""",0,shuffled,constructed control,derived
+hv_00223,What's it like to be kissed by a vampire?,It's a pain in the neck.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00232,Why are Assembly programmers always soaking wet?,They work below C-level.,1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00236,Finally realized why my plant sits around doing nothing all day...,A stick.,0,shuffled,constructed control,derived
+hv_00237,What do you call a lawyer with an IQ of 100?,so the with carried on as usual.,0,boring,constructed control,derived
+hv_00238,What says Oh Oh Oh?,and the says remained perfectly ordinary.,0,boring,constructed control,derived
+hv_00240,A ham sandwhich walks into a bar and orders a beer. The bartender says...,"I'm sorry, we don't serve food here",1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00244,"My mother said, ""You won't amount to anything because you always procrastinate.""","I said, ""Oh yeah... Just you wait.""",1,,v2.jokeapi.dev (safe-mode),JokeAPI (jokes submitted by users; safe-mode filtered)
+hv_00245,Why did the programmer bring a broom to work?,To clean up all the bugs.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00247,What do you call a lawyer with an IQ of 100?,Your Honor.,1,,traditional/anonymous (Claude-recalled),traditional folk humor; session-curated
+hv_00252,"Why can't you use ""Beef stew""as a password?",Because it wasn't peeling well.,0,shuffled,constructed control,derived
+hv_00253,What did the Buffalo say to his little boy when he dropped him off at school?,"I don't know what he laced them with, but I was tripping all day!",0,shuffled,constructed control,derived
+hv_00263,What do you get when you cross a rabbit with a water hose?,Hare spray.,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00265,What's it like to be kissed by a vampire?,then the vampire was discussed at the next meeting.,0,boring,constructed control,derived
+hv_00266,Why do programmers confuse Halloween and Christmas?,You'll strain your eyes.,0,shuffled,constructed control,derived
+hv_00267,Want to hear a joke about a piece of paper?,Never mind...it's tearable,1,,official-joke-api.appspot.com,public API (github: 15Dkatz/official_joke_api)
+hv_00270,"A weasel walks into a bar. The bartender says, ""Wow, I've never served a weasel before. What can I get for you?""",You can only use a low ha.,0,shuffled,constructed control,derived

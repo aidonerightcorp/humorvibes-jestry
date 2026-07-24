@@ -1,0 +1,75 @@
+{
+  "receipt_type": "gemma4_instrument_calibration",
+  "receipt_version": 1,
+  "ts": "2026-07-23T23:38:36",
+  "instrument": "gemma4-forced-nll",
+  "model": "gemma4",
+  "reference": [
+    {
+      "name": "speed_bumps",
+      "kind": "joke",
+      "S": 4.118,
+      "R": 0.0,
+      "E": 0.0,
+      "censored": 5,
+      "tokens": 10,
+      "measured": true
+    },
+    {
+      "name": "lion_heart",
+      "kind": "joke",
+      "S": 7.866,
+      "R": 0.306,
+      "E": 0.0219,
+      "censored": 4,
+      "tokens": 8,
+      "measured": true
+    },
+    {
+      "name": "ai_pm",
+      "kind": "joke",
+      "S": 6.89,
+      "R": 0.0,
+      "E": 0.0,
+      "censored": 4,
+      "tokens": 5,
+      "measured": true
+    },
+    {
+      "name": "boring",
+      "kind": "control",
+      "S": 6.123,
+      "R": 0.726,
+      "E": 0.7263,
+      "censored": 4,
+      "tokens": 9,
+      "measured": true
+    },
+    {
+      "name": "nonsense",
+      "kind": "control",
+      "S": 6.853,
+      "R": 0.0,
+      "E": 0.0,
+      "censored": 7,
+      "tokens": 7,
+      "measured": true
+    }
+  ],
+  "forced_nll_api_calls": 117,
+  "instrument_errors": 0,
+  "derived": null,
+  "certified": false,
+  "failure": {
+    "joke_R": [
+      0.0,
+      0.306,
+      0.0
+    ],
+    "control_R": [
+      0.726,
+      0.0
+    ],
+    "reason": "reference jokes do not separate from controls on R under top-K censoring"
+  }
+}

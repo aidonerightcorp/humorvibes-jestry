@@ -1,0 +1,18 @@
+{
+  "id": "taylorsamarel/humorvibes-measuring-jokes-with-gemma",
+  "title": "HumorVibes: Measuring Jokes with Gemma",
+  "code_file": "notebook.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": [
+    "humor-genome-nyc"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "model_sources": [
+    "google/gemma-2/transformers/gemma-2-2b-it/2"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "receipt_type": "instrument_calibration",
+  "receipt_version": 2,
+  "ts": "2026-07-24T09:59:19",
+  "instrument": "gemma2-full-nll",
+  "model": "gemma-2-2b-it-Q4_K_M.gguf (llama.cpp)",
+  "reference": [
+    {
+      "name": "speed_bumps",
+      "kind": "joke",
+      "S": 3.19,
+      "R": 0.08,
+      "E": 0.0053,
+      "censored": 0,
+      "tokens": 10,
+      "measured": true
+    },
+    {
+      "name": "lion_heart",
+      "kind": "joke",
+      "S": 3.476,
+      "R": 0.121,
+      "E": 0.0086,
+      "censored": 0,
+      "tokens": 8,
+      "measured": true
+    },
+    {
+      "name": "ai_pm",
+      "kind": "joke",
+      "S": 8.1,
+      "R": 0.444,
+      "E": 0.037,
+      "censored": 0,
+      "tokens": 5,
+      "measured": true
+    },
+    {
+      "name": "boring",
+      "kind": "control",
+      "S": 3.141,
+      "R": 0.0,
+      "E": 0.0,
+      "censored": 0,
+      "tokens": 10,
+      "measured": true
+    },
+    {
+      "name": "nonsense",
+      "kind": "control",
+      "S": 8.23,
+      "R": 0.0,
+      "E": 0.0,
+      "censored": 0,
+      "tokens": 9,
+      "measured": true
+    }
+  ],
+  "nll_calls": 11,
+  "instrument_errors": 0,
+  "derived": {
+    "s_band": [
+      1.91,
+      8.07
+    ],
+    "r_floor": 0.04,
+    "e_floor": 0.0027
+  },
+  "checks": {
+    "all_jokes_pass": true,
+    "all_controls_fail": true
+  },
+  "certified": true,
+  "adversarial_scope": {
+    "probe": "boring + crafted frame",
+    "S": 3.141,
+    "R": 0.215,
+    "E": 0.0215,
+    "in_region_if_frame_trusted": true,
+    "mitigation": "frame provenance hard gate \u2014 untrusted frame_hints never reach the oracle (jestry.trusted_frame_source)"
+  },
+  "rule": "accept when s_band[0] <= S <= s_band[1] (or S - R inside band) and R >= r_floor and E >= e_floor; SCOPE: frame hints only from trusted provenance (see adversarial_scope)"
+}

@@ -1,0 +1,34 @@
+{
+  "candidates": [
+    "AI PMs promise autonomy until the agentic product just needs a *supervisor*.",
+    "Shipping agentic software feels like managing a team of *very smart interns*.",
+    "We built an AI PM to ship products, now it keeps asking for *scope creep*.",
+    "The new agentic workflow promises efficiency, but the LLM just needs a *prompt engineer*."
+  ],
+  "completed_at_utc": "2026-07-11T05:21:58.318419Z",
+  "model": "gemma4",
+  "parsed_candidate_count": 4,
+  "prompt_sha256": "639f65f82457c088a7a83eccaebc4f7342bd50986de16d1f9d768c67d1f1c7ca",
+  "provider": "ollama",
+  "raw_output_sha256": "44f81a0055df813b32b1ad4379e5d54187484943a42f145385b1b695427563e9",
+  "receipt_type": "humorvibes_gemma_generation",
+  "receipt_version": 1,
+  "request": {
+    "audience": "NYC builders and startup engineers",
+    "format": "one_liner",
+    "preferences": "smart, specific, concise, not cruel, no false claims",
+    "requested_candidates": 4,
+    "temperature": 0.75,
+    "token_budget": 560,
+    "topic": "AI project managers shipping agentic products"
+  },
+  "signals": [],
+  "status": "completed",
+  "thinking_enabled": false,
+  "truth_boundary": {
+    "competition_submission": false,
+    "generation_executed": true,
+    "model_judgment_is_not_human_laughter": true,
+    "teacher_forced_logprobs_measured": false
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "all_six_complete_private_and_source_matched": true,
+  "audited_utc": "2026-07-12T16:36:43.498409+00:00",
+  "competition": {
+    "category": "Community",
+    "deadline": "2026-07-25 04:00:00",
+    "ref": "https://www.kaggle.com/competitions/humor-genome-nyc",
+    "reward": "1,500 Usd",
+    "teamCount": "0",
+    "userHasEntered": "True"
+  },
+  "kernels": [
+    {
+      "competition_sources": [
+        "humor-genome-nyc"
+      ],
+      "dataset_sources": [],
+      "enable_gpu": false,
+      "enable_internet": false,
+      "id": "taylorsamarel/humorvibes-measuring-jokes-with-gemma",
+      "local_notebook_sha256": "3692554c042cd1c4b4590af7925ca88fe0685978b1174ed334ea8c3a404963a8",
+      "local_private": true,
+      "mirrored_output_checks": [
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-measuring-jokes-with-gemma/humorvibes-measuring-jokes-with-gemma.log",
+          "local_sha256": "f053108e79a7188615ac7b583feeaf0cd2cd833ec708e2bcf9d5d1bb1be9d146",
+          "remote_path": "humorvibes-measuring-jokes-with-gemma.log",
+          "remote_sha256": "f053108e79a7188615ac7b583feeaf0cd2cd833ec708e2bcf9d5d1bb1be9d146"
+        }
+      ],
+      "mirrored_outputs_match": true,
+      "model_sources": [
+        "google/gemma-2/Transformers/gemma-2-2b-it/2"
+      ],
+      "name": "main",
+      "normalized_cells_sha256": "3adde596939d1c1eb65d391e0bab38c3b8ac3cfb1e4d4aa1478765377d5c6af0",
+      "remote_notebook_sha256": "99fd5a4efc185442c3be67bf62fe7d44b8d3a5d8f5d8c1ca4743a30c68668375",
+      "remote_output_file_count": 1,
+      "remote_output_manifest_sha256": "0dee49a7288d4de507f89f8c9fe8bd657eb9bd9ad4697ef8be0c3b92b9cc9d0b",
+      "remote_private": true,
+      "source_cells_match": true,
+      "status": "KernelWorkerStatus.COMPLETE"
+    },
+    {
+      "competition_sources": [],
+      "dataset_sources": [],
+      "enable_gpu": false,
+      "enable_internet": true,
+      "id": "taylorsamarel/humorvibes-mesh-zoo-lab",
+      "local_notebook_sha256": "46b0a11e4cacf1d31099ca4195d3e79a611766df8113312ebb1b9e30ac34daa9",
+      "local_private": true,
+      "mirrored_output_checks": [
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-mesh-zoo-lab/humorvibes-mesh-zoo-lab.log",
+          "local_sha256": "558c6bc1bf53ab98d6b32588746d59ca5bfa578bbbef7ec9700f397d035a2e96",
+          "remote_path": "humorvibes-mesh-zoo-lab.log",
+          "remote_sha256": "558c6bc1bf53ab98d6b32588746d59ca5bfa578bbbef7ec9700f397d035a2e96"
+        },
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-mesh-zoo-lab/research_out/zoo_report.json",
+          "local_sha256": "3a521c94c636c460c76ebec8ce59f6310026ec59d4bc8baacce20d31c6783e28",
+          "remote_path": "research_out/zoo_report.json",
+          "remote_sha256": "3a521c94c636c460c76ebec8ce59f6310026ec59d4bc8baacce20d31c6783e28"
+        }
+      ],
+      "mirrored_outputs_match": true,
+      "model_sources": [
+        "google/gemma-2/Transformers/gemma-2-2b-it/2",
+        "google/gemma-3/Transformers/gemma-3-1b-it/1",
+        "metaresearch/llama-3.2/Transformers/3b-instruct/1",
+        "qwen-lm/qwen2.5/Transformers/1.5b-instruct/1"
+      ],
+      "name": "zoo",
+      "normalized_cells_sha256": "53e6225883fd385f7bbafd94b96616c99377ada0c7f4e18653b4f19be93c14e6",
+      "remote_notebook_sha256": "80e0d9ce191676271ec443b483a42536f96cba06fdbc16a5861052c262375cf4",
+      "remote_output_file_count": 2,
+      "remote_output_manifest_sha256": "b2fe5fcb31aab3af1036a57a6c9bfcb3ee3f6291a54499ab9e134d49124d10d3",
+      "remote_private": true,
+      "source_cells_match": true,
+      "status": "KernelWorkerStatus.COMPLETE"
+    },
+    {
+      "competition_sources": [],
+      "dataset_sources": [
+        "taylorsamarel/punchline-mesh-src"
+      ],
+      "enable_gpu": false,
+      "enable_internet": true,
+      "id": "taylorsamarel/humorvibes-corpus-lab",
+      "local_notebook_sha256": "937f67401477822c5192f55e4beeb6ea103e89e6177426787c7dced4ab2a6752",
+      "local_private": true,
+      "mirrored_output_checks": [
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-corpus-lab/humorvibes-corpus-lab.log",
+          "local_sha256": "701f81a46c41695231e8ec88d84f47c78a0aaeadc9bcd23bddd51c4e29bed66f",
+          "remote_path": "humorvibes-corpus-lab.log",
+          "remote_sha256": "701f81a46c41695231e8ec88d84f47c78a0aaeadc9bcd23bddd51c4e29bed66f"
+        },
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-corpus-lab/research_out/corpus_report.json",
+          "local_sha256": "ebc191b41ec878ea3ab8e41e86d04f28109f08cbc041f1bed5c859707df7d3be",
+          "remote_path": "research_out/corpus_report.json",
+          "remote_sha256": "ebc191b41ec878ea3ab8e41e86d04f28109f08cbc041f1bed5c859707df7d3be"
+        }
+      ],
+      "mirrored_outputs_match": true,
+      "model_sources": [
+        "google/gemma-2/Transformers/gemma-2-2b-it/2"
+      ],
+      "name": "corpus",
+      "normalized_cells_sha256": "9ec3f27bda85629f9be4a7acc465571f2eeeb5427687b43c071bcb80a294bec8",
+      "remote_notebook_sha256": "43598b82aa96b75e2e9d44bab085f649acfbae140efe6ccc59ad5c59a1337b90",
+      "remote_output_file_count": 2,
+      "remote_output_manifest_sha256": "90137d0d0b2559c9cce409ea5f14009b2afc67ea399ce988ddd460f9509013b4",
+      "remote_private": true,
+      "source_cells_match": true,
+      "status": "KernelWorkerStatus.COMPLETE"
+    },
+    {
+      "competition_sources": [],
+      "dataset_sources": [
+        "taylorsamarel/punchline-mesh-src"
+      ],
+      "enable_gpu": false,
+      "enable_internet": true,
+      "id": "taylorsamarel/humorvibes-panel-lab",
+      "local_notebook_sha256": "5d97d11979c658a4dd3f6c06808c263c6a6c392bb45b52df1e39998184dec988",
+      "local_private": true,
+      "mirrored_output_checks": [
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-panel-lab/humorvibes-panel-lab.log",
+          "local_sha256": "fb0a389859fd2ea1e052b46fd1220202dfb88482507fc933e46f2619b317f033",
+          "remote_path": "humorvibes-panel-lab.log",
+          "remote_sha256": "fb0a389859fd2ea1e052b46fd1220202dfb88482507fc933e46f2619b317f033"
+        },
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-panel-lab/research_out/frame_duel.json",
+          "local_sha256": "7b31bc156a9c8228794803653c36d4c520f76f49c3c842df2f48ab10457a1d56",
+          "remote_path": "research_out/frame_duel.json",
+          "remote_sha256": "7b31bc156a9c8228794803653c36d4c520f76f49c3c842df2f48ab10457a1d56"
+        }
+      ],
+      "mirrored_outputs_match": true,
+      "model_sources": [
+        "google/gemma-2/Transformers/gemma-2-2b-it/2"
+      ],
+      "name": "panel",
+      "normalized_cells_sha256": "3d178da52254dc0f01235a757e970d93488ea3f1963382df28fc94b459a76948",
+      "remote_notebook_sha256": "f62fd1be7f8b4f22960ae8ce674101aa1ef69276f33aa2239f3d7dfb2a5f6724",
+      "remote_output_file_count": 2,
+      "remote_output_manifest_sha256": "5b8ecb1de8fbb5b7a1a7667c94a99b22fb23f4ceb058b278ef85927a025ff32c",
+      "remote_private": true,
+      "source_cells_match": true,
+      "status": "KernelWorkerStatus.COMPLETE"
+    },
+    {
+      "competition_sources": [],
+      "dataset_sources": [
+        "taylorsamarel/punchline-mesh-src"
+      ],
+      "enable_gpu": false,
+      "enable_internet": true,
+      "id": "taylorsamarel/humorvibes-validate-ratings",
+      "local_notebook_sha256": "f7484cf4a9854d17f8355d74e6480a0dddee0d57e2aa96c5bf93913409de117b",
+      "local_private": true,
+      "mirrored_output_checks": [
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-validate-ratings/humorvibes-validate-ratings.log",
+          "local_sha256": "3b1c8063ff9c89b118b24c6057b7be58047a3fa25cc6f0bd3709d648a3059083",
+          "remote_path": "humorvibes-validate-ratings.log",
+          "remote_sha256": "3b1c8063ff9c89b118b24c6057b7be58047a3fa25cc6f0bd3709d648a3059083"
+        },
+        {
+          "exact_match": true,
+          "local_path": "research_out/kaggle/humorvibes-validate-ratings/validation_results.json",
+          "local_sha256": "8a076e511b4a2ea23050a7603e1eee99d9f63351132849acc1dd9530daf7c351",
+          "remote_path": "validation_results.json",
+          "remote_sha256": "8a076e511b4a2ea23050a7603e1eee99d9f63351132849acc1dd9530daf7c351"
+        }
+      ],
+      "mirrored_outputs_match": true,
+      "model_sources": [
+        "google/gemma-2/Transformers/gemma-2-2b-it/2"
+      ],
+      "name": "ratings",
+      "normalized_cells_sha256": "3d0ab65d7746b4e3c3818a06f2b1dfadd0fc534699b1e388d86e5a92bb610027",
+      "remote_notebook_sha256": "806b836f5834d888cd1e55b085cd1170758880a38f7a553b5a90e77ba7a3fddb",
+      "remote_output_file_count": 2,
+      "remote_output_manifest_sha256": "c7e97754b2c6407c6a36d1ef127511734d5f0bc8e5a54d99c580f1d0f82a07ee",
+      "remote_private": true,
+      "source_cells_match": true,
+      "status": "KernelWorkerStatus.COMPLETE"
+    },
+    {
+      "competition_sources": [],
+      "dataset_sources": [
+        "taylorsamarel/punchline-mesh-src"
+      ],
+      "enable_gpu": false,
+      "enable_internet": true,
+      "id": "taylorsamarel/humorvibes-studio-g2",
+      "local_notebook_sha256": "4125db786f2139c5106f7d11045424e643d6d01b73ea020ee2efde3d51e0a916",
+      "local_private": true,
+      "mirrored_output_checks": [],
+      "mirrored_outputs_match": true,
+      "model_sources": [
+        "google/gemma-2/Transformers/gemma-2-2b-it/2"
+      ],
+      "name": "studio",
+      "normalized_cells_sha256": "32637e19f2a3f37eac46bbf412b7fadb87e7c001b3b71032c829597a5d32d122",
+      "remote_notebook_sha256": "24d1a8a035a635604ed97cc9eaa4df5779cbd2d6c2b52481b4cfc9d1fa1de8b7",
+      "remote_output_file_count": 58,
+      "remote_output_manifest_sha256": "24b2bea5daf0c51bcb7851bce0161b4cbb52569f25bf207a22251d121d9b911a",
+      "remote_private": true,
+      "source_cells_match": true,
+      "status": "KernelWorkerStatus.COMPLETE"
+    }
+  ],
+  "operation": "read_only_pull_status_source_output",
+  "schema": "humorvibes_six_kernel_audit_v1"
+}

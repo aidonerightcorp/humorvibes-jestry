@@ -1,0 +1,221 @@
+#!/usr/bin/env python3
+"""Generate the Panel Lab notebook: Kaggle-built-in Gemini credits + local Gemma instrument.
+
+One self-contained research run:
+  1. Resolve a Gemini key from the Kaggle platform (built-in add-on via
+     UserSecretsClient().get_gemini_api_key(), then user secrets, then env).
+  2. PANEL: persona-conditioned judgments from Gemini judges (platform credits).
+  3. FRAME DUEL: Gemini writes one-line frames; local gemma-2-2b measures each
+     frame's surprisal collapse net of the decoy null -> explanation leaderboard
+     in nats, not vibes.
+  4. Keyless fallback: curated ground-truth frames vs the 2B self-frames -> the
+     "frame gap" result still lands even with no LLM credits at all.
+Outputs: /kaggle/working/research_out/*.json + printed summary.
+"""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+_c = {"n": 0}
+
+
+def _cid() -> str:
+    _c["n"] += 1
+    return f"cell-{_c['n']:02d}"
+
+
+def md(src: str) -> dict:
+    return {"cell_type": "markdown", "id": _cid(), "metadata": {}, "source": src}
+
+
+def code(src: str) -> dict:
+    return {"cell_type": "code", "id": _cid(), "metadata": {}, "execution_count": None, "outputs": [], "source": src}
+
+
+CELLS = [
+    md(
+        "# HumorVibes — Panel Lab\n\n"
+        "**Kaggle's built-in LLM credits as the audience panel; local Gemma as the instrument.**\n\n"
+        "Theory (see THEORY.md in the mounted source): audiences are differently-tuned predictive "
+        "meshes. Hosted models judge persona-conditioned; the small local Gemma *measures* — "
+        "punchline surprisal S, and resolution R as the surprisal collapse a stated frame produces, "
+        "net of a decoy-hint null control.\n\n"
+        "**Frame duel**: each hosted mesh writes its best one-line frame per joke; frames are scored "
+        "by the measured collapse they cause. Explanation quality in nats, not vibes.\n\n"
+        "*Enable the free credits: Add-ons → Gemini (or attach a GEMINI_API_KEY secret). Without a "
+        "key the notebook still runs the ground-truth-vs-self frame-gap experiment.*"
+    ),
+    code(
+        "import glob, json, os, re, shutil, sys, time, urllib.request\n"
+        "apps = glob.glob('/kaggle/input/**/llm_panel.py', recursive=True)\n"
+        "assert apps, 'punchline-mesh-src dataset not attached'\n"
+        "SRC = os.path.dirname(apps[0])\n"
+        "sys.path.insert(0, SRC)\n"
+        "os.makedirs('/kaggle/working/research_out', exist_ok=True)\n"
+        "print('source:', SRC)\n\n"
+        "GEMINI_KEY = ''\n"
+        "try:\n"
+        "    from kaggle_secrets import UserSecretsClient\n"
+        "    usc = UserSecretsClient()\n"
+        "    for getter in (lambda: usc.get_gemini_api_key(),\n"
+        "                   lambda: usc.get_secret('GEMINI_API_KEY'),\n"
+        "                   lambda: usc.get_secret('GOOGLE_API_KEY')):\n"
+        "        try:\n"
+        "            GEMINI_KEY = getter() or ''\n"
+        "            if GEMINI_KEY: break\n"
+        "        except Exception: pass\n"
+        "except Exception as e:\n"
+        "    print('kaggle_secrets unavailable:', e)\n"
+        "if GEMINI_KEY:\n"
+        "    os.environ['GEMINI_API_KEY'] = GEMINI_KEY\n"
+        "    print('Gemini credits: AVAILABLE')\n"
+        "else:\n"
+        "    print('No Gemini key. Enable Add-ons -> Gemini (Kaggle built-in credits) and rerun for '\n"
+        "          'the hosted panel; continuing with the local-only frame-gap experiment.')"
+    ),
+    code(
+        "import torch\n"
+        "from transformers import AutoModelForCausalLM, AutoTokenizer\n"
+        "gcfg = [p for p in glob.glob('/kaggle/input/**/config.json', recursive=True) if 'gemma' in p.lower()]\n"
+        "MODEL_PATH = os.path.dirname(gcfg[0])\n"
+        "tok = AutoTokenizer.from_pretrained(MODEL_PATH)\n"
+        "def load_fallback(path):\n"
+        "    if torch.cuda.is_available():\n"
+        "        try:\n"
+        "            m = AutoModelForCausalLM.from_pretrained(path, torch_dtype=torch.float16, device_map='auto').eval()\n"
+        "            with torch.no_grad(): m(torch.tensor([[tok.bos_token_id or 2]]).to(m.device))\n"
+        "            return m\n"
+        "        except Exception as e:\n"
+        "            print('cuda failed ->cpu:', str(e)[:100]); torch.cuda.empty_cache()\n"
+        "    return AutoModelForCausalLM.from_pretrained(path, torch_dtype=torch.float32).eval()\n"
+        "model = load_fallback(MODEL_PATH)\n"
+        "print('instrument device:', model.device)\n\n"
+        "def nll_mean(context, continuation):\n"
+        "    ctx = tok(context, return_tensors='pt').input_ids\n"
+        "    cont = tok(continuation, add_special_tokens=False, return_tensors='pt').input_ids\n"
+        "    full = torch.cat([ctx, cont], dim=1).to(model.device)\n"
+        "    with torch.no_grad():\n"
+        "        lp = torch.log_softmax(model(full).logits.float(), dim=-1)\n"
+        "    n = ctx.shape[1]\n"
+        "    vals = [float(-lp[0, n+i-1, int(full[0, n+i])]) for i in range(cont.shape[1])]\n"
+        "    return sum(vals) / len(vals)\n\n"
+        "DECOY = 'It turns out this is really about quarterly regional cheese sales figures.'\n"
+        "def measure_frame(setup, punch, frame):\n"
+        "    S = nll_mean(setup + '\\n', ' ' + punch)\n"
+        "    r_raw = max(0.0, S - nll_mean(setup + '\\n(' + frame + ')\\n', ' ' + punch))\n"
+        "    r_null = max(0.0, S - nll_mean(setup + '\\n(' + DECOY + ')\\n', ' ' + punch))\n"
+        "    return round(S, 3), round(max(0.0, r_raw - r_null), 3), round(r_raw, 3), round(r_null, 3)"
+    ),
+    code(
+        "ITEMS = [\n"
+        "  ('speed_bumps', 'I told my therapist about my fear of speed bumps.', \"She said I'm slowly getting over it.\",\n"
+        "   \"'Getting over it' is literal: the car physically drives over the speed bumps slowly.\"),\n"
+        "  ('lion_heart', 'My grandfather has the heart of a lion', 'and a lifetime ban from the zoo.',\n"
+        "   \"He literally stole a lion's heart from the zoo, not the bravery metaphor.\"),\n"
+        "  ('ai_pm', 'I asked the AI project manager when the feature would ship.', 'It scheduled a meeting to align on what \\'when\\' means.',\n"
+        "   'The AI treats even the word when as a project requirement needing stakeholder alignment.'),\n"
+        "  ('nonsense_ctrl', 'I told my therapist about my fear of speed bumps.', 'The quarterly report shows strong regional cheese sales.',\n"
+        "   'NONE'),\n"
+        "]\n"
+        "def gen_local(prompt, max_new=60, temperature=0.3):\n"
+        "    ids = tok.apply_chat_template([{'role':'user','content':prompt}], return_tensors='pt', add_generation_prompt=True)\n"
+        "    if not torch.is_tensor(ids): ids = ids['input_ids']\n"
+        "    ids = ids.to(model.device)\n"
+        "    with torch.no_grad():\n"
+        "        out = model.generate(ids, max_new_tokens=max_new, do_sample=True, temperature=temperature,\n"
+        "                             top_p=0.95, pad_token_id=tok.eos_token_id)\n"
+        "    return tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True).strip()\n\n"
+        "FRAME_ASK = ('A joke works because a hidden frame reinterprets the punchline - the fact that, once stated, '\n"
+        "             'makes the punchline the OBVIOUS next thing to say.\\nJoke: {joke}\\n'\n"
+        "             'Frame (ONE short sentence, no preamble; if none exists, write NONE):')\n\n"
+        "# Frame writers: local 2B always; Gemini models when credits exist\n"
+        "WRITERS = {'local-gemma-2-2b': lambda joke: gen_local(FRAME_ASK.format(joke=joke)).splitlines()[0].strip()}\n"
+        "if os.environ.get('GEMINI_API_KEY'):\n"
+        "    import llm_panel\n"
+        "    from llm_panel import PanelJudge, _dispatch\n"
+        "    for gm in ('gemini-2.5-flash', 'gemini-2.5-flash-lite'):\n"
+        "        judge = PanelJudge(f'gem-{gm}', 'openai-compat', gm,\n"
+        "                           'https://generativelanguage.googleapis.com/v1beta/openai', 'GEMINI_API_KEY')\n"
+        "        WRITERS[gm] = (lambda j: (lambda joke: (_dispatch(j, FRAME_ASK.format(joke=joke)) or '').strip().splitlines()[0].strip() if (_dispatch(j, FRAME_ASK.format(joke=joke)) or '').strip() else ''))(judge)\n"
+        "print('frame writers:', list(WRITERS))"
+    ),
+    md("## Frame duel: who explains the joke best, measured in nats"),
+    code(
+        "duel = {}\n"
+        "for item_id, setup, punch, gt_frame in ITEMS:\n"
+        "    rows = {}\n"
+        "    if gt_frame != 'NONE':\n"
+        "        S, R, r_raw, r_null = measure_frame(setup, punch, gt_frame)\n"
+        "        rows['ground_truth'] = {'frame': gt_frame, 'S': S, 'R': R, 'R_raw': r_raw, 'R_null': r_null}\n"
+        "    for writer, fn in WRITERS.items():\n"
+        "        try:\n"
+        "            frame = fn(setup + ' ' + punch)\n"
+        "        except Exception as e:\n"
+        "            frame = ''\n"
+        "        if not frame or frame.upper().startswith('NONE'):\n"
+        "            rows[writer] = {'frame': frame or '(none)', 'S': None, 'R': 0.0}\n"
+        "            continue\n"
+        "        S, R, r_raw, r_null = measure_frame(setup, punch, frame)\n"
+        "        rows[writer] = {'frame': frame[:90], 'S': S, 'R': R, 'R_raw': r_raw, 'R_null': r_null}\n"
+        "    duel[item_id] = rows\n"
+        "    print('==', item_id)\n"
+        "    for w, r in sorted(rows.items(), key=lambda kv: -(kv[1].get('R') or 0)):\n"
+        "        print(f\"   {w:22s} R={r.get('R')} :: {r['frame'][:70]}\")\n"
+        "json.dump(duel, open('/kaggle/working/research_out/frame_duel.json', 'w'), indent=2)"
+    ),
+    md("## Persona panel (runs when credits exist)"),
+    code(
+        "if os.environ.get('GEMINI_API_KEY'):\n"
+        "    os.environ['PANEL_GEMINI_MODELS'] = 'gemini-2.5-flash,gemini-2.5-flash-lite'\n"
+        "    import importlib, llm_panel\n"
+        "    importlib.reload(llm_panel)\n"
+        "    judges = [j for j in llm_panel.available_judges() if j.judge_id.startswith('gem-')]\n"
+        "    personas = ['NYC tech meetup crowd', 'retired farmers with no software exposure',\n"
+        "                'mixed-politics community-center audience']\n"
+        "    results = {}\n"
+        "    for item_id, setup, punch, _gt in ITEMS:\n"
+        "        votes = llm_panel.run_panel(setup + ' ' + punch, personas, judges=judges)\n"
+        "        results[item_id] = [v.__dict__ for v in votes]\n"
+        "        ok = [v for v in votes if v.ok]\n"
+        "        if ok:\n"
+        "            ov = [v.scores.get('overall', 0) for v in ok]\n"
+        "            print(f'{item_id:16s} {len(ok)}/{len(votes)} votes, overall mean {sum(ov)/len(ov):.2f}')\n"
+        "        else:\n"
+        "            print(f'{item_id:16s} all failed:', votes[0].error if votes else '?')\n"
+        "    json.dump(results, open('/kaggle/working/research_out/gemini_panel.json', 'w'), indent=2)\n"
+        "    print('wrote gemini_panel.json')\n"
+        "else:\n"
+        "    print('skipped (no Gemini credits attached — Add-ons -> Gemini, then rerun)')"
+    ),
+    md(
+        "## Reading the results\n"
+        "- **Ground-truth frames vs model frames**: the gap between `ground_truth` R and each "
+        "writer's R is that writer's *explanation deficit* for the joke — understanding measured "
+        "as the surprisal collapse its explanation produces in another mesh.\n"
+        "- **Nonsense control**: every honest writer should output NONE (R=0). A writer that "
+        "invents a frame for nonsense — and especially one whose invented frame *measures* well — "
+        "is confabulating; the decoy null keeps that in check.\n"
+        "- The persona panel extends the multi-mesh study (THEORY.md §7) using Kaggle's built-in "
+        "LLM credits: validity (nonsense lowest), convergence by dimension, portability spread."
+    ),
+]
+
+
+def main() -> None:
+    nb = {
+        "nbformat": 4,
+        "nbformat_minor": 5,
+        "metadata": {
+            "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
+            "language_info": {"name": "python", "version": "3.11"},
+        },
+        "cells": CELLS,
+    }
+    (HERE / "panel_lab.ipynb").write_text(json.dumps(nb, indent=1), encoding="utf-8")
+    print("wrote", HERE / "panel_lab.ipynb", f"({len(CELLS)} cells)")
+
+
+if __name__ == "__main__":
+    main()

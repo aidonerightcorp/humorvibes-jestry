@@ -1,0 +1,77 @@
+{
+  "bootstrap_rounds": 1000,
+  "data": {
+    "archive_sha256": "30c024acb53fa32aa04d92089e3d4caf3401e5ce67b4d38ae87041930f6fd697",
+    "control_set_rows": 40,
+    "csv_member": "data/task-1/train.csv",
+    "csv_sha256": "635b38eab604275aba337463bdb2a23a407a40c46dd2612c1fce3cb58fa262ce",
+    "human_sample_rows": 120,
+    "sample_id_sha256": "ce5d2f93f35e8296efdc6b63f91aed0b5eb28ba8d8bc575d43441ef17360cee2",
+    "sampling_seed": 20260712,
+    "source_rows": 9652,
+    "url": "https://cs.rochester.edu/u/nhossain/humicroedit/semeval-2020-task-7-data.zip"
+  },
+  "environment": {
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "platform": "Linux-6.12.90+-x86_64-with-glibc2.35",
+    "python": "3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]"
+  },
+  "external_submission_made": false,
+  "finished_utc": "2026-07-12T20:20:45.823209+00:00",
+  "kernel_id": "taylorsamarel/humorvibes-ablation-court",
+  "kernel_private_at_run": true,
+  "model": {
+    "cuda_available": false,
+    "cuda_device": null,
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "humor_mesh_sha256": "3b02ead236028a41eb525ef976f480a5b20d9be720c6cae121d92e22a4aead62",
+    "mesh_signals_path": "/kaggle/working/humorvibes_source/mesh_signals.py",
+    "mesh_signals_sha256": "85d6638471bc277cfa6702fb775ffe8ee188b2220af689166be8b98d6693195b",
+    "model_config_name": "gemma2",
+    "model_config_path": "/kaggle/input/models/google/gemma-2/transformers/gemma-2-2b-it/2/config.json",
+    "model_config_sha256": "eacec6c5ca317a87ed2c46789d9705b9274db5027e7ba59da739bfae23addb55",
+    "model_source": "google/gemma-2/transformers/gemma-2-2b-it/2",
+    "parameter_count": 2614341888,
+    "provider_class": "TransformersProvider",
+    "provider_name": "transformers",
+    "source_delivery": "self_contained_notebook_vendor",
+    "torch_version": "2.10.0+cpu",
+    "true_teacher_forced_logprobs": true
+  },
+  "outputs": {
+    "ablation_failure_figure.png": {
+      "bytes": 203149,
+      "sha256": "7cbe78eaa67307d37aa94eb70708cf8353f63c7cdfa2881603bf6adde13daa57"
+    },
+    "ablation_rows.jsonl": {
+      "bytes": 242852,
+      "sha256": "89d96aca6f7566432ba2647dd1b64bd812392bbdf809316776c4426f94ab81ab"
+    },
+    "ablation_summary.json": {
+      "bytes": 9411,
+      "sha256": "7c1ff684a05d720635eeb0741594898338d23ff046ec4e50997dcf648c7a7472"
+    },
+    "failure_cases.csv": {
+      "bytes": 5027,
+      "sha256": "97e041c8641f48506ffb04a662068d9ccdd683d6e30f31d4e9e66d76a1e9aaf2"
+    },
+    "failure_cases.md": {
+      "bytes": 5389,
+      "sha256": "6830c27324b1558c3d0c2159882a7c677186a86db1e555523ab6d18c9169b3ab"
+    }
+  },
+  "reproduction": "Run the private Kaggle notebook humorvibes-ablation-court; it vendors the hashed signal source and attaches the pinned Gemma model source.",
+  "schema": "humorvibes_runtime_receipt_v1",
+  "seconds_per_successful_job": 64.18697352004,
+  "seed": 20260712,
+  "started_utc": "2026-07-12T16:46:48.428520+00:00",
+  "status": "complete",
+  "variant_seconds": {
+    "human_edit": 7666.939378986,
+    "original_headline": 2547.4455010640013,
+    "shuffled_edit": 2579.9349328480007
+  },
+  "wall_seconds": 12837.394702807
+}

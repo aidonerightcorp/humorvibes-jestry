@@ -1,0 +1,21 @@
+{
+  "n": 180,
+  "correlations": {
+    "laugh_score": {
+      "pearson": 0.108,
+      "spearman": 0.115
+    },
+    "S_surprise": {
+      "pearson": -0.001,
+      "spearman": -0.035
+    },
+    "R_resolution": {
+      "pearson": -0.003,
+      "spearman": 0.101
+    },
+    "E_efficiency": {
+      "pearson": 0.071,
+      "spearman": 0.105
+    }
+  }
+}

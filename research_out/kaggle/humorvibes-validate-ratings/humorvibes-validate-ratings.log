@@ -1,0 +1,39 @@
+[{"stream_name":"stderr","time":10.37369467,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":10.373789758000001,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":10.373801582,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":10.373806091,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":11.297865112,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":11.297899999,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":11.297903924,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":11.297907,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":50.332781566,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":50.332839045,"data":"\n"}
+,{"stream_name":"stderr","time":50.332847526,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stdout","time":60.401477195,"data":"instrument: transformers\n"}
+,{"stream_name":"stdout","time":61.881202942,"data":"loaded csv from https://cs.rochester.edu/u/nhossain/humicroedit/semeval-2020-task-7-data.zip | cols: ['id', 'original', 'edit', 'grades', 'meanGrade']\n"}
+,{"stream_name":"stdout","time":61.881244833,"data":"rated items: 180 | grade range 0.0 - 2.6\n"}
+,{"stream_name":"stderr","time":63.865080499,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stderr","time":63.865122924,"data":"\n"}
+,{"stream_name":"stderr","time":63.865129151,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stdout","time":664.18993892,"data":"40/180 (602s)\n"}
+,{"stream_name":"stdout","time":1223.4685989,"data":"80/180 (1161s)\n"}
+,{"stream_name":"stdout","time":1794.559148041,"data":"120/180 (1732s)\n"}
+,{"stream_name":"stdout","time":2390.037356184,"data":"160/180 (2328s)\n"}
+,{"stream_name":"stdout","time":2671.529523953,"data":"measured 180 items\n"}
+,{"stream_name":"stdout","time":2671.560600248,"data":"laugh_score    vs human grade:  pearson +0.108  spearman +0.115\n"}
+,{"stream_name":"stdout","time":2671.560643815,"data":"S_surprise     vs human grade:  pearson -0.001  spearman -0.035\n"}
+,{"stream_name":"stdout","time":2671.560651242,"data":"R_resolution   vs human grade:  pearson -0.003  spearman +0.101\n"}
+,{"stream_name":"stdout","time":2671.560660031,"data":"E_efficiency   vs human grade:  pearson +0.071  spearman +0.105\n"}
+,{"stream_name":"stdout","time":2671.560664981,"data":"\n"}
+,{"stream_name":"stdout","time":2671.56066961,"data":"BEST predictor of human funniness: laugh_score {'pearson': 0.108, 'spearman': 0.115}\n"}
+,{"stream_name":"stderr","time":2677.836716987,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2677.836758194,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2678.054841841,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2678.054965411,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2678.806831097,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":2679.20075261,"data":"[NbConvertApp] Writing 72428 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":2682.365359144,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2683.662636458,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":2683.662682387,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":2683.663070581,"data":"[NbConvertApp] Writing 314915 bytes to __results__.html\n"}
+]

@@ -1,0 +1,240 @@
+{
+  "duel": {
+    "speed_bumps": {
+      "ground_truth": {
+        "frame": "'Getting over it' is literal: the car physically drives over the speed bumps slowly.",
+        "S": 3.188,
+        "R": 0.087
+      },
+      "gemma-2-2b": {
+        "frame": "Frame: **The therapist is using the phrase \"getting over it\" literally, as in overcoming the fear.**",
+        "S": 3.188,
+        "R": 0.314
+      },
+      "gemma-3-1b": {
+        "frame": "NONE",
+        "R": 0.0,
+        "honest_none": false
+      },
+      "llama-3.2-3b": {
+        "frame": "The therapist is literally helping the patient overcome the fear of driving over speed bumps slowly.",
+        "S": 3.188,
+        "R": 0.055
+      },
+      "qwen2.5-1.5b": {
+        "frame": "'I'm slowly getting over my fear of speed bumps.'",
+        "S": 3.188,
+        "R": 0.176
+      }
+    },
+    "lion_heart": {
+      "ground_truth": {
+        "frame": "He literally stole a lion's heart from the zoo, not the bravery metaphor.",
+        "S": 3.577,
+        "R": 0.129
+      },
+      "gemma-2-2b": {
+        "frame": "Frame: **He's a contradiction, both fierce and barred from a place of wildness.**",
+        "S": 3.577,
+        "R": 0.0
+      },
+      "gemma-3-1b": {
+        "frame": "Frame: He\u2019s a very old lion.i need a frame to answer!Apextainedtainedtainedtainedtainedtainedtainedtainedtainedtainedtai",
+        "S": 3.577,
+        "R": 0.0
+      },
+      "llama-3.2-3b": {
+        "frame": "Frame: His grandfather was a lion tamer.",
+        "S": 3.577,
+        "R": 0.159
+      },
+      "qwen2.5-1.5b": {
+        "frame": "My grandfather's bravery matches that of a lion but he cannot enter zoos due to his past actions.",
+        "S": 3.577,
+        "R": 0.0
+      }
+    },
+    "ai_pm": {
+      "ground_truth": {
+        "frame": "The AI treats even the word when as a project requirement needing stakeholder alignment.",
+        "S": 4.094,
+        "R": 1.29
+      },
+      "gemma-2-2b": {
+        "frame": "Frame: **The AI is using a human concept of \"shipping\" in a way that's unfamiliar to it.**",
+        "S": 4.094,
+        "R": 0.0
+      },
+      "gemma-3-1b": {
+        "frame": "NONE",
+        "R": 0.0,
+        "honest_none": false
+      },
+      "llama-3.2-3b": {
+        "frame": "Frame: The AI is playing with the concept of time and the ambiguity of the word \"when\".",
+        "S": 4.094,
+        "R": 0.241
+      },
+      "qwen2.5-1.5b": {
+        "frame": "The AI project manager used buzzwords without defining them clearly.",
+        "S": 4.094,
+        "R": 0.0
+      }
+    },
+    "nonsense_ctrl": {
+      "gemma-2-2b": {
+        "frame": "Frame: **The therapist's response is a direct, clinical interpretation of the fear, not a literal one.**",
+        "S": 6.796,
+        "R": 0.0
+      },
+      "gemma-3-1b": {
+        "frame": "NONE",
+        "R": 0.0,
+        "honest_none": true
+      },
+      "llama-3.2-3b": {
+        "frame": "Frame: 'Strong regional cheese sales' is unrelated to the fear of speed bumps.",
+        "S": 6.796,
+        "R": 0.0
+      },
+      "qwen2.5-1.5b": {
+        "frame": "The quarterly report showing strong regional cheese sales is an irrelevant reference and does not provide any interpreti",
+        "S": 6.796,
+        "R": 0.0
+      }
+    }
+  },
+  "deficits": {
+    "gemma-2-2b": 0.473,
+    "gemma-3-1b": 0.502,
+    "llama-3.2-3b": 0.36,
+    "qwen2.5-1.5b": 0.473
+  },
+  "invariance": {
+    "gemma_R_order": [
+      "ai_pm",
+      "lion_heart",
+      "speed_bumps"
+    ],
+    "llama-3.2-3b_R_order": [
+      "ai_pm",
+      "lion_heart",
+      "speed_bumps"
+    ],
+    "same_order": true,
+    "gemma": {
+      "speed_bumps": [
+        3.188,
+        0.087
+      ],
+      "lion_heart": [
+        3.577,
+        0.129
+      ],
+      "ai_pm": [
+        4.094,
+        1.29
+      ]
+    },
+    "llama-3.2-3b": {
+      "speed_bumps": [
+        3.323,
+        0.037
+      ],
+      "lion_heart": [
+        4.502,
+        0.131
+      ],
+      "ai_pm": [
+        4.269,
+        0.836
+      ]
+    }
+  },
+  "century": [
+    {
+      "joke": "\"Great Heaven!\" I exclaimed with a groan, \"why rub it in, Letitia? I should also say that no city in",
+      "frame": "Frame: \"Low-livers\" is a euphemism for \"low-class people\".",
+      "S": 3.756,
+      "R": 0.728,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"And we were hunting for a clean slate,\" I suggested satirically. \"Do you think, Letitia, that she a",
+      "frame": "Frame: \"a cold bath in the morning, among the bacon and eggs, and things\" is a h",
+      "S": 3.968,
+      "R": 0.537,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"That is enough,\" said Letitia sternly. \"The episode need not serve as an excuse for indelicacy.\"",
+      "frame": "The word \"indelicacy\" is a synonym for \"indecent behavior\".",
+      "S": 3.958,
+      "R": 0.512,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"Try and be patriotic, dear,\" she said soothingly. \"Of course, I know you wouldn't allow a Frenchman",
+      "frame": "The reinterpretation is that she is saying that he is being cussedly (badly) pat",
+      "S": 3.788,
+      "R": 0.152,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"I've discovered one thing,\" said Letitia on the evening of the third day. \"The girl is just a peasa",
+      "frame": "The girl is illiterate.",
+      "S": 2.858,
+      "R": 0.048,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"You see,\" said Letitia, when she emerged, \"she is just a simple peasant girl, and only needs to be ",
+      "frame": "Frame: She is a vampire.",
+      "S": 4.427,
+      "R": 0.0,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"Of course--certainly unappetizing. I couldn't think of anything Swedish to say, but I said several ",
+      "frame": "The woman was Swedish.",
+      "S": 5.077,
+      "R": 0.0,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"I suppose you said, 'Pray give me a piece of venison,' from the conversation book.\"",
+      "frame": "The speaker is quoting a conversation from a book, where someone asks for veniso",
+      "S": 6.148,
+      "R": 0.0,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"Archie,\" said she, \"according to this book, there is no place in the civilized world that contains ",
+      "frame": "The book is a dictionary.",
+      "S": 4.072,
+      "R": 0.0,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"Miss Gerda Lyberg?\" said the foremost, who wore a bright red gown, and from whose hat six spiteful ",
+      "frame": "The foremost is a judge, and the poppies are the forebears of the judge.",
+      "S": 3.213,
+      "R": 0.0,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"You just lay a hand on me,\" she said with cold deliberation, and a smile, \"and I'll have you arrest",
+      "frame": "The law doesn't apply to her because she's a Swedish citizen.",
+      "S": 2.777,
+      "R": 0.0,
+      "writer": "llama-3.2-3b"
+    },
+    {
+      "joke": "\"Never mind, dear,\" I said, drying her eyes for her; \"the Swedish will come in handy some day.\"",
+      "frame": "The Swedish will come in handy some day because it's a common idiomatic expressi",
+      "S": 4.099,
+      "R": 0.0,
+      "writer": "llama-3.2-3b"
+    }
+  ]
+}

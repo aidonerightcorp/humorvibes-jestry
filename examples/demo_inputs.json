@@ -1,0 +1,13 @@
+[
+  {
+    "prompt": "Make a joke about AI project managers for a NYC tech meetup.",
+    "audience": "NYC tech meetup",
+    "preferences": "smart, not mean, concise"
+  },
+  {
+    "prompt": "Write a classroom-safe joke about debugging Python.",
+    "audience": "high school computer science class",
+    "preferences": "warm, educational, no insults"
+  }
+]
+

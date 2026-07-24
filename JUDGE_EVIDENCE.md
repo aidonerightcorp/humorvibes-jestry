@@ -1,0 +1,63 @@
+# HumorVibes judge evidence map
+
+This packet separates measured evidence, deterministic demonstrations, honest negative results,
+and unfinished publication steps. All Kaggle kernels and the GitHub mirror are private as of
+2026-07-12; none of the evidence below should be described as publicly accessible until the
+visibility checklist is completed.
+
+## Core claims and receipts
+
+| Claim | Exact evidence | What it does not prove |
+|---|---|---|
+| Gemma is the core instrument | `humorvibes-measuring-jokes-with-gemma` uses the attached `google/gemma-2/transformers/gemma-2-2b-it/2` checkpoint and teacher-forced continuation log-probabilities. | It does not prove every generated joke is funny. |
+| Null controls prevent fake resolution | Latest main run: shuffled nonsense raw R=2.37, decoy-null=2.67, net R=0.00. | One control cannot cover every form of confabulation. |
+| The leak guard closes the lexical shortcut | Latest zoo report: all four frame writers score the nonsense control R=0.00 after overlap discounting. | Legitimate frames that repeat punchline words can still be taxed. |
+| Ground-truth frames produce measurable collapse | Panel report: net R=0.347, 0.388, and 1.290 on the three fixed jokes. | n=3 is mechanism evidence, not population validation. |
+| Ordering is not unique to one instrument | Gemma-2 and Llama-3.2 produce the same R ordering on the three fixed jokes. | It establishes an ordering only on those three items. |
+| Human validation is weakly positive | Humicroedit n=180: fixed laugh score Spearman rho=0.115; R=0.101; E=0.105; S=-0.035. | Headline edits are a format mismatch and the confidence interval was not saved in that run. |
+| The predeclared v4 ablation falsified the fixed score on this format | 120 human-rated edits, 200/200 total measurements: full S/R/E/B rho=0.033, 95% CI [-0.126, 0.207]; E alone was highest at rho=0.099, also crossing zero. | This does not falsify S/R/E on explicit setup/punchline jokes; it rejects the current fixed scalar as a general headline-humor ranker. |
+| B detects a control difference but is not funniness | Across 40 paired triplets, human edits had benign-B +0.100 over shuffled edits (p=0.00216) and +0.085 over originals (p=0.0187); only the shuffled result survives Bonferroni over ten tests. Only-B vs human grade was rho=-0.072. | B is a persona-conditioned safety constraint, not a substitute for human humor ratings. |
+| Old humor can be tested rather than assumed | Fixed century extractor: 3/12 sampled 1916 jests have R above 0.5; top R=0.73. | This is not a historical-comedy prevalence estimate. |
+| Runtime material can be deterministic | Main notebook freezes a content hash and emits the same output twice at seed 7. | The demonstrated malformed template failed lint and remained `validated: False`. |
+| The seven-kernel research surface is receipt-backed | `research_out/kernel_audit_20260712.json` verifies the six pre-existing kernels; the separate v4 harvest receipt verifies COMPLETE/private status, exact source cells, and every ablation output hash. | Private verification is not public accessibility. |
+
+## Negative results that must stay visible
+
+- The strongest existing human correlation is only rho=0.115 on Humicroedit.
+- The larger source-pinned v4 court did not reproduce that magnitude: full rho=0.033 with a wide
+  interval crossing zero; human edits did not significantly beat shuffled edits on the full score.
+- The latest local 2B model is a weak frame writer; better frame writing came from Llama-3.2,
+  while Gemma remained the core measurement instrument.
+- The temporal self-containedness probe returned the same verdict for 8/8 items and did not
+  discriminate topical from canonical humor.
+- The main compiled example correctly failed static lint and measured validation; it is a safety
+  demonstration, not a validated joke artifact.
+- The current Streamlit URL is ephemeral. A recorded demo and public notebook are required for
+  a stable judge experience.
+
+## Ablation court receipt
+
+`humorvibes-ablation-court` is a separate private research kernel. Version 4 vendored the exact
+current `mesh_signals.py` and `humor_mesh.py`, attached Gemma-2-2B, and predeclared 120 human-rated
+items plus 40 paired original/shuffled controls. It completed 200/200 jobs; the harvester verified
+the COMPLETE status, exact source cells, every output hash, private metadata, and
+`external_submission_made=false`. Receipt:
+`research_out/kaggle/humorvibes-ablation-court/harvest_receipt.json`; report and figure are in the
+same directory. Versions 1–3 remain excluded from evidence.
+
+## Two-minute evidence order
+
+1. State the testable model: surprise, resolution, efficiency, and audience-relative permission.
+2. Show teacher-forced Gemma token surprisal and the raw-minus-null resolution computation.
+3. Show the nonsense control falling to zero and the three ground-truth frame measurements.
+4. Show the harvested human-ablation figure: rho=0.033 with its interval, paired-control failure,
+   the B-only control signal, and one visible counterexample.
+5. Show compile-time lint rejecting the malformed artifact, then identical seed-7 runtime output.
+6. Close with the visible limitations above and the exact public reproduction links.
+
+## Publication gates
+
+- GitHub `Amarel-Taylor-Scott/humorvibes` is currently private.
+- All seven verified Kaggle notebooks, including the ablation court, are currently private.
+- A ≤2-minute video has not yet been uploaded.
+- No Kaggle Writeup has been submitted.

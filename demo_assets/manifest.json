@@ -1,0 +1,25 @@
+{
+  "schema": "humorvibes_demo_assets_v1",
+  "assets": [
+    {
+      "path": "demo_assets/humorvibes_studio_20260712.png",
+      "sha256": "e7746bf1c0f294ad0b099ae3604cb9624b7e2ead8ae3e8b3e9ce0f08f49ba36b",
+      "width": 1600,
+      "height": 1400,
+      "captured_utc": "2026-07-12T16:57:00Z",
+      "state": "Load preset then Generate and score",
+      "provider_disclosure": "Offline fallback and Seeded offline are visibly labeled in the screenshot",
+      "gemma_measurement_claim": false
+    },
+    {
+      "path": "research_out/kaggle/humorvibes-ablation-court/ablation_failure_figure.png",
+      "sha256": "7cbe78eaa67307d37aa94eb70708cf8353f63c7cdfa2881603bf6adde13daa57",
+      "width": 2499,
+      "height": 1771,
+      "captured_utc": "2026-07-12T20:20:45Z",
+      "state": "Harvested v4 ablation, paired controls, and visible failure cases",
+      "provider_disclosure": "Pinned Gemma-2-2B Transformers provider, true teacher-forced log-probabilities, CPU float32",
+      "gemma_measurement_claim": true
+    }
+  ]
+}

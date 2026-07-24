@@ -1,0 +1,75 @@
+{"item": "speed_bumps", "judge_id": "ocl-gemma3:27b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-gemma3:27b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-gemma3:27b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-ministral-3:14b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-ministral-3:14b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-ministral-3:14b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-nemotron-3-super", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-nemotron-3-super", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-nemotron-3-super", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-deepseek-v4-flash", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-deepseek-v4-flash", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-deepseek-v4-flash", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-glm-5.2", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-glm-5.2", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "speed_bumps", "judge_id": "ocl-glm-5.2", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-gemma3:27b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-gemma3:27b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-gemma3:27b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-ministral-3:14b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-ministral-3:14b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-ministral-3:14b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-nemotron-3-super", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-nemotron-3-super", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-nemotron-3-super", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-deepseek-v4-flash", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-deepseek-v4-flash", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-deepseek-v4-flash", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-glm-5.2", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-glm-5.2", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "lion_heart", "judge_id": "ocl-glm-5.2", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-gemma3:27b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-gemma3:27b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-gemma3:27b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-ministral-3:14b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-ministral-3:14b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-ministral-3:14b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-nemotron-3-super", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-nemotron-3-super", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-nemotron-3-super", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-deepseek-v4-flash", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-deepseek-v4-flash", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-deepseek-v4-flash", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-glm-5.2", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-glm-5.2", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "ai_pm", "judge_id": "ocl-glm-5.2", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-gemma3:27b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-gemma3:27b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-gemma3:27b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-ministral-3:14b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-ministral-3:14b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-ministral-3:14b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-nemotron-3-super", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-nemotron-3-super", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-nemotron-3-super", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-deepseek-v4-flash", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-deepseek-v4-flash", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-deepseek-v4-flash", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-glm-5.2", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-glm-5.2", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "printer_congress", "judge_id": "ocl-glm-5.2", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-gemma3:27b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-gemma3:27b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-gemma3:27b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-ministral-3:14b", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-ministral-3:14b", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-ministral-3:14b", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-nemotron-3-super", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-nemotron-3-super", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-nemotron-3-super", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-deepseek-v4-flash", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-deepseek-v4-flash", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-deepseek-v4-flash", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-glm-5.2", "persona": "NYC tech meetup crowd", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-glm-5.2", "persona": "retired farmers with no software exposure", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}
+{"item": "nonsense_ctrl", "judge_id": "ocl-glm-5.2", "persona": "mixed-politics community-center audience", "scores": {}, "reaction": "", "ok": false, "error": "no/invalid response"}

@@ -1,0 +1,8 @@
+{"cls":"partisan_weapon","joke":"How many PARTY-A politicians does it take to change a lightbulb? None, they just declare the darkness a feature and fundraise off it.","predict":"sign_flip high asym"}
+{"cls":"bridge","joke":"Congress found a bipartisan solution: both sides agreed the printer was the real problem.","predict":"low asym mirror-stable"}
+{"cls":"bridge","joke":"A politician promised to fix the potholes. The potholes formed a committee to study the politician.","predict":"low asym"}
+{"cls":"leans_partisan","joke":"Thoughts and prayers have a great track record: every problem they've been applied to still exists, undefeated.","predict":"moderate asym weak flip"}
+{"cls":"spot_fallacy","joke":"Ice cream sales and shark attacks both peak in July, so clearly ice cream is chumming the water.","predict":"correction lifts R; careful laughs more"}
+{"cls":"spot_fallacy","joke":"Nicolas Cage film releases correlate with pool drownings, so for public safety we are placing him under a swim-season release embargo.","predict":"spot"}
+{"cls":"believe_fallacy","joke":"I wore my lucky socks and we won, so I am never washing them; the team is depending on me now.","predict":"correction deflates; credulous laughs more"}
+{"cls":"believe_fallacy","joke":"Mercury is in retrograde, which explains why my toast burned, my ex texted, and the printer jammed, all one cosmic event.","predict":"believe"}

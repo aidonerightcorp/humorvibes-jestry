@@ -1,0 +1,39 @@
+[{"stream_name":"stderr","time":7.613583462,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.614377311,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.614381882,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.614384322,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.202850252,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.202890572,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.202896032,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.202900212,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":9.470535284,"data":"source: /kaggle/input/datasets/taylorsamarel/punchline-mesh-src\n"}
+,{"stream_name":"stdout","time":10.388172982,"data":"No Gemini key. Enable Add-ons -\u003e Gemini (Kaggle built-in credits) and rerun for the hosted panel; continuing with the local-only frame-gap experiment.\n"}
+,{"stream_name":"stderr","time":36.512062764,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":36.512105924,"data":"\n"}
+,{"stream_name":"stderr","time":36.512111714,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stdout","time":47.612104378,"data":"instrument device: cpu\n"}
+,{"stream_name":"stdout","time":47.628075708,"data":"frame writers: ['local-gemma-2-2b']\n"}
+,{"stream_name":"stderr","time":63.896370535,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stderr","time":63.896501505,"data":"\n"}
+,{"stream_name":"stderr","time":63.896508495,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stdout","time":69.429476813,"data":"== speed_bumps\n"}
+,{"stream_name":"stdout","time":69.429557783,"data":"   ground_truth           R=0.347 :: 'Getting over it' is literal: the car physically drives over the speed\n"}
+,{"stream_name":"stdout","time":69.429566523,"data":"   local-gemma-2-2b       R=0.0 :: NONE\n"}
+,{"stream_name":"stdout","time":92.511744239,"data":"== lion_heart\n"}
+,{"stream_name":"stdout","time":92.511778239,"data":"   ground_truth           R=0.388 :: He literally stole a lion's heart from the zoo, not the bravery metaph\n"}
+,{"stream_name":"stdout","time":92.511784759,"data":"   local-gemma-2-2b       R=0.033 :: Because he kept escaping.\n"}
+,{"stream_name":"stdout","time":106.929539199,"data":"== ai_pm\n"}
+,{"stream_name":"stdout","time":106.929586259,"data":"   ground_truth           R=1.29 :: The AI treats even the word when as a project requirement needing stak\n"}
+,{"stream_name":"stdout","time":106.929592479,"data":"   local-gemma-2-2b       R=0.0 :: NONE\n"}
+,{"stream_name":"stdout","time":112.028534699,"data":"== nonsense_ctrl\n"}
+,{"stream_name":"stdout","time":112.028564749,"data":"   local-gemma-2-2b       R=0.0 :: NONE\n"}
+,{"stream_name":"stdout","time":112.045619969,"data":"skipped (no Gemini credits attached — Add-ons -\u003e Gemini, then rerun)\n"}
+,{"stream_name":"stderr","time":117.119567381,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":117.119621321,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":117.30678235,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":117.30682055,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":117.916069328,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":118.182512677,"data":"[NbConvertApp] Writing 29160 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":120.538371968,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":121.308164305,"data":"[NbConvertApp] Writing 330194 bytes to __results__.html\n"}
+]

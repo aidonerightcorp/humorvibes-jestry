@@ -1,0 +1,93 @@
+[{"stream_name":"stderr","time":9.844958065,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.845079339,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.845114194,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.845118019000001,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":10.745972596,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":10.746020747,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":10.746029169,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":10.746034647,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":55.689016733,"data":"corpus: 35 unique jokes\n"}
+,{"stream_name":"stdout","time":55.689077023,"data":" - Q: What did the spaghetti say to the other spaghetti?\r\n"}
+,{"stream_name":"stdout","time":55.689084227,"data":"A: Pasta la vista, baby!\n"}
+,{"stream_name":"stdout","time":55.689090192,"data":" - Remember, the best angle to approach a problem from is the \"try\" angle.\n"}
+,{"stream_name":"stdout","time":55.689096241,"data":" - I just wrote a book on reverse psychology. Do not read it!\n"}
+,{"stream_name":"stdout","time":55.689101476,"data":" - Mahatma Gandhi, as you know, walked barefoot most of the time, which produced an\n"}
+,{"stream_name":"stdout","time":55.689106878,"data":" - How do you know if there’s an elephant under your bed? Your head hits the ceilin\n"}
+,{"stream_name":"stderr","time":59.514337208,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":59.514403031,"data":"\n"}
+,{"stream_name":"stderr","time":59.514412152,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stdout","time":71.506720467,"data":"instrument: cpu\n"}
+,{"stream_name":"stderr","time":73.812504157,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stderr","time":73.812567342,"data":"\n"}
+,{"stream_name":"stderr","time":73.812574068,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stdout","time":207.988405992,"data":"5/30 measured (136s)\n"}
+,{"stream_name":"stdout","time":312.491970276,"data":"10/30 measured (241s)\n"}
+,{"stream_name":"stdout","time":415.262523149,"data":"15/30 measured (344s)\n"}
+,{"stream_name":"stdout","time":528.46704326,"data":"20/30 measured (457s)\n"}
+,{"stream_name":"stdout","time":631.172155101,"data":"25/30 measured (559s)\n"}
+,{"stream_name":"stdout","time":742.726992075,"data":"30/30 measured (671s)\n"}
+,{"stream_name":"stdout","time":742.727038805,"data":"\n"}
+,{"stream_name":"stdout","time":742.72704713,"data":"census: 30 measured | laugh-region 8 | predictable 0 | weak/no frame 12\n"}
+,{"stream_name":"stdout","time":742.72705395,"data":"\n"}
+,{"stream_name":"stdout","time":742.727059947,"data":"TOP 5 (measured):\n"}
+,{"stream_name":"stdout","time":742.727066764,"data":"  S= 5.54 R= 2.10 :: How do you know if there’s an elephant under your bed? Your head hits \n"}
+,{"stream_name":"stdout","time":742.727084731,"data":"  S= 4.23 R= 2.32 :: I WRITE MY JOKES IN CAPITALS. THIS ONE WAS WRITTEN IN PARIS.\n"}
+,{"stream_name":"stdout","time":742.727089173,"data":"  S= 7.34 R= 2.01 :: Why did the feline fail the lie detector test? Because he be lion.\n"}
+,{"stream_name":"stdout","time":742.727095553,"data":"  S= 4.87 R= 1.51 :: To whoever stole my copy of Microsoft Office, I will find you. You hav\n"}
+,{"stream_name":"stdout","time":742.727105267,"data":"  S= 5.95 R= 0.95 :: I invented a new word! Plagiarism!\n"}
+,{"stream_name":"stdout","time":742.727108299,"data":"\n"}
+,{"stream_name":"stdout","time":742.727111228,"data":"BOTTOM 3:\n"}
+,{"stream_name":"stdout","time":742.7271318,"data":"  S= 2.59 R= 0.00 :: Why didn’t the skeleton cross the road? Because he had no guts.\n"}
+,{"stream_name":"stdout","time":742.727136803,"data":"  S= 2.19 R= 0.00 :: Why is 6 afraid of 7 in hexadecimal Canada? Because 7 8 9 A?\n"}
+,{"stream_name":"stdout","time":742.727141657,"data":"  S= 1.73 R= 0.00 :: I've got a really good UDP joke to tell you but I don’t know if you'll\n"}
+,{"stream_name":"stdout","time":743.777548194,"data":"fetched 8 headlines\n"}
+,{"stream_name":"stdout","time":972.717413921,"data":"\n"}
+,{"stream_name":"stdout","time":972.717450081,"data":"kind       label                    gap  verdict\n"}
+,{"stream_name":"stdout","time":972.717455923,"data":"topical    Parents warned not to   0.00  canonical      :: My kid's birthday photos were trending on TikTok, so now eve\n"}
+,{"stream_name":"stdout","time":972.717461065,"data":"topical    AI is 'not smart' so w  0.00  canonical      :: What's the next step in artificial intelligence?  Making it \n"}
+,{"stream_name":"stdout","time":972.717466115,"data":"topical    Meta glasses wearers h  0.00  canonical      :: So, I was using my Meta glasses and trying to check my Faceb\n"}
+,{"stream_name":"stdout","time":972.717470751,"data":"topical    Google must pay €4.1bn  0.00  canonical      :: Why did Google get a massive fine? \n"}
+,{"stream_name":"stdout","time":972.717476034,"data":"Because they were using \n"}
+,{"stream_name":"stdout","time":972.717480548,"data":"canonical  Icarus                  0.00  canonical      :: Why don't scientists ever tell jokes about Icarus? \n"}
+,{"stream_name":"stdout","time":972.717485375,"data":"\n"}
+,{"stream_name":"stdout","time":972.717489729,"data":"Because\n"}
+,{"stream_name":"stdout","time":972.717494217,"data":"canonical  Trojan horse            0.00  canonical      :: Why did the Greeks bring a giant wooden horse to Troy?  To g\n"}
+,{"stream_name":"stdout","time":972.717499189,"data":"canonical  Newton's apple          0.00  canonical      :: Why did Isaac Newton get so good at apple-related physics? H\n"}
+,{"stream_name":"stdout","time":972.717504081,"data":"canonical  Eureka                  0.00  canonical      :: Why did Archimedes always run from his baths? \n"}
+,{"stream_name":"stdout","time":972.717508991,"data":"\n"}
+,{"stream_name":"stdout","time":972.717513311,"data":"He didn't wa\n"}
+,{"stream_name":"stdout","time":996.014779641,"data":"[meme_caption] R 2.10 -\u003e 0.70 (frame lost)\n"}
+,{"stream_name":"stdout","time":996.014858619,"data":"  TOP:  My bedroom ceiling.\n"}
+,{"stream_name":"stdout","time":996.014895278,"data":"BOTTOM:  My size after a nap.\n"}
+,{"stream_name":"stdout","time":996.014902462,"data":"\n"}
+,{"stream_name":"stdout","time":1024.257970878,"data":"[shorts_beat] R 2.10 -\u003e 0.15 (frame lost)\n"}
+,{"stream_name":"stdout","time":1024.258021972,"data":"  HOOK:  HEAD HIT THE CEILING.  BUILD:  ELEPHANT.  SNAP:  UNDER THE BED.\n"}
+,{"stream_name":"stdout","time":1024.258042197,"data":"\n"}
+,{"stream_name":"stdout","time":1053.045950909,"data":"[meme_caption] R 2.32 -\u003e 1.37 (FRAME SURVIVED)\n"}
+,{"stream_name":"stdout","time":1053.04600997,"data":"  'TOP: I WRITE MY JOKES IN CAPITALS.  BOTTOM:  *THIS ONE WAS WRITTEN IN PARIS.*'\n"}
+,{"stream_name":"stdout","time":1053.04601796,"data":"\n"}
+,{"stream_name":"stdout","time":1078.7704095,"data":"[shorts_beat] R 2.32 -\u003e 1.37 (FRAME SURVIVED)\n"}
+,{"stream_name":"stdout","time":1078.770451985,"data":"  HOOK:/BUILD:/SNAP: \n"}
+,{"stream_name":"stdout","time":1078.770459241,"data":"I write my jokes in capitals. This one was written in Paris.\n"}
+,{"stream_name":"stdout","time":1078.770465597,"data":"\n"}
+,{"stream_name":"stdout","time":1103.255645669,"data":"[meme_caption] R 2.01 -\u003e 2.07 (FRAME SURVIVED)\n"}
+,{"stream_name":"stdout","time":1103.255705589,"data":"  TOP:  His \"roaring\" wasn't convincing.\n"}
+,{"stream_name":"stdout","time":1103.255713169,"data":"BOTTOM:  Be lion.\n"}
+,{"stream_name":"stdout","time":1103.255719189,"data":"\n"}
+,{"stream_name":"stdout","time":1132.268123947,"data":"[shorts_beat] R 2.01 -\u003e 0.00 (frame lost)\n"}
+,{"stream_name":"stdout","time":1132.268177453,"data":"  HOOK:  Be lion.  \n"}
+,{"stream_name":"stdout","time":1132.268184333,"data":"BUILD:  Didn't lie.\n"}
+,{"stream_name":"stdout","time":1132.268189562,"data":"SNAP:  Be lie.\n"}
+,{"stream_name":"stdout","time":1132.268194904,"data":"\n"}
+,{"stream_name":"stdout","time":1132.268199807,"data":"wrote corpus_report.json\n"}
+,{"stream_name":"stderr","time":1138.984762036,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1138.98481102,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1139.208530906,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1139.20856853,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1140.009433267,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":1140.43650054,"data":"[NbConvertApp] Writing 79655 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":1144.172488508,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1145.629771753,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":1145.629827716,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":1145.630604811,"data":"[NbConvertApp] Writing 361711 bytes to __results__.html\n"}
+]

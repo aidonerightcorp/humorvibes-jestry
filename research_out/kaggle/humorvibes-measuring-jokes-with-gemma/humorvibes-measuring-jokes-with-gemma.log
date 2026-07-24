@@ -1,0 +1,84 @@
+[{"stream_name":"stderr","time":8.569505709,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.569576851,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.56958345,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.56958656,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.36965111,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.369688672,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.369694466,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.369698834,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":41.103929187,"data":"loading /kaggle/input/models/google/gemma-2/transformers/gemma-2-2b-it/2\n"}
+,{"stream_name":"stderr","time":42.85568848,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":42.855741785,"data":"\n"}
+,{"stream_name":"stderr","time":42.85574919,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stdout","time":55.58694249,"data":"device: cpu | fast(cuda): False\n"}
+,{"stream_name":"stderr","time":57.913095452,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stderr","time":57.913139672,"data":"\n"}
+,{"stream_name":"stderr","time":57.913146317,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stdout","time":77.296225575,"data":"joke     S=  3.19 R=  0.00 (raw  0.00 - null  0.00) E=  0.000  frame: She's a therapist, not a car mechanic.\n"}
+,{"stream_name":"stdout","time":103.083477787,"data":"joke     S=  3.58 R=  0.47 (raw  0.47 - null  0.00) E=  0.026  frame: He's been banned for life because he kept trying to \n"}
+,{"stream_name":"stdout","time":133.362069207,"data":"joke     S=  4.09 R=  0.18 (raw  0.18 - null  0.00) E=  0.011  frame: \"When\" in this context refers to the project's timel\n"}
+,{"stream_name":"stdout","time":156.751151914,"data":"boring   S=  3.05 R=  0.07 (raw  0.30 - null  0.23) E=  0.007  frame: Frame: \"Next session\" is a literal appointment, not \n"}
+,{"stream_name":"stdout","time":179.045539453,"data":"shuffled S=  6.80 R=  0.00 (raw  2.37 - null  2.67) E=  0.000  frame: Regional cheese sales are a metaphor for the \"bumps\"\n"}
+,{"stream_name":"stdout","time":307.795429738,"data":"NYC tech meetup crowd -\u003e {'collision': 2, 'colliding_model': 'Technical expertise/understanding of project timelines and deadlines', 'note': \"While the reframe is technically accurate, it might be perceived as a bit too casual or even condescending to someone deeply familiar with project management and the importance of precise timelines. The audience might be expecting a more direct and concrete answer, rather than a playful explanation about the ambiguity of 'when'.\"}\n"}
+,{"stream_name":"stdout","time":385.506218095,"data":"project managers at their own offsite -\u003e None\n"}
+,{"stream_name":"stdout","time":385.7024461,"data":"============================== one_liner ==============================\n"}
+,{"stream_name":"stdout","time":456.26001713,"data":"Here are three one-liner comedy options, playing with the hidden frames around AI project managers:\n"}
+,{"stream_name":"stdout","time":456.260052371,"data":"\n"}
+,{"stream_name":"stdout","time":456.260057756,"data":"1.  **These AI project managers, honestly, just need a caffeine fix.** (Hidden frame:  **\"Just a fix.\"** - plays on the stereotype of AI as over-powered and potentially emotionless)\n"}
+,{"stream_name":"stdout","time":456.26006248,"data":"2. **Forget Jira, these AI project managers are built on pure code love.** (Hidden frame: **\"Pure code love.\"** - humorously contrasts the emotional investment of a project manager with the technical focus)\n"}
+,{"stream_name":"stdout","time":456.260068177,"data":"3.  **My AI project manager told me I needed to stop \"procrastinating\n"}
+,{"stream_name":"stdout","time":485.063395645,"data":"   -\u003e S= 2.81 R= 0.26 E= 0.020 laugh_region=no\n"}
+,{"stream_name":"stdout","time":510.582239145,"data":"   -\u003e S= 2.46 R= 0.00 E= 0.000 laugh_region=no\n"}
+,{"stream_name":"stdout","time":527.178724105,"data":"   -\u003e S= 2.82 R= 0.00 E= 0.000 laugh_region=no\n"}
+,{"stream_name":"stdout","time":527.178781931,"data":"============================== meme_caption ==============================\n"}
+,{"stream_name":"stdout","time":595.514737446,"data":"Here are 3 meme captions for your prompt, playing on the contrast between a laptop fire and the tech industry's \"hustle\": \n"}
+,{"stream_name":"stdout","time":595.51481022,"data":"\n"}
+,{"stream_name":"stdout","time":595.514843599,"data":"**1.  TOP: \"Project deadline's tomorrow\" / BOTTOM:  \"This is the 'just a bit more work' I'm talking about\"**\n"}
+,{"stream_name":"stdout","time":595.514853354,"data":"\n"}
+,{"stream_name":"stdout","time":595.514860319,"data":"**2. TOP: \"Burned my data model\" / BOTTOM:  \"I told ya, this project was a risky bet.\"**\n"}
+,{"stream_name":"stdout","time":595.514867667,"data":"\n"}
+,{"stream_name":"stdout","time":595.514874417,"data":"**3. TOP: \"This meeting is starting to feel like the singularity\" / BOTTOM: \"At least the wifi is fast.\"**\n"}
+,{"stream_name":"stdout","time":670.87321752,"data":"STAGE 1 (generate): {\n"}
+,{"stream_name":"stdout","time":670.873299261,"data":" \"template\": \"The family {meeting} about {topic} was a real {adjective}.\",\n"}
+,{"stream_name":"stdout","time":670.873308849,"data":" \"punch_template\": \"I think we need to have a family meeting about the {adjective} family meeting.\",\n"}
+,{"stream_name":"stdout","time":670.873315741,"data":" \"frame\": \"A family gathering that could be considered an intervention, but with more awkward silences.\",\n"}
+,{"stream_name":"stdout","time":670.873322062,"data":" \"slots\": {\n"}
+,{"stream_name":"stdout","time":670.873327629,"data":"  \"meeting\": [\n"}
+,{"stream_name":"stdout","time":670.873345702,"data":"   \"lunch\",\n"}
+,{"stream_name":"stdout","time":670.873351797,"data":"   \"dinner\",\n"}
+,{"stream_name":"stdout","time":670.873357586,"data":"   \"movie night\",\n"}
+,{"stream_name":"stdout","time":670.873363186,"data":"   \"family game night\",\n"}
+,{"stream_name":"stdout","time":670.873369204,"data":"   \"book club\",\n"}
+,{"stream_name":"stdout","time":670.873375606,"data":"   \"code review\"\n"}
+,{"stream_name":"stdout","time":670.873381566,"data":"  ],\n"}
+,{"stream_name":"stdout","time":670.873387245,"data":"  \"topic\": [\n"}
+,{"stream_name":"stdout","time":670.87339269,"data":"   \"the remote control\",\n"}
+,{"stream_name":"stdout","time":670.873398382,"data":"   \"the couch\",\n"}
+,{"stream_name":"stdout","time":670.873404063,"data":"   \"the dishwasher\",\n"}
+,{"stream_name":"stdout","time":670.873424695,"data":"   \"the i\n"}
+,{"stream_name":"stdout","time":670.873429582,"data":"STAGE 2 (static lint): FAIL ['adjective', 'adjective']\n"}
+,{"stream_name":"stdout","time":679.568860399,"data":"  probe S= 2.03 R= 0.00 fail :: The family dinner about the houseplant was a real {adjective}. I think\n"}
+,{"stream_name":"stdout","time":688.089482593,"data":"  probe S= 2.04 R= 0.00 fail :: The family dinner about the couch was a real {adjective}. I think we n\n"}
+,{"stream_name":"stdout","time":696.469930247,"data":"  probe S= 2.04 R= 0.00 fail :: The family dinner about the couch was a real {adjective}. I think we n\n"}
+,{"stream_name":"stdout","time":696.469978541,"data":"STAGE 3 (measured): 0/3 probes in laugh region\n"}
+,{"stream_name":"stdout","time":696.469986702,"data":"STAGE 4 (freeze): 8f2bca9ac5d9 | validated: False\n"}
+,{"stream_name":"stdout","time":696.469992398,"data":"\n"}
+,{"stream_name":"stdout","time":696.469997531,"data":"DETERMINISTIC RUNTIME (zero model calls, seeded):\n"}
+,{"stream_name":"stdout","time":696.470002826,"data":"  seed=7: The family movie night about the couch was a real {adjective}. I think we need to have a family meeting about the {adjective} family meeting.\n"}
+,{"stream_name":"stdout","time":696.470008652,"data":"  seed=7: The family movie night about the couch was a real {adjective}. I think we need to have a family meeting about the {adjective} family meeting.\n"}
+,{"stream_name":"stdout","time":696.470014046,"data":"  seed=8: The family dinner about the dishwasher was a real {adjective}. I think we need to have a family meeting about the {adjective} family meeting.\n"}
+,{"stream_name":"stdout","time":725.862387046,"data":"signals: {'S': 3.163, 'R': 0.031, 'E': 0.0022} | frame: You're leaving it open-ended, which is the whole point of UDP's lack of confirmation.\n"}
+,{"stream_name":"stdout","time":725.862466954,"data":"diagnosis: no re-route: the frame does not explain the punchline\n"}
+,{"stream_name":"stdout","time":752.190631751,"data":"repair: I wrote a joke about UDP once. I hope you got it, because I'm never going to tell it again, and the whole point is that there's no way to guarantee it got delivered.\n"}
+,{"stream_name":"stderr","time":757.747345884,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":757.747405002,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":757.995670799,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":757.995709496,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":758.89343153,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":759.310249196,"data":"[NbConvertApp] Writing 132966 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":763.087300296,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":764.294569882,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":764.294604741,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":764.295238832,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":764.295524691,"data":"[NbConvertApp] Writing 372062 bytes to __results__.html\n"}
+]

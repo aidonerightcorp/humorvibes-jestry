@@ -1,0 +1,84 @@
+[{"stream_name":"stderr","time":8.498897929,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.498983221,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.49900889,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.499011836,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.242736465,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.24277594,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.242780013,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.24278355,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":36.271934985,"data":"zoo mounts: {\n"}
+,{"stream_name":"stdout","time":36.272006055,"data":" \"gemma-2-2b\": \"/kaggle/input/models/google/gemma-2/transformers/gemma-2-2b-it/2\",\n"}
+,{"stream_name":"stdout","time":36.272013443,"data":" \"gemma-3-1b\": \"/kaggle/input/models/google/gemma-3/transformers/gemma-3-1b-it/1\",\n"}
+,{"stream_name":"stdout","time":36.272018868,"data":" \"llama-3.2-3b\": \"/kaggle/input/models/metaresearch/llama-3.2/transformers/3b-instruct/1\",\n"}
+,{"stream_name":"stdout","time":36.272024185,"data":" \"qwen2.5-1.5b\": \"/kaggle/input/models/qwen-lm/qwen2.5/transformers/1.5b-instruct/1\"\n"}
+,{"stream_name":"stdout","time":36.272029223,"data":"}\n"}
+,{"stream_name":"stderr","time":39.551616647,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":39.551665647,"data":"\n"}
+,{"stream_name":"stderr","time":39.551672371,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":49.11342898,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stderr","time":49.113476722,"data":"\n"}
+,{"stream_name":"stderr","time":49.113482524,"data":"The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.\n"}
+,{"stream_name":"stdout","time":49.292757977,"data":"loaded gemma-2-2b on cpu\n"}
+,{"stream_name":"stdout","time":123.128025743,"data":"gemma-2-2b frames done\n"}
+,{"stream_name":"stdout","time":133.370722381,"data":"loaded gemma-3-1b on cpu\n"}
+,{"stream_name":"stdout","time":189.194348741,"data":"gemma-3-1b frames done\n"}
+,{"stream_name":"stdout","time":205.113887328,"data":"loaded llama-3.2-3b on cpu\n"}
+,{"stream_name":"stdout","time":278.83385235,"data":"llama-3.2-3b frames done\n"}
+,{"stream_name":"stdout","time":285.879719776,"data":"loaded qwen2.5-1.5b on cpu\n"}
+,{"stream_name":"stdout","time":330.046333365,"data":"qwen2.5-1.5b frames done\n"}
+,{"stream_name":"stdout","time":339.092505209,"data":"loaded gemma-2-2b on cpu\n"}
+,{"stream_name":"stdout","time":369.061138956,"data":"== speed_bumps\n"}
+,{"stream_name":"stdout","time":369.061484778,"data":"   gemma-2-2b       R= 0.31 :: Frame: **The therapist is using the phrase \"getting over it\" lit\n"}
+,{"stream_name":"stdout","time":369.061500396,"data":"   qwen2.5-1.5b     R= 0.18 :: 'I'm slowly getting over my fear of speed bumps.'\n"}
+,{"stream_name":"stdout","time":369.061524411,"data":"   ground_truth     R= 0.09 :: 'Getting over it' is literal: the car physically drives over the\n"}
+,{"stream_name":"stdout","time":369.061528865,"data":"   llama-3.2-3b     R= 0.06 :: The therapist is literally helping the patient overcome the fear\n"}
+,{"stream_name":"stdout","time":369.06153435,"data":"   gemma-3-1b       R= 0.00 :: NONE\n"}
+,{"stream_name":"stdout","time":406.04136424,"data":"== lion_heart\n"}
+,{"stream_name":"stdout","time":406.041451413,"data":"   llama-3.2-3b     R= 0.16 :: Frame: His grandfather was a lion tamer.\n"}
+,{"stream_name":"stdout","time":406.0414582,"data":"   ground_truth     R= 0.13 :: He literally stole a lion's heart from the zoo, not the bravery \n"}
+,{"stream_name":"stdout","time":406.041464816,"data":"   gemma-2-2b       R= 0.00 :: Frame: **He's a contradiction, both fierce and barred from a pla\n"}
+,{"stream_name":"stdout","time":406.041470132,"data":"   gemma-3-1b       R= 0.00 :: Frame: He’s a very old lion.i need a frame to answer!Apextainedt\n"}
+,{"stream_name":"stdout","time":406.04147776,"data":"   qwen2.5-1.5b     R= 0.00 :: My grandfather's bravery matches that of a lion but he cannot en\n"}
+,{"stream_name":"stdout","time":443.677909027,"data":"== ai_pm\n"}
+,{"stream_name":"stdout","time":443.677986124,"data":"   ground_truth     R= 1.29 :: The AI treats even the word when as a project requirement needin\n"}
+,{"stream_name":"stdout","time":443.67799467,"data":"   llama-3.2-3b     R= 0.24 :: Frame: The AI is playing with the concept of time and the ambigu\n"}
+,{"stream_name":"stdout","time":443.678000854,"data":"   gemma-2-2b       R= 0.00 :: Frame: **The AI is using a human concept of \"shipping\" in a way \n"}
+,{"stream_name":"stdout","time":443.678007143,"data":"   gemma-3-1b       R= 0.00 :: NONE\n"}
+,{"stream_name":"stdout","time":443.678022354,"data":"   qwen2.5-1.5b     R= 0.00 :: The AI project manager used buzzwords without defining them clea\n"}
+,{"stream_name":"stdout","time":469.699597491,"data":"== nonsense_ctrl\n"}
+,{"stream_name":"stdout","time":469.699662197,"data":"   gemma-2-2b       R= 0.00 :: Frame: **The therapist's response is a direct, clinical interpre\n"}
+,{"stream_name":"stdout","time":469.699667843,"data":"   gemma-3-1b       R= 0.00 :: NONE\n"}
+,{"stream_name":"stdout","time":469.699671406,"data":"   llama-3.2-3b     R= 0.00 :: Frame: 'Strong regional cheese sales' is unrelated to the fear o\n"}
+,{"stream_name":"stdout","time":469.699674934,"data":"   qwen2.5-1.5b     R= 0.00 :: The quarterly report showing strong regional cheese sales is an \n"}
+,{"stream_name":"stdout","time":469.699678537,"data":"\n"}
+,{"stream_name":"stdout","time":469.699681684,"data":"EXPLANATION DEFICIT (lower = better writer): {\n"}
+,{"stream_name":"stdout","time":469.699684851,"data":" \"gemma-2-2b\": 0.473,\n"}
+,{"stream_name":"stdout","time":469.6996882,"data":" \"gemma-3-1b\": 0.502,\n"}
+,{"stream_name":"stdout","time":469.699691417,"data":" \"llama-3.2-3b\": 0.36,\n"}
+,{"stream_name":"stdout","time":469.6996951,"data":" \"qwen2.5-1.5b\": 0.473\n"}
+,{"stream_name":"stdout","time":469.699698104,"data":"}\n"}
+,{"stream_name":"stdout","time":479.447489033,"data":"loaded llama-3.2-3b on cpu\n"}
+,{"stream_name":"stdout","time":511.517087853,"data":"llama-3.2-3b as instrument:\n"}
+,{"stream_name":"stdout","time":511.517148252,"data":"  speed_bumps    gemma S= 3.19 R= 0.09 | llama-3.2-3b S= 3.32 R= 0.04\n"}
+,{"stream_name":"stdout","time":511.517154302,"data":"  lion_heart     gemma S= 3.58 R= 0.13 | llama-3.2-3b S= 4.50 R= 0.13\n"}
+,{"stream_name":"stdout","time":511.517158032,"data":"  ai_pm          gemma S= 4.09 R= 1.29 | llama-3.2-3b S= 4.27 R= 0.84\n"}
+,{"stream_name":"stdout","time":511.51717834,"data":"R-ordering identical across instruments: True\n"}
+,{"stream_name":"stdout","time":516.677285124,"data":"century writer (lowest deficit): llama-3.2-3b 0.36\n"}
+,{"stream_name":"stdout","time":793.701100872,"data":"loaded gemma-2-2b on cpu\n"}
+,{"stream_name":"stdout","time":941.427361774,"data":"1916 corpus: 12 items (frames by llama-3.2-3b) | alive today: 3\n"}
+,{"stream_name":"stdout","time":941.427440366,"data":"  R= 0.73 :: \"Great Heaven!\" I exclaimed with a groan, \"why rub it in, Letitia? I should al\n"}
+,{"stream_name":"stdout","time":941.427445612,"data":"  R= 0.54 :: \"And we were hunting for a clean slate,\" I suggested satirically. \"Do you thin\n"}
+,{"stream_name":"stdout","time":941.42744934,"data":"  R= 0.51 :: \"That is enough,\" said Letitia sternly. \"The episode need not serve as an excu\n"}
+,{"stream_name":"stdout","time":941.427453372,"data":"  R= 0.15 :: \"Try and be patriotic, dear,\" she said soothingly. \"Of course, I know you woul\n"}
+,{"stream_name":"stdout","time":941.427457122,"data":"  R= 0.05 :: \"I've discovered one thing,\" said Letitia on the evening of the third day. \"Th\n"}
+,{"stream_name":"stdout","time":941.427460457,"data":"  R= 0.00 :: \"You see,\" said Letitia, when she emerged, \"she is just a simple peasant girl,\n"}
+,{"stream_name":"stdout","time":941.42746378,"data":"wrote zoo_report.json\n"}
+,{"stream_name":"stderr","time":948.190354621,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":948.190474517,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":948.540884986,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":948.540920228,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":950.090302776,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":950.536674381,"data":"[NbConvertApp] Writing 105970 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":954.714083732,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":957.183690479,"data":"[NbConvertApp] Writing 413078 bytes to __results__.html\n"}
+]

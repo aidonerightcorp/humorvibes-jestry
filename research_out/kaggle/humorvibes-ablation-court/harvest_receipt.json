@@ -1,0 +1,43 @@
+{
+  "dataset_sources": [],
+  "external_submission_made": false,
+  "harvested_utc": "2026-07-12T20:21:49.785733+00:00",
+  "kernel_id": "taylorsamarel/humorvibes-ablation-court",
+  "kernel_private": true,
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "model_sources": [
+    "google/gemma-2/Transformers/gemma-2-2b-it/2"
+  ],
+  "outputs": {
+    "ablation_failure_figure.png": {
+      "bytes": 203149,
+      "sha256": "7cbe78eaa67307d37aa94eb70708cf8353f63c7cdfa2881603bf6adde13daa57"
+    },
+    "ablation_rows.jsonl": {
+      "bytes": 242852,
+      "sha256": "89d96aca6f7566432ba2647dd1b64bd812392bbdf809316776c4426f94ab81ab"
+    },
+    "ablation_summary.json": {
+      "bytes": 9411,
+      "sha256": "7c1ff684a05d720635eeb0741594898338d23ff046ec4e50997dcf648c7a7472"
+    },
+    "failure_cases.csv": {
+      "bytes": 5027,
+      "sha256": "97e041c8641f48506ffb04a662068d9ccdd683d6e30f31d4e9e66d76a1e9aaf2"
+    },
+    "failure_cases.md": {
+      "bytes": 5389,
+      "sha256": "6830c27324b1558c3d0c2159882a7c677186a86db1e555523ab6d18c9169b3ab"
+    },
+    "humorvibes-ablation-court.log": {
+      "bytes": 26988,
+      "sha256": "b8fdde8a5e4b0769000e632cf524f33cd67f330a2e933d2996ec65b64ffbdc80"
+    },
+    "runtime_receipt.json": {
+      "bytes": 3139,
+      "sha256": "7cecefe976d17c839a278f513dd10820c836e186efe961289e50f638a4cc30f5"
+    }
+  },
+  "schema": "humorvibes_ablation_harvest_v1",
+  "source_cells_match": true
+}

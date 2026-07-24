@@ -1,0 +1,458 @@
+{
+  "measured": [
+    {
+      "S": 3.425,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "A:  **You're looking a little saucy.**",
+      "setup": "Q: What did the spaghetti say to the other spaghetti?\r",
+      "punch": "A: Pasta la vista, baby!",
+      "src": "icanhazdadjoke",
+      "text": "Q: What did the spaghetti say to the other spaghetti?\r\nA: Pasta la vista, baby!"
+    },
+    {
+      "S": 4.03,
+      "R": 1.129,
+      "E": 0.1613,
+      "frame": "\"Try\" is a verb, not an angle.",
+      "setup": "Remember, the best angle to approach a problem from",
+      "punch": "is the \"try\" angle.",
+      "src": "icanhazdadjoke",
+      "text": "Remember, the best angle to approach a problem from is the \"try\" angle."
+    },
+    {
+      "S": 4.29,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "You'll be the only one who reads it.",
+      "setup": "I just wrote a book on reverse psychology.",
+      "punch": "Do not read it!",
+      "src": "icanhazdadjoke",
+      "text": "I just wrote a book on reverse psychology. Do not read it!"
+    },
+    {
+      "S": 5.229,
+      "R": 0.051,
+      "E": 0.0169,
+      "frame": "...a walking contradiction.",
+      "setup": "Mahatma Gandhi, as you know, walked barefoot most of the time, which produced an impressive set of calluses on his feet. \r\nHe also ate very little, which made him rather frail and with his odd diet, he suffered from bad breath. \r",
+      "punch": "This made him a super calloused fragile mystic hexed by halitosis.",
+      "src": "icanhazdadjoke",
+      "text": "Mahatma Gandhi, as you know, walked barefoot most of the time, which produced an impressive set of calluses on his feet. \r\nHe also ate very little, which made him rather frail and with his odd diet, he suffered from bad breath. \r\nThis made him a super calloused fragile mystic hexed by halitosis."
+    },
+    {
+      "S": 5.543,
+      "R": 2.095,
+      "E": 0.1746,
+      "frame": "Your head hitting the ceiling is a sign of an elephant's size.",
+      "setup": "How do you know if there\u2019s an elephant under your bed?",
+      "punch": "Your head hits the ceiling!",
+      "src": "icanhazdadjoke",
+      "text": "How do you know if there\u2019s an elephant under your bed? Your head hits the ceiling!"
+    },
+    {
+      "S": 7.337,
+      "R": 2.006,
+      "E": 0.2006,
+      "frame": "\"Be lion\" is a literal description of a lion's behavior.",
+      "setup": "Why did the feline fail the lie detector test?",
+      "punch": "Because he be lion.",
+      "src": "icanhazdadjoke",
+      "text": "Why did the feline fail the lie detector test? Because he be lion."
+    },
+    {
+      "S": 4.896,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "\"Chess nuts\" is a slang term for people who are obsessed with chess.",
+      "setup": "What do you call a crowd of chess players bragging about their wins in a hotel lobby?",
+      "punch": "Chess nuts boasting in an open foyer.",
+      "src": "icanhazdadjoke",
+      "text": "What do you call a crowd of chess players bragging about their wins in a hotel lobby? Chess nuts boasting in an open foyer."
+    },
+    {
+      "S": 5.954,
+      "R": 0.949,
+      "E": 0.1356,
+      "frame": "\"Plagiarism\" is a word that describes copying.",
+      "setup": "I invented a new",
+      "punch": "word! Plagiarism!",
+      "src": "icanhazdadjoke",
+      "text": "I invented a new word! Plagiarism!"
+    },
+    {
+      "S": 3.836,
+      "R": 0.452,
+      "E": 0.0753,
+      "frame": "...because lions don't belong in zoos.",
+      "setup": "I have the heart of a lion...",
+      "punch": "and a lifetime ban from the San Diego Zoo.",
+      "src": "icanhazdadjoke",
+      "text": "I have the heart of a lion... and a lifetime ban from the San Diego Zoo."
+    },
+    {
+      "S": 6.67,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "...because they're always covered in white.",
+      "setup": "Whiteboards ...",
+      "punch": "are remarkable.",
+      "src": "icanhazdadjoke",
+      "text": "Whiteboards ... are remarkable."
+    },
+    {
+      "S": 5.955,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "\"Owlet\" is a baby bird.",
+      "setup": "Where do owls go to buy their baby clothes?",
+      "punch": "The owlet malls.",
+      "src": "icanhazdadjoke",
+      "text": "Where do owls go to buy their baby clothes? The owlet malls."
+    },
+    {
+      "S": 5.629,
+      "R": 0.165,
+      "E": 0.0412,
+      "frame": "Because it's a dinosaur.",
+      "setup": "Why can\u2019t you hear a pterodactyl go to the bathroom?",
+      "punch": "The p is silent.",
+      "src": "icanhazdadjoke",
+      "text": "Why can\u2019t you hear a pterodactyl go to the bathroom? The p is silent."
+    },
+    {
+      "S": 8.919,
+      "R": 0.655,
+      "E": 0.2184,
+      "frame": "\"It's a fracture.\"",
+      "setup": "What did the doctor say to the gingerbread man who broke his leg?",
+      "punch": "Try icing it.",
+      "src": "icanhazdadjoke",
+      "text": "What did the doctor say to the gingerbread man who broke his leg? Try icing it."
+    },
+    {
+      "S": 2.633,
+      "R": 0.116,
+      "E": 0.0232,
+      "frame": "\"It's really hot in here.\"",
+      "setup": "Two muffins were sitting in an oven, and the first looks over to the second, and says, \u201cman, it\u2019s really hot in here\u201d.",
+      "punch": "The second looks over at the first with a surprised look, and answers, \u201cWHOA, a talking muffin!\u201d",
+      "src": "icanhazdadjoke",
+      "text": "Two muffins were sitting in an oven, and the first looks over to the second, and says, \u201cman, it\u2019s really hot in here\u201d. The second looks over at the first with a surprised look, and answers, \u201cWHOA, a talking muffin!\u201d"
+    },
+    {
+      "S": 2.591,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "Because he's dead.",
+      "setup": "Why didn\u2019t the skeleton cross the road?",
+      "punch": "Because he had no guts.",
+      "src": "icanhazdadjoke",
+      "text": "Why didn\u2019t the skeleton cross the road? Because he had no guts."
+    },
+    {
+      "S": 4.23,
+      "R": 2.317,
+      "E": 0.3862,
+      "frame": "This one was written in Paris.",
+      "setup": "I WRITE MY JOKES IN CAPITALS.",
+      "punch": "THIS ONE WAS WRITTEN IN PARIS.",
+      "src": "jokeapi",
+      "text": "I WRITE MY JOKES IN CAPITALS. THIS ONE WAS WRITTEN IN PARIS."
+    },
+    {
+      "S": 4.2,
+      "R": 0.593,
+      "E": 0.0847,
+      "frame": "\"Elf\" is a shortened version of \"elf-abet\".",
+      "setup": "What do Santa's little helpers learn at school?",
+      "punch": "The elf-abet!",
+      "src": "jokeapi",
+      "text": "What do Santa's little helpers learn at school? The elf-abet!\n"
+    },
+    {
+      "S": 2.185,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "Because 789A is the hexadecimal representation of the word \"eight\".",
+      "setup": "Why is 6 afraid of 7 in hexadecimal Canada?",
+      "punch": "Because 7 8 9 A?",
+      "src": "jokeapi",
+      "text": "Why is 6 afraid of 7 in hexadecimal Canada? Because 7 8 9 A?"
+    },
+    {
+      "S": 6.087,
+      "R": 0.043,
+      "E": 0.0054,
+      "frame": "**Frame:**  \"He's been working on it for years.\"",
+      "setup": "What is a dying programmer's last program?",
+      "punch": "Goodbye, world!",
+      "src": "jokeapi",
+      "text": "What is a dying programmer's last program? Goodbye, world!"
+    },
+    {
+      "S": 4.81,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "The past, the present, and the future were all very drunk.",
+      "setup": "The past, the present and the future walk into a bar.",
+      "punch": "It was tense.",
+      "src": "jokeapi",
+      "text": "The past, the present and the future walk into a bar. It was tense."
+    },
+    {
+      "S": 3.108,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "\"That's a pretty good statistic.\"",
+      "setup": "\"99.9% of the people are dumb!\" \"Fortunately I belong",
+      "punch": "to the remaining 1%\"",
+      "src": "jokeapi",
+      "text": "\"99.9% of the people are dumb!\" \"Fortunately I belong to the remaining 1%\""
+    },
+    {
+      "S": 3.067,
+      "R": 0.284,
+      "E": 0.0709,
+      "frame": "\"She's a good cook.\"",
+      "setup": "Mom asked me where I'm taking her to go out to eat for mother's day.",
+      "punch": "I told her, \"We already have food in the house\".",
+      "src": "jokeapi",
+      "text": "Mom asked me where I'm taking her to go out to eat for mother's day. I told her, \"We already have food in the house\"."
+    },
+    {
+      "S": 3.643,
+      "R": 0.863,
+      "E": 0.2876,
+      "frame": "\"Just you wait\"",
+      "setup": "My mother said, \"You won't amount to anything because you always procrastinate.\" I said, \"Oh yeah...",
+      "punch": "Just you wait.\"",
+      "src": "jokeapi",
+      "text": "My mother said, \"You won't amount to anything because you always procrastinate.\" I said, \"Oh yeah... Just you wait.\""
+    },
+    {
+      "S": 3.096,
+      "R": 0.198,
+      "E": 0.0396,
+      "frame": "\"She's a pro at ironing.\"",
+      "setup": "I just saw my wife trip over and drop a basket full of ironed clothes.",
+      "punch": "I watched it all unfold.",
+      "src": "jokeapi",
+      "text": "I just saw my wife trip over and drop a basket full of ironed clothes. I watched it all unfold."
+    },
+    {
+      "S": 2.478,
+      "R": 0.673,
+      "E": 0.1121,
+      "frame": "The flag is a big plus.",
+      "setup": "What's the best thing about Switzerland?",
+      "punch": "I don't know, but the flag is a big plus.",
+      "src": "jokeapi",
+      "text": "What's the best thing about Switzerland? I don't know, but the flag is a big plus."
+    },
+    {
+      "S": 1.73,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "\"UDP is really fast.\"",
+      "setup": "I've got a really good UDP joke to tell you but I",
+      "punch": "don\u2019t know if you'll get it.",
+      "src": "jokeapi",
+      "text": "I've got a really good UDP joke to tell you but I don\u2019t know if you'll get it."
+    },
+    {
+      "S": 2.454,
+      "R": 0.171,
+      "E": 0.0342,
+      "frame": "\"It's a classic 'reboot' problem.\"",
+      "setup": "Four engineers get into a car. The car won't start.\nThe Mechanical engineer says \"It's a broken starter\".\nThe Electrical engineer says \"Dead battery\".\nThe Chemical engineer says \"Impurities in the gasoline\".",
+      "punch": "The IT engineer says \"Hey guys, I have an idea: How about we all get out of the car and get back in\".",
+      "src": "jokeapi",
+      "text": "Four engineers get into a car. The car won't start.\nThe Mechanical engineer says \"It's a broken starter\".\nThe Electrical engineer says \"Dead battery\".\nThe Chemical engineer says \"Impurities in the gasoline\".\nThe IT engineer says \"Hey guys, I have an idea: How about we all get out of the car and get back in\"."
+    },
+    {
+      "S": 4.873,
+      "R": 1.506,
+      "E": 0.3764,
+      "frame": "You have my Word.",
+      "setup": "To whoever stole my copy of Microsoft Office, I will find you.",
+      "punch": "You have my Word!",
+      "src": "jokeapi",
+      "text": "To whoever stole my copy of Microsoft Office, I will find you. You have my Word!"
+    },
+    {
+      "S": 3.126,
+      "R": 0.879,
+      "E": 0.1099,
+      "frame": "\"It's just a bunch of lines of code.\"",
+      "setup": "Algorithm:",
+      "punch": "A word used by programmers when they don't want to explain how their code works.",
+      "src": "jokeapi",
+      "text": "Algorithm: A word used by programmers when they don't want to explain how their code works."
+    },
+    {
+      "S": 3.724,
+      "R": 0.0,
+      "E": 0.0,
+      "frame": "\"I'm not sure I understand.\"",
+      "setup": "Judge: \"I sentence you to the maximum punishment...\"\nMe (thinking): \"Please be death, please be death...\"\nJudge: \"Learn Java!\"",
+      "punch": "Me: \"Damn.\"",
+      "src": "jokeapi",
+      "text": "Judge: \"I sentence you to the maximum punishment...\"\nMe (thinking): \"Please be death, please be death...\"\nJudge: \"Learn Java!\"\nMe: \"Damn.\""
+    }
+  ],
+  "remixes": [
+    {
+      "orig": "How do you know if there\u2019s an elephant under your bed? Your head hits ",
+      "frame": "Your head hitting the ceiling is a sign of an elephant's size.",
+      "format": "meme_caption",
+      "remix": "TOP:  My bedroom ceiling.\nBOTTOM:  My size after a nap.",
+      "R_orig": 2.095,
+      "R_remix": 0.703,
+      "verdict": "frame lost"
+    },
+    {
+      "orig": "How do you know if there\u2019s an elephant under your bed? Your head hits ",
+      "frame": "Your head hitting the ceiling is a sign of an elephant's size.",
+      "format": "shorts_beat",
+      "remix": "HOOK:  HEAD HIT THE CEILING.  BUILD:  ELEPHANT.  SNAP:  UNDER THE BED.",
+      "R_orig": 2.095,
+      "R_remix": 0.146,
+      "verdict": "frame lost"
+    },
+    {
+      "orig": "I WRITE MY JOKES IN CAPITALS. THIS ONE WAS WRITTEN IN PARIS.",
+      "frame": "This one was written in Paris.",
+      "format": "meme_caption",
+      "remix": "'TOP: I WRITE MY JOKES IN CAPITALS.  BOTTOM:  *THIS ONE WAS WRITTEN IN PARIS.*'",
+      "R_orig": 2.317,
+      "R_remix": 1.372,
+      "verdict": "FRAME SURVIVED"
+    },
+    {
+      "orig": "I WRITE MY JOKES IN CAPITALS. THIS ONE WAS WRITTEN IN PARIS.",
+      "frame": "This one was written in Paris.",
+      "format": "shorts_beat",
+      "remix": "HOOK:/BUILD:/SNAP: \nI write my jokes in capitals. This one was written in Paris.",
+      "R_orig": 2.317,
+      "R_remix": 1.375,
+      "verdict": "FRAME SURVIVED"
+    },
+    {
+      "orig": "Why did the feline fail the lie detector test? Because he be lion.",
+      "frame": "\"Be lion\" is a literal description of a lion's behavior.",
+      "format": "meme_caption",
+      "remix": "TOP:  His \"roaring\" wasn't convincing.\nBOTTOM:  Be lion.",
+      "R_orig": 2.006,
+      "R_remix": 2.067,
+      "verdict": "FRAME SURVIVED"
+    },
+    {
+      "orig": "Why did the feline fail the lie detector test? Because he be lion.",
+      "frame": "\"Be lion\" is a literal description of a lion's behavior.",
+      "format": "shorts_beat",
+      "remix": "HOOK:  Be lion.  \nBUILD:  Didn't lie.\nSNAP:  Be lie.",
+      "R_orig": 2.006,
+      "R_remix": 0.0,
+      "verdict": "frame lost"
+    }
+  ],
+  "temporal": [
+    {
+      "setup": "My kid's birthday photos were trending on TikTok, so now everyone",
+      "punch": "knows he loves cheese puffs.",
+      "R_with": 0.0,
+      "R_without": 4.02,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "topical",
+      "label": "Parents warned not to publicly share children\u2019s images amid AI abuse r",
+      "fact": "Parents warned not to publicly share children\u2019s images amid AI abuse risks",
+      "joke": "My kid's birthday photos were trending on TikTok, so now everyone knows he loves cheese puffs."
+    },
+    {
+      "setup": "What's the next step in artificial intelligence?",
+      "punch": "Making it even less intelligent than it is now.",
+      "R_with": 0.43,
+      "R_without": 1.7,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "topical",
+      "label": "AI is 'not smart' so what's next in artificial intelligence?",
+      "fact": "AI is 'not smart' so what's next in artificial intelligence?",
+      "joke": "What's the next step in artificial intelligence?  Making it even less intelligent than it is now."
+    },
+    {
+      "setup": "So, I was using my Meta glasses and trying to check my Facebook feed...",
+      "punch": "but then I got a message saying \"Sorry, this feature requires Meta Plus.\"",
+      "R_with": 0.246,
+      "R_without": 1.635,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "topical",
+      "label": "Meta glasses wearers hit with paywall to use built-in feature",
+      "fact": "Meta glasses wearers hit with paywall to use built-in feature",
+      "joke": "So, I was using my Meta glasses and trying to check my Facebook feed... but then I got a message saying \"Sorry, this feature requires Meta Plus.\""
+    },
+    {
+      "setup": "Why did Google get a massive fine? ",
+      "punch": "Because they were using Android to block out the competition.",
+      "R_with": 0.406,
+      "R_without": 1.622,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "topical",
+      "label": "Google must pay \u20ac4.1bn fine for using Android to 'block' rivals",
+      "fact": "Google must pay \u20ac4.1bn fine for using Android to 'block' rivals",
+      "joke": "Why did Google get a massive fine? \nBecause they were using Android to block out the competition."
+    },
+    {
+      "setup": "Why don't scientists ever tell jokes about Icarus? \n",
+      "punch": "Because their wings always melt.",
+      "R_with": 0.0,
+      "R_without": 4.45,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "canonical",
+      "label": "Icarus",
+      "fact": "Icarus flew too close to the sun on wings of wax and feathers, and they melted.",
+      "joke": "Why don't scientists ever tell jokes about Icarus? \n\nBecause their wings always melt."
+    },
+    {
+      "setup": "Why did the Greeks bring a giant wooden horse to Troy?",
+      "punch": "To give the city a real \"chest\" experience.",
+      "R_with": 0.0,
+      "R_without": 2.316,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "canonical",
+      "label": "Trojan horse",
+      "fact": "The Greeks hid soldiers inside a giant wooden horse to sneak into Troy.",
+      "joke": "Why did the Greeks bring a giant wooden horse to Troy?  To give the city a real \"chest\" experience."
+    },
+    {
+      "setup": "Why did Isaac Newton get so good at apple-related physics?",
+      "punch": "He had a lot of experience falling from trees.",
+      "R_with": 0.0,
+      "R_without": 2.178,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "canonical",
+      "label": "Newton's apple",
+      "fact": "An apple falling from a tree helped Isaac Newton work out that gravity pulls things down.",
+      "joke": "Why did Isaac Newton get so good at apple-related physics? He had a lot of experience falling from trees."
+    },
+    {
+      "setup": "Why did Archimedes always run from his baths? \n",
+      "punch": "He didn't want to be caught \"bathing in\" his own discoveries.",
+      "R_with": 0.0,
+      "R_without": 2.271,
+      "gap": 0.0,
+      "verdict": "canonical",
+      "kind": "canonical",
+      "label": "Eureka",
+      "fact": "Archimedes shouted Eureka and ran from his bath naked after realizing displaced water reveals volume.",
+      "joke": "Why did Archimedes always run from his baths? \n\nHe didn't want to be caught \"bathing in\" his own discoveries."
+    }
+  ]
+}

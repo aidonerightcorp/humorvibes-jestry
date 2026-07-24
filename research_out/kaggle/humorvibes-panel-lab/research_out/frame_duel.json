@@ -1,0 +1,53 @@
+{
+  "speed_bumps": {
+    "ground_truth": {
+      "frame": "'Getting over it' is literal: the car physically drives over the speed bumps slowly.",
+      "S": 3.188,
+      "R": 0.347,
+      "R_raw": 0.347,
+      "R_null": 0.0
+    },
+    "local-gemma-2-2b": {
+      "frame": "NONE",
+      "S": null,
+      "R": 0.0
+    }
+  },
+  "lion_heart": {
+    "ground_truth": {
+      "frame": "He literally stole a lion's heart from the zoo, not the bravery metaphor.",
+      "S": 3.577,
+      "R": 0.388,
+      "R_raw": 0.388,
+      "R_null": 0.0
+    },
+    "local-gemma-2-2b": {
+      "frame": "Because he kept escaping.",
+      "S": 3.577,
+      "R": 0.033,
+      "R_raw": 0.033,
+      "R_null": 0.0
+    }
+  },
+  "ai_pm": {
+    "ground_truth": {
+      "frame": "The AI treats even the word when as a project requirement needing stakeholder alignment.",
+      "S": 4.094,
+      "R": 1.29,
+      "R_raw": 1.29,
+      "R_null": 0.0
+    },
+    "local-gemma-2-2b": {
+      "frame": "NONE",
+      "S": null,
+      "R": 0.0
+    }
+  },
+  "nonsense_ctrl": {
+    "local-gemma-2-2b": {
+      "frame": "NONE",
+      "S": null,
+      "R": 0.0
+    }
+  }
+}

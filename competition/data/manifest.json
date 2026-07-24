@@ -1,0 +1,23 @@
+{
+  "seed": 20260723,
+  "genuine": 117,
+  "donors_sacrificed": 117,
+  "items": 273,
+  "self_attack": {
+    "max_punchline_occurrence": 2,
+    "genuine_control_overlap": 0,
+    "distinct_boring_tails": 39
+  },
+  "train": 87,
+  "test": 186,
+  "test_genuine": 78,
+  "test_controls": 108,
+  "public": 113,
+  "licenses": [
+    "JokeAPI (jokes submitted by users; safe-mode filtered)",
+    "derived",
+    "public API (github: 15Dkatz/official_joke_api)",
+    "repo",
+    "traditional folk humor; session-curated"
+  ]
+}

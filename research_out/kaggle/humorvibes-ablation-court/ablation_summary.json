@@ -1,0 +1,307 @@
+{
+  "external_submission_made": false,
+  "failure_case_count": 10,
+  "limitations": [
+    "Humicroedit headlines are not setup/punchline jokes; edit position often falls outside the inferred punchline span.",
+    "Human grades are not persona-specific, while B is measured for one declared broad-news persona.",
+    "This is one deterministic sample and one Gemma instrument; confidence intervals quantify item sampling, not model-family uncertainty."
+  ],
+  "metric": {
+    "ablation": {
+      "full_SREB": {
+        "components": [
+          "S",
+          "R",
+          "E",
+          "B"
+        ],
+        "pearson": 0.04193721257246767,
+        "pearson_p": 0.649259736947402,
+        "score_mean": 13.971281518405616,
+        "score_std": 10.87843000007161,
+        "spearman": 0.032548231208528206,
+        "spearman_bootstrap_95ci": [
+          -0.12576678634586214,
+          0.20744217280025698
+        ],
+        "spearman_delta_vs_full": 0.0,
+        "spearman_p": 0.724156229916581
+      },
+      "only_B": {
+        "components": [
+          "B"
+        ],
+        "pearson": -0.08974666476129603,
+        "pearson_p": 0.32965750517449766,
+        "score_mean": 36.416666666666664,
+        "score_std": 17.972007554960456,
+        "spearman": -0.0716359885920675,
+        "spearman_bootstrap_95ci": [
+          -0.23112982315220038,
+          0.11280416807980956
+        ],
+        "spearman_delta_vs_full": -0.10418421980059571,
+        "spearman_p": 0.43685272697137356
+      },
+      "only_E": {
+        "components": [
+          "E"
+        ],
+        "pearson": 0.09641877196104102,
+        "pearson_p": 0.2948218038997993,
+        "score_mean": 9.284504193170344,
+        "score_std": 25.10013777293428,
+        "spearman": 0.09859213639446546,
+        "spearman_bootstrap_95ci": [
+          -0.09120190815966364,
+          0.2913677811417566
+        ],
+        "spearman_delta_vs_full": 0.06604390518593725,
+        "spearman_p": 0.28402069606433256
+      },
+      "only_R": {
+        "components": [
+          "R"
+        ],
+        "pearson": 0.028819281101909906,
+        "pearson_p": 0.7546910205383976,
+        "score_mean": 3.8053501602763777,
+        "score_std": 11.392531235952555,
+        "spearman": 0.08845829284862766,
+        "spearman_bootstrap_95ci": [
+          -0.08700635367951234,
+          0.2711607539317634
+        ],
+        "spearman_delta_vs_full": 0.05591006164009946,
+        "spearman_p": 0.3366756345854913
+      },
+      "only_S": {
+        "components": [
+          "S"
+        ],
+        "pearson": 0.03994379525904429,
+        "pearson_p": 0.6649019056294138,
+        "score_mean": 13.211333333333334,
+        "score_std": 25.107304882626014,
+        "spearman": 0.011447605613596598,
+        "spearman_bootstrap_95ci": [
+          -0.1693435942264117,
+          0.1761997381280113
+        ],
+        "spearman_delta_vs_full": -0.02110062559493161,
+        "spearman_p": 0.9012410718847818
+      },
+      "without_B": {
+        "components": [
+          "S",
+          "R",
+          "E"
+        ],
+        "pearson": 0.07636415384980484,
+        "pearson_p": 0.4071140721325284,
+        "score_mean": 8.359935231340357,
+        "score_std": 12.748071895158672,
+        "spearman": 0.05324355078267874,
+        "spearman_bootstrap_95ci": [
+          -0.13419572284718032,
+          0.22515780932232488
+        ],
+        "spearman_delta_vs_full": 0.020695319574150536,
+        "spearman_p": 0.563561957705278
+      },
+      "without_E": {
+        "components": [
+          "S",
+          "R",
+          "B"
+        ],
+        "pearson": 0.010068268643897486,
+        "pearson_p": 0.9130908989959434,
+        "score_mean": 14.798359869917727,
+        "score_std": 10.889466424715135,
+        "spearman": 0.008268953055030236,
+        "spearman_bootstrap_95ci": [
+          -0.15089709246240984,
+          0.1673677631994027
+        ],
+        "spearman_delta_vs_full": -0.02427927815349797,
+        "spearman_p": 0.9285770682926342
+      },
+      "without_R": {
+        "components": [
+          "S",
+          "E",
+          "B"
+        ],
+        "pearson": 0.037772908464180785,
+        "pearson_p": 0.682101824583495,
+        "score_mean": 19.445244557398283,
+        "score_std": 13.900782300237374,
+        "spearman": 0.034640969221179416,
+        "spearman_bootstrap_95ci": [
+          -0.14004951268221139,
+          0.20633081933660316
+        ],
+        "spearman_delta_vs_full": 0.00209273801265121,
+        "spearman_p": 0.707204132969761
+      },
+      "without_S": {
+        "components": [
+          "R",
+          "E",
+          "B"
+        ],
+        "pearson": 0.019255744886296486,
+        "pearson_p": 0.8346452702669855,
+        "score_mean": 14.296973597722316,
+        "score_std": 11.52507387599442,
+        "spearman": 0.014027910834153529,
+        "spearman_bootstrap_95ci": [
+          -0.17639898080118815,
+          0.19537410325722365
+        ],
+        "spearman_delta_vs_full": -0.018520320374374677,
+        "spearman_p": 0.8791340087990704
+      }
+    },
+    "bad_surprise_persona": "a broad U.S. news audience including people or groups named in the headline",
+    "fixed_weights": {
+      "B": 0.2,
+      "E": 0.15,
+      "R": 0.35,
+      "S": 0.3
+    }
+  },
+  "paired_controls": {
+    "n_complete_sets": 40,
+    "paired_tests": {
+      "human_vs_original_headline": {
+        "B_score": {
+          "losses": 5,
+          "mean_human_minus_control": 0.085,
+          "median_human_minus_control": 0.0,
+          "ties": 21,
+          "wilcoxon_greater_p": 0.018679202650623384,
+          "wilcoxon_greater_statistic": 562.0,
+          "wins": 14
+        },
+        "E_score": {
+          "losses": 6,
+          "mean_human_minus_control": 0.0023894260082002903,
+          "median_human_minus_control": 0.0,
+          "ties": 27,
+          "wilcoxon_greater_p": 0.41702160363729457,
+          "wilcoxon_greater_statistic": 425.0,
+          "wins": 7
+        },
+        "R_score": {
+          "losses": 6,
+          "mean_human_minus_control": 0.027897639624620097,
+          "median_human_minus_control": 0.0,
+          "ties": 27,
+          "wilcoxon_greater_p": 0.3582404276526219,
+          "wilcoxon_greater_statistic": 436.0,
+          "wins": 7
+        },
+        "S_score": {
+          "losses": 19,
+          "mean_human_minus_control": -0.14197166666666666,
+          "median_human_minus_control": 0.0,
+          "ties": 18,
+          "wilcoxon_greater_p": 0.9997000768000724,
+          "wilcoxon_greater_statistic": 157.5,
+          "wins": 3
+        },
+        "full_score": {
+          "losses": 20,
+          "mean_human_minus_control": -1.5474999999999997,
+          "median_human_minus_control": -0.15000000000000036,
+          "ties": 7,
+          "wilcoxon_greater_p": 0.8895215466103855,
+          "wilcoxon_greater_statistic": 319.0,
+          "wins": 13
+        }
+      },
+      "human_vs_shuffled_edit": {
+        "B_score": {
+          "losses": 5,
+          "mean_human_minus_control": 0.1,
+          "median_human_minus_control": 0.0,
+          "ties": 17,
+          "wilcoxon_greater_p": 0.0021570068890960684,
+          "wilcoxon_greater_statistic": 620.0,
+          "wins": 18
+        },
+        "E_score": {
+          "losses": 8,
+          "mean_human_minus_control": -0.04814390974512132,
+          "median_human_minus_control": 0.0,
+          "ties": 27,
+          "wilcoxon_greater_p": 0.7704410101845478,
+          "wilcoxon_greater_statistic": 357.0,
+          "wins": 5
+        },
+        "R_score": {
+          "losses": 9,
+          "mean_human_minus_control": -0.015004487939648325,
+          "median_human_minus_control": 0.0,
+          "ties": 27,
+          "wilcoxon_greater_p": 0.8739720015745936,
+          "wilcoxon_greater_statistic": 328.0,
+          "wins": 4
+        },
+        "S_score": {
+          "losses": 7,
+          "mean_human_minus_control": -0.008070000000000003,
+          "median_human_minus_control": 0.0,
+          "ties": 25,
+          "wilcoxon_greater_p": 0.4421702970037833,
+          "wilcoxon_greater_statistic": 420.5,
+          "wins": 8
+        },
+        "full_score": {
+          "losses": 12,
+          "mean_human_minus_control": 0.5074999999999997,
+          "median_human_minus_control": 0.20000000000000284,
+          "ties": 7,
+          "wilcoxon_greater_p": 0.17148640554334088,
+          "wilcoxon_greater_statistic": 480.5,
+          "wins": 21
+        }
+      }
+    },
+    "variant_means": {
+      "human_edit": {
+        "B_score": 0.44250000000000006,
+        "E_score": 0.09254772672442961,
+        "R_score": 0.05052286331751073,
+        "S_score": 0.16912888888888888,
+        "full_score": 17.0775
+      },
+      "original_headline": {
+        "B_score": 0.35750000000000004,
+        "E_score": 0.09015830071622932,
+        "R_score": 0.022625223692890627,
+        "S_score": 0.3111005555555556,
+        "full_score": 18.625
+      },
+      "shuffled_edit": {
+        "B_score": 0.34249999999999997,
+        "E_score": 0.1406916364695509,
+        "R_score": 0.06552735125715906,
+        "S_score": 0.17719888888888888,
+        "full_score": 16.57
+      }
+    }
+  },
+  "sample": {
+    "bad_surprise_judge_coverage_on_human": 1.0,
+    "completion_rate": 1.0,
+    "control_sets": 40,
+    "human_rows": 120,
+    "measurement_jobs": 200,
+    "successful_jobs": 200
+  },
+  "schema": "humorvibes_ablation_v1",
+  "status": "complete"
+}

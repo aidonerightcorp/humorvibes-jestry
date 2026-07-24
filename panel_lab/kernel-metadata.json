@@ -1,0 +1,18 @@
+{
+  "id": "taylorsamarel/humorvibes-panel-lab",
+  "title": "HumorVibes Panel Lab",
+  "code_file": "panel_lab.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "competition_sources": [],
+  "dataset_sources": [
+    "taylorsamarel/punchline-mesh-src"
+  ],
+  "kernel_sources": [],
+  "model_sources": [
+    "google/gemma-2/transformers/gemma-2-2b-it/2"
+  ]
+}
