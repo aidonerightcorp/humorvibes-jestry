@@ -1,0 +1,32 @@
+1
+00:00:00,000 --> 00:00:06,500
+A joke is a controlled prediction error with a cheap, audience permitted repair. HumorVibes turns that claim into four falsifiable signals.
+
+2
+00:00:10,033 --> 00:00:16,533
+Pinned Gemma 2 supplies true teacher forced log probabilities. S is punchline surprisal. R is the collapse a hidden frame produces. E is R per frame token. B is a separate persona conditioned judgment. One joke, three independent instruments, one number.
+
+3
+00:00:27,700 --> 00:00:34,200
+Our first metric credited nonsense, raw R two point three seven. The matched null zeroed it, and a later leak guard drove all four frame writers to zero on the lexical shortcut. Real jokes keep their resolution.
+
+4
+00:00:41,667 --> 00:00:48,167
+The source pinned court completed two hundred of two hundred measurements. Full S R E B reached only rho zero point zero three three, confidence interval crossing zero. Human edits did not beat shuffled edits. B did separate them, but did not predict funniness. Safety is a constraint, not the objective.
+
+5
+00:01:01,833 --> 00:01:08,333
+A shuffled headline, Macron urges US to puppy isolationism, scored forty three point three. The model invented a frame. That is why this is a diagnostic instrument, not an oracle.
+
+6
+00:01:14,900 --> 00:01:21,400
+The live portal shows the whole loop. Generation, ranking, repair, and a contribution funnel where every accepted laugh carries a receipt.
+
+7
+00:01:25,000 --> 00:01:31,500
+Has this joke been done before is a first class query. An English paraphrase retrieves the Korean and Japanese even monkeys fall from trees as top neighbors, across a twenty three thousand item, forty six language index.
+
+8
+00:01:39,933 --> 00:01:46,433
+The compiled example fails lint and remains unvalidated. Forced replay is only a reproducibility proof. HumorVibes measures affordable surprise, and records where it fails.
+
