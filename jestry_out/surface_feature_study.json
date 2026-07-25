@@ -1,0 +1,257 @@
+{
+  "receipt_type": "surface_feature_study",
+  "receipt_version": 1,
+  "ts": "2026-07-25T02:21:16",
+  "question": "do cheap deterministic surface features predict humour as well as teacher-forced Gemma signals that cost seconds per item?",
+  "frequency_table": {
+    "types": 37521,
+    "tokens": 330413,
+    "source": "this project's own corpora/*.jsonl"
+  },
+  "n_rows": 143,
+  "n_features": 30,
+  "arm1_human_grade_spearman": {
+    "n": 83,
+    "dataset": "Humicroedit canonical split, annotator mean grade 0-3",
+    "multiple_comparison": "34 tests against one outcome; permutation p over 4000 seeded shuffles, Benjamini-Hochberg FDR at 0.05",
+    "survivors_after_fdr": [],
+    "top_features": [
+      {
+        "feature": "punch_mean_wordlen",
+        "spearman": 0.2778,
+        "perm_p": 0.0097,
+        "survives_fdr": false
+      },
+      {
+        "feature": "punch_rarity_max",
+        "spearman": 0.2426,
+        "perm_p": 0.0295,
+        "survives_fdr": false
+      },
+      {
+        "feature": "echo_frac",
+        "spearman": 0.2418,
+        "perm_p": 0.0682,
+        "survives_fdr": false
+      },
+      {
+        "feature": "exclaims",
+        "spearman": 0.2387,
+        "perm_p": 0.0932,
+        "survives_fdr": false
+      },
+      {
+        "feature": "end_rhyme",
+        "spearman": 0.2387,
+        "perm_p": 0.0932,
+        "survives_fdr": false
+      },
+      {
+        "feature": "punch_rarity_mean",
+        "spearman": 0.2364,
+        "perm_p": 0.0307,
+        "survives_fdr": false
+      },
+      {
+        "feature": "sentences",
+        "spearman": 0.2263,
+        "perm_p": 0.0872,
+        "survives_fdr": false
+      },
+      {
+        "feature": "type_token_ratio",
+        "spearman": 0.2258,
+        "perm_p": 0.0537,
+        "survives_fdr": false
+      },
+      {
+        "feature": "punch_syl_per_word",
+        "spearman": 0.2152,
+        "perm_p": 0.0475,
+        "survives_fdr": false
+      },
+      {
+        "feature": "questions",
+        "spearman": 0.2132,
+        "perm_p": 0.127,
+        "survives_fdr": false
+      },
+      {
+        "feature": "digits",
+        "spearman": 0.1928,
+        "perm_p": 0.1612,
+        "survives_fdr": false
+      },
+      {
+        "feature": "[gemma] S",
+        "spearman": 0.1682,
+        "perm_p": 0.1317,
+        "survives_fdr": false
+      }
+    ],
+    "all": {
+      "setup_chars": 0.0644,
+      "punch_chars": 0.0419,
+      "setup_words": 0.1526,
+      "punch_words": -0.0172,
+      "word_ratio": -0.0828,
+      "setup_syllables": 0.1066,
+      "punch_syllables": 0.0485,
+      "syllable_ratio": -0.0126,
+      "punch_syl_per_word": 0.2152,
+      "setup_mean_wordlen": -0.0649,
+      "punch_mean_wordlen": 0.2778,
+      "sentences": 0.2263,
+      "questions": 0.2132,
+      "exclaims": 0.2387,
+      "quotes": 0.0897,
+      "digits": 0.1928,
+      "caps_words": 0.07,
+      "type_token_ratio": 0.2258,
+      "echo_frac": 0.2418,
+      "punch_alliteration": -0.0419,
+      "punch_assonance": 0.1098,
+      "pair_alliteration": 0.0012,
+      "pair_assonance": 0.0259,
+      "punch_rarity_mean": 0.2364,
+      "punch_rarity_max": 0.2426,
+      "punch_rarity_final": 0.091,
+      "setup_rarity_mean": -0.0009,
+      "setup_rarity_max": 0.1376,
+      "setup_rarity_final": 0.1443,
+      "end_rhyme": 0.2387,
+      "[gemma] S": 0.1682,
+      "[gemma] R": 0.1452,
+      "[gemma] E": 0.1452,
+      "[gemma] laugh": -0.0164
+    },
+    "all_perm_p": {
+      "setup_chars": 0.5711,
+      "punch_chars": 0.7111,
+      "setup_words": 0.1725,
+      "punch_words": 0.8798,
+      "word_ratio": 0.4719,
+      "setup_syllables": 0.3412,
+      "punch_syllables": 0.6678,
+      "syllable_ratio": 0.909,
+      "punch_syl_per_word": 0.0475,
+      "setup_mean_wordlen": 0.5464,
+      "punch_mean_wordlen": 0.0097,
+      "sentences": 0.0872,
+      "questions": 0.127,
+      "exclaims": 0.0932,
+      "quotes": 0.4531,
+      "digits": 0.1612,
+      "caps_words": 0.5399,
+      "type_token_ratio": 0.0537,
+      "echo_frac": 0.0682,
+      "punch_alliteration": 0.7261,
+      "punch_assonance": 0.3097,
+      "pair_alliteration": 0.992,
+      "pair_assonance": 0.8175,
+      "punch_rarity_mean": 0.0307,
+      "punch_rarity_max": 0.0295,
+      "punch_rarity_final": 0.4236,
+      "setup_rarity_mean": 0.9925,
+      "setup_rarity_max": 0.2537,
+      "setup_rarity_final": 0.1867,
+      "end_rhyme": 0.0932,
+      "[gemma] S": 0.1317,
+      "[gemma] R": 0.2202,
+      "[gemma] E": 0.2202,
+      "[gemma] laugh": 0.8808
+    }
+  },
+  "arm2_genuine_vs_shuffled_auc": {
+    "n_genuine": 30,
+    "n_shuffled": 30,
+    "dataset": "r/Jokes native pairs vs punchline swapped from another setup",
+    "construction_confound": "the shuffled control is built by swapping a punchline in from a different setup, which necessarily destroys shared vocabulary. echo_frac measures exactly that shared vocabulary, so a high echo_frac AUC is partly the control's construction reflected back and must NOT be read as a general humour detector. It is reported because the confound is the finding: any swap-based benchmark can be beaten this way, including ours.",
+    "top_features": [
+      [
+        "echo_frac",
+        0.7661
+      ],
+      [
+        "[gemma] S",
+        0.3367
+      ],
+      [
+        "type_token_ratio",
+        0.3389
+      ],
+      [
+        "[gemma] R",
+        0.4061
+      ],
+      [
+        "[gemma] E",
+        0.4267
+      ],
+      [
+        "pair_alliteration",
+        0.5511
+      ],
+      [
+        "sentences",
+        0.5272
+      ],
+      [
+        "pair_assonance",
+        0.4833
+      ],
+      [
+        "end_rhyme",
+        0.4833
+      ],
+      [
+        "quotes",
+        0.515
+      ],
+      [
+        "word_ratio",
+        0.4872
+      ],
+      [
+        "syllable_ratio",
+        0.4883
+      ]
+    ],
+    "all": {
+      "setup_chars": 0.5,
+      "punch_chars": 0.5,
+      "setup_words": 0.5,
+      "punch_words": 0.5,
+      "word_ratio": 0.4872,
+      "setup_syllables": 0.5,
+      "punch_syllables": 0.5,
+      "syllable_ratio": 0.4883,
+      "punch_syl_per_word": 0.5,
+      "setup_mean_wordlen": 0.5,
+      "punch_mean_wordlen": 0.5,
+      "sentences": 0.5272,
+      "questions": 0.5094,
+      "exclaims": 0.5,
+      "quotes": 0.515,
+      "digits": 0.5,
+      "caps_words": 0.505,
+      "type_token_ratio": 0.3389,
+      "echo_frac": 0.7661,
+      "punch_alliteration": 0.5,
+      "punch_assonance": 0.5,
+      "pair_alliteration": 0.5511,
+      "pair_assonance": 0.4833,
+      "punch_rarity_mean": 0.5,
+      "punch_rarity_max": 0.5,
+      "punch_rarity_final": 0.5,
+      "setup_rarity_mean": 0.5,
+      "setup_rarity_max": 0.5,
+      "setup_rarity_final": 0.5,
+      "end_rhyme": 0.4833,
+      "[gemma] S": 0.3367,
+      "[gemma] R": 0.4061,
+      "[gemma] E": 0.4267,
+      "[gemma] laugh": 0.4967
+    }
+  }
+}

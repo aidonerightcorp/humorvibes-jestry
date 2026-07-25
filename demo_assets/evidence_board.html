@@ -1,0 +1,171 @@
+<title>HumorVibes: Evidence Board</title>
+<style>
+  .viz-root{
+    color-scheme: light;
+    --surface-1:#fcfcfb; --surface-2:#f4f4f1; --border:#dedcd4;
+    --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#77756e;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --neutral:#b9b7ae;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])) .viz-root{
+      color-scheme: dark;
+      --surface-1:#1a1a19; --surface-2:#232322; --border:#3a3a37;
+      --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#96948b;
+      --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --neutral:#5c5a54;
+    }
+  }
+  :root[data-theme="dark"] .viz-root{
+    color-scheme: dark;
+    --surface-1:#1a1a19; --surface-2:#232322; --border:#3a3a37;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#96948b;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --neutral:#5c5a54;
+  }
+  .viz-root{
+    background:var(--surface-1); color:var(--text-primary);
+    font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    margin:0; padding:32px 20px 72px;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+  h1{font-size:clamp(28px,4.4vw,40px);line-height:1.15;margin:0 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--text-secondary);font-size:17px;margin:0 0 8px}
+  .meta{color:var(--text-muted);font-size:13px;margin:0 0 34px}
+  h2{font-size:20px;margin:44px 0 6px;letter-spacing:-.01em}
+  .lede{color:var(--text-secondary);margin:0 0 18px;font-size:15px}
+  .card{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+  .tile{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:16px}
+  .tile b{display:block;font-size:27px;line-height:1.1;letter-spacing:-.02em}
+  .tile span{display:block;color:var(--text-secondary);font-size:12.5px;margin-top:5px}
+  .verdict{border-left:3px solid var(--s2);padding:2px 0 2px 14px;margin:16px 0;color:var(--text-secondary);font-size:15px}
+  .verdict b{color:var(--text-primary)}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+  th{color:var(--text-secondary);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+  td.num{font-variant-numeric:tabular-nums;text-align:right}
+  .scroll{overflow-x:auto}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 10px;font-size:13px;color:var(--text-secondary)}
+  .key{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);color:var(--text-muted);font-size:13px}
+  a{color:var(--s1)}
+  code{background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:13px}
+</style>
+<div class="viz-root"><div class="wrap">
+
+<h1>Humor as affordable surprise</h1>
+<p class="sub">Every number below is read off a Gemma model's own logits and traces to a receipt file in the public repository. Including the ones that went against us.</p>
+<p class="meta">HumorVibes / Jestry &middot; Build with Gemma: Humor Genome NYC &middot; evidence current to 2026-07-25</p>
+
+<div class="tiles">
+  <div class="tile"><b>3.19</b><span>nats of punchline surprisal, identical on four independent instruments</span></div>
+  <div class="tile"><b>23,779</b><span>indexed items across 45 languages</span></div>
+  <div class="tile"><b>13 / 13</b><span>verification gates green, 42 tests</span></div>
+  <div class="tile"><b>0</b><span>claims without a receipt</span></div>
+</div>
+
+<h2>1. One joke, four instruments, one number</h2>
+<p class="lede">If a measurement is real it should not care which machine takes it. The same reference joke was measured on the pinned Kaggle run, an in-kernel transformers Gemma, a local llama.cpp build, and a requantisation at four times the precision.</p>
+<div class="card">
+  <div class="scroll"><table>
+    <tr><th>Instrument</th><th style="text-align:right">Surprisal S (nats)</th></tr>
+    <tr><td>Pinned Kaggle gemma-2-2b</td><td class="num">3.19</td></tr>
+    <tr><td>In-kernel transformers Gemma</td><td class="num">3.19</td></tr>
+    <tr><td>Local llama.cpp full-vocabulary (Q4_K_M)</td><td class="num">3.19</td></tr>
+    <tr><td>Q8_0 requantisation (4&times; precision)</td><td class="num">3.20</td></tr>
+  </table></div>
+  <p class="verdict"><b>Verdict:</b> the number is not a quantisation artifact. Largest movement anywhere in the five-case reference set was 0.261 nats, and the Q4 arm reproduced the certified calibration at exactly zero drift.</p>
+</div>
+
+<h2>2. The predeclared follow-up, executed</h2>
+<p class="lede">Our own ablation blamed a bad setup/punchline split for a null result on headline edits. So we re-split every item at the edited word, against the old splitter and a placebo cut. If the split was the problem, the correlation should appear.</p>
+<div class="card">
+  <div class="legend"><span class="key"><span class="dot" style="background:var(--s1)"></span>share of items where resolution registered at all</span></div>
+  <svg viewBox="0 0 660 200" width="100%" height="200" role="img" aria-label="Resolution engagement by split condition: generic 19.3 percent, edit-anchored 31.3 percent, placebo 20.5 percent">
+    <line x1="188" y1="16" x2="188" y2="176" stroke="var(--border)" stroke-width="1"/>
+    <rect x="188" y="26"  width="212" height="26" rx="4" fill="var(--s1)"/>
+    <rect x="188" y="76"  width="344" height="26" rx="4" fill="var(--s1)"/>
+    <rect x="188" y="126" width="226" height="26" rx="4" fill="var(--s1)"/>
+    <text x="180" y="44"  text-anchor="end" font-size="13" fill="var(--text-primary)">generic splitter</text>
+    <text x="180" y="94"  text-anchor="end" font-size="13" fill="var(--text-primary)" font-weight="700">edit-anchored</text>
+    <text x="180" y="144" text-anchor="end" font-size="13" fill="var(--text-primary)">placebo cut</text>
+    <text x="410" y="44"  font-size="13" fill="var(--text-secondary)" font-variant-numeric="tabular-nums">19.3%</text>
+    <text x="542" y="94"  font-size="13" fill="var(--text-primary)" font-weight="700" font-variant-numeric="tabular-nums">31.3%</text>
+    <text x="424" y="144" font-size="13" fill="var(--text-secondary)" font-variant-numeric="tabular-nums">20.5%</text>
+    <text x="188" y="192" font-size="11.5" fill="var(--text-muted)">n = 83 items, 249 measurements, 0 instrument errors</text>
+  </svg>
+  <p class="verdict"><b>Verdict:</b> anchoring the split at the joke's actual seam roughly doubles how often the mechanism engages, and the placebo moves nothing &mdash; so the lift is real. But it predicted funniness no better. <b>The format boundary is not a splitting artifact.</b> That is a sharper falsification than the hypothesis it was built to test.</p>
+</div>
+
+<h2>3. Where the instrument breaks, stated plainly</h2>
+<p class="lede">Native setup/punchline jokes, no splitter involved, genuine pairs against pairs whose punchline was swapped in from a different joke. The frames here were written by the model itself.</p>
+<div class="card">
+  <div class="legend">
+    <span class="key"><span class="dot" style="background:var(--s3)"></span>genuine pairs</span>
+    <span class="key"><span class="dot" style="background:var(--s2)"></span>shuffled pairs</span>
+  </div>
+  <svg viewBox="0 0 660 150" width="100%" height="150" role="img" aria-label="Mean resolution: genuine 0.142, shuffled 0.273 — the ordering is backwards">
+    <line x1="150" y1="16" x2="150" y2="120" stroke="var(--border)" stroke-width="1"/>
+    <rect x="150" y="30" width="215" height="26" rx="4" fill="var(--s3)"/>
+    <rect x="150" y="76" width="414" height="26" rx="4" fill="var(--s2)"/>
+    <text x="142" y="48"  text-anchor="end" font-size="13" fill="var(--text-primary)">genuine</text>
+    <text x="142" y="94"  text-anchor="end" font-size="13" fill="var(--text-primary)">shuffled</text>
+    <text x="375" y="48" font-size="13" fill="var(--text-secondary)" font-variant-numeric="tabular-nums">mean R 0.142</text>
+    <text x="574" y="94" font-size="13" fill="var(--text-primary)" font-weight="700" font-variant-numeric="tabular-nums">0.273</text>
+    <text x="150" y="140" font-size="11.5" fill="var(--text-muted)">30 pairs, 60 measurements, 0 errors &middot; AUC 0.406, i.e. below chance</text>
+  </svg>
+  <p class="verdict"><b>Verdict:</b> with model-written frames the instrument does not merely fail, it <b>inverts</b>. Asked to explain a punchline that does not belong to its setup, the model builds an elaborate bridge that collapses surprisal harder than an honest frame does, and a fixed decoy control cannot absorb a per-item confabulation.</p>
+  <p class="lede" style="margin-top:14px">The clearest single case: the setup <em>&ldquo;A doctor tells a woman she can no longer touch anything alcoholic&rdquo;</em> was given the foreign punchline <em>&ldquo;If you beat your fish, it dies!&rdquo;</em>. The model's frame states outright that the punchline is unrelated, and the pair still measured <b>R = 1.426</b>, ten times the mean genuine pair.</p>
+  <p class="verdict" style="border-left-color:var(--s3)"><b>Why this strengthens the system:</b> resolution is trustworthy exactly when the frame's provenance is. Our acceptance gate already refused model-invented frames; it now rests on a measured population rather than a single crafted probe. This does not touch the certified regime, which uses given frames and still separates three jokes from two controls on both quantisations.</p>
+</div>
+
+<h2>4. Do cheap features beat the expensive instrument?</h2>
+<p class="lede">Thirty-four deterministic surface features &mdash; syllable counts, word lengths, rarity against our own corpus, alliteration, rhyme &mdash; computed in microseconds, versus signals that cost seconds per item. Correlations against human funniness grades.</p>
+<div class="card">
+  <div class="legend">
+    <span class="key"><span class="dot" style="background:var(--s4)"></span>surface feature</span>
+    <span class="key"><span class="dot" style="background:var(--s1)"></span>Gemma signal</span>
+  </div>
+  <svg viewBox="0 0 660 218" width="100%" height="218" role="img" aria-label="Spearman correlations with human grade: punchline mean word length 0.278, punchline rarity 0.243, lexical echo 0.242, Gemma surprisal 0.168 — none survive correction">
+    <line x1="210" y1="14" x2="210" y2="176" stroke="var(--border)" stroke-width="1"/>
+    <rect x="210" y="22"  width="278" height="24" rx="4" fill="var(--s4)"/>
+    <rect x="210" y="60"  width="243" height="24" rx="4" fill="var(--s4)"/>
+    <rect x="210" y="98"  width="242" height="24" rx="4" fill="var(--s4)"/>
+    <rect x="210" y="136" width="168" height="24" rx="4" fill="var(--s1)"/>
+    <text x="202" y="39"  text-anchor="end" font-size="13" fill="var(--text-primary)">punchline word length</text>
+    <text x="202" y="77"  text-anchor="end" font-size="13" fill="var(--text-primary)">punchline rarity</text>
+    <text x="202" y="115" text-anchor="end" font-size="13" fill="var(--text-primary)">lexical echo</text>
+    <text x="202" y="153" text-anchor="end" font-size="13" fill="var(--text-primary)">Gemma surprisal S</text>
+    <text x="498" y="39"  font-size="13" fill="var(--text-secondary)" font-variant-numeric="tabular-nums">+0.278</text>
+    <text x="463" y="77"  font-size="13" fill="var(--text-secondary)" font-variant-numeric="tabular-nums">+0.243</text>
+    <text x="462" y="115" font-size="13" fill="var(--text-secondary)" font-variant-numeric="tabular-nums">+0.242</text>
+    <text x="388" y="153" font-size="13" fill="var(--text-secondary)" font-variant-numeric="tabular-nums">+0.168</text>
+    <text x="210" y="196" font-size="11.5" fill="var(--text-muted)">n = 83 &middot; Spearman &middot; permutation p over 4,000 seeded shuffles</text>
+    <text x="210" y="211" font-size="11.5" fill="var(--text-muted)">34 features tested against one outcome</text>
+  </svg>
+  <p class="verdict"><b>Verdict:</b> on raw correlation, cheap features outrank the expensive ones. But testing thirty-four features against one outcome and reporting the winner is how a noise ranking gets published, so we applied Benjamini-Hochberg control. <b>Nothing survives &mdash; cheap or expensive.</b> At this sample size neither surface structure nor teacher-forced surprisal reliably predicts these human grades, and the apparent leaderboard is noise wearing a ranking.</p>
+</div>
+
+<h2>5. Is EmbeddingGemma actually the right choice?</h2>
+<p class="lede">The retrieval claims rest on one embedding model. We ran the same three fixed probes through every backend installed locally, so the choice is checkable rather than assumed.</p>
+<div class="card">
+  <div class="scroll"><table>
+    <tr><th>Backend</th><th style="text-align:right">Cross-lingual rank</th><th style="text-align:right">Frame-family rank</th><th style="text-align:right">Paraphrase AUC</th></tr>
+    <tr><td>EmbeddingGemma (768d)</td><td class="num">1</td><td class="num">5</td><td class="num"><b>0.91</b></td></tr>
+    <tr><td>nomic-embed-text (768d)</td><td class="num">1</td><td class="num"><b>1</b></td><td class="num">0.67</td></tr>
+    <tr><td>all-minilm (384d)</td><td class="num">1</td><td class="num">5</td><td class="num">0.74</td></tr>
+  </table></div>
+  <p class="verdict"><b>Verdict, split three ways and reported as such:</b> the headline cross-lingual retrieval is a three-way tie, so that result is a property of the dual-channel design rather than of EmbeddingGemma. EmbeddingGemma clearly wins paraphrase semantics. nomic wins frame-family retrieval, which is an open lever we have not taken. Collapsing three probes into one ranking would only have hidden which probe the weighting favoured.</p>
+</div>
+
+<h2>What this project is claiming</h2>
+<p class="lede">A joke is a controlled prediction error with a cheap, audience-permitted repair. That claim is turned into four measurable signals: surprise, resolution net of a decoy null, efficiency per frame token, and a separately-gated persona judgment. The apparatus is Gemma end to end &mdash; Gemma 2 as the certified instrument, Gemma 4 generating and judging, EmbeddingGemma for retrieval, Gemma 3 in the frame-writer leaderboard.</p>
+<p class="lede">What makes it a measurement rather than a rating is that it is allowed to fail, and it has, three times: a confabulation failure fixed by a decoy null, a leak failure fixed by an overlap guard, and the frame-provenance inversion above. Each failure is receipted in the repository next to the result it undermines.</p>
+
+<div class="foot">
+  Receipts: <code>jestry_out/format_boundary_experiment.json</code>, <code>native_format_probe.json</code>,
+  <code>surface_feature_study.json</code>, <code>embedding_bakeoff.json</code>,
+  <code>gemma2_full_nll_quant_check.json</code>.
+  Code and every receipt: <a href="https://github.com/aidonerightcorp/humorvibes-jestry">github.com/aidonerightcorp/humorvibes-jestry</a>
+</div>
+
+</div></div>
