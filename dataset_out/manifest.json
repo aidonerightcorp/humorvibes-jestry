@@ -1,0 +1,151 @@
+{
+  "dataset": "comedy-primitives-humor-genome",
+  "generated": "2026-07-25T00:05:48",
+  "generator": "comedy_primitives_dataset.py",
+  "files": {
+    "mechanisms.jsonl": {
+      "rows": 14,
+      "sha256": "ee459ca91d3f477f6ba3d857dc02a4ddb30770bc70a80970baf7de38e457947e"
+    },
+    "formats.jsonl": {
+      "rows": 11,
+      "sha256": "cb5726ead2bb1487a8ae3e130e9f49f0431624a9991708522b9dc661de3cf171"
+    },
+    "items.jsonl": {
+      "rows": 23779,
+      "sha256": "c05fdf6cd8ab3e823d82ef3b6e2108e5baf5741f48ae76d9a7acac2ed98fd4d8"
+    },
+    "frames.jsonl": {
+      "rows": 270,
+      "sha256": "460cb2fe61313f417145248bef2cb241aa70b1fbd1058a81edbd9dc78f7f5e00"
+    },
+    "measured_signals.jsonl": {
+      "rows": 309,
+      "sha256": "a51c93d1ae44a160319fcbe17266e3ee80e8fbf0b743e11ab416c6fea044bacc"
+    },
+    "embeddings_surface.npy": {
+      "shape": [
+        23779,
+        768
+      ],
+      "dtype": "float32",
+      "aligned_to": "items.jsonl rows where has_surface_embedding is true",
+      "sha256": "37614b2748edab287e2bcfddf310f17bf8945f168588deeae65f791e75d28c2e"
+    },
+    "embeddings_frame.npy": {
+      "shape": [
+        270,
+        768
+      ],
+      "dtype": "float32",
+      "aligned_to": "frames.jsonl rows",
+      "sha256": "b46ca495a04c8ea51731473e8431cb193d510eceb49873b373ae8c7353280b4b"
+    },
+    "DATASET_CARD.md": {
+      "sha256": "edce16a6bb945a2ea0f9a258b7eb6cb3f482ce0d0ed5a20bee3fd0ad96cec2fe"
+    }
+  },
+  "summary": {
+    "items": 23779,
+    "with_surface_embedding": 23779,
+    "labeled_frames": 270,
+    "measured_signal_rows": 309,
+    "mechanisms": 14,
+    "formats": 11,
+    "languages": 46,
+    "top_languages": [
+      [
+        "en",
+        10777
+      ],
+      [
+        "ru",
+        4893
+      ],
+      [
+        "es",
+        2066
+      ],
+      [
+        "de",
+        608
+      ],
+      [
+        "pt",
+        602
+      ],
+      [
+        "ar",
+        601
+      ],
+      [
+        "ro",
+        601
+      ],
+      [
+        "it",
+        601
+      ],
+      [
+        "lt",
+        600
+      ],
+      [
+        "sv",
+        597
+      ]
+    ],
+    "licenses": [
+      [
+        "per dataset card (verify before redistribution)",
+        12710
+      ],
+      [
+        "CC BY-SA (Wikiquote)",
+        6593
+      ],
+      [
+        "Public domain (Project Gutenberg)",
+        2619
+      ],
+      [
+        "CC BY-SA 4.0 (en.wikiquote.org)",
+        733
+      ],
+      [
+        "icanhazdadjoke API terms (attribution requested)",
+        442
+      ],
+      [
+        "public API (github: 15Dkatz/official_joke_api)",
+        235
+      ],
+      [
+        "JokeAPI (jokes submitted by users; safe-mode filtered)",
+        157
+      ],
+      [
+        "traditional folk humor; session-curated",
+        119
+      ],
+      [
+        "public domain (traditional)",
+        64
+      ],
+      [
+        "template metadata via public API",
+        40
+      ],
+      [
+        "CC BY 2.0 FR (Tatoeba)",
+        40
+      ],
+      [
+        "synthetic (model-generated; NOT human humor; indexed for self-precedent only)",
+        15
+      ]
+    ],
+    "embedding_backend": "ollama:embeddinggemma",
+    "embedding_dim": 768
+  }
+}

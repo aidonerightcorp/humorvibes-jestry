@@ -1,0 +1,133 @@
+{
+  "receipt_type": "instrument_quant_check",
+  "receipt_version": 1,
+  "ts": "2026-07-24T22:26:06",
+  "instrument": "gemma2-full-nll",
+  "certified_calibration_ts": "2026-07-24T09:59:19",
+  "region": {
+    "s_band": [
+      1.91,
+      8.07
+    ],
+    "r_floor": 0.04,
+    "e_floor": 0.0027
+  },
+  "protocol": "GT frames for jokes, generation suppressed (matches certified nll_calls=11)",
+  "results": {
+    "Q4_K_M": {
+      "gguf": "gemma-2-2b-it-Q4_K_M.gguf",
+      "rows": [
+        {
+          "name": "speed_bumps",
+          "kind": "joke",
+          "S": 3.19,
+          "R": 0.08,
+          "E": 0.0053,
+          "measured": true
+        },
+        {
+          "name": "lion_heart",
+          "kind": "joke",
+          "S": 3.476,
+          "R": 0.121,
+          "E": 0.0086,
+          "measured": true
+        },
+        {
+          "name": "ai_pm",
+          "kind": "joke",
+          "S": 8.1,
+          "R": 0.444,
+          "E": 0.037,
+          "measured": true
+        },
+        {
+          "name": "boring",
+          "kind": "control",
+          "S": 3.141,
+          "R": 0.0,
+          "E": 0.0,
+          "measured": true
+        },
+        {
+          "name": "nonsense",
+          "kind": "control",
+          "S": 8.23,
+          "R": 0.0,
+          "E": 0.0,
+          "measured": true
+        }
+      ],
+      "jokes_in_region": [
+        "speed_bumps",
+        "lion_heart",
+        "ai_pm"
+      ],
+      "controls_in_region": []
+    },
+    "Q8_0": {
+      "gguf": "gemma-2-2b-it-Q8_0.gguf",
+      "rows": [
+        {
+          "name": "speed_bumps",
+          "kind": "joke",
+          "S": 3.2,
+          "R": 0.083,
+          "E": 0.0055,
+          "measured": true
+        },
+        {
+          "name": "lion_heart",
+          "kind": "joke",
+          "S": 3.576,
+          "R": 0.127,
+          "E": 0.0091,
+          "measured": true
+        },
+        {
+          "name": "ai_pm",
+          "kind": "joke",
+          "S": 8.361,
+          "R": 0.441,
+          "E": 0.0367,
+          "measured": true
+        },
+        {
+          "name": "boring",
+          "kind": "control",
+          "S": 3.141,
+          "R": 0.0,
+          "E": 0.0,
+          "measured": true
+        },
+        {
+          "name": "nonsense",
+          "kind": "control",
+          "S": 8.108,
+          "R": 0.0,
+          "E": 0.0,
+          "measured": true
+        }
+      ],
+      "jokes_in_region": [
+        "speed_bumps",
+        "lion_heart",
+        "ai_pm"
+      ],
+      "controls_in_region": []
+    }
+  },
+  "q4_S_drift_vs_certified_receipt": {
+    "speed_bumps": 0.0,
+    "lion_heart": 0.0,
+    "ai_pm": 0.0,
+    "boring": 0.0,
+    "nonsense": 0.0
+  },
+  "verdict": {
+    "q8_separates_under_q4_region": true,
+    "max_abs_S_delta": 0.261,
+    "max_abs_R_delta": 0.006
+  },
+  "runtime_s": 70.4
+}

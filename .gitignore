@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 jestry_out/precedent_index_ollama_embeddinggemma.json
+# exported embedding matrices: large and rebuildable from the index in one
+# command (comedy_primitives_dataset.py); the JSONL files and card do ship
+dataset_out/*.npy

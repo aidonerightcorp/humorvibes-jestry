@@ -8,6 +8,16 @@ provide: structure, audience reaction, preference, timing, ranking, culture, or 
 Bad-surprise proxies such as offense, confusion, low appropriateness, or low laughter are useful signals, but they are
 not the controlling definition. The evaluator still uses the canonical bad-surprise definition in `humor_mesh.py`.
 
+## What the datacenter now exports (2026-07-24)
+
+The ingested supply is no longer only an internal index. `comedy_primitives_dataset.py` writes `dataset_out/`: the
+comedy mechanisms and format specs as structured primitives, every indexed item with its own source, license and
+language, the Gemma-labeled frame subset, rows carrying real teacher-forced S/R/E, and both embedding channels as
+aligned float32 matrices, with a dataset card and a manifest of sha256 digests. Licensing stays per record rather than
+per collection, so a redistributor must honour each item's own field; the card spells out which lanes require checking
+upstream terms first. Gate G13 in `verify_jestry.py` reloads the export on every verification run and fails if row
+counts, license coverage, or matrix alignment drift.
+
 ## High-Priority Sources
 
 | Source | Best signal | Integration use |

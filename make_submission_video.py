@@ -37,14 +37,15 @@ DECK = [
               "R = collapse after hidden frame  (net of a decoy null)\n"
               "E = R per frame token            affordability\n"
               "B = persona-conditioned judgment (separate gate)\n\n"
-              "speed-bumps joke, three independent instruments:\n"
+              "speed-bumps joke, four independent instruments:\n"
               "  pinned Kaggle gemma-2-2b run ......... S = 3.19\n"
               "  local llama.cpp full-vocab gemma-2 ... S = 3.19\n"
-              "  in-kernel transformers Gemma ......... S = 3.19"),
+              "  in-kernel transformers Gemma ......... S = 3.19\n"
+              "  4x-precision Q8 requant .............. S = 3.20"),
      "note": "Pinned Gemma 2 supplies true teacher forced log probabilities. "
              "S is punchline surprisal. R is the collapse a hidden frame "
              "produces. E is R per frame token. B is a separate persona "
-             "conditioned judgment. One joke, three independent instruments, "
+             "conditioned judgment. One joke, four independent instruments, "
              "one number."},
 
     {"kind": "bullets",
@@ -69,6 +70,18 @@ DECK = [
              "predict funniness. Safety is a constraint, not the objective."},
 
     {"kind": "code",
+     "title": "We ran our own next step",
+     "code": ("we predeclared: \"headline edits defeat setup/punchline inference\"\n"
+              "so we re-split every item AT THE EDITED WORD   (n = 83)\n\n"
+              "  resolution registered ....  19%  ->  31%  of items\n"
+              "  placebo split ............  20%       (moved nothing)\n"
+              "  predicted funniness ......  no better, all inside noise\n\n"
+              "the format boundary is NOT a splitting artifact."),
+     "note": "We ran the follow up we predeclared. Anchoring the split at the "
+             "edited word doubled how often resolution registered, and it still "
+             "predicted funniness no better. The boundary is real."},
+
+    {"kind": "code",
      "title": "A failure we show on purpose",
      "code": ("shuffled headline:\n"
               "  \"Macron urges US to puppy isolationism\"\n\n"
@@ -83,25 +96,24 @@ DECK = [
     {"kind": "chart",
      "title": "The live workflow runs on receipts",
      "image": DASH_PNG,
-     "note": "The live portal shows the whole loop. Generation, ranking, "
-             "repair, and a contribution funnel where every accepted laugh "
+     "note": "The live portal shows the whole loop, and every accepted laugh "
              "carries a receipt."},
 
     {"kind": "chart",
-     "title": "Been done? 23,155 items, 46 languages",
+     "title": "Been done? 23,000+ items, 46 languages",
      "image": BEEN_PNG,
      "note": "Has this joke been done before is a first class query. An "
              "English paraphrase retrieves the Korean and Japanese even "
-             "monkeys fall from trees as top neighbors, across a twenty "
-             "three thousand item, forty six language index."},
+             "monkeys fall from trees, across a twenty three thousand item, "
+             "forty six language index."},
 
     {"kind": "title",
      "title": "Measured, gated, honest",
      "subtitle": "The compiled example still fails lint and stays unvalidated. "
                  "HumorVibes measures affordable surprise, and records where it fails.",
      "note": "The compiled example fails lint and remains unvalidated. "
-             "Forced replay is only a reproducibility proof. HumorVibes "
-             "measures affordable surprise, and records where it fails."},
+             "HumorVibes measures affordable surprise, and records where "
+             "it fails."},
 ]
 
 

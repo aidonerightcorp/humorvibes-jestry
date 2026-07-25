@@ -11,10 +11,20 @@
 > kernel, and paste WRITEUP.md (+ optionally JESTRY_WRITEUP.md as a section).
 > The private GitHub mirror flip (step 4 below) becomes optional.
 
-**Submission deadline: 2026-07-25 04:00 UTC** (verified from the authenticated Kaggle
-competition API on 2026-07-12). Do not rely on the older 07-19 planning date that previously
-appeared here. Recheck the competition UI before the final click in case organizers publish
-a clarification.
+**Submission deadline: the authenticated API now reports 2026-07-26 04:00 UTC.**
+
+Re-queried 2026-07-24 23:48 UTC via `KaggleApi.competitions_list(search="humor-genome-nyc")`,
+which returns `deadline: 2026-07-26 04:00:00` AND `merger_deadline: 2026-07-26 04:00:00` (two
+independent fields agreeing), against `enabled_date: 2026-07-02`. Earlier notes in this file said
+2026-07-25 04:00 UTC, recorded from the same API on 2026-07-12; that may have been an off-by-one
+reading or the organizers may have extended by 24 hours. **Treat 2026-07-25 04:00 UTC as the
+working target anyway** so a clarification or a mistaken reading cannot cost the entry, and
+confirm the date in the competition UI before the final click. A Writeup can be edited and
+re-submitted, so submitting early is free insurance and costs nothing but a re-submit.
+
+Other facts from the same API call, useful for planning: `max_team_size: 3`,
+`max_daily_submissions: 5`, `reward: 1,500 Usd`, and `team_count: 4` (the field is teams entered,
+not final submissions, so read it as "a small field" rather than a guaranteed placing).
 Submission = Kaggle **Writeup** (submitted, not draft) + **public code repo** + **demo video ≤ 2 min**.
 Competition: https://www.kaggle.com/competitions/humor-genome-nyc - Track = **Humor Understanding**.
 
@@ -50,6 +60,20 @@ Competition: https://www.kaggle.com/competitions/humor-genome-nyc - Track = **Hu
       last verified update 2026-07-12 02:15 UTC. The new audit/ablation files are not yet
       claimed as mirrored; refresh and secret-scan after the v4 harvest, before making it public.
 
+## Post-freeze expansion (2026-07-24 night, after the submission state was tagged)
+
+The submission state is frozen at git tag `submission-2026-07-25` on the public repo. Later work
+lives on the `expansion` branch so nothing below can move under a judge's feet. What landed after
+the freeze, each with a receipt: the predeclared format-boundary follow-up executed and reported
+honestly (`jestry_out/format_boundary_experiment.json`), quantization robustness of the certified
+instrument (`jestry_out/gemma2_full_nll_quant_check.json`, S=3.19 stable to 0.01 across Q4 and
+Q8), a silent-NaN honesty bug found and fixed in the provider, the first accepted outcome from
+the compose-residual rung, 640 more French and Italian proverbs plus 40 more labeled frames, the
+Humor Vibes Open launch bundle under `competition/launch/`, and
+`RESEARCH_NOTE_INSTRUMENT_BOUNDARIES.md` tying the instrument findings together. `WRITEUP.md`,
+`RESULTS.md`, and `SUBMISSION_PASTE_PACK.md` already carry these numbers, so pasting the writeup
+tonight ships them.
+
 ## HUMAN-ONLY punch-list (ordered; target: all done by 2026-07-24 00:00 UTC)
 
 1. **Verify the rubric and reconfirm the deadline in the UI** (5 min)
@@ -68,8 +92,12 @@ Competition: https://www.kaggle.com/competitions/humor-genome-nyc - Track = **Hu
      aistudio.google.com).
    - Rerun: `python3 research_panel_study.py` locally (env keys) or re-run humorvibes-panel-lab.
 
-3. **Record the ≤2-minute demo video** (script below), upload to YouTube (unlisted is fine for
-   judging; check whether the rules require public), keep the URL.
+3. **The ≤2-minute demo video is already BUILT** at `demo_assets/humorvibes_submission.mp4`
+   (1:55.8, 1280x720 h264+aac, burned captions, soft subs, music bed; built by
+   `make_submission_video.py` from the repo's real evidence). Watch it once, then either upload
+   it as-is (YouTube unlisted is fine for judging; confirm the rules do not require public) or
+   mute it and record your own voice over the visuals, using the `.srt` beside it as a
+   teleprompter. The script below is what the narration already says. Keep the URL.
 
 4. **Flip the GitHub repo public** - https://github.com/Amarel-Taylor-Scott/humorvibes/settings
    → General → Danger Zone → "Change repository visibility" → Make public → type

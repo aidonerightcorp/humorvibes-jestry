@@ -164,10 +164,99 @@ zoo result near the top of this file and "Zoo v2" below.
   nothing about old jokes. The subsequent fixed extractor skipped front matter and required
   jest-like structure; its current result is 3/12 above R=0.5, top R=0.73.
 
+## 2026-07-24 format-boundary experiment - the predeclared follow-up, executed
+
+Question: the v4 court's rho=0.033 was attributed to headlines defeating setup/punchline
+inference. If that is the cause, anchoring the split at the edited word should recover the
+correlation. Design: same pinned sample recipe (Humicroedit train.csv, `sample(180,
+random_state=0)`, first 84 rows by CPU budget, 83 measured after one degenerate edit position),
+three split conditions per item on the certified local instrument, one shared deterministic
+leak-safe frame hint across conditions so the split is the only variable. 249 measurements,
+zero instrument errors. Receipt: `jestry_out/format_boundary_experiment.json`, per-item audit
+trail in `jestry_out/format_boundary_items.jsonl`.
+
+| condition | laugh vs grade | S vs grade | R vs grade | mean R | items with R>0 |
+|---|---|---|---|---|---|
+| generic (pinned splitter) | 0.021 (p=0.86) | 0.117 (p=0.31) | 0.056 (p=0.64) | 0.050 | 19.3% |
+| canonical (edit-anchored) | -0.044 (p=0.71) | 0.170 (p=0.12) | 0.095 (p=0.41) | 0.122 | 31.3% |
+| control (fixed 40% cut) | -0.097 (p=0.37) | 0.193 (p=0.076) | 0.037 (p=0.74) | 0.039 | 20.5% |
+
+- **Mechanistic positive**: edit-anchoring roughly doubles how often resolution registers at all
+  (19.3% to 31.3% of items) and lifts mean R from 0.050 to 0.122. The placebo cut is also a
+  different split and does not move it (20.5%), so the lift is specific to the seam.
+- **Predictive negative**: no condition predicts human funniness. Every laugh correlation sits
+  inside noise, canonical slightly negative. Spearman correlations, permutation p over 2000
+  seeded shuffles.
+- **Conclusion**: the format boundary is NOT a splitting artifact. Fixing the seam engages the
+  mechanism without buying predictive validity, which is a sharper falsification than the
+  hypothesis it tested. Open readings: Humicroedit humor may be incongruity without repair, or a
+  2B instrument may not resolve it at n=83.
+- E is an exact rescaling of R here (the shared hint is always ten words), so their correlations
+  are identical by construction, not by coincidence.
+- Caveat: this run fixes the frame hint across conditions to isolate the split, while the pinned
+  validation run generated a frame per item; the pinned rho=0.115 is context, not a fourth arm.
+
+## 2026-07-24 native-format probe - model-written frames INVERT the ordering
+
+The follow-up the format-boundary result demanded: if headlines are the wrong shape, does the
+instrument work where the shape is native? r/Jokes gives title=setup, body=punchline with no
+splitter involved. 30 pairs, 60 measurements, 0 instrument errors, content-screened.
+Receipt: `jestry_out/native_format_probe.json`, per-item `jestry_out/native_format_items.jsonl`.
+
+- **Arm A (clean, no ratings needed): genuine vs shuffled-punchline separation FAILS and reverses.**
+  AUC of R = 0.406. Mean R genuine 0.142 vs shuffled 0.273. R clears zero on 56.7% of genuine
+  pairs vs 66.7% of shuffled. Composite laugh score sits at chance (AUC 0.497).
+- **Arm B (exploratory, noisy): null**, as expected from a popularity proxy. Spearman vs
+  log2(1+upvotes): laugh -0.034, R -0.066, S -0.176.
+- **Mechanism, and why this does NOT contradict the certified calibration.** The calibration
+  supplies GROUND-TRUTH frames to the reference jokes and no frame to the controls, which is why
+  controls measured exactly 0. This probe let the model write a frame for every item, including
+  the mismatched ones. Asked to explain a punchline that does not belong to its setup, the model
+  confabulates a bridge, and a bridge reconciling two unrelated ideas is more elaborate than the
+  obvious frame a real joke needs, so it collapses surprisal harder. The fixed generic decoy null
+  cannot absorb a per-item confabulation, and the leak guard only removes frames that quote the
+  punchline, not frames that merely reason hard.
+- **Worked example** (top shuffled pair): setup "A doctor tells a woman she can no longer touch
+  anything alcoholic" + foreign punchline "If you beat your fish, it dies!" + model frame "The
+  doctor is implying the woman's hands are too shaky or weak to handle alcohol, and the punchline
+  is a literal, unrelated..." measured **R = 1.426**, ten times the mean genuine pair. The frame
+  states outright that the punchline is unrelated and still collapses the surprisal.
+- **What it establishes**: the frame-provenance trust gate (only curated/traditional sources may
+  supply a frame that reaches the acceptance oracle) is empirically necessary, not decorative.
+  It previously rested on one crafted-frame probe; it now has a 30-pair population behind it.
+  Model-written frames do not merely admit a bad joke occasionally, they invert the ordering.
+- Limits: 30 pairs, one subreddit, conservative content screen, so direction is clearer than
+  effect size. The certified regime measures with given frames and is unaffected (see the
+  quantization section below: Q4 and Q8 both separate 3 jokes / 0 controls).
+
+## 2026-07-24 quantization robustness of the certified instrument
+
+Same five reference cases, same acceptance region, two quantizations of the same public
+gemma-2-2b-it GGUF. Receipt: `jestry_out/gemma2_full_nll_quant_check.json`.
+
+- Q4_K_M reproduces the certified calibration receipt with **zero drift** on all five cases.
+- Q8_0 (fourfold precision) separates identically: all three jokes in region, both controls out.
+- Max |delta S| across quantizations 0.261, max |delta R| 0.006. The pinned speed-bumps number
+  moves 3.190 to 3.200, so **S=3.19 is not a quantization artifact**; four instruments now agree
+  (pinned Kaggle transformers, in-kernel transformers, llama.cpp Q4, llama.cpp Q8).
+
+## 2026-07-24 silent-NaN honesty bug (found, fixed, receipted)
+
+A resumed download produced a corrupt GGUF (2,834,392,928 bytes vs published 2,784,495,456;
+sha256 c6c8c1e8 vs published 2d448a9a). llama.cpp loaded it without error and returned NaN for
+every logit, and the NaN reached a receipt that still said `measured: true`. Fixed in
+`gemma2_full_nll.py`: non-finite NLLs count as instrument errors and degrade to
+`measured: false`. Discipline: verify a GGUF checksum against the published object before
+trusting any receipt from it; never resume a partial GGUF with `curl -C -`. Receipt:
+`jestry_out/instrument_sweep.jsonl` (latest entry). The certified Q4 calibration is unaffected.
+
 ## Open (queued)
 - ~~Century test with the fixed jest extractor~~ **DONE 2026-07-11 reconciliation: 12 jests, 3
   alive, top R 0.73** (zoo latest). ~~Headline temporal experiment~~ **RAN, did not discriminate**
   (8/8 canonical, gap 0.0) → fix the `temporal.py` gap conditioning, rerun.
-- Leak-guard refinement (punchline-exclusive words only); Humicroedit format-gap follow-up
-  (setup/punchline-style corpus with human grades); hosted panels/frame-duels when any key lands;
-  Gemini add-on click for platform-credit judging.
+- ~~Humicroedit format-gap follow-up~~ **DONE 2026-07-24: edit-anchored canonicalization engages
+  the mechanism (R>0 on 19.3% → 31.3% of items) but does not predict funniness; the boundary is
+  not a splitting artifact** (see the format-boundary section above). Next in that line: a
+  setup/punchline-native rated corpus, since Humicroedit may simply not carry repair-driven humor.
+- Leak-guard refinement (punchline-exclusive words only); hosted panels/frame-duels when any key
+  lands; Gemini add-on click for platform-credit judging.

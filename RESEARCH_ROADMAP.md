@@ -82,3 +82,14 @@ The strongest two-minute demo is:
 4. Repair it into a shared-frustration/process-target joke.
 5. Run pairwise ranking and show the repaired version winning.
 6. Log a live response and show the next-joke adaptation change.
+
+## Expansion Night 2026-07-24 (post-submission levers, all receipted)
+
+Work done after the submission state was frozen (git tag `submission-2026-07-25`), on the `expansion` branch. Each item names its receipt so the next session starts from evidence, not recollection.
+
+1. Format-boundary experiment: edit-anchored canonicalization of Humicroedit headlines versus the generic split and a placebo split, measured on the certified instrument. Design and results: `canonicalize_format.py`, `jestry_out/format_boundary_experiment.json`, audit trail in `jestry_out/format_boundary_items.jsonl`. Follow-up lever: a general headline-to-setup/punchline canonicalizer in front of the instrument, then tweets and captions.
+2. Instrument science: quantization robustness probe of the certified calibration (Q8_0 versus the certified Q4_K_M under the same acceptance region): `instrument_quant_check.py`, `jestry_out/gemma2_full_nll_quant_check.json`. Follow-up lever: certify a second model family and tighten the S band with more reference cases.
+3. Frame-channel density: labeling lane batch took labeled frames from 230 to 270 with zero failures (`jestry_out/frame_label_batch_20260724.json`). Follow-up lever: schedule recurring batches until frame coverage stops improving been-done verdicts, tracked by hinted-probe rankings.
+4. Multilingual supply: citation-template-aware wikiquote lane landed 640 French and Italian proverbs (`harvest_wikiquote_citation.py`, `corpora/harvest_wikiquote_citation_20260724.jsonl`); the Italian page needed bullet parsing, not templates, which is why the earlier lane read zero. Follow-up lever: apply the same page-structure probe to the fa/hi/ar pages that returned thin results.
+5. Hostable competition: launch bundle completed under `competition/launch/` (hosting guide, paste-ready description, executed starter notebook, host-side solution file). The one open action is a human clicking through the Kaggle community-competition form.
+6. The research synthesis of all instrument findings lives in `RESEARCH_NOTE_INSTRUMENT_BOUNDARIES.md`.

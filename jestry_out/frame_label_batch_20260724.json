@@ -1,0 +1,48 @@
+{
+  "receipt_type": "frame_label_batch",
+  "receipt_version": 1,
+  "ts": "2026-07-24T21:11:39",
+  "labeler_model": "gemma4",
+  "lane": "precedent.label_missing (selective enrichment, fixed order)",
+  "labeled_before": 230,
+  "labeled_after": 270,
+  "batch": {
+    "labeled": 40,
+    "attempted": 40
+  },
+  "failures": [],
+  "samples": [
+    {
+      "item_id": "harvest_wikiquote_20260724_2:22",
+      "status": "labeled",
+      "frame": "Shared Frustration with Over-the-Top Advertising"
+    },
+    {
+      "item_id": "harvest_wikiquote_20260724_2:23",
+      "status": "labeled",
+      "frame": "The passage uses a list structure to establish a desirable, minimalist life, whi"
+    },
+    {
+      "item_id": "harvest_wikiquote_20260724_2:24",
+      "status": "labeled",
+      "frame": "The universal irony of life's imbalances, where personal preference clashes with"
+    },
+    {
+      "item_id": "harvest_wikiquote_20260724_2:25",
+      "status": "labeled",
+      "frame": "The digestive system is personified as a controlling, dictatorial force over hum"
+    },
+    {
+      "item_id": "harvest_wikiquote_20260724_2:26",
+      "status": "labeled",
+      "frame": "The speaker's excessive enjoyment of work, bordering on obsession, suggests a hu"
+    }
+  ],
+  "embed_after": {
+    "surface_embedded": 0,
+    "frame_embedded": 40,
+    "total_items": 23778
+  },
+  "runtime_s": 192.8,
+  "context": "CPU-only batch (GPU driver down); overlapped with format-boundary run"
+}

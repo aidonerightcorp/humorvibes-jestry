@@ -21,6 +21,7 @@ is recorded in every calibration receipt.
 from __future__ import annotations
 
 import json
+import math
 import os
 import subprocess
 import sys
@@ -156,6 +157,17 @@ class Gemma2FullNLLProvider:
             return stub
         if "error" in resp:
             self.last_error = resp["error"]
+            self.errors += 1
+            stub = OfflineStub().nll_tokens(context, continuation)
+            stub.measured = False
+            return stub
+        # Non-finite guard (2026-07-24): a truncated/corrupt GGUF loads and
+        # evaluates without raising, but every logit comes back NaN — and NaN
+        # NLLs propagated all the way to a receipt that still claimed
+        # measured=True. A signal that is not a number was never measured.
+        if not all(math.isfinite(v) for v in resp["nlls"]):
+            self.last_error = ("non-finite NLL from the worker — corrupt or truncated "
+                               f"weights at {GGUF.name}? (verify the GGUF checksum)")
             self.errors += 1
             stub = OfflineStub().nll_tokens(context, continuation)
             stub.measured = False

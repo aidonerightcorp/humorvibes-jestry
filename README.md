@@ -132,6 +132,20 @@ any notebook public and is not a competition submission.
   deterministic offline is the local default.
 - `humor_mesh.py`: schema, canonical definition, fallback evaluator.
 - `humor_datacenter/`: study branches, audience probes, comedy mechanisms, source registry, acquisition planning, market analytics, model-jury convergence, portability checks, pairwise ranking, experiment planning, audience adaptation, experiment logging, schema, embeddings, SQLite store, and demo retrieval.
+- `comedy_primitives_dataset.py` → `dataset_out/`: the humor genome as a portable dataset.
+  Comedy mechanisms and format specs as structured primitives, every indexed item with its
+  source/license/language, the Gemma-labeled frame subset, rows carrying real teacher-forced
+  S/R/E, and **dual-channel 768-dim embeddings** (surface wording and comic frame embedded
+  separately, which is what makes cross-lingual same-engine retrieval work). Ships a dataset
+  card and a manifest of sha256 digests; the `.npy` matrices are git-ignored and rebuilt by
+  rerunning the exporter. Verified by gate G13 (row counts, license coverage, matrix alignment).
+- `browser_test_portal.py`: real headless-Chrome acceptance test of the portal over the DevTools
+  protocol. Every tab clicked and screenshotted, JS exceptions and failed requests captured,
+  rendered numbers cross-checked against the API, phone viewport checked for overflow.
+  Receipt: `jestry_out/browser_test_portal.json`.
+- `canonicalize_format.py`, `native_format_probe.py`, `instrument_quant_check.py`: the
+  format-boundary experiment, its native-format follow-up, and the quantization-robustness probe.
+  Findings are written up in `RESEARCH_NOTE_INSTRUMENT_BOUNDARIES.md`.
 - `DATA_SOURCES.md`: scanned source matrix and acquisition notes.
 - `RESEARCH_ROADMAP.md`: concrete study backlog for building the prototype into a stronger hackathon entry.
 - `JUDGE_EVIDENCE.md`: claim-by-claim receipt map, negative results, and private/public gates.

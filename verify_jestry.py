@@ -9,6 +9,7 @@ offline gates are deterministic and the second pass must agree.
 from __future__ import annotations
 
 import json
+import math
 import subprocess
 import sys
 import time
@@ -256,8 +257,101 @@ def g11():
             f"{cal['adversarial_scope']['R']}, trust gate enforced")
 
 
+@gate("G12 instrument robustness + executed follow-up receipts")
+def g12():
+    """Tonight's two experiments must stay true, not just have been true once."""
+    quant = ROOT / "jestry_out" / "gemma2_full_nll_quant_check.json"
+    assert quant.exists(), "no quantization-robustness receipt"
+    q = json.loads(quant.read_text(encoding="utf-8"))
+    for name in ("Q4_K_M", "Q8_0"):
+        block = q["results"].get(name, {})
+        assert "rows" in block, f"{name} not measured: {block.get('error')}"
+        # the honesty invariant the NaN bug violated: a measurement is a number
+        for row in block["rows"]:
+            assert math.isfinite(row["S"]), f"{name}/{row['name']} S is not finite"
+        assert len(block["jokes_in_region"]) == 3, \
+            f"{name} lost a reference joke: {block['jokes_in_region']}"
+        assert not block["controls_in_region"], \
+            f"{name} admitted a control: {block['controls_in_region']}"
+    assert q["verdict"]["q8_separates_under_q4_region"], "Q8 fails the Q4-derived region"
+    assert all(abs(v) < 0.01 for v in q["q4_S_drift_vs_certified_receipt"].values()), \
+        f"Q4 drifted from the certified receipt: {q['q4_S_drift_vs_certified_receipt']}"
+
+    nf = ROOT / "jestry_out" / "native_format_probe.json"
+    if nf.exists():
+        n = json.loads(nf.read_text(encoding="utf-8"))
+        assert n["worker"]["errors"] == 0, "native-format probe had instrument errors"
+        arm = n["arm_A_genuine_vs_shuffled"]
+        assert arm["n_genuine"] and arm["n_shuffled"], "native probe missing an arm"
+        # the finding is a NEGATIVE (model-written frames invert the ordering) and
+        # the docs say so; this pins the receipt's shape and honesty, not a verdict
+        assert 0.0 <= arm["auc_R"] <= 1.0, "auc out of range"
+        assert "popularity proxy" in n["arm_B_upvote_correlation"]["note"], \
+            "the upvote arm lost its confound caveat"
+
+    fb = ROOT / "jestry_out" / "format_boundary_experiment.json"
+    assert fb.exists(), "no format-boundary receipt"
+    f = json.loads(fb.read_text(encoding="utf-8"))
+    assert f["worker"]["errors"] == 0, "format-boundary run had instrument errors"
+    conds = f["conditions"]
+    assert set(conds) == {"generic", "canonical", "control"}, "missing a split condition"
+    assert all(c["n"] >= 80 for c in conds.values()), "format-boundary sample too small"
+    # the claim in WRITEUP/RESULTS is mechanistic, so pin the mechanism, not the null:
+    # anchoring the seam must engage resolution more often than the placebo cut does
+    assert conds["canonical"]["R_positive_frac"] > conds["control"]["R_positive_frac"], \
+        "canonical no longer engages R more than the placebo split"
+    return (f"Q4 drift 0, Q8 dS_max={q['verdict']['max_abs_S_delta']}, both separate 3/0; "
+            f"format-boundary n={conds['canonical']['n']} "
+            f"R>0 {conds['generic']['R_positive_frac']}→{conds['canonical']['R_positive_frac']} "
+            f"(placebo {conds['control']['R_positive_frac']})")
+
+
+@gate("G13 exported dataset loads and stays aligned")
+def g13():
+    """A dataset nobody can load is not a deliverable; prove it round-trips."""
+    out = ROOT / "dataset_out"
+    man_path = out / "manifest.json"
+    if not man_path.exists():
+        raise SkipGate("no dataset_out/ export yet (run comedy_primitives_dataset.py)")
+    man = json.loads(man_path.read_text(encoding="utf-8"))
+    rows = {}
+    for name in ("mechanisms.jsonl", "formats.jsonl", "items.jsonl",
+                 "frames.jsonl", "measured_signals.jsonl"):
+        path = out / name
+        assert path.exists(), f"missing {name}"
+        parsed = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
+        rows[name] = len(parsed)
+        recorded = man["files"][name]["rows"]
+        assert recorded == len(parsed), f"{name}: manifest says {recorded}, file has {len(parsed)}"
+    assert rows["mechanisms.jsonl"] >= 14 and rows["formats.jsonl"] >= 11, "primitives lost"
+    # every item must carry the provenance a redistributor needs
+    items = [json.loads(l) for l in (out / "items.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    assert all(r.get("license") for r in items), "an item lost its license field"
+    assert all(r.get("source") for r in items), "an item lost its source field"
+    # redistribution gate: text may only ship where a license permits it, so a
+    # future harvest lane cannot quietly publish scraped text through this export
+    from comedy_primitives_dataset import may_redistribute_text
+    leaks = [r["item_id"] for r in items
+             if not r.get("text_withheld") and not may_redistribute_text(r["license"])]
+    assert not leaks, f"{len(leaks)} items ship text without a redistributable license: {leaks[:3]}"
+    withheld = sum(1 for r in items if r.get("text_withheld"))
+    # matrices, when present, must line up row-for-row with their JSONL
+    npy = out / "embeddings_surface.npy"
+    aligned = "not exported"
+    if npy.exists():
+        import numpy as np
+        arr = np.load(npy)
+        embedded = sum(1 for r in items if r.get("has_surface_embedding"))
+        assert arr.shape[0] == embedded, f"matrix rows {arr.shape[0]} != embedded items {embedded}"
+        assert arr.shape[1] == 768, f"unexpected embedding dim {arr.shape[1]}"
+        aligned = f"{arr.shape[0]}x{arr.shape[1]} aligned"
+    return (f"{rows['items.jsonl']} items ({withheld} text-withheld, 0 licence leaks), "
+            f"{rows['frames.jsonl']} frames, {rows['measured_signals.jsonl']} measured, "
+            f"{rows['mechanisms.jsonl']} mechanisms; {aligned}")
+
+
 def main() -> int:
-    for fn in (g1, g2, g3, g4, g6, g5, g7, g8, g9, g10, g11):  # g6 before g5: live run feeds receipts
+    for fn in (g1, g2, g3, g4, g6, g5, g7, g8, g9, g10, g11, g12, g13):  # g6 before g5: live run feeds receipts
         fn()
     width = max(len(n) for n, _, _ in RESULTS)
     print("\n" + "=" * 78)

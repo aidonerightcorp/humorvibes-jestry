@@ -122,6 +122,12 @@ def dashboard_data() -> dict:
     }
 
 
+FAVICON_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">'
+    '<rect width="32" height="32" rx="7" fill="#151923"/>'
+    '<text x="16" y="23" font-size="20" text-anchor="middle">J</text></svg>'
+)
+
 PAGE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -194,9 +200,18 @@ TABS.forEach((t,i) => {
   b.onclick = () => show(i); nav.appendChild(b);
   const s = document.createElement("section"); s.id = "tab"+i; main.appendChild(s);
 });
+// panes that used to open blank until the visitor guessed which button to
+// press now fill themselves once (browser test 2026-07-24: Registry and Ledger
+// rendered ~32 chars on arrival); the guard keeps it to one fetch per pane
+const autoloaded = new Set();
 function show(i){ [...nav.children].forEach((b,j)=>b.classList.toggle("on", i===j));
   [...main.children].forEach((s,j)=>s.classList.toggle("on", i===j));
-  if (i===0) loadDash(); }
+  if (i===0) loadDash();
+  if (!autoloaded.has(i)) {
+    const first = {3: "cenbtn", 5: "stbtn"}[i];   // same defaults as #demo
+    const el = first && document.getElementById(first);
+    if (el) { autoloaded.add(i); el.click(); }
+  } }
 // deep links for demos/screenshots: #tab=N picks the tab; #demo auto-runs the
 // tab's default query (been-done check / registry census) after load
 const HASH_TAB = parseInt((location.hash.match(/tab=(\d)/) || [])[1] ?? "0", 10);
@@ -391,7 +406,13 @@ document.getElementById("tab2").innerHTML = `
   <button class="go" id="bdbtn">Check precedent</button>
   <div id="bdout"></div>`;
 document.getElementById("bdbtn").onclick = async () => {
+  // embedding the query and scanning the index takes ~10s on a cold pane;
+  // without this the button looks dead and a visitor clicks it again
+  const b = document.getElementById("bdbtn"); b.disabled = true;
+  document.getElementById("bdout").innerHTML =
+    "<small>embedding the query and scanning the indexed supply…</small>";
   const d = await api("/api/beendone", {text: bd.value});
+  b.disabled = false;
   let html = `<div class="card"><b>${esc(d.verdict)}</b><br><small>backend ${esc(d.backend)} ·
     semantic ${d.semantic} · indexed ${d.indexed_items} items</small>
     ${d.note ? `<br><small>${esc(d.note)}</small>` : ""}</div>`;
@@ -411,7 +432,10 @@ document.getElementById("cenbtn").onclick = async () => {
   const d = await api("/api/census");
   document.getElementById("regout").innerHTML = `<pre>${esc(JSON.stringify(d, null, 2))}</pre>`; };
 document.getElementById("qbtn").onclick = async () => {
+  const b = document.getElementById("qbtn"); b.disabled = true;
+  document.getElementById("regout").innerHTML = "<small>searching the registry…</small>";
   const d = await api("/api/search", {request: q.value});
+  b.disabled = false;
   let html = "";
   (d.cards || []).forEach(c => { html += `<div class="card"><span class="tag">${esc(c.kind)}</span>
     <span class="tag">${esc(c.acceptance_level)}</span> <b>${esc(c.bit_id)}</b><br>${esc(c.one_line)}</div>`; });
@@ -468,6 +492,10 @@ class Handler(BaseHTTPRequestHandler):
         if self.path in ("/", "/index.html"):
             page = PAGE.replace("__CHARTER__", CHARTER_VERSION).replace("__MOTTO__", MOTTO)
             self._send(200, page.encode("utf-8"), "text/html")
+        elif self.path == "/favicon.ico":
+            # every browser asks; answering keeps a 404 out of the visitor's
+            # console (and out of the kernel log during a judged demo)
+            self._send(200, FAVICON_SVG.encode("utf-8"), "image/svg+xml")
         elif self.path == "/api/charter":
             self._json({"motto": MOTTO, "laws": [list(l) for l in LAWS],
                         "funnel": list(FUNNEL_STAGES), "acceptance": list(ACCEPTANCE_LEVELS)})

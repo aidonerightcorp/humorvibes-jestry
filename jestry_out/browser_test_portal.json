@@ -1,0 +1,145 @@
+{
+  "receipt_type": "browser_test_portal",
+  "receipt_version": 1,
+  "ts": "2026-07-24T22:46:17",
+  "url": "http://127.0.0.1:8099/",
+  "api_truth": {
+    "digest": "a245bf905fdb0d0c",
+    "total_cards": 23824
+  },
+  "tabs": [
+    {
+      "index": 0,
+      "label": "Dashboard",
+      "text_len": 1406,
+      "svg": 5,
+      "svg_children": 156,
+      "buttons": 6,
+      "scroll_w": 1280,
+      "client_w": 1280,
+      "screenshot": "tab_00_dashboard.png"
+    },
+    {
+      "index": 1,
+      "label": "Run",
+      "text_len": 216,
+      "svg": 5,
+      "svg_children": 156,
+      "buttons": 6,
+      "scroll_w": 1280,
+      "client_w": 1280,
+      "screenshot": "tab_01_run.png"
+    },
+    {
+      "index": 2,
+      "label": "Been done?",
+      "text_len": 40,
+      "svg": 5,
+      "svg_children": 156,
+      "buttons": 6,
+      "scroll_w": 1280,
+      "client_w": 1280,
+      "screenshot": "tab_02_been_done.png"
+    },
+    {
+      "index": 3,
+      "label": "Registry",
+      "text_len": 222,
+      "svg": 5,
+      "svg_children": 156,
+      "buttons": 6,
+      "scroll_w": 1280,
+      "client_w": 1280,
+      "screenshot": "tab_03_registry.png"
+    },
+    {
+      "index": 4,
+      "label": "Charter",
+      "text_len": 3924,
+      "svg": 5,
+      "svg_children": 156,
+      "buttons": 6,
+      "scroll_w": 1280,
+      "client_w": 1280,
+      "screenshot": "tab_04_charter.png"
+    },
+    {
+      "index": 5,
+      "label": "Ledger",
+      "text_len": 556,
+      "svg": 5,
+      "svg_children": 156,
+      "buttons": 6,
+      "scroll_w": 1280,
+      "client_w": 1280,
+      "screenshot": "tab_05_ledger.png"
+    }
+  ],
+  "interactions": [
+    {
+      "check": "dashboard shows API card total",
+      "expected": "23,824",
+      "found": true
+    },
+    {
+      "check": "slow query shows a pending state",
+      "saw_pending": true
+    },
+    {
+      "check": "been-done returns cross-lingual neighbours",
+      "query": "Even the most skilled monkey falls from the tree sometimes.",
+      "chars": 794,
+      "cross_lingual_hit": true,
+      "excerpt": "adjacent_neighborhood: related material exists — worth citing\nbackend ollama:embeddinggemma · semantic true · indexed 23779 items\nko 0.7212 원숭이도 나무에서 떨어진다 (wonsungido namueseo tteoreojinda) — Even monkeys fall from trees.\ntraditional prover"
+    },
+    {
+      "check": "census pane shows the API registry digest",
+      "digest": "a245bf905fdb0d0c",
+      "agrees": true
+    }
+  ],
+  "viewports": [
+    {
+      "name": "desktop",
+      "w": 1280,
+      "h": 900,
+      "no_h_overflow": true
+    },
+    {
+      "name": "phone",
+      "w": 390,
+      "h": 844,
+      "no_h_overflow": true,
+      "scroll_w": 390,
+      "client_w": 390,
+      "text_len": 1406
+    }
+  ],
+  "failures": [],
+  "nav_labels": [
+    "Dashboard",
+    "Run",
+    "Been done?",
+    "Registry",
+    "Charter",
+    "Ledger"
+  ],
+  "desktop_page_errors": {
+    "exceptions": [],
+    "failed_requests": [],
+    "console_errors": []
+  },
+  "dashboard_api_keys": [
+    "calibration",
+    "cands",
+    "census",
+    "funnel",
+    "harvest",
+    "hero",
+    "posteriors",
+    "route_mix",
+    "sweep",
+    "tiles"
+  ],
+  "passed": true
+}

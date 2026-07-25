@@ -1,0 +1,128 @@
+{
+  "receipt_type": "format_boundary_experiment",
+  "ts": "2026-07-24T22:10:41",
+  "instrument": "gemma2-full-nll",
+  "gguf": "gemma-2-2b-it-Q4_K_M.gguf (bartowski, public)",
+  "data": {
+    "source": "https://cs.rochester.edu/u/nhossain/humicroedit/semeval-2020-task-7-data.zip",
+    "zip_sha256": "30c024acb53fa32aa04d92089e3d4caf3401e5ce67b4d38ae87041930f6fd697",
+    "sample": "dropna(meanGrade).sample(180, random_state=0) \u2014 pinned recipe; first 84 rows of that sample order (CPU budget, GPU driver down)",
+    "kept": 83,
+    "skipped_degenerate": 1
+  },
+  "frame_hint_template": "The serious headline expected the word '{orig}' at that spot.",
+  "design_note": "Frame hint is deterministic and shared across conditions (pinned run used model-generated frames), so pinned rho=0.115 is context, not a controlled arm; the controlled comparison is generic vs canonical vs control within this run.",
+  "pinned_reference": {
+    "n": 180,
+    "correlations": {
+      "laugh_score": {
+        "pearson": 0.108,
+        "spearman": 0.115
+      },
+      "S_surprise": {
+        "pearson": -0.001,
+        "spearman": -0.035
+      },
+      "R_resolution": {
+        "pearson": -0.003,
+        "spearman": 0.101
+      },
+      "E_efficiency": {
+        "pearson": 0.071,
+        "spearman": 0.105
+      }
+    }
+  },
+  "conditions": {
+    "generic": {
+      "n": 83,
+      "laugh": {
+        "pearson": -0.049,
+        "spearman": 0.021,
+        "perm_p_spearman": 0.8606,
+        "mean": 24.507
+      },
+      "S": {
+        "pearson": 0.189,
+        "spearman": 0.117,
+        "perm_p_spearman": 0.3078,
+        "mean": 7.267
+      },
+      "R": {
+        "pearson": 0.009,
+        "spearman": 0.056,
+        "perm_p_spearman": 0.6412,
+        "mean": 0.05
+      },
+      "E": {
+        "pearson": 0.009,
+        "spearman": 0.056,
+        "perm_p_spearman": 0.6412,
+        "mean": 0.005
+      },
+      "R_positive_frac": 0.193
+    },
+    "canonical": {
+      "n": 83,
+      "laugh": {
+        "pearson": -0.063,
+        "spearman": -0.044,
+        "perm_p_spearman": 0.7131,
+        "mean": 24.514
+      },
+      "S": {
+        "pearson": 0.152,
+        "spearman": 0.17,
+        "perm_p_spearman": 0.1249,
+        "mean": 10.444
+      },
+      "R": {
+        "pearson": 0.024,
+        "spearman": 0.095,
+        "perm_p_spearman": 0.4138,
+        "mean": 0.122
+      },
+      "E": {
+        "pearson": 0.024,
+        "spearman": 0.095,
+        "perm_p_spearman": 0.4138,
+        "mean": 0.012
+      },
+      "R_positive_frac": 0.313
+    },
+    "control": {
+      "n": 83,
+      "laugh": {
+        "pearson": -0.063,
+        "spearman": -0.097,
+        "perm_p_spearman": 0.3723,
+        "mean": 23.653
+      },
+      "S": {
+        "pearson": 0.215,
+        "spearman": 0.193,
+        "perm_p_spearman": 0.076,
+        "mean": 6.609
+      },
+      "R": {
+        "pearson": -0.003,
+        "spearman": 0.037,
+        "perm_p_spearman": 0.7426,
+        "mean": 0.039
+      },
+      "E": {
+        "pearson": -0.003,
+        "spearman": 0.037,
+        "perm_p_spearman": 0.7426,
+        "mean": 0.004
+      },
+      "R_positive_frac": 0.205
+    }
+  },
+  "runtime_s": 4377.9,
+  "worker": {
+    "calls": 747,
+    "errors": 0,
+    "restarts": 0
+  }
+}

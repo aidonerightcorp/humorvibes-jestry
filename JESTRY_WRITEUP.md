@@ -102,9 +102,19 @@ vacuously (the judge model tag was absent). The record was corrected by an
 append-only correction receipt, the gate now requires measured judgments, and the
 outcome was re-earned at `persona_permitted` with four real persona judgments.
 
+The ladder has since climbed one rung, which sharpens that claim rather than
+overturning it. A later run was accepted on the **compose-residual** route, where
+four mechanism cards (anthropomorphism, callback tag, misdirection reversal,
+specificity) ride the prompt and constrain generation to the residual twist: laugh
+41.4 measured on the certified oracle, B-gate passed on real judgments, a sibling
+candidate rejected in the same run for failing to re-route. Unconstrained frontier
+generation still rejects. So the honest form of the thesis is narrower and more
+interesting than "reuse beats generation": generation clears the bar when it is
+constrained by reusable mechanism structure, and not when it is free.
+
 ## Verification
 
-`verify_jestry.py` gates the layer: the full offline test suite (42 tests, of which
+`verify_jestry.py` gates the layer with 13 gates: the full offline test suite (42 tests, of which
 30 pin the Jestry layer: registry census, policy gates, ladder selection, carried
 acceptance, groaner incompatibility edges, governed bandit promotion, funnel
 receipts, forced-NLL discovery/censoring/replay, open-world precedent verdicts, the
@@ -112,8 +122,14 @@ frame-provenance trust gate; the other 12 are the pre-existing pinned-evidence
 suites), registry digest determinism twice over, charter/code sync (the 18 laws are
 pinned by test), a zero-model replay route, receipt schema, a live Gemma end-to-end
 route, live cross-lingual precedent, harvest provenance, portal boot, and
-byte-deterministic notebook builds. Every run appends its gate table to
-`jestry_out/verify_receipts.jsonl`, so "ALL GREEN" is a receipt, not a memory.
+byte-deterministic notebook builds. Two later gates keep this round's experiments
+honest: one reproves the certified instrument's robustness (the reference set must
+still separate under a fourfold-precision requant, and the pinned S must not drift)
+along with the executed format-boundary follow-up, and one loads the exported dataset
+to confirm its row counts, per-record licensing, and embedding-matrix alignment.
+Every run appends its gate table to `jestry_out/verify_receipts.jsonl`, so "ALL GREEN"
+is a receipt, not a memory. The portal is additionally driven by a real headless
+browser, which is how three visible defects in it were found and fixed.
 
 ## What this adds to HumorVibes
 
