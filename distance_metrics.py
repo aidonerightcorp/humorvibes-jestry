@@ -111,12 +111,27 @@ def main() -> None:
     winners = [t for t in table if t["survives_fdr"]]
     best = table[0] if table else None
     magnitude_aware = {"euclidean", "manhattan", "chebyshev", "dot", "mag_diff", "mag_ratio"}
-    verdict = None
-    if best:
-        verdict = ("a magnitude-aware metric beats plain cosine on held-out data, so normalising "
-                   "first discards signal on this task"
-                   if best["metric"] in magnitude_aware else
-                   "cosine, the default, is not beaten by any magnitude-aware alternative here")
+    # Several of these are monotone transforms of one another on this data, so
+    # they are ONE test reported many times and their rank correlations come out
+    # identical. Saying "metric X beats cosine" off a 0.003 gap between two
+    # statistically indistinguishable, partly-redundant measures would be exactly
+    # the noise-ranking this project keeps warning about.
+    by_rho: dict[float, list[str]] = {}
+    for t in table:
+        by_rho.setdefault(round(abs(t["test_rho"]), 4), []).append(t["metric"])
+    redundant = {k: v for k, v in by_rho.items() if len(v) > 1}
+    cos_rho = abs(next(t["test_rho"] for t in table if t["metric"] == "cosine"))
+    gap = abs(best["test_rho"]) - cos_rho if best else 0.0
+    if not winners:
+        verdict = ("NO metric survives multiple-comparison control, so no distance measure here "
+                   "reliably predicts funniness and none can be called the winner. The best and "
+                   f"cosine differ by {gap:.4f} in held-out rho, which is noise at this n.")
+    elif best["metric"] in magnitude_aware and gap > 0.02:
+        verdict = ("a magnitude-aware metric beats plain cosine by a margin that survives "
+                   "correction, so normalising first discards signal on this task")
+    else:
+        verdict = ("cosine is not beaten by any margin that survives correction; the ranking "
+                   "among these metrics is not interpretable")
 
     report = {
         "receipt_type": "distance_metric_comparison",
@@ -132,7 +147,12 @@ def main() -> None:
                      "Benjamini-Hochberg control across all eight metrics"),
         "results_ranked_by_test": table,
         "survivors": [w["metric"] for w in winners],
-        "best_metric": best["metric"] if best else None,
+        "best_metric_by_point_estimate": best["metric"] if best else None,
+        "metrics_with_identical_rho": redundant,
+        "redundancy_note": ("cosine, angular, euclidean and dot are monotone transforms of one "
+                            "another for these vectors, so rank correlation cannot distinguish "
+                            "them; they are one test, not four, and the FDR denominator is "
+                            "correspondingly inflated"),
         "verdict": verdict,
     }
     (OUT / "distance_metric_comparison.json").write_text(json.dumps(report, indent=2),

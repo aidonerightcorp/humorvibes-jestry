@@ -1,0 +1,90 @@
+{
+  "receipt_type": "distance_metric_comparison",
+  "receipt_version": 1,
+  "ts": "2026-07-25T03:32:23",
+  "question": "cosine discards magnitude by construction; does any magnitude-aware distance predict funniness better on the same word pairs?",
+  "dataset": "Humicroedit task-1, original word vs replacement word",
+  "embedding_model": "embeddinggemma (768d)",
+  "n_pairs": 9652,
+  "n_train": 6756,
+  "n_test": 2896,
+  "protocol": "same seeded 70/30 split as incongruity_study.py; held-out test correlations with permutation p over 2000 shuffles and Benjamini-Hochberg control across all eight metrics",
+  "results_ranked_by_test": [
+    {
+      "metric": "manhattan",
+      "train_rho": 0.0353,
+      "test_rho": 0.0346,
+      "test_perm_p": 0.054,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "metric": "cosine",
+      "train_rho": 0.0365,
+      "test_rho": 0.0317,
+      "test_perm_p": 0.087,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "metric": "angular",
+      "train_rho": 0.0365,
+      "test_rho": 0.0317,
+      "test_perm_p": 0.087,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "metric": "euclidean",
+      "train_rho": 0.0365,
+      "test_rho": 0.0317,
+      "test_perm_p": 0.087,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "metric": "dot",
+      "train_rho": -0.0365,
+      "test_rho": -0.0317,
+      "test_perm_p": 0.087,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "metric": "chebyshev",
+      "train_rho": 0.0305,
+      "test_rho": 0.0298,
+      "test_perm_p": 0.095,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "metric": "mag_ratio",
+      "train_rho": 0.0111,
+      "test_rho": 0.0194,
+      "test_perm_p": 0.3133,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "metric": "mag_diff",
+      "train_rho": 0.0074,
+      "test_rho": 0.0075,
+      "test_perm_p": 0.6952,
+      "survives_fdr": false,
+      "sign_held": true
+    }
+  ],
+  "survivors": [],
+  "best_metric_by_point_estimate": "manhattan",
+  "metrics_with_identical_rho": {
+    "0.0317": [
+      "cosine",
+      "angular",
+      "euclidean",
+      "dot"
+    ]
+  },
+  "redundancy_note": "cosine, angular, euclidean and dot are monotone transforms of one another for these vectors, so rank correlation cannot distinguish them; they are one test, not four, and the FDR denominator is correspondingly inflated",
+  "verdict": "NO metric survives multiple-comparison control, so no distance measure here reliably predicts funniness and none can be called the winner. The best and cosine differ by 0.0029 in held-out rho, which is noise at this n."
+}

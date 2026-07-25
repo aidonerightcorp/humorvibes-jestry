@@ -1,0 +1,68 @@
+{
+  "receipt_type": "instrument_calibration",
+  "receipt_version": 2,
+  "ts": "2026-07-25T03:36:40",
+  "instrument": "gemma4-transformers-full-nll",
+  "model": "google/gemma-4-E2B-it",
+  "transport": "transformers, local weights, full vocabulary, single forward pass",
+  "why_this_exists": "Ollama top-K failed certification, gemma4:e2b omits logprobs at sentence boundaries, and llama.cpp cannot load the Gemma 4 GGUF; all three re-tested 2026-07-25. Taking logits directly avoids all three.",
+  "reference": [
+    {
+      "name": "speed_bumps",
+      "kind": "joke",
+      "S": 9.191,
+      "R": 0.0,
+      "E": 0.0,
+      "measured": true
+    },
+    {
+      "name": "lion_heart",
+      "kind": "joke",
+      "S": 9.666,
+      "R": 0.007,
+      "E": 0.0005,
+      "measured": true
+    },
+    {
+      "name": "ai_pm",
+      "kind": "joke",
+      "S": 13.785,
+      "R": 0.896,
+      "E": 0.0747,
+      "measured": true
+    },
+    {
+      "name": "boring",
+      "kind": "control",
+      "S": 8.957,
+      "R": 0.0,
+      "E": 0.0,
+      "measured": true
+    },
+    {
+      "name": "nonsense",
+      "kind": "control",
+      "S": 15.127,
+      "R": 0.0,
+      "E": 0.0,
+      "measured": true
+    }
+  ],
+  "nll_calls": 15,
+  "instrument_errors": 0,
+  "load_seconds": 8.3,
+  "derived": null,
+  "checks": {
+    "all_jokes_pass": false,
+    "all_controls_fail": false
+  },
+  "certified": false,
+  "rule": "accept when s_band[0] <= S <= s_band[1] and R >= r_floor and E >= e_floor; SCOPE: frame hints only from trusted provenance, per the frame-provenance finding in native_format_probe.json",
+  "what_this_establishes": {
+    "transport": "SOLVED. Gemma 4 now yields exact full-vocabulary teacher-forced NLL. All five reference cases returned measured=true with no top-K censoring, no serving-layer prompt rewriting, and no lower-bound clipping. The three prior receipts (Ollama top-K certification failure, e2b EOS omission, llama.cpp architecture rejection) were transport limits, and taking logits directly removes all three.",
+    "certification": "FAILED on this variant. Two of the three reference jokes resolve at R = 0.000 and 0.007, so min(joke R) does not exceed max(control R). Gemma 4 E2B does not reconstruct the speed-bumps or lion-heart frames the way gemma-2-2b-it does, and an instrument that cannot separate a joke from a boring line is not allowed to gate acceptance here, regardless of how current the model is.",
+    "why_S_is_not_comparable_to_gemma2": "S is a per-token NLL under a different tokenizer and vocabulary, so 9.191 here and 3.19 on gemma-2 are not the same quantity and must never be compared directly. Each instrument derives its own band or it is not an instrument.",
+    "control_separation_is_structurally_trivial": "Both controls carry an empty frame, and compute_signals returns R = 0 by construction when no frame is supplied. So 'controls fail' is a property of the protocol, not a measurement. A meaningful control arm must give the controls a frame and require the null to absorb it. Logged as the next fix rather than counted as evidence here.",
+    "next_lever": "try a larger Gemma 4 (E4B or 12B) before concluding the family cannot serve as the instrument; E2B is the smallest variant and was chosen for CPU affordability, not for measurement quality."
+  }
+}
