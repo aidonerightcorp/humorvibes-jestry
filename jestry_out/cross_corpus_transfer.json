@@ -1,0 +1,28 @@
+{
+  "receipt_type": "cross_corpus_transfer",
+  "receipt_version": 1,
+  "ts": "2026-07-25T12:25:23",
+  "question": "does the structural model carry general humor signal, or did it learn Humicroedit's shape?",
+  "corpora": {
+    "humicroedit": {
+      "n": 28414,
+      "label": "annotator mean grade 0-3",
+      "format": "news headline with one word substituted"
+    },
+    "reddit": {
+      "n": 40000,
+      "label": "log2(1+upvotes), a popularity proxy",
+      "format": "native setup/punchline joke, no substitution"
+    }
+  },
+  "features": 30,
+  "results": {
+    "within_humicroedit_spearman": 0.5075,
+    "transfer_humicroedit_to_reddit_spearman": -0.0091,
+    "within_reddit_spearman": 0.1631,
+    "reverse_reddit_to_humicroedit_spearman": 0.0907
+  },
+  "verdict": "the model does NOT transfer: on a different population its ordering is indistinguishable from chance, so the within-corpus 0.51 describes Humicroedit, not humor in general",
+  "caveats": "upvotes are confounded by timing, subreddit dynamics and visibility, so even a perfect humor model would not reach its within-corpus number here; the reddit-native arm is included precisely so a low transfer number can be attributed to distribution shift rather than to an unlearnable target",
+  "runtime_s": 35.4
+}

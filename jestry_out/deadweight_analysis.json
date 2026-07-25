@@ -136,6 +136,14 @@
   "headline_result": {
     "held_out_spearman": 0.5075,
     "held_out_r2": 0.243,
-    "context": "the pinned single-signal Humicroedit validation reached spearman 0.115; a 30-feature gradient-boosted model on 28,414 graded rows reaches 0.5075 on 8,525 held-out rows, and picks the human-preferred edit in a controlled pair 0.707 of the time out of sample"
+    "context": "the pinned single-signal Humicroedit validation reached spearman 0.115; a 30-feature gradient-boosted model on 28,414 graded rows reaches 0.5075 on 8,525 held-out rows, and picks the human-preferred edit in a controlled pair 0.707 of the time out of sample",
+    "scope_correction": "this number is corpus-bound; see generalisation_check_2026_07_25"
+  },
+  "generalisation_check_2026_07_25": {
+    "finding": "the held-out 0.5075 does NOT generalise. Trained on all of Humicroedit and evaluated on 40,000 r/Jokes posts, the same model orders them at spearman -0.0091, which is chance.",
+    "not_an_unlearnable_target": "a Reddit-native model reaches 0.1631 on held-out Reddit, so the population IS learnable; the failure is distribution shift, not an impossible label",
+    "asymmetry_worth_noting": "reverse transfer, Reddit-trained evaluated on Humicroedit, is 0.0907, weakly POSITIVE. A model trained on the noisier and more varied corpus learns a little that applies to headlines; the headline-trained model learns nothing that applies to native jokes. That asymmetry says the Humicroedit-learnable signal is narrow and corpus-shaped.",
+    "how_the_headline_number_must_now_be_stated": "0.5075 held-out on Humicroedit, a corpus of news headlines with one word substituted, graded by annotators. It is NOT a general humor predictor and must never be quoted without that scope.",
+    "receipt": "jestry_out/cross_corpus_transfer.json"
   }
 }
