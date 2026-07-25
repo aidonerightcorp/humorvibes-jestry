@@ -1,0 +1,141 @@
+{
+  "receipt_type": "deadweight_word_analysis",
+  "receipt_version": 1,
+  "ts": "2026-07-25T04:00:26",
+  "idea": "delete each word and re-score; a word whose removal raises the predicted grade is dead weight",
+  "training_data": {
+    "graded_rows": 28414,
+    "sources": "Humicroedit task-1 train + task-2 train (both edits per row)",
+    "features": 30
+  },
+  "models": {
+    "ridge": {
+      "held_out_r2": 0.0209,
+      "held_out_spearman": 0.1402,
+      "n_test": 8525
+    },
+    "gbm": {
+      "held_out_r2": 0.243,
+      "held_out_spearman": 0.5075,
+      "n_test": 8525
+    }
+  },
+  "model_used": "gbm",
+  "controlled_pair_validation": {
+    "n_pairs": 2372,
+    "accuracy": 0.707,
+    "n_clear_pairs": 1579,
+    "clear_accuracy": 0.7695,
+    "chance": 0.5,
+    "note": "restricted to pairs whose BOTH members are in the held-out split, so this is out-of-sample; an earlier version scored all pairs including trained rows and reported 0.75, which measured memorisation as much as preference"
+  },
+  "demo": {
+    "setup": "I told my therapist about my fear of speed bumps.",
+    "punchline": "She said I am actually just slowly getting over it honestly.",
+    "predicted_grade": 1.1094,
+    "per_word": [
+      {
+        "word": "honestly.",
+        "index": 10,
+        "predicted_without": 1.2062,
+        "delta_if_cut": 0.0968,
+        "length_effect": -0.0046,
+        "word_specific": 0.1014
+      },
+      {
+        "word": "getting",
+        "index": 7,
+        "predicted_without": 1.2042,
+        "delta_if_cut": 0.0947,
+        "length_effect": -0.0046,
+        "word_specific": 0.0993
+      },
+      {
+        "word": "slowly",
+        "index": 6,
+        "predicted_without": 1.1946,
+        "delta_if_cut": 0.0851,
+        "length_effect": -0.0046,
+        "word_specific": 0.0897
+      },
+      {
+        "word": "it",
+        "index": 9,
+        "predicted_without": 1.1352,
+        "delta_if_cut": 0.0257,
+        "length_effect": -0.0046,
+        "word_specific": 0.0303
+      },
+      {
+        "word": "just",
+        "index": 5,
+        "predicted_without": 1.1327,
+        "delta_if_cut": 0.0233,
+        "length_effect": -0.0046,
+        "word_specific": 0.0279
+      },
+      {
+        "word": "She",
+        "index": 0,
+        "predicted_without": 1.0973,
+        "delta_if_cut": -0.0121,
+        "length_effect": -0.0046,
+        "word_specific": -0.0075
+      },
+      {
+        "word": "actually",
+        "index": 4,
+        "predicted_without": 1.0847,
+        "delta_if_cut": -0.0247,
+        "length_effect": -0.0046,
+        "word_specific": -0.0201
+      },
+      {
+        "word": "am",
+        "index": 3,
+        "predicted_without": 1.0421,
+        "delta_if_cut": -0.0673,
+        "length_effect": -0.0046,
+        "word_specific": -0.0627
+      },
+      {
+        "word": "said",
+        "index": 1,
+        "predicted_without": 1.033,
+        "delta_if_cut": -0.0765,
+        "length_effect": -0.0046,
+        "word_specific": -0.0719
+      },
+      {
+        "word": "over",
+        "index": 8,
+        "predicted_without": 1.0285,
+        "delta_if_cut": -0.081,
+        "length_effect": -0.0046,
+        "word_specific": -0.0764
+      },
+      {
+        "word": "I",
+        "index": 2,
+        "predicted_without": 0.9948,
+        "delta_if_cut": -0.1146,
+        "length_effect": -0.0046,
+        "word_specific": -0.11
+      }
+    ]
+  },
+  "honesty": "the deletion profile is only as good as the model; held-out spearman is reported above and is small, so treat per-word deltas as a ranked suggestion rather than a verdict",
+  "runtime_s": 10.5,
+  "known_failure_mode": {
+    "what": "On the demo joke the tool ranks 'getting' and 'slowly' as dead weight. Those two words ARE the pun: 'slowly getting over it' is the whole reframe. Cutting them destroys the joke.",
+    "why": "Every feature this model sees is structural - lengths, syllables, rarity, punctuation, position. None of them encode meaning, so the model cannot know that a common, unremarkable word is carrying the reframe. It sees two ordinary words adding length to a punchline, and length is the strongest thing it has learned.",
+    "what_the_tool_is_actually_good_for": "structural dead weight: hedges, trailing adverbs, filler like 'honestly' and 'just', which it does rank at the top. It is a filler detector, not a pun detector, and should be described that way.",
+    "the_fix_not_yet_built": "add semantic features that tie a punchline word back to the setup - embedding similarity to the setup, or the per-token surprisal drop the certified instrument already measures. A word whose removal collapses the setup-punchline link is load-bearing however common it looks.",
+    "why_this_is_stated_rather_than_tuned_away": "the demo could have been chosen to hide this. A tool that advises comedians has to publish the case where it gives bad advice."
+  },
+  "headline_result": {
+    "held_out_spearman": 0.5075,
+    "held_out_r2": 0.243,
+    "context": "the pinned single-signal Humicroedit validation reached spearman 0.115; a 30-feature gradient-boosted model on 28,414 graded rows reaches 0.5075 on 8,525 held-out rows, and picks the human-preferred edit in a controlled pair 0.707 of the time out of sample"
+  }
+}
