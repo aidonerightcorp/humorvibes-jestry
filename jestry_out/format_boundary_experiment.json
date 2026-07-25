@@ -38,25 +38,25 @@
       "n": 83,
       "laugh": {
         "pearson": -0.049,
-        "spearman": 0.021,
+        "spearman": -0.025,
         "perm_p_spearman": 0.8606,
         "mean": 24.507
       },
       "S": {
         "pearson": 0.189,
-        "spearman": 0.117,
+        "spearman": 0.112,
         "perm_p_spearman": 0.3078,
         "mean": 7.267
       },
       "R": {
         "pearson": 0.009,
-        "spearman": 0.056,
+        "spearman": -0.047,
         "perm_p_spearman": 0.6412,
         "mean": 0.05
       },
       "E": {
         "pearson": 0.009,
-        "spearman": 0.056,
+        "spearman": -0.047,
         "perm_p_spearman": 0.6412,
         "mean": 0.005
       },
@@ -66,25 +66,25 @@
       "n": 83,
       "laugh": {
         "pearson": -0.063,
-        "spearman": -0.044,
+        "spearman": -0.092,
         "perm_p_spearman": 0.7131,
         "mean": 24.514
       },
       "S": {
         "pearson": 0.152,
-        "spearman": 0.17,
+        "spearman": 0.163,
         "perm_p_spearman": 0.1249,
         "mean": 10.444
       },
       "R": {
         "pearson": 0.024,
-        "spearman": 0.095,
+        "spearman": 0.03,
         "perm_p_spearman": 0.4138,
         "mean": 0.122
       },
       "E": {
         "pearson": 0.024,
-        "spearman": 0.095,
+        "spearman": 0.03,
         "perm_p_spearman": 0.4138,
         "mean": 0.012
       },
@@ -94,25 +94,25 @@
       "n": 83,
       "laugh": {
         "pearson": -0.063,
-        "spearman": -0.097,
+        "spearman": -0.103,
         "perm_p_spearman": 0.3723,
         "mean": 23.653
       },
       "S": {
         "pearson": 0.215,
-        "spearman": 0.193,
+        "spearman": 0.183,
         "perm_p_spearman": 0.076,
         "mean": 6.609
       },
       "R": {
         "pearson": -0.003,
-        "spearman": 0.037,
+        "spearman": -0.052,
         "perm_p_spearman": 0.7426,
         "mean": 0.039
       },
       "E": {
         "pearson": -0.003,
-        "spearman": 0.037,
+        "spearman": -0.052,
         "perm_p_spearman": 0.7426,
         "mean": 0.004
       },
@@ -124,5 +124,61 @@
     "calls": 747,
     "errors": 0,
     "restarts": 0
+  },
+  "correction_2026_07_25": {
+    "what": "spearman recomputed with tied-value midranks",
+    "why": "the original implementation broke ties by array position, which correlates a low-cardinality column with row order; found by our own adversarial audit",
+    "scope": "correlations only; the R-engagement fractions and all measured S/R/E values are unchanged",
+    "conclusion_unchanged": "no split condition predicts human funniness; every |rho| stays inside noise",
+    "changed_values": {
+      "generic.laugh": {
+        "was": 0.021,
+        "now": -0.025
+      },
+      "generic.S": {
+        "was": 0.117,
+        "now": 0.112
+      },
+      "generic.R": {
+        "was": 0.056,
+        "now": -0.047
+      },
+      "generic.E": {
+        "was": 0.056,
+        "now": -0.047
+      },
+      "canonical.laugh": {
+        "was": -0.044,
+        "now": -0.092
+      },
+      "canonical.S": {
+        "was": 0.17,
+        "now": 0.163
+      },
+      "canonical.R": {
+        "was": 0.095,
+        "now": 0.03
+      },
+      "canonical.E": {
+        "was": 0.095,
+        "now": 0.03
+      },
+      "control.laugh": {
+        "was": -0.097,
+        "now": -0.103
+      },
+      "control.S": {
+        "was": 0.193,
+        "now": 0.183
+      },
+      "control.R": {
+        "was": 0.037,
+        "now": -0.052
+      },
+      "control.E": {
+        "was": 0.037,
+        "now": -0.052
+      }
+    }
   }
 }

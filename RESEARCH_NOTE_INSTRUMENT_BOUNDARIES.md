@@ -42,9 +42,11 @@ The run completed on 83 items (one of the 84 sampled rows had a degenerate edit 
 
 | condition | laugh vs grade | S vs grade | R vs grade | mean R | items with R > 0 |
 |---|---|---|---|---|---|
-| generic (pinned splitter) | 0.021 (p = 0.86) | 0.117 (p = 0.31) | 0.056 (p = 0.64) | 0.050 | 19.3% |
-| canonical (edit-anchored) | -0.044 (p = 0.71) | 0.170 (p = 0.12) | 0.095 (p = 0.41) | 0.122 | 31.3% |
-| control (fixed 40% cut) | -0.097 (p = 0.37) | 0.193 (p = 0.076) | 0.037 (p = 0.74) | 0.039 | 20.5% |
+| generic (pinned splitter) | -0.025 | 0.112 | -0.047 | 0.050 | 19.3% |
+| canonical (edit-anchored) | -0.092 | 0.163 | 0.030 | 0.122 | 31.3% |
+| control (fixed 40% cut) | -0.103 | 0.183 | -0.052 | 0.039 | 20.5% |
+
+**Correction, 2026-07-25.** The correlations in this table were recomputed after our own adversarial audit found that the ranking function broke ties by array position, which silently correlates a low-cardinality column with row order. Several values moved and three changed sign (generic R read +0.056 against a true -0.047). The statistic now uses tied-value midranks, verified against scipy. The engagement fractions, the measured S/R/E values, and the conclusion are unaffected: no split condition predicts human funniness, and every correlation remains inside noise. The receipt carries a `correction_2026_07_25` block listing every changed value.
 
 Correlations are spearman against the human mean grade, with permutation p values over 2000 seeded label shuffles. E is omitted from the table because the shared hint is exactly ten words for every item, making E an exact rescaling of R with identical correlations; that identity in the receipt is a property of the design, not a bug.
 

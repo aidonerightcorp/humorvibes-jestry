@@ -1,0 +1,332 @@
+{
+  "receipt_type": "incongruity_study",
+  "receipt_version": 1,
+  "ts": "2026-07-25T02:31:06",
+  "question": "at full sample size, does anything predict human funniness, and does semantic distance between the replaced word and its replacement carry the signal incongruity theory predicts?",
+  "dataset": "Humicroedit task-1 train.csv, all graded rows",
+  "n_total": 400,
+  "n_train": 280,
+  "n_test": 120,
+  "n_features": 37,
+  "embedding_model": "embeddinggemma",
+  "vocabulary_embedded": 677,
+  "protocol": "seeded 70/30 split fixed before inspection; features ranked on TRAIN, every headline number is the HELD-OUT TEST correlation with permutation p over 2000 shuffles and Benjamini-Hochberg FDR at 0.05",
+  "survivors_on_test": [
+    "edit_position",
+    "syllable_ratio",
+    "word_ratio",
+    "setup_words",
+    "setup_chars",
+    "edit_distance_cos",
+    "edit_distance_sq"
+  ],
+  "n_survivors": 7,
+  "table_ranked_by_train": [
+    {
+      "feature": "edit_position",
+      "train_rho": 0.1648,
+      "test_rho": 0.2557,
+      "test_perm_p": 0.005,
+      "survives_fdr": true,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_syllables",
+      "train_rho": -0.1537,
+      "test_rho": -0.2214,
+      "test_perm_p": 0.016,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "syllable_ratio",
+      "train_rho": -0.1522,
+      "test_rho": -0.2369,
+      "test_perm_p": 0.0075,
+      "survives_fdr": true,
+      "sign_held": true
+    },
+    {
+      "feature": "word_ratio",
+      "train_rho": -0.1463,
+      "test_rho": -0.2404,
+      "test_perm_p": 0.0085,
+      "survives_fdr": true,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_chars",
+      "train_rho": -0.1431,
+      "test_rho": -0.224,
+      "test_perm_p": 0.013,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "setup_syllables",
+      "train_rho": 0.1417,
+      "test_rho": 0.2005,
+      "test_perm_p": 0.0275,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "setup_words",
+      "train_rho": 0.1391,
+      "test_rho": 0.2421,
+      "test_perm_p": 0.0065,
+      "survives_fdr": true,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_rarity_max",
+      "train_rho": -0.1339,
+      "test_rho": -0.0659,
+      "test_perm_p": 0.4928,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "setup_chars",
+      "train_rho": 0.1329,
+      "test_rho": 0.2498,
+      "test_perm_p": 0.0055,
+      "survives_fdr": true,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_words",
+      "train_rho": -0.1316,
+      "test_rho": -0.2039,
+      "test_perm_p": 0.0275,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "quotes",
+      "train_rho": 0.1025,
+      "test_rho": 0.074,
+      "test_perm_p": 0.5292,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "edit_syl_delta",
+      "train_rho": 0.092,
+      "test_rho": 0.0607,
+      "test_perm_p": 0.5417,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "questions",
+      "train_rho": 0.0836,
+      "test_rho": 0.1129,
+      "test_perm_p": 0.4453,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "setup_rarity_max",
+      "train_rho": 0.0827,
+      "test_rho": 0.2006,
+      "test_perm_p": 0.037,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "sentences",
+      "train_rho": 0.082,
+      "test_rho": 0.0037,
+      "test_perm_p": 0.9725,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "setup_mean_wordlen",
+      "train_rho": 0.0816,
+      "test_rho": 0.104,
+      "test_perm_p": 0.2399,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "edit_distance_cos",
+      "train_rho": 0.0711,
+      "test_rho": 0.2439,
+      "test_perm_p": 0.007,
+      "survives_fdr": true,
+      "sign_held": true
+    },
+    {
+      "feature": "edit_distance_sq",
+      "train_rho": 0.0711,
+      "test_rho": 0.2439,
+      "test_perm_p": 0.007,
+      "survives_fdr": true,
+      "sign_held": true
+    },
+    {
+      "feature": "edit_len_delta",
+      "train_rho": 0.0701,
+      "test_rho": 0.0391,
+      "test_perm_p": 0.6937,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_rarity_mean",
+      "train_rho": -0.0683,
+      "test_rho": 0.0848,
+      "test_perm_p": 0.3458,
+      "survives_fdr": false,
+      "sign_held": false
+    },
+    {
+      "feature": "punch_assonance",
+      "train_rho": 0.0675,
+      "test_rho": 0.002,
+      "test_perm_p": 0.981,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_alliteration",
+      "train_rho": -0.0613,
+      "test_rho": -0.1236,
+      "test_perm_p": 0.2549,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "setup_rarity_final",
+      "train_rho": -0.0603,
+      "test_rho": -0.0429,
+      "test_perm_p": 0.6517,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "exclaims",
+      "train_rho": 0.0573,
+      "test_rho": 0.0667,
+      "test_perm_p": 0.6837,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "end_rhyme",
+      "train_rho": 0.0516,
+      "test_rho": 0.1157,
+      "test_perm_p": 0.4343,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_rarity_final",
+      "train_rho": -0.0513,
+      "test_rho": -0.1377,
+      "test_perm_p": 0.1389,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "digits",
+      "train_rho": 0.0485,
+      "test_rho": -0.0127,
+      "test_perm_p": 0.9225,
+      "survives_fdr": false,
+      "sign_held": false
+    },
+    {
+      "feature": "caps_words",
+      "train_rho": 0.043,
+      "test_rho": -0.0236,
+      "test_perm_p": 0.8046,
+      "survives_fdr": false,
+      "sign_held": false
+    },
+    {
+      "feature": "setup_rarity_mean",
+      "train_rho": 0.0425,
+      "test_rho": 0.0999,
+      "test_perm_p": 0.2759,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "edit_rarity_delta",
+      "train_rho": -0.0306,
+      "test_rho": 0.0643,
+      "test_perm_p": 0.5047,
+      "survives_fdr": false,
+      "sign_held": false
+    },
+    {
+      "feature": "echo_frac",
+      "train_rho": 0.0255,
+      "test_rho": 0.1508,
+      "test_perm_p": 0.2014,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "punch_syl_per_word",
+      "train_rho": -0.0241,
+      "test_rho": 0.025,
+      "test_perm_p": 0.7971,
+      "survives_fdr": false,
+      "sign_held": false
+    },
+    {
+      "feature": "punch_mean_wordlen",
+      "train_rho": -0.0084,
+      "test_rho": -0.005,
+      "test_perm_p": 0.958,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "pair_assonance",
+      "train_rho": -0.0074,
+      "test_rho": -0.1119,
+      "test_perm_p": 0.2229,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "edit_rarity",
+      "train_rho": 0.0046,
+      "test_rho": 0.0815,
+      "test_perm_p": 0.3893,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "type_token_ratio",
+      "train_rho": 0.0043,
+      "test_rho": 0.0812,
+      "test_perm_p": 0.4983,
+      "survives_fdr": false,
+      "sign_held": true
+    },
+    {
+      "feature": "pair_alliteration",
+      "train_rho": 0.0011,
+      "test_rho": -0.0165,
+      "test_perm_p": 0.8616,
+      "survives_fdr": false,
+      "sign_held": false
+    }
+  ],
+  "custom_attributes": [
+    "edit_distance_cos",
+    "edit_distance_sq",
+    "edit_rarity_delta",
+    "edit_rarity",
+    "edit_position",
+    "edit_len_delta",
+    "edit_syl_delta"
+  ],
+  "runtime_s": 83.7
+}

@@ -167,16 +167,36 @@ def features(setup: str, punchline: str, freq: dict[str, int], total: int) -> di
 
 
 # ---------------------------------------------------------------- statistics
+def rank_midpoint(v: list[float]) -> list[float]:
+    """Ranks with TIED VALUES SHARING THEIR AVERAGE RANK.
+
+    The obvious implementation, ``sorted(range(n), key=lambda i: v[i])``, breaks
+    ties by position in the input, which silently correlates a feature with row
+    order. For a constant feature that produced spearman = 1.0 against any
+    monotone outcome, and it manufactured a +0.242 correlation for a feature
+    whose true value is -0.011 (adversarial audit, 2026-07-25). Midranks are not
+    a refinement here, they are the difference between a statistic and an
+    artifact.
+    """
+    order = sorted(range(len(v)), key=lambda i: v[i])
+    out = [0.0] * len(v)
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and v[order[j + 1]] == v[order[i]]:
+            j += 1
+        avg = (i + j) / 2.0
+        for k in range(i, j + 1):
+            out[order[k]] = avg
+        i = j + 1
+    return out
+
+
 def spearman(a: list[float], b: list[float]) -> float:
+    """Spearman rho with correct tie handling. Constant input -> 0.0, not 1.0."""
     if len(a) < 3:
         return 0.0
-    def rank(v: list[float]) -> list[float]:
-        order = sorted(range(len(v)), key=lambda i: v[i])
-        out = [0.0] * len(v)
-        for pos, idx in enumerate(order):
-            out[idx] = float(pos)
-        return out
-    ra, rb = rank(a), rank(b)
+    ra, rb = rank_midpoint(a), rank_midpoint(b)
     ma, mb = sum(ra) / len(ra), sum(rb) / len(rb)
     num = sum((x - ma) * (y - mb) for x, y in zip(ra, rb))
     den = math.sqrt(sum((x - ma) ** 2 for x in ra) * sum((y - mb) ** 2 for y in rb))

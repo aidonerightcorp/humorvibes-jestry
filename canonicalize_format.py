@@ -84,10 +84,26 @@ def control_split(edited: str) -> tuple[str, str]:
 
 
 def corr(a: np.ndarray, b: np.ndarray) -> tuple[float, float]:
-    """Pearson + tie-naive spearman, byte-matching the pinned notebook's corr()."""
+    """Pearson + spearman with TIED-VALUE MIDRANKS.
+
+    This used to mirror the pinned notebook's tie-naive ranking, which breaks ties
+    by array position and so silently correlates a feature with row order. On the
+    binary and low-cardinality columns here that flipped signs (adversarial audit,
+    2026-07-25: generic R-vs-grade read +0.056 when the true value is -0.047).
+    Matching a known-wrong implementation is not compatibility, it is copying a bug.
+    """
 
     def rank(v: np.ndarray) -> np.ndarray:
-        return np.argsort(np.argsort(v))
+        order = np.argsort(v, kind="mergesort")
+        out = np.empty(len(v), dtype=float)
+        i = 0
+        while i < len(order):
+            j = i
+            while j + 1 < len(order) and v[order[j + 1]] == v[order[i]]:
+                j += 1
+            out[order[i:j + 1]] = (i + j) / 2.0
+            i = j + 1
+        return out
 
     pear = np.corrcoef(a, b)[0, 1]
     spear = np.corrcoef(rank(a), rank(b))[0, 1]

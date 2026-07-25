@@ -177,9 +177,11 @@ trail in `jestry_out/format_boundary_items.jsonl`.
 
 | condition | laugh vs grade | S vs grade | R vs grade | mean R | items with R>0 |
 |---|---|---|---|---|---|
-| generic (pinned splitter) | 0.021 (p=0.86) | 0.117 (p=0.31) | 0.056 (p=0.64) | 0.050 | 19.3% |
-| canonical (edit-anchored) | -0.044 (p=0.71) | 0.170 (p=0.12) | 0.095 (p=0.41) | 0.122 | 31.3% |
-| control (fixed 40% cut) | -0.097 (p=0.37) | 0.193 (p=0.076) | 0.037 (p=0.74) | 0.039 | 20.5% |
+| generic (pinned splitter) | -0.025 | 0.112 | -0.047 | 0.050 | 19.3% |
+| canonical (edit-anchored) | -0.092 | 0.163 | 0.030 | 0.122 | 31.3% |
+| control (fixed 40% cut) | -0.103 | 0.183 | -0.052 | 0.039 | 20.5% |
+
+**Correction, 2026-07-25.** The correlations in this table were recomputed after our own adversarial audit found that the ranking function broke ties by array position, which silently correlates a low-cardinality column with row order. Several values moved and three changed sign (generic R read +0.056 against a true -0.047). The statistic now uses tied-value midranks, verified against scipy. The engagement fractions, the measured S/R/E values, and the conclusion are unaffected: no split condition predicts human funniness, and every correlation remains inside noise. The receipt carries a `correction_2026_07_25` block listing every changed value.
 
 - **Mechanistic positive**: edit-anchoring roughly doubles how often resolution registers at all
   (19.3% to 31.3% of items) and lifts mean R from 0.050 to 0.122. The placebo cut is also a
