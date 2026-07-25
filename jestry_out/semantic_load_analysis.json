@@ -1,0 +1,83 @@
+{
+  "receipt_type": "semantic_load_analysis",
+  "receipt_version": 1,
+  "ts": "2026-07-25T05:23:09",
+  "method": "semantic_load(word) = cos(setup, punchline) - cos(setup, punchline without word), using EmbeddingGemma; centred on the mean deletion so the shared shortening effect is divided out",
+  "why": "deadweight.py's structural model ranked 'slowly' and 'getting' as cuttable when they carry the pun, because no structural feature can represent meaning. This measures the setup-punchline tie directly and needs no trained model.",
+  "what_it_measures_and_what_it_does_not": {
+    "measures": "TOPICAL tie to the setup. In both test cases the top-ranked content word is a genuine payoff word: 'slowly' bridges to speed bumps, 'zoo' recontextualises the lion. That is a real signal the structural model does not have, and it rescues the case deadweight.py gets wrong.",
+    "does_not_measure": "comic dependency in general. 'ban' ranks LAST in the lion joke although the line collapses without it, because 'ban' shares no topic with 'heart of a lion'; removing it leaves a string that is still about zoos and animals. Topical overlap and comic load are correlated, not identical.",
+    "honest_scope": "use the top-ranked content word as a candidate payoff, not the full ranking as a cut list. Two jokes is also a demo, not an evaluation; a real one needs human-annotated payoff words, which this project does not yet have."
+  },
+  "cases": [
+    {
+      "setup": "I told my therapist about my fear of speed bumps.",
+      "punchline": "She said I am actually just slowly getting over it honestly.",
+      "setup_punchline_link": 0.46773,
+      "mean_load": 0.00847,
+      "content_words_scored": 5,
+      "function_words_skipped": 6,
+      "words": [
+        {
+          "word": "said",
+          "link_without": 0.46568,
+          "semantic_load": 0.00206,
+          "load_relative": -0.00641
+        },
+        {
+          "word": "actually",
+          "link_without": 0.46383,
+          "semantic_load": 0.0039,
+          "load_relative": -0.00457
+        },
+        {
+          "word": "slowly",
+          "link_without": 0.4299,
+          "semantic_load": 0.03783,
+          "load_relative": 0.02936
+        },
+        {
+          "word": "getting",
+          "link_without": 0.47266,
+          "semantic_load": -0.00493,
+          "load_relative": -0.0134
+        },
+        {
+          "word": "honestly.",
+          "link_without": 0.46423,
+          "semantic_load": 0.00351,
+          "load_relative": -0.00496
+        }
+      ]
+    },
+    {
+      "setup": "My grandfather has the heart of a lion",
+      "punchline": "and a lifetime ban from the zoo.",
+      "setup_punchline_link": 0.32823,
+      "mean_load": -0.05167,
+      "content_words_scored": 3,
+      "function_words_skipped": 4,
+      "words": [
+        {
+          "word": "lifetime",
+          "link_without": 0.3634,
+          "semantic_load": -0.03517,
+          "load_relative": 0.0165
+        },
+        {
+          "word": "ban",
+          "link_without": 0.42861,
+          "semantic_load": -0.10038,
+          "load_relative": -0.04871
+        },
+        {
+          "word": "zoo.",
+          "link_without": 0.34769,
+          "semantic_load": -0.01946,
+          "load_relative": 0.03221
+        }
+      ]
+    }
+  ],
+  "runtime_s": 2.2
+}
