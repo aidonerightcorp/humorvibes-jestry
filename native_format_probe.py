@@ -157,17 +157,37 @@ def auc(pos: list[float], neg: list[float]) -> float:
 
 
 def spearman(a: list[float], b: list[float]) -> float:
-    def rank(v: list[float]) -> list[float]:
-        order = sorted(range(len(v)), key=lambda i: v[i])
-        out = [0.0] * len(v)
-        for pos, idx in enumerate(order):
-            out[idx] = float(pos)
-        return out
-    ra, rb = rank(a), rank(b)
+    """Tied values share their average rank; see humor_features.rank_midpoint.
+
+    The tie-naive version this replaced correlated a low-cardinality column with
+    row order (adversarial audit, 2026-07-25).
+    """
+    from humor_features import rank_midpoint
+    ra, rb = rank_midpoint(a), rank_midpoint(b)
     ma, mb = sum(ra) / len(ra), sum(rb) / len(rb)
     num = sum((x - ma) * (y - mb) for x, y in zip(ra, rb))
     den = math.sqrt(sum((x - ma) ** 2 for x in ra) * sum((y - mb) ** 2 for y in rb))
     return round(num / den, 3) if den else 0.0
+
+
+def _headline_comparison() -> dict:
+    """Read the headline experiment's numbers from ITS receipt, never copy them.
+
+    These were literals with a "source" field asserting a provenance they did not
+    have: correct on the day, silently false the moment that experiment is re-run
+    (adversarial audit, 2026-07-25).
+    """
+    path = OUT / "format_boundary_experiment.json"
+    if not path.exists():
+        return {"unavailable": "format_boundary_experiment.json not present"}
+    rec = json.loads(path.read_text(encoding="utf-8"))
+    canon = rec["conditions"]["canonical"]
+    return {
+        "headline_canonical_R_positive_frac": canon["R_positive_frac"],
+        "headline_laugh_spearman": canon["laugh"]["spearman"],
+        "source": "jestry_out/format_boundary_experiment.json",
+        "read_at_runtime": True,
+    }
 
 
 def main() -> None:
@@ -241,11 +261,7 @@ def main() -> None:
             "spearman_S_vs_log2score": spearman([r["S"] for r in genuine],
                                                 [r["log2_score"] for r in genuine]),
         },
-        "comparison": {
-            "headline_canonical_R_positive_frac": 0.313,
-            "headline_laugh_spearman": -0.044,
-            "source": "jestry_out/format_boundary_experiment.json",
-        },
+        "comparison": _headline_comparison(),
         "worker": {"calls": provider.calls, "errors": provider.errors,
                    "restarts": provider.restarts},
         "runtime_s": round(time.time() - t0, 1),

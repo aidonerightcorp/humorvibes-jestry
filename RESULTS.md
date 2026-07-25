@@ -209,7 +209,7 @@ Receipt: `jestry_out/native_format_probe.json`, per-item `jestry_out/native_form
   AUC of R = 0.406. Mean R genuine 0.142 vs shuffled 0.273. R clears zero on 56.7% of genuine
   pairs vs 66.7% of shuffled. Composite laugh score sits at chance (AUC 0.497).
 - **Arm B (exploratory, noisy): null**, as expected from a popularity proxy. Spearman vs
-  log2(1+upvotes): laugh -0.034, R -0.066, S -0.176.
+  log2(1+upvotes): laugh -0.017, R -0.044, S -0.191.
 - **Mechanism, and why this does NOT contradict the certified calibration.** The calibration
   supplies GROUND-TRUTH frames to the reference jokes and no frame to the controls, which is why
   controls measured exactly 0. This probe let the model write a frame for every item, including

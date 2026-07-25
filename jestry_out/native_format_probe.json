@@ -19,9 +19,9 @@
   },
   "arm_B_upvote_correlation": {
     "note": "upvotes are a popularity proxy confounded by timing, subreddit dynamics and visibility; a null here is weak evidence, a positive would be strong",
-    "spearman_laugh_vs_log2score": -0.034,
-    "spearman_R_vs_log2score": -0.066,
-    "spearman_S_vs_log2score": -0.176
+    "spearman_laugh_vs_log2score": -0.017,
+    "spearman_R_vs_log2score": -0.044,
+    "spearman_S_vs_log2score": -0.191
   },
   "comparison": {
     "headline_canonical_R_positive_frac": 0.313,
@@ -33,5 +33,11 @@
     "errors": 0,
     "restarts": 0
   },
-  "runtime_s": 1845.9
+  "runtime_s": 1845.9,
+  "correction_2026_07_25": {
+    "what": "arm B correlations recomputed with tied-value midranks",
+    "why": "the tie-naive ranking correlated low-cardinality columns with row order",
+    "scope": "arm B only; arm A AUCs use a separate, audited tie-handling implementation and are unchanged",
+    "conclusion_unchanged": "arm B remains null, as expected from a popularity proxy"
+  }
 }

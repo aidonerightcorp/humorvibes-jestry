@@ -1,6 +1,6 @@
 {
   "dataset": "comedy-primitives-humor-genome",
-  "generated": "2026-07-25T00:05:48",
+  "generated": "2026-07-25T03:10:32",
   "generator": "comedy_primitives_dataset.py",
   "files": {
     "mechanisms.jsonl": {
@@ -13,33 +13,15 @@
     },
     "items.jsonl": {
       "rows": 23779,
-      "sha256": "c05fdf6cd8ab3e823d82ef3b6e2108e5baf5741f48ae76d9a7acac2ed98fd4d8"
+      "sha256": "9cb46105526dbe988a3befe07b006b472ae446662668d8c4ba43359327276f07"
     },
     "frames.jsonl": {
       "rows": 270,
-      "sha256": "460cb2fe61313f417145248bef2cb241aa70b1fbd1058a81edbd9dc78f7f5e00"
+      "sha256": "ad763d4250cfb792c9a7a1b76fa8c1ee779c9cb369671e422d95718e510ef334"
     },
     "measured_signals.jsonl": {
       "rows": 309,
       "sha256": "a51c93d1ae44a160319fcbe17266e3ee80e8fbf0b743e11ab416c6fea044bacc"
-    },
-    "embeddings_surface.npy": {
-      "shape": [
-        23779,
-        768
-      ],
-      "dtype": "float32",
-      "aligned_to": "items.jsonl rows where has_surface_embedding is true",
-      "sha256": "37614b2748edab287e2bcfddf310f17bf8945f168588deeae65f791e75d28c2e"
-    },
-    "embeddings_frame.npy": {
-      "shape": [
-        270,
-        768
-      ],
-      "dtype": "float32",
-      "aligned_to": "frames.jsonl rows",
-      "sha256": "b46ca495a04c8ea51731473e8431cb193d510eceb49873b373ae8c7353280b4b"
     },
     "DATASET_CARD.md": {
       "sha256": "edce16a6bb945a2ea0f9a258b7eb6cb3f482ce0d0ed5a20bee3fd0ad96cec2fe"
@@ -52,11 +34,11 @@
     "measured_signal_rows": 309,
     "mechanisms": 14,
     "formats": 11,
-    "languages": 46,
+    "languages": 43,
     "top_languages": [
       [
         "en",
-        10777
+        10781
       ],
       [
         "ru",
@@ -71,6 +53,10 @@
         608
       ],
       [
+        "it",
+        603
+      ],
+      [
         "pt",
         602
       ],
@@ -80,10 +66,6 @@
       ],
       [
         "ro",
-        601
-      ],
-      [
-        "it",
         601
       ],
       [

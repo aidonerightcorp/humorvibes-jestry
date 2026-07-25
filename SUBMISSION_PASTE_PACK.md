@@ -21,7 +21,7 @@ writeup's final sentence ("...`mesh_cli.py {signals|vibe|...}`.") with this one.
 Check the word count after doing so; the writeup is already near the cap:
 
 > All code, including Jestry, the charter-governed reuse layer that added a
-> certified full-logprob instrument, a 23,779-item been-done index across 46
+> certified full-logprob instrument, a 23,779-item been-done index across 43
 > languages, and an adversarially-hardened competition pack, is public at
 > github.com/aidonerightcorp/humorvibes-jestry.
 
@@ -136,7 +136,7 @@ https://raw.githubusercontent.com/aidonerightcorp/humorvibes-jestry/main/demo_as
   generation cannot. The receipt keeps its truth boundary explicit
   (model judgment is not human laughter). jestry_out/receipts.jsonl
 - Been-done engine: 23,779 indexed items (jokes, proverbs, anecdotes, quips,
-  meme frames), 46+ languages, 270 Gemma-labeled frames (a citation-template
+  meme frames), 43 languages (46 raw label values before ISO alias normalisation), 270 Gemma-labeled frames (a citation-template
   parser recovered 640 French and Italian proverbs an earlier lane read as
   zero, and a labeling batch added 40 frames with zero failures);
   EN paraphrase retrieves KO 0.72 / JA 0.70 monkeys-fall originals at full
@@ -156,7 +156,7 @@ https://raw.githubusercontent.com/aidonerightcorp/humorvibes-jestry/main/demo_as
   without a redistributable license (0 leaks).
 - Exported dataset (comedy_primitives_dataset.py -> dataset_out/): 14 comedy
   mechanisms + 11 format specs as structured primitives, 23,779 licensed items
-  in 45 languages, 270 Gemma-labeled frames, 309 rows of real teacher-forced
+  in 43 languages, 270 Gemma-labeled frames, 309 rows of real teacher-forced
   S/R/E, and DUAL-CHANNEL 768-dim embeddings (surface wording and comic frame
   embedded separately). Round-trip proven with numpy alone, no project code:
   querying with the Korean "monkeys fall from trees" vector returns the

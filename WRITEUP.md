@@ -117,7 +117,7 @@ material), not noise.
 ## The genome, exported
 
 The apparatus is also a dataset generator, so we ship what it produced: 14 comedy mechanisms and
-11 format specs as primitives, 23,779 licensed items in 45 languages with 768-dimensional
+11 format specs as primitives, 23,779 licensed items in 43 languages with 768-dimensional
 **dual-channel** EmbeddingGemma vectors (surface wording and, separately, the comic frame), 270
 Gemma-labeled frames, and 309 rows of teacher-forced S/R/E. Licensing is per record, and text is
 withheld (metadata, labels and vectors kept) wherever a source's own terms say verify before

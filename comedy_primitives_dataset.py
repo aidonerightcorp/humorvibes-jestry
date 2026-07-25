@@ -71,6 +71,26 @@ def may_redistribute_text(license_str: str) -> bool:
     return any(tok in lic for tok in TEXT_OK)
 
 
+# Language labels arrive from many lanes in mixed standards: ISO-639-1, ISO-639-3,
+# and free text ("Yiddish", "Latin"). Counting the raw strings overstates coverage,
+# which is how "45 languages" got into a writeup when the true figure is 43
+# (adversarial audit, 2026-07-25). Normalise once, here, so every downstream count
+# is of languages rather than of spellings.
+LANG_ALIAS = {
+    "eng": "en", "ita": "it", "lat": "la", "Latin": "la", "urd": "ur", "isl": "is",
+    "hait": "ht", "Yiddish": "yi", "yid": "yi", "deu": "de", "ger": "de", "fra": "fr",
+    "fre": "fr", "spa": "es", "rus": "ru", "jpn": "ja", "kor": "ko", "zho": "zh",
+    "chi": "zh", "por": "pt", "nld": "nl", "dut": "nl",
+}
+
+
+def normalise_language(code: str) -> str:
+    c = (code or "").strip()
+    if c in LANG_ALIAS:
+        return LANG_ALIAS[c]
+    return c.lower() if len(c) <= 3 else c
+
+
 def _plain(value):
     """Dataclasses/tuples -> JSON-safe structures, order preserved."""
     if dataclasses.is_dataclass(value):
@@ -256,7 +276,7 @@ def main() -> None:
             "text_withheld": not shareable,
             "source": it.get("source", ""),
             "license": lic,
-            "language": labels.get("language") or it.get("language", "en"),
+            "language": normalise_language(labels.get("language") or it.get("language", "en")),
             "has_surface_embedding": bool(it.get("surface")),
             "labeled": bool(labels),
         }
