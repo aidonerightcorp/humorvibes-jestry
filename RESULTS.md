@@ -252,6 +252,66 @@ every logit, and the NaN reached a receipt that still said `measured: true`. Fix
 trusting any receipt from it; never resume a partial GGUF with `curl -C -`. Receipt:
 `jestry_out/instrument_sweep.jsonl` (latest entry). The certified Q4 calibration is unaffected.
 
+## 2026-07-25 the predictive model, and why its headline number is corpus-bound
+
+**The model.** Humicroedit task-2 had gone unused: each row is one headline with TWO different
+one-word edits and TWO grades, so flattening it with task-1 gives **28,414 human-graded rows**
+and a set of controlled pairs where the sentence is held constant. A gradient-boosted model over
+30 structural features (lengths, syllables, rarity against this project's own corpus, punctuation,
+position, lexical echo) reaches:
+
+- **held-out Spearman +0.5075, R^2 +0.243** on 8,525 unseen rows
+- **70.7%** accuracy choosing the human-preferred edit on controlled pairs whose BOTH members are
+  held out (77.0% on the 1,579 pairs humans separated by >= 0.4), against 50% chance
+
+For scale, the pinned single-signal Humicroedit validation reached spearman 0.115. An earlier
+version of the pair test scored all pairs including trained rows and read 0.75; that measured
+memorisation and was replaced with the out-of-sample figure above.
+
+**And it does not transfer.** A within-corpus number is the easiest possible test, so the same
+model was moved to a different population: 100,000 r/Jokes posts (native setup/punchline jokes,
+no substitution, scored by upvotes rather than annotators). Receipt:
+`jestry_out/cross_corpus_transfer.json`.
+
+| arm | spearman |
+|---|---|
+| within Humicroedit (train to test) | +0.5075 |
+| **transfer Humicroedit to Reddit** | **-0.0091** |
+| within Reddit (train to test) | +0.1631 |
+| reverse Reddit to Humicroedit | +0.0907 |
+
+The third arm is what makes the second interpretable: r/Jokes IS learnable at 0.163, so the
+transfer failure is distribution shift rather than an impossible target. The asymmetry between
+arms 2 and 4 carries its own information: a model trained on the noisier, more varied corpus
+learns a little that applies to headlines, while the headline-trained model learns nothing that
+applies to native jokes. The Humicroedit-learnable signal is narrow and corpus-shaped.
+
+**How the number must be quoted.** 0.5075 is held-out performance on news headlines with one word
+substituted, graded by annotators. It is not a general humor predictor, and it is not quoted here
+without that scope.
+
+## 2026-07-25 dead-weight words, and the limit of structural features
+
+From the question "can we detect extra words that ruin a joke": delete each word, re-score, and
+the change is that word's contribution (`deadweight.py`). Removing ANY word shortens the punchline
+and the model has learned shorter scores higher, so every raw delta is positive; each is therefore
+centred on the mean deletion to isolate the word-specific part.
+
+On the demo joke it ranks *slowly* and *getting* as dead weight. **Those two words are the pun.**
+Every feature the model sees is structural, so it cannot know that a plain word is holding a
+reframe. It correctly top-ranks *honestly* and *just*, so it is a filler detector and is described
+as one. Receipt: `jestry_out/deadweight_analysis.json`.
+
+`semantic_load.py` adds the missing axis without a trained model:
+`load(word) = cos(setup, punchline) - cos(setup, punchline without word)`. Two things were measured
+rather than assumed. Function words had to be excluded, because with them included *and*, *a* and
+*the* ranked as the most load-bearing words in the lion/zoo joke: deleting a function word from a
+short string perturbs the embedding through grammaticality, not meaning. And the metric measures
+TOPICAL tie rather than comic load. It rescues the case the structural model gets wrong (*slowly*
+and *zoo* come top), but *ban* ranks last in the lion joke although the line collapses without it,
+because *ban* shares no topic with "heart of a lion". Scope shipped in the receipt: use the top
+content word as a candidate payoff, not the ranking as a cut list.
+
 ## Open (queued)
 - ~~Century test with the fixed jest extractor~~ **DONE 2026-07-11 reconciliation: 12 jests, 3
   alive, top R 0.73** (zoo latest). ~~Headline temporal experiment~~ **RAN, did not discriminate**
