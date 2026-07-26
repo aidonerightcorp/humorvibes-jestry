@@ -7,7 +7,7 @@ bounds, held-out caption-model result, and live Gemma measurement are consolidat
 `wave2_notebook/humor_genome_wave2.ipynb`. It clones this repository, verifies the attached
 release byte-for-byte and semantically, then runs the Gemma instrument. The repository is the
 implementation and receipt ledger; the Kaggle page is the single executable write-up. Its source
-checkout is pinned to the immutable `humor-genome-wave2-v1` tag rather than whatever `main` becomes.
+checkout is pinned to the immutable `humor-genome-wave2-v2` tag rather than whatever `main` becomes.
 
 *(Formerly "Punchline Mesh" — a few internal Kaggle slugs keep the old name for stability:
 the `punchline-mesh-src` dataset and already-running kernel sessions.)*
@@ -124,16 +124,20 @@ any notebook public and is not a competition submission.
 Wave 2 turns the source sweep into a reproducible release rather than a directory-sized claim:
 
 - **3,164,600** full-corpus rows across 217 source families and 62 language labels;
-- **257,141** rows in the deterministic, per-family-capped Kaggle slice;
-- **19,455** non-English phrases carrying English counterparts and **2,581** independently
+- **121,670** redistributable rows in the deterministic, per-family-capped Kaggle slice, selected
+  from 471,328 eligible records after a deny-first rights gate;
+- **7,913** non-English phrases carrying English counterparts and **2,581** independently
   annotated expectation/violation frames;
 - per-record provenance and licence, a full-corpus census, and SHA-256/byte manifests verified by
   the consuming notebook before it measures anything.
 
-The published sample is deliberately stratified. The caption family is 71.0% of the full corpus;
-a random sample would reproduce that imbalance, while the 12,000-row family cap reduces the
-largest export family to 4.7%. Selection is SHA-256 ordered and clock-free, so rebuilding the same
-corpus yields identical bytes.
+The published sample is deliberately stratified and rights-filtered. The caption family is 71.0%
+of the full corpus; a random sample would reproduce that imbalance, while the deny-first licence
+gate and 12,000-row family cap reduce captions to 2.2% of the public slice and hold every source
+family below 9.9%. Selection is SHA-256 ordered and clock-free, so rebuilding the same corpus
+yields identical bytes. The other 2,693,272 records remain represented in the local census but
+their verbatim text is not published because their licence class is noncommercial, research-only,
+or unclassified.
 
 The Gemma-2 form study reports uncertainty, not a winner: all ten joke-form bootstrap intervals
 overlap the proverb control, so the checked-in notebook prints **SEPARATION IS NOT ESTABLISHED**.

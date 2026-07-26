@@ -5,7 +5,9 @@
 > endpoints, 301 Wikiquote pages across 51 language editions, and 164 Wiktionary
 > categories, each with a live status code and a row count. The corpus grew from
 > 23,885 items to **3,164,600** across 217 source families and 62 language labels. The
-> deterministic public slice contains 257,141 rows and 19,455 aligned non-English/English pairs.
+> deny-first deterministic public slice contains 121,670 redistributable rows and 7,913 aligned
+> non-English/English pairs. The full census remains 3,164,600 rows; records without explicit
+> redistribution permission are counted locally but their verbatim text is not published.
 > That document supersedes the
 > priority tables below where the two disagree, and it also records what is
 > **dead** — `numbersapi.com` is now a hijacked redirect, Princeton's SARC is

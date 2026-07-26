@@ -475,9 +475,12 @@ records core and end-to-end runtimes separately.
 
 The final strict scan contains **3,164,600 rows in 117 files, 767 source labels, 217 source
 families and 62 language labels**. It carries 2,587,825 source-specific human signals (81.8%). The
-published Kaggle slice is SHA-256 ordered and capped at 12,000 rows per family: **257,141 rows,
-19,455 aligned non-English/English pairs, and 2,581 expectation/violation frames**. The dominant
-caption family falls from 71.0% of the full corpus to 4.7% of the slice.
+published Kaggle slice is SHA-256 ordered, deny-first on redistribution rights, and capped at
+12,000 rows per family: **121,670 redistributable rows, 7,913 aligned non-English/English pairs,
+and 2,581 expectation/violation frames**. It is drawn from 471,328 licence-eligible rows. The
+caption family falls from 71.0% of the full corpus to 2.2% of the public slice; no public source
+family exceeds 9.9%. The remaining 2,693,272 rows stay in the local census but their verbatim text
+is excluded: 2,580,994 research-only, 59,537 noncommercial, and 52,741 unclassified.
 
 The release builder now scans the corpus once with bounded per-family heaps. It fails on malformed
 JSON instead of silently dropping a row, has no clock field, stages every artifact before replacing
@@ -486,8 +489,8 @@ release again and checks hashes, JSONL counts, family caps, languages, licence c
 aligned-pair invariants, frame provenance, and agreement among the sample header, summary, census
 and data card. Final receipt: **PASS**, six payloads.
 
-Two consecutive full builds produced identical hashes for all eight local files. The domain audit
-then found one last semantic bug before publication: the keyword patterns had a leading word
+The deterministic-build test produces identical hashes on consecutive schema-3 builds. The domain
+audit also found a semantic bug before publication: the keyword patterns had a leading word
 boundary but no trailing one, so `car` matched “carpet” and `cat` matched “category.” After adding
 the second boundary, exactly the files that should change did change—`corpus_sample.jsonl` and its
 manifest—while the census, selection summary, aligned pairs, frame rows and data card stayed
