@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = "https://github.com/aidonerightcorp/humorvibes-jestry"
-REPO_REF = "humor-genome-wave2-v2"
+REPO_REF = "humor-genome-wave2-v3"
 
 # The controlling definition of bad surprise, verbatim. It is quoted rather than
 # paraphrased everywhere in this project because paraphrasing it changes what
@@ -368,7 +368,19 @@ CELLS: list[tuple[str, str]] = [
      "    hits = [d for d in glob.glob('/kaggle/input/**/config.json', recursive=True)]\n"
      "    MODEL = os.path.dirname(hits[0]) if hits else 'google/gemma-2-2b-it'\n"
      "print('checkpoint:', MODEL)\n"
-     "DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'\n"
+     "def cuda_runtime_usable() -> bool:\n"
+     "    if not torch.cuda.is_available():\n"
+     "        return False\n"
+     "    try:\n"
+     "        # is_available() alone was a false positive on one Kaggle image:\n"
+     "        # PyTorch saw the GPU, but its kernels did not support that device.\n"
+     "        probe = torch.arange(8, device='cuda')\n"
+     "        assert int((probe + 1).sum().item()) == 36\n"
+     "        return True\n"
+     "    except Exception as exc:\n"
+     "        print(f'CUDA runtime probe failed ({type(exc).__name__}: {exc}); using CPU')\n"
+     "        return False\n"
+     "DEVICE = 'cuda' if cuda_runtime_usable() else 'cpu'\n"
      "DTYPE = torch.float16 if DEVICE == 'cuda' else torch.float32\n"
      "tok = AutoTokenizer.from_pretrained(MODEL)\n"
      "model = AutoModelForCausalLM.from_pretrained(MODEL, torch_dtype=DTYPE).to(DEVICE).eval()\n"
