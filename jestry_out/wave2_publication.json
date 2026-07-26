@@ -1,0 +1,79 @@
+{
+  "receipt_type": "humor_genome_wave2_publication",
+  "receipt_version": 1,
+  "verified_utc": "2026-07-26T22:24:19Z",
+  "github": {
+    "url": "https://github.com/aidonerightcorp/humorvibes-jestry",
+    "main_commit_at_live_verification": "abb7fabfd74d461f58fe1439d883dabda267068c",
+    "source_tag": "humor-genome-wave2-v4",
+    "source_tag_commit": "abb7fabfd74d461f58fe1439d883dabda267068c",
+    "anonymous_http_status": 200
+  },
+  "dataset": {
+    "url": "https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2",
+    "version": 5,
+    "status": "ready",
+    "is_private": false,
+    "anonymous_http_status": 200,
+    "schema_version": 3,
+    "release_policy": "redistributable_text_only",
+    "full_corpus_rows": 3164600,
+    "eligible_rows": 471328,
+    "published_rows": 121670,
+    "excluded_rows": 2693272,
+    "languages_in_public_slice": 59,
+    "source_families_in_public_slice": 166,
+    "aligned_phrase_pairs": 7913,
+    "expectation_violation_frames": 2581,
+    "manifest_sha256": "39bfb4e1340fc11cc25c62c4db8f73fc2a86c51b166252cfdbc31d0cd3ac813e",
+    "remote_files": {
+      "DATA_CARD.md": 2500,
+      "aligned_phrases.jsonl": 2247343,
+      "census.json": 5106,
+      "corpus_sample.jsonl": 65190241,
+      "expectation_violation_frames.jsonl": 1571077,
+      "export_summary.json": 6300,
+      "manifest.json": 771
+    }
+  },
+  "notebook": {
+    "url": "https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma",
+    "version": 9,
+    "status": "COMPLETE",
+    "is_private": false,
+    "anonymous_http_status": 200,
+    "source_commit_printed_by_run": "abb7fabfd74d461f58fe1439d883dabda267068c",
+    "source_tag_printed_by_run": "humor-genome-wave2-v4",
+    "local_source_notebook_sha256": "53e158297de76c6203e1954aada7e8179cb8c0c75017a187878c6c8ba9f3855d",
+    "raw_kaggle_log_sha256": "748aeabd4fc7c84987c278462af7d449940428f3b013e972870b52f75fe5ac59",
+    "device": "cpu",
+    "instrument": {
+      "measured_s": 3.188,
+      "pinned_s": 3.19,
+      "tokens": 10,
+      "agreement": true
+    },
+    "form_study": {
+      "joke_arms": 10,
+      "strictly_above_proverb_control": 0,
+      "overlapping_proverb_control": 10,
+      "verdict": "SEPARATION IS NOT ESTABLISHED"
+    },
+    "caption_model": {
+      "label_ceiling": 0.8262,
+      "text_only_bound": 0.4110,
+      "held_out_contest_spearman": 0.1555,
+      "fraction_of_text_only_bound": 0.378,
+      "captions": 215465,
+      "held_out_contests": 360,
+      "protocol_receipt": "PASS"
+    }
+  },
+  "local_verification": {
+    "full_verifier_receipt_utc": "2026-07-26T17:52:35-04:00",
+    "full_verifier_result": "ALL GREEN",
+    "full_pytest_result": "62 passed in 11.37s",
+    "wave2_tests_at_release_commit": "20 passed in 1.34s",
+    "semantic_release_gate": "PASS"
+  }
+}

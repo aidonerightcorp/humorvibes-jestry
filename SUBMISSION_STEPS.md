@@ -1,5 +1,15 @@
 # Humor Genome NYC - Submission Steps
 
+> **2026-07-26 final public state:** the single canonical implementation is
+> https://github.com/aidonerightcorp/humorvibes-jestry at
+> `humor-genome-wave2-v4` (`abb7fab`); the fail-closed dataset is public and ready at
+> https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2 (version 5); and the
+> consolidated executable write-up is public and COMPLETE at
+> https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma (version 9). Anonymous
+> requests returned HTTP 200 for all three surfaces. The older state audits below are preserved
+> as history. Public artifacts do not by themselves prove that a competition Writeup or video
+> was submitted.
+
 > **2026-07-24 addendum (Jestry round):** the code now ALSO lives in a PUBLIC
 > GitHub repo - https://github.com/aidonerightcorp/humorvibes-jestry - which
 > satisfies the "public code repo" requirement immediately (no visibility flip

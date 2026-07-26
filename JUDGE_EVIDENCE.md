@@ -1,9 +1,24 @@
 # HumorVibes judge evidence map
 
-This packet separates measured evidence, deterministic demonstrations, honest negative results,
-and unfinished publication steps. All Kaggle kernels and the GitHub mirror are private as of
-2026-07-12; none of the evidence below should be described as publicly accessible until the
-visibility checklist is completed.
+## Current public release (2026-07-26)
+
+The canonical evidence is now consolidated and public:
+
+- repository: https://github.com/aidonerightcorp/humorvibes-jestry at commit
+  `abb7fabfd74d461f58fe1439d883dabda267068c`, source tag `humor-genome-wave2-v4`;
+- dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2, version 5,
+  121,670 fail-closed redistributable rows, public and ready;
+- executable write-up: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma,
+  version 9, public and COMPLETE.
+
+The notebook verifies six mounted payload hashes and the semantic release gate, runs Gemma 2 on
+CPU, reproduces S=3.188 over ten tokens against the pinned 3.19 instrument check, and verifies the
+full form-study receipt before printing `SEPARATION IS NOT ESTABLISHED`. Machine-readable public
+state is in `jestry_out/wave2_publication.json`.
+
+The remainder of this packet preserves earlier evidence and limitations. Statements below about
+private kernels or an unfinished visibility flip describe the dated 2026-07-12 audit, not the
+canonical release above.
 
 ## Core claims and receipts
 
@@ -55,9 +70,12 @@ same directory. Versions 1–3 remain excluded from evidence.
 5. Show compile-time lint rejecting the malformed artifact, then identical seed-7 runtime output.
 6. Close with the visible limitations above and the exact public reproduction links.
 
-## Publication gates
+## Historical publication gates (2026-07-12)
 
-- GitHub `Amarel-Taylor-Scott/humorvibes` is currently private.
-- All seven verified Kaggle notebooks, including the ablation court, are currently private.
+- The old GitHub mirror `Amarel-Taylor-Scott/humorvibes` was private; the canonical repository
+  linked above is public.
+- The seven older research notebooks, including the ablation court, were private. Their evidence
+  is consolidated into the public canonical notebook; this does not claim their own visibility
+  changed.
 - A ≤2-minute video has not yet been uploaded.
 - No Kaggle Writeup has been submitted.
