@@ -311,10 +311,21 @@ CELLS: list[tuple[str, str]] = [
     ("code",
      "import torch\n"
      "from transformers import AutoTokenizer, AutoModelForCausalLM\n"
-     "MODEL = '/kaggle/input/gemma-2/transformers/gemma-2-2b-it/2'\n"
+     "\n"
+     "# DISCOVER the checkpoint, never hard-code the mount. A hard-coded path\n"
+     "# failed here once already: transformers sees a non-existent directory,\n"
+     "# assumes it is a hub repo id, and raises a confusing 'Repo id must be in\n"
+     "# the form namespace/repo_name'. The repo already solved this once, so reuse\n"
+     "# its finder and fall back to a glob.\n"
+     "from mesh_signals import TransformersProvider\n"
+     "MODEL = TransformersProvider._find_kaggle_gemma()\n"
+     "if not MODEL:\n"
+     "    hits = [d for d in glob.glob('/kaggle/input/**/config.json', recursive=True)]\n"
+     "    MODEL = os.path.dirname(hits[0]) if hits else 'google/gemma-2-2b-it'\n"
+     "print('checkpoint:', MODEL)\n"
      "tok = AutoTokenizer.from_pretrained(MODEL)\n"
      "model = AutoModelForCausalLM.from_pretrained(MODEL, torch_dtype=torch.float32).eval()\n"
-     "print('loaded', MODEL)"),
+     "print('loaded OK')"),
 
     ("code",
      "@torch.no_grad()\n"
