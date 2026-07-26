@@ -114,8 +114,71 @@ least surprising to the model; forms whose turn is a pun on a requested *name* a
 surprising. That is the direction the theory predicts, since a more rigid frame constrains the
 ending more tightly.
 
-Read the ordering, not the individual means: n is small per arm, and S is model surprisal, **not
-funniness**. These items carry no human grade, so nothing here says a form is funnier.
+### The separation is NOT established, and that matters
+
+The full run — 8 items per arm, 88 measurements, deterministic sampling, bootstrap 95% CIs:
+
+| form | n | mean S | 95% CI |
+| --- | --- | --- | --- |
+| what_do_you_call | 8 | 6.680 | [4.759, 8.855] |
+| doctor_doctor | 8 | 4.703 | [3.654, 5.884] |
+| whats_the_difference | 8 | 4.693 | [3.905, 5.446] |
+| walks_into_bar | 8 | 4.479 | [3.172, 5.809] |
+| yo_mama | 8 | 4.178 | [3.309, 5.025] |
+| setup_punchline | 8 | 4.082 | [3.085, 5.127] |
+| q_and_a | 8 | 3.874 | [3.119, 4.555] |
+| limerick | 8 | 3.856 | [3.262, 4.486] |
+| light_bulb | 8 | 3.815 | [3.051, 4.682] |
+| knock_knock | 8 | 3.728 | [2.915, 4.461] |
+| **control_proverb** | 8 | 3.652 | [2.298, 5.198] |
+
+**0 of 10 joke forms have a confidence interval strictly above the proverb control's upper bound
+(5.198). All ten overlap it.**
+
+A separate smaller run comparing *declared style* arms (military, medical, legal, dad-joke,
+jest-book, riddles) put all ten joke arms above the control **on the mean** — but that comparison
+used point estimates with no uncertainty, and ranking means at n=6 manufactures a separation the
+data does not contain. The interval-based verdict is the one to believe.
+
+So: the ordering is a hypothesis worth more measurement, not a finding. S is model surprisal,
+**not funniness** — these items carry no human grade, so nothing here says any form is funnier.
+
+## Do different subjects recruit different forms?
+
+Cross-tabulating form against domain over all 2,664,398 labelled rows says yes — but only after
+removing a confound that would otherwise have produced a wrong answer.
+
+**The confound.** `shaggy_dog` is assigned by length alone (over 900 characters), not by a
+template. On a first pass it dominated military, religion and medical. Checking where those items
+came from showed they were overwhelmingly taivop Reddit dumps — long reddit posts. The label was
+tracking **source verbosity, not genre**. Any conclusion drawn from that pass would have been
+about where the text came from.
+
+With the length proxy excluded, real domain–form pairings appear:
+
+| domain | n | top template forms |
+| --- | --- | --- |
+| medical | 783 | **doctor_doctor 183**, what_do_you_call 150, blonde_joke 89 |
+| science | 448 | **walks_into_bar 194**, walk_into_group 74, what_do_you_call 53 |
+| religion | 1,211 | **walks_into_bar 281**, what_do_you_call 275, **walk_into_group 217** |
+| nautical | 534 | what_do_you_call 215, walks_into_bar 196 |
+| music | 361 | what_do_you_call 136, **whats_the_difference 72** |
+| military | 186 | what_do_you_call 66, chuck_norris 31, whats_the_difference 26 |
+| tech | 402 | what_do_you_call 113, chuck_norris 76, **light_bulb 56** |
+| legal | 336 | what_do_you_call 82, whats_the_difference 59 |
+
+The pairings are interpretable rather than arbitrary. Medicine is the one domain that has its
+**own** form (`doctor_doctor`). Science and religion both recruit the entry frame — "a neutron
+walks into a bar", "a priest, a rabbi and a minister walk into…" — and religion is the top user of
+the rule-of-three roster, which is exactly the shape of that genre's stock joke. Music skews to
+comparison forms, which is what viola jokes are. Technology is the heaviest user of the light-bulb
+frame.
+
+Caveats: `domain` is a keyword guess, counts are small once the length proxy is removed, and
+`chuck_norris` appearing under military is a topical artifact of that cycle's vocabulary rather
+than evidence about military humor. One pairing is worth flagging rather than celebrating —
+`blonde_joke` ranking in aviation and medical reflects a stereotype cluster in the source data,
+not a structural fact about those domains.
 
 ## Screening, and what it does not catch
 
