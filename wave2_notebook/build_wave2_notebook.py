@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = "https://github.com/aidonerightcorp/humorvibes-jestry"
-REPO_REF = "humor-genome-wave2-v3"
+REPO_REF = "humor-genome-wave2-v4"
 
 # The controlling definition of bad surprise, verbatim. It is quoted rather than
 # paraphrased everywhere in this project because paraphrasing it changes what
@@ -432,9 +432,10 @@ CELLS: list[tuple[str, str]] = [
      "measurements, bootstrap 95% CIs) produced the same rough ordering — `what_do_you_call` "
      "highest at 6.68, `knock_knock` near the bottom at 3.73 — but **0 of 10 arms had a "
      "confidence interval strictly above the proverb control's**. Every interval overlapped.\n\n"
-     "So the ordering is a hypothesis worth more data, not a result. The cell below therefore "
-     "compares intervals rather than ranking means, because ranking means at this sample size "
-     "would manufacture a separation the data does not contain."),
+     "So the ordering is a hypothesis worth more data, not a result. The cells below expose the "
+     "smaller public-slice check as exploratory, then load and verify the versioned 88-measurement "
+     "receipt. The fuller receipt controls the conclusion; ranking either set of bare means would "
+     "manufacture a separation the evidence does not establish."),
 
     ("code",
      "import hashlib, statistics\n"
@@ -497,14 +498,30 @@ CELLS: list[tuple[str, str]] = [
      "    print(f'\\nproverb control: mean {statistics.mean(ctrl):.3f}  95% CI [{c_lo:.3f}, {c_hi:.3f}]')\n"
      "    sep = [a for a, v in results.items()\n"
      "           if a != 'control_proverb' and boot_ci(v)[0] > c_hi]\n"
-     "    print(f'arms whose CI lies STRICTLY ABOVE the control CI: '\n"
+     "    print(f'exploratory public-slice arms whose CI lies STRICTLY ABOVE the control CI: '\n"
      "          f'{len(sep)}/{len(results)-1}')\n"
-     "    if not sep:\n"
-     "        print('  -> none. The ordering is suggestive; the SEPARATION IS NOT ESTABLISHED')\n"
-     "        print('     at this sample size. Reporting the ranking as a finding would')\n"
-     "        print('     be an overclaim.')\n"
-     "    else:\n"
-     "        print('  ->', sorted(sep))"),
+     "    print('  ->', sorted(sep) if sep else 'none')\n"
+     "    print('  This mixed source/form subsample is an execution check, not the controlling study.')\n"
+     "\n"
+     "receipt_path = Path('jestry_out/form_signal_receipts.jsonl')\n"
+     "form_receipts = [json.loads(line) for line in receipt_path.read_text(encoding='utf-8').splitlines()\n"
+     "                 if line.strip()]\n"
+     "full = form_receipts[-1]\n"
+     "assert full['receipt_type'] == 'form_signal_study' and full['errors'] == 0\n"
+     "assert full['per_form_requested'] == 8 and len(full['per_form']) == 11\n"
+     "full_control = full['per_form']['control_proverb']['ci95']\n"
+     "full_jokes = {name: evidence for name, evidence in full['per_form'].items()\n"
+     "              if name != 'control_proverb'}\n"
+     "strict = [name for name, evidence in full_jokes.items()\n"
+     "          if evidence['ci95'][0] > full_control[1]]\n"
+     "overlap = [name for name, evidence in full_jokes.items()\n"
+     "           if evidence['ci95'][0] <= full_control[1]\n"
+     "           and evidence['ci95'][1] >= full_control[0]]\n"
+     "assert not strict and len(overlap) == len(full_jokes) == 10\n"
+     "print(f'\\nCONTROLLING FULL FORM RECEIPT: {len(strict)}/10 strictly above; '\n"
+     "      f'{len(overlap)}/10 overlap the proverb control')\n"
+     "print('SEPARATION IS NOT ESTABLISHED')\n"
+     "print(full['verdict'])"),
 
     # --------------------------------------------------------- human-label bounds
     ("markdown",

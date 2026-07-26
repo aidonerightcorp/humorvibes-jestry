@@ -7,7 +7,7 @@ bounds, held-out caption-model result, and live Gemma measurement are consolidat
 `wave2_notebook/humor_genome_wave2.ipynb`. It clones this repository, verifies the attached
 release byte-for-byte and semantically, then runs the Gemma instrument. The repository is the
 implementation and receipt ledger; the Kaggle page is the single executable write-up. Its source
-checkout is pinned to the immutable `humor-genome-wave2-v3` tag rather than whatever `main` becomes.
+checkout is pinned to the immutable `humor-genome-wave2-v4` tag rather than whatever `main` becomes.
 
 *(Formerly "Punchline Mesh" — a few internal Kaggle slugs keep the old name for stability:
 the `punchline-mesh-src` dataset and already-running kernel sessions.)*
