@@ -36,6 +36,8 @@ pair:
 from __future__ import annotations
 
 import argparse
+import gzip
+import hashlib
 import json
 import math
 import re
@@ -46,6 +48,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "jestry_out"
 CORPORA = HERE / "corpora"
+CACHE_DIR = HERE / "data_cache"
 
 VOWELS = "aeiouy"
 WORD = re.compile(r"[A-Za-z']+")
@@ -70,29 +73,81 @@ def syllables(word: str) -> int:
     return max(1, groups)
 
 
-def build_frequencies(limit_files: int | None = None) -> dict[str, int]:
-    """Word frequencies from this project's own corpus, not an external list."""
+def _freq_cache_key(files: list[Path]) -> str:
+    """Local source identity for the frequency cache.
+
+    Name, length and nanosecond mtime make append, replacement and same-length
+    local rewrites invalidate the table without hashing the multi-gigabyte
+    corpus on every cached read. This is cache invalidation, not a claim of
+    cryptographic content identity; release payloads use SHA-256 instead.
+    """
+    sig = "|".join(
+        f"{p.name}:{p.stat().st_size}:{p.stat().st_mtime_ns}" for p in files
+    )
+    return hashlib.sha256(sig.encode()).hexdigest()[:16]
+
+
+def build_frequencies(limit_files: int | None = None,
+                      use_cache: bool = True) -> dict[str, int]:
+    """Word frequencies from this project's own corpus, not an external list.
+
+    Cached since 2026-07-26: the corpus reached 1.3 GB that day, and every study
+    that wants one rarity feature was re-reading and re-parsing all of it, which
+    cost minutes per run and dominated several studies' runtime. The cache key
+    is the file-name/size/mtime manifest, so an append or local rewrite cannot
+    silently reuse the old table.
+    """
     freq: Counter[str] = Counter()
     files = sorted(CORPORA.glob("*.jsonl"))
     if limit_files:
         files = files[:limit_files]
+    cache = CACHE_DIR / f"word_frequencies_{_freq_cache_key(files)}.json.gz"
+    if use_cache and cache.exists():
+        try:
+            with gzip.open(cache, "rt", encoding="utf-8") as fh:
+                return json.load(fh)
+        except Exception:
+            pass    # a damaged cache is not a reason to fail; rebuild it
+    # Streamed, not slurped. `read_text()` on the 887 MB caption harvest
+    # allocates the whole file as one string, and on 2026-07-26 that allocation
+    # failed under memory pressure from concurrent studies — where the old
+    # `except Exception: continue` skipped the file IN SILENCE and returned a
+    # table 23,360 terms short with no indication anything had gone wrong.
+    failed: list[str] = []
     for path in files:
         try:
-            text = path.read_text(encoding="utf-8")
+            with path.open(encoding="utf-8") as fh:
+                for line_no, line in enumerate(fh, 1):
+                    if not line.strip() or '"_meta"' in line[:20]:
+                        continue
+                    try:
+                        rec = json.loads(line)
+                    except json.JSONDecodeError as exc:
+                        raise ValueError(
+                            f"malformed JSON at line {line_no}: {exc.msg}"
+                        ) from exc
+                    body = str(rec.get("text") or rec.get("joke") or "")
+                    for w in WORD.findall(body.lower()):
+                        freq[w] += 1
+        except Exception as e:                    # noqa: BLE001 - reported, not hidden
+            failed.append(f"{path.name}: {type(e).__name__}: {e}")
+    if failed:
+        # A partial table is a wrong table: every rarity feature downstream
+        # shifts. Say so, and never cache it.
+        raise RuntimeError(
+            f"corpus read failed for {len(failed)} file(s), so the frequency table "
+            f"would be silently incomplete: {'; '.join(failed[:3])}")
+    out = dict(freq)
+    if use_cache:
+        try:
+            CACHE_DIR.mkdir(parents=True, exist_ok=True)
+            tmp = cache.with_suffix(".tmp")
+            with gzip.open(tmp, "wt", encoding="utf-8") as fh:
+                json.dump(out, fh)
+            tmp.replace(cache)      # atomic: a killed run leaves no half-table
         except Exception:
-            continue
-        for line in text.splitlines():
-            line = line.strip()
-            if not line or '"_meta"' in line[:20]:
-                continue
-            try:
-                rec = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            body = str(rec.get("text") or rec.get("joke") or "")
-            for w in WORD.findall(body.lower()):
-                freq[w] += 1
-    return dict(freq)
+            pass
+    return out
 
 
 def _phonetic(words: list[str]) -> dict[str, float]:

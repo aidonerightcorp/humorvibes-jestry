@@ -5,3 +5,11 @@ jestry_out/precedent_index_ollama_embeddinggemma.json
 # exported embedding matrices: large and rebuildable from the index in one
 # command (comedy_primitives_dataset.py); the JSONL files and card do ship
 dataset_out/*.npy
+# Multi-hundred-MB generated Wave-2 artifacts and resumable download caches.
+# Their builders, schemas, compact receipts, and Kaggle locations are tracked;
+# the payloads themselves are published through Kaggle rather than GitHub.
+dataset_out/style_labels*.jsonl
+kaggle_wave2/
+.kaggle-wave2-*/
+data_cache/
+jestry_out/partial_*.jsonl

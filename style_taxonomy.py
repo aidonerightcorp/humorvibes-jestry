@@ -1,6 +1,6 @@
 """Joke FORM and DOMAIN labels over the whole corpus.
 
-The corpus grew to ~185k items with no style axis at all, so questions like
+The corpus grew to millions of items with no style axis at all, so questions like
 "does a military joke resolve differently from a dad joke?" or "do knock-knock
 jokes sit in a different S/R region than one-liners?" could not even be asked.
 This module assigns two independent labels to any item:
@@ -37,6 +37,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable
@@ -157,6 +158,25 @@ FORM_RULES: list[tuple[str, re.Pattern[str], str]] = [
     ("dialogue", re.compile(r"^\s*[-–—\"']|\b(he|she|they) (said|asked|replied)\b.*[\"']", re.I),
      "reported speech; turn is a reply that reinterprets the line"),
 ]
+
+
+def _rule_trigger(rules: Iterable[tuple[str, re.Pattern[str], str]]) -> re.Pattern[str]:
+    """One exact OR prefilter for an otherwise linear regex rule table.
+
+    Most of the multi-million-row corpus matches no named form. Scanning all 41
+    expressions in that overwhelmingly negative case cost nearly a second per
+    thousand captions. Inline flags preserve each rule's original case
+    sensitivity; a positive trigger still runs the original rules so
+    precedence and `form_all` remain byte-for-byte unchanged.
+    """
+    arms = []
+    for _, pattern, _ in rules:
+        body = pattern.pattern
+        arms.append(f"(?i:{body})" if pattern.flags & re.I else f"(?:{body})")
+    return re.compile("|".join(arms))
+
+
+_FORM_TRIGGER = _rule_trigger(FORM_RULES)
 
 # Question-answer forms are checked after the named templates above.
 _Q_OPEN = re.compile(r"^\s*(why|what|when|where|who|how|which|did you hear|"
@@ -304,9 +324,19 @@ DOMAIN_LEXICON: dict[str, tuple[str, ...]] = {
     "dark": ("funeral", "death", "died", "grave", "corpse", "coffin",
              "cremat", "widow", "morgue", "obituary"),
 }
-_DOMAIN_RE = {d: re.compile(r"\b(" + "|".join(re.escape(w) for w in words) + r")",
+_DOMAIN_RE = {d: re.compile(r"\b(" + "|".join(re.escape(w) for w in words) + r")\b",
                             re.I)
               for d, words in DOMAIN_LEXICON.items()}
+
+_DOMAIN_TERMS = sorted(
+    {word.casefold() for words in DOMAIN_LEXICON.values() for word in words},
+    key=lambda word: (-len(word), word),
+)
+_DOMAIN_WORD_RE = re.compile(r"[a-z]+", re.I)
+_DOMAIN_ANCHORS = {
+    re.match(r"[a-z]+", term).group()  # every domain term is ASCII and word-led
+    for term in _DOMAIN_TERMS
+}
 
 
 def classify_form(text: str, meta: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -314,7 +344,8 @@ def classify_form(text: str, meta: dict[str, Any] | None = None) -> dict[str, An
     so an ambiguous item stays visibly ambiguous."""
     meta = meta or {}
     t = " ".join(text.split())
-    hits = [(name, why) for name, pat, why in FORM_RULES if pat.search(t)]
+    hits = ([(name, why) for name, pat, why in FORM_RULES if pat.search(t)]
+            if _FORM_TRIGGER.search(t) else [])
     # limerick sits where it always sat in the precedence order — after every
     # named template, ahead of `dialogue` — but it is verified on the RAW text,
     # because the rhyme scheme lives in the line breaks that `t` just discarded.
@@ -343,6 +374,14 @@ def classify_form(text: str, meta: dict[str, Any] | None = None) -> dict[str, An
 
 
 def classify_domain(text: str) -> dict[str, Any]:
+    # Exact negative prefilter: an actual keyword match must contain its first
+    # word as a token. Most caption/proverb rows have none, so they avoid 25
+    # regex scans. A possible false positive merely runs the original rules;
+    # it cannot alter a label. The original per-domain scans remain the source
+    # of truth so overlapping domains are preserved.
+    if _DOMAIN_ANCHORS.isdisjoint(
+            word.casefold() for word in _DOMAIN_WORD_RE.findall(text)):
+        return {"domain": "general", "domain_all": [], "domain_hits": 0}
     counts = {d: len(rx.findall(text)) for d, rx in _DOMAIN_RE.items()}
     counts = {d: c for d, c in counts.items() if c}
     if not counts:
@@ -369,19 +408,31 @@ def label_item(rec: dict[str, Any]) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-def iter_corpus(paths: Iterable[Path] | None = None):
+def iter_corpus(paths: Iterable[Path] | None = None, *, strict: bool = False):
+    """Yield corpus records.
+
+    Interactive analysis keeps the historical best-effort default. Release
+    builders pass ``strict=True`` so a truncated JSONL line or unreadable file
+    cannot silently disappear from published counts.
+    """
     for p in sorted(paths or CORPORA.glob("*.jsonl")):
         try:
             with p.open(encoding="utf-8") as fh:
-                for line in fh:
+                for line_no, line in enumerate(fh, 1):
                     try:
                         rec = json.loads(line)
-                    except json.JSONDecodeError:
+                    except json.JSONDecodeError as exc:
+                        if strict:
+                            raise ValueError(
+                                f"malformed JSON in {p}:{line_no}: {exc.msg}"
+                            ) from exc
                         continue
                     if "_meta" in rec or not rec.get("text"):
                         continue
                     yield rec
         except OSError:
+            if strict:
+                raise
             continue
 
 
@@ -392,7 +443,15 @@ def iter_corpus(paths: Iterable[Path] | None = None):
 GENERIC_FORMS = {"one_liner", "setup_punchline", "q_and_a", "dialogue"}
 
 
-def coverage(labels: list[dict[str, Any]]) -> dict[str, Any]:
+def _coverage_report(per_lang: dict[str, Counter]) -> dict[str, Any]:
+    return {lang: {"n": c["n"], "labelled": c["labelled"],
+                   "share": round(c["labelled"] / c["n"], 3) if c["n"] else 0.0,
+                   "specific": c["specific"],
+                   "specific_share": round(c["specific"] / c["n"], 3) if c["n"] else 0.0}
+            for lang, c in sorted(per_lang.items(), key=lambda kv: -kv[1]["n"])}
+
+
+def coverage(labels: Iterable[dict[str, Any]]) -> dict[str, Any]:
     """Labelled share PER LANGUAGE, split into any-form and specific-form.
 
     `share` counts every non-unknown form and will look high everywhere.
@@ -407,11 +466,7 @@ def coverage(labels: list[dict[str, Any]]) -> dict[str, Any]:
             c["labelled"] += 1
         if lab["form"] not in GENERIC_FORMS and lab["form"] != "unknown":
             c["specific"] += 1
-    return {lang: {"n": c["n"], "labelled": c["labelled"],
-                   "share": round(c["labelled"] / c["n"], 3) if c["n"] else 0.0,
-                   "specific": c["specific"],
-                   "specific_share": round(c["specific"] / c["n"], 3) if c["n"] else 0.0}
-            for lang, c in sorted(per_lang.items(), key=lambda kv: -kv[1]["n"])}
+    return _coverage_report(per_lang)
 
 
 SELFTEST_CASES: list[tuple[str, str]] = [
@@ -484,56 +539,93 @@ def main() -> int:
     if a.cmd == "selftest":
         return selftest()
 
-    # Stream to disk as labels are produced. Labelling millions of rows takes
-    # long enough to hit a timeout, and accumulating everything in a list before
-    # the first write means a kill at 99% yields nothing — the same failure that
-    # cost a 90-minute measurement run and a 60-minute fetch on 2026-07-26.
-    labels: list[dict[str, Any]] = []
+    # Stream labels and aggregate counters in one pass. The previous version
+    # wrote a checkpoint but ALSO retained every label in a list and rewrote
+    # the whole output afterwards. At 2.7M rows that defeated the checkpoint's
+    # purpose and made memory, rather than classification, the bottleneck.
     out_path = ROOT / a.out
-    out_path.parent.mkdir(parents=True, exist_ok=True)
     stream = out_path.with_suffix(".partial.jsonl")
-    with stream.open("w", encoding="utf-8") as sfh:
+    sfh = None
+    if a.cmd == "label":
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        sfh = stream.open("w", encoding="utf-8")
+    forms: Counter = Counter()
+    domains: Counter = Counter()
+    # Keep the publishable cross-tab in the same pass as labelling. Generic
+    # shapes and the length-only shaggy_dog proxy are excluded here because
+    # neither supports a domain-by-form claim; the complete marginal counts
+    # remain in `forms` above.
+    domain_specific_forms: dict[str, Counter] = {}
+    per_lang: dict[str, Counter] = {}
+    n_labels = 0
+    try:
         for i, rec in enumerate(iter_corpus()):
             if a.limit and i >= a.limit:
                 break
             lab = label_item(rec)
-            labels.append(lab)
-            sfh.write(json.dumps(lab, ensure_ascii=False) + "\n")
+            n_labels += 1
+            forms[lab["form"]] += 1
+            domains[lab["domain"]] += 1
+            if (lab["domain"] != "general" and
+                    lab["form"] not in GENERIC_FORMS | {"unknown", "shaggy_dog"}):
+                domain_specific_forms.setdefault(lab["domain"], Counter())[lab["form"]] += 1
+            lang_counts = per_lang.setdefault(lab.get("language", "unknown"), Counter())
+            lang_counts["n"] += 1
+            if lab["form"] != "unknown":
+                lang_counts["labelled"] += 1
+            if lab["form"] not in GENERIC_FORMS and lab["form"] != "unknown":
+                lang_counts["specific"] += 1
+            if sfh is not None:
+                sfh.write(json.dumps(lab, ensure_ascii=False) + "\n")
             if i and i % 250_000 == 0:
-                sfh.flush()
+                if sfh is not None:
+                    sfh.flush()
                 print(f"  ... {i:,} labelled", flush=True)
+    finally:
+        if sfh is not None:
+            sfh.close()
 
-    forms = Counter(l["form"] for l in labels)
-    domains = Counter(l["domain"] for l in labels)
-    print(f"items labelled: {len(labels)}\n")
+    print(f"items labelled: {n_labels}\n")
     print("FORM distribution:")
     for k, v in forms.most_common():
-        print(f"  {k:<22} {v:>7}  {v / len(labels):>6.1%}")
+        print(f"  {k:<22} {v:>7}  {v / n_labels:>6.1%}")
     print("\nDOMAIN distribution:")
     for k, v in domains.most_common():
-        print(f"  {k:<22} {v:>7}  {v / len(labels):>6.1%}")
-    spec = sum(1 for l in labels if l["form"] not in GENERIC_FORMS
-               and l["form"] != "unknown")
-    print(f"\nspecific (non-generic) forms: {spec} = {spec / len(labels):.1%} "
+        print(f"  {k:<22} {v:>7}  {v / n_labels:>6.1%}")
+    spec = sum(v for k, v in forms.items()
+               if k not in GENERIC_FORMS and k != "unknown")
+    print(f"\nspecific (non-generic) forms: {spec} = {spec / n_labels:.1%} "
           f"— the rest sit in the catch-all buckets {sorted(GENERIC_FORMS)}")
     print("\nFORM coverage by language (top 15) — 'spec' is the honest column:")
-    cov = coverage(labels)
+    cov = _coverage_report(per_lang)
     for lang, c in list(cov.items())[:15]:
         print(f"  {lang:<10} n={c['n']:>7}  any={c['share']:>6.1%}  "
               f"spec={c['specific']:>6} {c['specific_share']:>6.1%}")
 
+    print("\nDOMAIN x specific FORM (generic and length-proxy forms excluded):")
+    for domain, counts in sorted(domain_specific_forms.items(),
+                                 key=lambda kv: -sum(kv[1].values())):
+        top = ", ".join(f"{form} {count}" for form, count in counts.most_common(3))
+        print(f"  {domain:<22} n={sum(counts.values()):>6}  {top}")
+
     if a.cmd == "label":
-        out = ROOT / a.out
-        out.parent.mkdir(parents=True, exist_ok=True)
-        with out.open("w", encoding="utf-8") as fh:
-            fh.write(json.dumps({"_meta": {"n": len(labels),
+        assembled = out_path.with_suffix(".assembled.tmp")
+        with assembled.open("w", encoding="utf-8") as fh:
+            fh.write(json.dumps({"_meta": {"n": n_labels,
                                            "forms": dict(forms),
                                            "domains": dict(domains),
-                                           "coverage_by_language": cov}},
+                                           "coverage_by_language": cov,
+                                           "domain_specific_forms": {
+                                               domain: dict(counts)
+                                               for domain, counts in
+                                               sorted(domain_specific_forms.items())
+                                           }}},
                                 ensure_ascii=False) + "\n")
-            for lab in labels:
-                fh.write(json.dumps(lab, ensure_ascii=False) + "\n")
-        print(f"\nwrote {out}")
+            with stream.open(encoding="utf-8") as rows:
+                shutil.copyfileobj(rows, fh, length=1024 * 1024)
+        assembled.replace(out_path)
+        stream.unlink()
+        print(f"\nwrote {out_path}")
     return 0
 
 

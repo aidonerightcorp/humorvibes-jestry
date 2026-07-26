@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -27,23 +28,53 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent
 CORPORA = ROOT / "corpora"
 
-# Licence strings are free text per record; these substrings classify them.
-REDISTRIBUTABLE = ("cc by 4.0", "cc by 3.0", "cc by 2.0", "cc by-sa", "mit",
-                   "public domain", "apache", "cc0")
-NONCOMMERCIAL = ("cc by-nc", "-nc ", "noncommercial", "non-commercial")
-RESEARCH_ONLY = ("research use", "do not redistribute", "no stated licence",
-                 "no license", "per dataset card", "unstated")
+# Licence strings are upstream free text, not trusted policy decisions.  Deny
+# markers are deliberately evaluated before grants, and grant tokens require
+# real token boundaries.  The old substring check classified "permit required"
+# as MIT and let "CC BY; do not redistribute" win on the permissive fragment.
+_NONCOMMERCIAL = (
+    re.compile(r"\bcc\s*[- ]?by\s*[- ]?nc\b", re.I),
+    re.compile(r"\bnon[- ]?commercial\b", re.I),
+)
+_RESEARCH_ONLY = (
+    re.compile(r"\bresearch(?:[- ]only|\s+use(?:\s+only)?)\b", re.I),
+    re.compile(r"\bdo\s+not\s+redistribute\b", re.I),
+    re.compile(r"\b(?:redistribution|publication)\s+(?:is\s+)?(?:not\s+)?permitted\b", re.I),
+    re.compile(r"\b(?:permission|permit)\s+(?:is\s+)?required\b", re.I),
+    re.compile(r"\bno\s+(?:stated\s+|declared\s+)?licen[cs]e\b", re.I),
+    re.compile(r"\blicen[cs]e\s+(?:not\s+declared|unknown|unstated)\b", re.I),
+    re.compile(r"\b(?:verify|check)\s+before\s+redistribut", re.I),
+    re.compile(r"\bper\s+dataset\s+card\b", re.I),
+    re.compile(r"\bunstated\b", re.I),
+)
+_REDISTRIBUTABLE = (
+    re.compile(r"\bpublic\s+domain\b", re.I),
+    re.compile(r"\bcc\s*[- ]?0(?:\s*1\.0)?\b|\bcc0\b", re.I),
+    re.compile(r"\bcc\s*[- ]?by(?:\s*[- ]?sa)?(?:\s*[- ]?\d(?:\.\d)?)?\b", re.I),
+    re.compile(r"\bmit(?:\s+licen[cs]e)?\b", re.I),
+    re.compile(r"\bapache(?:\s+licen[cs]e)?(?:\s+version)?\s*2(?:\.0)?\b", re.I),
+)
 
 
 def classify_licence(lic: str) -> str:
-    low = lic.lower()
-    if any(k in low for k in NONCOMMERCIAL):
+    text = " ".join(str(lic or "").split())
+    if any(pattern.search(text) for pattern in _NONCOMMERCIAL):
         return "noncommercial"
-    if any(k in low for k in REDISTRIBUTABLE):
-        return "redistributable"
-    if any(k in low for k in RESEARCH_ONLY):
+    if any(pattern.search(text) for pattern in _RESEARCH_ONLY):
         return "research_only"
+    if any(pattern.search(text) for pattern in _REDISTRIBUTABLE):
+        return "redistributable"
     return "unclassified"
+
+
+def may_redistribute_text(lic: str) -> bool:
+    """Fail-closed release decision for verbatim text.
+
+    This is intentionally narrower than "a licence string exists".  Candidate
+    inventory may retain research-only metadata locally; public exports may
+    carry text only when the normalized class is explicitly redistributable.
+    """
+    return classify_licence(lic) == "redistributable"
 
 
 def source_family(src: str) -> str:
@@ -71,6 +102,59 @@ def source_family(src: str) -> str:
     return src
 
 
+class CensusAccumulator:
+    """One-pass census state shared by the CLI and streaming exporters."""
+
+    def __init__(self) -> None:
+        self.sources: Counter = Counter()
+        self.families: Counter = Counter()
+        self.licences: Counter = Counter()
+        self.lic_class: Counter = Counter()
+        self.langs: Counter = Counter()
+        self.kinds: Counter = Counter()
+        self.styles: Counter = Counter()
+        self.n = 0
+        self.graded = 0
+
+    def add(self, rec: dict[str, Any]) -> None:
+        if "_meta" in rec or not rec.get("text"):
+            return
+        self.n += 1
+        meta = rec.get("meta", {}) or {}
+        src = rec.get("source", "?")
+        self.sources[src] += 1
+        self.families[source_family(src)] += 1
+        licence = rec.get("license", "?")
+        self.licences[licence] += 1
+        self.lic_class[classify_licence(licence)] += 1
+        # top-level `language` is the flattened/export schema; `meta` is the
+        # raw corpus one. Both must be read or exports read blank.
+        self.langs[meta.get("language") or rec.get("language") or "unknown"] += 1
+        if meta.get("record_kind"):
+            self.kinds[meta["record_kind"]] += 1
+        if meta.get("style"):
+            self.styles[str(meta["style"])] += 1
+        if rec.get("funniness_label") is not None:
+            self.graded += 1
+
+    def report(self, files: int = 0) -> dict[str, Any]:
+        top_share = (self.families.most_common(1)[0][1] / self.n) if self.n else 0.0
+        return {"files": files, "items": self.n, "graded": self.graded,
+                "graded_share": round(self.graded / self.n, 4) if self.n else 0.0,
+                "distinct_sources": len(self.sources),
+                "distinct_families": len(self.families),
+                "distinct_licences": len(self.licences),
+                "distinct_languages": len(self.langs),
+                "top_source": self.families.most_common(1)[0] if self.families else None,
+                "top_source_share": round(top_share, 4),
+                "families": dict(self.families.most_common(25)),
+                "licence_classes": dict(self.lic_class),
+                "sources": dict(self.sources.most_common(40)),
+                "languages": dict(self.langs.most_common(60)),
+                "record_kinds": dict(self.kinds),
+                "declared_styles": dict(self.styles.most_common(30))}
+
+
 def census(paths: list[Path] | None = None) -> dict[str, Any]:
     """Census over `paths`, defaulting to every JSONL in corpora/.
 
@@ -79,14 +163,7 @@ def census(paths: list[Path] | None = None) -> dict[str, Any]:
     corpus, and globbing the whole directory folds those into the row count
     with a different schema.
     """
-    sources: Counter = Counter()
-    families: Counter = Counter()
-    licences: Counter = Counter()
-    lic_class: Counter = Counter()
-    langs: Counter = Counter()
-    kinds: Counter = Counter()
-    styles: Counter = Counter()
-    n = graded = 0
+    acc = CensusAccumulator()
     files = 0
     for p in sorted(paths if paths is not None else CORPORA.glob("*.jsonl")):
         files += 1
@@ -96,38 +173,8 @@ def census(paths: list[Path] | None = None) -> dict[str, Any]:
                     r = json.loads(line)
                 except json.JSONDecodeError:
                     continue
-                if "_meta" in r or not r.get("text"):
-                    continue
-                n += 1
-                meta = r.get("meta", {}) or {}
-                src = r.get("source", "?")
-                sources[src] += 1
-                families[source_family(src)] += 1
-                lic = r.get("license", "?")
-                licences[lic] += 1
-                lic_class[classify_licence(lic)] += 1
-                # top-level `language` is the flattened/export schema; `meta` is
-                # the raw corpus one. Both must be read or exports read blank.
-                langs[meta.get("language") or r.get("language") or "unknown"] += 1
-                if meta.get("record_kind"):
-                    kinds[meta["record_kind"]] += 1
-                if meta.get("style"):
-                    styles[str(meta["style"])] += 1
-                if r.get("funniness_label") is not None:
-                    graded += 1
-    top_share = (families.most_common(1)[0][1] / n) if n else 0.0
-    return {"files": files, "items": n, "graded": graded,
-            "graded_share": round(graded / n, 4) if n else 0.0,
-            "distinct_sources": len(sources), "distinct_families": len(families),
-            "distinct_licences": len(licences),
-            "distinct_languages": len(langs),
-            "top_source": families.most_common(1)[0] if families else None,
-            "top_source_share": round(top_share, 4),
-            "families": dict(families.most_common(25)),
-            "licence_classes": dict(lic_class),
-            "sources": dict(sources.most_common(40)),
-            "languages": dict(langs.most_common(60)),
-            "record_kinds": dict(kinds), "declared_styles": dict(styles.most_common(30))}
+                acc.add(r)
+    return acc.report(files)
 
 
 def main() -> int:

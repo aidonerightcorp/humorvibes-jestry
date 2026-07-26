@@ -214,7 +214,7 @@ function show(i){ [...nav.children].forEach((b,j)=>b.classList.toggle("on", i===
   } }
 // deep links for demos/screenshots: #tab=N picks the tab; #demo auto-runs the
 // tab's default query (been-done check / registry census) after load
-const HASH_TAB = parseInt((location.hash.match(/tab=(\d)/) || [])[1] ?? "0", 10);
+const HASH_TAB = parseInt((location.hash.match(/tab=(\\d)/) || [])[1] ?? "0", 10);
 const HASH_DEMO = location.hash.includes("demo");
 async function api(path, body){
   const r = await fetch(path, body ? {method:"POST", headers:{"Content-Type":"application/json"},

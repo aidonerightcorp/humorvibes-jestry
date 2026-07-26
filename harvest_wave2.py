@@ -27,12 +27,15 @@ What is new here is the TRANSPORT, which wave 1 did not need:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import re
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from pathlib import Path
 from typing import Any, Callable
 
 import harvest_supply
@@ -56,16 +59,17 @@ LAST_STATUS: dict[str, Any] = {}
 # over freshly fetched ones.
 # ---------------------------------------------------------------------------
 _PARTIAL_FH: Any = None
+_PARTIAL_PATH: Path | None = None
 
 
 def open_partial(lane: str, arg: str) -> None:
-    global _PARTIAL_FH
-    from pathlib import Path
+    global _PARTIAL_FH, _PARTIAL_PATH
     d = Path(__file__).resolve().parent / "jestry_out"
     d.mkdir(exist_ok=True)
     stamp = time.strftime("%Y%m%d-%H%M%S")
     safe = re.sub(r"[^A-Za-z0-9_.-]+", "_", arg)[:60]
-    _PARTIAL_FH = (d / f"partial_{lane}_{safe}_{stamp}.jsonl").open("a", encoding="utf-8")
+    _PARTIAL_PATH = d / f"partial_{lane}_{safe}_{stamp}.jsonl"
+    _PARTIAL_FH = _PARTIAL_PATH.open("a", encoding="utf-8")
 
 
 def emit(rec: dict[str, Any]) -> dict[str, Any]:
@@ -76,9 +80,21 @@ def emit(rec: dict[str, Any]) -> dict[str, Any]:
     return rec
 
 
-def close_partial() -> None:
+def close_partial(*, completed: bool = False) -> None:
+    """Close the crash checkpoint; discard it only after a finished harvest.
+
+    A raised exception leaves the partial in place for ``recover``. Once the
+    normal harvest has written its corpus file and receipt, retaining the same
+    rows as a recovery candidate only wastes disk and makes a later recovery
+    re-read already committed data.
+    """
+    global _PARTIAL_FH, _PARTIAL_PATH
     if _PARTIAL_FH is not None:
         _PARTIAL_FH.close()
+        _PARTIAL_FH = None
+    if completed and _PARTIAL_PATH is not None:
+        _PARTIAL_PATH.unlink(missing_ok=True)
+    _PARTIAL_PATH = None
 
 
 def _get(url: str, *, timeout: int = 30, tries: int = 4,
@@ -144,6 +160,20 @@ _SLUR_RE = re.compile(
 # factor of four or more against them.
 _DENSE_SCRIPT = re.compile(r"[぀-ヿ㐀-䶿一-鿿豈-﫿가-힯]")
 
+_LANGUAGE_CODES = {
+    "arabic": "ar", "chinese": "zh", "czech": "cs", "danish": "da",
+    "dutch": "nl", "english": "en", "finnish": "fi", "french": "fr",
+    "german": "de", "italian": "it", "japanese": "ja", "korean": "ko",
+    "polish": "pl", "portuguese": "pt", "russian": "ru", "spanish": "es",
+    "swedish": "sv", "urdu": "ur", "vietnamese": "vi", "yoruba": "yo",
+}
+
+
+def normalize_language(value: Any) -> str:
+    """Return an ISO-like code when a source uses an English language name."""
+    raw = str(value or "unknown").strip()
+    return _LANGUAGE_CODES.get(raw.casefold(), raw.casefold().replace("_", "-"))
+
 
 def min_chars(text: str) -> int:
     """Minimum plausible length, by script.
@@ -172,6 +202,9 @@ def screen(text: str) -> bool:
 # a tuple of (setup_field, punch_field). `labels` names columns worth keeping as
 # the validation signal (graded funniness, disagreement, offence).
 HF_SPECS: dict[str, dict[str, Any]] = {}
+HF_TRANSPORT = "auto"
+HF_CACHE = Path(__file__).resolve().parent / "data_cache" / "hf_parquet"
+_HF_LOCATION_CACHE: dict[str, tuple[str, str]] = {}
 
 
 def hf_resolve(repo: str) -> list[tuple[str, str]]:
@@ -223,6 +256,165 @@ def hf_size(repo: str, config: str, split: str) -> int | None:
     return None
 
 
+def _hf_location(key: str) -> tuple[str, str] | None:
+    """Resolve and cache the config/split selected for a source spec."""
+    if key in _HF_LOCATION_CACHE:
+        return _HF_LOCATION_CACHE[key]
+    spec = HF_SPECS[key]
+    config, split = spec.get("config"), spec.get("split")
+    if not config or not split:
+        pairs = hf_resolve(spec["repo"])
+        if not pairs:
+            return None
+        train = [pair for pair in pairs if pair[1] == "train"] or pairs
+        config, split = train[0]
+    location = str(config), str(split)
+    _HF_LOCATION_CACHE[key] = location
+    return location
+
+
+def hf_parquet_files(repo: str, config: str, split: str) -> list[dict[str, Any]]:
+    """Converted parquet shards published by HuggingFace's dataset server."""
+    data = _get_json("https://datasets-server.huggingface.co/parquet?dataset="
+                     + urllib.parse.quote(repo, safe=""))
+    return [f for f in (data or {}).get("parquet_files", [])
+            if f.get("config") == config and f.get("split") == split
+            and f.get("url")]
+
+
+def _download_parquet(info: dict[str, Any]) -> Path | None:
+    """Download one shard atomically, resuming a partial file when possible."""
+    url = str(info["url"])
+    expected = int(info.get("size") or 0)
+    digest = hashlib.sha256(url.encode()).hexdigest()[:16]
+    name = re.sub(r"[^A-Za-z0-9_.-]+", "_", str(info.get("filename") or "data.parquet"))
+    HF_CACHE.mkdir(parents=True, exist_ok=True)
+    dest = HF_CACHE / f"{digest}_{name}"
+    if dest.exists() and (not expected or dest.stat().st_size == expected):
+        return dest
+    part = dest.with_suffix(dest.suffix + ".part")
+    for attempt in range(4):
+        start = part.stat().st_size if part.exists() else 0
+        headers = dict(UA)
+        if start:
+            headers["Range"] = f"bytes={start}-"
+        req = urllib.request.Request(url, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                # A server may ignore Range and return 200. Truncate in that
+                # case; appending a complete response would corrupt the shard.
+                append = start > 0 and getattr(resp, "status", 200) == 206
+                with part.open("ab" if append else "wb") as fh:
+                    while chunk := resp.read(1024 * 1024):
+                        fh.write(chunk)
+            if expected and part.stat().st_size != expected:
+                if part.stat().st_size > expected:
+                    part.unlink()
+                raise OSError(
+                    f"shard length {part.stat().st_size if part.exists() else 0} != {expected}")
+            os.replace(part, dest)
+            return dest
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            LAST_STATUS[url] = repr(exc)
+            if attempt == 3:
+                return None
+            time.sleep(2 ** attempt)
+    return None
+
+
+def _record_from_hf_row(spec: dict[str, Any], repo: str, config: str,
+                        split: str, row: dict[str, Any],
+                        source_offset: int) -> dict[str, Any] | None:
+    tf = spec["text"]
+    labels = spec.get("labels", [])
+    if isinstance(tf, (list, tuple)):
+        parts = [str(row.get(field, "")).strip() for field in tf]
+        body = " ".join(part for part in parts if part)
+        extra = {field: row.get(field) for field in tf if row.get(field)}
+    else:
+        body = str(row.get(tf, "")).strip()
+        extra = {}
+    body = " ".join(body.split())
+    if not screen(body):
+        return None
+    language = spec.get("lang", "en")
+    language_field = spec.get("language_field")
+    if language_field and row.get(language_field):
+        language = row[language_field]
+    language = normalize_language(language)
+    meta = {"config": config, "split": split,
+            "language": language,
+            # This makes a partial file a true resume point, not merely a copy
+            # of accepted rows whose upstream cursor has been lost.
+            "_hf_row_offset": source_offset} | extra
+    for label in labels:
+        if label in row and row[label] is not None:
+            if label == language_field:
+                meta["language_source_value"] = row[label]
+            else:
+                meta[label] = row[label]
+    translation_field = spec.get("translation")
+    if translation_field and row.get(translation_field):
+        meta["translation_en"] = row[translation_field]
+    rec: dict[str, Any] = {
+        "source": f"hf:{repo}",
+        "license": spec.get("license", "per dataset card (verify before redistribution)"),
+        "text": body,
+        "meta": meta,
+    }
+    grade = spec.get("grade")
+    if grade and grade in row and row[grade] is not None:
+        rec["funniness_label"] = row[grade]
+    return rec
+
+
+def hf_spec_fetch_parquet(key: str, limit: int, start_offset: int = 0
+                          ) -> list[dict[str, Any]] | None:
+    """Fast, restartable bulk path. ``None`` means fall back to rows API."""
+    if limit <= 0:
+        return []
+    try:
+        import pyarrow.parquet as pq
+    except ImportError:
+        return None
+    spec = HF_SPECS[key]
+    repo = spec["repo"]
+    location = _hf_location(key)
+    if location is None:
+        return None
+    config, split = location
+    shards = hf_parquet_files(repo, config, split)
+    if not shards:
+        return None
+    out: list[dict[str, Any]] = []
+    global_offset = 0
+    for info in shards:
+        path = _download_parquet(info)
+        if path is None:
+            return None
+        parquet = pq.ParquetFile(path)
+        shard_rows = parquet.metadata.num_rows
+        if global_offset + shard_rows <= start_offset:
+            global_offset += shard_rows
+            continue
+        for batch in parquet.iter_batches(batch_size=4096):
+            for row in batch.to_pylist():
+                source_offset = global_offset
+                global_offset += 1
+                if source_offset < start_offset:
+                    continue
+                rec = _record_from_hf_row(
+                    spec, repo, config, split, row, source_offset)
+                if rec is not None:
+                    out.append(emit(rec))
+                    if len(out) >= limit:
+                        return out
+        # ``global_offset`` was advanced per row unless the whole shard was
+        # skipped above; assert catches pyarrow metadata/iteration drift.
+        assert global_offset >= shard_rows
+    return out
+
+
 def _hf_rows(repo: str, config: str, split: str, offset: int,
              length: int) -> tuple[list[dict[str, Any]], bool]:
     """Returns (rows, ok). ok=False means the REQUEST failed; an empty list
@@ -239,21 +431,25 @@ def _hf_rows(repo: str, config: str, split: str, offset: int,
     return [r.get("row", {}) for r in data.get("rows", [])], True
 
 
-def hf_spec_fetch(key: str, limit: int) -> list[dict[str, Any]]:
+def hf_spec_fetch(key: str, limit: int, start_offset: int = 0) -> list[dict[str, Any]]:
+    if limit <= 0:
+        return []
     spec = HF_SPECS[key]
     repo = spec["repo"]
-    config, split = spec.get("config"), spec.get("split")
-    if not config or not split:
-        pairs = hf_resolve(repo)
-        if not pairs:
-            print(f"  ! {repo}: no splits served (status {LAST_STATUS and list(LAST_STATUS.values())[-1]})")
-            return []
-        train = [p for p in pairs if p[1] == "train"] or pairs
-        config, split = train[0]
-    tf = spec["text"]
-    labels = spec.get("labels", [])
+    location = _hf_location(key)
+    if location is None:
+        print(f"  ! {repo}: no splits served (status "
+              f"{LAST_STATUS and list(LAST_STATUS.values())[-1]})")
+        return []
+    config, split = location
+    if HF_TRANSPORT in ("auto", "parquet"):
+        fast = hf_spec_fetch_parquet(key, limit, start_offset)
+        if fast is not None:
+            return fast
+        if HF_TRANSPORT == "parquet":
+            print(f"  ! {repo}: parquet unavailable; falling back to rows API")
     out: list[dict[str, Any]] = []
-    offset = int(spec.get("offset", 0))
+    offset = max(int(spec.get("offset", 0)), start_offset)
     total = hf_size(repo, config, split)
     hard_stop = min(limit, (total - offset)) if total else limit
     failures = 0
@@ -270,52 +466,89 @@ def hf_spec_fetch(key: str, limit: int) -> list[dict[str, Any]]:
         failures = 0
         if not rows:
             break
-        for r in rows:
-            if isinstance(tf, (list, tuple)):
-                parts = [str(r.get(f, "")).strip() for f in tf]
-                text = " ".join(p for p in parts if p)
-                extra = {f: r.get(f) for f in tf if r.get(f)}
-            else:
-                text = str(r.get(tf, "")).strip()
-                extra = {}
-            text = " ".join(text.split())
-            if not screen(text):
-                continue
-            meta = {"config": config, "split": split,
-                    "language": spec.get("lang", "en")} | extra
-            for lab in labels:
-                if lab in r and r[lab] is not None:
-                    meta[lab] = r[lab]
-            rec = {"source": f"hf:{repo}",
-                   "license": spec.get("license", "per dataset card (verify before redistribution)"),
-                   "text": text, "meta": meta}
-            if spec.get("grade") and spec["grade"] in r and r[spec["grade"]] is not None:
-                rec["funniness_label"] = r[spec["grade"]]
-            out.append(emit(rec))
+        page_start = offset
+        for i, row in enumerate(rows):
+            rec = _record_from_hf_row(
+                spec, repo, config, split, row, page_start + i)
+            if rec is not None:
+                out.append(emit(rec))
         offset += len(rows)
         time.sleep(float(spec.get("pace", 1.0)))
     return out[:limit]
 
 
+def _waterfill(available: list[int], budget: int) -> list[int]:
+    """Fair caps that redistribute unused capacity from small sources."""
+    caps = [0] * len(available)
+    active = set(range(len(available)))
+    remaining = min(budget, sum(max(0, n) for n in available))
+    while active and remaining > 0:
+        share = (remaining + len(active) - 1) // len(active)
+        small = [i for i in active if available[i] <= share]
+        if small:
+            for i in small:
+                caps[i] = available[i]
+                remaining -= caps[i]
+                active.remove(i)
+            continue
+        ordered = sorted(active)
+        base, extra = divmod(remaining, len(ordered))
+        for pos, i in enumerate(ordered):
+            caps[i] = base + (1 if pos < extra else 0)
+        remaining = 0
+    return caps
+
+
 def hf_lane(limit: int = 200, arg: str = "") -> list[dict[str, Any]]:
-    keys = list(HF_SPECS) if arg in ("", "all") else [k.strip() for k in arg.split(",")]
+    tokens = list(HF_SPECS) if arg in ("", "all") else [k.strip() for k in arg.split(",")]
+    parsed: list[tuple[str, int]] = []
+    for token in tokens:
+        key, marker, raw_offset = token.partition("@")
+        try:
+            offset = int(raw_offset) if marker else 0
+        except ValueError:
+            print(f"  ! invalid resume offset in '{token}' (expected key@ROW)")
+            continue
+        parsed.append((key, max(0, offset)))
     out: list[dict[str, Any]] = []
-    per = max(1, limit // max(1, len(keys)))
-    for k in keys:
+    available: list[int] = []
+    for key, offset in parsed:
+        if key not in HF_SPECS:
+            available.append(0)
+            continue
+        location = _hf_location(key)
+        total = hf_size(HF_SPECS[key]["repo"], *location) if location else None
+        available.append(max(0, (total if total is not None else limit) - offset))
+    caps = _waterfill(available, limit)
+    carry = 0
+    for pos, (k, offset) in enumerate(parsed):
         if k not in HF_SPECS:
             print(f"  ! unknown hf spec '{k}'")
             continue
-        got = hf_spec_fetch(k, per)
-        print(f"  hf:{k:<28} {len(got):>6} rows")
+        cap = min(available[pos], caps[pos] + carry)
+        if cap <= 0:
+            print(f"  hf:{k:<28}       0 rows  (source exhausted at {offset:,})")
+            continue
+        got = hf_spec_fetch(k, cap, offset)
+        carry = max(0, cap - len(got))
+        print(f"  hf:{k:<28} {len(got):>7} rows  "
+              f"(raw offset {offset:,}; cap {cap:,}; {HF_TRANSPORT})")
         out.extend(got)
-    return out
+    return out[:limit]
 
 
 # ---------------------------------------------------------------------------
 # Wikiquote lane 2: reuses the {{citation}}-aware parser from wave 1
 # ---------------------------------------------------------------------------
 def wikiquote2_lane(limit: int = 400, arg: str = "") -> list[dict[str, Any]]:
-    """arg = 'lang:Page Title' or comma-separated list of those."""
+    """arg = ``lang:Page Title`` or a comma-separated list.
+
+    Explicit ``{{:subpage}}`` transclusions are followed breadth-first, with a
+    hard page cap. Indonesian Wikiquote stores its A-Z proverb collection in
+    24 such pages; treating the index page as the corpus returned zero rows.
+    Only explicit transclusions are followed, so ordinary article links cannot
+    turn a bounded harvest into a site crawl.
+    """
     import harvest_wikiquote_citation as hwc
 
     targets = [t.strip() for t in arg.split(",") if t.strip()]
@@ -324,23 +557,43 @@ def wikiquote2_lane(limit: int = 400, arg: str = "") -> list[dict[str, Any]]:
     for t in targets:
         lang, _, page = t.partition(":")
         lang, page = lang.strip(), page.strip()
-        got = hwc.api_wikitext(f"{lang}.wikiquote.org", page)
-        if not got:
-            print(f"  wq:{lang}:{page} -> no wikitext")
-            continue
-        title, wikitext = got
-        quotes, how = hwc.extract_page(wikitext)
+        queue = [page]
+        seen_pages: set[str] = set()
         kept = 0
-        for q in quotes[:per]:
-            if not screen(q):
+        while queue and kept < per and len(seen_pages) < 64:
+            requested = queue.pop(0)
+            page_key = requested.casefold()
+            if page_key in seen_pages:
                 continue
-            out.append({"source": f"{lang}.wikiquote:{title}",
-                        "license": "CC BY-SA (Wikiquote)",
-                        "text": q,
-                        "meta": {"language": lang, "page": title, "extractor": how}})
-            kept += 1
-        print(f"  wq:{lang}:{title:<40} {kept:>5} quotes ({how})")
-        hwc._polite_sleep()
+            seen_pages.add(page_key)
+            got = hwc.api_wikitext(f"{lang}.wikiquote.org", requested)
+            if not got:
+                print(f"  wq:{lang}:{requested} -> no wikitext")
+                continue
+            title, wikitext = got
+            quotes, how = hwc.extract_page(wikitext)
+            page_kept = 0
+            for q in quotes:
+                if kept >= per:
+                    break
+                if not screen(q):
+                    continue
+                out.append(emit({
+                    "source": f"{lang}.wikiquote:{title}",
+                    "license": "CC BY-SA (Wikiquote)",
+                    "text": q,
+                    "meta": {"language": lang, "page": title,
+                             "extractor": how},
+                }))
+                kept += 1
+                page_kept += 1
+            children = hwc.transcluded_pages(wikitext)
+            queue.extend(p for p in children if p.casefold() not in seen_pages)
+            print(f"  wq:{lang}:{title:<40} {page_kept:>5} quotes ({how}); "
+                  f"{len(children)} explicit subpages")
+            hwc._polite_sleep()
+        if queue:
+            print(f"  ! wq:{lang}:{page}: stopped at the 64-page safety cap")
     return out[:limit]
 
 
@@ -1675,6 +1928,7 @@ _load_specs()
 
 
 def main() -> int:
+    global HF_TRANSPORT
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("lane", help="one of: " + ", ".join(LANES)
@@ -1683,7 +1937,11 @@ def main() -> int:
     ap.add_argument("--arg", default="")
     ap.add_argument("--no-dedupe", action="store_true")
     ap.add_argument("--semantic", action="store_true")
+    ap.add_argument("--hf-transport", choices=("auto", "rows", "parquet"),
+                    default=os.environ.get("HUMOR_HF_TRANSPORT", "auto"),
+                    help="HF bulk transport; auto prefers resumable parquet and falls back to rows")
     a = ap.parse_args()
+    HF_TRANSPORT = a.hf_transport
 
     if a.lane == "recover":
         # Re-ingest whatever a killed run managed to write. Recovered records go
@@ -1722,11 +1980,13 @@ def main() -> int:
         return 0
 
     open_partial(a.lane, a.arg)
+    completed = False
     try:
         r = harvest_supply.harvest(a.lane, limit=a.limit, arg=a.arg,
                                    dedupe=not a.no_dedupe, semantic=a.semantic)
+        completed = True
     finally:
-        close_partial()
+        close_partial(completed=completed)
     print(json.dumps(r, ensure_ascii=False, indent=2))
     return 0
 

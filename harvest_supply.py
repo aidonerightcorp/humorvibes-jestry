@@ -44,6 +44,45 @@ def _sha(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
 
 
+def exact_digest_index(corpora_dir: Path = ingest.CORPORA,
+                       out_dir: Path = OUT_DIR) -> set[str]:
+    """Stream the exact-text index without constructing semantic records.
+
+    Exact harvest dedupe only asks whether a 64-bit text digest exists. It used
+    to instantiate :class:`PrecedentIndex`, retaining source, text, labels and
+    vector slots for all 2.7M rows; a 95k-row recovery reached 4.8 GB RSS even
+    though none of those fields were read. Semantic dedupe still uses the rich
+    index. This path keeps precisely the keys the exact comparison consumes.
+    """
+    known: set[str] = set()
+    for path in sorted(corpora_dir.glob("*.jsonl")):
+        try:
+            with path.open(encoding="utf-8") as fh:
+                for line in fh:
+                    try:
+                        rec = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if "_meta" in rec:
+                        continue
+                    text = str(rec.get("text") or rec.get("joke") or "").strip()
+                    if text:
+                        known.add(_sha(text))
+        except OSError:
+            continue
+    accepted = out_dir / "accepted_bits.jsonl"
+    if accepted.exists():
+        with accepted.open(encoding="utf-8") as fh:
+            for line in fh:
+                try:
+                    text = str(json.loads(line).get("text") or "").strip()
+                except json.JSONDecodeError:
+                    continue
+                if text:
+                    known.add(_sha(text))
+    return known
+
+
 def _json_get(url: str, timeout: int = 25) -> Any:
     """Resilient JSON GET: Accept header (icanhazdadjoke serves HTML without
     it) and None on any transport/parse failure — a dead lane is a receipt
@@ -176,12 +215,13 @@ def harvest(lane: str, limit: int = 20, arg: str = "", *, dedupe: bool = True,
     near_dupes = 0
     idx = None
     if dedupe:
-        from precedent import HashEmbedBackend, PrecedentIndex, pick_backend
-        idx = PrecedentIndex(backend=pick_backend(semantic) if semantic else HashEmbedBackend(),
-                             out_dir=out_dir)
-        known = set(idx.items.keys())
         if semantic:
+            from precedent import PrecedentIndex, pick_backend
+            idx = PrecedentIndex(backend=pick_backend(True), out_dir=out_dir)
+            known = set(idx.items.keys())
             idx.ensure_embedded()
+        else:
+            known = exact_digest_index(out_dir=out_dir)
     fresh: list[dict[str, Any]] = []
     seen_batch: set[str] = set()
     for rec in fetched:

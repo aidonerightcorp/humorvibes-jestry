@@ -148,6 +148,7 @@
       "labels": [
         "english"
       ],
+      "translation": "english",
       "lang": "yo",
       "license": "per dataset card (unstated)",
       "verified": "2026-07-26 568 rows, PARALLEL yoruba<->english"
@@ -160,6 +161,7 @@
         "human",
         "machine"
       ],
+      "translation": "gold",
       "lang": "zh",
       "license": "per dataset card (unstated)",
       "verified": "2026-07-26 4,310 rows; `gold` is the human English gloss, `machine` the MT one — an aligned pair AND a human-vs-machine contrast"
@@ -170,6 +172,7 @@
       "labels": [
         "Hard work is the key to success."
       ],
+      "translation": "Hard work is the key to success.",
       "lang": "ur",
       "license": "per dataset card (unstated)",
       "verified": "2026-07-26 2,111 rows. NOTE: the upstream CSV has no header row, so the first data row became the column names — the field names below are literally the first idiom and its translation. Referenced verbatim on purpose"
@@ -229,6 +232,7 @@
         "category",
         "origin"
       ],
+      "translation": "text",
       "lang": "zh",
       "license": "per dataset card (unstated)",
       "verified": "2026-07-26 Chinese proverb + pinyin + English gloss + category"
@@ -290,6 +294,8 @@
     },
     "dadjokes_split": {
       "repo": "shuttie/dadjokes",
+      "config": "default",
+      "split": "train",
       "text": [
         "question",
         "response"
@@ -300,7 +306,17 @@
       ],
       "lang": "en",
       "license": "Apache-2.0",
-      "verified": "2026-07-26 53,400 rows with an explicit setup/punchline column split"
+      "verified": "2026-07-26 train arm; explicit setup/punchline columns"
+    },
+    "dadjokes_split_test": {
+      "repo": "shuttie/dadjokes",
+      "config": "default",
+      "split": "test",
+      "text": ["question", "response"],
+      "labels": ["question", "response"],
+      "lang": "en",
+      "license": "Apache-2.0",
+      "verified": "2026-07-26 held-out arm; train plus test total 53,400 rows"
     },
     "humor_greats_pd": {
       "repo": "yoonholee/humor-greats-public-domain",
@@ -340,12 +356,16 @@
         "votes_number"
       ],
       "grade": "yes_ratios",
+      "translation": "joke_english",
+      "language_field": "language",
       "lang": "mul",
       "license": "per dataset card (unstated)",
       "verified": "2026-07-26 9,978 rows: crowd yes/no ratio + vote count + an English gloss + which model wrote it, across ja/en/vi/pt/ar"
     },
     "grips_multilingual": {
       "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "ces",
       "text": "question",
       "labels": [
         "answer",
@@ -354,12 +374,104 @@
         "cot",
         "hard"
       ],
-      "lang": "mul",
+      "lang": "cs",
       "license": "CC-BY-4.0",
-      "verified": "2026-07-26 6,359 rows over 10 languages with an explicit wordplay MECHANIC label plus an explanation"
+      "verified": "2026-07-26 Czech split; one of 10 language splits with explicit wordplay mechanic and explanation"
+    },
+    "grips_danish": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "dan",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "da",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Danish split"
+    },
+    "grips_finnish": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "fin",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "fi",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Finnish split"
+    },
+    "grips_french": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "fra",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "fr",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 French split"
+    },
+    "grips_italian": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "ita",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "it",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Italian split"
+    },
+    "grips_dutch": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "nld",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "nl",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Dutch split"
+    },
+    "grips_polish": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "pol",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "pl",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Polish split"
+    },
+    "grips_portuguese": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "por",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "pt",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Portuguese split"
+    },
+    "grips_spanish": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "spa",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "es",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Spanish split"
+    },
+    "grips_swedish": {
+      "repo": "ellamind/grips-multilingual",
+      "config": "default",
+      "split": "swe",
+      "text": "question",
+      "labels": ["answer", "explanation", "mechanic", "cot", "hard"],
+      "lang": "sv",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 Swedish split"
     },
     "puntuguese": {
       "repo": "Superar/Puntuguese",
+      "config": "default",
+      "split": "train",
       "text": "text",
       "labels": [
         "label",
@@ -368,7 +480,27 @@
       ],
       "lang": "pt",
       "license": "CC-BY-SA-4.0",
-      "verified": "2026-07-26 5,700 rows with TOKEN-LEVEL pun spans — span labels are rare in any language"
+      "verified": "2026-07-26 train arm with TOKEN-LEVEL pun spans"
+    },
+    "puntuguese_validation": {
+      "repo": "Superar/Puntuguese",
+      "config": "default",
+      "split": "validation",
+      "text": "text",
+      "labels": ["label", "tokens", "labels"],
+      "lang": "pt",
+      "license": "CC-BY-SA-4.0",
+      "verified": "2026-07-26 validation arm"
+    },
+    "puntuguese_test": {
+      "repo": "Superar/Puntuguese",
+      "config": "default",
+      "split": "test",
+      "text": "text",
+      "labels": ["label", "tokens", "labels"],
+      "lang": "pt",
+      "license": "CC-BY-SA-4.0",
+      "verified": "2026-07-26 held-out arm; all three splits total 5,700 rows"
     },
     "spanish_sarcasm": {
       "repo": "Ernesto-1997/Sarcastic_spanish_dataset",

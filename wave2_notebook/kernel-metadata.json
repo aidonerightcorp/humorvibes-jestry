@@ -4,8 +4,8 @@
   "code_file": "humor_genome_wave2.ipynb",
   "language": "python",
   "kernel_type": "notebook",
-  "is_private": true,
-  "enable_gpu": false,
+  "is_private": false,
+  "enable_gpu": true,
   "enable_internet": true,
   "competition_sources": [
     "humor-genome-nyc"

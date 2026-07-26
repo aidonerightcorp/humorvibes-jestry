@@ -4,7 +4,9 @@
 > A six-lane sweep verified 144 fetchable HuggingFace datasets, 78 keyless API
 > endpoints, 301 Wikiquote pages across 51 language editions, and 164 Wiktionary
 > categories, each with a live status code and a row count. The corpus grew from
-> 23,885 items to over 2.5 million in the same pass. That document supersedes the
+> 23,885 items to **3,164,600** across 217 source families and 62 language labels. The
+> deterministic public slice contains 257,141 rows and 19,455 aligned non-English/English pairs.
+> That document supersedes the
 > priority tables below where the two disagree, and it also records what is
 > **dead** — `numbersapi.com` is now a hijacked redirect, Princeton's SARC is
 > gone with no recoverable Wayback payload, `altsoph/humor-mechanics` returns 401,

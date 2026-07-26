@@ -1,4 +1,4 @@
-"""Citation-template-aware Wikiquote proverb harvester for fr + it.
+"""Structure-aware Wikiquote proverb harvester.
 
 Why this exists: the wq_multilang lane parses top-level ``*`` bullets, which
 works on de/en-style pages but yields (near) zero on fr.wikiquote, where the
@@ -8,15 +8,15 @@ This standalone lane (additive — touches no existing module):
   1. discovers the actual proverb page titles via the MediaWiki API
      (opensearch), seeded with known-good titles;
   2. fetches page wikitext via ``action=parse&prop=wikitext&format=json``;
-  3. extracts quotes from ``{{citation|...}}`` / ``{{Citation|...}}``
-     templates (named ``citation=`` / ``texte=`` args or first positional),
-     falling back to top-level ``*`` bullet parsing when a page has no
-     citation templates (it.wikiquote's "Proverbi italiani" is bullet+ref
-     formatted, verified 2026-07-24);
-  4. cleans wikitext (nested templates, [[links]], refs, bold/italic,
-     HTML entities), keeps proverb-looking entries 15-300 chars, dedupes
+  3. extracts and UNIONS citation templates, ``*`` and ``#`` lists, raw
+     ``<P>/<BR>`` entries, and sentence-shaped transclusion templates. Mixed
+     pages are common, so choosing one representation silently loses rows;
+  4. exposes explicit ``{{:A-Z subpage}}`` targets for the wave-2 lane to
+     follow (the Indonesian index stores all 1,300+ entries that way);
+  5. cleans wikitext (nested templates, [[links]], refs, bold/italic,
+     HTML entities), applies a script-aware 3/15-to-300-character range, dedupes
      within-run by normalized text, caps ~600 per language;
-  5. writes records in the exact harvest_wq_multilang schema to a NEW
+  6. writes records in the exact harvest_wq_multilang schema to a NEW
      corpora/harvest_wikiquote_citation_YYYYMMDD[_k].jsonl and APPENDS one
      receipt per language to jestry_out/harvest_receipts.jsonl.
 
@@ -50,6 +50,16 @@ RETRY_429_SLEEP_S = 60.0
 MAX_PER_LANG = 600
 MIN_LEN, MAX_LEN = 15, 300
 LICENSE = "CC BY-SA (Wikiquote)"   # exact string used by the wq_multilang lane
+
+_DENSE_SCRIPT = re.compile(r"[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff\uac00-\ud7af]")
+_CITATION_NAMES = {"citation", "citazione", "цитат", "цитата", "quote"}
+_TEXT_TEMPLATE_NAMES = {
+    "ruby", "nihongo", "lang", "nowrap", "small", "smallcaps", "sc",
+}
+_NON_QUOTE_TEMPLATES = {
+    "tema", "theme", "wikipedia", "commons", "indice", "index",
+    "protetta", "protected", "sssk", "spiegazione", "explanation",
+}
 
 # Per-language lane config. `accept` = casefolded titles we take from
 # discovery; `seeds` = known-good fallbacks if discovery misses them.
@@ -193,12 +203,62 @@ def _strip_templates(s: str) -> str:
     return "".join(out)
 
 
+def _template_value(content: str) -> str:
+    """Render text-carrying templates and drop presentational metadata.
+
+    Wikiquote editions use different wrappers for visible text. In particular,
+    ``{{Ruby|漢字|かな}}`` contains the proverb in its first argument, while
+    ``{{spiegazione|...}}`` is commentary and must not become part of it.
+    Unknown templates remain dropped by :func:`_strip_templates`.
+    """
+    parts = _split_top_args(content)
+    name = parts[0].strip().casefold()
+    if name in _NON_QUOTE_TEMPLATES or name.startswith(":"):
+        return ""
+    named: dict[str, str] = {}
+    positional: list[str] = []
+    for part in parts[1:]:
+        key, eq, val = part.partition("=")
+        if eq and re.fullmatch(r"\s*[\w àâäéèêëîïôöùûüç'-]{1,30}\s*",
+                               key, flags=re.UNICODE):
+            named[key.strip().casefold()] = val
+        else:
+            positional.append(part)
+    if name in _CITATION_NAMES:
+        return (named.get("citation") or named.get("texte")
+                or named.get("citazione") or named.get("цитат")
+                or named.get("1") or (positional[0] if positional else ""))
+    if name in _TEXT_TEMPLATE_NAMES:
+        return named.get("1") or (positional[0] if positional else "")
+    return ""
+
+
+def _expand_text_templates(s: str) -> str:
+    """Resolve innermost text wrappers before generic template removal."""
+    inner = re.compile(r"\{\{([^{}]*)\}\}")
+    for _ in range(24):
+        changed = False
+
+        def repl(match: re.Match[str]) -> str:
+            nonlocal changed
+            changed = True
+            return _template_value(match.group(1))
+
+        s2 = inner.sub(repl, s)
+        s = s2
+        if not changed or "{{" not in s:
+            break
+    return s
+
+
 def clean_text(s: str) -> str:
     s = re.sub(r"<!--.*?-->", "", s, flags=re.S)
     s = re.sub(r"<ref[^>]*/>", "", s)
     s = re.sub(r"<ref[^>]*>.*?</ref>", "", s, flags=re.S)
     s = re.sub(r"<ref[^>]*>.*$", "", s, flags=re.S)   # unclosed ref: drop tail
-    s = re.sub(r"</?[a-zA-Z][^>]*>", " ", s)          # <br/>, <small>, ...
+    s = re.sub(r"<\s*(?:br|p)\b[^>]*>", " ", s, flags=re.I)
+    s = re.sub(r"</?[a-zA-Z][^>]*>", " ", s)          # <small>, ...
+    s = _expand_text_templates(s)
     s = _strip_templates(s)
     s = re.sub(r"\[\[[^\]|]*\|([^\]]*)\]\]", r"\1", s)   # [[a|b]] -> b
     s = re.sub(r"\[\[([^\]]*)\]\]", r"\1", s)            # [[a]] -> a
@@ -215,7 +275,11 @@ def clean_text(s: str) -> str:
 
 
 def looks_like_proverb(s: str) -> bool:
-    if not (MIN_LEN <= len(s) <= MAX_LEN):
+    # A four-character Chinese chengyu is a complete phrase. Applying the
+    # Latin-script floor here recreates the exact silent CJK deletion fixed in
+    # the wave-2 content screen.
+    floor = 3 if _DENSE_SCRIPT.search(s) else MIN_LEN
+    if not (floor <= len(s) <= MAX_LEN):
         return False
     low = s.casefold()
     if "http" in low or "www." in low:
@@ -235,7 +299,7 @@ def norm_key(s: str) -> str:
 def quotes_from_citation_templates(wikitext: str) -> list[str]:
     quotes = []
     for name, content in _iter_top_templates(wikitext):
-        if name != "citation":
+        if name not in _CITATION_NAMES:
             continue
         parts = _split_top_args(content)
         named: dict[str, str] = {}
@@ -248,7 +312,8 @@ def quotes_from_citation_templates(wikitext: str) -> list[str]:
             else:
                 positional.append(part)
         raw = named.get("citation") or named.get("texte") \
-            or named.get("citazione") or named.get("1") \
+            or named.get("citazione") or named.get("цитат") \
+            or named.get("1") \
             or (positional[0] if positional else "")
         text = clean_text(raw)
         if looks_like_proverb(text):
@@ -256,26 +321,91 @@ def quotes_from_citation_templates(wikitext: str) -> list[str]:
     return quotes
 
 
-def quotes_from_bullets(wikitext: str) -> list[str]:
+def quotes_from_lists(wikitext: str) -> list[str]:
+    """Top-level bulleted OR numbered entries.
+
+    Lithuanian Wikiquote alone has 1,500+ ``#`` entries. The old star-only
+    parser returned zero without raising, which made a parser limitation look
+    like an empty source.
+    """
     quotes = []
     for line in wikitext.split("\n"):
-        if not line.startswith("*") or line.startswith("**"):
+        if not re.match(r"^[*#](?![*#])", line):
             continue
-        text = clean_text(line.lstrip("*").strip())
+        text = clean_text(line[1:].strip())
         if looks_like_proverb(text):
             quotes.append(text)
     return quotes
 
 
+def quotes_from_html_blocks(wikitext: str) -> list[str]:
+    """Entries separated by legacy raw ``<P>``/``<BR>`` markup."""
+    if not re.search(r"<(?:p|br)\b", wikitext, flags=re.I):
+        return []
+    chunks = re.split(r"</?p\b[^>]*>|<br\b[^>]*?/?>", wikitext,
+                      flags=re.I)
+    return [text for chunk in chunks
+            if looks_like_proverb(text := clean_text(chunk))]
+
+
+def quotes_from_sentence_templates(wikitext: str) -> list[str]:
+    """Recover sentence-shaped, argument-free transclusion templates.
+
+    Nynorsk Wikiquote represents ``Ein person er ...`` as ``{{Ein person er
+    ...}}``. It is visible page content, not a template invocation with fields.
+    Housekeeping templates are explicitly excluded.
+    """
+    out: list[str] = []
+    for name, content in _iter_top_templates(wikitext):
+        if ("|" in content or name.startswith(":") or name in _CITATION_NAMES
+                or name in _TEXT_TEMPLATE_NAMES or name in _NON_QUOTE_TEMPLATES):
+            continue
+        text = clean_text(content)
+        # Navigation templates such as ``{{Peribahasa Indonesia}}`` are two
+        # title words, not sayings. Sentence-shaped Latin templates need at
+        # least four words; dense-script phrases can legitimately be shorter.
+        if (looks_like_proverb(text)
+                and (len(text.split()) >= 4 or _DENSE_SCRIPT.search(text))):
+            out.append(text)
+    return out
+
+
+def transcluded_pages(wikitext: str) -> list[str]:
+    """Return explicit page transclusions in source order, deduplicated."""
+    pages: list[str] = []
+    seen: set[str] = set()
+    # Preserve source casing: MediaWiki normalises the first character but page
+    # title matching beyond it can be case-sensitive.
+    for match in re.finditer(r"\{\{\s*:([^{}|]+?)(?:\|[^{}]*)?\}\}", wikitext):
+        page = match.group(1).strip()
+        key = page.casefold()
+        if page and key not in seen:
+            seen.add(key)
+            pages.append(page)
+    return pages
+
+
 def extract_page(wikitext: str) -> tuple[list[str], str]:
-    """Citation templates first; bullet fallback when a page has none/few."""
-    cite = quotes_from_citation_templates(wikitext)
-    if len(cite) >= 5:
-        return cite, "citation-templates"
-    bullets = quotes_from_bullets(wikitext)
-    if cite and len(cite) >= len(bullets):
-        return cite, "citation-templates"
-    return bullets, "bullets-fallback"
+    """Union every representation present; never discard a mixed page arm."""
+    arms = [
+        ("citation-templates", quotes_from_citation_templates(wikitext)),
+        ("lists", quotes_from_lists(wikitext)),
+        ("html-blocks", quotes_from_html_blocks(wikitext)),
+        ("sentence-templates", quotes_from_sentence_templates(wikitext)),
+    ]
+    out: list[str] = []
+    seen: set[str] = set()
+    modes: list[str] = []
+    for mode, rows in arms:
+        if not rows:
+            continue
+        modes.append(mode)
+        for row in rows:
+            key = norm_key(row)
+            if key and key not in seen:
+                seen.add(key)
+                out.append(row)
+    return out, "+".join(modes) if modes else "none"
 
 
 # ------------------------------------------------------------------ file IO

@@ -52,24 +52,21 @@ bucket while the naive coverage number read 99%+ for several languages.
 
 ### The templates were not the bottleneck — the data was
 
-Adding them, then re-labelling all 2,664,398 items, produced a result that corrects the original
-diagnosis. Non-English specific coverage is *still* near zero: zh 1.4%, ru 0.8%, es 0.6%, and
-de / pl / tr / it / pt / fi / nl / sv all **0.0%**.
+The first 2,664,398-row pass corrected the original diagnosis: adding native regexes did almost
+nothing because the multilingual supply was overwhelmingly proverbs and idioms rather than jokes.
+A proverb has no punchline, so no joke template can match it, and none should.
 
-The native templates work — they fire on 257 xiehouyu, 32 Vovochka, 22 anekdot openers, 22
-Spanish `¿Qué le dice`, 20 Shtirlitz. There is simply almost nothing for them to fire on, because
-**the non-English corpus is overwhelmingly proverbs and idioms, not jokes.** Of 18,394 Chinese
-items, 18,384 are Wiktionary idiom entries; the German, Polish, Turkish, Italian, Portuguese,
-Finnish, Dutch and Swedish holdings are near-entirely proverb lists.
+The sourcing fix has now landed, and the final **3,164,600-row** pass shows the difference. Russian
+specific-form coverage is **2.9%** (4,489 rows), Bulgarian **6.2%** (3,454), Polish **2.9%**
+(433), Chinese **1.0%** (257), and Spanish **0.6%** (43). The Russian joke cycles now fire at
+scale: Vovochka 1,433, stock anekdot openers 625, and Shtirlitz 522. Chinese remains dominated by
+phrase supply, so all 257 of its specific rows are xiehouyu; Portuguese, Greek, Amharic, Japanese,
+Italian, Arabic and Turkish remain at effectively zero specific coverage.
 
-A proverb has no punchline, so no joke template can match it, and none should. The honest
-statement is therefore not "the taxonomy is English-biased" but "**the multilingual half of this
-corpus is a phrase collection, and the English half is a joke collection**". Those are different
-objects and should not be compared as though the same labels apply.
-
-The fix is a sourcing fix, not a regex fix: ingest non-English *jokes* — Bulgarian (93,968),
-Russian (150,553), Greek (9,999), Spanish sarcasm (19,096), Romanian satire (13,873) — all
-verified live and queued.
+That before/after is the useful result. Regex breadth was not enough; adding actual Russian,
+Bulgarian, Polish and multilingual joke sources moved the coverage. The corpus still contains
+different objects—jokes, proverbs, idioms, puzzles—and the per-language coverage table keeps that
+difference visible rather than averaging it away.
 
 ## Two numbers reported instead of one
 
@@ -78,16 +75,16 @@ number counts generic buckets — `one_liner`, `setup_punchline`, `q_and_a`, `di
 short text falls into. A Swedish proverb is a single short assertion, so it lands in `one_liner`
 and reads as "labelled" while telling us nothing about mechanism.
 
-**The specific-form share is the honest column.** Over the full 2,664,398-item corpus it is
-**2.2%** — and it went *down* as the corpus grew, because the bulk additions (ranked captions,
-reddit dumps, proverb lists) are largely formless with respect to these templates. A coverage
-number that improves only when you stop adding data is a number worth distrusting.
+**The specific-form share is the honest column.** Over the final 3,164,600-item corpus it is
+**2.5% (80,246 rows)**. The forms that fire most often are: `what_do_you_call` 20,583;
+`shaggy_dog` 17,110; `walks_into_bar` 8,445; `whats_the_difference` 7,276; `chuck_norris`
+6,545; `light_bulb` 3,143; `knock_knock` 2,706; `blonde_joke` 2,242; `yo_mama` 1,950;
+`paraprosdokian` 1,902; rule-of-three rosters 1,555; Vovochka 1,433; `how_many_x` 805;
+`wellerism` 755; stock Russian anekdot openers 625; Shtirlitz 522; `doctor_doctor` 363;
+and xiehouyu 257.
 
-The forms that do fire, at corpus scale: what_do_you_call 15,015 · shaggy_dog 10,985 ·
-walks_into_bar 6,807 · chuck_norris 6,249 · whats_the_difference 5,765 · light_bulb 2,427 ·
-blonde 1,858 · knock_knock 1,846 · paraprosdokian 1,618 · yo_mama 1,534 · rule-of-three rosters
-1,424 · how_many 649 · wellerism 556 · xiehouyu 257 · roses_are_red 210 · doctor_doctor 187 ·
-soviet_russia 95 · confucius_say 81 · elephant 59 · Tom Swifty 20 · limerick 9.
+The other 97.5% is not relabelled as mechanism by wishful thinking: 63.8% is `one_liner`, 21.7%
+unknown, 5.2% declared setup/punchline, 3.7% generic Q&A, and 3.1% dialogue.
 
 ## Domain is a guess, and says so
 
@@ -95,6 +92,11 @@ Domains come from keyword lexicons and are returned with the match count that pr
 joke mentioning a doctor is not necessarily a medical joke. Military is additionally split by
 branch — `mil_army`, `mil_navy`, `mil_air`, `mil_marines` — because "military humor" is not one
 register: a boot-camp joke and a submarine joke share almost no vocabulary.
+
+The final rerun caught a lexical bug before these counts were published: the old compiled patterns
+had a leading word boundary but no trailing one, so `car` matched **carpet** and `cat` matched
+**category**. Every domain term now requires both boundaries; regression tests also pin intended
+overlaps such as `flight deck` contributing to both air and nautical vocabulary.
 
 ## What the measurement showed
 
@@ -145,7 +147,7 @@ So: the ordering is a hypothesis worth more measurement, not a finding. S is mod
 
 ## Do different subjects recruit different forms?
 
-Cross-tabulating form against domain over all 2,664,398 labelled rows says yes — but only after
+Cross-tabulating form against domain over all 3,164,600 labelled rows says yes — but only after
 removing a confound that would otherwise have produced a wrong answer.
 
 **The confound.** `shaggy_dog` is assigned by length alone (over 900 characters), not by a
@@ -158,21 +160,21 @@ With the length proxy excluded, real domain–form pairings appear:
 
 | domain | n | top template forms |
 | --- | --- | --- |
-| medical | 783 | **doctor_doctor 183**, what_do_you_call 150, blonde_joke 89 |
-| science | 448 | **walks_into_bar 194**, walk_into_group 74, what_do_you_call 53 |
-| religion | 1,211 | **walks_into_bar 281**, what_do_you_call 275, **walk_into_group 217** |
-| nautical | 534 | what_do_you_call 215, walks_into_bar 196 |
-| music | 361 | what_do_you_call 136, **whats_the_difference 72** |
-| military | 186 | what_do_you_call 66, chuck_norris 31, whats_the_difference 26 |
-| tech | 402 | what_do_you_call 113, chuck_norris 76, **light_bulb 56** |
-| legal | 336 | what_do_you_call 82, whats_the_difference 59 |
+| medical | 976 | **doctor_doctor 357**, what_do_you_call 178, blonde_joke 99 |
+| science | 376 | **walks_into_bar 191**, walk_into_group 79, what_do_you_call 42 |
+| religion | 1,483 | what_do_you_call 387, **walks_into_bar 347**, **walk_into_group 239** |
+| nautical | 500 | walks_into_bar 239, what_do_you_call 174, walk_into_group 21 |
+| music | 462 | what_do_you_call 168, **whats_the_difference 96**, walks_into_bar 87 |
+| military | 198 | what_do_you_call 77, whats_the_difference 28, chuck_norris 24 |
+| tech | 452 | what_do_you_call 157, chuck_norris 78, whats_the_difference 64 |
+| legal | 322 | what_do_you_call 71, whats_the_difference 65, walks_into_bar 53 |
 
 The pairings are interpretable rather than arbitrary. Medicine is the one domain that has its
 **own** form (`doctor_doctor`). Science and religion both recruit the entry frame — "a neutron
 walks into a bar", "a priest, a rabbi and a minister walk into…" — and religion is the top user of
 the rule-of-three roster, which is exactly the shape of that genre's stock joke. Music skews to
-comparison forms, which is what viola jokes are. Technology is the heaviest user of the light-bulb
-frame.
+comparison forms, which is what viola jokes are. Technology still contains 37 light-bulb forms,
+but the corrected full-corpus table does not support calling it that frame's heaviest user.
 
 Caveats: `domain` is a keyword guess, counts are small once the length proxy is removed, and
 `chuck_norris` appearing under military is a topical artifact of that cycle's vocabulary rather

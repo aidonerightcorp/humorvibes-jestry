@@ -1,0 +1,27 @@
+{
+  "n_captions": 2186939,
+  "n_contests": 371,
+  "vote_total_vs_votes_field_mismatch": 7061,
+  "votes": {
+    "min": 1.0,
+    "median": 83.0,
+    "mean": 126.3683189151595,
+    "max": 25887.0,
+    "share_ge_20": 0.9513882188757894,
+    "share_ge_50": 0.8321050564281857,
+    "share_ge_100": 0.36131414730817824
+  },
+  "recomputed_mean_max_abs_diff": 0.2168674698795181,
+  "recomputed_mean_disagree_gt_1e6": 27829,
+  "within_contest_dup_groups": 17,
+  "within_contest_dup_groups_identical_counts": 0,
+  "within_contest_dup_groups_distinct_counts": 17,
+  "texts_in_multiple_contests": 2492,
+  "max_contests_for_one_text": 4,
+  "contests_with_multiple_sources": 0,
+  "captions_per_contest": {
+    "min": 342,
+    "median": 5631,
+    "max": 15228
+  }
+}

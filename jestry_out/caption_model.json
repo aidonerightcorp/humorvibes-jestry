@@ -1,0 +1,81 @@
+{
+  "receipt_type": "caption_model_vs_bounds",
+  "receipt_version": 2,
+  "ts": "2026-07-26T21:14:11",
+  "question": "how much of the achievable caption signal do structural text features actually capture?",
+  "protocol": {
+    "target": "percentile standing within the caption's own contest, computed on the full contest before subsampling",
+    "cv": "GroupKFold over contests, 5 folds \u2014 a held-out contest is an unseen drawing",
+    "model": "HistGradientBoostingRegressor(max_iter=300, lr=0.06)",
+    "features": [
+      "caps_words",
+      "digits",
+      "echo_frac",
+      "end_rhyme",
+      "exclaims",
+      "pair_alliteration",
+      "pair_assonance",
+      "punch_alliteration",
+      "punch_assonance",
+      "punch_chars",
+      "punch_mean_wordlen",
+      "punch_rarity_final",
+      "punch_rarity_max",
+      "punch_rarity_mean",
+      "punch_syl_per_word",
+      "punch_syllables",
+      "punch_words",
+      "questions",
+      "quotes",
+      "sentences",
+      "setup_chars",
+      "setup_mean_wordlen",
+      "setup_rarity_final",
+      "setup_rarity_max",
+      "setup_rarity_mean",
+      "setup_syllables",
+      "setup_words",
+      "syllable_ratio",
+      "type_token_ratio",
+      "word_ratio"
+    ],
+    "per_contest_sample": 600,
+    "seed": 20260726
+  },
+  "n_rows": 215465,
+  "n_contests": 360,
+  "results": {
+    "within_contest_median_spearman": 0.1555,
+    "within_contest_iqr": [
+      0.117325,
+      0.18975
+    ],
+    "high_vote_subset_spearman": 0.10375,
+    "pooled_spearman": 0.1538,
+    "random_split_same_contests_spearman": 0.1541,
+    "contests_above_chance": 358,
+    "contests_scored": 360
+  },
+  "bounds": {
+    "label_ceiling": 0.8262266476511767,
+    "text_only_bound": 0.41097445176069036,
+    "achieved_over_text_only_bound": 0.3783690186429091,
+    "achieved_over_label_ceiling": 0.1882050166767924,
+    "sources": [
+      "jestry_out/caption_ceiling.json",
+      "jestry_out/caption_portability.json"
+    ]
+  },
+  "status": "complete",
+  "core_runtime_s": 3880.9,
+  "completed_ts": "2026-07-26T21:35:23.231229Z",
+  "runtime_s": 5153.1,
+  "runtime_note": "Core runtime was written by the process. Total runtime was reconstructed from its core timestamp and final receipt mtime because this run predates the atomic checkpoint patch.",
+  "transfer": {
+    "caption_to_reddit": 0.0959,
+    "caption_to_humicroedit": 0.049,
+    "reddit_to_caption_within": -0.00285,
+    "humicroedit_to_caption_within": 0.0471
+  },
+  "transfer_note": "caption arms are evaluated WITHIN contest (median over contests); the reddit and humicroedit arms are pooled, since neither corpus has a controlled context to hold fixed"
+}

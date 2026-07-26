@@ -54,10 +54,16 @@ def full_nll(context, continuation):
                          f"exceeds n_ctx {N_CTX}")
     llm.reset()
     llm.eval(ctx + cont)
-    scores = np.asarray(llm.scores, dtype=np.float64)  # [n_tokens, n_vocab]
+    # `llm.scores` is preallocated at [n_ctx, n_vocab] = 2048 x 256128. Converting
+    # the WHOLE buffer to float64 allocated and copied 4.2 GB per call to read the
+    # handful of rows a punchline needs — the dominant cost of every measurement
+    # and, on a loaded machine, the difference between seconds and minutes.
+    # Row-at-a-time is bit-identical: the same float32 values widened in the same
+    # order, so the certified calibration is untouched (verified below).
+    scores = llm.scores
     toks, nlls = [], []
     for i, tok in enumerate(cont):
-        row = scores[len(ctx) + i - 1]
+        row = np.asarray(scores[len(ctx) + i - 1], dtype=np.float64)
         m = row.max()
         lse = m + np.log(np.exp(row - m).sum())
         nlls.append(round(float(lse - row[tok]), 4))

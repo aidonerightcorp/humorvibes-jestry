@@ -312,6 +312,194 @@ and *zoo* come top), but *ban* ranks last in the lion joke although the line col
 because *ban* shares no topic with "heart of a lion". Scope shipped in the receipt: use the top
 content word as a candidate payoff, not the ranking as a cut list.
 
+## 2026-07-26 wave-2 corpus census, and the one family that matters
+
+The census (`jestry_out/corpus_census.json`, taken 12:08 UTC) reads **2,261,096 items over 486
+sources, 172 families, 46 languages and 26 licence strings**, 97.0% carrying a numeric grade. It is
+a snapshot: the final nextml harvest file landed a minute later and is not in it, so the corpus is
+larger than the census says. Anything quoted from that file should carry the timestamp.
+
+The shape matters more than the size. One family is **84.2%** of the census — the NextML mirror of
+the New Yorker caption contest. Measured directly from the harvest files rather than from the
+snapshot: **2,186,939 ranked captions over 371 contests**, median 5,631 captions per contest.
+Everything below is about that family, because it is the only corpus here that ships **the raw vote
+breakdown per item** (not_funny / somewhat_funny / funny) instead of a mean alone. A visible label
+error is what turns a prediction score from a number into a judgement.
+
+Licence classes are tracked rather than assumed: 2,168,401 research-only, 59,537 noncommercial,
+32,248 redistributable, 910 unclassified. The export's redistribution gate (G13) keys on that
+field, so the noncommercial caption bulk cannot leak into a shipped artifact by accident.
+
+## 2026-07-26 two form labels were wrong, found before the study that would have used them
+
+`form_signal_study.py` asks whether joke FORM changes what the certified instrument finds
+surprising. Before spending instrument time, the labels it depends on were sampled and read. Two of
+the ten target forms were badly wrong:
+
+- **limerick** fired on the opening words alone. `^there (once )?(was|were) an?\b` matched 652
+  items, of which a read of a deterministic sample put roughly a quarter in the form. "There was a
+  fly in my soup" and "There was a snake in his boot." were being counted as limericks.
+- **yo_mama** fired on any mention of a mother. Of 7,177 raw hits, **5,773 were not the genre** —
+  overwhelmingly Chuck Norris facts that happen to contain "your mother".
+
+Both are now structural rather than lexical, pinned by the real corpus items that were mislabelled
+(selftest 22/22, up from 12 cases that never covered these forms):
+
+- A limerick IS its **AABBA rhyme**, so `_is_limerick()` verifies the scheme instead of the opener:
+  five line-units, rhyme keys from each unit's final vowel-cluster, both couplets required, line
+  breaks preferred over punctuation as the unit boundary. Count **652 → 8**, all 8 genuine on
+  inspection. Recall is now the weak side rather than precision, which is the right trade for a
+  study that reports a per-form mean.
+- **yo_mama** requires the dialectal spelling ("yo mama") or the escalation frame ("your mother is
+  so ..."), with an adverb lookahead so "...as your Mother so nicely asked" no longer qualifies.
+  Count **7,177 → 1,486**, 9 of 10 genuine in the sample.
+
+Two details that each cost a real detection, worth keeping: an orthographic rhyme key must
+normalise the English /ʌ/ that is spelled with an o, or `front` fails to rhyme with `hunt`; and a
+token regex of `[A-Za-z']+` will return a lone apostrophe as a line's rhyme word (`out 'duck!',`),
+silently rejecting the item. The pre-fix run of the study was already in flight and was discarded
+rather than reported.
+
+## 2026-07-26 the label's own reliability, and the ceiling it puts under every score
+
+Every prediction number in this project has been quoted against an implicit ceiling of 1.0. That
+ceiling is wrong. A caption's published funniness is a mean over a finite number of crowd votes, so
+it carries sampling error, and no predictor can correlate with a noisy measurement better than a
+second independent measurement of the same thing does. Receipt: `jestry_out/caption_ceiling.json`,
+gate G14.
+
+Two estimators on deliberately unrelated assumptions:
+
+- **split-half** — deal each caption's own votes into two disjoint halves (multivariate
+  hypergeometric), average each, correlate across the captions of one contest, Spearman-Brown back
+  to full length. Nothing assumed about the vote distribution.
+- **analytic** — the multinomial sampling variance of each caption's mean over the observed
+  within-contest variance of means. Different assumptions entirely.
+
+Over **2,052,842 usable captions in 360 contests**, all within contest, because the drawing and the
+vote scale change between contests:
+
+| quantity | median | p10 | p90 |
+|---|---|---|---|
+| reliability, split-half on ranks | 0.683 | 0.561 | 0.782 |
+| reliability, split-half on values | 0.794 | 0.712 | 0.850 |
+| reliability, analytic | 0.797 | 0.715 | 0.852 |
+| **ceiling on Spearman** | **0.826** | 0.749 | 0.884 |
+
+The two estimators first appeared to disagree by 0.109. They do not: the split-half was computed on
+ranks and the analytic one is a variance ratio. Comparing like with like, **0.794 vs 0.797 — a gap
+of 0.003** between a non-parametric resampling of the actual votes and a closed-form variance
+argument. That agreement is the receipt; 0.826 is merely what it implies.
+
+Reliability rises with votes exactly as sampling error must, which is the third check that the
+estimator measures what it claims:
+
+| votes per caption | contests | reliability | ceiling |
+|---|---|---|---|
+| 20–50 | 47 | 0.617 | 0.786 |
+| 50–100 | 205 | 0.675 | 0.822 |
+| 100–200 | 95 | 0.721 | 0.849 |
+| 200+ | 13 | 0.823 | 0.907 |
+
+**Integrity finding, dropped rather than averaged over.** 27,829 captions (1.3%) publish a mean
+their own vote counts cannot produce, and 7,061 have a `votes` field disagreeing with the sum of
+their counts — count vector and mean column written from different snapshots of a live contest. The
+clearest case reads `not_funny=5, votes=5` with a mean of 1.2, which needs six votes. This study
+resamples the counts, so such a row is unusable in either direction; 134,097 rows are excluded in
+total, including the sub-20-vote tail.
+
+## 2026-07-26 funniness is mostly not in the words — the bound on any text-only model
+
+The theory says a punchline lands by repairing an expectation the setup built, which implies
+funniness is not a property of a string. That has never been testable here: no corpus rated the same
+joke in two contexts. This one does, by accident. **2,173 caption texts were submitted to more than
+one contest** — same words, different drawing, different crowd. Receipt:
+`jestry_out/caption_portability.json`, gate G15.
+
+| arm | spearman |
+|---|---|
+| 1. cross-context — same words, different drawing | **+0.1689** |
+| 2. same-context ceiling — split-half of the same captions' own votes | +0.6913 |
+| 3. placebo — arm 1 with the partner shuffled | +0.0111 |
+
+Arm 2 is what arm 1 would read if context were irrelevant, computed on exactly the same items, so
+the ratio is the honest quantity: **24% of a caption's standing travels with its words**. Arm 3
+reads zero, so the pairing and the ranking are not leaking.
+
+**What it bounds.** Write standing = T(text) + C(fit with this drawing) + E(vote noise). With C and
+E independent between contests, arm 1 *is* var(T)/var(standing), and a model seeing only the text
+can at best predict T, so it correlates with standing at sqrt(arm 1). **Any text-only predictor is
+bounded at spearman ≈ 0.411 within contest**, against a label that would support 0.826. That is an
+upper bound: a caption submitted to two contests skews generic, which helps it travel.
+
+The items say it better than the statistic. "He still doesn't get it." stood in the 98th percentile
+against one drawing and the 1st against another. "Haven't seen him." went 5th → 100th. Same words,
+opposite reception.
+
+## 2026-07-26 structural text model: 37.8% of the text-only bound
+
+`caption_model.py` fixes the pooled-contest defect in the earlier caption arm. Its target is each
+caption's percentile within its own full contest; sampling happens only after that percentile is
+computed. Five-fold `GroupKFold` holds out whole contests, so every test drawing is unseen. The
+completed receipt covers **215,465 captions in 360 contests** and 30 deterministic structural text
+features. Receipt: `jestry_out/caption_model.json`, gate G16.
+
+| evaluation | Spearman |
+|---|---:|
+| contest-held-out, median within contest (IQR 0.1173–0.1898) | **0.1555** |
+| contest-held-out, captions with at least 100 votes | 0.1038 |
+| contest-held-out, pooled | 0.1538 |
+| random split sharing contests, pooled | 0.1541 |
+
+The model recovers **37.8% of the 0.411 text-only bound** and **18.8% of the 0.826 label ceiling**;
+358/360 contest-level correlations are positive. The pooled held-out and shared-contest scores are
+effectively the same, so contest identity did not inflate this model's pooled result. The lower
+high-vote result is reported rather than rationalized; less label noise did not improve this arm.
+
+Transfer remains weak and asymmetric:
+
+| train → test | Spearman |
+|---|---:|
+| caption → Reddit jokes | +0.0959 |
+| caption → Humicroedit | +0.0490 |
+| Reddit jokes → caption, median within contest | -0.0029 |
+| Humicroedit → caption, median within contest | +0.0471 |
+
+This is a human-label prediction result, but it is text-only and sees no cartoon. It does not show
+that the features cause humor, and it leaves most of even the portable text signal uncaptured. The
+run took 85.9 minutes on a saturated shared host. Because the original process wrote only after
+transfer, version 2 now atomically checkpoints `core_complete` before optional transfer work and
+records core and end-to-end runtimes separately.
+
+## 2026-07-26 Wave 2 release: completed, stratified, and fail-closed
+
+The final strict scan contains **3,164,600 rows in 117 files, 767 source labels, 217 source
+families and 62 language labels**. It carries 2,587,825 source-specific human signals (81.8%). The
+published Kaggle slice is SHA-256 ordered and capped at 12,000 rows per family: **257,141 rows,
+19,455 aligned non-English/English pairs, and 2,581 expectation/violation frames**. The dominant
+caption family falls from 71.0% of the full corpus to 4.7% of the slice.
+
+The release builder now scans the corpus once with bounded per-family heaps. It fails on malformed
+JSON instead of silently dropping a row, has no clock field, stages every artifact before replacing
+the prior release, and hashes every mounted payload. `verify_wave2_release.py` then streams the
+release again and checks hashes, JSONL counts, family caps, languages, licence classes, grades,
+aligned-pair invariants, frame provenance, and agreement among the sample header, summary, census
+and data card. Final receipt: **PASS**, six payloads.
+
+Two consecutive full builds produced identical hashes for all eight local files. The domain audit
+then found one last semantic bug before publication: the keyword patterns had a leading word
+boundary but no trailing one, so `car` matched “carpet” and `cat` matched “category.” After adding
+the second boundary, exactly the files that should change did change—`corpus_sample.jsonl` and its
+manifest—while the census, selection summary, aligned pairs, frame rows and data card stayed
+byte-identical. The semantic release gate passed again on the corrected artifact.
+
+The full style relabel now has a machine-readable cross-tab in its header. **80,246 rows (2.5%)**
+receive a specific form. The sourcing intervention is visible rather than asserted: Russian is
+2.9% specific (4,489 rows), Bulgarian 6.2% (3,454), and Polish 2.9% (433), after the final joke
+harvest; proverb-heavy Portuguese, Greek, Amharic, Japanese, Italian, Arabic and Turkish remain at
+effectively zero. Generic forms and the length-only `shaggy_dog` proxy are excluded from every
+domain×form claim.
+
 ## Open (queued)
 - ~~Century test with the fixed jest extractor~~ **DONE 2026-07-11 reconciliation: 12 jests, 3
   alive, top R 0.73** (zoo latest). ~~Headline temporal experiment~~ **RAN, did not discriminate**
@@ -322,3 +510,15 @@ content word as a candidate payoff, not the ranking as a cut list.
   setup/punchline-native rated corpus, since Humicroedit may simply not carry repair-driven humor.
 - Leak-guard refinement (punchline-exclusive words only); hosted panels/frame-duels when any key
   lands; Gemini add-on click for platform-credit judging.
+- **Re-run the per-feature caption arm of `three_corpus_study.py` within contest.** Its New Yorker
+  column pools captions across contests, which is the same confound the model-level correction
+  above quantifies; the per-feature signs and FDR survivals inherit it and have not been rechecked.
+- **The 705 human expectation/violation frames** in the caption annotation layers are the first
+  frames in this project that are neither model-written nor crafted here. The frame-provenance trust
+  gate exists precisely because model-written frames invert the ordering — a human-annotated frame
+  set is the missing arm of that experiment.
+- **Weight training by label reliability.** Every caption's vote count gives its mean a known
+  standard error, so rows are not equally informative; the ceiling work above computes the per-row
+  variance already and nothing yet uses it.
+- **The bound is on TEXT-only models, not on models.** 0.411 falls out of the caption's context
+  dependence, so the way past it is to give the model the drawing, not better text features.

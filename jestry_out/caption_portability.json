@@ -1,0 +1,140 @@
+{
+  "receipt_type": "caption_portability",
+  "receipt_version": 1,
+  "ts": "2026-07-26T16:43:32",
+  "question": "does a caption's funniness travel with its words to a different drawing?",
+  "protocol": {
+    "standing": "percentile rank of the crowd mean within its own contest, ties averaged",
+    "pairing": "texts normalised for case/whitespace/curly-quotes; first occurrence per contest; the two lowest-numbered contests when a text appears in more",
+    "control": "split-half of the SAME captions' own votes, Spearman-Brown lifted to full length \u2014 the value arm 1 would take if context were irrelevant",
+    "min_votes_per_caption": 20,
+    "min_captions_per_contest": 200,
+    "seed": 20260726
+  },
+  "n_pairs": 2173,
+  "n_texts_in_3_or_more_contests": 84,
+  "results": {
+    "cross_context_spearman": 0.1689,
+    "same_context_ceiling_spearman": 0.6912707760764298,
+    "same_context_half_split_spearman": 0.5282,
+    "placebo_spearman": 0.0111,
+    "portable_share": 0.24433262021961374,
+    "text_only_predictor_bound": 0.41097445176069036
+  },
+  "text_only_bound_derivation": "standing = T(text) + C(fit with this drawing) + E(vote noise); C and E independent across contests makes arm 1 equal to var(T)/var(standing), so a perfect text-only predictor correlates with standing at sqrt(arm 1). Read as an UPPER bound: texts that recur across contests skew generic, which inflates arm 1.",
+  "verdict": "a minority of standing travels with the words (24% of what the label's reliability would allow); most of a caption's reception belongs to its fit with the drawing, which bounds text-only models",
+  "examples_most_context_dependent": [
+    {
+      "text": "He still doesn't get it.",
+      "contest_a": "559",
+      "standing_a": 0.981,
+      "contest_b": "778.csv",
+      "standing_b": 0.01,
+      "votes_a": 79.0,
+      "votes_b": 68.0
+    },
+    {
+      "text": "I\u2019m suddenly feeling profoundly domesticated.",
+      "contest_a": "883",
+      "standing_a": 0.99,
+      "contest_b": "886",
+      "standing_b": 0.025,
+      "votes_a": 742.0,
+      "votes_b": 78.0
+    },
+    {
+      "text": "Haven't seen him.",
+      "contest_a": "632",
+      "standing_a": 0.054,
+      "contest_b": "824.csv",
+      "standing_b": 0.997,
+      "votes_a": 37.0,
+      "votes_b": 1817.0
+    },
+    {
+      "text": "No, YOU'RE a mirage",
+      "contest_a": "552",
+      "standing_a": 0.993,
+      "contest_b": "728.csv",
+      "standing_b": 0.054,
+      "votes_a": 176.0,
+      "votes_b": 41.0
+    },
+    {
+      "text": "I am the Ghost of Breakfast Past.",
+      "contest_a": "642",
+      "standing_a": 0.964,
+      "contest_b": "772.csv",
+      "standing_b": 0.026,
+      "votes_a": 251.0,
+      "votes_b": 64.0
+    },
+    {
+      "text": "Do you have the Age?",
+      "contest_a": "646",
+      "standing_a": 0.041,
+      "contest_b": "827.csv",
+      "standing_b": 0.976,
+      "votes_a": 278.0,
+      "votes_b": 491.0
+    }
+  ],
+  "examples_most_portable": [
+    {
+      "text": "Funny seeing you here",
+      "contest_a": "605",
+      "standing_a": 0.473,
+      "contest_b": "753.csv",
+      "standing_b": 0.474,
+      "votes_a": 100.0,
+      "votes_b": 72.0
+    },
+    {
+      "text": "It's a side effect of the Paleo Diet.",
+      "contest_a": "537",
+      "standing_a": 0.603,
+      "contest_b": "755.csv",
+      "standing_b": 0.605,
+      "votes_a": 117.0,
+      "votes_b": 57.0
+    },
+    {
+      "text": "living the dream",
+      "contest_a": "677.csv",
+      "standing_a": 0.648,
+      "contest_b": "809.csv",
+      "standing_b": 0.649,
+      "votes_a": 136.0,
+      "votes_b": 79.0
+    },
+    {
+      "text": "Where\u2019s Billy?",
+      "contest_a": "785.csv",
+      "standing_a": 0.298,
+      "contest_b": "885",
+      "standing_b": 0.299,
+      "votes_a": 50.0,
+      "votes_b": 91.0
+    },
+    {
+      "text": "It's not as bad as it looks.",
+      "contest_a": "565",
+      "standing_a": 0.713,
+      "contest_b": "651",
+      "standing_b": 0.713,
+      "votes_a": 36.0,
+      "votes_b": 246.0
+    },
+    {
+      "text": "I'm not sure you understand the gravity of the situation.",
+      "contest_a": "639",
+      "standing_a": 0.993,
+      "contest_b": "773.csv",
+      "standing_b": 0.993,
+      "votes_a": 240.0,
+      "votes_b": 859.0
+    }
+  ],
+  "caveats": "a text submitted to two contests is not a random caption \u2014 it is more likely to be generic, which if anything HELPS it travel, so this is an upper bound on portability rather than a lower one",
+  "runtime_s": 47.7
+}

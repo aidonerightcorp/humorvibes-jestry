@@ -350,8 +350,102 @@ def g13():
             f"{rows['mechanisms.jsonl']} mechanisms; {aligned}")
 
 
+@gate("G14 caption label ceiling, two estimators agreeing")
+def g14():
+    """The ceiling reframes every prediction number, so it must not drift.
+
+    The load-bearing claim is not the value 0.83 — it is that two estimators
+    built on unrelated assumptions (resampling the actual votes vs multinomial
+    variance algebra) land in the same place. If that agreement breaks, one of
+    them is wrong and neither can be quoted.
+    """
+    path = ROOT / "jestry_out" / "caption_ceiling.json"
+    if not path.exists():
+        raise SkipGate("no caption_ceiling.json yet (run caption_ceiling.py)")
+    rep = json.loads(path.read_text(encoding="utf-8"))
+    h = rep["headline"]
+    per = rep["per_contest"]
+    assert rep["n_contests"] >= 100, f"only {rep['n_contests']} contests scored"
+    sh_val = [r["reliability_split_half_pearson"] for r in per]
+    an = [r["reliability_analytic"] for r in per]
+    med_gap = sorted(abs(a - b) for a, b in zip(sh_val, an))[len(per) // 2]
+    assert med_gap < 0.02, (
+        f"the two reliability estimators disagree by {med_gap:.3f} on the like-for-like "
+        f"(Pearson) comparison; the ceiling is no longer supported")
+    assert 0.5 < h["median_ceiling"] < 0.95, f"implausible ceiling {h['median_ceiling']}"
+    # reliability must rise with votes — if it does not, the estimator is not
+    # measuring sampling error and the whole construction is wrong
+    by = rep["by_vote_count"]
+    assert by[-1]["reliability"] > by[0]["reliability"], \
+        "reliability does not increase with vote count"
+    return (f"ceiling {h['median_ceiling']:.3f} over {rep['n_contests']} contests; "
+            f"estimators agree to {med_gap:.3f}; reliability "
+            f"{by[0]['reliability']:.2f}→{by[-1]['reliability']:.2f} with votes")
+
+
+@gate("G15 caption portability + its placebo")
+def g15():
+    """The text-only bound is only worth as much as its placebo arm.
+
+    Arm 3 pairs each caption with a random partner and must read zero. If it
+    drifts, the pairing or the ranking is leaking and the headline ratio is an
+    artifact rather than a measurement.
+    """
+    path = ROOT / "jestry_out" / "caption_portability.json"
+    if not path.exists():
+        raise SkipGate("no caption_portability.json yet (run caption_portability.py)")
+    rep = json.loads(path.read_text(encoding="utf-8"))
+    r = rep["results"]
+    assert abs(r["placebo_spearman"]) < 0.05, \
+        f"placebo arm reads {r['placebo_spearman']:+.4f}, so the pairing leaks"
+    assert r["cross_context_spearman"] < r["same_context_ceiling_spearman"], \
+        "a caption travels to a new drawing as well as it repeats in its own — implausible"
+    assert rep["n_pairs"] >= 500, f"only {rep['n_pairs']} cross-context pairs"
+    bound = r["text_only_predictor_bound"]
+    assert abs(bound - math.sqrt(max(r["cross_context_spearman"], 0.0))) < 1e-6, \
+        "the published bound is not sqrt of the measured cross-context correlation"
+    return (f"cross {r['cross_context_spearman']:+.3f} vs ceiling "
+            f"{r['same_context_ceiling_spearman']:+.3f} (placebo "
+            f"{r['placebo_spearman']:+.3f}), text-only bound {bound:.3f}, n={rep['n_pairs']}")
+
+
+@gate("G16 held-out caption model receipt")
+def g16():
+    """Cross-check the expensive model receipt against its independent bounds."""
+    out = ROOT / "jestry_out"
+    model_path = out / "caption_model.json"
+    if not model_path.exists():
+        raise SkipGate("no caption_model.json yet (run caption_model.py --per-contest 600)")
+    rep = json.loads(model_path.read_text(encoding="utf-8"))
+    ceiling = json.loads((out / "caption_ceiling.json").read_text(encoding="utf-8"))
+    portability = json.loads((out / "caption_portability.json").read_text(encoding="utf-8"))
+    assert rep["receipt_type"] == "caption_model_vs_bounds"
+    assert rep["receipt_version"] >= 2 and rep["status"] == "complete"
+    assert rep["n_rows"] >= 100_000 and rep["n_contests"] >= 300
+    assert "GroupKFold over contests" in rep["protocol"]["cv"]
+    result = rep["results"]["within_contest_median_spearman"]
+    label_ceiling = ceiling["headline"]["median_ceiling"]
+    text_bound = portability["results"]["text_only_predictor_bound"]
+    bounds = rep["bounds"]
+    assert math.isfinite(result) and -1 <= result <= 1
+    assert math.isclose(bounds["label_ceiling"], label_ceiling, abs_tol=1e-12)
+    assert math.isclose(bounds["text_only_bound"], text_bound, abs_tol=1e-12)
+    assert math.isclose(bounds["achieved_over_text_only_bound"],
+                        result / text_bound, abs_tol=1e-12)
+    assert math.isclose(bounds["achieved_over_label_ceiling"],
+                        result / label_ceiling, abs_tol=1e-12)
+    assert 0 <= rep["results"]["contests_above_chance"] <= rep["n_contests"]
+    expected_transfer = {"caption_to_reddit", "caption_to_humicroedit",
+                         "reddit_to_caption_within", "humicroedit_to_caption_within"}
+    assert expected_transfer <= set(rep.get("transfer", {})), "transfer matrix is incomplete"
+    assert rep["runtime_s"] >= rep["core_runtime_s"] > 0
+    return (f"rho {result:+.3f}, {bounds['achieved_over_text_only_bound']:.1%} of text bound, "
+            f"{rep['n_rows']:,} rows/{rep['n_contests']} held-out contests")
+
+
 def main() -> int:
-    for fn in (g1, g2, g3, g4, g6, g5, g7, g8, g9, g10, g11, g12, g13):  # g6 before g5: live run feeds receipts
+    for fn in (g1, g2, g3, g4, g6, g5, g7, g8, g9, g10, g11, g12, g13,
+               g14, g15, g16):  # g6 before g5: live run feeds receipts
         fn()
     width = max(len(n) for n, _, _ in RESULTS)
     print("\n" + "=" * 78)

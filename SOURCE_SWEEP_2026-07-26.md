@@ -18,8 +18,8 @@ Before: 23,885 items, 159 sources, 46 languages.
 | --- | --- | --- |
 | nextml caption archive (385 contests) | 2,186,939 | mean rating **plus the raw 3-bin vote histogram** per caption |
 | taivop/joke-dataset (3 dumps) | 198,573 | reddit score; unfiltered, slur-screened on ingest |
-| r/Jokes bulk (staged locally, never ingested) | 98,516 | setup/punchline split + score |
-| New Yorker captions (staged locally, never ingested) | 59,537 | mean rating + vote count |
+| r/Jokes bulk | 98,516 | ingested setup/punchline split + score |
+| New Yorker caption supplement | 59,537 | ingested mean rating + vote count; grouped with the NextML family in the census |
 | Wiktionary idioms/proverbs/similes | 12,926 | phrases, 5 languages (first pass) |
 | Polyglot of Foreign Proverbs (Gutenberg 51090) | 7,913 | **aligned foreign → English pairs**, 7 languages |
 | MemeCap | 6,382 | literal reading vs intended reading vs the metaphor between them |
@@ -27,6 +27,8 @@ Before: 23,885 items, 159 sources, 46 languages.
 | HaHackathon (SemEval-2021 T7) | 5,583 | graded funniness + **annotator controversy** + offence |
 | New Yorker annotation layers | 2,636 | **705 expectation/violation frames**, 647 explained jokes |
 | static dumps, meme templates, style APIs | 2,094 | MIT sets, 271 templates with declared slot counts |
+| HuggingFace bulk completion | 404,109 | resumable English/Russian/Bulgarian/Polish joke supply, public-domain jest books, Dadjokes splits, GRIPS wordplay, Puntuguese, and 9,907 multilingual jokes with ratings and English glosses |
+| structure-aware Wikiquote recovery | 2,979 | numbered lists, citation templates, Indonesian transclusions, Nynorsk sentence templates, and Arabic list entries that the old parser missed |
 
 ## The find that matters most
 
@@ -68,7 +70,7 @@ geography attached, still unharvested.
 
 ## Multilingual and translation-aligned
 
-The corpus was 98.9% English before this lane. What is now ingested or queued:
+The corpus was 98.9% English before this lane. What is now ingested:
 
 - **en.wiktionary per-language categories** — Chinese idioms 16,920, Mandarin 14,865, English
   10,599, Polish 4,890, Spanish 3,321, and a long tail down to Amharic and Zulu. One wiki, one
@@ -88,14 +90,18 @@ The corpus was 98.9% English before this lane. What is now ingested or queued:
   editions are new to this project. Largest: Kannada `ಗಾದೆಗಳು` 4,470, Swedish 3,779, Russian 3,676,
   Finnish 3,158, Dutch 3,127.
 
-### Parser debt, quantified
+### Parser debt, repaired and measured
 
-A `* `-prefixed-line parser silently loses about 10,000 verified Wikiquote items. The specific
-failures: numbered `#` lists (lithuanian and arabic pages, ~5,835 items), whole entries wrapped in
-`{{Цитат}}` on Bulgarian pages (1,058), index pages whose content lives on A–Z subpages
-(Indonesian, 1,376), transcluded page-title proverbs (Norwegian Nynorsk), and raw `<P>`/`<BR>`
-HTML on Hindi pages. Each needs its own rule. This is written down rather than fixed because the
-fix is cheap and the loss is now measured.
+The old `* `-only parser silently lost real Wikiquote structure. The replacement unions every
+representation present on a page instead of choosing one: `*` and `#` lists, citation templates
+(including Cyrillic names), raw `<P>`/`<BR>` blocks, sentence-shaped proverb templates, Ruby text,
+and explicit `{{:subpage}}` transclusions followed with a bounded queue.
+
+The live repair pass fetched **4,114** entries: Lithuanian numbered lists 1,561; Bulgarian mixed
+citation/list markup 41; Indonesian A–Y subpages 1,370; Nynorsk sentence templates 1; and Arabic
+lists 1,141. Exact corpus deduplication retained **2,979 new rows** and rejected 1,135 already
+present. The cases are pinned in `tests/test_wave2.py`, including a mixed page where all four
+representation arms must survive together.
 
 One earlier belief was wrong: Italian `Proverbi italiani` is **not** template-wrapped and yields
 2,229 clean lines. The Italian template problem is confined to the dialect and Japanese-proverb
@@ -144,34 +150,39 @@ raw comment dump and **has no label column** — easy to mistake for the task da
 ## Joke styles
 
 The corpus had no style axis, so `style_taxonomy.py` was written to add two independent labels:
-FORM (structural template) and DOMAIN (subject matter). Self-test 14/14.
+FORM (structural template) and DOMAIN (subject matter). Self-test **28/28**, including real
+false-positive regressions and native German, Russian, French, Portuguese, and Chinese forms.
 
-Over 187,423 items at the time of labelling, the specific forms found were q_and_a 31,087,
+In the early 187,423-row snapshot, the specific forms found were q_and_a 31,087,
 what_do_you_call 5,900, walks_into_bar 1,684, whats_the_difference 1,437, yo_mama 742,
 knock_knock 561, light_bulb 512, limerick 162, how_many_x 155, doctor_doctor 76, wellerism 42,
 xiehouyu 7, tom_swifty 1.
 
-Two limits are worth stating plainly. Only **6.0%** of items receive a *specific* form; the rest
+In that snapshot only **6.0%** of items received a *specific* form; the rest
 fall into catch-all buckets (one_liner, setup_punchline, q_and_a, dialogue) that describe shape
-rather than mechanism. And **non-English specific-form coverage is approximately zero** — the
+rather than mechanism. It also showed that **non-English specific-form coverage was approximately
+zero** — the
 templates are English in practice, so a Swedish proverb reads as "labelled" while telling us
-nothing. Coverage is therefore reported twice, and the specific-form column is the honest one.
+nothing. `STYLES.md` carries the final full-corpus rerun and the sourcing correction that followed.
+Coverage is therefore reported twice, and the specific-form column is the honest one.
 
 Domains are thin exactly where a comedy writer would want them: military 0.5%, legal 0.5%,
 science 0.6%, tech 0.7%, against animal 6.4% and family 5.7%.
 
 ## Licensing reality
 
-Of 2.26M items at census time: 95.9% research-only, 2.6% noncommercial, 1.4% redistributable.
+The final release census contains **3,164,600 items**: 2,580,879 research-only, 59,537
+noncommercial, 511,110 redistributable, and 13,074 unclassified.
 The corpus is a research instrument, not a redistributable dataset, and the per-record `license`
 field is what a redistributor must honour. The clean lanes are Wikidata labels (CC0), Ling &
 Klinger (CC0), Misra headlines (CC BY 4.0), the caption-contest annotation layers (CC BY 4.0),
 Gutenberg (public domain), Wiktionary and Wikiquote (CC BY-SA 4.0), Chuck Norris (CC BY 3.0), and
 anything from `iabufarha` (MIT).
 
-One concentration fact governs every corpus-wide statistic: the caption archive is **84%** of all
-rows. Any average taken over the whole corpus describes New Yorker captions. Stratify by source
-family first.
+One concentration fact governs every corpus-wide statistic: the caption archive is **71.0%** of
+the final 3,164,600-row corpus. Any pooled average still mostly describes New Yorker captions.
+The published sample therefore caps each source family at 12,000 rows, reducing its largest-family
+share to 4.7% instead of pretending a random slice is representative.
 
 ## Content screening
 

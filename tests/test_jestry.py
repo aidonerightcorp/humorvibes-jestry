@@ -33,6 +33,42 @@ def tmp_out(tmp_path: Path) -> Path:
     return out
 
 
+@pytest.fixture(autouse=True)
+def offline_external_supply(monkeypatch, tmp_path: Path):
+    """Keep this module's advertised no-network contract true.
+
+    Accepted live-path candidates normally receive a semantic been-done check.
+    Those mechanics are tested directly in test_precedent.py; route tests need a
+    deterministic receipt, not a several-minute Ollama embedding call. The
+    registry mechanics also need representative corpus cards, not a repeated
+    scan of the repository's roughly 100 MB public sample on every unit test.
+    """
+    import precedent
+    corpus = tmp_path / "corpora"
+    corpus.mkdir()
+    fixture_rows = [
+        {"text": f"AI project manager planning fixture joke number {i}.",
+         "source": "test-fixture", "license": "MIT"}
+        for i in range(48)
+    ]
+    (corpus / "fixture.jsonl").write_text(
+        "\n".join(json.dumps(row) for row in fixture_rows) + "\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(J, "CORPORA_DIR", corpus)
+    monkeypatch.setattr(
+        precedent,
+        "quick_check",
+        lambda text, **_: {
+            "query": text,
+            "verdict": "fixture_no_precedent_match",
+            "backend": "test-double",
+            "semantic": False,
+            "indexed_items": 0,
+        },
+    )
+
+
 @pytest.fixture()
 def registry(tmp_out: Path) -> BitRegistry:
     return BitRegistry(out_dir=tmp_out)

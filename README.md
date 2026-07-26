@@ -2,6 +2,13 @@
 
 A Gemma-powered humor engine for the Build with Gemma: Humor Genome NYC hackathon.
 
+**One canonical public deliverable:** the complete corpus audit, style analysis, human-label
+bounds, held-out caption-model result, and live Gemma measurement are consolidated in
+`wave2_notebook/humor_genome_wave2.ipynb`. It clones this repository, verifies the attached
+release byte-for-byte and semantically, then runs the Gemma instrument. The repository is the
+implementation and receipt ledger; the Kaggle page is the single executable write-up. Its source
+checkout is pinned to the immutable `humor-genome-wave2-v1` tag rather than whatever `main` becomes.
+
 *(Formerly "Punchline Mesh" — a few internal Kaggle slugs keep the old name for stability:
 the `punchline-mesh-src` dataset and already-running kernel sessions.)*
 
@@ -112,6 +119,43 @@ separate source/hash/privacy harvest gate: 200/200 Gemma measurements, fixed S/R
 `research_out/kaggle/humorvibes-ablation-court/ABLATION_REPORT.md`. This verification does not make
 any notebook public and is not a competition submission.
 
+## Wave 2 corpus and Gemma study (2026-07-26)
+
+Wave 2 turns the source sweep into a reproducible release rather than a directory-sized claim:
+
+- **3,164,600** full-corpus rows across 217 source families and 62 language labels;
+- **257,141** rows in the deterministic, per-family-capped Kaggle slice;
+- **19,455** non-English phrases carrying English counterparts and **2,581** independently
+  annotated expectation/violation frames;
+- per-record provenance and licence, a full-corpus census, and SHA-256/byte manifests verified by
+  the consuming notebook before it measures anything.
+
+The published sample is deliberately stratified. The caption family is 71.0% of the full corpus;
+a random sample would reproduce that imbalance, while the 12,000-row family cap reduces the
+largest export family to 4.7%. Selection is SHA-256 ordered and clock-free, so rebuilding the same
+corpus yields identical bytes.
+
+The Gemma-2 form study reports uncertainty, not a winner: all ten joke-form bootstrap intervals
+overlap the proverb control, so the checked-in notebook prints **SEPARATION IS NOT ESTABLISHED**.
+Its S statistic is model surprisal, not a human funniness grade.
+
+The human-label arm is contest-held-out rather than row-random: 30 structural text features reach
+median Spearman **0.1555** on 215,465 captions across 360 unseen drawings, or **37.8% of the
+measured text-only bound**. The canonical notebook cross-checks that receipt against the independent
+label-ceiling and cross-drawing portability receipts before displaying it.
+
+```bash
+python3 harvest_wave2.py list
+python3 style_taxonomy.py selftest
+python3 build_kaggle_export.py --per-family 12000
+python3 verify_wave2_release.py
+python3 -m pytest -q tests/test_wave2.py
+python3 wave2_notebook/build_wave2_notebook.py
+```
+
+Dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2
+Notebook: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma
+
 ## Files
 
 - `THEORY.md`: the canonical theory (Friston-derived mesh framing → computable S/R/E/B signals).
@@ -147,6 +191,19 @@ any notebook public and is not a competition submission.
   format-boundary experiment, its native-format follow-up, and the quantization-robustness probe.
   Findings are written up in `RESEARCH_NOTE_INSTRUMENT_BOUNDARIES.md`.
 - `DATA_SOURCES.md`: scanned source matrix and acquisition notes.
+- `SOURCE_SWEEP_2026-07-26.md`: live source inventory, dead-source ledger, parser repairs, and
+  licensing limits for Wave 2.
+- `harvest_wave2.py` / `wave2_specs.json`: checkpointed, exact-deduped API/Wikimedia/HuggingFace
+  acquisition; bulk HuggingFace reads use resumable Parquet transport with row-API fallback.
+- `style_taxonomy.py` / `STYLES.md`: structural form, lexical domain, and source-declared style
+  axes, including language-specific forms and the documented length-proxy confound.
+- `corpus_census.py` / `build_kaggle_export.py`: one-pass census and bounded-memory deterministic
+  release builder; release reads fail closed on malformed JSON.
+- `caption_corpus.py` / `caption_ceiling.py` / `caption_portability.py` / `caption_model.py`:
+  integrity-clean caption loading, two-estimator label ceiling, cross-drawing text-only bound, and
+  contest-held-out structural model. Compact measured receipts live under `jestry_out/`.
+- `verify_wave2_release.py` / `verify_jestry.py`: semantic release checks and 16 cross-receipt gates.
+- `wave2_notebook/`: deterministic notebook builder, checked-in notebook, and Kaggle metadata.
 - `RESEARCH_ROADMAP.md`: concrete study backlog for building the prototype into a stronger hackathon entry.
 - `JUDGE_EVIDENCE.md`: claim-by-claim receipt map, negative results, and private/public gates.
 - `ablation_lab/`: source-pinned private ablation kernel builder, tests, and receipt-gated
@@ -176,7 +233,7 @@ print(i.been_done('Man plans and God laughs.').verdict)"   # been-done? (embeddi
 python3 harvest_supply.py keyless --limit 20   # grow supply w/ provenance + dedupe receipts
 python3 calibrate_gemma4.py                    # instrument certification (currently: honest FAIL)
 python3 jestry_portal.py                       # stdlib live portal on :8081
-python3 verify_jestry.py                       # ALL GREEN gate (10 gates, live gemma4 incl.)
+python3 verify_jestry.py                       # 16 receipt gates; unavailable live checks skip honestly
 ```
 
 - `jestry.py` — routes ladder (replay → remix → compose-residual → frontier → abstain),

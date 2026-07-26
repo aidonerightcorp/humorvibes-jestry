@@ -12,11 +12,13 @@ repo. Rebuild and push with:
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = "https://github.com/aidonerightcorp/humorvibes-jestry"
+REPO_REF = "humor-genome-wave2-v1"
 
 # The controlling definition of bad surprise, verbatim. It is quoted rather than
 # paraphrased everywhere in this project because paraphrasing it changes what
@@ -37,7 +39,7 @@ CELLS: list[tuple[str, str]] = [
     ("markdown",
      "# HumorVibes — the Humor Genome, wave 2\n\n"
      "### Humor as affordable surprise, measured with Gemma, over a corpus grown "
-     "from 23,885 items to more than 2.5 million\n\n"
+     "from 23,885 items to 3,164,600\n\n"
      "This notebook is the write-up. Theory, method, data provenance, results and "
      "limits are here, next to the code that produces every number quoted.\n\n"
      "---\n\n"
@@ -74,13 +76,17 @@ CELLS: list[tuple[str, str]] = [
 
     # ------------------------------------------------------------------ setup
     ("code",
-     "import subprocess, sys, os, json, textwrap, glob\n"
+     "import subprocess, sys, os, json, textwrap, glob, hashlib\n"
      "REPO = " + json.dumps(REPO) + "\n"
+     "REPO_REF = " + json.dumps(REPO_REF) + "\n"
      "if not os.path.exists('humorvibes-jestry'):\n"
-     "    subprocess.run(['git','clone','--depth','1',REPO,'humorvibes-jestry'], check=True)\n"
+     "    subprocess.run(['git','clone','--depth','1','--branch',REPO_REF,REPO,\n"
+     "                    'humorvibes-jestry'], check=True)\n"
      "sys.path.insert(0, 'humorvibes-jestry')\n"
      "os.chdir('humorvibes-jestry')\n"
-     "print('repo at', os.getcwd())"),
+     "commit = subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip()\n"
+     "print('repo at', os.getcwd())\n"
+     "print('pinned source', REPO_REF, commit)"),
 
     ("code",
      "# The full corpus is ~1 GB and lives outside git, so this reads a stratified\n"
@@ -106,7 +112,29 @@ CELLS: list[tuple[str, str]] = [
      "for p in sorted(glob.glob(os.path.join(DATA_DIR, '*'))):\n"
      "    print(f'  {os.path.basename(p):<42} {os.path.getsize(p):>12,} B')\n"
      "\n"
+     "# Verify the bytes Kaggle mounted before deriving any claim from them.\n"
+     "manifest_path = os.path.join(DATA_DIR, 'manifest.json')\n"
+     "assert os.path.exists(manifest_path), 'dataset manifest is missing'\n"
+     "manifest = json.load(open(manifest_path, encoding='utf-8'))\n"
+     "for name, evidence in manifest.items():\n"
+     "    path = os.path.join(DATA_DIR, name)\n"
+     "    assert os.path.exists(path), f'manifest payload missing: {name}'\n"
+     "    digest = hashlib.sha256()\n"
+     "    with open(path, 'rb') as fh:\n"
+     "        while chunk := fh.read(1024 * 1024):\n"
+     "            digest.update(chunk)\n"
+     "    assert os.path.getsize(path) == evidence['bytes'], f'byte length mismatch: {name}'\n"
+     "    assert digest.hexdigest() == evidence['sha256'], f'sha256 mismatch: {name}'\n"
+     "print(f'manifest verified: {len(manifest)} payload files')\n"
+     "FULL_CENSUS = json.load(open(os.path.join(DATA_DIR, 'census.json'), encoding='utf-8'))\n"
+     "EXPORT_SUMMARY = json.load(open(os.path.join(DATA_DIR, 'export_summary.json'), encoding='utf-8'))\n"
+     "assert FULL_CENSUS['items'] == EXPORT_SUMMARY['full_corpus_rows']\n"
+     "\n"
      "import style_taxonomy as st, corpus_census as cc\n"
+     "import verify_wave2_release as release_gate\n"
+     "release_receipt = release_gate.verify(Path(DATA_DIR))\n"
+     "print('semantic release gate:', release_receipt['status'], "
+     "f\"({release_receipt['exported_rows']:,} rows)\")\n"
      "# Point at the CORPUS file only. Both modules glob CORPORA/*.jsonl, and the\n"
      "# export ships derived sidecars (frames, aligned phrases) in the same folder\n"
      "# with a different schema — globbing the folder silently mixed them in.\n"
@@ -114,7 +142,7 @@ CELLS: list[tuple[str, str]] = [
      "if not CORPUS_FILES:\n"
      "    CORPUS_FILES = [Path(p) for p in sorted(glob.glob(os.path.join(DATA_DIR, '*.jsonl')))]\n"
      "_orig_iter = st.iter_corpus\n"
-     "st.iter_corpus = lambda paths=None: _orig_iter(paths or CORPUS_FILES)\n"
+     "st.iter_corpus = lambda paths=None, strict=False: _orig_iter(paths or CORPUS_FILES, strict=strict)\n"
      "print('\\ncorpus files:', [p.name for p in CORPUS_FILES])\n"
      "print('rows visible:', sum(1 for _ in st.iter_corpus()))"),
 
@@ -131,7 +159,10 @@ CELLS: list[tuple[str, str]] = [
      "so 385 sibling sources each look tiny while together they dominate."),
 
     ("code",
-     "c = cc.census(CORPUS_FILES)\n"
+     "c = FULL_CENSUS\n"
+     "sample_c = cc.census(CORPUS_FILES)\n"
+     "assert sample_c['items'] == EXPORT_SUMMARY['exported_rows']\n"
+     "print('FULL CORPUS')\n"
      "print(f\"items {c['items']:,}   sources {c['distinct_sources']}   \"\n"
      "      f\"languages {c['distinct_languages']}   licences {c['distinct_licences']}\")\n"
      "print(f\"graded (carry a human funniness signal): {c['graded']:,} = {c['graded_share']:.1%}\")\n"
@@ -142,7 +173,9 @@ CELLS: list[tuple[str, str]] = [
      "    print(f'  {k:<18} {v:>9,}  {v/c[\"items\"]:>6.1%}')\n"
      "print('\\ntop source families:')\n"
      "for k, v in list(c['families'].items())[:12]:\n"
-     "    print(f'  {k[:56]:<56} {v:>9,}')"),
+     "    print(f'  {k[:56]:<56} {v:>9,}')\n"
+     "print(f\"\\nPUBLISHED STRATIFIED SLICE: {sample_c['items']:,} rows; \"\n"
+     "      f\"largest-family share {sample_c['top_source_share']:.1%}\")"),
 
     ("markdown",
      "### Languages\n\n"
@@ -335,21 +368,24 @@ CELLS: list[tuple[str, str]] = [
      "    hits = [d for d in glob.glob('/kaggle/input/**/config.json', recursive=True)]\n"
      "    MODEL = os.path.dirname(hits[0]) if hits else 'google/gemma-2-2b-it'\n"
      "print('checkpoint:', MODEL)\n"
+     "DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'\n"
+     "DTYPE = torch.float16 if DEVICE == 'cuda' else torch.float32\n"
      "tok = AutoTokenizer.from_pretrained(MODEL)\n"
-     "model = AutoModelForCausalLM.from_pretrained(MODEL, torch_dtype=torch.float32).eval()\n"
-     "print('loaded OK')"),
+     "model = AutoModelForCausalLM.from_pretrained(MODEL, torch_dtype=DTYPE).to(DEVICE).eval()\n"
+     "print(f'loaded OK on {DEVICE} ({DTYPE})')"),
 
     ("code",
      "@torch.no_grad()\n"
      "def surprise(setup: str, punchline: str) -> dict:\n"
      "    \"\"\"Mean NLL of the punchline tokens given the setup. Deterministic.\"\"\"\n"
-     "    ctx  = tok(setup + '\\n', return_tensors='pt')\n"
-     "    full = tok(setup + '\\n' + ' ' + punchline, return_tensors='pt')\n"
+     "    ctx  = tok(setup + '\\n', return_tensors='pt').to(DEVICE)\n"
+     "    full = tok(setup + '\\n' + ' ' + punchline, return_tensors='pt').to(DEVICE)\n"
      "    n_ctx = ctx.input_ids.shape[1]\n"
      "    logits = model(**full).logits[0]\n"
      "    tgt = full.input_ids[0][1:]\n"
      "    lp = torch.log_softmax(logits[:-1].float(), dim=-1)\n"
-     "    nll = -lp[range(len(tgt)), tgt][n_ctx - 1:]\n"
+     "    positions = torch.arange(tgt.numel(), device=tgt.device)\n"
+     "    nll = -lp[positions, tgt][n_ctx - 1:]\n"
      "    return {'S': nll.mean().item(), 'n_tokens': int(nll.numel())}\n"
      "\n"
      "# The pinned reference is a SPECIFIC joke. An earlier version of this cell\n"
@@ -458,17 +494,86 @@ CELLS: list[tuple[str, str]] = [
      "    else:\n"
      "        print('  ->', sorted(sep))"),
 
-    # ------------------------------------------------------------------ limits
+    # --------------------------------------------------------- human-label bounds
+    ("markdown",
+     "## 5. What the human label can support\n\n"
+     "The largest source family is useful for a different reason: its captions carry the "
+     "raw vote breakdown. That exposes label noise instead of pretending the crowd mean is "
+     "perfect truth. The full grouped run is intentionally not repeated in this Kaggle "
+     "notebook: it fits five contest-held-out models over 215,465 captions and is the slow "
+     "step in the release. Its complete JSON receipt is versioned in the cloned repository "
+     "and checked below against the two independent bound receipts.\n\n"
+     "The result has three denominators:\n\n"
+     "- **0.826 label ceiling:** finite votes limit agreement with the published mean.\n"
+     "- **0.411 text-only bound:** the same words travel poorly between drawings, so most "
+     "caption reception is contextual.\n"
+     "- **held-out-contest score:** what 30 structural text features recover on drawings the "
+     "model never saw. The completed grouped run reaches **rho = 0.1555**, or **37.8%** of "
+     "the text-only bound; 358 of 360 contest-level correlations are positive. The old "
+     "random split reads 0.1541 versus 0.1538 for held-out contests when both are pooled, "
+     "so shared contest identity did not inflate this model's pooled score.\n\n"
+     "This section makes the expensive result visible without disguising a stored receipt as "
+     "an in-notebook training run."),
+
+    ("code",
+     "from math import isclose\n"
+     "RECEIPTS = Path('jestry_out')\n"
+     "def receipt(name):\n"
+     "    path = RECEIPTS / name\n"
+     "    assert path.exists(), f'missing versioned receipt: {path}'\n"
+     "    return json.loads(path.read_text(encoding='utf-8'))\n"
+     "\n"
+     "ceiling_receipt = receipt('caption_ceiling.json')\n"
+     "portability_receipt = receipt('caption_portability.json')\n"
+     "caption_model_receipt = receipt('caption_model.json')\n"
+     "label_ceiling = ceiling_receipt['headline']['median_ceiling']\n"
+     "text_bound = portability_receipt['results']['text_only_predictor_bound']\n"
+     "model_result = caption_model_receipt['results']['within_contest_median_spearman']\n"
+     "bounds = caption_model_receipt['bounds']\n"
+     "assert caption_model_receipt['receipt_version'] >= 2\n"
+     "assert caption_model_receipt['status'] == 'complete'\n"
+     "assert isclose(bounds['label_ceiling'], label_ceiling, abs_tol=1e-12)\n"
+     "assert isclose(bounds['text_only_bound'], text_bound, abs_tol=1e-12)\n"
+     "assert caption_model_receipt['n_contests'] >= 300\n"
+     "assert 'GroupKFold over contests' in caption_model_receipt['protocol']['cv']\n"
+     "print(f\"label ceiling                 {label_ceiling:+.4f}\")\n"
+     "print(f\"text-only bound                {text_bound:+.4f}\")\n"
+     "print(f\"held-out-contest model         {model_result:+.4f}\")\n"
+     "print(f\"achieved / text-only bound     {bounds['achieved_over_text_only_bound']:.1%}\")\n"
+     "print(f\"captions / held-out contests   {caption_model_receipt['n_rows']:,} / \"\n"
+     "      f\"{caption_model_receipt['n_contests']}\")\n"
+     "print(f\"end-to-end model runtime       {caption_model_receipt['runtime_s']/60:.1f} min\")\n"
+     "print('protocol receipt: PASS')"),
+
+    ("code",
+     "import matplotlib.pyplot as plt\n"
+     "names = ['label ceiling', 'text-only bound', 'held-out model']\n"
+     "values = [label_ceiling, text_bound, model_result]\n"
+     "colors = ['#3987e5', '#d95926', '#199e70']\n"
+     "fig, ax = plt.subplots(figsize=(8, 3.6))\n"
+     "bars = ax.barh(names[::-1], values[::-1], color=colors[::-1])\n"
+     "ax.set_xlim(min(0, min(values) - .03), max(values) * 1.12)\n"
+     "ax.set_xlabel('Spearman correlation')\n"
+     "ax.set_title('Observed model result against achievable bounds', loc='left', weight='bold')\n"
+     "ax.axvline(0, color='#777777', linewidth=.8)\n"
+     "for bar, value in zip(bars, values[::-1]):\n"
+     "    ax.text(value + .012, bar.get_y() + bar.get_height()/2, f'{value:.3f}', va='center')\n"
+     "for spine in ('top', 'right', 'left'):\n"
+     "    ax.spines[spine].set_visible(False)\n"
+     "plt.tight_layout(); plt.show()"),
+
+     # ------------------------------------------------------------------ limits
     ("markdown",
      "## What this is, and is not\n\n"
-     "**Is:** a research instrument. 2.5M+ items, 58+ languages, ~486 distinct sources, "
-     "every row carrying its own source and licence, with three style axes and a "
+     "**Is:** a research instrument spanning millions of items, dozens of language labels "
+     "and hundreds of sources, with every row carrying its own source and licence, three "
+     "style axes, and a "
      "deterministic Gemma measurement protocol.\n\n"
-     "**Is not:** a redistributable dataset. Roughly 96% of rows are research-only, ~3% "
-     "noncommercial and ~1% carry a licence permitting redistribution. A redistributor must "
-     "honour the per-record `license` field, not a collection-level claim.\n\n"
+     "**Is not:** a single-licence dataset. The live census above reports the exact research-only, "
+     "noncommercial, redistributable and unclassified counts. A redistributor must honour the "
+     "per-record `license` field, not a collection-level claim.\n\n"
      "### Limits, stated rather than buried\n\n"
-     "1. **Concentration.** One source family is ~84% of the full corpus, so any "
+     "1. **Concentration.** One source family is the majority of the full corpus, so any "
      "corpus-wide average describes it. The published slice is stratified per family "
      "specifically to break that, which is why its distribution differs from the full "
      "corpus by design.\n"
@@ -501,13 +606,19 @@ CELLS: list[tuple[str, str]] = [
 
 
 def build() -> Path:
+    cells = []
+    for index, (kind, body) in enumerate(CELLS):
+        cell = {
+            "cell_type": kind,
+            "id": f"cell-{index:02d}-{hashlib.sha256(body.encode()).hexdigest()[:12]}",
+            "metadata": {},
+            "source": body.splitlines(keepends=True),
+        }
+        if kind == "code":
+            cell.update({"outputs": [], "execution_count": None})
+        cells.append(cell)
     nb = {
-        "cells": [
-            {"cell_type": kind, "metadata": {},
-             "source": body.splitlines(keepends=True),
-             **({"outputs": [], "execution_count": None} if kind == "code" else {})}
-            for kind, body in CELLS
-        ],
+        "cells": cells,
         "metadata": {
             "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
             "language_info": {"name": "python", "version": "3.11"},

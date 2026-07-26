@@ -1,0 +1,60 @@
+{
+  "receipt_type": "instrument_rowslice_check",
+  "receipt_version": 1,
+  "ts": "2026-07-26T17:18:41",
+  "question": "does widening one score row at a time instead of the whole buffer change any measured NLL?",
+  "gguf": "gemma-2-2b-it-Q4_K_M.gguf",
+  "n_ctx": 2048,
+  "cases": [
+    {
+      "context": "I told my wife she should embrace her mistakes.",
+      "continuation": " She gave me a hug.",
+      "identical": true,
+      "n_tokens": 6,
+      "mean_nll_old": 2.7849,
+      "mean_nll_new": 2.7849,
+      "max_abs_diff": 0.0
+    },
+    {
+      "context": "Why did the scarecrow win an award?",
+      "continuation": " He was outstanding in his field.",
+      "identical": true,
+      "n_tokens": 7,
+      "mean_nll_old": 1.3587,
+      "mean_nll_new": 1.3587,
+      "max_abs_diff": 0.0
+    },
+    {
+      "context": "They put speed bumps outside the school.",
+      "continuation": " I've hit six kids already.",
+      "identical": true,
+      "n_tokens": 8,
+      "mean_nll_old": 3.8616,
+      "mean_nll_new": 3.8616,
+      "max_abs_diff": 0.0
+    },
+    {
+      "context": "A horse walks into a bar.",
+      "continuation": " The bartender says, why the long face?",
+      "identical": true,
+      "n_tokens": 9,
+      "mean_nll_old": 1.642,
+      "mean_nll_new": 1.642,
+      "max_abs_diff": 0.0
+    },
+    {
+      "context": "The sky is blue today.",
+      "continuation": " The sky is blue today.",
+      "identical": true,
+      "n_tokens": 6,
+      "mean_nll_old": 2.0618,
+      "mean_nll_new": 2.0618,
+      "max_abs_diff": 0.0
+    }
+  ],
+  "all_identical": true,
+  "seconds_old_path": 238.14,
+  "seconds_new_path": 208.68,
+  "speedup": 1.14,
+  "note": "timings are from a machine under heavy concurrent load (load avg ~90 on 16 cores), so the ratio is more meaningful than either absolute"
+}

@@ -190,29 +190,38 @@ class PrecedentIndex:
     def _collect(self) -> None:
         live: set[str] = set()
         for path in sorted(self.corpora_dir.glob("*.jsonl")):
-            for i, line in enumerate(path.read_text(encoding="utf-8").splitlines()):
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    rec = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
-                if "_meta" in rec:
-                    continue
-                text = str(rec.get("text") or rec.get("joke") or "").strip()
-                if not text:
-                    continue
-                iid = f"{path.stem}:{i}"
-                meta = rec.get("meta", {}) if isinstance(rec.get("meta"), dict) else {}
-                live.add(_sha(text))
-                self.items.setdefault(_sha(text), {
-                    "item_id": iid, "text": text,
-                    "source": rec.get("source", path.stem),
-                    "license": rec.get("license", "unknown"),
-                    "language": meta.get("language", "en"),
-                    "labels": {}, "surface": None, "frame_vec": None,
-                })
+            # Stream large harvests. `read_text().splitlines()` temporarily
+            # duplicated the 887 MB caption file before the index itself was
+            # allocated, turning a routine collect into a multi-gigabyte spike.
+            try:
+                with path.open(encoding="utf-8") as fh:
+                    for i, line in enumerate(fh):
+                        line = line.strip()
+                        if not line:
+                            continue
+                        try:
+                            rec = json.loads(line)
+                        except json.JSONDecodeError:
+                            continue
+                        if "_meta" in rec:
+                            continue
+                        text = str(rec.get("text") or rec.get("joke") or "").strip()
+                        if not text:
+                            continue
+                        iid = f"{path.stem}:{i}"
+                        meta = (rec.get("meta", {})
+                                if isinstance(rec.get("meta"), dict) else {})
+                        digest = _sha(text)
+                        live.add(digest)
+                        self.items.setdefault(digest, {
+                            "item_id": iid, "text": text,
+                            "source": rec.get("source", path.stem),
+                            "license": rec.get("license", "unknown"),
+                            "language": meta.get("language", "en"),
+                            "labels": {}, "surface": None, "frame_vec": None,
+                        })
+            except OSError:
+                continue
         accepted = self.out_dir / "accepted_bits.jsonl"
         if accepted.exists():
             for line in accepted.read_text(encoding="utf-8").splitlines():
@@ -355,11 +364,13 @@ class PrecedentIndex:
         return [h for h in report.surface_hits if h.language not in ("en", "", "und")][:k]
 
 
-def quick_check(text: str, *, live: bool = True, out_dir: Path = OUT_DIR) -> dict[str, Any]:
+def quick_check(text: str, *, live: bool = True, out_dir: Path = OUT_DIR,
+                corpora_dir: Path | None = None) -> dict[str, Any]:
     """One-call been-done check for jestry receipts. Never raises."""
     try:
         backend = pick_backend(prefer_semantic=live)
-        idx = PrecedentIndex(backend=backend, out_dir=out_dir)
+        kwargs = {"corpora_dir": corpora_dir} if corpora_dir is not None else {}
+        idx = PrecedentIndex(backend=backend, out_dir=out_dir, **kwargs)
         idx.ensure_embedded()
         return idx.been_done(text).to_dict()
     except Exception as exc:                      # pragma: no cover - defensive

@@ -13,8 +13,33 @@ from precedent import (  # noqa: E402
 )
 
 
+def fixture_corpora(tmp_path: Path) -> Path:
+    corpus = tmp_path / "corpora"
+    corpus.mkdir(exist_ok=True)
+    rows = [
+        {"text": "Man plans and God laughs.", "source": "Yiddish fixture",
+         "license": "CC0", "meta": {"language": "yi"}},
+        {"text": "A Twain fixture joke about a careful witness.",
+         "source": "Mark Twain fixture", "license": "public domain",
+         "meta": {"language": "en"}},
+    ]
+    languages = ("es", "de", "zh", "ja", "en")
+    rows.extend(
+        {"text": f"Fixture humor item {i} with a distinct comic detail.",
+         "source": "multilingual fixture", "license": "CC0",
+         "meta": {"language": languages[i % len(languages)]}}
+        for i in range(82)
+    )
+    (corpus / "fixture.jsonl").write_text(
+        "\n".join(json.dumps(row, ensure_ascii=False) for row in rows) + "\n",
+        encoding="utf-8",
+    )
+    return corpus
+
+
 def make_index(tmp_path: Path) -> PrecedentIndex:
-    return PrecedentIndex(backend=HashEmbedBackend(), out_dir=tmp_path / "out")
+    return PrecedentIndex(backend=HashEmbedBackend(), out_dir=tmp_path / "out",
+                          corpora_dir=fixture_corpora(tmp_path))
 
 
 def test_index_collects_multilingual_supply(tmp_path):
@@ -89,17 +114,24 @@ def test_cross_lingual_bridge_finds_non_english_neighbors(tmp_path):
 
 
 def test_quick_check_never_raises_and_reports_backend(tmp_path):
-    rep = quick_check("any text at all", live=False, out_dir=tmp_path / "out")
+    rep = quick_check("any text at all", live=False, out_dir=tmp_path / "out",
+                      corpora_dir=fixture_corpora(tmp_path))
     assert "verdict" in rep and "backend" in rep
     assert rep["semantic"] is False
 
 
 def test_receipt_integration_annotates_accepted_outcome(tmp_path, monkeypatch):
     import jestry as J
+    import precedent
     from jestry import BitRegistry, Jestry, WorkSpec
     from tests.test_jestry import FakeInstrument, fake_generation
 
     monkeypatch.setattr(J, "ollama_generate_with_usage", fake_generation)
+    monkeypatch.setattr(J, "CORPORA_DIR", fixture_corpora(tmp_path))
+    monkeypatch.setattr(precedent, "quick_check", lambda text, **_: {
+        "query": text, "verdict": "fixture_no_precedent_match",
+        "backend": "test-double", "semantic": False, "indexed_items": 84,
+    })
     out = tmp_path / "jout"
     out.mkdir(parents=True)
     (out / "fake_calibration.json").write_text(json.dumps({
