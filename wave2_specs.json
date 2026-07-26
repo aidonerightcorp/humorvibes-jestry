@@ -1,0 +1,515 @@
+{
+  "_note": "Verified-live source specs for harvest_wave2.py. A source enters this file only after a real fetch returned rows; config/split omitted means auto-resolve via datasets-server /splits.",
+  "hf": {
+    "hahackathon": {
+      "repo": "hfht/SemEval-2021-Task-7-Jokes",
+      "text": "text",
+      "labels": [
+        "is_humor",
+        "humor_rating",
+        "humor_controversy",
+        "offense_rating"
+      ],
+      "grade": "humor_rating",
+      "lang": "en",
+      "license": "SemEval-2021 Task 7 (HaHackathon) research use",
+      "verified": "2026-07-26 config=train split=train, 8000 rows, 6 columns, graded funniness + annotator controversy + offence"
+    },
+    "hahackathon_dev": {
+      "repo": "hfht/SemEval-2021-Task-7-Jokes",
+      "config": "default",
+      "split": "dev",
+      "text": "text",
+      "labels": [
+        "is_humor",
+        "humor_rating",
+        "humor_controversy",
+        "offense_rating"
+      ],
+      "grade": "humor_rating",
+      "lang": "en",
+      "license": "SemEval-2021 Task 7 (HaHackathon) research use",
+      "verified": "2026-07-26 1000 rows (held-out split, 2 columns)"
+    },
+    "hahackathon_test": {
+      "repo": "hfht/SemEval-2021-Task-7-Jokes",
+      "config": "default",
+      "split": "test",
+      "text": "text",
+      "labels": [
+        "is_humor",
+        "humor_rating",
+        "humor_controversy",
+        "offense_rating"
+      ],
+      "grade": "humor_rating",
+      "lang": "en",
+      "license": "SemEval-2021 Task 7 (HaHackathon) research use",
+      "verified": "2026-07-26 held-out split"
+    },
+    "colbert_humor": {
+      "repo": "CreativeLang/ColBERT_Humor_Detection",
+      "text": "text",
+      "labels": [
+        "humor"
+      ],
+      "lang": "en",
+      "license": "CC BY 2.0",
+      "verified": "2026-07-26 200,000 rows, balanced jokes vs news headlines — the humor:False half is a ready-made BORING CONTROL arm, which this project needs as much as it needs jokes"
+    },
+    "offensive_humor": {
+      "repo": "metaeval/offensive-humor",
+      "text": [
+        "title",
+        "selftext"
+      ],
+      "labels": [
+        "joke_type",
+        "score"
+      ],
+      "grade": "score",
+      "lang": "en",
+      "license": "per dataset card (unstated); reddit-derived, research use",
+      "verified": "2026-07-26 102,863 rows, carries joke_type + upvote score"
+    },
+    "reddit_1m": {
+      "repo": "SocialGrep/one-million-reddit-jokes",
+      "text": [
+        "title",
+        "selftext"
+      ],
+      "labels": [
+        "score",
+        "created_utc",
+        "subreddit.name"
+      ],
+      "grade": "score",
+      "lang": "en",
+      "license": "CC BY 4.0",
+      "verified": "2026-07-26 1,000,000 rows with per-item score; CC BY 4.0 is the cleanest large licence in the sweep"
+    },
+    "humor_train_12k": {
+      "repo": "lm233/humor_train",
+      "text": "text",
+      "labels": [
+        "is_humor",
+        "humor_rating",
+        "humor_controversy",
+        "offense_rating"
+      ],
+      "grade": "humor_rating",
+      "lang": "en",
+      "license": "per dataset card (unstated); SemEval-2021 Task 7 derived",
+      "verified": "2026-07-26 12,000 rows — a SUPERSET of the 10,000 served by hfht/SemEval-2021-Task-7-Jokes"
+    },
+    "xkcd": {
+      "repo": "olivierdehaene/xkcd",
+      "text": [
+        "title",
+        "transcript"
+      ],
+      "labels": [
+        "id",
+        "url",
+        "explained_url",
+        "explanation"
+      ],
+      "lang": "en",
+      "license": "CC BY-NC 2.5 (xkcd) + CC BY-SA 3.0 (explainxkcd) — NONCOMMERCIAL",
+      "verified": "2026-07-26 2,630 rows: panel transcript joined to the explainxkcd prose explanation, i.e. the joke and its stated repair in one row"
+    },
+    "chinese_memes": {
+      "repo": "REILX/chinese-meme-description-dataset",
+      "text": "description",
+      "labels": [
+        "picName"
+      ],
+      "lang": "zh",
+      "license": "Apache-2.0",
+      "verified": "2026-07-26 39,145 rows of Chinese meme descriptions, text-only"
+    },
+    "xiehouyu": {
+      "repo": "oHenri/chinese_xiehouyu",
+      "text": [
+        "riddle",
+        "answer"
+      ],
+      "labels": [
+        "riddle",
+        "answer"
+      ],
+      "lang": "zh",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 14,032 rows. Natively two-part: `riddle` sets the image, `answer` springs it — a setup/punchline split that did not have to be inferred"
+    },
+    "yoruba_proverbs": {
+      "repo": "mxronga/yoruba-proverbs-parallel-corpora",
+      "text": "yoruba",
+      "labels": [
+        "english"
+      ],
+      "lang": "yo",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 568 rows, PARALLEL yoruba<->english"
+    },
+    "zh_idiom_aligned": {
+      "repo": "svjack/zh-idiom-in-human-machine-eng",
+      "text": "chinese",
+      "labels": [
+        "gold",
+        "human",
+        "machine"
+      ],
+      "lang": "zh",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 4,310 rows; `gold` is the human English gloss, `machine` the MT one — an aligned pair AND a human-vs-machine contrast"
+    },
+    "urdu_idioms": {
+      "repo": "Ehtisham1328/urdu-idioms-with-english-translation",
+      "text": "محنت کامیابی کی کنجی ہے۔",
+      "labels": [
+        "Hard work is the key to success."
+      ],
+      "lang": "ur",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 2,111 rows. NOTE: the upstream CSV has no header row, so the first data row became the column names — the field names below are literally the first idiom and its translation. Referenced verbatim on purpose"
+    },
+    "greek_humor": {
+      "repo": "Kalloniatis/Greek-Humor-Dataset",
+      "text": "text",
+      "labels": [
+        "label"
+      ],
+      "lang": "el",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 9,999 rows with a binary humor label"
+    },
+    "tamil_proverbs": {
+      "repo": "dearprakash/tamil_proverbs",
+      "text": "text",
+      "lang": "ta",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 890 rows"
+    },
+    "proverbeval_amh": {
+      "repo": "israel/ProverbEval",
+      "config": "amh",
+      "split": "train",
+      "text": "Proverb",
+      "lang": "am",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 Amharic arm of the African proverb benchmark"
+    },
+    "proverbeval_orm": {
+      "repo": "israel/ProverbEval",
+      "config": "orm",
+      "split": "train",
+      "text": "Proverb",
+      "lang": "om",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 Oromo arm"
+    },
+    "proverbeval_tir": {
+      "repo": "israel/ProverbEval",
+      "config": "tir",
+      "split": "train",
+      "text": "Proverb",
+      "lang": "ti",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 Tigrinya arm"
+    },
+    "francophonia_zh": {
+      "repo": "FrancophonIA/Proverbs",
+      "config": "Chinese",
+      "split": "train",
+      "text": "in_chinese",
+      "labels": [
+        "pin_yin",
+        "text",
+        "category",
+        "origin"
+      ],
+      "lang": "zh",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 Chinese proverb + pinyin + English gloss + category"
+    },
+    "francophonia_fr": {
+      "repo": "FrancophonIA/Proverbs",
+      "config": "French",
+      "split": "train",
+      "text": "text",
+      "labels": [
+        "category",
+        "origin"
+      ],
+      "lang": "fr",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 French arm"
+    },
+    "epic_irony": {
+      "repo": "CreativeLang/EPIC_Irony",
+      "text": "text",
+      "labels": [
+        "label",
+        "user",
+        "source",
+        "subreddit",
+        "parent_text",
+        "Age",
+        "Sex",
+        "Nationality",
+        "Language_variety"
+      ],
+      "lang": "en",
+      "license": "NOT DECLARED on the dataset card — verify before redistribution",
+      "verified": "2026-07-26 14,172 rows. One row PER ANNOTATOR PER TEXT (74 annotators, 3,000 texts, ~4.7 each) with annotator demographics and the parent comment. 2,010 of 3,000 texts are contested, so a majority vote would discard most of the signal — this is the rare corpus that keeps disagreement instead of averaging it away"
+    },
+    "short_jokes_full": {
+      "repo": "ysharma/short_jokes",
+      "text": "Joke",
+      "lang": "en",
+      "license": "MIT",
+      "verified": "2026-07-26 231,657 rows — 36x the 6,435 previously held from this same repo"
+    },
+    "russian_jokes_full": {
+      "repo": "IgorVolochay/russian_jokes",
+      "text": "text",
+      "lang": "ru",
+      "license": "MIT",
+      "verified": "2026-07-26 150,553 rows — 35x the 4,288 anekdots previously held"
+    },
+    "bulgarian_jokes": {
+      "repo": "vislupus/alpaca-bulgarian-jokes",
+      "text": "output",
+      "labels": [
+        "instruction"
+      ],
+      "lang": "bg",
+      "license": "MIT",
+      "verified": "2026-07-26 93,968 rows; the instruction field carries the topic"
+    },
+    "dadjokes_split": {
+      "repo": "shuttie/dadjokes",
+      "text": [
+        "question",
+        "response"
+      ],
+      "labels": [
+        "question",
+        "response"
+      ],
+      "lang": "en",
+      "license": "Apache-2.0",
+      "verified": "2026-07-26 53,400 rows with an explicit setup/punchline column split"
+    },
+    "humor_greats_pd": {
+      "repo": "yoonholee/humor-greats-public-domain",
+      "text": "text",
+      "labels": [
+        "author",
+        "book_title",
+        "gutenberg_id",
+        "year"
+      ],
+      "lang": "en",
+      "license": "CC0-1.0",
+      "verified": "2026-07-26 19,354 rows of pre-1930 humor books; CC0 and a genuinely different era from reddit"
+    },
+    "polish_jokes": {
+      "repo": "JonaszPotoniec/dowcipy-polish-jokes-dataset",
+      "text": "joke",
+      "labels": [
+        "upvotes",
+        "downvotes"
+      ],
+      "grade": "upvotes",
+      "lang": "pl",
+      "license": "MIT",
+      "verified": "2026-07-26 9,000 rows carrying BOTH upvotes and downvotes — reddit-style sources only expose the net"
+    },
+    "rapidata_multiling": {
+      "repo": "Rapidata/multilingual-llm-jokes-4o-claude-gemini",
+      "text": "joke",
+      "labels": [
+        "joke_english",
+        "language",
+        "model",
+        "topic",
+        "yes_ratios",
+        "no_ratios",
+        "votes_number"
+      ],
+      "grade": "yes_ratios",
+      "lang": "mul",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 9,978 rows: crowd yes/no ratio + vote count + an English gloss + which model wrote it, across ja/en/vi/pt/ar"
+    },
+    "grips_multilingual": {
+      "repo": "ellamind/grips-multilingual",
+      "text": "question",
+      "labels": [
+        "answer",
+        "explanation",
+        "mechanic",
+        "cot",
+        "hard"
+      ],
+      "lang": "mul",
+      "license": "CC-BY-4.0",
+      "verified": "2026-07-26 6,359 rows over 10 languages with an explicit wordplay MECHANIC label plus an explanation"
+    },
+    "puntuguese": {
+      "repo": "Superar/Puntuguese",
+      "text": "text",
+      "labels": [
+        "label",
+        "tokens",
+        "labels"
+      ],
+      "lang": "pt",
+      "license": "CC-BY-SA-4.0",
+      "verified": "2026-07-26 5,700 rows with TOKEN-LEVEL pun spans — span labels are rare in any language"
+    },
+    "spanish_sarcasm": {
+      "repo": "Ernesto-1997/Sarcastic_spanish_dataset",
+      "text": "Texto",
+      "labels": [
+        "Sarcasmo"
+      ],
+      "lang": "es",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 19,096 rows"
+    },
+    "korean_sarcasm": {
+      "repo": "SpellOnYou/kor_sarcasm",
+      "text": "tokens",
+      "labels": [
+        "label"
+      ],
+      "lang": "ko",
+      "license": "MIT",
+      "verified": "2026-07-26 9,301 rows"
+    },
+    "arabic_humor": {
+      "repo": "FatimahEmadEldin/arabic-humor-kalifa",
+      "text": "text",
+      "labels": [
+        "humor"
+      ],
+      "lang": "ar",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 4,455 rows"
+    },
+    "turkish_riddles": {
+      "repo": "selimc/bilmecebench",
+      "text": [
+        "riddle",
+        "answer"
+      ],
+      "labels": [
+        "riddle",
+        "answer"
+      ],
+      "lang": "tr",
+      "license": "MIT",
+      "verified": "2026-07-26 442 Turkish folk riddles, natively two-part"
+    },
+    "guarani_humor": {
+      "repo": "mmaguero/gn-humor-detection",
+      "text": "text",
+      "lang": "gn",
+      "license": "MIT",
+      "verified": "2026-07-26 1,842 rows in Guarani — the rarest language in this sweep"
+    },
+    "ruozhiba": {
+      "repo": "LooksJuicy/ruozhiba",
+      "text": "instruction",
+      "labels": [
+        "output"
+      ],
+      "lang": "zh",
+      "license": "Apache-2.0",
+      "verified": "2026-07-26 1,496 rows of Chinese absurd-logic questions"
+    },
+    "ruozhiba_raw": {
+      "repo": "ticoAg/ruozhiba_raw",
+      "text": "conversations",
+      "lang": "zh",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 92,509 raw Chinese absurdist one-liners"
+    },
+    "bokete_oogiri": {
+      "repo": "Joctor/bokete_oogiri_caption",
+      "text": "boke",
+      "labels": [
+        "star",
+        "odai_url"
+      ],
+      "grade": "star",
+      "lang": "ja",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 767,284 Japanese ogiri captions with crowd star scores — the largest graded non-English humor set found"
+    },
+    "romanian_satire": {
+      "repo": "GRAI-UNSTPB/SeLeRoSa",
+      "text": "sentence",
+      "labels": [
+        "label",
+        "label_0",
+        "label_1",
+        "label_2",
+        "domain"
+      ],
+      "lang": "ro",
+      "license": "CC-BY-NC-SA-4.0",
+      "verified": "2026-07-26 13,873 rows with THREE raw annotator columns kept alongside the aggregate"
+    },
+    "roastme": {
+      "repo": "gus-gustavo/reddit_roastme",
+      "text": "comment",
+      "lang": "en",
+      "license": "MIT",
+      "verified": "2026-07-26 397,928 roasts — an aggressive register absent from the corpus"
+    },
+    "comedy_transcripts": {
+      "repo": "zachgitt/comedy-transcripts",
+      "text": "transcript",
+      "lang": "en",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 419 FULL stand-up specials — long-form structure the joke dumps cannot show"
+    },
+    "joke_explanations": {
+      "repo": "theblackcat102/joke_explaination",
+      "text": "joke",
+      "labels": [
+        "explaination",
+        "url"
+      ],
+      "lang": "en",
+      "license": "MIT",
+      "verified": "2026-07-26 377 human-written joke explanations"
+    },
+    "twistlist": {
+      "repo": "CreativeLang/TwistList",
+      "text": "target",
+      "labels": [
+        "source"
+      ],
+      "lang": "en",
+      "license": "per dataset card (unstated)",
+      "verified": "2026-07-26 2,128 tongue twisters (phonological humor)"
+    },
+    "pun_semeval2017": {
+      "repo": "CreativeLang/pun_detection_semeval2017_task7",
+      "text": "text",
+      "labels": [
+        "label",
+        "type"
+      ],
+      "lang": "en",
+      "license": "CC-BY-2.0",
+      "verified": "2026-07-26 4,030 rows split homographic vs heterographic"
+    }
+  },
+  "api": {}
+}

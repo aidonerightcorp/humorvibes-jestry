@@ -1,5 +1,15 @@
 # Humor Datacenter Sources
 
+> **2026-07-26 — see `SOURCE_SWEEP_2026-07-26.md` for the current inventory.**
+> A six-lane sweep verified 144 fetchable HuggingFace datasets, 78 keyless API
+> endpoints, 301 Wikiquote pages across 51 language editions, and 164 Wiktionary
+> categories, each with a live status code and a row count. The corpus grew from
+> 23,885 items to over 2.5 million in the same pass. That document supersedes the
+> priority tables below where the two disagree, and it also records what is
+> **dead** — `numbersapi.com` is now a hijacked redirect, Princeton's SARC is
+> gone with no recoverable Wayback payload, `altsoph/humor-mechanics` returns 401,
+> and reddit's keyless `.json` endpoints 403 in every user-agent variation tried.
+
 HumorVibes now treats humor data as a datacenter, not a single dataset. Each source is mapped to the signal it can
 provide: structure, audience reaction, preference, timing, ranking, culture, or risk.
 

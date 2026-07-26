@@ -1,0 +1,20 @@
+{
+  "id": "taylorsamarel/humor-genome-wave2-gemma",
+  "title": "Humor Genome wave2 Gemma",
+  "code_file": "humor_genome_wave2.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "competition_sources": [
+    "humor-genome-nyc"
+  ],
+  "dataset_sources": [
+    "taylorsamarel/humor-genome-wave2"
+  ],
+  "kernel_sources": [],
+  "model_sources": [
+    "google/gemma-2/transformers/gemma-2-2b-it/2"
+  ]
+}
