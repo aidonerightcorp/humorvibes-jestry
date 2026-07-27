@@ -41,7 +41,7 @@ def test_docker_context_is_allowlist_shaped() -> None:
 
 
 def test_current_application_version_is_consistent_across_release_surfaces() -> None:
-    expected = "0.7.1"
+    expected = "0.8.0"
     project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     package_text = (ROOT / "humorvibes/__init__.py").read_text(encoding="utf-8")
     dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
@@ -238,8 +238,14 @@ def test_container_publish_workflow_is_multiarch_sbom_and_attested() -> None:
     text = (ROOT / ".github/workflows/publish-container.yml").read_text(encoding="utf-8")
     assert "linux/amd64,linux/arm64" in text
     assert "provenance: mode=max" in text and "sbom: true" in text
-    assert "packages: write" in text and "attestations: write" in text and "id-token: write" in text
+    assert "contents: write" in text and "packages: write" in text
+    assert "attestations: write" in text and "id-token: write" in text
     assert "subject-digest: ${{ steps.build.outputs.digest }}" in text
+    assert 'tag_version="${GITHUB_REF_NAME#v}"' in text
+    assert 'test "$version" = "$tag_version"' in text
+    assert "uv build" in text and "humorvibes_github_release_manifest" in text
+    assert 'gh release create "$tag"' in text and 'gh release upload "$tag"' in text
+    assert "anonymous_pull_verified\": False" in text
     assert "@v" not in "\n".join(line for line in text.splitlines() if "uses:" in line)
 
 
@@ -264,13 +270,13 @@ def test_helm_chart_preserves_secure_defaults_and_supports_image_digests() -> No
         path.read_text(encoding="utf-8")
         for path in sorted((ROOT / "deploy/helm/humorvibes/templates").glob("*.yaml"))
     )
-    assert chart["version"] == "0.7.1" and chart["appVersion"] == "0.7.1"
+    assert chart["version"] == "0.8.0" and chart["appVersion"] == "0.8.0"
     assert values["replicaCount"] == 2
     assert values["service"]["type"] == "ClusterIP"
     assert values["podSecurityContext"]["runAsNonRoot"] is True
     assert values["securityContext"]["readOnlyRootFilesystem"] is True
     assert values["securityContext"]["capabilities"]["drop"] == ["ALL"]
-    assert values["image"]["tag"] == "0.7.1" and values["image"]["digest"] == ""
+    assert values["image"]["tag"] == "0.8.0" and values["image"]["digest"] == ""
     digest_schema = schema["properties"]["image"]["properties"]["digest"]
     assert "sha256" in digest_schema["pattern"]
     assert "@{{ .Values.image.digest }}" in deployment
@@ -343,14 +349,14 @@ def test_release_metadata_is_versioned_citable_and_archive_ready() -> None:
     citation = load_yaml("CITATION.cff")
     archive = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
     security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-    release = (ROOT / "RELEASE_NOTES_v0.7.1.md").read_text(encoding="utf-8")
+    release = (ROOT / "RELEASE_NOTES_v0.8.0.md").read_text(encoding="utf-8")
     assert citation["cff-version"] == "1.2.0"
-    assert citation["version"] == "0.7.1" and citation["license"] == "Apache-2.0"
+    assert citation["version"] == "0.8.0" and citation["license"] == "Apache-2.0"
     assert citation["repository-code"] == "https://github.com/aidonerightcorp/humorvibes-jestry"
     assert archive["license"] == "Apache-2.0" and archive["upload_type"] == "software"
     assert archive["creators"] and archive["related_identifiers"]
-    assert "0.7.x" in security and "Python 3.10-3.14" in security
-    assert "188 tests pass" in release and "DOI is not fabricated" in release
+    assert "0.8.x" in security and "Python 3.10-3.14" in security
+    assert "221 tests pass" in release and "DOI is not fabricated" in release
 
 
 def test_release_candidate_receipt_resolves_every_recorded_digest() -> None:

@@ -2,8 +2,8 @@ apiVersion: v2
 name: humorvibes
 description: Deploy the HumorVibes research and application API
 type: application
-version: 0.7.1
-appVersion: "0.7.1"
+version: 0.8.0
+appVersion: "0.8.0"
 kubeVersion: ">=1.27.0-0"
 home: https://github.com/aidonerightcorp/humorvibes-jestry
 sources:
@@ -12,6 +12,6 @@ annotations:
   artifacthub.io/category: ai-machine-learning
   artifacthub.io/changes: |
     - kind: added
-      description: Default-deny network policy and digest-ready GHCR deployment support.
+      description: Fail-closed source, native-review, human-multimodal, and DOI release gates.
     - kind: added
-      description: Optional body-free OpenTelemetry and external StatsD configuration.
+      description: Reproducible multilingual semantic-provider benchmark contracts and receipts.

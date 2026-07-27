@@ -7,10 +7,10 @@ type: software
 authors:
   - family-names: Amarel
     given-names: "Taylor S."
-version: 0.7.1
+version: 0.8.0
 date-released: 2026-07-27
 repository-code: "https://github.com/aidonerightcorp/humorvibes-jestry"
-url: "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1"
+url: "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0"
 license: Apache-2.0
 keywords:
   - humor research

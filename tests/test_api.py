@@ -33,7 +33,7 @@ def test_liveness_readiness_version_and_openapi_are_available() -> None:
         assert api.get("/health/live").json()["ok"] is True
         ready = api.get("/health/ready")
         assert ready.status_code == 200 and ready.json()["ok"] is True
-        assert api.get("/version").json()["version"] == "0.7.1"
+        assert api.get("/version").json()["version"] == "0.8.0"
         schema = api.get("/openapi.json").json()
         assert schema["info"]["title"] == "HumorVibes Integration API"
         assert "/v1/embed" in schema["paths"]
@@ -61,7 +61,7 @@ def test_checked_in_openapi_contract_matches_the_runtime_schema() -> None:
     root = Path(__file__).resolve().parents[1]
     checked_in = json.loads((root / "docs/openapi.json").read_text(encoding="utf-8"))
     assert checked_in == openapi_schema()
-    assert checked_in["info"]["version"] == "0.7.1"
+    assert checked_in["info"]["version"] == "0.8.0"
     assert "/v1/generate" in checked_in["paths"]
     assert "/v1/embed" in checked_in["paths"]
     assert "/v1/research/study-template" in checked_in["paths"]

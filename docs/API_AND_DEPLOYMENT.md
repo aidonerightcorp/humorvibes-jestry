@@ -181,9 +181,9 @@ disposable `kind` cluster; the complete result and cleanup receipt is
 Build and run the image directly:
 
 ```bash
-docker build -t humorvibes-research:0.7.1 .
+docker build -t humorvibes-research:0.8.0 .
 docker run --rm --read-only --tmpfs /tmp:rw,size=64m \
-  -p 127.0.0.1:8080:8080 humorvibes-research:0.7.1
+  -p 127.0.0.1:8080:8080 humorvibes-research:0.8.0
 ```
 
 Or run the hardened Compose profile:
@@ -274,15 +274,15 @@ among probe types follows the
 For a local `kind` cluster:
 
 ```bash
-docker build -t humorvibes-research:0.7.1 .
-kind load docker-image humorvibes-research:0.7.1
+docker build -t humorvibes-research:0.8.0 .
+kind load docker-image humorvibes-research:0.8.0
 kubectl apply -k deploy/kubernetes
 kubectl rollout status deployment/humorvibes
 kubectl port-forward service/humorvibes 8080:80
 ```
 
 Then run `python3 examples/api_client.py` in another shell. For `minikube`, use
-`minikube image load humorvibes-research:0.7.1` in place of the `kind` command.
+`minikube image load humorvibes-research:0.8.0` in place of the `kind` command.
 
 To reproduce the verified public-image path instead of building locally, apply the digest overlay:
 
@@ -323,7 +323,7 @@ kubectl set env deployment/humorvibes \
   HUMORVIBES_EMBEDDING_DEFAULT=ollama:embeddinggemma
 ```
 
-For a remote cluster, push `humorvibes-research:0.7.1` to your registry, obtain the resulting
+For a remote cluster, push `humorvibes-research:0.8.0` to your registry, obtain the resulting
 digest, and replace the base image with that immutable registry reference in a deployment-specific
 Kustomize overlay. Add provider, DNS, and telemetry egress rules only for exact destinations.
 [`deploy/gateway/README.md`](../deploy/gateway/README.md) contains the separately rendered Envoy
@@ -340,7 +340,7 @@ helm lint deploy/helm/humorvibes
 helm template demo deploy/helm/humorvibes
 helm upgrade --install humorvibes deploy/helm/humorvibes \
   --set image.repository=humorvibes-research \
-  --set image.tag=0.7.1
+  --set image.tag=0.8.0
 ```
 
 Use `existingSecret` for keys. The chart intentionally does not create an Ingress or accept

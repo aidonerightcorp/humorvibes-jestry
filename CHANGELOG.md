@@ -5,6 +5,41 @@ study revisions remain separately identified by their dataset/notebook versions 
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-07-27
+
+### Added
+
+- A fail-closed source-spec preflight with a pinned CC BY 2.0 fixture, exact normalized output,
+  bounded live validation, and body-free receipts.
+- A one-language-per-change native-review contract with rights evidence, positive and hard-negative
+  fixtures, human fluency attestation, corpus digests, and coverage/error reporting.
+- A rights- and consent-aware human multimodal intake and evaluator with exact/perceptual duplicate,
+  scene, contest, arm-identity, uncertainty, calibration, and slice gates.
+- A reproducible semantic-provider matrix covering five real Ollama/TEI model-interface arms on
+  frozen hard-retrieval and seven-language crosslingual tasks.
+- An exact v0.7.0 DOI archive preflight with a complete per-file source inventory, deposition
+  metadata, local verification, and anonymous public-record verification.
+
+### Changed
+
+- Strengthened the writer crossover launch plan with separate anticipated-effect and claim
+  thresholds, exact retention assurance, and hierarchical writer/premise/rating/attrition
+  sensitivity. The conservative launch plan is 80 analyzable writers, 99 recruits, and 1,280
+  blinded audience ratings.
+- Expanded the application contracts to 221 tests and the network-free adversarial audit to
+  27 checks while retaining clean-install coverage for Python 3.10 through 3.14.
+- Marked v0.8.0 as the formal closeout of the initial build phase. Open human studies, native
+  reviews, DOI publication, and production-environment integrations remain explicit future work.
+
+### Evidence boundaries
+
+- The writer launch pack is precollection infrastructure, not a completed human study.
+- Native-language and human-multimodal validators do not manufacture reviewer, consent, rights, or
+  audience evidence.
+- Provider retrieval benchmarks measure frozen proxy tasks, not human funniness or a universal
+  model ranking.
+- A reproducible archive preflight is not a DOI; owner-controlled Zenodo publication remains open.
+
 ## [0.7.1] - 2026-07-27
 
 ### Documentation
@@ -62,6 +97,7 @@ study revisions remain separately identified by their dataset/notebook versions 
 - The local ephemeral cluster proof is not a hosted Kubernetes deployment; no completed human
   trial is claimed.
 
+[0.8.0]: https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0
 [0.7.1]: https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1
 [0.7.0]: https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0
-[Unreleased]: https://github.com/aidonerightcorp/humorvibes-jestry/compare/v0.7.1...HEAD
+[Unreleased]: https://github.com/aidonerightcorp/humorvibes-jestry/compare/v0.8.0...HEAD

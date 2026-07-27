@@ -13,7 +13,7 @@ RUN python -m pip wheel --wheel-dir /wheels --requirement requirements-api.lock 
     && python -m pip wheel --wheel-dir /wheels --no-deps .
 
 FROM ${PYTHON_IMAGE} AS runtime
-ARG VERSION=0.7.1
+ARG VERSION=0.8.0
 ARG VCS_REF=""
 ARG BUILD_DATE=""
 LABEL org.opencontainers.image.title="HumorVibes Research API" \
