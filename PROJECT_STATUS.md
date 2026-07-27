@@ -13,6 +13,7 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
 | Application package | [v0.7.1 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Patch source includes the live-cluster fix; multi-architecture publication remains provenance- and SBOM-bearing |
+| Academic archive | [DOI archive preflight](docs/DOI_ARCHIVE.md) | Exact v0.7.0 source is deposit-ready and identified by a complete per-file inventory; no public Zenodo record or DOI is claimed yet |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
@@ -103,6 +104,7 @@ remote provider. This extension does not alter the immutable Kaggle notebook or 
 - Public artifacts do not retroactively create a competition submission.
 - “Release complete” does not mean the research question is settled. The negative results are a
   starting point for better experiments.
+- Archive-ready metadata and a reproducible source checksum do not constitute a published DOI.
 
 ## How to verify the release
 

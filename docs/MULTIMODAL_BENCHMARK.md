@@ -88,3 +88,57 @@ A real run is still non-claim-ready until all of these are true:
 
 Until then, the defensible claim is narrower: the project has a fully executable multimodal study
 contract and a rights-safe positive-control fixture.
+
+## Human-cohort preflight and evaluator
+
+The repository now has a second, deliberately stricter lane for real observations. It does not
+turn an internet download into a rights-cleared benchmark. It requires the evidence that a
+reviewer would otherwise have to reconstruct after the analysis:
+
+```bash
+python3 -m pip install -e '.[multimodal]'
+humorvibes multimodal-human-contract --out /tmp/human-mm-contract.json
+humorvibes multimodal-human-validate \
+  --root /secure/path/to/frozen-cohort \
+  --out /tmp/human-mm-preflight.json
+humorvibes multimodal-human-benchmark \
+  --root /secure/path/to/frozen-cohort \
+  --out /tmp/human-mm-benchmark.json
+```
+
+The frozen cohort directory contains `human_multimodal_manifest.json`,
+`caption_candidates.jsonl`, `rights_ledger.jsonl`, local image bytes, and local evidence files.
+The validator checks all of the following before fitting a model:
+
+- one rights-ledger row per image plus a reviewed caption-cohort licence;
+- redistribution, research, and derivative rights stated separately;
+- local evidence, source-snapshot, and image SHA-256 digests;
+- a recomputed 64-bit difference hash for every decodable image;
+- no exact duplicates, near-duplicate split crossings, or canonical-scene split crossings;
+- at least two whole contests in each split and the frozen caption minimum in every contest;
+- human-observed targets, rating counts, standard errors, protocol evidence, and consent evidence;
+- no direct participant identity fields in analysis rows;
+- executed feature provenance and stable dimensions for text, image, and fusion arms;
+- one content digest over the images, captions, and rights ledger.
+
+The benchmark then uses exactly the same held-out row IDs for all three arms and produces
+contest-bootstrap uncertainty, calibration, and the predeclared slices. The output remains
+`EXTERNAL_EVIDENCE_REVIEW_REQUIRED`: software can verify bytes and consistency, but cannot prove
+that a signer is human, that consent was valid, or that a licence is legally sufficient.
+
+### Why the first plausible public dataset was not silently imported
+
+[HumorDB](https://github.com/kreimanlab/HumorDB) is a useful adjacent, image-only benchmark with
+human ratings, and its paper and repository declare CC BY 4.0. Its own data-source notes also say
+that images came from mixed internet sources and that non-open-source images are linked to their
+origins. That dataset-level declaration is not the source-level permission required for this
+caption-plus-drawing cohort. It also does not offer multiple competing captions per fixed drawing,
+so it cannot answer the same-contest text-versus-image-versus-fusion question. The project records
+that as a rejected import, not as a completed human benchmark.
+
+### The remaining external collection step
+
+The shortest clean route is a small, preregistered cohort made from project-created or
+commissioned drawings. Obtain an explicit redistributable caption licence during submission,
+collect independent audience ratings, freeze whole contests, then run the two commands above.
+Publish only privacy-minimized aggregates and the exact evidence files approved for release.

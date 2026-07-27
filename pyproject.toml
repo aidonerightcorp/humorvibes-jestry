@@ -30,6 +30,9 @@ api = [
 local-embeddings = [
   "sentence-transformers>=3,<6",
 ]
+multimodal = [
+  "pillow>=10,<13",
+]
 telemetry = [
   "opentelemetry-sdk>=1.30,<2",
   "opentelemetry-exporter-otlp-proto-http>=1.30,<2",

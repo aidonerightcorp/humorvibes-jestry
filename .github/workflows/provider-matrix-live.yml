@@ -1,0 +1,73 @@
+name: Opt-in live semantic provider matrix
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: provider-matrix-live-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  live-matrix:
+    name: Pinned provider compatibility and retrieval quality
+    runs-on: [self-hosted, linux, x64, humorvibes-provider-matrix]
+    timeout-minutes: 45
+    steps:
+      - name: Check out immutable source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.11.16"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Install locked test environment
+        run: uv sync --frozen --extra dev
+
+      - name: Validate exact live prerequisites without printing credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(ollama --version)" = "ollama version is 0.24.0"
+          curl --fail --silent --show-error http://127.0.0.1:11434/api/version >/dev/null
+          curl --fail --silent --show-error http://127.0.0.1:18081/info >/dev/null
+          python - <<'PY'
+          import json
+          from humorvibes.provider_matrix import validate_provider_matrix_spec
+          spec = json.load(open("provider_matrix_live_v1.json", encoding="utf-8"))
+          assert validate_provider_matrix_spec(spec)["ok"]
+          PY
+
+      - name: Run every provider on both frozen benchmarks
+        run: >-
+          uv run humorvibes provider-matrix
+          --spec provider_matrix_live_v1.json
+          --out provider-matrix-live-receipt.json
+
+      - name: Enforce secret, execution, and implementation gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          receipt = json.load(open("provider-matrix-live-receipt.json", encoding="utf-8"))
+          assert receipt["ok"] is True
+          assert receipt["secret_scan"]["secrets_absent"] is True
+          assert receipt["summary"]["quality_validated_runs"] == 5
+          assert receipt["summary"]["independent_server_implementations"] == 2
+          PY
+
+      - name: Upload the body-free public receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: provider-matrix-live-receipt
+          path: provider-matrix-live-receipt.json
+          if-no-files-found: error
+          retention-days: 30

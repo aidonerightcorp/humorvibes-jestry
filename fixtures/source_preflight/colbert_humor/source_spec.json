@@ -1,0 +1,17 @@
+{
+  "source_key": "colbert_humor",
+  "provider": "huggingface",
+  "repo": "CreativeLang/ColBERT_Humor_Detection",
+  "config": "default",
+  "split": "train",
+  "text": "text",
+  "labels": [
+    "humor"
+  ],
+  "lang": "en",
+  "license": "CC BY 2.0",
+  "license_id": "cc-by-2.0",
+  "license_evidence_url": "https://huggingface.co/datasets/CreativeLang/ColBERT_Humor_Detection",
+  "revision": "2bb7d6bce15e42c2a3cf2be8305fa3049929d3ac",
+  "verified": "2026-07-27: Hugging Face dataset API reported cardData.license=cc-by-2.0 and datasets-server served config=default split=train with text and humor columns"
+}

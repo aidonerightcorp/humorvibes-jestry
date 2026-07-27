@@ -111,13 +111,20 @@ suite and include the command output in the pull request.
 Add structural form rules only with positive and negative fixtures from the target language.
 Report precision-oriented coverage by language before and after the change. Keep lexical domain
 labels separate from structural form and source-declared style. See
-[`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md).
+[`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md). Native-language changes also follow
+[`docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md`](docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md) and must pass
+`humorvibes native-fixture-validate`; one pull request may cover only one language and form.
 
 ### Source acquisition
 
 Verify the upstream source, schema, licence, and a real response before registering it. Preserve
 per-row provenance and upstream labels. Ambiguous redistribution rights are acceptable for local
 research inventory only; the exporter will and must fail closed.
+
+Start with `python3 source_spec_preflight.py`. It runs from committed fixtures without a network
+connection or corpus write. Use `--live` only after the fixture passes, and include the body-free
+receipt in the pull request. The exact workflow and failure gates are in
+[`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md).
 
 Never commit multi-hundred-megabyte generated corpus payloads. Commit the source specification,
 parser, fixtures, tests, compact receipts, and documentation. Publish an updated public payload
@@ -134,6 +141,28 @@ For a real-world pilot, also define the user, decision being improved, existing 
 and retention policy, adverse outcomes, opt-out path, and exact claim gate. Product usage logs are
 not automatically research consent, and demographic proxies must not substitute for audience
 members' explicit preferences.
+
+### Embedding or provider benchmark
+
+Start from [`provider_matrix_live_v1.json`](provider_matrix_live_v1.json) and
+[`docs/PROVIDER_MATRIX.md`](docs/PROVIDER_MATRIX.md). A comparable live run must pin the model
+revision or digest, server implementation and version, exact server artifact, request schema,
+embedding dimension, benchmark digests, and hardware. Record model-licence metadata even when it
+is `NOASSERTION`; availability through a provider is not evidence of redistribution rights.
+
+Never place a provider key in the specification or receipt. Use environment-variable references,
+run the built-in secret scan, and preserve failed arms in the result. Do not overwrite an existing
+receipt when model bytes, server bytes, hardware, benchmark inputs, or the matrix schema change;
+create a newly versioned specification and receipt instead.
+
+```bash
+humorvibes provider-matrix \
+  --spec provider_matrix_live_v1.json \
+  --out /tmp/provider_matrix_live_v1.json
+```
+
+Provider reachability is only a compatibility check. A quality claim requires the frozen tracks,
+their input digests, interval estimates, and the limitations recorded with the receipt.
 
 ## Required checks
 

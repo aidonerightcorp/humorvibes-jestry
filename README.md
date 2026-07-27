@@ -46,17 +46,24 @@ separate causal-design lab with its own downloadable verification and publicatio
   application release history and the exact 0.7.1 patch boundary.
 - [`CITATION.cff`](CITATION.cff): cite the software release; also cite the exact Kaggle artifact
   version used in an analysis.
+- [`docs/DOI_ARCHIVE.md`](docs/DOI_ARCHIVE.md): whole-tag archive checksums, the anonymous DOI
+  verifier, current no-DOI status, and the exact owner-account publication gate.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): local setup, evidence rules, tests, and pull-request
   expectations.
 - [`ROADMAP.md`](ROADMAP.md): prioritized, contribution-sized research and maintenance work.
 - [`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md): exact paths for adding sources, languages,
   labels, model instruments, experiments, and public releases.
+- [`source_spec_preflight.py`](source_spec_preflight.py): offline-first, no-write schema,
+  provenance, licence, duplicate, and export-policy gate for one proposed Hugging Face source.
 - [`docs/API_AND_DEPLOYMENT.md`](docs/API_AND_DEPLOYMENT.md): Python SDK, FastAPI, Docker,
   Compose, local/cloud Ollama, Kubernetes, authentication, and configuration.
 - [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md): supported LLM/embedding providers and the
   application contract.
 - [`docs/ADVERSARIAL_VALIDATION.md`](docs/ADVERSARIAL_VALIDATION.md): tested attack classes,
   deterministic audit commands, and security boundaries.
+- [`docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md`](docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md): one-language
+  review bundles, privacy-minimized human attestations, licence gates, fixture counts, and the
+  body-free validation receipt.
 - [`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md): what a
   comedian, audience member, academic, educator, curator, or product team can use now; the missing
   evidence; and the claim gates for stronger conclusions.
@@ -64,7 +71,8 @@ separate causal-design lab with its own downloadable verification and publicatio
   definitions, intellectual lineage, evidence map, falsifiable predictions, and the precise sense
   in which “surprise reduction” is a framework rather than a completed result.
 - [`docs/REAL_WORLD_STUDY_WORKBENCH.md`](docs/REAL_WORLD_STUDY_WORKBENCH.md): the executable,
-  privacy-minimized writer crossover protocol, prospective precision planner, private-keyed
+  privacy-minimized writer crossover protocol, claim-threshold-aware precision planner,
+  hierarchical power sensitivity, private-keyed
   randomization, blinded launch pack, local analyzer, evidence ladder, and remaining human-study
   infrastructure. The checked-in
   [`study_demo_receipt.json`](jestry_out/study_demo_receipt.json) proves the synthetic positive
@@ -102,8 +110,15 @@ humorvibes doctor
 humorvibes adversarial
 humorvibes study-demo
 humorvibes multimodal-fixture --out-dir /tmp/humorvibes-multimodal --contests 30
+humorvibes multimodal-human-contract --out /tmp/human-multimodal-contract.json
+humorvibes provider-matrix --spec provider_matrix_live_v1.json --out /tmp/provider-matrix.json
 humorvibes-api
 ```
+
+The first exact live semantic comparison is documented in
+[`docs/PROVIDER_MATRIX.md`](docs/PROVIDER_MATRIX.md): five combinations, two independent server
+implementations, two frozen tasks, bootstrap intervals, language/failure slices, and no default
+recommendation from availability alone.
 
 ```bash
 curl --fail http://127.0.0.1:8080/health/ready

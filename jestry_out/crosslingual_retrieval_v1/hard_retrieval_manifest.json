@@ -1,0 +1,86 @@
+{
+  "benchmark_version": "crosslingual-proverbs-1.0.0",
+  "content_digest": "c212177d2f28fc3a2380b6c0f5e2c7261980e4fdec1e502cbd480b83b3aa9ea4",
+  "counts": {
+    "by_source_language": {
+      "da": 70,
+      "de": 70,
+      "es": 70,
+      "fr": 70,
+      "it": 70,
+      "nl": 70,
+      "pt": 70
+    },
+    "by_split_and_language": {
+      "test": {
+        "da": 7,
+        "de": 7,
+        "es": 7,
+        "fr": 7,
+        "it": 7,
+        "nl": 7,
+        "pt": 7
+      },
+      "train": {
+        "da": 56,
+        "de": 56,
+        "es": 56,
+        "fr": 56,
+        "it": 56,
+        "nl": 56,
+        "pt": 56
+      },
+      "validation": {
+        "da": 7,
+        "de": 7,
+        "es": 7,
+        "fr": 7,
+        "it": 7,
+        "nl": 7,
+        "pt": 7
+      }
+    },
+    "documents": 490,
+    "hard_negative_rows": 0,
+    "qrels": 490,
+    "queries": 490
+  },
+  "receipt_type": "humorvibes_crosslingual_retrieval_manifest",
+  "receipt_version": 1,
+  "relations": {
+    "candidate_pool": "all English translations inside the same frozen split",
+    "qrel_origin": "paired foreign proverb and English translation in the historical source"
+  },
+  "selection": {
+    "language_order": [
+      "da",
+      "de",
+      "es",
+      "fr",
+      "it",
+      "nl",
+      "pt"
+    ],
+    "method": "lowest SHA-256 pair digests after global English-translation deduplication",
+    "pairs_per_language": 70,
+    "rejected_before_selection": {
+      "duplicate": 441,
+      "length": 1
+    },
+    "split_within_language": "first 80 percent train, next 10 percent validation, final 10 percent test after digest sort"
+  },
+  "source_snapshot": {
+    "copyright_status": "Public domain in the USA per Project Gutenberg ebook 51090",
+    "input_sha256": "81c05b01714dac9ea8e7ba521a281d7d02d43b4cef51eaca6b212ff9565b2676",
+    "jurisdiction_warning": "Reusers outside the USA must verify local copyright status.",
+    "name": "gutenberg:51090 A Polyglot of Foreign Proverbs",
+    "source_url": "https://www.gutenberg.org/ebooks/51090"
+  },
+  "truth_boundary": {
+    "allowed_claim": "cross-language retrieval performance on frozen historical proverb-translation pairs",
+    "human_funniness_labels": false,
+    "modern_native_review": false,
+    "qrels_are_historical_editorial_alignments": true,
+    "translation_quality_revalidated": false
+  }
+}

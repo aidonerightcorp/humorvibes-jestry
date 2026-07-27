@@ -1,0 +1,57 @@
+name: Native-language form contribution
+description: Coordinate one human-reviewed language/form fixture and pull request.
+title: "Native review: "
+labels:
+  - multilingual
+  - research
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One issue and pull request must cover one language and one narrow form. Do not post direct reviewer identity or copyright-ambiguous fixture text.
+  - type: input
+    id: language
+    attributes:
+      label: Language and locale
+      description: Provide the exact language code and locale used for review.
+    validations:
+      required: true
+  - type: input
+    id: form
+    attributes:
+      label: Proposed form ID
+      description: Use one lowercase snake_case structural form identifier.
+    validations:
+      required: true
+  - type: textarea
+    id: reviewer
+    attributes:
+      label: Pseudonymous reviewer qualification
+      description: State native/fluent basis, conflicts, and consent to publish the attestation without providing a name, email, employer, or social handle.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Fixture source and rights
+      description: Give the HTTPS source, revision, licence evidence, and redistribution permission.
+    validations:
+      required: true
+  - type: textarea
+    id: coverage
+    attributes:
+      label: Planned coverage and false-positive audit
+      description: Name the corpus snapshot, positive/negative counts, reviewed match sample, and aligned-pair check when applicable.
+    validations:
+      required: true
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: Acceptance gates
+      options:
+        - label: I will provide at least 20 positives and 20 hard negatives with permission.
+          required: true
+        - label: A native or fluent human, not a model or translation service, will make the acceptance decision.
+          required: true
+        - label: I will run native-fixture-validate, style_taxonomy.py selftest, and the full test suite.
+          required: true

@@ -1,26 +1,28 @@
 {
-  "assignment_digest": "fc9547272d7305c88d015b73fda64ac5cf81f7f261589e11e0c71abc0f716060",
-  "assignment_key_sha256": "a159456ee77f134013d569e4e138dc4624f3b6608c522b6b17ba218cb93444e0",
-  "blinded_schedule_digest": "f5d23cedd3965e17c482bf8af2a1003563e70be94b97ee4423a9bf92f51b4d3d",
+  "assignment_digest": "9f57e9c73052dc13c738f1d5448b36f7bac72479595b39c72a5ab03ff4a4cb1e",
+  "assignment_key_sha256": "1f2b4e9772a5faaa5b13558c82f46818f455e497f78c5ebce1963222fc70fe32",
+  "blinded_schedule_digest": "27b361b0f1ffaa1dcfd8ccfd41d83a9582c2ff06bd0c4e99d04716e68b023dd8",
   "claim_gate": {
     "claim_ready": false,
     "reason": "This is a prospective launch pack with no human observations."
   },
   "external_gates": {
     "ethics_or_irb_determination_archived": false,
+    "hierarchical_sensitivity_reviewed": false,
     "institutional_consent_operations_approved": false,
     "observations_collected": false,
     "preregistration_recorded": false,
     "recruitment_completed": false,
     "secure_linkage_store_verified": false
   },
-  "pack_digest": "cf7dd061ecdb76e94d3a486626204aa7e02241da060538b514e7cfa25eb18e1e",
-  "precision_plan_digest": "4dfe4d9ad4ff7c8180cce27716bc93f33ebfd9bdd62c5fdf8e459ed7c6dbe28c",
+  "hierarchical_sensitivity_digest": "1985294d5bafbd086ab687450b791e924d9c469ef6ce5f351b61c0e372dc8b16",
+  "pack_digest": "c840e98288cb752bffa46fe447d24195820b7993c9626de243a98fb3f335c4c3",
+  "precision_plan_digest": "fc4ccba7b8d30765485b40840ba21b105404cc53e87f709c210e2c4d10dc1414",
   "protocol_digest": "cbf0c3d5572b5179ae80eac87a62b9e4e8113cad8ebf06b2e7854a64bba80751",
   "protocol_minimums_compatible_with_precision_plan": true,
   "receipt_type": "humorvibes_human_study_launch_pack",
   "receipt_version": 1,
-  "status": "READY_FOR_EXTERNAL_ETHICS_AND_REGISTRATION",
+  "status": "REQUIRES_POWER_AND_EXTERNAL_ETHICS_REVIEW",
   "study_id": "writer-assistance-crossover-v1",
   "truth_boundary": {
     "authorizes_product_advantage_claim": false,

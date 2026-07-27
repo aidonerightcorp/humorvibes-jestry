@@ -1,0 +1,73 @@
+{
+  "license_evidence": {
+    "declared_license": "CC BY 2.0",
+    "declared_license_id": "cc-by-2.0",
+    "evidence_url": "https://huggingface.co/datasets/CreativeLang/ColBERT_Humor_Detection",
+    "licence_class": "redistributable",
+    "license_id_matches": true,
+    "observed_license_id": "cc-by-2.0",
+    "repository_identity_matches": true,
+    "revision_matches": true
+  },
+  "mode": "live",
+  "observed_response": {
+    "columns": [
+      "text",
+      "humor"
+    ],
+    "input_rows": 4,
+    "network_requests": [
+      {
+        "bytes": 1313,
+        "content_type": "application/json; charset=utf-8",
+        "sha256": "1301dd868a4f56cdc2fba2a2ef33ad6df5c9ebad753d39e108e98cc0170350bc",
+        "status": 200,
+        "url": "https://huggingface.co/api/datasets/CreativeLang/ColBERT_Humor_Detection"
+      },
+      {
+        "bytes": 13560,
+        "content_type": "application/json",
+        "sha256": "c96abee60e27de8e3203517d2708afb2a7ea56a7bd58fdff849a7609982efcf2",
+        "status": 200,
+        "url": "https://datasets-server.huggingface.co/first-rows?dataset=CreativeLang%2FColBERT_Humor_Detection&config=default&split=train"
+      }
+    ],
+    "normalized_rows": 4,
+    "normalized_rows_sha256": "e66fb668aeb8755555c1decbe6fb24ff4a05249e07698ae0940d89c0cf9ab290",
+    "row_ids_unique": true,
+    "screened_rows": 0
+  },
+  "ok": true,
+  "parser": {
+    "expected_fixture_checked": false,
+    "expected_fixture_match": null,
+    "expected_fixture_sha256": null,
+    "implementation": "harvest_wave2._record_from_hf_row",
+    "success": true
+  },
+  "preflight_digest": "1870b1ca305c8710a24f78f89c9df24c8db8484c19099a64450776b0878a1207",
+  "receipt_type": "humorvibes_source_spec_preflight",
+  "receipt_version": 1,
+  "release_decision": {
+    "export_eligible": true,
+    "failed_gates": [],
+    "policy": "deny-first: explicit redistributable class plus matching live/fixture license and repository evidence"
+  },
+  "safety": {
+    "maximum_live_rows": 4,
+    "network_disabled_by_default": true,
+    "raw_text_in_receipt": false,
+    "writes_corpus": false
+  },
+  "source": {
+    "candidate_rows_url": "https://datasets-server.huggingface.co/first-rows?dataset=CreativeLang%2FColBERT_Humor_Detection&config=default&split=train",
+    "config": "default",
+    "declared_revision": "2bb7d6bce15e42c2a3cf2be8305fa3049929d3ac",
+    "observed_repo": "CreativeLang/ColBERT_Humor_Detection",
+    "observed_revision": "2bb7d6bce15e42c2a3cf2be8305fa3049929d3ac",
+    "provider": "huggingface",
+    "repo": "CreativeLang/ColBERT_Humor_Detection",
+    "source_key": "colbert_humor",
+    "split": "train"
+  }
+}

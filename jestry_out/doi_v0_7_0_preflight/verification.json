@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "expected": "5b62f01ffb89d5e8bb67a5572fac687e406aecc01f57458a6a19b27929cbe526",
+        "observed": "5b62f01ffb89d5e8bb67a5572fac687e406aecc01f57458a6a19b27929cbe526"
+      },
+      "name": "checksum.humorvibes-jestry-v0.7.0-source.zip",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "expected": "e15645b0702294708bf8e5e125b84e1630cff25613f4349e1d8631c7a65be2ad",
+        "observed": "e15645b0702294708bf8e5e125b84e1630cff25613f4349e1d8631c7a65be2ad"
+      },
+      "name": "checksum.source_inventory.json",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "expected": "2359c36aad8fd14d8a7d023bef86834e4cc08271f9b1190d3a84e059bc77798b",
+        "observed": "2359c36aad8fd14d8a7d023bef86834e4cc08271f9b1190d3a84e059bc77798b"
+      },
+      "name": "checksum.zenodo_deposition_metadata.json",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "expected": "24e1d8543d1873cd56c9bfb5759088d2239114a581e1a84f2b47cb461f953727",
+        "observed": "24e1d8543d1873cd56c9bfb5759088d2239114a581e1a84f2b47cb461f953727"
+      },
+      "name": "checksum.doi_archive_preflight.json",
+      "ok": true
+    },
+    {
+      "evidence": "5b62f01ffb89d5e8bb67a5572fac687e406aecc01f57458a6a19b27929cbe526",
+      "name": "archive.sha256",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "expected_files_digest": "20296c5cbfd7960a8000b545ff6e28f2cbd21082301129d8e6f9f194e499cdbc",
+        "file_count": 510,
+        "observed_files_digest": "20296c5cbfd7960a8000b545ff6e28f2cbd21082301129d8e6f9f194e499cdbc"
+      },
+      "name": "archive.file_inventory",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "commit_sha1": "9a58dac4a81fbb512e1c939dce1a979facc7a078",
+        "tag": "v0.7.0",
+        "tree_sha1": "3208dc48e7c36a7696520f7c3044c6d3bbf29890"
+      },
+      "name": "source.identity",
+      "ok": true
+    },
+    {
+      "evidence": "0eb84780dd020397c9fad8d477459e07dad6a8539d08411c8a010eab6c00a2e6",
+      "name": "archive.citation_metadata",
+      "ok": true
+    },
+    {
+      "evidence": "16c2e092388645dbb4acd2db9f95c90198a4aeee306fe5f20668964abba4638f",
+      "name": "archive.zenodo_metadata",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "anonymous_download_verified": false,
+        "doi_claimed": false,
+        "record_id_claimed": false,
+        "required_next_gate": "publish the exact tag through the owner-controlled Zenodo integration, then run the anonymous verifier"
+      },
+      "name": "publication.truth_boundary",
+      "ok": true
+    }
+  ],
+  "ok": true,
+  "receipt_type": "humorvibes_doi_archive_verification",
+  "receipt_version": 1,
+  "source": {
+    "annotated": true,
+    "commit_sha1": "9a58dac4a81fbb512e1c939dce1a979facc7a078",
+    "commit_time": "2026-07-27T13:18:46-04:00",
+    "pinned_identity_match": true,
+    "signature": "unsigned",
+    "tag": "v0.7.0",
+    "tag_object_sha1": "19c5f54c37cf2e05423941b7f7cd2eb911b70d35",
+    "tree_sha1": "3208dc48e7c36a7696520f7c3044c6d3bbf29890",
+    "version": "0.7.0"
+  },
+  "truth_boundary": {
+    "allowed_claim": "the exact tagged source and metadata are deposit-ready and identified by the per-file inventory",
+    "archive_container_sha256_is_cross_toolchain_identity": false,
+    "archive_preflight_is_doi": false,
+    "reserved_doi_is_published_doi": false
+  }
+}

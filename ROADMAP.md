@@ -18,8 +18,9 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
   writes one receipt. **Good first issue.**
 - [x] Add a small dependency smoke test in a clean virtual environment and document the supported
   Python range. **Good first issue.**
-- [ ] Archive a citable release snapshot through Zenodo or an equivalent DOI service after the
-  first outside contribution.
+- [ ] Archive v0.7.0 through Zenodo and record a real DOI. The canonical 510-file inventory,
+  deposit metadata, checksums, local verifier, and anonymous public-record verifier are complete;
+  owner-account repository enablement and published-record verification remain open in issue #9.
 - [x] Add a deterministic human-study launch pack with prospective writer-level precision,
   attrition-aware recruitment, balanced crossover randomization, separated blinded/restricted
   schedules, preregistration draft, operational runbook, and a fail-closed no-observations receipt.
@@ -36,6 +37,10 @@ download the public data, and pass `verify_wave2_release.py` without access to t
   splits, exact and canonical-scene image identity gates, identical held-out rows for text-only,
   image-only, and fusion arms, contest bootstrap intervals, calibration, error slices, and an
   explicit synthetic-evidence claim gate.
+- [x] Add a fail-closed human-cohort preflight and evaluator that verifies asset-level rights
+  evidence, source snapshots, exact and perceptual image hashes, privacy-minimized human-label
+  provenance, feature revisions, whole-contest grouping, and identical held-out rows. Software
+  validation deliberately leaves the independent legal/research review gate open.
 - [ ] Build a caption-plus-drawing baseline with whole contests held out.
 - [ ] Compare text-only, image-only, and multimodal arms on exactly the same contests.
 - [ ] Add drawing hashes and leakage checks so duplicated or near-duplicated images cannot cross
@@ -105,7 +110,7 @@ uncertainty rather than a table of unqualified means.
 
 ## P2 — make data contribution easier
 
-- [ ] Add a command that validates one proposed source spec against a small live sample and emits
+- [x] Add a command that validates one proposed source spec against a small live sample and emits
   a reviewable provenance/licence receipt. **Good first issue.**
 - [ ] Add tiny committed fixture corpora for each supported ingestion shape. **Good first issue.**
 - [ ] Generate a machine-readable schema reference from the exporter and test it against all
@@ -131,8 +136,9 @@ Controls endpoints are implemented in 0.7.0. Useful follow-ups are:
 - [ ] Add optional streaming generation with disconnect/cancellation and backpressure tests.
 - [x] Add opt-in low-cardinality StatsD export and OTLP/HTTP spans with W3C context while
   explicitly excluding bodies, keys, user IDs, and provider URLs.
-- [ ] Add live compatibility jobs for a version matrix of Ollama and two OpenAI-compatible servers.
-- [ ] Benchmark configured embedding models on frozen multilingual retrieval fixtures before
+- [x] Add an opt-in live compatibility job for pinned Ollama native/OpenAI-compatible routes and
+  an independently implemented TEI OpenAI-compatible server, retaining exact server/model hashes.
+- [x] Benchmark configured embedding models on frozen multilingual retrieval fixtures before
   recommending a default semantic model.
 - [ ] Add a vector-database adapter protocol with conformance tests for SQLite, pgvector, and
   Qdrant; preserve model/dimension identity in every collection.

@@ -1,1165 +1,1245 @@
 {
-  "blinded_schedule_digest": "f5d23cedd3965e17c482bf8af2a1003563e70be94b97ee4423a9bf92f51b4d3d",
+  "blinded_schedule_digest": "27b361b0f1ffaa1dcfd8ccfd41d83a9582c2ff06bd0c4e99d04716e68b023dd8",
   "rows": [
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-c7d3cdc19c51772f",
+      "blind_material_id": "material-102a8efd185cbf01",
       "block_id": "block-000001"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-6fbed898192d0f5e",
+      "blind_material_id": "material-44c92c26809ffbff",
       "block_id": "block-000001"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-91c59d5d6c9cfd52",
+      "blind_material_id": "material-38b6950a9b6b2e96",
       "block_id": "block-000002"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-6ef2225fcb782e26",
+      "blind_material_id": "material-5ef82d62f82137d5",
       "block_id": "block-000002"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-86ca55a6e0a11a2a",
+      "blind_material_id": "material-2ce5516961ad6b57",
       "block_id": "block-000003"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-99639bdc74ecb5a8",
+      "blind_material_id": "material-3c9bae0663798c0d",
       "block_id": "block-000003"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-01155bd55ab6f082",
+      "blind_material_id": "material-bf0fea1966189ef8",
       "block_id": "block-000004"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-80c4d8064470dc2b",
+      "blind_material_id": "material-489076a1d288d2aa",
       "block_id": "block-000004"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-85af46290ba36692",
+      "blind_material_id": "material-7b29911a3c3628e7",
       "block_id": "block-000005"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-f2fdcfa3d9c93a8c",
+      "blind_material_id": "material-88c3d9d9d914f86a",
       "block_id": "block-000005"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-0de0332f47fd2820",
+      "blind_material_id": "material-8d5a188369cf2c5a",
       "block_id": "block-000006"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-fa0d3f20fd84dce8",
+      "blind_material_id": "material-ef04296f4b6125fd",
       "block_id": "block-000006"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-88008ea183754b57",
+      "blind_material_id": "material-41879e8af52ce073",
       "block_id": "block-000007"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-5bd420e71013846e",
+      "blind_material_id": "material-cfcc8dd992947205",
       "block_id": "block-000007"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-a40ed2944c7d46d8",
+      "blind_material_id": "material-2d77a73bba9340eb",
       "block_id": "block-000008"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-caec366d0d7a3a22",
+      "blind_material_id": "material-388cb6e291c45809",
       "block_id": "block-000008"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-5e73f79d340fb7be",
+      "blind_material_id": "material-9d288b1b9ba3fa95",
       "block_id": "block-000009"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-e56984573ebd554c",
+      "blind_material_id": "material-f794db7478a53957",
       "block_id": "block-000009"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-03378534c6ed7278",
+      "blind_material_id": "material-159b2ac38e3949b4",
       "block_id": "block-000010"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-e697b0e77bb1ad34",
+      "blind_material_id": "material-9603062e28329180",
       "block_id": "block-000010"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-a0dd06ae43ffc2bd",
+      "blind_material_id": "material-9689555cae46dab4",
       "block_id": "block-000011"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-e16c3290d445ccd6",
+      "blind_material_id": "material-25e0612d7a00d1e4",
       "block_id": "block-000011"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-30a64b7f30b6d0cf",
+      "blind_material_id": "material-50897986caee83f4",
       "block_id": "block-000012"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-373c352f5392d8e8",
+      "blind_material_id": "material-611096435047d825",
       "block_id": "block-000012"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-244cf6858fca98b3",
+      "blind_material_id": "material-47324a14b3c350d1",
       "block_id": "block-000013"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-6837cd878a772789",
+      "blind_material_id": "material-d9a88b01f3bff6ce",
       "block_id": "block-000013"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-a234bfdae81922c9",
+      "blind_material_id": "material-b792a7d40fdbb7c9",
       "block_id": "block-000014"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-e051d09b757bb484",
+      "blind_material_id": "material-78eee1589de3aaa6",
       "block_id": "block-000014"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-a2545d95ecac1a39",
+      "blind_material_id": "material-3111ff3dc162b918",
       "block_id": "block-000015"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-30bc6d22f493fcb6",
+      "blind_material_id": "material-58dfc96dc6147af6",
       "block_id": "block-000015"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-d0589fe4c721c06d",
+      "blind_material_id": "material-43718a89454f71cf",
       "block_id": "block-000016"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-af74e14a29a3715c",
+      "blind_material_id": "material-3bb59e22dca885bd",
       "block_id": "block-000016"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-0edb2ca339dc1f91",
+      "blind_material_id": "material-d58e2b915b1054e0",
       "block_id": "block-000017"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-f2034f8d8bb7a62a",
+      "blind_material_id": "material-f56e93cfcc8db961",
       "block_id": "block-000017"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-7dce7ae072c08fcd",
+      "blind_material_id": "material-6a6a3241697eec25",
       "block_id": "block-000018"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-0853895f3840114e",
+      "blind_material_id": "material-260b8b632466ef7a",
       "block_id": "block-000018"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-218e5e2177eab254",
+      "blind_material_id": "material-892f35618f62b03e",
       "block_id": "block-000019"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-5290c080e84144ea",
+      "blind_material_id": "material-a68fc940560eae8d",
       "block_id": "block-000019"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-8e26c94cdb080b03",
+      "blind_material_id": "material-a6953c4aefb3d385",
       "block_id": "block-000020"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-05ca3a062bc05c86",
+      "blind_material_id": "material-fe314816d27e494c",
       "block_id": "block-000020"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-7888e67d5539d3da",
+      "blind_material_id": "material-234f1767d30f5add",
       "block_id": "block-000021"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-c8735099a72faa95",
+      "blind_material_id": "material-39c89245e85afde2",
       "block_id": "block-000021"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2a260e41c7f6bcf5",
+      "blind_material_id": "material-7e28f1f5b3102ac8",
       "block_id": "block-000022"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-c2dc1c4bda6bea7a",
+      "blind_material_id": "material-f434f1766e5e2b3d",
       "block_id": "block-000022"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-79919da063c88183",
+      "blind_material_id": "material-5697a8064dc755d7",
       "block_id": "block-000023"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-93964bc619939817",
+      "blind_material_id": "material-bada50ab12ccfeb3",
       "block_id": "block-000023"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-59a1e0d5eff87dcd",
+      "blind_material_id": "material-32e0620066296740",
       "block_id": "block-000024"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-72612f7fe44ca8e3",
+      "blind_material_id": "material-56801083ed3cffae",
       "block_id": "block-000024"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-67a9b9ae77bfc079",
+      "blind_material_id": "material-76984154627ec2e2",
       "block_id": "block-000025"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-fbc2ea092f021c6f",
+      "blind_material_id": "material-22154d3449774160",
       "block_id": "block-000025"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-e8a0ab80c2861b8f",
+      "blind_material_id": "material-6d57ef8343b49c6a",
       "block_id": "block-000026"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-562249704f407361",
+      "blind_material_id": "material-c92d65f977799cad",
       "block_id": "block-000026"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-1620c183d8bdbc5c",
+      "blind_material_id": "material-55d627ea7d37bb2e",
       "block_id": "block-000027"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-67fe4a7548891711",
+      "blind_material_id": "material-80793bf493e077d7",
       "block_id": "block-000027"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2763ddb5f1d221bb",
+      "blind_material_id": "material-ef533797d8ea02ed",
       "block_id": "block-000028"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-986d9c2de14bdb95",
+      "blind_material_id": "material-6282f2806d6e95ae",
       "block_id": "block-000028"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-e6e00fee416ca755",
+      "blind_material_id": "material-b0d3b2694f18f1d0",
       "block_id": "block-000029"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-34f143281ff54f0f",
+      "blind_material_id": "material-d526b9d61fa88a6a",
       "block_id": "block-000029"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-0facbda62c3198fc",
+      "blind_material_id": "material-6100fba2761e62a3",
       "block_id": "block-000030"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-ff763682b2c69286",
+      "blind_material_id": "material-bd639ce85efffc84",
       "block_id": "block-000030"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-dd42cb19de362fe7",
+      "blind_material_id": "material-d129bebb1aa3c98b",
       "block_id": "block-000031"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-571cada588bcbca8",
+      "blind_material_id": "material-f69ff9c39c62dce0",
       "block_id": "block-000031"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-03a36214cb423ffa",
+      "blind_material_id": "material-b37bdffafe3af237",
       "block_id": "block-000032"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-4633d97321470116",
+      "blind_material_id": "material-6445aad680e6f501",
       "block_id": "block-000032"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-3fcb981a401a1a02",
+      "blind_material_id": "material-68f8ddafb2391db6",
       "block_id": "block-000033"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-4150c2d4748bc7a8",
+      "blind_material_id": "material-6a983ebbda1632dd",
       "block_id": "block-000033"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-f04adad2e550292a",
+      "blind_material_id": "material-935effa8aa32a01d",
       "block_id": "block-000034"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-078218d76049b154",
+      "blind_material_id": "material-0206fb5b04a7907c",
       "block_id": "block-000034"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-5c87920acf8331ac",
+      "blind_material_id": "material-0236497e82f08cf4",
       "block_id": "block-000035"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-adb7f3e649c0de19",
+      "blind_material_id": "material-27883e0c0fcc4b1e",
       "block_id": "block-000035"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-da06726599ecf87e",
+      "blind_material_id": "material-07073e9893ee2067",
       "block_id": "block-000036"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-aab27d5df1971586",
+      "blind_material_id": "material-20cbb84ea45e728e",
       "block_id": "block-000036"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-d215e039b7415056",
+      "blind_material_id": "material-5843120300bf9e03",
       "block_id": "block-000037"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-6e38b521a842a6a7",
+      "blind_material_id": "material-528cbb8412421337",
       "block_id": "block-000037"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-5597ad3030bd550d",
+      "blind_material_id": "material-fbd94c38eec49ed3",
       "block_id": "block-000038"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-288f3d01c9722289",
+      "blind_material_id": "material-842e3c353a7ccad3",
       "block_id": "block-000038"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-ce3cd1eb69380348",
+      "blind_material_id": "material-7b22d185b1702f9b",
       "block_id": "block-000039"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-aa0f820bf9b05c76",
+      "blind_material_id": "material-3c74e3a7763389f5",
       "block_id": "block-000039"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-688a705e3bfba4ac",
+      "blind_material_id": "material-160fa71f9934a350",
       "block_id": "block-000040"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-3363a6c6edd285f6",
+      "blind_material_id": "material-c3d101284bcb6c6e",
       "block_id": "block-000040"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-0c54adcfb815447d",
+      "blind_material_id": "material-116500cbff72e737",
       "block_id": "block-000041"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-9642f76a668371d2",
+      "blind_material_id": "material-76fe1cc416ec590c",
       "block_id": "block-000041"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-28011e0535200a4f",
+      "blind_material_id": "material-b1c7cc84ed60c146",
       "block_id": "block-000042"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-f2e8960bf7586ebb",
+      "blind_material_id": "material-a53e2c82cb17b067",
       "block_id": "block-000042"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-c95f53874000066d",
+      "blind_material_id": "material-58f08c6f61fafa8a",
       "block_id": "block-000043"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-4a25279f86cf810d",
+      "blind_material_id": "material-2f82bbf4c9482740",
       "block_id": "block-000043"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-e8eb27e498a56d97",
+      "blind_material_id": "material-628135168ba0bc82",
       "block_id": "block-000044"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-5b1465da166326b8",
+      "blind_material_id": "material-a8b97b7c850ddbad",
       "block_id": "block-000044"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-6f5c285fc47b90c5",
+      "blind_material_id": "material-a12f72f901ff073e",
       "block_id": "block-000045"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-f4500d0b5889a705",
+      "blind_material_id": "material-1d5dc19229f7c3c0",
       "block_id": "block-000045"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-fa5f6f7787f87de0",
+      "blind_material_id": "material-590acb597b7f87f9",
       "block_id": "block-000046"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-2f8b47a1bb2bf386",
+      "blind_material_id": "material-707bfd60206e6612",
       "block_id": "block-000046"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-39708fe7b0e7e66b",
+      "blind_material_id": "material-df4d845f999dbdd9",
       "block_id": "block-000047"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-cb5842396320ba00",
+      "blind_material_id": "material-a412a9638720826f",
       "block_id": "block-000047"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-161a8c959d3aaf26",
+      "blind_material_id": "material-2656e19f6e42fb37",
       "block_id": "block-000048"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-4d648a2450a03c55",
+      "blind_material_id": "material-d5a9177fcd90afef",
       "block_id": "block-000048"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-1e2296c8c06f3225",
+      "blind_material_id": "material-fcd39e613ac23020",
       "block_id": "block-000049"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-7698f49c995a9079",
+      "blind_material_id": "material-669fb9b72c965a93",
       "block_id": "block-000049"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-0795f434a495d210",
+      "blind_material_id": "material-ea2c1dae55ec1baf",
       "block_id": "block-000050"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-dc5f06113cc5df24",
+      "blind_material_id": "material-accdb6c6eba4d186",
       "block_id": "block-000050"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2568b68d6658d143",
+      "blind_material_id": "material-6779126576b27306",
       "block_id": "block-000051"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-fceb7ca31a791812",
+      "blind_material_id": "material-6351745c31391096",
       "block_id": "block-000051"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-66423eed54ebba9f",
+      "blind_material_id": "material-effae7a16242068f",
       "block_id": "block-000052"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-27d7a9fd53a39f2a",
+      "blind_material_id": "material-4bdf640b7113219f",
       "block_id": "block-000052"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2ead512ca632b0b1",
+      "blind_material_id": "material-b05f4c9a51e3f108",
       "block_id": "block-000053"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-84a54c416d1804c0",
+      "blind_material_id": "material-f234b350568f77e3",
       "block_id": "block-000053"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2a629aa382fc58af",
+      "blind_material_id": "material-7d0aac185fb38693",
       "block_id": "block-000054"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-6f57277156e5b168",
+      "blind_material_id": "material-fcf9bd5a3b075b30",
       "block_id": "block-000054"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-f9a6ba40b3d1a7c2",
+      "blind_material_id": "material-b572cb8bb3ae5846",
       "block_id": "block-000055"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-9653741854762a98",
+      "blind_material_id": "material-a405d7eeb829474a",
       "block_id": "block-000055"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-1e03c0c37a45c55f",
+      "blind_material_id": "material-0373c43a0da519d7",
       "block_id": "block-000056"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-edb1b1cce721416b",
+      "blind_material_id": "material-1eed428b92aa999f",
       "block_id": "block-000056"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-a4132078988d1e91",
+      "blind_material_id": "material-68fa62a98bfa6a0a",
       "block_id": "block-000057"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-62bd3e137a138df1",
+      "blind_material_id": "material-3cc0fbf468c9489e",
       "block_id": "block-000057"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-b0470883f2cbdc4d",
+      "blind_material_id": "material-23d258c928fd87fa",
       "block_id": "block-000058"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-651338c57ca7f9a6",
+      "blind_material_id": "material-e8029ebd299a81b9",
       "block_id": "block-000058"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-0b045240ee65eb12",
+      "blind_material_id": "material-20257d3f12524de4",
       "block_id": "block-000059"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-44bd3761f7f0f9e7",
+      "blind_material_id": "material-543c56888cdfd48d",
       "block_id": "block-000059"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-b00d5556dad26e8b",
+      "blind_material_id": "material-e3459518780c6fc3",
       "block_id": "block-000060"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-c94e2dd26f4ef38f",
+      "blind_material_id": "material-5ce35c1a3de3756d",
       "block_id": "block-000060"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-c4e96a7f3fed6692",
+      "blind_material_id": "material-6400516c12a32a5d",
       "block_id": "block-000061"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-2a5c3db6aea5f430",
+      "blind_material_id": "material-d9ca4cfb4f80b996",
       "block_id": "block-000061"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-d2095bb0f719616d",
+      "blind_material_id": "material-c94bcb11e05b748d",
       "block_id": "block-000062"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-2e1c8bd3be512ff5",
+      "blind_material_id": "material-e0be220e2fb6d283",
       "block_id": "block-000062"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-f89b830a3587b254",
+      "blind_material_id": "material-9c58c6a2d1029af5",
       "block_id": "block-000063"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-ff04f2ca979d6277",
+      "blind_material_id": "material-1f6ba2c249c469de",
       "block_id": "block-000063"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-9fd93fe8cc70f6cf",
+      "blind_material_id": "material-f60d9670561ed7b6",
       "block_id": "block-000064"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-7091aa36cb008ec9",
+      "blind_material_id": "material-beb32b43c895657f",
       "block_id": "block-000064"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-78fe114e51dcc8d9",
+      "blind_material_id": "material-17ba805c00abd417",
       "block_id": "block-000065"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-cd1518017a2a82b6",
+      "blind_material_id": "material-2c756c02489ac2f5",
       "block_id": "block-000065"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-4ee35d60783cc5d3",
+      "blind_material_id": "material-6f0a35a6a4a30067",
       "block_id": "block-000066"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-98b42a0ac94a8beb",
+      "blind_material_id": "material-fcd5d78fb2a538af",
       "block_id": "block-000066"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-94cb9df5f40ae93b",
+      "blind_material_id": "material-77b1c42646343af6",
       "block_id": "block-000067"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-bdcc06745e768bd5",
+      "blind_material_id": "material-c5d6dca5c8487681",
       "block_id": "block-000067"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-e54c5131e7e953dc",
+      "blind_material_id": "material-8502890a9cde95f9",
       "block_id": "block-000068"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-657a3580c1309f9f",
+      "blind_material_id": "material-dd6490275e40c44d",
       "block_id": "block-000068"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-7519c894a7c9e0fd",
+      "blind_material_id": "material-b170b1d61ea72c80",
       "block_id": "block-000069"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-036399f4b883c9b8",
+      "blind_material_id": "material-799e01f49385c629",
       "block_id": "block-000069"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-31f4526a87457aeb",
+      "blind_material_id": "material-28065850e211d0c9",
       "block_id": "block-000070"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-827d862b666178c0",
+      "blind_material_id": "material-be16c9c28a004bd6",
       "block_id": "block-000070"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-36e14c7f97d4ebce",
+      "blind_material_id": "material-0aa466bdcfccc4bf",
       "block_id": "block-000071"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-64382a2ffa844735",
+      "blind_material_id": "material-dd36667f60529b1f",
       "block_id": "block-000071"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-6329222464138ff9",
+      "blind_material_id": "material-e0465a2198058e45",
       "block_id": "block-000072"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-10ba9b708022eb75",
+      "blind_material_id": "material-18abe5d5423432b8",
       "block_id": "block-000072"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-04f65c067fe34322",
+      "blind_material_id": "material-d96225cac4e44059",
       "block_id": "block-000073"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-70f70b761f70d448",
+      "blind_material_id": "material-40f74683475094df",
       "block_id": "block-000073"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-12623eb22e48d819",
+      "blind_material_id": "material-3ef936f0e1bf5b9c",
       "block_id": "block-000074"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-973fd1df62215396",
+      "blind_material_id": "material-4e3f348182b69099",
       "block_id": "block-000074"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-f84b3cc22f67fe26",
+      "blind_material_id": "material-80a54c1c29d54aa7",
       "block_id": "block-000075"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-cdc5fd5fbe63fa8b",
+      "blind_material_id": "material-96ba767538acc0f2",
       "block_id": "block-000075"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-684981f4b9b00fad",
+      "blind_material_id": "material-87f3e07ebeb85cb8",
       "block_id": "block-000076"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-cdc68ce6b8e4d40f",
+      "blind_material_id": "material-a5df93ba493e696b",
       "block_id": "block-000076"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-c1b7e420e5c35ff6",
+      "blind_material_id": "material-037091ffb970a0bb",
       "block_id": "block-000077"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-1625ecae166f0088",
+      "blind_material_id": "material-4acf81242956f864",
       "block_id": "block-000077"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-8e7f342b45d6ff95",
+      "blind_material_id": "material-80d4b15c1a50bb7b",
       "block_id": "block-000078"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-3badc4d56fa8c4b3",
+      "blind_material_id": "material-76f7a5370acbb6e7",
       "block_id": "block-000078"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-dfdbcbae0bbb8a2e",
+      "blind_material_id": "material-f3348cd021a23472",
       "block_id": "block-000079"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-e3dbf8642bb0d037",
+      "blind_material_id": "material-07d8c80f9c64a2bc",
       "block_id": "block-000079"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-fc750cd31bc60b6a",
+      "blind_material_id": "material-a978e7f17b87cfb4",
       "block_id": "block-000080"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-eff20bc6f012482e",
+      "blind_material_id": "material-980dea247b9628c7",
       "block_id": "block-000080"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-e6e2ad230c85c12b",
+      "blind_material_id": "material-1d920a77644e1690",
       "block_id": "block-000081"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-46932c722207304c",
+      "blind_material_id": "material-5b13e791d039f88e",
       "block_id": "block-000081"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-9a2ea4266d61f7e2",
+      "blind_material_id": "material-1d9bdfdbe128c71e",
       "block_id": "block-000082"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-6cb2ddfb167af97c",
+      "blind_material_id": "material-0411b60dd8d08c53",
       "block_id": "block-000082"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-7bd74641cb70e669",
+      "blind_material_id": "material-8253ba88866a36fe",
       "block_id": "block-000083"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-94f3aa79d316bd50",
+      "blind_material_id": "material-b377e3ae68e354b9",
       "block_id": "block-000083"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-79ba302d04f15c13",
+      "blind_material_id": "material-33718648ca1501e9",
       "block_id": "block-000084"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-d1e8f8be3f37f582",
+      "blind_material_id": "material-57c48122aac1b029",
       "block_id": "block-000084"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-372d6be69662601c",
+      "blind_material_id": "material-527249cf1bfef431",
       "block_id": "block-000085"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-f424a09802b1eb60",
+      "blind_material_id": "material-182b4b2cfa6449da",
       "block_id": "block-000085"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-30c366fc5e7359d5",
+      "blind_material_id": "material-d1bd66a8ef525327",
       "block_id": "block-000086"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-8bcc398e6f83cba1",
+      "blind_material_id": "material-6ce53593fbc323b3",
       "block_id": "block-000086"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2e887675e72260c6",
+      "blind_material_id": "material-0ab446a4f638c7f4",
       "block_id": "block-000087"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-d47e40dac2aab5ec",
+      "blind_material_id": "material-ebe3ac08586a472e",
       "block_id": "block-000087"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-3085668435e6f598",
+      "blind_material_id": "material-38e092dd564ceaa0",
       "block_id": "block-000088"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-9d5a120902327fed",
+      "blind_material_id": "material-464071f695b4f1f5",
       "block_id": "block-000088"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-f983aff467abe1da",
+      "blind_material_id": "material-e254021c2585deee",
       "block_id": "block-000089"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-59c87e6a5a2a5fed",
+      "blind_material_id": "material-eb89fadceb8bb913",
       "block_id": "block-000089"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-4815dc6428f3a515",
+      "blind_material_id": "material-f90c1cf53092f737",
       "block_id": "block-000090"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-b7415ae2546d6857",
+      "blind_material_id": "material-8b5848b3e649d2af",
       "block_id": "block-000090"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-0fbf02525ec8dc66",
+      "blind_material_id": "material-771983094b1b0a4d",
       "block_id": "block-000091"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-328a268c88e1ee56",
+      "blind_material_id": "material-83d93b03451f3033",
       "block_id": "block-000091"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-15e8f5f96dc2128f",
+      "blind_material_id": "material-c754d06cad5b3a84",
       "block_id": "block-000092"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-3fcf8c4548f56b4b",
+      "blind_material_id": "material-b93476e27e763352",
       "block_id": "block-000092"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-7fc3c8e57bcc937b",
+      "blind_material_id": "material-2cc1fa08b0bb0c47",
       "block_id": "block-000093"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-756fdcee5a549948",
+      "blind_material_id": "material-c0a185d81517e1a9",
       "block_id": "block-000093"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2d4807f7e08f2c79",
+      "blind_material_id": "material-041e526d21b7caa6",
       "block_id": "block-000094"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-89be8b977dc1074f",
+      "blind_material_id": "material-ee17666808362812",
       "block_id": "block-000094"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-c6d43ab449303b4a",
+      "blind_material_id": "material-b4dcd7529fef5190",
       "block_id": "block-000095"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-35bdfec2ffe6c89c",
+      "blind_material_id": "material-f36b31f95d143e8c",
       "block_id": "block-000095"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-74038c02277192ad",
+      "blind_material_id": "material-56ba4185ceca0baf",
       "block_id": "block-000096"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-8084a0344c4a8f5f",
+      "blind_material_id": "material-49f8234ae7636e22",
       "block_id": "block-000096"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-a77cea60326381f1",
+      "blind_material_id": "material-c886f079ed8725e9",
       "block_id": "block-000097"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-1ecc57cddb2d88ff",
+      "blind_material_id": "material-2673d3ce91ec9947",
       "block_id": "block-000097"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-847054f47a966853",
+      "blind_material_id": "material-085df44758a6f6b5",
       "block_id": "block-000098"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-5845942ef219c3c7",
+      "blind_material_id": "material-c95d91a634e7829a",
       "block_id": "block-000098"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-8103d34d71b11818",
+      "blind_material_id": "material-9d42c84e2e8d7a53",
       "block_id": "block-000099"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-c99eb29790e3de79",
+      "blind_material_id": "material-0d1a3eb15853d2b2",
       "block_id": "block-000099"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-79b568b5190dd812",
+      "blind_material_id": "material-addf5013fcc2cf1f",
       "block_id": "block-000100"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-d391ff134ba767a8",
+      "blind_material_id": "material-78f87e2b38f1996b",
       "block_id": "block-000100"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-9865c305abcfd0a1",
+      "blind_material_id": "material-f587e24fea0a255c",
       "block_id": "block-000101"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-a8406aa9c942a539",
+      "blind_material_id": "material-25469d0b61113d47",
       "block_id": "block-000101"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-b16e959520099e17",
+      "blind_material_id": "material-a03c79abcdfb68fb",
       "block_id": "block-000102"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-0567e665aa0baf64",
+      "blind_material_id": "material-0c49122cf16f803c",
       "block_id": "block-000102"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-537c7e4bc6e96d5d",
+      "blind_material_id": "material-fe4c21b55412ebc7",
       "block_id": "block-000103"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-94ab734e0680400c",
+      "blind_material_id": "material-abe3d3d092d58bd6",
       "block_id": "block-000103"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-96ded8ae778683c8",
+      "blind_material_id": "material-d4b7769516e8e73b",
       "block_id": "block-000104"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-3cf9ae056e17bae1",
+      "blind_material_id": "material-ba402816e9d4984b",
       "block_id": "block-000104"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-4c64c368c811e0fa",
+      "blind_material_id": "material-ca830371b71bcdf7",
       "block_id": "block-000105"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-efffadb85dca2540",
+      "blind_material_id": "material-47654b4a5be157e1",
       "block_id": "block-000105"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-1e5ff0e6d31c1a2c",
+      "blind_material_id": "material-6cab66472cce773d",
       "block_id": "block-000106"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-6e30bff1b82c08ca",
+      "blind_material_id": "material-dd2d10371b742868",
       "block_id": "block-000106"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-8697290c9ca1abd0",
+      "blind_material_id": "material-69d74dc7aa46115a",
       "block_id": "block-000107"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-2291bb566aa9ed68",
+      "blind_material_id": "material-79e5a8c3bc10e4e7",
       "block_id": "block-000107"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-d33ccc058516964c",
+      "blind_material_id": "material-035f8a5c22496684",
       "block_id": "block-000108"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-f36f53927ef62d19",
+      "blind_material_id": "material-1421392fecc36780",
       "block_id": "block-000108"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-79d9534dac3cf771",
+      "blind_material_id": "material-4ba8dc5be46600da",
       "block_id": "block-000109"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-a8f530444e650114",
+      "blind_material_id": "material-f5337d9c6270c226",
       "block_id": "block-000109"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-d0740fe093f172b1",
+      "blind_material_id": "material-1da3e4787a92f840",
       "block_id": "block-000110"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-296e2d261152ca8d",
+      "blind_material_id": "material-92d682f5fd949b2e",
       "block_id": "block-000110"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-799ae21fecf53220",
+      "blind_material_id": "material-bde354c299063f9f",
       "block_id": "block-000111"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-c65ac69c61c993d9",
+      "blind_material_id": "material-4bb1e4134021fac3",
       "block_id": "block-000111"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-e88015b38ce5c0ee",
+      "blind_material_id": "material-de6669a705e40fb1",
       "block_id": "block-000112"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-1c1755d162a0a258",
+      "blind_material_id": "material-607e4f8507536718",
       "block_id": "block-000112"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-dc3508c4fdf811c2",
+      "blind_material_id": "material-96a0137bb2b3ac35",
       "block_id": "block-000113"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-887a12baed4478de",
+      "blind_material_id": "material-7cc7ffa17156d676",
       "block_id": "block-000113"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-f4ae212d860676ce",
+      "blind_material_id": "material-d71cbd827c82de33",
       "block_id": "block-000114"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-30a480ce9ffebc77",
+      "blind_material_id": "material-6feea8e7b0d3d7c0",
       "block_id": "block-000114"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-2d7c7b14a7da8f1c",
+      "blind_material_id": "material-86766e89aaf99004",
       "block_id": "block-000115"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-417d846661b45178",
+      "blind_material_id": "material-9a6f7133d2a3a80f",
       "block_id": "block-000115"
     },
     {
       "audience_panel_id": "audience-panel-01",
-      "blind_material_id": "material-c24d4ebb5afbd2a9",
+      "blind_material_id": "material-88a467f51e60b0f1",
       "block_id": "block-000116"
     },
     {
       "audience_panel_id": "audience-panel-02",
-      "blind_material_id": "material-4a3e7df4989384b1",
+      "blind_material_id": "material-84a10e05eb354285",
       "block_id": "block-000116"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-acef935db1a505d6",
+      "block_id": "block-000117"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-2e1cbe0305ce97c1",
+      "block_id": "block-000117"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-bed068f412deda76",
+      "block_id": "block-000118"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-bc1f9b6f973739c6",
+      "block_id": "block-000118"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-1aa9f76aa04e6e81",
+      "block_id": "block-000119"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-76a9bca3dbb7d423",
+      "block_id": "block-000119"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-e02fa5abf9b938ff",
+      "block_id": "block-000120"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-72bdbaf6d123b3b4",
+      "block_id": "block-000120"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-85ea3a5317ac9a0d",
+      "block_id": "block-000121"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-ddb7d252c6302537",
+      "block_id": "block-000121"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-29cc1fe9c6e6bb70",
+      "block_id": "block-000122"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-0e82499eceaf595f",
+      "block_id": "block-000122"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-e06fe33837974d05",
+      "block_id": "block-000123"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-36d5804b79302330",
+      "block_id": "block-000123"
+    },
+    {
+      "audience_panel_id": "audience-panel-01",
+      "blind_material_id": "material-8936f1722ef59ac6",
+      "block_id": "block-000124"
+    },
+    {
+      "audience_panel_id": "audience-panel-02",
+      "blind_material_id": "material-552e4f5a48c61e08",
+      "block_id": "block-000124"
     }
   ]
 }

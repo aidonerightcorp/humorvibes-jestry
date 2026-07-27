@@ -1,0 +1,50 @@
+[
+  {
+    "source": "hf:CreativeLang/ColBERT_Humor_Detection",
+    "license": "CC BY 2.0",
+    "text": "Joe biden rules out 2020 bid: 'guys, i'm not running'",
+    "meta": {
+      "config": "default",
+      "split": "train",
+      "language": "en",
+      "_hf_row_offset": 0,
+      "humor": false
+    }
+  },
+  {
+    "source": "hf:CreativeLang/ColBERT_Humor_Detection",
+    "license": "CC BY 2.0",
+    "text": "Watch: darvish gave hitter whiplash with slow pitch",
+    "meta": {
+      "config": "default",
+      "split": "train",
+      "language": "en",
+      "_hf_row_offset": 1,
+      "humor": false
+    }
+  },
+  {
+    "source": "hf:CreativeLang/ColBERT_Humor_Detection",
+    "license": "CC BY 2.0",
+    "text": "What do you call a turtle without its shell? dead.",
+    "meta": {
+      "config": "default",
+      "split": "train",
+      "language": "en",
+      "_hf_row_offset": 2,
+      "humor": true
+    }
+  },
+  {
+    "source": "hf:CreativeLang/ColBERT_Humor_Detection",
+    "license": "CC BY 2.0",
+    "text": "5 reasons the 2016 election feels so personal",
+    "meta": {
+      "config": "default",
+      "split": "train",
+      "language": "en",
+      "_hf_row_offset": 3,
+      "humor": false
+    }
+  }
+]

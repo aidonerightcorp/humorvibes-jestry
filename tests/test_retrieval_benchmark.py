@@ -76,6 +76,12 @@ def test_evaluator_runs_two_distinct_offline_models(
     assert receipt["overall"]["queries"] == 60
     assert 0.0 <= receipt["overall"]["MRR"] <= 1.0
     assert set(receipt["metrics_by_split"]) == {"train", "validation", "test"}
+    assert receipt["overall"]["nDCG@10"] >= 0.0
+    assert set(receipt["overall"]["bootstrap_95pct_ci"]) == {
+        "MRR", "Recall@1", "Recall@5", "Recall@10", "nDCG@10"
+    }
+    assert receipt["failure_slices"]["not_ranked_first"]["rate"] >= 0.0
+    assert receipt["frozen_input_digests"]["queries"]
     assert receipt["truth_boundary"]["qrels_are_human_judgments"] is False
 
 
@@ -85,6 +91,18 @@ def test_invalid_qrel_fails_closed(hard_dataset: dict) -> None:
     with pytest.raises(IntegrationError) as observed:
         evaluate_retrieval(broken)
     assert observed.value.code == "invalid_retrieval_qrel"
+
+
+def test_clock_free_embedding_receipt_is_byte_recomputable(hard_dataset: dict) -> None:
+    first = evaluate_retrieval(
+        hard_dataset, model_id="hash:128", record_duration=False
+    )
+    second = evaluate_retrieval(
+        hard_dataset, model_id="hash:128", record_duration=False
+    )
+    assert first == second
+    assert "duration_seconds" not in first
+    assert "performance" not in first["model"]
 
 
 def test_cli_build_and_benchmark_execute_end_to_end(tmp_path: Path) -> None:
@@ -138,4 +156,3 @@ def test_cli_build_and_benchmark_execute_end_to_end(tmp_path: Path) -> None:
     )
     assert json.loads(completed.stdout) == json.loads(receipt_path.read_text())
     assert load_retrieval_dataset(target)["manifest"]["counts"]["queries"] == 60
-

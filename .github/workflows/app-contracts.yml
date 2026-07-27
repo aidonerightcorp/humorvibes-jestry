@@ -22,6 +22,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          # The DOI preflight archives the immutable v0.7.0 tag rather than HEAD.
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
@@ -36,6 +38,19 @@ jobs:
         run: uv sync --frozen --extra api --extra dev
       - name: Run repository tests
         run: uv run pytest -q
+      - name: Rebuild and verify the complete v0.7.0 DOI source identity
+        run: |
+          uv run python tools/build_doi_archive.py \
+            --tag v0.7.0 \
+            --out-dir /tmp/humorvibes-doi-v0.7.0
+          uv run python tools/verify_doi_archive.py \
+            --root /tmp/humorvibes-doi-v0.7.0
+          diff -u \
+            jestry_out/doi_v0_7_0_preflight/source_inventory.json \
+            /tmp/humorvibes-doi-v0.7.0/source_inventory.json
+          diff -u \
+            jestry_out/doi_v0_7_0_preflight/zenodo_deposition_metadata.json \
+            /tmp/humorvibes-doi-v0.7.0/zenodo_deposition_metadata.json
       - name: Reject whitespace damage
         run: git diff --check
       - name: Run network-free adversarial audit
