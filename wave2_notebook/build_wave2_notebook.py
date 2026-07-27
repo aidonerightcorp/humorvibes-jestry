@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = "https://github.com/aidonerightcorp/humorvibes-jestry"
-REPO_REF = "humor-genome-wave2-v5"
+REPO_REF = "humor-genome-wave2-v6"
 
 # The controlling definition of bad surprise, verbatim. It is quoted rather than
 # paraphrased everywhere in this project because paraphrasing it changes what
@@ -46,7 +46,7 @@ CELLS: list[tuple[str, str]] = [
      "(https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2)\n"
      "- Code and receipts: [aidonerightcorp/humorvibes-jestry]"
      "(https://github.com/aidonerightcorp/humorvibes-jestry)\n"
-     "- Immutable source for this run: `humor-genome-wave2-v5`\n\n"
+     "- Immutable source for this run: `humor-genome-wave2-v6`\n\n"
      "The notebook verifies every mounted dataset payload before analysis, loads the attached "
      "Gemma 2 checkpoint, checks the instrument against a pinned reference, and then displays "
      "the controlling statistical receipts.\n\n"

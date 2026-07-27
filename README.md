@@ -7,12 +7,12 @@ A public, reproducible Gemma study of humor structure. **HumorVibes** is the imp
 
 | Public artifact | Open it | Status | What it is for |
 | --- | --- | --- | --- |
-| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma) | Public, COMPLETE | Read the write-up and rerun every public measurement |
+| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, COMPLETE | Read the write-up and rerun every public measurement |
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
 
 The notebook is the single canonical executable write-up. It clones the immutable
-`humor-genome-wave2-v5` source tag, verifies the mounted dataset byte-for-byte and semantically,
+`humor-genome-wave2-v6` source tag, verifies the mounted dataset byte-for-byte and semantically,
 loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
 [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
 
@@ -216,7 +216,7 @@ python3 wave2_notebook/build_wave2_notebook.py
 ```
 
 Dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2
-Notebook: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma
+Notebook: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study
 
 ## Files
 

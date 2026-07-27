@@ -88,7 +88,7 @@ def _data_card(summary: dict[str, Any], census: dict[str, Any]) -> str:
     return f"""# Humor Genome Wave 2 — public research dataset
 
 This is the public data layer for the
-[Humor Genome Wave 2 executable Gemma study](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma).
+[Humor Genome Wave 2 executable Gemma study](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study).
 It contains a deterministic, rights-filtered, source-stratified slice of a
 {census['items']:,}-item research inventory, plus translation pairs, annotated frames, a full
 census, exact build parameters, and a cryptographic manifest.
@@ -191,7 +191,7 @@ the exact per-row licence and attribution terms.
 
 ## Related public artifacts
 
-- Executable write-up: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma
+- Executable write-up: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study
 - Source, methods, tests, and receipts: https://github.com/aidonerightcorp/humorvibes-jestry
 - Machine-readable publication receipt:
   https://github.com/aidonerightcorp/humorvibes-jestry/blob/main/jestry_out/wave2_publication.json

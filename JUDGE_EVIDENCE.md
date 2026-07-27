@@ -8,8 +8,9 @@ The canonical evidence is now consolidated and public:
   `abb7fabfd74d461f58fe1439d883dabda267068c`, source tag `humor-genome-wave2-v4`;
 - dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2, version 5,
   121,670 fail-closed redistributable rows, public and ready;
-- executable write-up: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma,
-  version 9, public and COMPLETE.
+- executable write-up:
+  https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study,
+  public and COMPLETE; the exact current version is recorded in the publication receipt.
 
 The notebook verifies six mounted payload hashes and the semantic release gate, runs Gemma 2 on
 CPU, reproduces S=3.188 over ten tokens against the pinned 3.19 instrument check, and verifies the

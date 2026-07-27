@@ -5,7 +5,7 @@
 > `humor-genome-wave2-v4` (`abb7fab`); the fail-closed dataset is public and ready at
 > https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2 (version 5); and the
 > consolidated executable write-up is public and COMPLETE at
-> https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma (version 9). Anonymous
+> https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study. Anonymous
 > requests returned HTTP 200 for all three surfaces. The older state audits below are preserved
 > as history. Public artifacts do not by themselves prove that a competition Writeup or video
 > was submitted.
