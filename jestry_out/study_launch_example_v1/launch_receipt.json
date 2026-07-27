@@ -1,0 +1,31 @@
+{
+  "assignment_digest": "fc9547272d7305c88d015b73fda64ac5cf81f7f261589e11e0c71abc0f716060",
+  "assignment_key_sha256": "a159456ee77f134013d569e4e138dc4624f3b6608c522b6b17ba218cb93444e0",
+  "blinded_schedule_digest": "f5d23cedd3965e17c482bf8af2a1003563e70be94b97ee4423a9bf92f51b4d3d",
+  "claim_gate": {
+    "claim_ready": false,
+    "reason": "This is a prospective launch pack with no human observations."
+  },
+  "external_gates": {
+    "ethics_or_irb_determination_archived": false,
+    "institutional_consent_operations_approved": false,
+    "observations_collected": false,
+    "preregistration_recorded": false,
+    "recruitment_completed": false,
+    "secure_linkage_store_verified": false
+  },
+  "pack_digest": "cf7dd061ecdb76e94d3a486626204aa7e02241da060538b514e7cfa25eb18e1e",
+  "precision_plan_digest": "4dfe4d9ad4ff7c8180cce27716bc93f33ebfd9bdd62c5fdf8e459ed7c6dbe28c",
+  "protocol_digest": "cbf0c3d5572b5179ae80eac87a62b9e4e8113cad8ebf06b2e7854a64bba80751",
+  "protocol_minimums_compatible_with_precision_plan": true,
+  "receipt_type": "humorvibes_human_study_launch_pack",
+  "receipt_version": 1,
+  "status": "READY_FOR_EXTERNAL_ETHICS_AND_REGISTRATION",
+  "study_id": "writer-assistance-crossover-v1",
+  "truth_boundary": {
+    "authorizes_product_advantage_claim": false,
+    "registration_or_recruitment_performed": false,
+    "synthetic_or_planned_counts_are_observed_people": false,
+    "technical_readiness_is_ethics_approval": false
+  }
+}

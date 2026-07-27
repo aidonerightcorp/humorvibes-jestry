@@ -71,6 +71,38 @@ Commit the frozen protocol or place its digest in a public registry. Do not chan
 at outcomes; if the plan changes, publish an amendment and label the resulting analysis
 exploratory.
 
+## Build the prospective launch pack
+
+Before registration or recruitment, turn the edited human protocol into separated operational
+artifacts:
+
+```bash
+humorvibes study-key --out restricted/randomization.key
+humorvibes study-launch \
+  --protocol protocol.json \
+  --assignment-key-file restricted/randomization.key \
+  --out-dir study_launch/writer-crossover-v1
+```
+
+The command computes a prospective writer-level precision plan, adjusts recruitment for declared
+attrition, freezes the resulting minimum counts, creates balanced crossover assignments, and
+uses the mode-0600 key so a public seed cannot reveal assignments, and writes separate restricted
+and blinded schedules. It also writes a complete preregistration draft,
+an operations runbook, and a receipt whose status remains
+`READY_FOR_EXTERNAL_ETHICS_AND_REGISTRATION`.
+
+The default assumptions are a 0.25-point target effect, 0.45 between-writer SD, 0.60 within-writer
+premise SD, two paired premises per writer, two-sided alpha 0.05, power 0.80, and 15% writer
+attrition. These are transparent starting assumptions, not observed variance. Review sensitivity
+across plausible values and add a hierarchical simulation before institutional submission.
+
+`restricted_assignment_map.json` contains the condition mapping and must be access-controlled.
+The randomization key stays outside the launch directory; the receipt records only its SHA-256
+commitment. Never commit or transmit the key with the blinded schedules.
+Writers use `blinded_writing_schedule.json`; audience facilitators use
+`blinded_audience_schedule.json`. Each audience panel receives only one version of a paired block.
+The public analysis export must never contain the restricted mapping.
+
 ## Export only the analysis contract
 
 The study bundle accepts two row types.
@@ -175,7 +207,7 @@ also fit a prespecified hierarchical model with crossed effects for writer, prem
 audience, venue, and possibly performance order. Compare that model with the receipt, publish both,
 and do not switch estimators based on which one passes a threshold.
 
-## Minimum real collection infrastructure still needed
+## External collection infrastructure still needed
 
 The code intentionally does not fake the human-operations layer. Before a real pilot, a study team
 still needs:
@@ -183,10 +215,12 @@ still needs:
 - appropriate ethics/IRB review or documented determination for its institution and jurisdiction;
 - accessible consent, withdrawal, compensation, and complaint processes;
 - a secure identity-to-pseudonym linkage store separate from the analysis export;
-- assignment and blinding UI, version-locked stimulus presentation, and an audit log;
+- a reviewed presentation UI around the generated blinded schedules, version-locked stimuli, and
+  an audit log;
 - retention/deletion automation and access control;
 - delivery/context capture proportionate to the question;
-- prospective power or precision analysis, including expected clustering and attrition;
+- institutional review of the generated prospective precision assumptions and a hierarchical
+  simulation sensitivity analysis;
 - a plan for adverse outcomes and stopping the pilot.
 
 The practical first milestone is not “prove the theory.” It is to show that independent writers

@@ -115,6 +115,7 @@ def verify_kubernetes() -> dict[str, Any]:
     paths = [
         ROOT / "deploy/kubernetes/configmap.yaml",
         ROOT / "deploy/kubernetes/deployment.yaml",
+        ROOT / "deploy/kubernetes/networkpolicy.yaml",
         ROOT / "deploy/kubernetes/service.yaml",
         ROOT / "deploy/kubernetes/kustomization.yaml",
     ]
@@ -122,17 +123,22 @@ def verify_kubernetes() -> dict[str, Any]:
     assert all(isinstance(document, dict) and document.get("apiVersion") for document in documents)
     deployment = next(document for document in documents if document.get("kind") == "Deployment")
     service = next(document for document in documents if document.get("kind") == "Service")
+    network_policy = next(
+        document for document in documents if document.get("kind") == "NetworkPolicy"
+    )
     pod = deployment["spec"]["template"]["spec"]
     container = pod["containers"][0]
     assert pod["securityContext"]["runAsNonRoot"] is True
     assert container["securityContext"]["readOnlyRootFilesystem"] is True
     assert service["spec"]["type"] == "ClusterIP"
+    assert network_policy["spec"]["egress"] == []
     return {
         "objects": [document["kind"] for document in documents],
         "replicas": deployment["spec"]["replicas"],
         "service_type": service["spec"]["type"],
         "nonroot": True,
         "readonly_root": True,
+        "default_deny_egress": True,
     }
 
 
@@ -155,6 +161,7 @@ def verify_kustomize_container(image: str) -> dict[str, Any]:
         "ConfigMap/humorvibes-config",
         "Service/humorvibes",
         "Deployment/humorvibes",
+        "NetworkPolicy/humorvibes-default-deny",
     ]
     return {"image": image, "objects": identities, "rendered": True}
 
@@ -189,6 +196,7 @@ def verify_helm_container(image: str) -> dict[str, Any]:
     documents = [row for row in yaml.safe_load_all(rendered) if row]
     identities = [f"{row['kind']}/{row['metadata']['name']}" for row in documents]
     assert identities == [
+        "NetworkPolicy/receipt-humorvibes",
         "ConfigMap/receipt-humorvibes",
         "Service/receipt-humorvibes",
         "Deployment/receipt-humorvibes",
@@ -198,7 +206,7 @@ def verify_helm_container(image: str) -> dict[str, Any]:
     container = pod["containers"][0]
     assert pod["automountServiceAccountToken"] is False
     assert container["securityContext"]["readOnlyRootFilesystem"] is True
-    assert container["image"] == "humorvibes-research:0.6.0"
+    assert container["image"] == "humorvibes-research:0.7.0"
     return {
         "image": image,
         "objects": identities,
@@ -281,7 +289,7 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
         assert inspection["HostConfig"]["ReadonlyRootfs"] is True
         assert embedded["model_id"] == "hash:128" and embedded["count"] == 1
         assert remote_similarity["cosine_similarity"] == [[1.0]]
-        assert openapi["info"]["version"] == "0.6.0"
+        assert openapi["info"]["version"] == "0.7.0"
         assert capabilities["truth_boundary"]["generation_is_not_human_validation"] is True
         assert capabilities["product_use_cases"]["creative_assistance"]["claim_gate"] == (
             "blind_or_live_human_response"
@@ -332,7 +340,7 @@ def main() -> int:
         action="store_true",
         help="also build, launch, and probe the image",
     )
-    parser.add_argument("--image", default="humorvibes-research:0.6.0")
+    parser.add_argument("--image", default="humorvibes-research:0.7.0")
     parser.add_argument(
         "--no-build",
         action="store_true",

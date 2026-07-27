@@ -3,7 +3,7 @@ replicaCount: 2
 image:
   repository: humorvibes-research
   pullPolicy: IfNotPresent
-  tag: "0.6.0"
+  tag: "0.7.0"
   digest: ""
 
 imagePullSecrets: []
@@ -11,6 +11,16 @@ nameOverride: ""
 fullnameOverride: ""
 
 existingSecret: ""
+
+networkPolicy:
+  enabled: true
+  ingress:
+    - from:
+        - podSelector: {}
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress: []
 
 podAnnotations: {}
 podLabels: {}
@@ -68,6 +78,11 @@ config:
   rateLimitPerMinute: "600"
   strictReadiness: "false"
   corsOrigins: ""
+  statsdHost: ""
+  statsdPort: "8125"
+  otelTracesEndpoint: ""
+  otelServiceName: humorvibes-api
+  otelSampleRatio: "0.1"
 
 extraEnv: []
 

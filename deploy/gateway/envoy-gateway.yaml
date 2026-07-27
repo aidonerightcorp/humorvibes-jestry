@@ -1,0 +1,97 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: humorvibes
+spec:
+  gatewayClassName: eg
+  listeners:
+    - name: https
+      hostname: api.humorvibes.example
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: humorvibes-tls
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: humorvibes
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: humorvibes
+      sectionName: https
+  hostnames:
+    - api.humorvibes.example
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: humorvibes
+          port: 80
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: humorvibes-api-key
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: humorvibes
+  apiKeyAuth:
+    credentialRefs:
+      - group: ""
+        kind: Secret
+        name: humorvibes-edge-api-keys
+    extractFrom:
+      - headers:
+          - x-api-key
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: humorvibes-traffic
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: humorvibes
+  rateLimit:
+    local:
+      rules:
+        - limit:
+            requests: 60
+            unit: Second
+    global:
+      rules:
+        - limit:
+            requests: 600
+            unit: Minute
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: humorvibes-tls
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: humorvibes
+  tls:
+    minVersion: "1.3"

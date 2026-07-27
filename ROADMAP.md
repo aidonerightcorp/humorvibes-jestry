@@ -13,19 +13,29 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
   project-controlled Open Controls data; keep mixed-provenance imports on per-row licences.
 - [x] Publish Open Controls as a separately licensed Kaggle dataset and COMPLETE notebook; verify
   a fresh download, remote source, terminal output, anonymous access, and cross-surface receipt.
-- [ ] Add a read-only cross-surface audit command that checks GitHub visibility, Kaggle dataset
+- [x] Add a read-only cross-surface audit command that checks GitHub visibility, Kaggle dataset
   readiness, notebook completion, source tag, manifest hash, and anonymous HTTP access, then
   writes one receipt. **Good first issue.**
-- [ ] Add a small dependency smoke test in a clean virtual environment and document the supported
+- [x] Add a small dependency smoke test in a clean virtual environment and document the supported
   Python range. **Good first issue.**
 - [ ] Archive a citable release snapshot through Zenodo or an equivalent DOI service after the
   first outside contribution.
+- [x] Add a deterministic human-study launch pack with prospective writer-level precision,
+  attrition-aware recruitment, balanced crossover randomization, separated blinded/restricted
+  schedules, preregistration draft, operational runbook, and a fail-closed no-observations receipt.
+- [x] Add a provider-neutral hard retrieval track that masks entities/pivots, preserves
+  family-disjoint splits, records same-frame and same-context negatives, audits lexical leakage,
+  and runs TF-IDF or any allowlisted embedding backend against one frozen evaluator.
 
 Acceptance for P0 work: a new machine can clone the repository, install dependencies, run tests,
 download the public data, and pass `verify_wave2_release.py` without access to the private corpus.
 
 ## P1 — test context instead of asking text to carry it
 
+- [x] Ship a rights-safe procedural SVG positive-control fixture and evaluator with whole-contest
+  splits, exact and canonical-scene image identity gates, identical held-out rows for text-only,
+  image-only, and fusion arms, contest bootstrap intervals, calibration, error slices, and an
+  explicit synthetic-evidence claim gate.
 - [ ] Build a caption-plus-drawing baseline with whole contests held out.
 - [ ] Compare text-only, image-only, and multimodal arms on exactly the same contests.
 - [ ] Add drawing hashes and leakage checks so duplicated or near-duplicated images cannot cross
@@ -111,12 +121,15 @@ multi-million-row inventory.
 
 The initial SDK/API, authenticated Ollama/OpenAI-compatible transports, multi-model embedding
 registry, offline adversarial audit, Docker/Compose profiles, Kubernetes base, and local real-world
-study workbench and bounded Open Controls endpoints are implemented in 0.6.0. Useful follow-ups are:
+study workbench, hard retrieval and multimodal contracts, body-free telemetry, and bounded Open
+Controls endpoints are implemented in 0.7.0. Useful follow-ups are:
 
 - [ ] Publish a signed multi-architecture image to GHCR and add a digest-pinned deployment overlay.
-- [ ] Add gateway examples for TLS, identity, global rate limiting, and request tracing.
+- [x] Add a separately rendered Envoy Gateway 1.8.3 example for TLS 1.3, API-key identity,
+  local and Redis-backed global rate limiting, W3C trace context, and secret-safe operations.
 - [ ] Add optional streaming generation with disconnect/cancellation and backpressure tests.
-- [ ] Add an external metrics backend and OpenTelemetry spans without logging prompts or keys.
+- [x] Add opt-in low-cardinality StatsD export and OTLP/HTTP spans with W3C context while
+  explicitly excluding bodies, keys, user IDs, and provider URLs.
 - [ ] Add live compatibility jobs for a version matrix of Ollama and two OpenAI-compatible servers.
 - [ ] Benchmark configured embedding models on frozen multilingual retrieval fixtures before
   recommending a default semantic model.

@@ -58,6 +58,14 @@ Model downloads and licences remain the operator's responsibility. A model appea
 capability list means it was configured, not downloaded or live; `humorvibes doctor --live` is the
 explicit availability check.
 
+For a receipt across every configured model, use `humorvibes provider-audit`. Offline mode makes
+no provider request and proves only the deterministic `hash:128` operation. `--live` separately
+records provider reachability and a bounded operation attempt while leaving
+`quality_validated=false`. The checked-in 2026-07-27 live receipt is deliberately negative: the
+Ollama version endpoint was reachable, generation returned HTTP 410, all six semantic embedding
+operations returned HTTP 401, and only `hash:128` executed. That is a credential/service-state
+finding, not a semantic-model comparison.
+
 ## Existing research-tool integration
 
 The shared transport now backs the API/SDK and the active Ollama paths in `mesh_cli.py`,

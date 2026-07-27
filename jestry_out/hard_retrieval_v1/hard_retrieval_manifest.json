@@ -1,0 +1,34 @@
+{
+  "benchmark_version": "1.0.0",
+  "content_digest": "9124e2e3fb32721f4445a4ddb518257f470bc659bcc96dc61e2f2fa89688b7f2",
+  "counts": {
+    "documents": 300,
+    "hard_negative_rows": 300,
+    "qrels": 300,
+    "queries": 300
+  },
+  "leakage_audit": {
+    "entity_or_pivot_leaks": 0,
+    "maximum_content_token_jaccard_to_relevant_document": 0.10638297872340426,
+    "mean_content_token_jaccard_to_relevant_document": 0.01664952470594712,
+    "template_family_crosses_splits": false
+  },
+  "receipt_type": "humorvibes_hard_retrieval_manifest",
+  "receipt_version": 1,
+  "relations": {
+    "relevance_origin": "deterministic generator lineage",
+    "same_context_negative": "same controlled situation, different lexical frame",
+    "same_frame_negative": "same lexical frame, different controlled situation"
+  },
+  "splits": {
+    "test": 30,
+    "train": 240,
+    "validation": 30
+  },
+  "truth_boundary": {
+    "allowed_use": "provider-comparative retrieval evaluation against frozen generator relations",
+    "human_funniness_labels": false,
+    "human_relevance_judgments": false,
+    "semantic_model_quality_established": false
+  }
+}

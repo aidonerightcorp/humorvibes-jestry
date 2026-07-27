@@ -36,10 +36,36 @@ jobs:
         run: uv sync --frozen --extra api --extra dev
       - name: Run repository tests
         run: uv run pytest -q
+      - name: Reject whitespace damage
+        run: git diff --check
       - name: Run network-free adversarial audit
         run: uv run humorvibes adversarial
       - name: Build wheel
         run: uv build --wheel
+
+  clean-install:
+    name: Clean install Python ${{ matrix.python-version }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.11.16"
+      - name: Build and smoke-test an isolated wheel
+        run: python tools/clean_install_smoke.py --python "$pythonLocation"
 
   container:
     name: Container build and smoke test
@@ -60,6 +86,12 @@ jobs:
           docker run --rm -v "$PWD:/work:ro" -w /work \
             alpine/helm:4.2.0@sha256:af08f75a3130d666a50b9fc150f40987ef20b885cf67659aabf4b83a5f2c5501 \
             template ci deploy/helm/humorvibes >/dev/null
+      - name: Render Kubernetes and gateway resources
+        run: |
+          docker run --rm -v "$PWD:/work:ro" -w /work \
+            registry.k8s.io/kubectl:v1.36.2 kustomize deploy/kubernetes >/dev/null
+          docker run --rm -v "$PWD:/work:ro" -w /work \
+            registry.k8s.io/kubectl:v1.36.2 kustomize deploy/gateway >/dev/null
       - name: Build and start hardened profile
         shell: bash
         run: |

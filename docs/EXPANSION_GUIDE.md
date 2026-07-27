@@ -11,6 +11,7 @@ evidence boundaries. All commands are run from the repository root.
 | Rights and census | `corpus_census.py`, `build_kaggle_export.py` | Licence-class tests, exclusion counts, deterministic export |
 | Form/domain/style | `style_taxonomy.py`, `STYLES.md` | Positive/negative fixtures, coverage and false-positive audit |
 | Human labels | `caption_*.py`, `humor_features.py` | Group-held-out split, reliability, uncertainty, provenance |
+| Multimodal labels | `humorvibes/multimodal_benchmark.py`, image/caption manifests | Rights, image hashes, contest groups, identical-arm row digest |
 | Gemma measurement | `form_signal_study.py`, `mesh_signals.py`, `wave2_notebook/` | Pinned calibration, model identity, token accounting, controls |
 | Public release | `wave2_dataset/`, `wave2_notebook/`, `verify_wave2_release.py` | Hash and semantic gates, COMPLETE notebook, publication receipt |
 
@@ -112,6 +113,23 @@ python3 caption_model.py
 These are long-running research jobs and are not required for a documentation contribution. Keep
 core results atomically checkpointed before optional transfer arms. Never replace a previous
 receipt if the protocol changes; version the new result and explain the difference.
+
+### 4a. Add rights-cleared drawings and multimodal features
+
+Run the complete synthetic contract before touching human or third-party material:
+
+```bash
+humorvibes multimodal-fixture --out-dir /tmp/humorvibes-mm --contests 30
+humorvibes multimodal-benchmark --root /tmp/humorvibes-mm
+```
+
+Then follow [`MULTIMODAL_BENCHMARK.md`](MULTIMODAL_BENCHMARK.md). Preserve its manifest fields,
+stable contest IDs, split membership, exact image hashes, canonical scene signatures, three arm
+names, feature dimensions, and held-out row digest. Replace `target_origin` with an explicit
+human-observed target only after consent, rights, raw vote provenance, and the label protocol are
+reviewable. Never copy a third-party drawing into the repository just because it is reachable on
+the web. A real run requires its own versioned receipt; it must not overwrite the procedural
+positive-control receipt.
 
 ## 5. Add or compare a model instrument
 

@@ -14,9 +14,18 @@ data:
   HUMORVIBES_MAX_BATCH_ITEMS: {{ .Values.config.maxBatchItems | quote }}
   HUMORVIBES_RATE_LIMIT_PER_MINUTE: {{ .Values.config.rateLimitPerMinute | quote }}
   HUMORVIBES_STRICT_READINESS: {{ .Values.config.strictReadiness | quote }}
+  HUMORVIBES_STATSD_PORT: {{ .Values.config.statsdPort | quote }}
+  HUMORVIBES_OTEL_SERVICE_NAME: {{ .Values.config.otelServiceName | quote }}
+  HUMORVIBES_OTEL_SAMPLE_RATIO: {{ .Values.config.otelSampleRatio | quote }}
   {{- if .Values.config.ollamaHost }}
   OLLAMA_HOST: {{ .Values.config.ollamaHost | quote }}
   {{- end }}
   {{- if .Values.config.corsOrigins }}
   HUMORVIBES_CORS_ORIGINS: {{ .Values.config.corsOrigins | quote }}
+  {{- end }}
+  {{- if .Values.config.statsdHost }}
+  HUMORVIBES_STATSD_HOST: {{ .Values.config.statsdHost | quote }}
+  {{- end }}
+  {{- if .Values.config.otelTracesEndpoint }}
+  HUMORVIBES_OTEL_TRACES_ENDPOINT: {{ .Values.config.otelTracesEndpoint | quote }}
   {{- end }}

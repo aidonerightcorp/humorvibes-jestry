@@ -22,6 +22,16 @@
     "nameOverride": {"type": "string"},
     "fullnameOverride": {"type": "string"},
     "existingSecret": {"type": "string"},
+    "networkPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "ingress", "egress"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "ingress": {"type": "array"},
+        "egress": {"type": "array"}
+      }
+    },
     "podAnnotations": {"type": "object"},
     "podLabels": {"type": "object"},
     "podSecurityContext": {"type": "object"},
@@ -53,7 +63,12 @@
         "maxBatchItems",
         "rateLimitPerMinute",
         "strictReadiness",
-        "corsOrigins"
+        "corsOrigins",
+        "statsdHost",
+        "statsdPort",
+        "otelTracesEndpoint",
+        "otelServiceName",
+        "otelSampleRatio"
       ],
       "properties": {
         "llmDefault": {"type": "string"},
@@ -66,7 +81,12 @@
         "maxBatchItems": {"type": "string"},
         "rateLimitPerMinute": {"type": "string"},
         "strictReadiness": {"type": "string"},
-        "corsOrigins": {"type": "string"}
+        "corsOrigins": {"type": "string"},
+        "statsdHost": {"type": "string"},
+        "statsdPort": {"type": "string", "pattern": "^[0-9]+$"},
+        "otelTracesEndpoint": {"type": "string"},
+        "otelServiceName": {"type": "string", "minLength": 1},
+        "otelSampleRatio": {"type": "string", "pattern": "^(0(\\.[0-9]+)?|1(\\.0+)?)$"}
       }
     },
     "extraEnv": {"type": "array"},

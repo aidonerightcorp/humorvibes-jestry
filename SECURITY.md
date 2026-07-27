@@ -6,7 +6,7 @@ not include active keys, private model responses, or unpublished corpus rows in 
 
 ## Supported surface
 
-The current deployable integration package is `humorvibes-research` 0.4.x on Python 3.10-3.12.
+The current deployable integration package is `humorvibes-research` 0.7.x on Python 3.10-3.14.
 The historical research scripts remain auditable, but only the `humorvibes` SDK/API, Dockerfile,
 Compose files, `deploy/kubernetes` manifests, and `deploy/helm` chart are treated as an
 application-serving boundary.
@@ -19,6 +19,8 @@ application-serving boundary.
   committed environment file, URL, or client payload.
 - Restrict provider hosts and model allowlists to operator-controlled configuration.
 - Use a gateway-level distributed rate limiter for multi-replica or public deployments.
+- Keep OpenTelemetry and StatsD export disabled unless the collector is operator-controlled; do
+  not add bodies, authorization values, provider URLs, or user identifiers as telemetry fields.
 - Pin the container by digest and run image/dependency scanning in the target registry.
 - Keep the canonical Kaggle notebook and public dataset verification independent from the app
   deployment.

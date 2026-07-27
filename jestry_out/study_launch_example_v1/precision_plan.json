@@ -1,0 +1,35 @@
+{
+  "attrition_assumption": {
+    "writer_attrition_rate": 0.15
+  },
+  "design": {
+    "independent_unit": "writer",
+    "premises_per_writer": 2,
+    "target_effect": 0.25,
+    "target_power": 0.8,
+    "two_sided_alpha": 0.05
+  },
+  "expected_95_percent_half_width_at_minimum": 0.17316725422853788,
+  "method": "normal approximation over independent writer-level mean paired effects",
+  "plan_digest": "4dfe4d9ad4ff7c8180cce27716bc93f33ebfd9bdd62c5fdf8e459ed7c6dbe28c",
+  "planned_counts": {
+    "calculated_analyzable_writers": 49,
+    "minimum_analyzable_writers": 49,
+    "paired_blocks_at_minimum": 98,
+    "paired_premises_per_analyzable_writer": 2,
+    "writers_to_recruit": 58
+  },
+  "receipt_type": "humorvibes_prospective_precision_plan",
+  "receipt_version": 1,
+  "truth_boundary": {
+    "assumptions_require_domain_review": true,
+    "authorizes_human_claim": false,
+    "hierarchical_simulation_still_recommended": true,
+    "prospective_not_observed_power": true
+  },
+  "variance_assumptions": {
+    "between_writer_sd": 0.45,
+    "derived_writer_mean_effect_sd": 0.6184658438426491,
+    "within_writer_premise_sd": 0.6
+  }
+}

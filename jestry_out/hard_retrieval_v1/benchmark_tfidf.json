@@ -1,0 +1,67 @@
+{
+  "benchmark_digest": "9124e2e3fb32721f4445a4ddb518257f470bc659bcc96dc61e2f2fa89688b7f2",
+  "benchmark_version": "1.0.0",
+  "duration_seconds": 5.450856632000068,
+  "metrics_by_split": {
+    "test": {
+      "MRR": 0.28890780563345597,
+      "Recall@1": 0.13333333333333333,
+      "Recall@10": 0.6,
+      "Recall@5": 0.4666666666666667,
+      "beats_same_context_hard_negative_rate": 0.5666666666666667,
+      "beats_same_frame_hard_negative_rate": 0.6333333333333333,
+      "median_rank": 6.5,
+      "queries": 30
+    },
+    "train": {
+      "MRR": 0.0761152125190136,
+      "Recall@1": 0.03333333333333333,
+      "Recall@10": 0.13333333333333333,
+      "Recall@5": 0.09166666666666666,
+      "beats_same_context_hard_negative_rate": 0.3958333333333333,
+      "beats_same_frame_hard_negative_rate": 0.6416666666666667,
+      "median_rank": 61.0,
+      "queries": 240
+    },
+    "validation": {
+      "MRR": 0.23890994928150616,
+      "Recall@1": 0.13333333333333333,
+      "Recall@10": 0.5,
+      "Recall@5": 0.3333333333333333,
+      "beats_same_context_hard_negative_rate": 0.43333333333333335,
+      "beats_same_frame_hard_negative_rate": 0.5333333333333333,
+      "median_rank": 10.5,
+      "queries": 30
+    }
+  },
+  "model": {
+    "dimensions_by_split": {
+      "test": 168,
+      "train": 417,
+      "validation": 166
+    },
+    "model_id": "lexical:tfidf",
+    "normalized": true,
+    "provider": "stdlib-tfidf",
+    "semantic": false
+  },
+  "overall": {
+    "MRR": 0.1136739455067071,
+    "Recall@1": 0.05333333333333334,
+    "Recall@10": 0.21666666666666667,
+    "Recall@5": 0.15333333333333332,
+    "beats_same_context_hard_negative_rate": 0.4166666666666667,
+    "beats_same_frame_hard_negative_rate": 0.63,
+    "median_rank": 37.5,
+    "queries": 300
+  },
+  "receipt_digest": "85ef1652ef8cb28d2098c0802ad832dc2e79d225e958db7f76c789d6b7a211ee",
+  "receipt_type": "humorvibes_retrieval_benchmark",
+  "receipt_version": 1,
+  "truth_boundary": {
+    "allowed_claim": "measured retrieval performance on frozen generator-lineage relations",
+    "provider_availability_is_model_quality": false,
+    "qrels_are_human_judgments": false,
+    "retrieval_quality_is_funniness": false
+  }
+}

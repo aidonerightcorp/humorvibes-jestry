@@ -21,7 +21,9 @@ import, transcription, model output, or contribution whose rights are unclear.
 
 ## Local setup
 
-Python 3.10 or newer is recommended.
+Python 3.10 through 3.14 are supported and clean-install tested. The package declares
+`>=3.10`; each newly released Python version must pass the same isolated-wheel matrix before it
+is added to the supported range.
 
 ```bash
 git clone https://github.com/aidonerightcorp/humorvibes-jestry.git
@@ -38,7 +40,7 @@ When dependency metadata changes, refresh both locks and review the diff before 
 
 ```bash
 uv lock
-uv export --frozen --extra api --no-dev --no-emit-project --no-hashes \
+uv export --frozen --extra api --extra telemetry --no-dev --no-emit-project --no-hashes \
   --output-file requirements-api.lock
 ```
 
@@ -63,6 +65,17 @@ kaggle datasets download -d taylorsamarel/humor-genome-wave2 \
   --unzip -p kaggle_wave2_public
 python3 verify_wave2_release.py --root kaggle_wave2_public
 ```
+
+Audit both public GitHub/Kaggle releases without mutating either service:
+
+```bash
+python3 tools/public_release_audit.py --out jestry_out/public_surface_audit.json
+python3 tools/clean_install_smoke.py --python 3.12
+```
+
+The live audit checks anonymous visibility, Kaggle readiness, terminal notebook state, public tag
+resolution, and freshly downloaded manifest hashes. Use `--offline` only for a no-network local
+receipt/schema check; an offline pass is not publication evidence.
 
 Rebuilding the 3.16-million-row inventory or running Gemma locally is optional and substantially
 heavier. The public Kaggle notebook is the reference environment for the canonical model run.

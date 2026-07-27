@@ -26,7 +26,7 @@ claim gate.
 | Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, v14 COMPLETE | Read the write-up and rerun every public measurement |
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
-| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v3 ready; notebook v2 COMPLETE | Use 120,000 CC0 procedural four-arm controls without confusing them with human evidence |
+| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v4 ready; notebook v3 COMPLETE | Use 120,000 CC0 procedural controls and frozen easy/hard retrieval tracks without confusing them with human evidence |
 
 The Wave 2 notebook is the canonical executable write-up for the observational study. It clones the immutable
 `humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
@@ -41,6 +41,10 @@ separate causal-design lab with its own downloadable verification and publicatio
   findings, written for readers who do not need the implementation history.
 - [`PROJECT_STATUS.md`](PROJECT_STATUS.md): what is public and complete, what is not claimed, and
   how to verify the release.
+- [`CHANGELOG.md`](CHANGELOG.md) and [`RELEASE_NOTES_v0.7.0.md`](RELEASE_NOTES_v0.7.0.md): the
+  application release history and the exact 0.7.0 verification boundary.
+- [`CITATION.cff`](CITATION.cff): cite the software release; also cite the exact Kaggle artifact
+  version used in an analysis.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): local setup, evidence rules, tests, and pull-request
   expectations.
 - [`ROADMAP.md`](ROADMAP.md): prioritized, contribution-sized research and maintenance work.
@@ -59,10 +63,16 @@ separate causal-design lab with its own downloadable verification and publicatio
   definitions, intellectual lineage, evidence map, falsifiable predictions, and the precise sense
   in which “surprise reduction” is a framework rather than a completed result.
 - [`docs/REAL_WORLD_STUDY_WORKBENCH.md`](docs/REAL_WORLD_STUDY_WORKBENCH.md): the executable,
-  privacy-minimized writer crossover protocol, local analyzer, evidence ladder, and remaining
-  human-study infrastructure. The checked-in
+  privacy-minimized writer crossover protocol, prospective precision planner, private-keyed
+  randomization, blinded launch pack, local analyzer, evidence ladder, and remaining human-study
+  infrastructure. The checked-in
   [`study_demo_receipt.json`](jestry_out/study_demo_receipt.json) proves the synthetic positive
-  effect remains non-claim-ready.
+  effect remains non-claim-ready; the
+  [`launch_receipt.json`](jestry_out/study_launch_example_v1/launch_receipt.json) proves the
+  complete precollection pack also remains non-claim-ready.
+- [`docs/MULTIMODAL_BENCHMARK.md`](docs/MULTIMODAL_BENCHMARK.md): the rights-safe procedural
+  caption-plus-drawing fixture, whole-contest split and image-leakage contract, identical
+  text/image/fusion evaluation arms, and the evidence gate for replacing it with human data.
 - [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md): the canonical notebook, the role of each supporting
   notebook, and the clarity contract for future experiments.
 - [`docs/OPEN_CONTROLS.md`](docs/OPEN_CONTROLS.md): the 120,000-row deterministic CC0 control
@@ -71,6 +81,8 @@ separate causal-design lab with its own downloadable verification and publicatio
 
 Issues, reproductions, and research proposals are welcome. In this project, reproducing a null
 result, removing a confound, or documenting a licensing boundary is a successful contribution.
+Community expectations and support routes are in [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) and
+[`SUPPORT.md`](SUPPORT.md).
 Repository code and documentation are licensed under Apache-2.0. The new project-controlled Open
 Controls payload is separately dedicated under CC0-1.0; imported dataset rows retain their exact
 recorded source licences and are not relicensed by the repository licence.
@@ -88,6 +100,7 @@ python3 -m pip install -e ".[api]"
 humorvibes doctor
 humorvibes adversarial
 humorvibes study-demo
+humorvibes multimodal-fixture --out-dir /tmp/humorvibes-multimodal --contests 30
 humorvibes-api
 ```
 
@@ -120,7 +133,8 @@ python3 verify_deployment.py --docker \
 ```
 
 The same API supports authenticated local or cloud Ollama, OpenAI-compatible generation and
-embeddings, six configurable Ollama embedding model names, and optional sentence-transformers.
+embeddings, six configurable Ollama embedding model names, optional sentence-transformers,
+body-free OTLP traces, Prometheus/StatsD metrics, and a separately rendered Envoy Gateway edge.
 All live model IDs are exact operator allowlists; callers cannot provide arbitrary provider URLs.
 See the [deployment guide](docs/API_AND_DEPLOYMENT.md) for Ollama keys, model configuration,
 Docker profiles, the non-root Kubernetes base, the Helm chart, typed remote client, and checked-in

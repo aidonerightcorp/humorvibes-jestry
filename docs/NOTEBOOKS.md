@@ -16,8 +16,8 @@ builder, rebuild the notebook, and commit both; do not hand-edit generated cells
 
 The separate [Open Controls Causal Design Lab](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab)
 is the promoted executable for the synthetic four-arm corpus. It verifies all mounted payloads,
-reports generator artifacts, runs a retrieval baseline, and explicitly stops short of human
-funniness or brain-mechanism claims.
+reports generator artifacts, runs both the easy and entity-masked hard retrieval baselines, and
+explicitly stops short of human funniness or brain-mechanism claims.
 
 ## Supporting notebooks
 

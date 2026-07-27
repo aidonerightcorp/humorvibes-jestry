@@ -60,6 +60,12 @@ class Settings:
     rate_limit_per_minute: int
     strict_readiness: bool
     allow_insecure_remote: bool
+    statsd_host: str
+    statsd_port: int
+    statsd_prefix: str
+    otel_traces_endpoint: str
+    otel_service_name: str
+    otel_sample_ratio: float
 
     @classmethod
     def from_env(cls, environ: Mapping[str, str] | None = None) -> Settings:
@@ -116,6 +122,18 @@ class Settings:
             rate_limit_per_minute=_bounded_int(env.get("HUMORVIBES_RATE_LIMIT_PER_MINUTE", ""), 0, 0, 100_000),
             strict_readiness=_bool(env.get("HUMORVIBES_STRICT_READINESS", "")),
             allow_insecure_remote=_bool(env.get("HUMORVIBES_ALLOW_INSECURE_REMOTE", "")),
+            statsd_host=env.get("HUMORVIBES_STATSD_HOST", "").strip(),
+            statsd_port=_bounded_int(env.get("HUMORVIBES_STATSD_PORT", ""), 8125, 1, 65_535),
+            statsd_prefix=env.get("HUMORVIBES_STATSD_PREFIX", "humorvibes").strip() or "humorvibes",
+            otel_traces_endpoint=env.get(
+                "HUMORVIBES_OTEL_TRACES_ENDPOINT",
+                env.get("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT", ""),
+            ).strip(),
+            otel_service_name=env.get("HUMORVIBES_OTEL_SERVICE_NAME", "humorvibes-api").strip()
+            or "humorvibes-api",
+            otel_sample_ratio=_bounded_float(
+                env.get("HUMORVIBES_OTEL_SAMPLE_RATIO", ""), 0.1, 0.0, 1.0
+            ),
         )
 
     def public_summary(self) -> dict[str, object]:
@@ -128,6 +146,14 @@ class Settings:
             "api_auth_required": bool(self.api_key),
             "cors_origins_configured": len(self.cors_origins),
             "strict_readiness": self.strict_readiness,
+            "observability": {
+                "prometheus_enabled": True,
+                "statsd_configured": bool(self.statsd_host),
+                "otel_traces_configured": bool(self.otel_traces_endpoint),
+                "otel_service_name": self.otel_service_name,
+                "otel_sample_ratio": self.otel_sample_ratio,
+                "records_request_or_response_bodies": False,
+            },
             "limits": {
                 "prompt_chars": self.max_prompt_chars,
                 "text_chars": self.max_text_chars,

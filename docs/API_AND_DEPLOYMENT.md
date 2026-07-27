@@ -16,6 +16,7 @@ does not change the published study or turn model output into human funniness ev
 | Compose + Ollama cloud | authenticated Ollama native API | `OLLAMA_API_KEY` | hosted inference without local weights |
 | Kubernetes | two offline/hash API replicas, ClusterIP only | No | a secure base to customize |
 | Helm | configurable version of the Kubernetes base | No by default | repeatable environment-specific installation |
+| Envoy Gateway example | TLS 1.3, edge API-key identity, local/global rate limits, trace context | TLS/API-key Secrets; Redis | named production edge contract |
 
 The offline hash backend is deterministic token hashing for integration tests and lexical
 retrieval. It is explicitly marked `semantic: false`; it is not a substitute for a semantic
@@ -120,18 +121,53 @@ humorvibes study-analyze --protocol protocol.json --bundle privacy_minimized_bun
 
 See [`REAL_WORLD_STUDY_WORKBENCH.md`](REAL_WORLD_STUDY_WORKBENCH.md) before collecting data.
 
+Audit configured provider claims independently from the API readiness path:
+
+```bash
+humorvibes provider-audit --out provider-offline.json
+HUMORVIBES_REQUEST_TIMEOUT=20 humorvibes provider-audit --live --out provider-live.json
+```
+
+The receipt records four separate states for every exact allowlisted model: configured, provider
+reachable, operation executed, and quality validated. A reachable version endpoint is not an
+executed generation, and an executed embedding is not retrieval-quality evidence. Output text is
+replaced by a digest and configured keys are scanned out of the serialized receipt.
+
 When `HUMORVIBES_API_KEY` is set, all `/v1/*` routes and `/metrics` require
 `Authorization: Bearer <key>`. Health and version routes stay unauthenticated for orchestrator
 probes. TLS belongs at the reverse proxy, ingress, or service mesh boundary.
+
+### Metrics and traces
+
+Prometheus counters remain available at `/metrics`. Set `HUMORVIBES_STATSD_HOST` to mirror only
+low-cardinality request counts, status classes, errors, and duration to an external StatsD sink.
+No route, request ID, prompt, response, authorization value, provider URL, or user identifier is
+sent to StatsD; UDP failures are best-effort and appear in the local Prometheus output.
+
+The production image includes the optional OpenTelemetry SDK and OTLP/HTTP exporter. Set a
+per-signal traces endpoint to enable spans:
+
+```bash
+export HUMORVIBES_OTEL_TRACES_ENDPOINT=http://otel-collector.observability.svc:4318/v1/traces
+export HUMORVIBES_OTEL_SERVICE_NAME=humorvibes-api
+export HUMORVIBES_OTEL_SAMPLE_RATIO=0.1
+```
+
+Spans contain only method, fixed route, response status, duration, service name, and a boolean
+that asserts bodies are not recorded. W3C `traceparent` context is extracted so a gateway span and
+application span can join one trace; sampled responses include `X-Trace-ID`. Exporter credentials,
+when required, stay in the standard `OTEL_EXPORTER_OTLP_TRACES_HEADERS` environment variable and
+are never added to settings summaries or receipts. Plain HTTP exporters remain limited to local
+or private-network destinations unless the operator explicitly enables insecure remote URLs.
 
 ## Docker
 
 Build and run the image directly:
 
 ```bash
-docker build -t humorvibes-research:0.6.0 .
+docker build -t humorvibes-research:0.7.0 .
 docker run --rm --read-only --tmpfs /tmp:rw,size=64m \
-  -p 127.0.0.1:8080:8080 humorvibes-research:0.6.0
+  -p 127.0.0.1:8080:8080 humorvibes-research:0.7.0
 ```
 
 Or run the hardened Compose profile:
@@ -164,6 +200,12 @@ and has an in-image health check. Compose additionally drops Linux capabilities,
 escalation, mounts a read-only root filesystem, and binds only to loopback by default. These
 choices follow the general single-process container pattern in the
 [FastAPI container deployment guide](https://fastapi.tiangolo.com/deployment/docker/).
+
+Tagged releases trigger [the pinned container publication workflow](../.github/workflows/publish-container.yml).
+It builds `linux/amd64` and `linux/arm64`, publishes to GHCR, attaches BuildKit provenance and an
+SBOM, creates a GitHub/Sigstore provenance attestation, and prints the immutable manifest digest.
+Do not write a digest into Kubernetes until the registry has returned and independently exposed
+that exact value.
 
 ### Local Ollama Compose profile
 
@@ -206,22 +248,22 @@ start when `OLLAMA_API_KEY` is absent.
 
 The base manifests run the exact same image as two non-root, read-only replicas behind a
 cluster-internal `ClusterIP` Service. They include startup, liveness, and readiness probes,
-resource requests/limits, rolling-update constraints, no service-account token, and a runtime
-seccomp profile. The distinction among probe types follows the
+resource requests/limits, rolling-update constraints, no service-account token, a runtime
+seccomp profile, same-namespace ingress, and default-deny egress. The distinction among probe types follows the
 [Kubernetes probe contract](https://kubernetes.io/docs/concepts/workloads/pods/probes/).
 
 For a local `kind` cluster:
 
 ```bash
-docker build -t humorvibes-research:0.6.0 .
-kind load docker-image humorvibes-research:0.6.0
+docker build -t humorvibes-research:0.7.0 .
+kind load docker-image humorvibes-research:0.7.0
 kubectl apply -k deploy/kubernetes
 kubectl rollout status deployment/humorvibes
 kubectl port-forward service/humorvibes 8080:80
 ```
 
 Then run `python3 examples/api_client.py` in another shell. For `minikube`, use
-`minikube image load humorvibes-research:0.6.0` in place of the `kind` command.
+`minikube image load humorvibes-research:0.7.0` in place of the `kind` command.
 
 Before exposing the Service outside the cluster, require inbound authentication:
 
@@ -249,10 +291,11 @@ kubectl set env deployment/humorvibes \
   HUMORVIBES_EMBEDDING_DEFAULT=ollama:embeddinggemma
 ```
 
-For a remote cluster, push `humorvibes-research:0.6.0` to your registry, obtain the resulting
+For a remote cluster, push `humorvibes-research:0.7.0` to your registry, obtain the resulting
 digest, and replace the base image with that immutable registry reference in a deployment-specific
-Kustomize overlay. The base deliberately names the locally built image rather than claiming that
-an image has already been published to a registry.
+Kustomize overlay. Add provider, DNS, and telemetry egress rules only for exact destinations.
+[`deploy/gateway/README.md`](../deploy/gateway/README.md) contains the separately rendered Envoy
+Gateway 1.8.3 edge example and its secret-safe verification commands.
 
 ### Helm
 
@@ -265,7 +308,7 @@ helm lint deploy/helm/humorvibes
 helm template demo deploy/helm/humorvibes
 helm upgrade --install humorvibes deploy/helm/humorvibes \
   --set image.repository=humorvibes-research \
-  --set image.tag=0.6.0
+  --set image.tag=0.7.0
 ```
 
 Use `existingSecret` for keys. The chart intentionally does not create an Ingress or accept
@@ -296,6 +339,10 @@ for digest-pinned registry installation.
 | `HUMORVIBES_RATE_LIMIT_PER_MINUTE` | per-process client-IP limit; `0` disables | `0` |
 | `HUMORVIBES_STRICT_READINESS` | make readiness call configured providers | `false` |
 | `HUMORVIBES_ALLOW_INSECURE_REMOTE` | allow plain HTTP to a public integration host | `false` |
+| `HUMORVIBES_STATSD_HOST` / `HUMORVIBES_STATSD_PORT` | optional external low-cardinality StatsD sink | unset / `8125` |
+| `HUMORVIBES_OTEL_TRACES_ENDPOINT` | optional OTLP/HTTP per-signal traces URL | unset |
+| `HUMORVIBES_OTEL_SERVICE_NAME` | OpenTelemetry service identity | `humorvibes-api` |
+| `HUMORVIBES_OTEL_SAMPLE_RATIO` | parent-based root trace sample ratio | `0.1` |
 
 Do not enable strict live readiness on a frequent Kubernetes probe: it calls the configured model
 providers and can add latency and inference cost. Use `humorvibes doctor --live` for an explicit
@@ -303,8 +350,8 @@ dependency check instead.
 
 ## Production boundaries
 
-- The in-process rate limiter and counters are per replica. Use an API gateway or distributed
-  limiter for a global quota, and scrape every replica for metrics.
+- The in-process rate limiter and counters are per replica. Use the rendered Envoy Gateway policy
+  with a healthy Redis-backed rate-limit service (or an equivalent gateway) for a global quota.
 - The service does not terminate TLS, issue user identities, or implement model-level billing.
 - Provider hosts and models are operator configuration, never caller-provided values.
 - Outbound plain HTTP is accepted only for local/private/cluster hosts unless the operator opts in.

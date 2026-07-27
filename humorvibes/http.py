@@ -10,6 +10,7 @@ import urllib.request
 from typing import Any
 from urllib.parse import urlsplit, urlunsplit
 
+from . import __version__
 from .errors import IntegrationError
 
 _SAFE_ERROR = re.compile(r"[^\x20-\x7e]+")
@@ -108,7 +109,7 @@ class JsonHttpClient:
             raise IntegrationError("invalid_endpoint", "Integration endpoint path is invalid.", 500)
         headers = {
             "Accept": "application/json",
-            "User-Agent": "HumorVibes/0.4",
+            "User-Agent": f"HumorVibes/{__version__}",
             **(extra_headers or {}),
         }
         body = None

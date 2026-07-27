@@ -1,0 +1,32 @@
+{
+  "allowed_claim": "downloaded bytes reproduce the deterministic synthetic-control release contract",
+  "checks": {
+    "counterfactual_arms": true,
+    "dataset_id": true,
+    "hard_retrieval_baselines": true,
+    "hard_retrieval_contract": true,
+    "hard_retrieval_summary": true,
+    "manifest": true,
+    "no_model_calls": true,
+    "public_kaggle_metadata": true,
+    "published_audit_matches": true,
+    "reference_overlap_gate": true,
+    "retrieval_contract": true,
+    "row_count": true,
+    "semantic_audit": true,
+    "truth_boundary": true
+  },
+  "dataset_id": "humor-genome-open-controls",
+  "files_verified": 24,
+  "forbidden_claim": "this verification does not establish human funniness, safety, originality worldwide, or a brain mechanism",
+  "hard_retrieval": {
+    "benchmark_digest": "9124e2e3fb32721f4445a4ddb518257f470bc659bcc96dc61e2f2fa89688b7f2",
+    "enabled": true,
+    "hash_128_overall_mrr": 0.0524071946596324,
+    "maximum_content_token_jaccard": 0.10638297872340426,
+    "tfidf_overall_mrr": 0.1136739455067071
+  },
+  "ok": true,
+  "rows": 120000,
+  "surface_only_arm_accuracy": 0.5519083333333333
+}

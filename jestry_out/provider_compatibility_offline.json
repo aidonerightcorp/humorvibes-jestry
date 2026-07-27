@@ -1,0 +1,159 @@
+{
+  "configuration": {
+    "api_auth_required": false,
+    "cors_origins_configured": 0,
+    "default_embedding": "hash:128",
+    "default_llm": "ollama:gemma3:4b",
+    "limits": {
+      "batch_chars": 256000,
+      "batch_items": 64,
+      "prompt_chars": 20000,
+      "request_bytes": 1000000,
+      "text_chars": 32000
+    },
+    "ollama_key_configured": true,
+    "openai_key_configured": false,
+    "signal_provider": "offline",
+    "strict_readiness": false
+  },
+  "embedding_models": [
+    {
+      "configured": true,
+      "configured_dimensions": 128,
+      "key_configured": false,
+      "local": true,
+      "model_id": "hash:128",
+      "observed_dimensions": 128,
+      "operation_executed": true,
+      "provider": "hash",
+      "provider_probe": {
+        "dimensions": 128,
+        "ok": true,
+        "provider": "hash"
+      },
+      "provider_reachable": true,
+      "quality_validated": false,
+      "remote_model": "hash:128",
+      "semantic": false
+    },
+    {
+      "configured": true,
+      "configured_dimensions": null,
+      "key_configured": true,
+      "local": false,
+      "model_id": "ollama:embeddinggemma",
+      "operation_executed": false,
+      "provider": "ollama",
+      "provider_reachable": null,
+      "quality_validated": false,
+      "remote_model": "embeddinggemma",
+      "semantic": true
+    },
+    {
+      "configured": true,
+      "configured_dimensions": null,
+      "key_configured": true,
+      "local": false,
+      "model_id": "ollama:qwen3-embedding",
+      "operation_executed": false,
+      "provider": "ollama",
+      "provider_reachable": null,
+      "quality_validated": false,
+      "remote_model": "qwen3-embedding",
+      "semantic": true
+    },
+    {
+      "configured": true,
+      "configured_dimensions": null,
+      "key_configured": true,
+      "local": false,
+      "model_id": "ollama:all-minilm",
+      "operation_executed": false,
+      "provider": "ollama",
+      "provider_reachable": null,
+      "quality_validated": false,
+      "remote_model": "all-minilm",
+      "semantic": true
+    },
+    {
+      "configured": true,
+      "configured_dimensions": null,
+      "key_configured": true,
+      "local": false,
+      "model_id": "ollama:nomic-embed-text",
+      "operation_executed": false,
+      "provider": "ollama",
+      "provider_reachable": null,
+      "quality_validated": false,
+      "remote_model": "nomic-embed-text",
+      "semantic": true
+    },
+    {
+      "configured": true,
+      "configured_dimensions": null,
+      "key_configured": true,
+      "local": false,
+      "model_id": "ollama:mxbai-embed-large",
+      "operation_executed": false,
+      "provider": "ollama",
+      "provider_reachable": null,
+      "quality_validated": false,
+      "remote_model": "mxbai-embed-large",
+      "semantic": true
+    },
+    {
+      "configured": true,
+      "configured_dimensions": null,
+      "key_configured": true,
+      "local": false,
+      "model_id": "ollama:bge-m3",
+      "operation_executed": false,
+      "provider": "ollama",
+      "provider_reachable": null,
+      "quality_validated": false,
+      "remote_model": "bge-m3",
+      "semantic": true
+    }
+  ],
+  "generated_at": "2026-07-27T16:52:39.387746+00:00",
+  "llm_models": [
+    {
+      "configured": true,
+      "key_configured": true,
+      "local": false,
+      "measured_logprobs": false,
+      "model_id": "ollama:gemma3:4b",
+      "operation_executed": false,
+      "provider": "ollama",
+      "provider_reachable": null,
+      "quality_validated": false,
+      "remote_model": "gemma3:4b",
+      "supports_json": true,
+      "supports_thinking": true
+    }
+  ],
+  "mode": {
+    "generation_probe_max_tokens": 0,
+    "live": false,
+    "quality_benchmark_executed": false
+  },
+  "ok": true,
+  "receipt_type": "humorvibes_provider_compatibility_audit",
+  "receipt_version": 1,
+  "secret_scan": {
+    "configured_secret_count": 1,
+    "secrets_absent": true
+  },
+  "summary": {
+    "models_configured": 8,
+    "operations_executed": 1,
+    "operations_failed_or_not_probed": 7,
+    "quality_validated_models": 0
+  },
+  "truth_boundary": {
+    "configured_is_reachable": false,
+    "operation_compatible_is_quality_validated": false,
+    "provider_quality_or_human_funniness_established": false,
+    "reachable_is_operation_compatible": false
+  }
+}

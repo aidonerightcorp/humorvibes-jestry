@@ -1,0 +1,66 @@
+{
+  "benchmark_digest": "9124e2e3fb32721f4445a4ddb518257f470bc659bcc96dc61e2f2fa89688b7f2",
+  "benchmark_version": "1.0.0",
+  "duration_seconds": 1.6947960370016517,
+  "metrics_by_split": {
+    "test": {
+      "MRR": 0.13287743426174212,
+      "Recall@1": 0.03333333333333333,
+      "Recall@10": 0.36666666666666664,
+      "Recall@5": 0.13333333333333333,
+      "beats_same_context_hard_negative_rate": 0.5,
+      "beats_same_frame_hard_negative_rate": 0.36666666666666664,
+      "median_rank": 14.5,
+      "queries": 30
+    },
+    "train": {
+      "MRR": 0.03086555134935907,
+      "Recall@1": 0.004166666666666667,
+      "Recall@10": 0.05,
+      "Recall@5": 0.041666666666666664,
+      "beats_same_context_hard_negative_rate": 0.425,
+      "beats_same_frame_hard_negative_rate": 0.5375,
+      "median_rank": 114.0,
+      "queries": 240
+    },
+    "validation": {
+      "MRR": 0.14427010153970937,
+      "Recall@1": 0.03333333333333333,
+      "Recall@10": 0.4,
+      "Recall@5": 0.2,
+      "beats_same_context_hard_negative_rate": 0.5,
+      "beats_same_frame_hard_negative_rate": 0.43333333333333335,
+      "median_rank": 14.0,
+      "queries": 30
+    }
+  },
+  "model": {
+    "count": 600,
+    "dimensions": 128,
+    "model_id": "hash:128",
+    "normalized": true,
+    "provider": "hash",
+    "remote_model": "hash:128",
+    "semantic": false,
+    "validated": true
+  },
+  "overall": {
+    "MRR": 0.0524071946596324,
+    "Recall@1": 0.01,
+    "Recall@10": 0.11666666666666667,
+    "Recall@5": 0.06666666666666667,
+    "beats_same_context_hard_negative_rate": 0.44,
+    "beats_same_frame_hard_negative_rate": 0.51,
+    "median_rank": 83.0,
+    "queries": 300
+  },
+  "receipt_digest": "6b7d1f82b62bc48c0dee4bb8dbac8b98e40d4c42dcf4bebcdaf6e4bb0ac5513c",
+  "receipt_type": "humorvibes_retrieval_benchmark",
+  "receipt_version": 1,
+  "truth_boundary": {
+    "allowed_claim": "measured retrieval performance on frozen generator-lineage relations",
+    "provider_availability_is_model_quality": false,
+    "qrels_are_human_judgments": false,
+    "retrieval_quality_is_funniness": false
+  }
+}

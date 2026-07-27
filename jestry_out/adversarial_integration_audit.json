@@ -104,12 +104,27 @@
       "evidence": "observed=incomplete_paired_block; expected=incomplete_paired_block",
       "name": "study_export_rejects_incomplete_paired_blocks",
       "passed": true
+    },
+    {
+      "evidence": "precision and assignments remained prospective, with no observations",
+      "name": "prospective_launch_pack_cannot_authorize_human_claim",
+      "passed": true
+    },
+    {
+      "evidence": "condition labels exist only in the restricted assignment map",
+      "name": "blinded_schedule_excludes_condition_mapping",
+      "passed": true
+    },
+    {
+      "evidence": "observed=invalid_assignment_key; expected=invalid_assignment_key",
+      "name": "public_seed_without_private_key_cannot_rebuild_assignments",
+      "passed": true
     }
   ],
   "model_downloads": 0,
   "network_calls": 0,
   "ok": true,
-  "passed": 21,
+  "passed": 24,
   "receipt_type": "humorvibes_adversarial_integration_audit",
   "receipt_version": 1,
   "scope": {
@@ -121,7 +136,8 @@
       "cosine preconditions",
       "deterministic offline embeddings",
       "synthetic-evidence claim gates",
-      "study schema, privacy, finiteness, uniqueness, and paired-design validation"
+      "study schema, privacy, finiteness, uniqueness, and paired-design validation",
+      "prospective-study claim gates and private-keyed blinding separation"
     ],
     "not_covered": [
       "live provider availability",
@@ -131,5 +147,5 @@
       "cluster-level denial-of-service"
     ]
   },
-  "total": 21
+  "total": 24
 }

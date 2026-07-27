@@ -40,6 +40,11 @@ from humorvibes.open_controls import (
     validate_manifest,
     write_jsonl,
 )
+from humorvibes.retrieval_benchmark import (
+    build_hard_retrieval_rows,
+    evaluate_retrieval,
+    write_retrieval_dataset,
+)
 
 
 ROOT = Path(__file__).resolve().parent
@@ -107,6 +112,35 @@ def _write_parquet(path: Path, rows: Iterable[dict[str, Any]]) -> int:
 def _data_card(summary: dict[str, Any], audit: dict[str, Any], reference: dict[str, Any]) -> str:
     counts = audit["counts"]
     surface = audit["adversarial"]["surface_only_arm_accuracy"]
+    hard = summary["hard_retrieval"]
+    if hard["enabled"]:
+        hard_files = """| `hard_retrieval_documents.jsonl` | Same document pool with controlled context metadata |
+| `hard_retrieval_queries.jsonl` | Entity/pivot-masked semantic queries |
+| `hard_retrieval_qrels.jsonl` | Frozen generator-lineage relations for the hard queries |
+| `hard_retrieval_negatives.jsonl` | Same-frame and same-context within-split negatives |
+| `hard_retrieval_manifest.json` | Leakage audit, relation contract, counts, and content digest |
+| `hard_retrieval_tfidf_baseline.json` | Deterministic split-local lexical baseline |
+| `hard_retrieval_hash_128_baseline.json` | Deterministic non-semantic hash-vector baseline |"""
+        hard_section = f"""## Hard retrieval track
+
+The original query repeats the controlled entity and setting and is retained as a pipeline check.
+The hard track removes the entity and both pivot words, describes their senses and situation
+indirectly, and keeps template families isolated across splits. Its maximum content-token Jaccard
+to the relevant document is **{hard['maximum_content_token_jaccard']:.3f}**; the entity/pivot
+leakage count is **{hard['entity_or_pivot_leaks']}**.
+
+The frozen baselines are deliberately modest: TF-IDF MRR is
+**{hard['tfidf_overall_mrr']:.3f}** and non-semantic `hash:128` MRR is
+**{hard['hash_128_overall_mrr']:.3f}** over {hard['queries']} queries. This is evidence that the
+hard track no longer rewards simple surface repetition. It is not evidence that either baseline
+understands humor, and its qrels are generator relations rather than human judgments."""
+    else:
+        hard_files = ""
+        hard_section = """## Hard retrieval track
+
+This partial developer build contains fewer than 60 premise families, so it cannot supply a
+same-frame negative in a different situation for every query. The hard track is therefore omitted
+rather than silently weakening its contract. Full 300-family public builds include it."""
     return f"""# {DATASET_TITLE}
 
 An openly reusable, deterministic counterfactual corpus for studying one narrow question:
@@ -145,6 +179,7 @@ starting hypothesis; it does not prove a brain mechanism or audience response.
 | `retrieval_documents.jsonl` | One compact-repair document per premise family |
 | `retrieval_queries.jsonl` | Paired mechanism queries |
 | `retrieval_qrels.jsonl` | Exact relevance mapping for embedding/reranking evaluation |
+{hard_files}
 | `audit.json` | Recomputed balance, leakage, duplication, safety, and artifact checks |
 | `reference_overlap.json` | Exact and 12-word overlap screen against the existing local inventory |
 | `human-rating.schema.json` | Privacy-minimized contract for future real observations |
@@ -185,6 +220,8 @@ Rows sharing a premise or template are not independent observations. `split` is 
 
 The reference screen is useful evidence, not a worldwide originality guarantee. It cannot find
 every paraphrase, private work, trademark, privacy issue, or culturally sensitive association.
+
+{hard_section}
 
 ## Quick start
 
@@ -282,6 +319,20 @@ def build(
         write_jsonl(stage / "retrieval_documents.jsonl", documents)
         write_jsonl(stage / "retrieval_queries.jsonl", queries)
         write_jsonl(stage / "retrieval_qrels.jsonl", qrels)
+        hard_retrieval: dict[str, Any] | None = None
+        hard_tfidf: dict[str, Any] | None = None
+        hard_hash: dict[str, Any] | None = None
+        if families >= 60:
+            hard_retrieval = build_hard_retrieval_rows(documents, queries, qrels)
+            write_retrieval_dataset(stage, hard_retrieval)
+            hard_tfidf = evaluate_retrieval(
+                hard_retrieval, model_id="lexical:tfidf", record_duration=False
+            )
+            hard_hash = evaluate_retrieval(
+                hard_retrieval, model_id="hash:128", record_duration=False
+            )
+            _json(stage / "hard_retrieval_tfidf_baseline.json", hard_tfidf)
+            _json(stage / "hard_retrieval_hash_128_baseline.json", hard_hash)
 
         reference = audit_reference_overlap(accumulator.prototype_rows, reference_paths)
         if reference_paths and not reference["ok"]:
@@ -307,6 +358,27 @@ def build(
             "human_rated_rows": 0,
             "retrieval_documents": len(documents),
             "retrieval_queries": len(queries),
+            "hard_retrieval": (
+                {
+                    "enabled": True,
+                    "benchmark_version": hard_retrieval["manifest"]["benchmark_version"],
+                    "content_digest": hard_retrieval["manifest"]["content_digest"],
+                    "queries": len(hard_retrieval["queries"]),
+                    "entity_or_pivot_leaks": hard_retrieval["manifest"]["leakage_audit"][
+                        "entity_or_pivot_leaks"
+                    ],
+                    "maximum_content_token_jaccard": hard_retrieval["manifest"][
+                        "leakage_audit"
+                    ]["maximum_content_token_jaccard_to_relevant_document"],
+                    "tfidf_overall_mrr": hard_tfidf["overall"]["MRR"],
+                    "hash_128_overall_mrr": hard_hash["overall"]["MRR"],
+                }
+                if hard_retrieval is not None and hard_tfidf is not None and hard_hash is not None
+                else {
+                    "enabled": False,
+                    "reason": "at least 60 premise families are required for complete hard negatives",
+                }
+            ),
             "build_is_clock_free": True,
             "truth_boundary": generation_contract()["truth_boundary"],
         }

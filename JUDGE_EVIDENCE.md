@@ -28,7 +28,7 @@ effect is +0.45, while `claim_ready` remains false by construction. The v14 outp
 published data file—the executive summary—after moving the temporary GitHub checkout out of
 `/kaggle/working`.
 
-The public repository also carries the 0.6.0 Python SDK/API, remote client, OpenAPI contract,
+The public repository also carries the 0.7.0 Python SDK/API, remote client, OpenAPI contract,
 Docker/Compose/Kustomize/Helm packaging, and a green public CI run. This is deployable source, not
 a claim that a public container image, hosted API, live Kubernetes cluster, or model-quality result
 exists.
