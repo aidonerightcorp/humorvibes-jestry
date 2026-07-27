@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import random
 import re
 import time
 from collections import Counter, defaultdict
@@ -296,9 +297,12 @@ def _embed_all(
 ) -> tuple[list[list[float]], dict[str, Any]]:
     vectors: list[list[float]] = []
     metadata: dict[str, Any] | None = None
+    batch_durations: list[float] = []
     batch_size = int(registry.settings.max_batch_items)
     for start in range(0, len(texts), batch_size):
+        batch_started = time.perf_counter()
         result = registry.embed(texts[start : start + batch_size], model_id=model_id)
+        batch_durations.append(time.perf_counter() - batch_started)
         current = result.public(include_vectors=False)
         if metadata is None:
             metadata = current
@@ -311,7 +315,51 @@ def _embed_all(
     if metadata is None:
         raise _error("empty_retrieval_benchmark", "No texts were available for embedding.")
     metadata = {**metadata, "count": len(vectors)}
+    ordered = sorted(batch_durations)
+    total_duration = sum(batch_durations)
+    metadata["performance"] = {
+        "batch_count": len(batch_durations),
+        "batch_size_limit": batch_size,
+        "embedding_duration_seconds": total_duration,
+        "texts_per_second": len(vectors) / total_duration if total_duration else None,
+        "batch_latency_seconds": {
+            "minimum": ordered[0],
+            "median": median(ordered),
+            "p95": ordered[min(len(ordered) - 1, int(len(ordered) * 0.95))],
+            "maximum": ordered[-1],
+        },
+    }
     return vectors, metadata
+
+
+def _bootstrap_metric_intervals(
+    rows: list[dict[str, Any]], *, seed_material: str, samples: int = 2000
+) -> dict[str, list[float]]:
+    """Deterministic percentile intervals over the frozen query rows."""
+
+    if not rows:
+        return {}
+    values = {
+        "MRR": [float(row["reciprocal_rank"]) for row in rows],
+        "Recall@1": [float(row["rank"] <= 1) for row in rows],
+        "Recall@5": [float(row["rank"] <= 5) for row in rows],
+        "Recall@10": [float(row["rank"] <= 10) for row in rows],
+        "nDCG@10": [float(row["ndcg_at_10"]) for row in rows],
+    }
+    seed = int(hashlib.sha256(seed_material.encode("utf-8")).hexdigest()[:16], 16)
+    rng = random.Random(seed)
+    output: dict[str, list[float]] = {}
+    for name, metric_values in values.items():
+        draws = sorted(
+            sum(metric_values[rng.randrange(len(metric_values))] for _ in metric_values)
+            / len(metric_values)
+            for _ in range(samples)
+        )
+        output[name] = [
+            draws[int(samples * 0.025)],
+            draws[min(samples - 1, int(samples * 0.975))],
+        ]
+    return output
 
 
 def evaluate_retrieval(
@@ -382,6 +430,10 @@ def evaluate_retrieval(
             {query_id: vector for query_id, vector in zip(query_ids, vectors[len(documents) :], strict=True)}
         )
         model = {**metadata, "semantic": model_id != "hash:128"}
+        if not record_duration:
+            # Release baselines are byte-recomputed by the verifier. Runtime timing is useful
+            # for live provider receipts but cannot be part of a deterministic release file.
+            model.pop("performance", None)
 
     per_split: dict[str, list[dict[str, Any]]] = defaultdict(list)
     per_query: list[dict[str, Any]] = []
@@ -402,8 +454,10 @@ def evaluate_retrieval(
         row: dict[str, Any] = {
             "query_id": query_id,
             "split": split,
+            "language": str(query.get("language") or "und"),
             "rank": rank,
             "reciprocal_rank": 1.0 / rank,
+            "ndcg_at_10": 1.0 / math.log2(rank + 1) if rank <= 10 else 0.0,
         }
         hard = negative_by_query.get(query_id)
         if hard:
@@ -423,13 +477,18 @@ def evaluate_retrieval(
         per_query.append(row)
         per_split[split].append(row)
 
-    def metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    benchmark_digest = dataset.get("manifest", {}).get(
+        "content_digest", _canonical_digest(dataset)
+    )
+
+    def metrics(rows: list[dict[str, Any]], *, slice_id: str) -> dict[str, Any]:
         result = {
             "queries": len(rows),
             "MRR": sum(row["reciprocal_rank"] for row in rows) / len(rows),
             "Recall@1": sum(row["rank"] <= 1 for row in rows) / len(rows),
             "Recall@5": sum(row["rank"] <= 5 for row in rows) / len(rows),
             "Recall@10": sum(row["rank"] <= 10 for row in rows) / len(rows),
+            "nDCG@10": sum(row["ndcg_at_10"] for row in rows) / len(rows),
             "median_rank": median(row["rank"] for row in rows),
         }
         if rows and "beats_same_frame_negative" in rows[0]:
@@ -439,20 +498,63 @@ def evaluate_retrieval(
             result["beats_same_context_hard_negative_rate"] = sum(
                 row["beats_same_context_negative"] for row in rows
             ) / len(rows)
+        result["bootstrap_95pct_ci"] = _bootstrap_metric_intervals(
+            rows,
+            seed_material=f"{benchmark_digest}|{model_id}|{slice_id}",
+        )
         return result
+
+    language_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in per_query:
+        language_rows[str(row["language"])].append(row)
+    failure_slices: dict[str, Any] = {
+        "rank_above_10": {
+            "queries": sum(row["rank"] > 10 for row in per_query),
+            "rate": sum(row["rank"] > 10 for row in per_query) / len(per_query),
+        },
+        "not_ranked_first": {
+            "queries": sum(row["rank"] > 1 for row in per_query),
+            "rate": sum(row["rank"] > 1 for row in per_query) / len(per_query),
+        },
+    }
+    if negatives:
+        failure_slices.update(
+            {
+                "lost_to_same_frame_negative": {
+                    "queries": sum(not row["beats_same_frame_negative"] for row in per_query),
+                    "rate": sum(not row["beats_same_frame_negative"] for row in per_query)
+                    / len(per_query),
+                },
+                "lost_to_same_context_negative": {
+                    "queries": sum(not row["beats_same_context_negative"] for row in per_query),
+                    "rate": sum(not row["beats_same_context_negative"] for row in per_query)
+                    / len(per_query),
+                },
+            }
+        )
 
     result = {
         "receipt_type": "humorvibes_retrieval_benchmark",
         "receipt_version": 1,
         "benchmark_version": dataset.get("manifest", {}).get("benchmark_version", "unknown"),
-        "benchmark_digest": dataset.get("manifest", {}).get(
-            "content_digest", _canonical_digest(dataset)
-        ),
+        "benchmark_digest": benchmark_digest,
+        "frozen_input_digests": {
+            "documents": _canonical_digest(documents),
+            "queries": _canonical_digest(queries),
+            "qrels": _canonical_digest(qrels),
+            "hard_negatives": _canonical_digest(negatives),
+        },
         "model": model,
         "metrics_by_split": {
-            split: metrics(rows) for split, rows in sorted(per_split.items())
+            split: metrics(rows, slice_id=f"split:{split}")
+            for split, rows in sorted(per_split.items())
         },
-        "overall": metrics(per_query),
+        "metrics_by_language": {
+            language: metrics(rows, slice_id=f"language:{language}")
+            for language, rows in sorted(language_rows.items())
+        },
+        "failure_slices": failure_slices,
+        "overall": metrics(per_query, slice_id="overall"),
         "truth_boundary": {
             "qrels_are_human_judgments": False,
             "retrieval_quality_is_funniness": False,
@@ -462,9 +564,13 @@ def evaluate_retrieval(
     }
     if record_duration:
         result["duration_seconds"] = time.perf_counter() - started
-    result["receipt_digest"] = _canonical_digest(
-        {key: value for key, value in result.items() if key != "duration_seconds"}
-    )
+    digest_payload = {key: value for key, value in result.items() if key != "duration_seconds"}
+    if isinstance(digest_payload.get("model"), dict):
+        digest_payload["model"] = {
+            key: value for key, value in digest_payload["model"].items() if key != "performance"
+        }
+    result["receipt_digest"] = _canonical_digest(digest_payload)
+    result["receipt_digest_excludes_runtime_timing"] = True
     return result
 
 

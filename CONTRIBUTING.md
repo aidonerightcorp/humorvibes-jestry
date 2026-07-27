@@ -142,6 +142,28 @@ and retention policy, adverse outcomes, opt-out path, and exact claim gate. Prod
 not automatically research consent, and demographic proxies must not substitute for audience
 members' explicit preferences.
 
+### Embedding or provider benchmark
+
+Start from [`provider_matrix_live_v1.json`](provider_matrix_live_v1.json) and
+[`docs/PROVIDER_MATRIX.md`](docs/PROVIDER_MATRIX.md). A comparable live run must pin the model
+revision or digest, server implementation and version, exact server artifact, request schema,
+embedding dimension, benchmark digests, and hardware. Record model-licence metadata even when it
+is `NOASSERTION`; availability through a provider is not evidence of redistribution rights.
+
+Never place a provider key in the specification or receipt. Use environment-variable references,
+run the built-in secret scan, and preserve failed arms in the result. Do not overwrite an existing
+receipt when model bytes, server bytes, hardware, benchmark inputs, or the matrix schema change;
+create a newly versioned specification and receipt instead.
+
+```bash
+humorvibes provider-matrix \
+  --spec provider_matrix_live_v1.json \
+  --out /tmp/provider_matrix_live_v1.json
+```
+
+Provider reachability is only a compatibility check. A quality claim requires the frozen tracks,
+their input digests, interval estimates, and the limitations recorded with the receipt.
+
 ## Required checks
 
 For every change:
