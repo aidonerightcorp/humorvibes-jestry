@@ -162,6 +162,20 @@ or private-network destinations unless the operator explicitly enables insecure 
 
 ## Docker
 
+The public 0.7.0 image is available by its independently verified multi-architecture digest:
+
+```bash
+docker pull ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8
+gh attestation verify \
+  oci://ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8 \
+  --repo aidonerightcorp/humorvibes-jestry
+```
+
+Its publication receipt records the anonymous pull, `linux/amd64` and `linux/arm64` manifests,
+SLSA provenance identity, SBOM setting, OCI labels, non-root/read-only runtime, and API probe.
+Use [`deploy/overlays/ghcr`](../deploy/overlays/ghcr) to render the base with
+that exact digest.
+
 Build and run the image directly:
 
 ```bash
@@ -204,8 +218,8 @@ choices follow the general single-process container pattern in the
 Tagged releases trigger [the pinned container publication workflow](../.github/workflows/publish-container.yml).
 It builds `linux/amd64` and `linux/arm64`, publishes to GHCR, attaches BuildKit provenance and an
 SBOM, creates a GitHub/Sigstore provenance attestation, and prints the immutable manifest digest.
-Do not write a digest into Kubernetes until the registry has returned and independently exposed
-that exact value.
+The 0.7.0 publication passed those gates and is pinned above; future versions must repeat them
+before their digest enters an overlay.
 
 ### Local Ollama Compose profile
 

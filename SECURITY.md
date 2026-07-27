@@ -1,8 +1,10 @@
 # Security policy
 
 Please report suspected credential exposure, request-boundary bypasses, dependency vulnerabilities,
-or unsafe deployment defaults privately to the repository owner before opening a public issue. Do
-not include active keys, private model responses, or unpublished corpus rows in a report.
+or unsafe deployment defaults through the repository's
+[private vulnerability form](https://github.com/aidonerightcorp/humorvibes-jestry/security/advisories/new)
+before opening a public issue. Do not include active keys, private model responses, or unpublished
+corpus rows in a public report.
 
 ## Supported surface
 

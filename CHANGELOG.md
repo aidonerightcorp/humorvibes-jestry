@@ -3,6 +3,14 @@
 All notable application and research-infrastructure changes are recorded here. Immutable Kaggle
 study revisions remain separately identified by their dataset/notebook versions and source tags.
 
+## [Unreleased]
+
+### Documentation
+
+- Recorded the independently verified public 0.7.0 GHCR manifest, two platform digests,
+  GitHub/Sigstore provenance, anonymous pull, hardened runtime probe, and digest-pinned Kustomize
+  overlay without claiming that a Kubernetes cluster was deployed.
+
 ## [0.7.0] - 2026-07-27
 
 ### Added
@@ -41,3 +49,4 @@ study revisions remain separately identified by their dataset/notebook versions 
 - No hosted Kubernetes deployment or completed human trial is claimed.
 
 [0.7.0]: https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0
+[Unreleased]: https://github.com/aidonerightcorp/humorvibes-jestry/compare/v0.7.0...HEAD

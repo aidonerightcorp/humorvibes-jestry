@@ -18,3 +18,15 @@ deployment-specific Kustomize overlay to set an immutable registry digest, gatew
 external-secret integration, exact provider/telemetry egress, autoscaling, and provider
 configuration. Full commands and
 the environment reference are in [`../../docs/API_AND_DEPLOYMENT.md`](../../docs/API_AND_DEPLOYMENT.md).
+
+For the public 0.7.0 image, the checked-in [`../overlays/ghcr`](../overlays/ghcr) pins the independently
+verified multi-architecture manifest digest while preserving the base offline/default-deny
+contract:
+
+```bash
+kubectl kustomize deploy/overlays/ghcr
+kubectl apply -k deploy/overlays/ghcr
+```
+
+Rendering this overlay is verified; applying it still requires a named cluster and does not happen
+as part of repository CI.

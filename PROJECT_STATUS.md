@@ -12,6 +12,7 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
+| Application package | [v0.7.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public multi-architecture image pinned by manifest digest; provenance, SBOM, anonymous pull, and hardened runtime verified |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
@@ -37,15 +38,18 @@ The repository now also contains a separate `humorvibes-research` 0.7.0 applicat
   rendered Envoy Gateway TLS/identity/global-rate-limit example.
 
 The local image was built and launched with a read-only root filesystem; its readiness, capability,
-embedding, and signal-boundary checks passed. Compose rendering, the Kubernetes security/probe
-contracts, a kubectl 1.36.2 Kustomize render, and a Helm 4.2.0 lint/render also passed. The
-machine-readable receipt is
-[`jestry_out/deployment_validation.json`](jestry_out/deployment_validation.json).
+embedding, and signal-boundary checks passed. The public 0.7.0 GHCR digest was then anonymously
+pulled, verified as `linux/amd64` plus `linux/arm64`, checked against its GitHub/Sigstore
+attestation, and run with the same non-root/read-only controls. Compose rendering, the Kubernetes
+security/probe contracts, a kubectl 1.36.2 Kustomize render, and a Helm 4.2.0 lint/render also
+passed. The controlling receipts are
+[`jestry_out/deployment_validation.json`](jestry_out/deployment_validation.json) and
+[`jestry_out/v0_7_0_publication.json`](jestry_out/v0_7_0_publication.json).
 
-Those statements do **not** claim a public container-registry image, a hosted public API, a live
-Kubernetes cluster deployment, or a live LLM/semantic-embedding quality result. The Kubernetes
-manifests were statically validated because no cluster client is installed in the verification
-environment. This extension does not alter the immutable Kaggle notebook or its measurements.
+Those statements do **not** claim a hosted public API, a live Kubernetes cluster deployment, or a
+live LLM/semantic-embedding quality result. The Kubernetes manifests and digest overlay were
+rendered but not applied because no target cluster was named. This extension does not alter the
+immutable Kaggle notebook or its measurements.
 
 ## What is complete
 
