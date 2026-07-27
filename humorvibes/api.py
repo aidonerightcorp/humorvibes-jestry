@@ -77,6 +77,13 @@ class SignalsRequest(StrictModel):
     personas: list[str] = Field(default_factory=list, max_length=32)
 
 
+class OpenControlsSampleRequest(StrictModel):
+    count: int = Field(default=8, ge=1, le=64)
+    seed: int = Field(default=20_260_727)
+    arm: str | None = Field(default=None, max_length=64)
+    split: str | None = Field(default=None, max_length=16)
+
+
 class _RateLimiter:
     def __init__(self, limit: int) -> None:
         self.limit = limit
@@ -360,6 +367,14 @@ def create_app(
         """Discover the local analyzer contract; human study rows are not uploaded here."""
 
         return runtime_service.study_template()
+
+    @app.get("/v1/open-controls/metadata", dependencies=auth, tags=["open-controls"])
+    def open_controls_metadata() -> dict[str, Any]:
+        return runtime_service.open_controls_metadata()
+
+    @app.post("/v1/open-controls/sample", dependencies=auth, tags=["open-controls"])
+    def open_controls_sample(payload: OpenControlsSampleRequest) -> dict[str, Any]:
+        return runtime_service.open_controls_sample(**payload.model_dump())
 
     return app
 

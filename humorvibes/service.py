@@ -14,6 +14,7 @@ from .config import Settings
 from .embeddings import EmbeddingRegistry, cosine_similarity
 from .errors import IntegrationError
 from .llm import LLMRegistry
+from .open_controls import generation_contract, sample_rows
 
 
 class HumorVibesService:
@@ -86,6 +87,39 @@ class HumorVibesService:
                 "audience_traits_must_not_be_inferred": True,
                 "personalization_requires_opt_in_data": True,
                 "synthetic_study_data_cannot_authorize_a_human_claim": True,
+            },
+            "open_controls": generation_contract(),
+        }
+
+    def open_controls_metadata(self) -> dict[str, Any]:
+        """Return the deterministic corpus contract without reading release files."""
+
+        return generation_contract()
+
+    def open_controls_sample(
+        self,
+        *,
+        count: int = 8,
+        seed: int = 20_260_727,
+        arm: str | None = None,
+        split: str | None = None,
+    ) -> dict[str, Any]:
+        """Return bounded procedural fixtures; never model or human output."""
+
+        try:
+            rows = sample_rows(count, seed=seed, arm=arm, split=split)
+        except ValueError as exc:
+            raise IntegrationError("invalid_open_controls_request", str(exc), 422) from exc
+        return {
+            "count": len(rows),
+            "rows": rows,
+            "contract": generation_contract(),
+            "truth_boundary": {
+                "procedural": True,
+                "human_authored": False,
+                "human_rated": False,
+                "model_generated": False,
+                "funniness_ground_truth": False,
             },
         }
 

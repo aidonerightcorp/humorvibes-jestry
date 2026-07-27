@@ -86,6 +86,28 @@ def main() -> int:
     study_analyze.add_argument("--bundle", type=Path, required=True)
     study_analyze.add_argument("--out", type=Path, help="also write the JSON receipt")
 
+    sub.add_parser("controls-info", help="show the deterministic Open Controls corpus contract")
+    controls_sample = sub.add_parser("controls-sample", help="print bounded procedural Open Controls rows")
+    controls_sample.add_argument("--count", type=int, default=8)
+    controls_sample.add_argument("--seed", type=int, default=20_260_727)
+    controls_sample.add_argument("--arm")
+    controls_sample.add_argument("--split")
+    controls_ratings = sub.add_parser(
+        "controls-validate-ratings",
+        help="fail-closed validation of privacy-minimized human-rating JSONL",
+    )
+    controls_ratings.add_argument("path", type=Path)
+    controls_contrib = sub.add_parser(
+        "controls-validate-contributions",
+        help="fail-closed validation of human-original contribution JSONL",
+    )
+    controls_contrib.add_argument("path", type=Path)
+    controls_models = sub.add_parser(
+        "controls-validate-model-candidates",
+        help="validate provenance-complete model candidates while preserving quarantine",
+    )
+    controls_models.add_argument("path", type=Path)
+
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
     if args.command == "serve":
@@ -112,6 +134,41 @@ def main() -> int:
 
         print(export_openapi(args.out))
         return 0
+
+    if args.command in {
+        "controls-info",
+        "controls-sample",
+        "controls-validate-ratings",
+        "controls-validate-contributions",
+        "controls-validate-model-candidates",
+    }:
+        from .open_controls import (
+            generation_contract,
+            sample_rows,
+            validate_human_contributions,
+            validate_human_ratings,
+            validate_model_candidates,
+        )
+
+        try:
+            if args.command == "controls-info":
+                payload = generation_contract()
+            elif args.command == "controls-sample":
+                payload = {
+                    "rows": sample_rows(args.count, seed=args.seed, arm=args.arm, split=args.split),
+                    "truth_boundary": generation_contract()["truth_boundary"],
+                }
+            elif args.command == "controls-validate-ratings":
+                payload = validate_human_ratings(args.path)
+            elif args.command == "controls-validate-contributions":
+                payload = validate_human_contributions(args.path)
+            else:
+                payload = validate_model_candidates(args.path)
+        except (OSError, json.JSONDecodeError, ValueError) as exc:
+            _dump({"error": {"code": "invalid_open_controls_input", "message": str(exc)}})
+            return 2
+        _dump(payload)
+        return 0 if payload.get("ok", True) else 1
 
     if args.command in {"study-protocol", "study-demo", "study-analyze"}:
         from .studies import (

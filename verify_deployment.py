@@ -198,7 +198,7 @@ def verify_helm_container(image: str) -> dict[str, Any]:
     container = pod["containers"][0]
     assert pod["automountServiceAccountToken"] is False
     assert container["securityContext"]["readOnlyRootFilesystem"] is True
-    assert container["image"] == "humorvibes-research:0.5.0"
+    assert container["image"] == "humorvibes-research:0.6.0"
     return {
         "image": image,
         "objects": identities,
@@ -268,6 +268,12 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
             {"setup": "A setup establishes a frame.", "punchline": "Then the frame turns."},
         )
         study_template = json_call(base, "/v1/research/study-template")
+        controls_metadata = remote.open_controls_metadata()
+        controls_sample = remote.open_controls_sample(
+            count=4,
+            arm="surprising_resolved",
+            split="test",
+        )
         inspection = json.loads(command("docker", "inspect", name))[0]
         if built_image_id:
             assert inspection["Image"] == built_image_id
@@ -275,13 +281,17 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
         assert inspection["HostConfig"]["ReadonlyRootfs"] is True
         assert embedded["model_id"] == "hash:128" and embedded["count"] == 1
         assert remote_similarity["cosine_similarity"] == [[1.0]]
-        assert openapi["info"]["version"] == "0.5.0"
+        assert openapi["info"]["version"] == "0.6.0"
         assert capabilities["truth_boundary"]["generation_is_not_human_validation"] is True
         assert capabilities["product_use_cases"]["creative_assistance"]["claim_gate"] == (
             "blind_or_live_human_response"
         )
         assert signals["truth_boundary"]["teacher_forced_logprobs_measured"] is False
         assert study_template["privacy_boundary"]["analysis_upload_endpoint"] is False
+        assert controls_metadata["maximum_rows"] == 120_000
+        assert controls_metadata["truth_boundary"]["human_rated"] is False
+        assert controls_sample["count"] == 4
+        assert controls_sample["truth_boundary"]["model_generated"] is False
         return {
             "image": image,
             "image_id": inspection["Image"],
@@ -298,6 +308,8 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
                 "/v1/similarity",
                 "/v1/signals",
                 "/v1/research/study-template",
+                "/v1/open-controls/metadata",
+                "/v1/open-controls/sample",
             ],
             "offline_signals_measured": False,
         }
@@ -320,7 +332,7 @@ def main() -> int:
         action="store_true",
         help="also build, launch, and probe the image",
     )
-    parser.add_argument("--image", default="humorvibes-research:0.5.0")
+    parser.add_argument("--image", default="humorvibes-research:0.6.0")
     parser.add_argument(
         "--no-build",
         action="store_true",

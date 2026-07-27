@@ -11,6 +11,7 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public; version 14 is COMPLETE and is the canonical executable write-up |
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
+| Open causal controls | Humor Genome Open Controls | 120,000 deterministic CC0 procedural rows, separate from observed and human-rated evidence |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
@@ -18,7 +19,7 @@ move underneath an existing run.
 
 ## Application and deployment extension
 
-The repository now also contains a separate `humorvibes-research` 0.5.0 application layer:
+The repository now also contains a separate `humorvibes-research` 0.6.0 application layer:
 
 - an importable Python SDK and a schema-first FastAPI service;
 - authenticated native Ollama (local or cloud) and OpenAI-compatible generation;
@@ -65,6 +66,9 @@ environment. This extension does not alter the immutable Kaggle notebook or its 
   limitations, includes a sourced predictive-processing-to-product evidence map, and emits a
   machine-readable executive-summary artifact. The supporting notebook
   map is documented in [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md).
+- Open Controls adds a separate 120,000-row four-arm corpus, strict data/human/model schemas,
+  grouped splits, exact and long-phrase overlap checks, retrieval qrels, a bounded SDK/API, a
+  standalone verifier, and a public-notebook builder. It contains no human ratings.
 
 ## What is deliberately not claimed
 
@@ -120,10 +124,10 @@ human-annotated setup/frame/punchline data, native-form rules for under-covered 
 licence-verified sources, embedding-model bake-offs on frozen multilingual fixtures, live provider
 compatibility checks, and small reproducibility improvements.
 
-## One remaining owner decision
+## Licensing state
 
-The GitHub repository is public but currently has no repository-level code licence. Public access
-does not grant open-source reuse rights. Issues, independent reproductions, and research proposals
-can proceed now, but the maintainer should choose and add a code licence before accepting reusable
-outside code. The dataset is a separate mixed-provenance artifact: each row retains its recorded
-source licence, and the exporter admits text only when redistribution is explicit.
+Repository code and documentation are Apache-2.0. The project-controlled Open Controls payload is
+CC0-1.0 to the extent contributors hold the relevant rights. The Wave 2 dataset remains a separate
+mixed-provenance artifact: each row retains its recorded source licence, and the exporter admits
+text only when redistribution is explicit. Neither repository access nor the Open Controls
+dedication relicenses imported records, model weights, or third-party assets.

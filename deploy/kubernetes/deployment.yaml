@@ -28,7 +28,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: api
-          image: humorvibes-research:0.5.0
+          image: humorvibes-research:0.6.0
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

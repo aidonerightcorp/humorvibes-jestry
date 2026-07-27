@@ -33,11 +33,13 @@ def test_liveness_readiness_version_and_openapi_are_available() -> None:
         assert api.get("/health/live").json()["ok"] is True
         ready = api.get("/health/ready")
         assert ready.status_code == 200 and ready.json()["ok"] is True
-        assert api.get("/version").json()["version"] == "0.5.0"
+        assert api.get("/version").json()["version"] == "0.6.0"
         schema = api.get("/openapi.json").json()
         assert schema["info"]["title"] == "HumorVibes Integration API"
         assert "/v1/embed" in schema["paths"]
         assert "/v1/research/study-template" in schema["paths"]
+        assert "/v1/open-controls/metadata" in schema["paths"]
+        assert "/v1/open-controls/sample" in schema["paths"]
 
 
 def test_standalone_server_defaults_to_loopback(monkeypatch) -> None:
@@ -59,10 +61,12 @@ def test_checked_in_openapi_contract_matches_the_runtime_schema() -> None:
     root = Path(__file__).resolve().parents[1]
     checked_in = json.loads((root / "docs/openapi.json").read_text(encoding="utf-8"))
     assert checked_in == openapi_schema()
-    assert checked_in["info"]["version"] == "0.5.0"
+    assert checked_in["info"]["version"] == "0.6.0"
     assert "/v1/generate" in checked_in["paths"]
     assert "/v1/embed" in checked_in["paths"]
     assert "/v1/research/study-template" in checked_in["paths"]
+    assert "/v1/open-controls/metadata" in checked_in["paths"]
+    assert "/v1/open-controls/sample" in checked_in["paths"]
     assert "OLLAMA_API_KEY" not in json.dumps(checked_in)
 
 
@@ -116,6 +120,33 @@ def test_study_template_is_static_privacy_minimized_and_authenticated() -> None:
     assert body["truth_boundary"]["synthetic_fixture_can_authorize_claim"] is False
     assert "email" not in body["material_record"]
     assert "raw_text" not in body["material_record"]
+
+
+def test_open_controls_endpoints_are_bounded_model_free_and_authenticated() -> None:
+    with client(runtime(api_key="inbound-secret")) as api:
+        assert api.get("/v1/open-controls/metadata").status_code == 401
+        metadata = api.get("/v1/open-controls/metadata", headers=auth())
+        sampled = api.post(
+            "/v1/open-controls/sample",
+            headers=auth(),
+            json={"count": 4, "arm": "surprising_resolved", "split": "test"},
+        )
+        invalid = api.post(
+            "/v1/open-controls/sample",
+            headers=auth(),
+            json={"count": 4, "arm": "not-an-arm"},
+        )
+    assert metadata.status_code == 200
+    assert metadata.json()["maximum_rows"] == 120_000
+    assert metadata.json()["truth_boundary"]["human_rated"] is False
+    assert sampled.status_code == 200
+    body = sampled.json()
+    assert body["count"] == 4
+    assert all(row["counterfactual_arm"] == "surprising_resolved" for row in body["rows"])
+    assert all(row["split"] == "test" and row["human_rated"] is False for row in body["rows"])
+    assert body["truth_boundary"]["model_generated"] is False
+    assert invalid.status_code == 422
+    assert invalid.json()["error"]["code"] == "invalid_open_controls_request"
 
 
 def test_hash_embedding_and_similarity_work_without_network_or_model() -> None:

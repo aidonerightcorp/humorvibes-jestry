@@ -16,5 +16,7 @@ dataset_out/*.npy
 dataset_out/style_labels*.jsonl
 kaggle_wave2/
 .kaggle-wave2-*/
+kaggle_open_controls/
+.open-controls-*/
 data_cache/
 jestry_out/partial_*.jsonl

@@ -68,6 +68,27 @@ notebook measures anything.
 This is a reproducible research release, not a universal benchmark. The sample is intentionally
 stratified, and its coverage reflects the licences and public sources that could be verified.
 
+## A separate controlled corpus for the causal question
+
+The observational corpus cannot answer the cleanest mechanism question because it rarely contains
+matched alternative endings for the same premise. Humor Genome Open Controls therefore adds a
+separate, project-controlled dataset rather than inventing rows inside Wave 2. Its 120,000 English
+records cross 300 premise families, 50 configurations, four counterfactual arms, and two surface
+variants. The arms hold a premise fixed while presenting an expected literal continuation,
+unresolved surprise, compact lexical repair, or the same repair explained explicitly.
+
+The release is deterministic and CC0 to the extent contributors hold the relevant rights. It has
+strict schemas, premise/template-isolated splits, retrieval qrels, a surface-artifact adversary,
+exact and 12-word overlap screening against 3.16 million readable corpus records, and independent
+manifest verification. It contains zero human-authored and zero human-rated rows. Its labels say
+how the generator was constructed, not what an audience experienced.
+
+This makes Open Controls useful for application fixtures, grouped evaluation, embedding bakeoffs,
+and preparing a preregistered study. The next evidentiary step is to randomize and blind the arms,
+then collect expectedness, surprise, resolution, funniness, familiarity, comprehensibility, and
+offensiveness separately from consenting people. See
+[`docs/OPEN_CONTROLS.md`](docs/OPEN_CONTROLS.md) for the full contract and release procedure.
+
 ## Gemma as a measured instrument
 
 The canonical notebook attaches `google/gemma-2/transformers/gemma-2-2b-it/2` and computes
@@ -139,6 +160,8 @@ The project contributes an inspectable research workflow more than a single winn
 - a contest-held-out human-label baseline stated against reliability and context bounds;
 - executable checks linking the GitHub source, Kaggle data, and Kaggle notebook;
 - a ledger of negative results and corrected confounds.
+- a separate 120,000-row CC0 counterfactual-control corpus whose synthetic origin cannot be
+  mistaken for human evidence.
 
 ## Limitations and next experiments
 

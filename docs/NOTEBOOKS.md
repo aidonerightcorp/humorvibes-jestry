@@ -31,6 +31,7 @@ project's development history. They do not override the canonical Wave 2 conclus
 | `panel_lab/panel_lab.ipynb` | Panel and frame comparison experiment |
 | `validate_ratings/validate_notebook.ipynb` | Model signals compared with available human ratings |
 | `zoo_lab/zoo_lab.ipynb` | Multi-model-family and invariance exploration |
+| `open_controls_notebook/humor_genome_open_controls.ipynb` | Public Open Controls integrity, artifact, and retrieval lab; synthetic evidence only |
 
 ## Clarity contract
 
@@ -56,6 +57,10 @@ does not become external validation.
 python3 wave2_notebook/build_wave2_notebook.py
 python3 -m pytest -q tests/test_wave2.py
 git diff --exit-code -- wave2_notebook/humor_genome_wave2.ipynb
+
+python3 open_controls_notebook/build_open_controls_notebook.py
+python3 -m pytest -q tests/test_open_controls.py
+git diff --exit-code -- open_controls_notebook/humor_genome_open_controls.ipynb
 ```
 
 Kaggle publication additionally requires a terminal `COMPLETE` run and a downloaded independent

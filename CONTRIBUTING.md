@@ -13,11 +13,11 @@ and the minimum study fields.
 
 ## Licensing boundary
 
-The repository is public but does not yet have a project-level code licence. Until the maintainer
-selects one, public access should not be interpreted as permission to reuse the code. Issues,
-reproduction reports, documentation suggestions, and research proposals are welcome now. Coordinate
-before contributing reusable code so authorship and licensing are explicit. Dataset records retain
-their own source licences and are governed separately from the repository code.
+Repository code and documentation are Apache-2.0. Unless explicitly marked otherwise, an
+intentional code or documentation contribution is submitted under that licence. Dataset records
+remain separate: imported Wave 2 rows retain their per-record licences, while only the
+project-controlled Open Controls payload is dedicated under CC0-1.0. Never use CC0 to launder an
+import, transcription, model output, or contribution whose rights are unclear.
 
 ## Local setup
 
@@ -154,6 +154,19 @@ python3 build_kaggle_export.py --per-family 12000 \
   --metadata-template wave2_dataset/dataset-metadata.json
 python3 verify_wave2_release.py --root kaggle_wave2
 ```
+
+For Open Controls generator, schema, API, or notebook changes:
+
+```bash
+python3 build_open_controls.py --reference-dir corpora
+python3 verify_open_controls_release.py --root kaggle_open_controls
+python3 open_controls_notebook/build_open_controls_notebook.py
+python3 -m pytest -q tests/test_open_controls.py
+git diff --exit-code -- open_controls_notebook/humor_genome_open_controls.ipynb
+```
+
+Human-original data contributions use the contract in `docs/OPEN_CONTROLS.md`. Do not commit
+identity fields or fabricate ratings, consent, authorship attestations, or populated human lanes.
 
 Publishing to Kaggle requires the maintainer's credentials and is not expected from an outside
 contributor.

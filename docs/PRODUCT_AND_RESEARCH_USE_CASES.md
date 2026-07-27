@@ -19,8 +19,9 @@ The project combines four layers without collapsing their evidence boundaries:
 
 1. A provenance-rich multilingual corpus and a rights-filtered public slice.
 2. Structural labels and retrieval features for finding relevant forms and precedents.
-3. Reproducible Gemma measurements of model surprise and frame resolution.
-4. An SDK/API for generation, embeddings, similarity, and research signals, with human validation
+3. A separate deterministic four-arm control corpus for experiments and application fixtures.
+4. Reproducible Gemma measurements of model surprise and frame resolution.
+5. An SDK/API for generation, embeddings, similarity, and research signals, with human validation
    explicitly required before a creative or audience claim is accepted.
 
 The practical loop is **retrieve → generate or edit → diagnose → test with people → retain the
@@ -52,6 +53,11 @@ needed for the declared study and only with an explicit data lifecycle.
 | Educator or student | Rerun a complete model-instrument study and examine null results, confounds, leakage, and licence filtering | A polished notebook proves a theory | Students can trace every conclusion to code and explain why the strongest claims are bounded |
 | Data curator or archivist | Inspect source family, language, licence class, public-selection policy, hashes, and concentration | Public metadata grants permission to redistribute every source row | Provenance completeness, licence review coverage, deterministic rebuilds, concentration reported |
 | Product or venue team | Integrate the Python SDK or HTTP API; deploy offline with Docker, Compose, Kustomize, or Helm; configure allowlisted LLM and embedding providers | The API is a production audience oracle, a global safety system, or a hosted service | SLOs, cost and latency budgets, abuse controls, consented outcome metrics, rollback-ready releases |
+
+Open Controls adds matched procedural alternatives to each workflow. Writers can compare forms
+without receiving a fake winner; academics can preregister arm contrasts; educators can demonstrate
+group leakage; and builders can use stable CC0 fixtures. No one may treat the intended arm as an
+observed funniness label. The complete contract is in [`OPEN_CONTROLS.md`](OPEN_CONTROLS.md).
 
 ## Product workflows worth building and testing
 
@@ -107,6 +113,10 @@ the caption model is text-only.
 **Test:** an independent lab reruns the same frozen analysis, then performs an external replication
 with new jokes, speakers, audiences, and contexts. Report effect sizes and uncertainty, not just
 rankings or thresholded significance.
+
+The Open Controls extension supplies 300 grouped premise families with expected, unresolved,
+compact-repair, and over-explained endings plus a strict future-rating schema. It improves stimulus
+design but does not populate that schema with fabricated people.
 
 ### 4. Humor search and explanation
 

@@ -26,6 +26,7 @@ claim gate.
 | Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, v14 COMPLETE | Read the write-up and rerun every public measurement |
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
+| Open causal controls | `Humor Genome Open Controls` release | Release pipeline added | Use 120,000 CC0 procedural four-arm controls without confusing them with human evidence |
 
 The notebook is the single canonical executable write-up. It clones the immutable
 `humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
@@ -62,12 +63,14 @@ loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross
   effect remains non-claim-ready.
 - [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md): the canonical notebook, the role of each supporting
   notebook, and the clarity contract for future experiments.
+- [`docs/OPEN_CONTROLS.md`](docs/OPEN_CONTROLS.md): the 120,000-row deterministic CC0 control
+  corpus, adversarial gates, human/model evidence lanes, API, schemas, and release procedure.
 
 Issues, reproductions, and research proposals are welcome. In this project, reproducing a null
 result, removing a confound, or documenting a licensing boundary is a successful contribution.
-The repository is public but does not yet carry a project-level code licence; the maintainer must
-choose one before outside code reuse is unambiguous. Dataset rows retain their recorded source
-licences.
+Repository code and documentation are licensed under Apache-2.0. The new project-controlled Open
+Controls payload is separately dedicated under CC0-1.0; imported dataset rows retain their exact
+recorded source licences and are not relicensed by the repository licence.
 
 ## Use it in an application
 
@@ -90,6 +93,10 @@ curl --fail http://127.0.0.1:8080/health/ready
 curl --fail -X POST http://127.0.0.1:8080/v1/similarity \
   -H 'Content-Type: application/json' \
   -d '{"left":["Even experts slip."],"right":["A master can blunder."]}'
+
+curl --fail -X POST http://127.0.0.1:8080/v1/open-controls/sample \
+  -H 'Content-Type: application/json' \
+  -d '{"count":4,"arm":"surprising_resolved","split":"test"}'
 ```
 
 Container quick start:
@@ -151,6 +158,9 @@ other humor-adjacent text; source-specific human signals are not interchangeable
   and deployment surface; it is an extension layer, not a second research notebook.
 - `build_kaggle_export.py`, `wave2_dataset/`, `verify_wave2_release.py`: public dataset build,
   Kaggle metadata, and fail-closed validation.
+- `build_open_controls.py`, `verify_open_controls_release.py`, `open_controls_dataset/`, and
+  `open_controls_notebook/`: separate CC0 procedural-control build, semantic verifier, public
+  dataset descriptor, and executable causal-design notebook.
 - `caption_*.py`, `style_taxonomy.py`, `corpus_census.py`: the measured Wave 2 analyses.
 - `jestry_out/`: compact, versioned receipts; `wave2_publication.json` is the release index.
 - `RESULTS.md`, `STYLES.md`, `DATA_SOURCES.md`: detailed findings, taxonomy, and source provenance.
