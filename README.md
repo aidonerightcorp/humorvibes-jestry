@@ -102,8 +102,14 @@ humorvibes doctor
 humorvibes adversarial
 humorvibes study-demo
 humorvibes multimodal-fixture --out-dir /tmp/humorvibes-multimodal --contests 30
+humorvibes provider-matrix --spec provider_matrix_live_v1.json --out /tmp/provider-matrix.json
 humorvibes-api
 ```
+
+The first exact live semantic comparison is documented in
+[`docs/PROVIDER_MATRIX.md`](docs/PROVIDER_MATRIX.md): five combinations, two independent server
+implementations, two frozen tasks, bootstrap intervals, language/failure slices, and no default
+recommendation from availability alone.
 
 ```bash
 curl --fail http://127.0.0.1:8080/health/ready

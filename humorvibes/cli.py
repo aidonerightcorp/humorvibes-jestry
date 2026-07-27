@@ -146,6 +146,15 @@ def main() -> int:
     retrieval_benchmark.add_argument("--model", default="lexical:tfidf")
     retrieval_benchmark.add_argument("--out", type=Path)
 
+    crosslingual_build = sub.add_parser(
+        "retrieval-crosslingual-build",
+        help="freeze balanced public-domain proverb/translation retrieval rows",
+    )
+    crosslingual_build.add_argument("--aligned-jsonl", type=Path, required=True)
+    crosslingual_build.add_argument("--out-dir", type=Path, required=True)
+    crosslingual_build.add_argument("--pairs-per-language", type=int, default=70)
+    crosslingual_build.add_argument("--force", action="store_true")
+
     multimodal_fixture = sub.add_parser(
         "multimodal-fixture",
         help="build and evaluate the rights-safe procedural multimodal contract fixture",
@@ -167,6 +176,13 @@ def main() -> int:
     )
     provider_audit.add_argument("--live", action="store_true")
     provider_audit.add_argument("--out", type=Path)
+
+    provider_matrix = sub.add_parser(
+        "provider-matrix",
+        help="run a pinned compatibility and retrieval-quality matrix without serializing secrets",
+    )
+    provider_matrix.add_argument("--spec", type=Path, required=True)
+    provider_matrix.add_argument("--out", type=Path, required=True)
 
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
@@ -206,7 +222,11 @@ def main() -> int:
         _dump(payload)
         return 0
 
-    if args.command in {"retrieval-hard-build", "retrieval-benchmark"}:
+    if args.command in {
+        "retrieval-hard-build",
+        "retrieval-crosslingual-build",
+        "retrieval-benchmark",
+    }:
         from .retrieval_benchmark import (
             build_hard_retrieval_rows,
             evaluate_retrieval,
@@ -221,6 +241,21 @@ def main() -> int:
                     read_jsonl(args.release_root / "retrieval_documents.jsonl"),
                     read_jsonl(args.release_root / "retrieval_queries.jsonl"),
                     read_jsonl(args.release_root / "retrieval_qrels.jsonl"),
+                )
+                payload = write_retrieval_dataset(
+                    args.out_dir, dataset, overwrite=args.force
+                )
+            elif args.command == "retrieval-crosslingual-build":
+                from .crosslingual_retrieval import (
+                    build_crosslingual_retrieval,
+                    read_aligned_jsonl,
+                )
+
+                aligned, snapshot_sha256 = read_aligned_jsonl(args.aligned_jsonl)
+                dataset = build_crosslingual_retrieval(
+                    aligned,
+                    source_snapshot_sha256=snapshot_sha256,
+                    pairs_per_language=args.pairs_per_language,
                 )
                 payload = write_retrieval_dataset(
                     args.out_dir, dataset, overwrite=args.force
@@ -282,6 +317,26 @@ def main() -> int:
         _dump(payload)
         if args.out:
             write_provider_audit(args.out, payload)
+        return 0 if payload["ok"] else 1
+
+    if args.command == "provider-matrix":
+        from .provider_matrix import (
+            load_provider_matrix_spec,
+            run_provider_matrix,
+            write_provider_matrix,
+        )
+
+        try:
+            spec = load_provider_matrix_spec(args.spec)
+            payload = run_provider_matrix(spec, spec_dir=args.spec.parent)
+        except IntegrationError as exc:
+            _dump({"error": exc.public()})
+            return 2
+        except (OSError, json.JSONDecodeError) as exc:
+            _dump({"error": {"code": "invalid_provider_matrix_file", "message": str(exc)}})
+            return 2
+        _dump(payload)
+        write_provider_matrix(args.out, payload)
         return 0 if payload["ok"] else 1
 
     if args.command in {

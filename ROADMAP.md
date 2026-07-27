@@ -131,8 +131,9 @@ Controls endpoints are implemented in 0.7.0. Useful follow-ups are:
 - [ ] Add optional streaming generation with disconnect/cancellation and backpressure tests.
 - [x] Add opt-in low-cardinality StatsD export and OTLP/HTTP spans with W3C context while
   explicitly excluding bodies, keys, user IDs, and provider URLs.
-- [ ] Add live compatibility jobs for a version matrix of Ollama and two OpenAI-compatible servers.
-- [ ] Benchmark configured embedding models on frozen multilingual retrieval fixtures before
+- [x] Add an opt-in live compatibility job for pinned Ollama native/OpenAI-compatible routes and
+  an independently implemented TEI OpenAI-compatible server, retaining exact server/model hashes.
+- [x] Benchmark configured embedding models on frozen multilingual retrieval fixtures before
   recommending a default semantic model.
 - [ ] Add a vector-database adapter protocol with conformance tests for SQLite, pgvector, and
   Qdrant; preserve model/dimension identity in every collection.

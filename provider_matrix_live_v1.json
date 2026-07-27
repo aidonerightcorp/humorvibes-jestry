@@ -1,0 +1,101 @@
+{
+  "receipt_type": "humorvibes_provider_matrix_spec",
+  "spec_version": 1,
+  "hardware_class": "16-vCPU x86_64 host; NVIDIA GeForce RTX 3060 12GB; driver 595.84; Ollama reported 100% GPU",
+  "benchmarks": [
+    {
+      "benchmark_id": "hard-generator-lineage-v1",
+      "root": "jestry_out/hard_retrieval_v1",
+      "expected_digest": "9124e2e3fb32721f4445a4ddb518257f470bc659bcc96dc61e2f2fa89688b7f2"
+    },
+    {
+      "benchmark_id": "crosslingual-proverbs-v1",
+      "root": "jestry_out/crosslingual_retrieval_v1",
+      "expected_digest": "c212177d2f28fc3a2380b6c0f5e2c7261980e4fdec1e502cbd480b83b3aa9ea4"
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "ollama-native-embeddinggemma",
+      "backend": "ollama",
+      "base_url": "http://127.0.0.1:11434",
+      "remote_model": "embeddinggemma:latest",
+      "model_digest": "85462619ee721b466c5927d109d4cb765861907d5417b9109caebc4e614679f1",
+      "model_license": "Gemma Terms of Use, revision 2025-03-24",
+      "server_implementation": "ollama",
+      "server_version": "0.24.0",
+      "server_artifact": "sha256:b2e45ade9cb754a079f74645e1183d613f582d98f7354b05f4f9a5bd81f8e0c9",
+      "request_schema": "ollama:/api/embed:v1",
+      "hardware_class": "16-vCPU x86_64 host; NVIDIA GeForce RTX 3060 12GB; driver 595.84; Ollama reported 100% GPU",
+      "expected_dimensions": 768,
+      "timeout_seconds": 300,
+      "batch_size": 64
+    },
+    {
+      "run_id": "ollama-native-qwen3-embedding-0.6b",
+      "backend": "ollama",
+      "base_url": "http://127.0.0.1:11434",
+      "remote_model": "qwen3-embedding:0.6b",
+      "model_digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+      "model_license": "NOASSERTION in local Ollama model metadata; review required before redistribution",
+      "server_implementation": "ollama",
+      "server_version": "0.24.0",
+      "server_artifact": "sha256:b2e45ade9cb754a079f74645e1183d613f582d98f7354b05f4f9a5bd81f8e0c9",
+      "request_schema": "ollama:/api/embed:v1",
+      "hardware_class": "16-vCPU x86_64 host; NVIDIA GeForce RTX 3060 12GB; driver 595.84; Ollama reported 100% GPU",
+      "expected_dimensions": 1024,
+      "timeout_seconds": 300,
+      "batch_size": 64
+    },
+    {
+      "run_id": "ollama-native-paraphrase-multilingual",
+      "backend": "ollama",
+      "base_url": "http://127.0.0.1:11434",
+      "remote_model": "paraphrase-multilingual:latest",
+      "model_digest": "ba13c2e06707cde2895d11e3c6e7905685edcca25861b93ccf15f692256e4339",
+      "model_license": "Apache-2.0 in local Ollama model metadata",
+      "server_implementation": "ollama",
+      "server_version": "0.24.0",
+      "server_artifact": "sha256:b2e45ade9cb754a079f74645e1183d613f582d98f7354b05f4f9a5bd81f8e0c9",
+      "request_schema": "ollama:/api/embed:v1",
+      "hardware_class": "16-vCPU x86_64 host; NVIDIA GeForce RTX 3060 12GB; driver 595.84; Ollama reported 100% GPU",
+      "expected_dimensions": 768,
+      "timeout_seconds": 300,
+      "batch_size": 64
+    },
+    {
+      "run_id": "ollama-openai-compat-embeddinggemma",
+      "backend": "openai-compatible",
+      "base_url": "http://127.0.0.1:11434/v1",
+      "remote_model": "embeddinggemma:latest",
+      "model_digest": "85462619ee721b466c5927d109d4cb765861907d5417b9109caebc4e614679f1",
+      "model_license": "Gemma Terms of Use, revision 2025-03-24",
+      "server_implementation": "ollama",
+      "server_version": "0.24.0",
+      "server_artifact": "sha256:b2e45ade9cb754a079f74645e1183d613f582d98f7354b05f4f9a5bd81f8e0c9",
+      "request_schema": "openai:/v1/embeddings:v1",
+      "hardware_class": "16-vCPU x86_64 host; NVIDIA GeForce RTX 3060 12GB; driver 595.84; Ollama reported 100% GPU",
+      "expected_dimensions": 768,
+      "timeout_seconds": 300,
+      "batch_size": 64
+    },
+    {
+      "run_id": "tei-openai-compat-paraphrase-multilingual",
+      "backend": "openai-compatible",
+      "base_url": "http://127.0.0.1:18081/v1",
+      "readiness_base_url": "http://127.0.0.1:18081",
+      "readiness_path": "/info",
+      "remote_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "model_digest": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "model_license": "Apache-2.0",
+      "server_implementation": "huggingface-text-embeddings-inference",
+      "server_version": "1.9.0",
+      "server_artifact": "sha256:ad950d30878eceb72aaf32024d26fa2b1d04a75304fa0b4776b49aa1941fea07",
+      "request_schema": "openai:/v1/embeddings:v1",
+      "hardware_class": "16-vCPU x86_64 host; TEI cpu-1.9 image; float32 ONNX Runtime",
+      "expected_dimensions": 384,
+      "timeout_seconds": 300,
+      "batch_size": 64
+    }
+  ]
+}
