@@ -1,7 +1,7 @@
 {
   "receipt_type": "humor_genome_wave2_publication",
-  "receipt_version": 2,
-  "verified_utc": "2026-07-27T00:33:50Z",
+  "receipt_version": 3,
+  "verified_utc": "2026-07-27T02:48:45Z",
   "project_state": {
     "competition_deadline_passed": true,
     "competition_submission_claimed": false,
@@ -9,17 +9,22 @@
   },
   "github": {
     "url": "https://github.com/aidonerightcorp/humorvibes-jestry",
-    "main_commit_at_live_verification": "1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922",
-    "source_tag": "humor-genome-wave2-v6",
-    "source_tag_commit": "1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922",
+    "main_commit_at_live_verification": "9bf5a7711a68b1443b63f60b6b05b95b839c7293",
+    "source_tag": "humor-genome-wave2-v7",
+    "source_tag_commit": "9bf5a7711a68b1443b63f60b6b05b95b839c7293",
     "visibility": "public",
-    "anonymous_http_status": 200
+    "anonymous_http_status": 200,
+    "application_contracts_ci": {
+      "url": "https://github.com/aidonerightcorp/humorvibes-jestry/actions/runs/30232730335",
+      "conclusion": "success",
+      "python_package_and_contracts": "success",
+      "container_build_and_smoke_test": "success"
+    }
   },
   "dataset": {
     "url": "https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2",
     "title": "Humor Genome Wave 2 - Public Research Corpus",
-    "public_api_version_observed": 5,
-    "version_observation_note": "The public metadata endpoint still reported version 5 while the public file listing showed the refreshed 2026-07-27 files. No unobserved version number is inferred.",
+    "public_api_version_observed": 7,
     "status": "ready",
     "is_private": false,
     "anonymous_http_status": 200,
@@ -35,7 +40,7 @@
     "expectation_violation_frames": 2581,
     "data_card_sha256": "4e78807e4c87e510bdfd1949e6905a49da45bcc887b70e94bc1060b5589bc7bb",
     "manifest_sha256": "a5159c806f885bc3cf320a5b88691f49060ee7d89946472cebe60cd5dfe33d20",
-    "remote_files_observed_utc": "2026-07-27T00:31:36Z",
+    "remote_files_observed_utc": "2026-07-27T02:48:45Z",
     "remote_files": {
       "DATA_CARD.md": 5073,
       "aligned_phrases.jsonl": 2247343,
@@ -48,14 +53,21 @@
   },
   "notebook": {
     "url": "https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study",
-    "version_pushed": 11,
+    "version_pushed": 12,
     "status": "COMPLETE",
     "is_private": false,
     "anonymous_http_status": 200,
-    "source_commit_printed_by_run": "1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922",
-    "source_tag_printed_by_run": "humor-genome-wave2-v6",
-    "local_source_notebook_sha256": "be60442971afbe8d50f615b9a6d1bd545e75cc5081c5213fa3aaa47c3b6f78ba",
-    "raw_kaggle_log_sha256": "f5e04f1754153adabe098576e97919901427e945c6042e69189f0906de6294aa",
+    "source_commit_printed_by_run": "9bf5a7711a68b1443b63f60b6b05b95b839c7293",
+    "source_tag_printed_by_run": "humor-genome-wave2-v7",
+    "local_source_notebook_sha256": "c23e7f6efcf30e95f48755a4aa3a2b03cd7cbb9d408de018bb38969c2159d5dc",
+    "raw_kaggle_log_sha256": "ed516714a903e2af49d1750db00979d6fc01522e9585a8545684b2074fcd935e",
+    "executive_summary_output": {
+      "filename": "humor_genome_wave2_executive_summary.json",
+      "sha256": "1a422e6d2326f76ecac18a8335bfba3e6f1d641906283767e85dba063bec2d6c",
+      "schema_version": 1,
+      "release_verification": "PASS",
+      "next_evidence_gate": "preregistered within-writer crossover trial with blinded opt-in audience evaluation"
+    },
     "device": "cpu",
     "instrument": {
       "measured_s": 3.188,
@@ -82,10 +94,28 @@
   "local_verification": {
     "full_release_verifier_result": "PASS",
     "fresh_public_download_verifier_result": "PASS",
-    "full_pytest_result": "64 passed",
+    "full_pytest_result": "118 passed",
     "semantic_release_gate": "PASS",
     "manifest_payloads": 6,
     "markdown_missing_local_targets": 0,
-    "github_issue_forms_parsed": 3
+    "github_issue_forms_parsed": 3,
+    "fresh_wheel_import_result": "PASS",
+    "local_documentation_missing_targets": 0
+  },
+  "application_release": {
+    "package_version": "0.4.0",
+    "openapi_sha256": "0c5238360a8c60afb5f34775964bfe44ce41be46d5c33be8b6d659ac34b94011",
+    "deployment_receipt": "jestry_out/deployment_validation.json",
+    "deployment_receipt_version": 3,
+    "deployment_verifier_result": "PASS",
+    "adversarial_contracts": "16/16 passed",
+    "local_container_image_id": "sha256:e5c2ceecfddcf1279a1861735034ac1014231dda907ef7b4ea87f4e19449948a",
+    "container_built_from_current_source": true,
+    "kustomize_render_executed": true,
+    "helm_lint_and_render_executed": true,
+    "public_container_registry_image_verified": false,
+    "hosted_public_api_verified": false,
+    "kubernetes_cluster_apply_executed": false,
+    "live_llm_or_semantic_embedding_quality_validated": false
   }
 }

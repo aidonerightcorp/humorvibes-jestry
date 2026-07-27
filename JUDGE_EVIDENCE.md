@@ -5,20 +5,27 @@
 The canonical evidence is now consolidated and public:
 
 - repository: https://github.com/aidonerightcorp/humorvibes-jestry at commit
-  `1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922`, source tag `humor-genome-wave2-v6`;
+  `9bf5a7711a68b1443b63f60b6b05b95b839c7293`, source tag `humor-genome-wave2-v7`;
 - dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2, latest public files,
   121,670 fail-closed redistributable rows, public and ready. Kaggle's public metadata endpoint
-  still reports version 5 while its file listing shows the refreshed 2026-07-27 payload, so no
-  unobserved version number is inferred;
+  and file listing now agree on dataset version 7;
 - executable write-up:
   https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study,
-  public and COMPLETE; notebook version 11 was pushed from source tag v6 and its live log is
+  public and COMPLETE; notebook version 12 was pushed from source tag v7 and its live log is
   recorded in the publication receipt.
 
 The notebook verifies six mounted payload hashes and the semantic release gate, runs Gemma 2 on
 CPU, reproduces S=3.188 over ten tokens against the pinned 3.19 instrument check, and verifies the
-full form-study receipt before printing `SEPARATION IS NOT ESTABLISHED`. Machine-readable public
+full form-study receipt before printing `SEPARATION IS NOT ESTABLISHED`. It now opens with an
+executive problem/solution/learning/use summary and emits
+`humor_genome_wave2_executive_summary.json`, whose next evidence gate is a preregistered
+within-writer crossover trial with blinded, opt-in audience evaluation. Machine-readable public
 state is in `jestry_out/wave2_publication.json`.
+
+The public repository also carries the 0.4.0 Python SDK/API, remote client, OpenAPI contract,
+Docker/Compose/Kustomize/Helm packaging, and a green public CI run. This is deployable source, not
+a claim that a public container image, hosted API, live Kubernetes cluster, or model-quality result
+exists.
 
 The remainder of this packet preserves earlier evidence and limitations. Statements below about
 private kernels or an unfinished visibility flip describe the dated 2026-07-12 audit, not the

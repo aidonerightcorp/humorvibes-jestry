@@ -8,8 +8,8 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 
 | Surface | Canonical location | Current contract |
 | --- | --- | --- |
-| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public; latest successful run is the canonical executable write-up |
-| Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public and ready; only explicitly redistributable text is included |
+| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public; version 12 is COMPLETE and is the canonical executable write-up |
+| Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v7`. GitHub `main` may move as
