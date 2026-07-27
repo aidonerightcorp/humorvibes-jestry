@@ -2,7 +2,7 @@
 
 This pack is technically complete and reproducible. It is not institutional approval, legal
 advice, consent, recruitment, or collected evidence. Current launch status:
-`READY_FOR_EXTERNAL_ETHICS_AND_REGISTRATION`.
+`REQUIRES_POWER_AND_EXTERNAL_ETHICS_REVIEW`.
 
 ## Required external gates before recruitment
 
@@ -32,7 +32,7 @@ access, or material harm signal until the responsible reviewer documents a dispo
 ## Pre-analysis integrity checks
 
 Verify the protocol digest `cbf0c3d5572b5179ae80eac87a62b9e4e8113cad8ebf06b2e7854a64bba80751`, assignment digest
-`fc9547272d7305c88d015b73fda64ac5cf81f7f261589e11e0c71abc0f716060`, and blinded schedule digest
-`f5d23cedd3965e17c482bf8af2a1003563e70be94b97ee4423a9bf92f51b4d3d`. Confirm the analyst remained blinded, the stopping rule was
+`9f57e9c73052dc13c738f1d5448b36f7bac72479595b39c72a5ab03ff4a4cb1e`, and blinded schedule digest
+`27b361b0f1ffaa1dcfd8ccfd41d83a9582c2ff06bd0c4e99d04716e68b023dd8`. Confirm the analyst remained blinded, the stopping rule was
 not outcome-driven, all deviations are published, and the analysis bundle contains no forbidden
 fields.

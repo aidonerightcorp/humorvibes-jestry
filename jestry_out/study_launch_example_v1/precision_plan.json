@@ -1,23 +1,28 @@
 {
   "attrition_assumption": {
+    "achieved_retention_assurance": 0.9270714348606237,
+    "method": "exact binomial tail for normal study sizes; continuity-corrected normal approximation above 5000 required writers",
+    "minimum_retention_assurance": 0.9,
     "writer_attrition_rate": 0.15
   },
   "design": {
+    "claim_threshold": 0.25,
+    "effect_above_claim_threshold": 0.25,
     "independent_unit": "writer",
     "premises_per_writer": 2,
-    "target_effect": 0.25,
+    "target_effect": 0.5,
     "target_power": 0.8,
     "two_sided_alpha": 0.05
   },
   "expected_95_percent_half_width_at_minimum": 0.17316725422853788,
   "method": "normal approximation over independent writer-level mean paired effects",
-  "plan_digest": "4dfe4d9ad4ff7c8180cce27716bc93f33ebfd9bdd62c5fdf8e459ed7c6dbe28c",
+  "plan_digest": "fc4ccba7b8d30765485b40840ba21b105404cc53e87f709c210e2c4d10dc1414",
   "planned_counts": {
     "calculated_analyzable_writers": 49,
     "minimum_analyzable_writers": 49,
     "paired_blocks_at_minimum": 98,
     "paired_premises_per_analyzable_writer": 2,
-    "writers_to_recruit": 58
+    "writers_to_recruit": 62
   },
   "receipt_type": "humorvibes_prospective_precision_plan",
   "receipt_version": 1,
@@ -25,7 +30,8 @@
     "assumptions_require_domain_review": true,
     "authorizes_human_claim": false,
     "hierarchical_simulation_still_recommended": true,
-    "prospective_not_observed_power": true
+    "prospective_not_observed_power": true,
+    "target_effect_is_not_the_claim_threshold": true
   },
   "variance_assumptions": {
     "between_writer_sd": 0.45,
