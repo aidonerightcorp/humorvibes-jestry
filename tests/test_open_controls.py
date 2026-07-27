@@ -302,6 +302,7 @@ def test_notebook_builder_is_deterministic_and_every_code_cell_compiles(tmp_path
     notebook = json.loads(first)
     assert notebook["nbformat"] == 4
     assert len(notebook["cells"]) >= 12
+    assert len({cell["id"] for cell in notebook["cells"]}) == len(notebook["cells"])
     for cell in notebook["cells"]:
         if cell["cell_type"] == "code":
             compile("".join(cell["source"]), str(path), "exec")

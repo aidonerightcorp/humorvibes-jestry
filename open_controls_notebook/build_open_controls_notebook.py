@@ -221,8 +221,9 @@ CELLS: list[tuple[str, str]] = [
 
 def build() -> Path:
     notebook_cells = []
-    for kind, source in CELLS:
+    for index, (kind, source) in enumerate(CELLS):
         cell = {
+            "id": f"{kind}-{index:02d}",
             "cell_type": kind,
             "metadata": {},
             "source": [line + "\n" for line in source.splitlines()],
