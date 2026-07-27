@@ -129,6 +129,25 @@ The application supports deterministic hash embeddings, an operator allowlist of
 models, OpenAI-compatible embedding endpoints, and optional sentence-transformers. Similarity is
 not proof of novelty, equivalence, funniness, or audience suitability.
 
+The original query repeats the controlled entity and setting, so it is a pipeline baseline rather
+than a demanding semantic test. Build and evaluate the harder track with:
+
+```bash
+humorvibes retrieval-hard-build \
+  --release-root kaggle_open_controls \
+  --out-dir hard_retrieval_v1
+humorvibes retrieval-benchmark --root hard_retrieval_v1 --model lexical:tfidf
+humorvibes retrieval-benchmark --root hard_retrieval_v1 --model hash:128
+humorvibes retrieval-benchmark --root hard_retrieval_v1 --model ollama:embeddinggemma
+```
+
+The hard query removes the entity and both pivot words, describes their senses and situation
+indirectly, and records two within-split negatives: the same frame in a different context and the
+same context with a different frame. Template families remain isolated across train, validation,
+and test. Any configured embedding model can use the same evaluator; its exact allowlisted model
+ID, dimensions, normalization, benchmark digest, MRR, Recall@k, median rank, and hard-negative win
+rates are recorded. Qrels still come from generator lineage, not people.
+
 ## Human-rating lane
 
 `human-rating.schema.json` is a join contract, not generated evidence. A real study should:

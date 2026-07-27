@@ -23,6 +23,9 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
 - [x] Add a deterministic human-study launch pack with prospective writer-level precision,
   attrition-aware recruitment, balanced crossover randomization, separated blinded/restricted
   schedules, preregistration draft, operational runbook, and a fail-closed no-observations receipt.
+- [x] Add a provider-neutral hard retrieval track that masks entities/pivots, preserves
+  family-disjoint splits, records same-frame and same-context negatives, audits lexical leakage,
+  and runs TF-IDF or any allowlisted embedding backend against one frozen evaluator.
 
 Acceptance for P0 work: a new machine can clone the repository, install dependencies, run tests,
 download the public data, and pass `verify_wave2_release.py` without access to the private corpus.

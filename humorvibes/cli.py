@@ -130,6 +130,22 @@ def main() -> int:
     )
     controls_models.add_argument("path", type=Path)
 
+    retrieval_build = sub.add_parser(
+        "retrieval-hard-build",
+        help="derive masked hard queries and hard negatives from an Open Controls release",
+    )
+    retrieval_build.add_argument("--release-root", type=Path, required=True)
+    retrieval_build.add_argument("--out-dir", type=Path, required=True)
+    retrieval_build.add_argument("--force", action="store_true")
+
+    retrieval_benchmark = sub.add_parser(
+        "retrieval-benchmark",
+        help="evaluate TF-IDF or an allowlisted embedding model on frozen hard qrels",
+    )
+    retrieval_benchmark.add_argument("--root", type=Path, required=True)
+    retrieval_benchmark.add_argument("--model", default="lexical:tfidf")
+    retrieval_benchmark.add_argument("--out", type=Path)
+
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
     if args.command == "serve":
@@ -166,6 +182,44 @@ def main() -> int:
             _dump({"error": exc.public()})
             return 2
         _dump(payload)
+        return 0
+
+    if args.command in {"retrieval-hard-build", "retrieval-benchmark"}:
+        from .retrieval_benchmark import (
+            build_hard_retrieval_rows,
+            evaluate_retrieval,
+            load_retrieval_dataset,
+            read_jsonl,
+            write_retrieval_dataset,
+        )
+
+        try:
+            if args.command == "retrieval-hard-build":
+                dataset = build_hard_retrieval_rows(
+                    read_jsonl(args.release_root / "retrieval_documents.jsonl"),
+                    read_jsonl(args.release_root / "retrieval_queries.jsonl"),
+                    read_jsonl(args.release_root / "retrieval_qrels.jsonl"),
+                )
+                payload = write_retrieval_dataset(
+                    args.out_dir, dataset, overwrite=args.force
+                )
+            else:
+                payload = evaluate_retrieval(
+                    load_retrieval_dataset(args.root), model_id=args.model
+                )
+        except (OSError, json.JSONDecodeError) as exc:
+            _dump({"error": {"code": "invalid_retrieval_file", "message": str(exc)}})
+            return 2
+        except IntegrationError as exc:
+            _dump({"error": exc.public()})
+            return 2
+        _dump(payload)
+        if getattr(args, "out", None):
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(
+                json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
         return 0
 
     if args.command in {
