@@ -100,6 +100,12 @@ def main() -> int:
     study_launch.add_argument("--alpha", type=float, default=0.05)
     study_launch.add_argument("--power", type=float, default=0.80)
     study_launch.add_argument("--writer-attrition-rate", type=float, default=0.15)
+    study_launch.add_argument(
+        "--retention-assurance",
+        type=float,
+        default=0.90,
+        help="minimum planned probability of retaining the analyzable writer count",
+    )
     study_launch.add_argument("--force", action="store_true", help="replace files in an existing pack")
 
     study_key = sub.add_parser(
@@ -351,6 +357,7 @@ def main() -> int:
                     alpha=args.alpha,
                     power=args.power,
                     writer_attrition_rate=args.writer_attrition_rate,
+                    retention_assurance=args.retention_assurance,
                 )
                 payload = write_launch_pack(args.out_dir, pack, overwrite=args.force)
         except (OSError, json.JSONDecodeError) as exc:

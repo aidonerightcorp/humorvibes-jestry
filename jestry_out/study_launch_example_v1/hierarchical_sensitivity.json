@@ -1,0 +1,176 @@
+{
+  "planning_recommendation": {
+    "advisory_only": true,
+    "approximate_required_counts": {
+      "calculated_analyzable_writers": 80,
+      "minimum_analyzable_writers": 80,
+      "paired_blocks_at_minimum": 160,
+      "paired_premises_per_analyzable_writer": 2,
+      "writers_to_recruit": 99
+    },
+    "approximation_requires_statistical_review": true,
+    "combined_within_premise_effect_sd": 0.9273618495495705,
+    "minimum_ratings_at_approximate_required_count": 1280,
+    "scenario": "conservative_rating_noise"
+  },
+  "receipt_type": "humorvibes_hierarchical_sensitivity_grid",
+  "receipt_version": 1,
+  "review_gate": {
+    "all_scenarios_meet_target": false,
+    "requires_institutional_statistical_review": true,
+    "target_conditional_power": 0.8
+  },
+  "scenarios": {
+    "conservative_rating_noise": {
+      "assumptions": {
+        "analyzable_writers": 49,
+        "audience_rating_sd": 1.0,
+        "between_writer_sd": 0.45,
+        "claim_threshold": 0.25,
+        "premises_per_writer": 2,
+        "ratings_per_material": 4,
+        "target_effect": 0.5,
+        "two_sided_alpha": 0.05,
+        "within_writer_premise_sd": 0.6,
+        "writer_attrition_rate": 0.15,
+        "writers_to_recruit": 62
+      },
+      "method": "prospective Gaussian writer/premise/rating hierarchy with attrition and a normal lower confidence bound",
+      "planning_sensitivity": {
+        "approximate_required_counts": {
+          "calculated_analyzable_writers": 80,
+          "minimum_analyzable_writers": 80,
+          "paired_blocks_at_minimum": 160,
+          "paired_premises_per_analyzable_writer": 2,
+          "writers_to_recruit": 99
+        },
+        "approximation_requires_statistical_review": true,
+        "combined_within_premise_effect_sd": 0.9273618495495705,
+        "minimum_ratings_at_approximate_required_count": 1280
+      },
+      "receipt_type": "humorvibes_hierarchical_power_simulation",
+      "receipt_version": 1,
+      "results": {
+        "conditional_claim_gate_power": 0.6241173275393808,
+        "conditional_power_95_percent_monte_carlo_interval": [
+          0.6017555607931467,
+          0.6459622026032455
+        ],
+        "maximum_observed_retained_writers": 60,
+        "mean_retained_writers": 52.6285,
+        "minimum_observed_retained_writers": 43,
+        "retention_gate_probability": 0.9205,
+        "unconditional_claim_gate_probability": 0.5745
+      },
+      "seed": 20260728,
+      "simulation_digest": "413e528ca65efbd6ebbd48b9b41a6ace45b9699dd2e313c90140f689b3922d88",
+      "simulations": 2000,
+      "truth_boundary": {
+        "normal_interval_is_not_the_final_writer_bootstrap": true,
+        "prospective_assumptions_not_observed_variance": true,
+        "simulation_authorizes_recruitment_or_claim": false
+      }
+    },
+    "declared_variance_only": {
+      "assumptions": {
+        "analyzable_writers": 49,
+        "audience_rating_sd": 0.0,
+        "between_writer_sd": 0.45,
+        "claim_threshold": 0.25,
+        "premises_per_writer": 2,
+        "ratings_per_material": 8,
+        "target_effect": 0.5,
+        "two_sided_alpha": 0.05,
+        "within_writer_premise_sd": 0.6,
+        "writer_attrition_rate": 0.15,
+        "writers_to_recruit": 62
+      },
+      "method": "prospective Gaussian writer/premise/rating hierarchy with attrition and a normal lower confidence bound",
+      "planning_sensitivity": {
+        "approximate_required_counts": {
+          "calculated_analyzable_writers": 49,
+          "minimum_analyzable_writers": 49,
+          "paired_blocks_at_minimum": 98,
+          "paired_premises_per_analyzable_writer": 2,
+          "writers_to_recruit": 62
+        },
+        "approximation_requires_statistical_review": true,
+        "combined_within_premise_effect_sd": 0.6,
+        "minimum_ratings_at_approximate_required_count": 1568
+      },
+      "receipt_type": "humorvibes_hierarchical_power_simulation",
+      "receipt_version": 1,
+      "results": {
+        "conditional_claim_gate_power": 0.8372717508055854,
+        "conditional_power_95_percent_monte_carlo_interval": [
+          0.8198144950451061,
+          0.8533402331137672
+        ],
+        "maximum_observed_retained_writers": 61,
+        "mean_retained_writers": 52.6525,
+        "minimum_observed_retained_writers": 40,
+        "retention_gate_probability": 0.931,
+        "unconditional_claim_gate_probability": 0.7795
+      },
+      "seed": 20260726,
+      "simulation_digest": "49c1cd16cb916d36483e4982450cc6c054a845a753d29672a57e204a92f62921",
+      "simulations": 2000,
+      "truth_boundary": {
+        "normal_interval_is_not_the_final_writer_bootstrap": true,
+        "prospective_assumptions_not_observed_variance": true,
+        "simulation_authorizes_recruitment_or_claim": false
+      }
+    },
+    "moderate_rating_noise": {
+      "assumptions": {
+        "analyzable_writers": 49,
+        "audience_rating_sd": 0.75,
+        "between_writer_sd": 0.45,
+        "claim_threshold": 0.25,
+        "premises_per_writer": 2,
+        "ratings_per_material": 8,
+        "target_effect": 0.5,
+        "two_sided_alpha": 0.05,
+        "within_writer_premise_sd": 0.6,
+        "writer_attrition_rate": 0.15,
+        "writers_to_recruit": 62
+      },
+      "method": "prospective Gaussian writer/premise/rating hierarchy with attrition and a normal lower confidence bound",
+      "planning_sensitivity": {
+        "approximate_required_counts": {
+          "calculated_analyzable_writers": 57,
+          "minimum_analyzable_writers": 57,
+          "paired_blocks_at_minimum": 114,
+          "paired_premises_per_analyzable_writer": 2,
+          "writers_to_recruit": 72
+        },
+        "approximation_requires_statistical_review": true,
+        "combined_within_premise_effect_sd": 0.7075485849042453,
+        "minimum_ratings_at_approximate_required_count": 1824
+      },
+      "receipt_type": "humorvibes_hierarchical_power_simulation",
+      "receipt_version": 1,
+      "results": {
+        "conditional_claim_gate_power": 0.7665245202558635,
+        "conditional_power_95_percent_monte_carlo_interval": [
+          0.7468484571226941,
+          0.7851112968808924
+        ],
+        "maximum_observed_retained_writers": 61,
+        "mean_retained_writers": 52.7085,
+        "minimum_observed_retained_writers": 42,
+        "retention_gate_probability": 0.938,
+        "unconditional_claim_gate_probability": 0.719
+      },
+      "seed": 20260727,
+      "simulation_digest": "0986cc0344d64771d50750ac24a4b37f8829d71a555fb5efce48dda5519388be",
+      "simulations": 2000,
+      "truth_boundary": {
+        "normal_interval_is_not_the_final_writer_bootstrap": true,
+        "prospective_assumptions_not_observed_variance": true,
+        "simulation_authorizes_recruitment_or_claim": false
+      }
+    }
+  },
+  "sensitivity_digest": "1985294d5bafbd086ab687450b791e924d9c469ef6ce5f351b61c0e372dc8b16"
+}

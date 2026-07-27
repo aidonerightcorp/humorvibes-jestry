@@ -84,17 +84,24 @@ humorvibes study-launch \
   --out-dir study_launch/writer-crossover-v1
 ```
 
-The command computes a prospective writer-level precision plan, adjusts recruitment for declared
-attrition, freezes the resulting minimum counts, creates balanced crossover assignments, and
+The command computes a prospective writer-level precision plan, distinguishes the anticipated
+effect from the lower-bound claim threshold, chooses recruitment to meet a declared probability
+of retaining the analyzable writer count, runs three deterministic hierarchical sensitivity
+scenarios, freezes the resulting minimum counts, creates balanced crossover assignments, and
 uses the mode-0600 key so a public seed cannot reveal assignments, and writes separate restricted
 and blinded schedules. It also writes a complete preregistration draft,
 an operations runbook, and a receipt whose status remains
-`READY_FOR_EXTERNAL_ETHICS_AND_REGISTRATION`.
+`REQUIRES_POWER_AND_EXTERNAL_ETHICS_REVIEW` whenever any checked sensitivity scenario misses the
+target power. The generated preregistration draft reports the advisory count for the most
+conservative checked scenario; a responsible statistician and ethics process must choose and
+freeze the governing assumptions before registration or recruitment.
 
-The default assumptions are a 0.25-point target effect, 0.45 between-writer SD, 0.60 within-writer
-premise SD, two paired premises per writer, two-sided alpha 0.05, power 0.80, and 15% writer
-attrition. These are transparent starting assumptions, not observed variance. Review sensitivity
-across plausible values and add a hierarchical simulation before institutional submission.
+The default assumptions are a 0.50-point anticipated effect, a 0.25-point lower-bound claim
+threshold, 0.45 between-writer SD, 0.60 within-writer premise SD, two paired premises per writer,
+two-sided alpha 0.05, power 0.80, 15% writer attrition, and at least 90% probability of retaining
+the analyzable writer count. These are transparent starting assumptions, not observed variance.
+The checked sensitivity scenarios add zero, moderate, and conservative audience-rating noise;
+their receipt is `hierarchical_sensitivity.json`.
 
 `restricted_assignment_map.json` contains the condition mapping and must be access-controlled.
 The randomization key stays outside the launch directory; the receipt records only its SHA-256

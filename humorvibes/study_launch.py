@@ -16,7 +16,7 @@ import random
 import secrets
 import stat
 from pathlib import Path
-from statistics import NormalDist
+from statistics import NormalDist, fmean, stdev
 from typing import Any
 
 from .errors import IntegrationError
@@ -63,6 +63,58 @@ def _digest(value: Any) -> str:
     ).hexdigest()
 
 
+def _binomial_retention_probability(*, recruited: int, required: int, retention: float) -> float:
+    """Return P(retained >= required) without requiring scipy."""
+
+    if recruited < required:
+        return 0.0
+    if retention >= 1.0:
+        return 1.0
+    if retention <= 0.0:
+        return 0.0
+    # Exact log-space summation is stable and inexpensive for the bounded study sizes normally
+    # produced here. Very large administrative studies use a continuity-corrected normal
+    # approximation rather than making the command spend minutes summing a tail.
+    if required <= 5_000:
+        log_terms = [
+            math.lgamma(recruited + 1)
+            - math.lgamma(value + 1)
+            - math.lgamma(recruited - value + 1)
+            + value * math.log(retention)
+            + (recruited - value) * math.log1p(-retention)
+            for value in range(required)
+        ]
+        largest = max(log_terms)
+        below = math.exp(largest) * sum(math.exp(value - largest) for value in log_terms)
+        return max(0.0, min(1.0, 1.0 - below))
+    mean = recruited * retention
+    variance = recruited * retention * (1.0 - retention)
+    if variance == 0.0:
+        return float(mean >= required)
+    below = NormalDist(mean, math.sqrt(variance)).cdf(required - 0.5)
+    return max(0.0, min(1.0, 1.0 - below))
+
+
+def _attrition_assured_recruitment(
+    *, analyzable_writers: int, attrition_rate: float, assurance: float
+) -> tuple[int, float]:
+    retention = 1.0 - attrition_rate
+    recruited = max(analyzable_writers, math.ceil(analyzable_writers / retention))
+    probability = _binomial_retention_probability(
+        recruited=recruited,
+        required=analyzable_writers,
+        retention=retention,
+    )
+    while probability < assurance:
+        recruited += 1
+        probability = _binomial_retention_probability(
+            recruited=recruited,
+            required=analyzable_writers,
+            retention=retention,
+        )
+    return recruited, probability
+
+
 def prospective_precision_plan(
     *,
     target_effect: float = 0.25,
@@ -72,6 +124,8 @@ def prospective_precision_plan(
     alpha: float = 0.05,
     power: float = 0.80,
     writer_attrition_rate: float = 0.15,
+    claim_threshold: float = 0.0,
+    retention_assurance: float = 0.90,
     minimum_writers: int = 12,
 ) -> dict[str, Any]:
     """Plan a two-sided paired writer-level test under declared assumptions.
@@ -82,6 +136,15 @@ def prospective_precision_plan(
     """
 
     effect = _bounded_number(target_effect, "target_effect", minimum=0.0, maximum=4.0, inclusive_minimum=False)
+    threshold = _bounded_number(
+        claim_threshold, "claim_threshold", minimum=0.0, maximum=4.0
+    )
+    if effect <= threshold:
+        raise _error(
+            "invalid_launch_assumption",
+            "target_effect must exceed claim_threshold; otherwise the planned claim gate has no positive effect gap.",
+        )
+    effect_gap = effect - threshold
     between_sd = _bounded_number(
         between_writer_sd, "between_writer_sd", minimum=0.0, maximum=10.0
     )
@@ -92,6 +155,12 @@ def prospective_precision_plan(
     alpha_value = _bounded_number(alpha, "alpha", minimum=0.0, maximum=0.25, inclusive_minimum=False)
     power_value = _bounded_number(power, "power", minimum=0.50, maximum=0.999)
     attrition = _bounded_number(writer_attrition_rate, "writer_attrition_rate", minimum=0.0, maximum=0.75)
+    assurance = _bounded_number(
+        retention_assurance,
+        "retention_assurance",
+        minimum=0.50,
+        maximum=0.999,
+    )
     minimum = _bounded_integer(minimum_writers, "minimum_writers", minimum=2, maximum=100_000)
 
     writer_mean_sd = math.sqrt(between_sd**2 + within_sd**2 / premises)
@@ -99,9 +168,13 @@ def prospective_precision_plan(
         raise _error("invalid_launch_assumption", "At least one variance assumption must be positive.")
     z_alpha = NormalDist().inv_cdf(1.0 - alpha_value / 2.0)
     z_power = NormalDist().inv_cdf(power_value)
-    calculated = math.ceil(((z_alpha + z_power) * writer_mean_sd / effect) ** 2)
+    calculated = math.ceil(((z_alpha + z_power) * writer_mean_sd / effect_gap) ** 2)
     analyzable = max(minimum, calculated)
-    recruit = math.ceil(analyzable / (1.0 - attrition))
+    recruit, achieved_assurance = _attrition_assured_recruitment(
+        analyzable_writers=analyzable,
+        attrition_rate=attrition,
+        assurance=assurance,
+    )
     half_width = z_alpha * writer_mean_sd / math.sqrt(analyzable)
     result = {
         "receipt_type": "humorvibes_prospective_precision_plan",
@@ -111,6 +184,8 @@ def prospective_precision_plan(
             "two_sided_alpha": alpha_value,
             "target_power": power_value,
             "target_effect": effect,
+            "claim_threshold": threshold,
+            "effect_above_claim_threshold": effect_gap,
             "premises_per_writer": premises,
             "independent_unit": "writer",
         },
@@ -119,7 +194,12 @@ def prospective_precision_plan(
             "within_writer_premise_sd": within_sd,
             "derived_writer_mean_effect_sd": writer_mean_sd,
         },
-        "attrition_assumption": {"writer_attrition_rate": attrition},
+        "attrition_assumption": {
+            "writer_attrition_rate": attrition,
+            "minimum_retention_assurance": assurance,
+            "achieved_retention_assurance": achieved_assurance,
+            "method": "exact binomial tail for normal study sizes; continuity-corrected normal approximation above 5000 required writers",
+        },
         "planned_counts": {
             "calculated_analyzable_writers": calculated,
             "minimum_analyzable_writers": analyzable,
@@ -132,10 +212,171 @@ def prospective_precision_plan(
             "prospective_not_observed_power": True,
             "assumptions_require_domain_review": True,
             "hierarchical_simulation_still_recommended": True,
+            "target_effect_is_not_the_claim_threshold": True,
             "authorizes_human_claim": False,
         },
     }
     result["plan_digest"] = _digest(result)
+    return result
+
+
+def hierarchical_power_simulation(
+    *,
+    target_effect: float,
+    claim_threshold: float,
+    between_writer_sd: float,
+    within_writer_premise_sd: float,
+    premises_per_writer: int,
+    audience_rating_sd: float,
+    ratings_per_material: int,
+    analyzable_writers: int,
+    writers_to_recruit: int,
+    writer_attrition_rate: float,
+    alpha: float = 0.05,
+    simulations: int = 2_000,
+    seed: int = 20_260_727,
+) -> dict[str, Any]:
+    """Simulate the planned hierarchy and the same lower-interval claim boundary.
+
+    This prospective sensitivity calculation models writer heterogeneity, premise-level effect
+    variation, rating noise after material-level aggregation, and attrition. It is deliberately
+    not fitted to outcome-bearing pilot data.
+    """
+
+    effect = _bounded_number(target_effect, "target_effect", minimum=0.0, maximum=4.0)
+    threshold = _bounded_number(claim_threshold, "claim_threshold", minimum=0.0, maximum=4.0)
+    if effect <= threshold:
+        raise _error("invalid_launch_assumption", "Simulation target must exceed the claim threshold.")
+    between_sd = _bounded_number(
+        between_writer_sd, "between_writer_sd", minimum=0.0, maximum=10.0
+    )
+    within_sd = _bounded_number(
+        within_writer_premise_sd, "within_writer_premise_sd", minimum=0.0, maximum=10.0
+    )
+    audience_sd = _bounded_number(
+        audience_rating_sd, "audience_rating_sd", minimum=0.0, maximum=10.0
+    )
+    premises = _bounded_integer(premises_per_writer, "premises_per_writer", minimum=1, maximum=100)
+    ratings = _bounded_integer(ratings_per_material, "ratings_per_material", minimum=1, maximum=10_000)
+    required = _bounded_integer(analyzable_writers, "analyzable_writers", minimum=2, maximum=100_000)
+    recruited = _bounded_integer(writers_to_recruit, "writers_to_recruit", minimum=2, maximum=150_000)
+    if recruited < required:
+        raise _error("invalid_launch_assumption", "writers_to_recruit must cover analyzable_writers.")
+    attrition = _bounded_number(
+        writer_attrition_rate, "writer_attrition_rate", minimum=0.0, maximum=0.75
+    )
+    alpha_value = _bounded_number(alpha, "alpha", minimum=0.0, maximum=0.25, inclusive_minimum=False)
+    repetitions = _bounded_integer(simulations, "simulations", minimum=100, maximum=100_000)
+    seed_value = _bounded_integer(seed, "seed", minimum=0, maximum=2**31 - 1)
+
+    rng = random.Random(seed_value)
+    z_alpha = NormalDist().inv_cdf(1.0 - alpha_value / 2.0)
+    # Each paired material effect contains two independently averaged audience-rating means.
+    paired_rating_noise_sd = math.sqrt(2.0) * audience_sd / math.sqrt(ratings)
+    retention_met = 0
+    claim_gate_passed = 0
+    conditional_passed = 0
+    retained_counts: list[int] = []
+    for _ in range(repetitions):
+        retained = sum(rng.random() >= attrition for _ in range(recruited))
+        retained_counts.append(retained)
+        if retained < required:
+            continue
+        retention_met += 1
+        writer_effects: list[float] = []
+        for _writer in range(retained):
+            writer_shift = rng.gauss(0.0, between_sd)
+            premise_effects = [
+                effect
+                + writer_shift
+                + rng.gauss(0.0, within_sd)
+                + rng.gauss(0.0, paired_rating_noise_sd)
+                for _premise in range(premises)
+            ]
+            writer_effects.append(fmean(premise_effects))
+        estimate = fmean(writer_effects)
+        standard_error = stdev(writer_effects) / math.sqrt(len(writer_effects))
+        lower = estimate - z_alpha * standard_error
+        if lower > threshold:
+            conditional_passed += 1
+            claim_gate_passed += 1
+
+    def _wilson(successes: int, total: int) -> list[float]:
+        if total == 0:
+            return [0.0, 0.0]
+        probability = successes / total
+        denominator = 1.0 + z_alpha**2 / total
+        center = (probability + z_alpha**2 / (2.0 * total)) / denominator
+        half = (
+            z_alpha
+            * math.sqrt(
+                probability * (1.0 - probability) / total
+                + z_alpha**2 / (4.0 * total**2)
+            )
+            / denominator
+        )
+        return [max(0.0, center - half), min(1.0, center + half)]
+
+    result = {
+        "receipt_type": "humorvibes_hierarchical_power_simulation",
+        "receipt_version": 1,
+        "method": "prospective Gaussian writer/premise/rating hierarchy with attrition and a normal lower confidence bound",
+        "seed": seed_value,
+        "simulations": repetitions,
+        "assumptions": {
+            "target_effect": effect,
+            "claim_threshold": threshold,
+            "between_writer_sd": between_sd,
+            "within_writer_premise_sd": within_sd,
+            "audience_rating_sd": audience_sd,
+            "ratings_per_material": ratings,
+            "premises_per_writer": premises,
+            "analyzable_writers": required,
+            "writers_to_recruit": recruited,
+            "writer_attrition_rate": attrition,
+            "two_sided_alpha": alpha_value,
+        },
+        "results": {
+            "retention_gate_probability": retention_met / repetitions,
+            "conditional_claim_gate_power": conditional_passed / retention_met if retention_met else 0.0,
+            "unconditional_claim_gate_probability": claim_gate_passed / repetitions,
+            "conditional_power_95_percent_monte_carlo_interval": _wilson(
+                conditional_passed, retention_met
+            ),
+            "mean_retained_writers": fmean(retained_counts),
+            "minimum_observed_retained_writers": min(retained_counts),
+            "maximum_observed_retained_writers": max(retained_counts),
+        },
+        "truth_boundary": {
+            "prospective_assumptions_not_observed_variance": True,
+            "normal_interval_is_not_the_final_writer_bootstrap": True,
+            "simulation_authorizes_recruitment_or_claim": False,
+        },
+    }
+    combined_within_sd = math.sqrt(within_sd**2 + paired_rating_noise_sd**2)
+    approximate_plan = prospective_precision_plan(
+        target_effect=effect,
+        claim_threshold=threshold,
+        between_writer_sd=between_sd,
+        within_writer_premise_sd=combined_within_sd,
+        premises_per_writer=premises,
+        alpha=alpha_value,
+        power=0.80,
+        writer_attrition_rate=attrition,
+        retention_assurance=0.90,
+        minimum_writers=2,
+    )
+    result["planning_sensitivity"] = {
+        "combined_within_premise_effect_sd": combined_within_sd,
+        "approximate_required_counts": approximate_plan["planned_counts"],
+        "minimum_ratings_at_approximate_required_count": (
+            approximate_plan["planned_counts"]["paired_blocks_at_minimum"]
+            * 2
+            * ratings
+        ),
+        "approximation_requires_statistical_review": True,
+    }
+    result["simulation_digest"] = _digest(result)
     return result
 
 
@@ -290,9 +531,16 @@ def deterministic_randomization(
     return result
 
 
-def _preregistration_markdown(protocol: dict[str, Any], precision: dict[str, Any], receipt: dict[str, Any]) -> str:
+def _preregistration_markdown(
+    protocol: dict[str, Any],
+    precision: dict[str, Any],
+    sensitivity: dict[str, Any],
+    receipt: dict[str, Any],
+) -> str:
     counts = precision["planned_counts"]
     variance = precision["variance_assumptions"]
+    recommendation = sensitivity["planning_recommendation"]
+    recommended_counts = recommendation["approximate_required_counts"]
     return f"""# Preregistration draft: {protocol['title']}
 
 Status: **not registered**. This complete draft must be submitted to a timestamped registry and
@@ -323,15 +571,24 @@ members receive one version of each writer-premise block, never both, through bl
 
 - Two-sided alpha: {precision['design']['two_sided_alpha']}
 - Target power: {precision['design']['target_power']}
-- Target effect: {precision['design']['target_effect']}
+- Anticipated effect: {precision['design']['target_effect']}
+- Claim threshold: {precision['design']['claim_threshold']}
+- Effect above the claim threshold used for planning: {precision['design']['effect_above_claim_threshold']}
 - Between-writer SD: {variance['between_writer_sd']}
 - Within-writer premise SD: {variance['within_writer_premise_sd']}
 - Analyzable writers: {counts['minimum_analyzable_writers']}
 - Writers to recruit after declared attrition: {counts['writers_to_recruit']}
+- Planned probability of retaining the analyzable writer count:
+  {precision['attrition_assumption']['achieved_retention_assurance']:.3f}
 - Minimum paired writer-premise blocks: {counts['paired_blocks_at_minimum']}
 
-These are prospective assumptions, not observed power. A hierarchical simulation sensitivity
-analysis should accompany institutional review before recruitment.
+These are prospective assumptions, not observed power. The generated hierarchical sensitivity
+analysis did not automatically authorize registration or recruitment. Its most conservative
+checked scenario is `{recommendation['scenario']}` and its normal-approximation advisory calls for
+{recommended_counts['minimum_analyzable_writers']} analyzable writers,
+{recommended_counts['writers_to_recruit']} recruited writers, and
+{recommendation['minimum_ratings_at_approximate_required_count']} ratings. A statistician and the
+responsible ethics process must choose and freeze the governing scenario before registration.
 
 ## Inclusion, exclusion, and stopping
 
@@ -415,22 +672,27 @@ def build_launch_pack(
     alpha: float = 0.05,
     power: float = 0.80,
     writer_attrition_rate: float = 0.15,
+    retention_assurance: float = 0.90,
 ) -> dict[str, Any]:
     """Build a deterministic, non-claim-ready precollection pack in memory."""
 
     plan = validate_protocol(protocol)
     if plan["data_origin"] != "human_observed":
         raise _error("launch_requires_human_protocol", "Study launch requires a human_observed protocol.")
+    claim_threshold = float(plan["minimally_important_difference"])
+    anticipated_effect = float(
+        target_effect if target_effect is not None else 2.0 * claim_threshold
+    )
     precision = prospective_precision_plan(
-        target_effect=float(
-            target_effect if target_effect is not None else plan["minimally_important_difference"]
-        ),
+        target_effect=anticipated_effect,
         between_writer_sd=between_writer_sd,
         within_writer_premise_sd=within_writer_premise_sd,
         premises_per_writer=premises_per_writer,
         alpha=alpha,
         power=power,
         writer_attrition_rate=writer_attrition_rate,
+        claim_threshold=claim_threshold,
+        retention_assurance=retention_assurance,
         minimum_writers=int(plan["minimum_writers"]),
     )
     counts = precision["planned_counts"]
@@ -453,23 +715,95 @@ def build_launch_pack(
         seed=int(frozen["assignment_seed"]),
         assignment_key=assignment_key,
     )
+    simulation_scenarios = {
+        "declared_variance_only": hierarchical_power_simulation(
+            target_effect=anticipated_effect,
+            claim_threshold=claim_threshold,
+            between_writer_sd=between_writer_sd,
+            within_writer_premise_sd=within_writer_premise_sd,
+            premises_per_writer=premises_per_writer,
+            audience_rating_sd=0.0,
+            ratings_per_material=8,
+            analyzable_writers=required_writers,
+            writers_to_recruit=int(counts["writers_to_recruit"]),
+            writer_attrition_rate=writer_attrition_rate,
+            alpha=alpha,
+            seed=int(frozen["assignment_seed"]),
+        ),
+        "moderate_rating_noise": hierarchical_power_simulation(
+            target_effect=anticipated_effect,
+            claim_threshold=claim_threshold,
+            between_writer_sd=between_writer_sd,
+            within_writer_premise_sd=within_writer_premise_sd,
+            premises_per_writer=premises_per_writer,
+            audience_rating_sd=0.75,
+            ratings_per_material=8,
+            analyzable_writers=required_writers,
+            writers_to_recruit=int(counts["writers_to_recruit"]),
+            writer_attrition_rate=writer_attrition_rate,
+            alpha=alpha,
+            seed=int(frozen["assignment_seed"]) + 1,
+        ),
+        "conservative_rating_noise": hierarchical_power_simulation(
+            target_effect=anticipated_effect,
+            claim_threshold=claim_threshold,
+            between_writer_sd=between_writer_sd,
+            within_writer_premise_sd=within_writer_premise_sd,
+            premises_per_writer=premises_per_writer,
+            audience_rating_sd=1.0,
+            ratings_per_material=4,
+            analyzable_writers=required_writers,
+            writers_to_recruit=int(counts["writers_to_recruit"]),
+            writer_attrition_rate=writer_attrition_rate,
+            alpha=alpha,
+            seed=int(frozen["assignment_seed"]) + 2,
+        ),
+    }
+    sensitivity = {
+        "receipt_type": "humorvibes_hierarchical_sensitivity_grid",
+        "receipt_version": 1,
+        "scenarios": simulation_scenarios,
+        "review_gate": {
+            "target_conditional_power": power,
+            "all_scenarios_meet_target": all(
+                row["results"]["conditional_claim_gate_power"] >= power
+                for row in simulation_scenarios.values()
+            ),
+            "requires_institutional_statistical_review": True,
+        },
+    }
+    most_conservative = max(
+        simulation_scenarios.items(),
+        key=lambda item: item[1]["planning_sensitivity"]["approximate_required_counts"][
+            "minimum_analyzable_writers"
+        ],
+    )
+    sensitivity["planning_recommendation"] = {
+        "scenario": most_conservative[0],
+        **most_conservative[1]["planning_sensitivity"],
+        "advisory_only": True,
+    }
+    sensitivity["sensitivity_digest"] = _digest(sensitivity)
+    sensitivity_ready = bool(sensitivity["review_gate"]["all_scenarios_meet_target"])
     receipt = {
         "receipt_type": "humorvibes_human_study_launch_pack",
         "receipt_version": 1,
         "status": (
             "AWAITING_ETHICS_AND_OPERATIONAL_APPROVAL"
-            if frozen["preregistered"]
-            else "READY_FOR_EXTERNAL_ETHICS_AND_REGISTRATION"
+            if frozen["preregistered"] and sensitivity_ready
+            else "REQUIRES_POWER_AND_EXTERNAL_ETHICS_REVIEW"
         ),
         "study_id": frozen["study_id"],
         "protocol_digest": _digest(frozen),
         "precision_plan_digest": precision["plan_digest"],
+        "hierarchical_sensitivity_digest": sensitivity["sensitivity_digest"],
         "assignment_digest": randomization["assignment_digest"],
         "blinded_schedule_digest": randomization["blinded_schedule_digest"],
         "assignment_key_sha256": randomization["assignment_key_sha256"],
         "protocol_minimums_compatible_with_precision_plan": compatible,
         "external_gates": {
             "ethics_or_irb_determination_archived": False,
+            "hierarchical_sensitivity_reviewed": False,
             "preregistration_recorded": bool(frozen["preregistered"]),
             "institutional_consent_operations_approved": False,
             "secure_linkage_store_verified": False,
@@ -491,9 +825,12 @@ def build_launch_pack(
     return {
         "protocol": frozen,
         "precision_plan": precision,
+        "hierarchical_sensitivity": sensitivity,
         "randomization": randomization,
         "launch_receipt": receipt,
-        "preregistration_markdown": _preregistration_markdown(frozen, precision, receipt),
+        "preregistration_markdown": _preregistration_markdown(
+            frozen, precision, sensitivity, receipt
+        ),
         "operations_markdown": _operations_markdown(receipt),
     }
 
@@ -504,6 +841,7 @@ def write_launch_pack(output_directory: Path, pack: dict[str, Any], *, overwrite
     targets = {
         "protocol.json": pack["protocol"],
         "precision_plan.json": pack["precision_plan"],
+        "hierarchical_sensitivity.json": pack["hierarchical_sensitivity"],
         "restricted_assignment_map.json": {
             "warning": "RESTRICT ACCESS; condition mapping must stay hidden from raters and analysts",
             "assignment_digest": pack["randomization"]["assignment_digest"],

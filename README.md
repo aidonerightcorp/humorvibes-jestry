@@ -64,7 +64,8 @@ separate causal-design lab with its own downloadable verification and publicatio
   definitions, intellectual lineage, evidence map, falsifiable predictions, and the precise sense
   in which “surprise reduction” is a framework rather than a completed result.
 - [`docs/REAL_WORLD_STUDY_WORKBENCH.md`](docs/REAL_WORLD_STUDY_WORKBENCH.md): the executable,
-  privacy-minimized writer crossover protocol, prospective precision planner, private-keyed
+  privacy-minimized writer crossover protocol, claim-threshold-aware precision planner,
+  hierarchical power sensitivity, private-keyed
   randomization, blinded launch pack, local analyzer, evidence ladder, and remaining human-study
   infrastructure. The checked-in
   [`study_demo_receipt.json`](jestry_out/study_demo_receipt.json) proves the synthetic positive

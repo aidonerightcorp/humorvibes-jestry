@@ -28,15 +28,24 @@ members receive one version of each writer-premise block, never both, through bl
 
 - Two-sided alpha: 0.05
 - Target power: 0.8
-- Target effect: 0.25
+- Anticipated effect: 0.5
+- Claim threshold: 0.25
+- Effect above the claim threshold used for planning: 0.25
 - Between-writer SD: 0.45
 - Within-writer premise SD: 0.6
 - Analyzable writers: 49
-- Writers to recruit after declared attrition: 58
+- Writers to recruit after declared attrition: 62
+- Planned probability of retaining the analyzable writer count:
+  0.927
 - Minimum paired writer-premise blocks: 98
 
-These are prospective assumptions, not observed power. A hierarchical simulation sensitivity
-analysis should accompany institutional review before recruitment.
+These are prospective assumptions, not observed power. The generated hierarchical sensitivity
+analysis did not automatically authorize registration or recruitment. Its most conservative
+checked scenario is `conservative_rating_noise` and its normal-approximation advisory calls for
+80 analyzable writers,
+99 recruited writers, and
+1280 ratings. A statistician and the
+responsible ethics process must choose and freeze the governing scenario before registration.
 
 ## Inclusion, exclusion, and stopping
 
