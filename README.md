@@ -135,7 +135,12 @@ docker compose down
 
 The public image's anonymous pull, platforms, attestation, labels, hardened runtime, and API were
 independently checked in [`jestry_out/v0_7_0_publication.json`](jestry_out/v0_7_0_publication.json).
-The acyclic digest overlay is at [`deploy/overlays/ghcr`](deploy/overlays/ghcr).
+The acyclic digest overlay is at [`deploy/overlays/ghcr`](deploy/overlays/ghcr). Both that overlay
+and the Helm chart were then installed in a disposable `kind` cluster against the exact public
+digest: two replicas became ready with zero restarts and the live Service checks passed. The run,
+including the service-link collision it uncovered and the verified cleanup, is recorded in
+[`jestry_out/v0_7_0_kind_smoke.json`](jestry_out/v0_7_0_kind_smoke.json). This is local cluster
+proof, not a hosted-production claim.
 
 To build from the current source and reproduce the static and live-container receipt:
 

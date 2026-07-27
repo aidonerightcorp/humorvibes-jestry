@@ -174,7 +174,9 @@ gh attestation verify \
 Its publication receipt records the anonymous pull, `linux/amd64` and `linux/arm64` manifests,
 SLSA provenance identity, SBOM setting, OCI labels, non-root/read-only runtime, and API probe.
 Use [`deploy/overlays/ghcr`](../deploy/overlays/ghcr) to render the base with
-that exact digest.
+that exact digest. The overlay and Helm chart were also installed against that digest in a
+disposable `kind` cluster; the complete result and cleanup receipt is
+[`jestry_out/v0_7_0_kind_smoke.json`](../jestry_out/v0_7_0_kind_smoke.json).
 
 Build and run the image directly:
 
@@ -263,7 +265,10 @@ start when `OLLAMA_API_KEY` is absent.
 The base manifests run the exact same image as two non-root, read-only replicas behind a
 cluster-internal `ClusterIP` Service. They include startup, liveness, and readiness probes,
 resource requests/limits, rolling-update constraints, no service-account token, a runtime
-seccomp profile, same-namespace ingress, and default-deny egress. The distinction among probe types follows the
+seccomp profile, disabled Service-link environment injection, same-namespace ingress, and
+default-deny egress. Disabling Service links prevents a Service named `humorvibes` from injecting
+`HUMORVIBES_PORT=tcp://...` over the application's numeric listen-port setting. The distinction
+among probe types follows the
 [Kubernetes probe contract](https://kubernetes.io/docs/concepts/workloads/pods/probes/).
 
 For a local `kind` cluster:
@@ -278,6 +283,19 @@ kubectl port-forward service/humorvibes 8080:80
 
 Then run `python3 examples/api_client.py` in another shell. For `minikube`, use
 `minikube image load humorvibes-research:0.7.0` in place of the `kind` command.
+
+To reproduce the verified public-image path instead of building locally, apply the digest overlay:
+
+```bash
+kubectl apply -k deploy/overlays/ghcr
+kubectl rollout status deployment/humorvibes
+kubectl port-forward service/humorvibes 8080:80
+curl --fail http://127.0.0.1:8080/health/ready
+```
+
+The checked-in receipt proves this path on an ephemeral local cluster only. A hosted deployment
+still needs an environment-specific gateway, DNS, TLS certificate, secret manager, observability
+destination, egress policy, autoscaling load test, and rollback exercise.
 
 Before exposing the Service outside the cluster, require inbound authentication:
 

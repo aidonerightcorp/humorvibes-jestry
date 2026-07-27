@@ -1,7 +1,7 @@
 {
   "receipt_type": "humorvibes_public_software_release",
-  "receipt_version": 1,
-  "generated_at": "2026-07-27T17:23:44Z",
+  "receipt_version": 2,
+  "generated_at": "2026-07-27T17:44:57Z",
   "source": {
     "repository": "https://github.com/aidonerightcorp/humorvibes-jestry",
     "release_url": "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0",
@@ -9,7 +9,8 @@
     "annotated_tag_object": "19c5f54c37cf2e05423941b7f7cd2eb911b70d35",
     "commit": "9a58dac4a81fbb512e1c939dce1a979facc7a078",
     "release_candidate_receipt_sha256": "6d5dee42f99f5f53ee2402045b35535cdf8d8803a8d87f60b54ce7458ed2a0af",
-    "local_deployment_receipt_sha256": "e4342f304b434b1d052e4ede25c5f0be16ed8b858b5b1789ab5c310c45fd2bd4"
+    "local_deployment_receipt_sha256": "e4342f304b434b1d052e4ede25c5f0be16ed8b858b5b1789ab5c310c45fd2bd4",
+    "ephemeral_kubernetes_smoke_sha256": "75d40c9ddfd55834c5deb2a5e26fb7518b829c402cf0a58ca853dce50ce2120a"
   },
   "container": {
     "package_url": "https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry",
@@ -76,7 +77,11 @@
     "kustomize_overlay": "deploy/overlays/ghcr",
     "kustomize_digest_render_verified": true,
     "helm_digest_render_verified": true,
-    "kubernetes_cluster_apply_executed": false
+    "kubernetes_cluster_apply_executed": true,
+    "kubernetes_apply_scope": "ephemeral local kind cluster",
+    "kustomize_ephemeral_kind_apply_verified": true,
+    "helm_ephemeral_kind_install_verified": true,
+    "hosted_cluster_apply_executed": false
   },
   "research_surfaces": {
     "wave2_dataset_version": 7,
@@ -87,7 +92,8 @@
   "truth_boundary": {
     "public_container_registry_release_verified": true,
     "hosted_api_verified": false,
-    "kubernetes_cluster_apply_executed": false,
+    "local_ephemeral_kubernetes_apply_verified": true,
+    "hosted_production_cluster_verified": false,
     "live_semantic_provider_quality_established": false,
     "human_writer_or_audience_trial_completed": false,
     "model_surprisal_is_human_funniness": false,

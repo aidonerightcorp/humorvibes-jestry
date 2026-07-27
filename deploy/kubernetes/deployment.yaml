@@ -18,6 +18,9 @@ spec:
         app.kubernetes.io/name: humorvibes
     spec:
       automountServiceAccountToken: false
+      # Prevent Kubernetes Service environment variables such as HUMORVIBES_PORT=tcp://...
+      # from colliding with the application's numeric listen-port setting.
+      enableServiceLinks: false
       securityContext:
         runAsNonRoot: true
         runAsUser: 10001

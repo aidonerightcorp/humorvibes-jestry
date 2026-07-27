@@ -9,7 +9,15 @@ study revisions remain separately identified by their dataset/notebook versions 
 
 - Recorded the independently verified public 0.7.0 GHCR manifest, two platform digests,
   GitHub/Sigstore provenance, anonymous pull, hardened runtime probe, and digest-pinned Kustomize
-  overlay without claiming that a Kubernetes cluster was deployed.
+  overlay.
+- Recorded reproducible Kustomize and Helm installs of the exact public digest in a disposable
+  `kind` cluster, live Service checks, runtime security checks, and verified cluster cleanup.
+
+### Fixed
+
+- Disabled Kubernetes Service-link environment injection in both deployment paths after a live
+  cluster test exposed `HUMORVIBES_PORT=tcp://...` shadowing the application's numeric listen port.
+  A static regression test now protects both manifests.
 
 ## [0.7.0] - 2026-07-27
 
@@ -46,7 +54,8 @@ study revisions remain separately identified by their dataset/notebook versions 
   find an output funny.
 - Live provider probing found only the deterministic hash embedding operational in the configured
   environment; no semantic provider was quality-validated.
-- No hosted Kubernetes deployment or completed human trial is claimed.
+- The local ephemeral cluster proof is not a hosted Kubernetes deployment; no completed human
+  trial is claimed.
 
 [0.7.0]: https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0
 [Unreleased]: https://github.com/aidonerightcorp/humorvibes-jestry/compare/v0.7.0...HEAD
