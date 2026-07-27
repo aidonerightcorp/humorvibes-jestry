@@ -20,6 +20,9 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
   Python range. **Good first issue.**
 - [ ] Archive a citable release snapshot through Zenodo or an equivalent DOI service after the
   first outside contribution.
+- [x] Add a deterministic human-study launch pack with prospective writer-level precision,
+  attrition-aware recruitment, balanced crossover randomization, separated blinded/restricted
+  schedules, preregistration draft, operational runbook, and a fail-closed no-observations receipt.
 
 Acceptance for P0 work: a new machine can clone the repository, install dependencies, run tests,
 download the public data, and pass `verify_wave2_release.py` without access to the private corpus.

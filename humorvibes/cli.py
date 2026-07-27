@@ -86,6 +86,28 @@ def main() -> int:
     study_analyze.add_argument("--bundle", type=Path, required=True)
     study_analyze.add_argument("--out", type=Path, help="also write the JSON receipt")
 
+    study_launch = sub.add_parser(
+        "study-launch",
+        help="build a precision-planned, blinded precollection launch pack",
+    )
+    study_launch.add_argument("--protocol", type=Path, required=True)
+    study_launch.add_argument("--out-dir", type=Path, required=True)
+    study_launch.add_argument("--assignment-key-file", type=Path, required=True)
+    study_launch.add_argument("--target-effect", type=float)
+    study_launch.add_argument("--between-writer-sd", type=float, default=0.45)
+    study_launch.add_argument("--within-writer-premise-sd", type=float, default=0.60)
+    study_launch.add_argument("--premises-per-writer", type=int, default=2)
+    study_launch.add_argument("--alpha", type=float, default=0.05)
+    study_launch.add_argument("--power", type=float, default=0.80)
+    study_launch.add_argument("--writer-attrition-rate", type=float, default=0.15)
+    study_launch.add_argument("--force", action="store_true", help="replace files in an existing pack")
+
+    study_key = sub.add_parser(
+        "study-key",
+        help="create a mode-0600 private randomization key without printing it",
+    )
+    study_key.add_argument("--out", type=Path, required=True)
+
     sub.add_parser("controls-info", help="show the deterministic Open Controls corpus contract")
     controls_sample = sub.add_parser("controls-sample", help="print bounded procedural Open Controls rows")
     controls_sample.add_argument("--count", type=int, default=8)
@@ -121,7 +143,7 @@ def main() -> int:
 
         receipt = run_adversarial_suite()
         _dump(receipt)
-        if args.out:
+        if getattr(args, "out", None):
             args.out.parent.mkdir(parents=True, exist_ok=True)
             args.out.write_text(
                 json.dumps(receipt, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
@@ -133,6 +155,17 @@ def main() -> int:
         from .openapi import export_openapi
 
         print(export_openapi(args.out))
+        return 0
+
+    if args.command == "study-key":
+        from .study_launch import create_assignment_key
+
+        try:
+            payload = create_assignment_key(args.out)
+        except IntegrationError as exc:
+            _dump({"error": exc.public()})
+            return 2
+        _dump(payload)
         return 0
 
     if args.command in {
@@ -170,7 +203,7 @@ def main() -> int:
         _dump(payload)
         return 0 if payload.get("ok", True) else 1
 
-    if args.command in {"study-protocol", "study-demo", "study-analyze"}:
+    if args.command in {"study-protocol", "study-demo", "study-analyze", "study-launch"}:
         from .studies import (
             analyze_study,
             default_study_protocol,
@@ -184,10 +217,26 @@ def main() -> int:
                 )
             elif args.command == "study-demo":
                 payload = synthetic_demo_receipt()
-            else:
+            elif args.command == "study-analyze":
                 protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
                 bundle = json.loads(args.bundle.read_text(encoding="utf-8"))
                 payload = analyze_study(protocol, bundle)
+            else:
+                from .study_launch import build_launch_pack, read_assignment_key, write_launch_pack
+
+                protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
+                pack = build_launch_pack(
+                    protocol,
+                    assignment_key=read_assignment_key(args.assignment_key_file),
+                    target_effect=args.target_effect,
+                    between_writer_sd=args.between_writer_sd,
+                    within_writer_premise_sd=args.within_writer_premise_sd,
+                    premises_per_writer=args.premises_per_writer,
+                    alpha=args.alpha,
+                    power=args.power,
+                    writer_attrition_rate=args.writer_attrition_rate,
+                )
+                payload = write_launch_pack(args.out_dir, pack, overwrite=args.force)
         except (OSError, json.JSONDecodeError) as exc:
             _dump({"error": {"code": "invalid_study_file", "message": str(exc)}})
             return 2
@@ -195,7 +244,7 @@ def main() -> int:
             _dump({"error": exc.public()})
             return 2
         _dump(payload)
-        if args.out:
+        if getattr(args, "out", None):
             args.out.parent.mkdir(parents=True, exist_ok=True)
             args.out.write_text(
                 json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n",

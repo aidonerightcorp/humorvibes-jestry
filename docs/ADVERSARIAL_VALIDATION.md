@@ -48,6 +48,8 @@ answers availability; it does not establish model quality, correctness, or funni
 - synthetic positive effects attempting to cross a human-evidence claim gate;
 - study exports containing raw material or direct identity, unknown fields, duplicate IDs,
   non-finite ratings, missing permission/consent/holdout, or incomplete paired blocks.
+- prospective launch packs attempting to claim observations, condition labels leaking into blinded
+  schedules, short assignment keys, and reconstruction from the public assignment seed alone.
 
 ## Deliberate boundaries
 

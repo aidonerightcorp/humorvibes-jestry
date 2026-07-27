@@ -1,0 +1,817 @@
+{
+  "blinded_schedule_digest": "f5d23cedd3965e17c482bf8af2a1003563e70be94b97ee4423a9bf92f51b4d3d",
+  "rows": [
+    {
+      "block_id": "block-000001",
+      "premise_id": "writer-0001-premise-01",
+      "session_1_material_id": "material-6fbed898192d0f5e",
+      "session_2_material_id": "material-c7d3cdc19c51772f",
+      "writer_id": "writer-0001"
+    },
+    {
+      "block_id": "block-000002",
+      "premise_id": "writer-0001-premise-02",
+      "session_1_material_id": "material-6ef2225fcb782e26",
+      "session_2_material_id": "material-91c59d5d6c9cfd52",
+      "writer_id": "writer-0001"
+    },
+    {
+      "block_id": "block-000003",
+      "premise_id": "writer-0002-premise-01",
+      "session_1_material_id": "material-86ca55a6e0a11a2a",
+      "session_2_material_id": "material-99639bdc74ecb5a8",
+      "writer_id": "writer-0002"
+    },
+    {
+      "block_id": "block-000004",
+      "premise_id": "writer-0002-premise-02",
+      "session_1_material_id": "material-80c4d8064470dc2b",
+      "session_2_material_id": "material-01155bd55ab6f082",
+      "writer_id": "writer-0002"
+    },
+    {
+      "block_id": "block-000005",
+      "premise_id": "writer-0003-premise-01",
+      "session_1_material_id": "material-85af46290ba36692",
+      "session_2_material_id": "material-f2fdcfa3d9c93a8c",
+      "writer_id": "writer-0003"
+    },
+    {
+      "block_id": "block-000006",
+      "premise_id": "writer-0003-premise-02",
+      "session_1_material_id": "material-fa0d3f20fd84dce8",
+      "session_2_material_id": "material-0de0332f47fd2820",
+      "writer_id": "writer-0003"
+    },
+    {
+      "block_id": "block-000007",
+      "premise_id": "writer-0004-premise-01",
+      "session_1_material_id": "material-5bd420e71013846e",
+      "session_2_material_id": "material-88008ea183754b57",
+      "writer_id": "writer-0004"
+    },
+    {
+      "block_id": "block-000008",
+      "premise_id": "writer-0004-premise-02",
+      "session_1_material_id": "material-caec366d0d7a3a22",
+      "session_2_material_id": "material-a40ed2944c7d46d8",
+      "writer_id": "writer-0004"
+    },
+    {
+      "block_id": "block-000009",
+      "premise_id": "writer-0005-premise-01",
+      "session_1_material_id": "material-5e73f79d340fb7be",
+      "session_2_material_id": "material-e56984573ebd554c",
+      "writer_id": "writer-0005"
+    },
+    {
+      "block_id": "block-000010",
+      "premise_id": "writer-0005-premise-02",
+      "session_1_material_id": "material-03378534c6ed7278",
+      "session_2_material_id": "material-e697b0e77bb1ad34",
+      "writer_id": "writer-0005"
+    },
+    {
+      "block_id": "block-000011",
+      "premise_id": "writer-0006-premise-01",
+      "session_1_material_id": "material-a0dd06ae43ffc2bd",
+      "session_2_material_id": "material-e16c3290d445ccd6",
+      "writer_id": "writer-0006"
+    },
+    {
+      "block_id": "block-000012",
+      "premise_id": "writer-0006-premise-02",
+      "session_1_material_id": "material-373c352f5392d8e8",
+      "session_2_material_id": "material-30a64b7f30b6d0cf",
+      "writer_id": "writer-0006"
+    },
+    {
+      "block_id": "block-000013",
+      "premise_id": "writer-0007-premise-01",
+      "session_1_material_id": "material-244cf6858fca98b3",
+      "session_2_material_id": "material-6837cd878a772789",
+      "writer_id": "writer-0007"
+    },
+    {
+      "block_id": "block-000014",
+      "premise_id": "writer-0007-premise-02",
+      "session_1_material_id": "material-a234bfdae81922c9",
+      "session_2_material_id": "material-e051d09b757bb484",
+      "writer_id": "writer-0007"
+    },
+    {
+      "block_id": "block-000015",
+      "premise_id": "writer-0008-premise-01",
+      "session_1_material_id": "material-30bc6d22f493fcb6",
+      "session_2_material_id": "material-a2545d95ecac1a39",
+      "writer_id": "writer-0008"
+    },
+    {
+      "block_id": "block-000016",
+      "premise_id": "writer-0008-premise-02",
+      "session_1_material_id": "material-af74e14a29a3715c",
+      "session_2_material_id": "material-d0589fe4c721c06d",
+      "writer_id": "writer-0008"
+    },
+    {
+      "block_id": "block-000017",
+      "premise_id": "writer-0009-premise-01",
+      "session_1_material_id": "material-f2034f8d8bb7a62a",
+      "session_2_material_id": "material-0edb2ca339dc1f91",
+      "writer_id": "writer-0009"
+    },
+    {
+      "block_id": "block-000018",
+      "premise_id": "writer-0009-premise-02",
+      "session_1_material_id": "material-0853895f3840114e",
+      "session_2_material_id": "material-7dce7ae072c08fcd",
+      "writer_id": "writer-0009"
+    },
+    {
+      "block_id": "block-000019",
+      "premise_id": "writer-0010-premise-01",
+      "session_1_material_id": "material-218e5e2177eab254",
+      "session_2_material_id": "material-5290c080e84144ea",
+      "writer_id": "writer-0010"
+    },
+    {
+      "block_id": "block-000020",
+      "premise_id": "writer-0010-premise-02",
+      "session_1_material_id": "material-05ca3a062bc05c86",
+      "session_2_material_id": "material-8e26c94cdb080b03",
+      "writer_id": "writer-0010"
+    },
+    {
+      "block_id": "block-000021",
+      "premise_id": "writer-0011-premise-01",
+      "session_1_material_id": "material-c8735099a72faa95",
+      "session_2_material_id": "material-7888e67d5539d3da",
+      "writer_id": "writer-0011"
+    },
+    {
+      "block_id": "block-000022",
+      "premise_id": "writer-0011-premise-02",
+      "session_1_material_id": "material-c2dc1c4bda6bea7a",
+      "session_2_material_id": "material-2a260e41c7f6bcf5",
+      "writer_id": "writer-0011"
+    },
+    {
+      "block_id": "block-000023",
+      "premise_id": "writer-0012-premise-01",
+      "session_1_material_id": "material-79919da063c88183",
+      "session_2_material_id": "material-93964bc619939817",
+      "writer_id": "writer-0012"
+    },
+    {
+      "block_id": "block-000024",
+      "premise_id": "writer-0012-premise-02",
+      "session_1_material_id": "material-59a1e0d5eff87dcd",
+      "session_2_material_id": "material-72612f7fe44ca8e3",
+      "writer_id": "writer-0012"
+    },
+    {
+      "block_id": "block-000025",
+      "premise_id": "writer-0013-premise-01",
+      "session_1_material_id": "material-67a9b9ae77bfc079",
+      "session_2_material_id": "material-fbc2ea092f021c6f",
+      "writer_id": "writer-0013"
+    },
+    {
+      "block_id": "block-000026",
+      "premise_id": "writer-0013-premise-02",
+      "session_1_material_id": "material-562249704f407361",
+      "session_2_material_id": "material-e8a0ab80c2861b8f",
+      "writer_id": "writer-0013"
+    },
+    {
+      "block_id": "block-000027",
+      "premise_id": "writer-0014-premise-01",
+      "session_1_material_id": "material-67fe4a7548891711",
+      "session_2_material_id": "material-1620c183d8bdbc5c",
+      "writer_id": "writer-0014"
+    },
+    {
+      "block_id": "block-000028",
+      "premise_id": "writer-0014-premise-02",
+      "session_1_material_id": "material-2763ddb5f1d221bb",
+      "session_2_material_id": "material-986d9c2de14bdb95",
+      "writer_id": "writer-0014"
+    },
+    {
+      "block_id": "block-000029",
+      "premise_id": "writer-0015-premise-01",
+      "session_1_material_id": "material-34f143281ff54f0f",
+      "session_2_material_id": "material-e6e00fee416ca755",
+      "writer_id": "writer-0015"
+    },
+    {
+      "block_id": "block-000030",
+      "premise_id": "writer-0015-premise-02",
+      "session_1_material_id": "material-0facbda62c3198fc",
+      "session_2_material_id": "material-ff763682b2c69286",
+      "writer_id": "writer-0015"
+    },
+    {
+      "block_id": "block-000031",
+      "premise_id": "writer-0016-premise-01",
+      "session_1_material_id": "material-dd42cb19de362fe7",
+      "session_2_material_id": "material-571cada588bcbca8",
+      "writer_id": "writer-0016"
+    },
+    {
+      "block_id": "block-000032",
+      "premise_id": "writer-0016-premise-02",
+      "session_1_material_id": "material-4633d97321470116",
+      "session_2_material_id": "material-03a36214cb423ffa",
+      "writer_id": "writer-0016"
+    },
+    {
+      "block_id": "block-000033",
+      "premise_id": "writer-0017-premise-01",
+      "session_1_material_id": "material-3fcb981a401a1a02",
+      "session_2_material_id": "material-4150c2d4748bc7a8",
+      "writer_id": "writer-0017"
+    },
+    {
+      "block_id": "block-000034",
+      "premise_id": "writer-0017-premise-02",
+      "session_1_material_id": "material-078218d76049b154",
+      "session_2_material_id": "material-f04adad2e550292a",
+      "writer_id": "writer-0017"
+    },
+    {
+      "block_id": "block-000035",
+      "premise_id": "writer-0018-premise-01",
+      "session_1_material_id": "material-adb7f3e649c0de19",
+      "session_2_material_id": "material-5c87920acf8331ac",
+      "writer_id": "writer-0018"
+    },
+    {
+      "block_id": "block-000036",
+      "premise_id": "writer-0018-premise-02",
+      "session_1_material_id": "material-da06726599ecf87e",
+      "session_2_material_id": "material-aab27d5df1971586",
+      "writer_id": "writer-0018"
+    },
+    {
+      "block_id": "block-000037",
+      "premise_id": "writer-0019-premise-01",
+      "session_1_material_id": "material-6e38b521a842a6a7",
+      "session_2_material_id": "material-d215e039b7415056",
+      "writer_id": "writer-0019"
+    },
+    {
+      "block_id": "block-000038",
+      "premise_id": "writer-0019-premise-02",
+      "session_1_material_id": "material-5597ad3030bd550d",
+      "session_2_material_id": "material-288f3d01c9722289",
+      "writer_id": "writer-0019"
+    },
+    {
+      "block_id": "block-000039",
+      "premise_id": "writer-0020-premise-01",
+      "session_1_material_id": "material-ce3cd1eb69380348",
+      "session_2_material_id": "material-aa0f820bf9b05c76",
+      "writer_id": "writer-0020"
+    },
+    {
+      "block_id": "block-000040",
+      "premise_id": "writer-0020-premise-02",
+      "session_1_material_id": "material-3363a6c6edd285f6",
+      "session_2_material_id": "material-688a705e3bfba4ac",
+      "writer_id": "writer-0020"
+    },
+    {
+      "block_id": "block-000041",
+      "premise_id": "writer-0021-premise-01",
+      "session_1_material_id": "material-9642f76a668371d2",
+      "session_2_material_id": "material-0c54adcfb815447d",
+      "writer_id": "writer-0021"
+    },
+    {
+      "block_id": "block-000042",
+      "premise_id": "writer-0021-premise-02",
+      "session_1_material_id": "material-28011e0535200a4f",
+      "session_2_material_id": "material-f2e8960bf7586ebb",
+      "writer_id": "writer-0021"
+    },
+    {
+      "block_id": "block-000043",
+      "premise_id": "writer-0022-premise-01",
+      "session_1_material_id": "material-c95f53874000066d",
+      "session_2_material_id": "material-4a25279f86cf810d",
+      "writer_id": "writer-0022"
+    },
+    {
+      "block_id": "block-000044",
+      "premise_id": "writer-0022-premise-02",
+      "session_1_material_id": "material-5b1465da166326b8",
+      "session_2_material_id": "material-e8eb27e498a56d97",
+      "writer_id": "writer-0022"
+    },
+    {
+      "block_id": "block-000045",
+      "premise_id": "writer-0023-premise-01",
+      "session_1_material_id": "material-6f5c285fc47b90c5",
+      "session_2_material_id": "material-f4500d0b5889a705",
+      "writer_id": "writer-0023"
+    },
+    {
+      "block_id": "block-000046",
+      "premise_id": "writer-0023-premise-02",
+      "session_1_material_id": "material-fa5f6f7787f87de0",
+      "session_2_material_id": "material-2f8b47a1bb2bf386",
+      "writer_id": "writer-0023"
+    },
+    {
+      "block_id": "block-000047",
+      "premise_id": "writer-0024-premise-01",
+      "session_1_material_id": "material-39708fe7b0e7e66b",
+      "session_2_material_id": "material-cb5842396320ba00",
+      "writer_id": "writer-0024"
+    },
+    {
+      "block_id": "block-000048",
+      "premise_id": "writer-0024-premise-02",
+      "session_1_material_id": "material-4d648a2450a03c55",
+      "session_2_material_id": "material-161a8c959d3aaf26",
+      "writer_id": "writer-0024"
+    },
+    {
+      "block_id": "block-000049",
+      "premise_id": "writer-0025-premise-01",
+      "session_1_material_id": "material-1e2296c8c06f3225",
+      "session_2_material_id": "material-7698f49c995a9079",
+      "writer_id": "writer-0025"
+    },
+    {
+      "block_id": "block-000050",
+      "premise_id": "writer-0025-premise-02",
+      "session_1_material_id": "material-0795f434a495d210",
+      "session_2_material_id": "material-dc5f06113cc5df24",
+      "writer_id": "writer-0025"
+    },
+    {
+      "block_id": "block-000051",
+      "premise_id": "writer-0026-premise-01",
+      "session_1_material_id": "material-2568b68d6658d143",
+      "session_2_material_id": "material-fceb7ca31a791812",
+      "writer_id": "writer-0026"
+    },
+    {
+      "block_id": "block-000052",
+      "premise_id": "writer-0026-premise-02",
+      "session_1_material_id": "material-27d7a9fd53a39f2a",
+      "session_2_material_id": "material-66423eed54ebba9f",
+      "writer_id": "writer-0026"
+    },
+    {
+      "block_id": "block-000053",
+      "premise_id": "writer-0027-premise-01",
+      "session_1_material_id": "material-2ead512ca632b0b1",
+      "session_2_material_id": "material-84a54c416d1804c0",
+      "writer_id": "writer-0027"
+    },
+    {
+      "block_id": "block-000054",
+      "premise_id": "writer-0027-premise-02",
+      "session_1_material_id": "material-6f57277156e5b168",
+      "session_2_material_id": "material-2a629aa382fc58af",
+      "writer_id": "writer-0027"
+    },
+    {
+      "block_id": "block-000055",
+      "premise_id": "writer-0028-premise-01",
+      "session_1_material_id": "material-9653741854762a98",
+      "session_2_material_id": "material-f9a6ba40b3d1a7c2",
+      "writer_id": "writer-0028"
+    },
+    {
+      "block_id": "block-000056",
+      "premise_id": "writer-0028-premise-02",
+      "session_1_material_id": "material-edb1b1cce721416b",
+      "session_2_material_id": "material-1e03c0c37a45c55f",
+      "writer_id": "writer-0028"
+    },
+    {
+      "block_id": "block-000057",
+      "premise_id": "writer-0029-premise-01",
+      "session_1_material_id": "material-a4132078988d1e91",
+      "session_2_material_id": "material-62bd3e137a138df1",
+      "writer_id": "writer-0029"
+    },
+    {
+      "block_id": "block-000058",
+      "premise_id": "writer-0029-premise-02",
+      "session_1_material_id": "material-651338c57ca7f9a6",
+      "session_2_material_id": "material-b0470883f2cbdc4d",
+      "writer_id": "writer-0029"
+    },
+    {
+      "block_id": "block-000059",
+      "premise_id": "writer-0030-premise-01",
+      "session_1_material_id": "material-0b045240ee65eb12",
+      "session_2_material_id": "material-44bd3761f7f0f9e7",
+      "writer_id": "writer-0030"
+    },
+    {
+      "block_id": "block-000060",
+      "premise_id": "writer-0030-premise-02",
+      "session_1_material_id": "material-c94e2dd26f4ef38f",
+      "session_2_material_id": "material-b00d5556dad26e8b",
+      "writer_id": "writer-0030"
+    },
+    {
+      "block_id": "block-000061",
+      "premise_id": "writer-0031-premise-01",
+      "session_1_material_id": "material-2a5c3db6aea5f430",
+      "session_2_material_id": "material-c4e96a7f3fed6692",
+      "writer_id": "writer-0031"
+    },
+    {
+      "block_id": "block-000062",
+      "premise_id": "writer-0031-premise-02",
+      "session_1_material_id": "material-d2095bb0f719616d",
+      "session_2_material_id": "material-2e1c8bd3be512ff5",
+      "writer_id": "writer-0031"
+    },
+    {
+      "block_id": "block-000063",
+      "premise_id": "writer-0032-premise-01",
+      "session_1_material_id": "material-f89b830a3587b254",
+      "session_2_material_id": "material-ff04f2ca979d6277",
+      "writer_id": "writer-0032"
+    },
+    {
+      "block_id": "block-000064",
+      "premise_id": "writer-0032-premise-02",
+      "session_1_material_id": "material-7091aa36cb008ec9",
+      "session_2_material_id": "material-9fd93fe8cc70f6cf",
+      "writer_id": "writer-0032"
+    },
+    {
+      "block_id": "block-000065",
+      "premise_id": "writer-0033-premise-01",
+      "session_1_material_id": "material-cd1518017a2a82b6",
+      "session_2_material_id": "material-78fe114e51dcc8d9",
+      "writer_id": "writer-0033"
+    },
+    {
+      "block_id": "block-000066",
+      "premise_id": "writer-0033-premise-02",
+      "session_1_material_id": "material-98b42a0ac94a8beb",
+      "session_2_material_id": "material-4ee35d60783cc5d3",
+      "writer_id": "writer-0033"
+    },
+    {
+      "block_id": "block-000067",
+      "premise_id": "writer-0034-premise-01",
+      "session_1_material_id": "material-94cb9df5f40ae93b",
+      "session_2_material_id": "material-bdcc06745e768bd5",
+      "writer_id": "writer-0034"
+    },
+    {
+      "block_id": "block-000068",
+      "premise_id": "writer-0034-premise-02",
+      "session_1_material_id": "material-657a3580c1309f9f",
+      "session_2_material_id": "material-e54c5131e7e953dc",
+      "writer_id": "writer-0034"
+    },
+    {
+      "block_id": "block-000069",
+      "premise_id": "writer-0035-premise-01",
+      "session_1_material_id": "material-036399f4b883c9b8",
+      "session_2_material_id": "material-7519c894a7c9e0fd",
+      "writer_id": "writer-0035"
+    },
+    {
+      "block_id": "block-000070",
+      "premise_id": "writer-0035-premise-02",
+      "session_1_material_id": "material-827d862b666178c0",
+      "session_2_material_id": "material-31f4526a87457aeb",
+      "writer_id": "writer-0035"
+    },
+    {
+      "block_id": "block-000071",
+      "premise_id": "writer-0036-premise-01",
+      "session_1_material_id": "material-64382a2ffa844735",
+      "session_2_material_id": "material-36e14c7f97d4ebce",
+      "writer_id": "writer-0036"
+    },
+    {
+      "block_id": "block-000072",
+      "premise_id": "writer-0036-premise-02",
+      "session_1_material_id": "material-10ba9b708022eb75",
+      "session_2_material_id": "material-6329222464138ff9",
+      "writer_id": "writer-0036"
+    },
+    {
+      "block_id": "block-000073",
+      "premise_id": "writer-0037-premise-01",
+      "session_1_material_id": "material-04f65c067fe34322",
+      "session_2_material_id": "material-70f70b761f70d448",
+      "writer_id": "writer-0037"
+    },
+    {
+      "block_id": "block-000074",
+      "premise_id": "writer-0037-premise-02",
+      "session_1_material_id": "material-973fd1df62215396",
+      "session_2_material_id": "material-12623eb22e48d819",
+      "writer_id": "writer-0037"
+    },
+    {
+      "block_id": "block-000075",
+      "premise_id": "writer-0038-premise-01",
+      "session_1_material_id": "material-f84b3cc22f67fe26",
+      "session_2_material_id": "material-cdc5fd5fbe63fa8b",
+      "writer_id": "writer-0038"
+    },
+    {
+      "block_id": "block-000076",
+      "premise_id": "writer-0038-premise-02",
+      "session_1_material_id": "material-cdc68ce6b8e4d40f",
+      "session_2_material_id": "material-684981f4b9b00fad",
+      "writer_id": "writer-0038"
+    },
+    {
+      "block_id": "block-000077",
+      "premise_id": "writer-0039-premise-01",
+      "session_1_material_id": "material-1625ecae166f0088",
+      "session_2_material_id": "material-c1b7e420e5c35ff6",
+      "writer_id": "writer-0039"
+    },
+    {
+      "block_id": "block-000078",
+      "premise_id": "writer-0039-premise-02",
+      "session_1_material_id": "material-3badc4d56fa8c4b3",
+      "session_2_material_id": "material-8e7f342b45d6ff95",
+      "writer_id": "writer-0039"
+    },
+    {
+      "block_id": "block-000079",
+      "premise_id": "writer-0040-premise-01",
+      "session_1_material_id": "material-dfdbcbae0bbb8a2e",
+      "session_2_material_id": "material-e3dbf8642bb0d037",
+      "writer_id": "writer-0040"
+    },
+    {
+      "block_id": "block-000080",
+      "premise_id": "writer-0040-premise-02",
+      "session_1_material_id": "material-fc750cd31bc60b6a",
+      "session_2_material_id": "material-eff20bc6f012482e",
+      "writer_id": "writer-0040"
+    },
+    {
+      "block_id": "block-000081",
+      "premise_id": "writer-0041-premise-01",
+      "session_1_material_id": "material-46932c722207304c",
+      "session_2_material_id": "material-e6e2ad230c85c12b",
+      "writer_id": "writer-0041"
+    },
+    {
+      "block_id": "block-000082",
+      "premise_id": "writer-0041-premise-02",
+      "session_1_material_id": "material-9a2ea4266d61f7e2",
+      "session_2_material_id": "material-6cb2ddfb167af97c",
+      "writer_id": "writer-0041"
+    },
+    {
+      "block_id": "block-000083",
+      "premise_id": "writer-0042-premise-01",
+      "session_1_material_id": "material-7bd74641cb70e669",
+      "session_2_material_id": "material-94f3aa79d316bd50",
+      "writer_id": "writer-0042"
+    },
+    {
+      "block_id": "block-000084",
+      "premise_id": "writer-0042-premise-02",
+      "session_1_material_id": "material-79ba302d04f15c13",
+      "session_2_material_id": "material-d1e8f8be3f37f582",
+      "writer_id": "writer-0042"
+    },
+    {
+      "block_id": "block-000085",
+      "premise_id": "writer-0043-premise-01",
+      "session_1_material_id": "material-f424a09802b1eb60",
+      "session_2_material_id": "material-372d6be69662601c",
+      "writer_id": "writer-0043"
+    },
+    {
+      "block_id": "block-000086",
+      "premise_id": "writer-0043-premise-02",
+      "session_1_material_id": "material-30c366fc5e7359d5",
+      "session_2_material_id": "material-8bcc398e6f83cba1",
+      "writer_id": "writer-0043"
+    },
+    {
+      "block_id": "block-000087",
+      "premise_id": "writer-0044-premise-01",
+      "session_1_material_id": "material-2e887675e72260c6",
+      "session_2_material_id": "material-d47e40dac2aab5ec",
+      "writer_id": "writer-0044"
+    },
+    {
+      "block_id": "block-000088",
+      "premise_id": "writer-0044-premise-02",
+      "session_1_material_id": "material-9d5a120902327fed",
+      "session_2_material_id": "material-3085668435e6f598",
+      "writer_id": "writer-0044"
+    },
+    {
+      "block_id": "block-000089",
+      "premise_id": "writer-0045-premise-01",
+      "session_1_material_id": "material-59c87e6a5a2a5fed",
+      "session_2_material_id": "material-f983aff467abe1da",
+      "writer_id": "writer-0045"
+    },
+    {
+      "block_id": "block-000090",
+      "premise_id": "writer-0045-premise-02",
+      "session_1_material_id": "material-b7415ae2546d6857",
+      "session_2_material_id": "material-4815dc6428f3a515",
+      "writer_id": "writer-0045"
+    },
+    {
+      "block_id": "block-000091",
+      "premise_id": "writer-0046-premise-01",
+      "session_1_material_id": "material-328a268c88e1ee56",
+      "session_2_material_id": "material-0fbf02525ec8dc66",
+      "writer_id": "writer-0046"
+    },
+    {
+      "block_id": "block-000092",
+      "premise_id": "writer-0046-premise-02",
+      "session_1_material_id": "material-3fcf8c4548f56b4b",
+      "session_2_material_id": "material-15e8f5f96dc2128f",
+      "writer_id": "writer-0046"
+    },
+    {
+      "block_id": "block-000093",
+      "premise_id": "writer-0047-premise-01",
+      "session_1_material_id": "material-756fdcee5a549948",
+      "session_2_material_id": "material-7fc3c8e57bcc937b",
+      "writer_id": "writer-0047"
+    },
+    {
+      "block_id": "block-000094",
+      "premise_id": "writer-0047-premise-02",
+      "session_1_material_id": "material-2d4807f7e08f2c79",
+      "session_2_material_id": "material-89be8b977dc1074f",
+      "writer_id": "writer-0047"
+    },
+    {
+      "block_id": "block-000095",
+      "premise_id": "writer-0048-premise-01",
+      "session_1_material_id": "material-c6d43ab449303b4a",
+      "session_2_material_id": "material-35bdfec2ffe6c89c",
+      "writer_id": "writer-0048"
+    },
+    {
+      "block_id": "block-000096",
+      "premise_id": "writer-0048-premise-02",
+      "session_1_material_id": "material-8084a0344c4a8f5f",
+      "session_2_material_id": "material-74038c02277192ad",
+      "writer_id": "writer-0048"
+    },
+    {
+      "block_id": "block-000097",
+      "premise_id": "writer-0049-premise-01",
+      "session_1_material_id": "material-a77cea60326381f1",
+      "session_2_material_id": "material-1ecc57cddb2d88ff",
+      "writer_id": "writer-0049"
+    },
+    {
+      "block_id": "block-000098",
+      "premise_id": "writer-0049-premise-02",
+      "session_1_material_id": "material-847054f47a966853",
+      "session_2_material_id": "material-5845942ef219c3c7",
+      "writer_id": "writer-0049"
+    },
+    {
+      "block_id": "block-000099",
+      "premise_id": "writer-0050-premise-01",
+      "session_1_material_id": "material-8103d34d71b11818",
+      "session_2_material_id": "material-c99eb29790e3de79",
+      "writer_id": "writer-0050"
+    },
+    {
+      "block_id": "block-000100",
+      "premise_id": "writer-0050-premise-02",
+      "session_1_material_id": "material-79b568b5190dd812",
+      "session_2_material_id": "material-d391ff134ba767a8",
+      "writer_id": "writer-0050"
+    },
+    {
+      "block_id": "block-000101",
+      "premise_id": "writer-0051-premise-01",
+      "session_1_material_id": "material-a8406aa9c942a539",
+      "session_2_material_id": "material-9865c305abcfd0a1",
+      "writer_id": "writer-0051"
+    },
+    {
+      "block_id": "block-000102",
+      "premise_id": "writer-0051-premise-02",
+      "session_1_material_id": "material-b16e959520099e17",
+      "session_2_material_id": "material-0567e665aa0baf64",
+      "writer_id": "writer-0051"
+    },
+    {
+      "block_id": "block-000103",
+      "premise_id": "writer-0052-premise-01",
+      "session_1_material_id": "material-94ab734e0680400c",
+      "session_2_material_id": "material-537c7e4bc6e96d5d",
+      "writer_id": "writer-0052"
+    },
+    {
+      "block_id": "block-000104",
+      "premise_id": "writer-0052-premise-02",
+      "session_1_material_id": "material-96ded8ae778683c8",
+      "session_2_material_id": "material-3cf9ae056e17bae1",
+      "writer_id": "writer-0052"
+    },
+    {
+      "block_id": "block-000105",
+      "premise_id": "writer-0053-premise-01",
+      "session_1_material_id": "material-4c64c368c811e0fa",
+      "session_2_material_id": "material-efffadb85dca2540",
+      "writer_id": "writer-0053"
+    },
+    {
+      "block_id": "block-000106",
+      "premise_id": "writer-0053-premise-02",
+      "session_1_material_id": "material-6e30bff1b82c08ca",
+      "session_2_material_id": "material-1e5ff0e6d31c1a2c",
+      "writer_id": "writer-0053"
+    },
+    {
+      "block_id": "block-000107",
+      "premise_id": "writer-0054-premise-01",
+      "session_1_material_id": "material-2291bb566aa9ed68",
+      "session_2_material_id": "material-8697290c9ca1abd0",
+      "writer_id": "writer-0054"
+    },
+    {
+      "block_id": "block-000108",
+      "premise_id": "writer-0054-premise-02",
+      "session_1_material_id": "material-f36f53927ef62d19",
+      "session_2_material_id": "material-d33ccc058516964c",
+      "writer_id": "writer-0054"
+    },
+    {
+      "block_id": "block-000109",
+      "premise_id": "writer-0055-premise-01",
+      "session_1_material_id": "material-79d9534dac3cf771",
+      "session_2_material_id": "material-a8f530444e650114",
+      "writer_id": "writer-0055"
+    },
+    {
+      "block_id": "block-000110",
+      "premise_id": "writer-0055-premise-02",
+      "session_1_material_id": "material-296e2d261152ca8d",
+      "session_2_material_id": "material-d0740fe093f172b1",
+      "writer_id": "writer-0055"
+    },
+    {
+      "block_id": "block-000111",
+      "premise_id": "writer-0056-premise-01",
+      "session_1_material_id": "material-c65ac69c61c993d9",
+      "session_2_material_id": "material-799ae21fecf53220",
+      "writer_id": "writer-0056"
+    },
+    {
+      "block_id": "block-000112",
+      "premise_id": "writer-0056-premise-02",
+      "session_1_material_id": "material-1c1755d162a0a258",
+      "session_2_material_id": "material-e88015b38ce5c0ee",
+      "writer_id": "writer-0056"
+    },
+    {
+      "block_id": "block-000113",
+      "premise_id": "writer-0057-premise-01",
+      "session_1_material_id": "material-dc3508c4fdf811c2",
+      "session_2_material_id": "material-887a12baed4478de",
+      "writer_id": "writer-0057"
+    },
+    {
+      "block_id": "block-000114",
+      "premise_id": "writer-0057-premise-02",
+      "session_1_material_id": "material-30a480ce9ffebc77",
+      "session_2_material_id": "material-f4ae212d860676ce",
+      "writer_id": "writer-0057"
+    },
+    {
+      "block_id": "block-000115",
+      "premise_id": "writer-0058-premise-01",
+      "session_1_material_id": "material-417d846661b45178",
+      "session_2_material_id": "material-2d7c7b14a7da8f1c",
+      "writer_id": "writer-0058"
+    },
+    {
+      "block_id": "block-000116",
+      "premise_id": "writer-0058-premise-02",
+      "session_1_material_id": "material-4a3e7df4989384b1",
+      "session_2_material_id": "material-c24d4ebb5afbd2a9",
+      "writer_id": "writer-0058"
+    }
+  ]
+}

@@ -19,6 +19,7 @@ from .errors import IntegrationError
 from .http import JsonHttpClient, normalize_base_url
 from .llm import LLMRegistry
 from .studies import analyze_study, default_study_protocol, synthetic_study_bundle, validate_study_bundle
+from .study_launch import build_launch_pack, deterministic_randomization
 
 
 @dataclass(frozen=True)
@@ -175,6 +176,40 @@ def run_adversarial_suite() -> dict[str, Any]:
         lambda: validate_study_bundle(protocol, incomplete_bundle),
     ))
 
+    human_protocol = default_study_protocol(data_origin="human_observed")
+    launch = build_launch_pack(
+        human_protocol,
+        assignment_key="adversarial-private-key-00000000000000000000000000000000",
+    )
+    blinded = json.dumps(
+        {
+            "writing": launch["randomization"]["blinded_writing_schedule"],
+            "audience": launch["randomization"]["blinded_audience_schedule"],
+        },
+        sort_keys=True,
+    )
+    checks.append(AuditCheck(
+        "prospective_launch_pack_cannot_authorize_human_claim",
+        launch["launch_receipt"]["claim_gate"]["claim_ready"] is False
+        and launch["launch_receipt"]["external_gates"]["observations_collected"] is False,
+        "precision and assignments remained prospective, with no observations",
+    ))
+    checks.append(AuditCheck(
+        "blinded_schedule_excludes_condition_mapping",
+        "condition" not in blinded,
+        "condition labels exist only in the restricted assignment map",
+    ))
+    checks.append(_expect_error(
+        "public_seed_without_private_key_cannot_rebuild_assignments",
+        "invalid_assignment_key",
+        lambda: deterministic_randomization(
+            writer_count=12,
+            premises_per_writer=2,
+            seed=int(human_protocol["assignment_seed"]),
+            assignment_key="public-seed-only",
+        ),
+    ))
+
     passed = sum(check.passed for check in checks)
     return {
         "receipt_type": "humorvibes_adversarial_integration_audit",
@@ -195,6 +230,7 @@ def run_adversarial_suite() -> dict[str, Any]:
                 "deterministic offline embeddings",
                 "synthetic-evidence claim gates",
                 "study schema, privacy, finiteness, uniqueness, and paired-design validation",
+                "prospective-study claim gates and private-keyed blinding separation",
             ],
             "not_covered": [
                 "live provider availability",
