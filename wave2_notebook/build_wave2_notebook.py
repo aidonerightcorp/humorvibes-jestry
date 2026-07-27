@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = "https://github.com/aidonerightcorp/humorvibes-jestry"
-REPO_REF = "humor-genome-wave2-v8"
+REPO_REF = "humor-genome-wave2-v9"
 
 # The controlling definition of bad surprise, verbatim. It is quoted rather than
 # paraphrased everywhere in this project because paraphrasing it changes what
@@ -81,9 +81,9 @@ CELLS: list[tuple[str, str]] = [
      "(https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2)\n"
      "- Code, SDK/API, and receipts: [aidonerightcorp/humorvibes-jestry]"
      "(https://github.com/aidonerightcorp/humorvibes-jestry)\n"
-     "- Immutable source for this run: `humor-genome-wave2-v8`\n"
+     "- Immutable source for this run: `humor-genome-wave2-v9`\n"
      "- Sourced foundation: [`docs/RESEARCH_FOUNDATIONS.md`]"
-     "(https://github.com/aidonerightcorp/humorvibes-jestry/blob/humor-genome-wave2-v8/docs/RESEARCH_FOUNDATIONS.md)\n\n"
+     "(https://github.com/aidonerightcorp/humorvibes-jestry/blob/humor-genome-wave2-v9/docs/RESEARCH_FOUNDATIONS.md)\n\n"
      "The notebook verifies every mounted payload before analysis, loads the attached Gemma 2 "
      "checkpoint, checks the instrument, and only then displays the controlling receipts. Read in "
      "order: **release audit → corpus → taxonomy → annotated frames → Gemma measurement → human "
@@ -144,11 +144,16 @@ CELLS: list[tuple[str, str]] = [
      "import subprocess, sys, os, json, textwrap, glob, hashlib\n"
      "REPO = " + json.dumps(REPO) + "\n"
      "REPO_REF = " + json.dumps(REPO_REF) + "\n"
-     "if not os.path.exists('humorvibes-jestry'):\n"
+     "# Kaggle publishes everything left under /kaggle/working as notebook output.\n"
+     "# Clone immutable source under /tmp so the downloadable output contains the\n"
+     "# executive-summary receipt, not an accidental copy of the whole repository.\n"
+     "WORK_ROOT = '/tmp' if os.path.isdir('/kaggle/working') else '.'\n"
+     "CHECKOUT = os.path.join(WORK_ROOT, 'humorvibes-jestry-' + REPO_REF)\n"
+     "if not os.path.exists(CHECKOUT):\n"
      "    subprocess.run(['git','clone','--depth','1','--branch',REPO_REF,REPO,\n"
-     "                    'humorvibes-jestry'], check=True)\n"
-     "sys.path.insert(0, 'humorvibes-jestry')\n"
-     "os.chdir('humorvibes-jestry')\n"
+     "                    CHECKOUT], check=True)\n"
+     "sys.path.insert(0, CHECKOUT)\n"
+     "os.chdir(CHECKOUT)\n"
      "commit = subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip()\n"
      "print('repo at', os.getcwd())\n"
      "print('pinned source', REPO_REF, commit)"),
@@ -882,7 +887,10 @@ CELLS: list[tuple[str, str]] = [
      "- Concurrent HuggingFace pulls rate-limit each other into silent truncation: an "
      "8,000-row split first came back as 3,195.\n"
      "- A study wrote its receipt only at the end, so a 90-minute run that hit its timeout "
-     "produced nothing. It now checkpoints each measurement as it lands.\n\n"
+     "produced nothing. It now checkpoints each measurement as it lands.\n"
+     "- Cloning the source under `/kaggle/working` made Kaggle expose the entire checkout as "
+     "notebook output. The immutable checkout now lives under `/tmp`; only the executive-summary "
+     "receipt is published.\n\n"
      "Full source inventory, dead links and parser debt: `SOURCE_SWEEP_2026-07-26.md`. "
      "Sourced theory, definitions, and evidence map: `docs/RESEARCH_FOUNDATIONS.md`. Executable "
      "human-study contract: `docs/REAL_WORLD_STUDY_WORKBENCH.md`. Full theory and falsifiable "

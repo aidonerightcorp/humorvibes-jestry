@@ -59,4 +59,7 @@ git diff --exit-code -- wave2_notebook/humor_genome_wave2.ipynb
 ```
 
 Kaggle publication additionally requires a terminal `COMPLETE` run and a downloaded independent
-log/output audit. A successful source upload alone is not an executed public result.
+log/output audit. The source checkout must live outside `/kaggle/working`, or Kaggle will publish
+the checkout as output; the canonical builder uses a tag-specific `/tmp` directory and leaves only
+the executive-summary receipt in the working directory. A successful source upload alone is not
+an executed public result.

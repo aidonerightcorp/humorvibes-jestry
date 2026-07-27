@@ -48,7 +48,7 @@ def test_canonical_notebook_is_deterministic_public_and_schema_clean() -> None:
     assert "What is the proposed solution or exploration?" in opening
     assert "What did we learn?" in opening
     assert "What can people use this for?" in opening
-    assert "humor-genome-wave2-v8" in opening
+    assert "humor-genome-wave2-v9" in opening
     all_source = "\n".join("".join(cell["source"]) for cell in nb["cells"])
     assert "humor_genome_wave2_executive_summary.json" in all_source
     assert "## 6. What we learned" in all_source
@@ -58,6 +58,8 @@ def test_canonical_notebook_is_deterministic_public_and_schema_clean() -> None:
     assert "docs/RESEARCH_FOUNDATIONS.md" in all_source
     assert "synthetic_demo_receipt" in all_source
     assert "claim ready:" in all_source
+    assert "WORK_ROOT = '/tmp' if os.path.isdir('/kaggle/working') else '.'" in all_source
+    assert "CHECKOUT = os.path.join(WORK_ROOT" in all_source
     ids = [cell.get("id") for cell in nb["cells"]]
     assert all(ids) and len(ids) == len(set(ids))
     for cell in nb["cells"]:
