@@ -1,0 +1,86 @@
+replicaCount: 2
+
+image:
+  repository: humorvibes-research
+  pullPolicy: IfNotPresent
+  tag: "0.4.0"
+  digest: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+existingSecret: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: "1"
+    memory: 512Mi
+
+startupProbe:
+  failureThreshold: 30
+  periodSeconds: 2
+
+livenessProbe:
+  failureThreshold: 3
+  periodSeconds: 10
+  timeoutSeconds: 3
+
+readinessProbe:
+  failureThreshold: 3
+  periodSeconds: 10
+  timeoutSeconds: 4
+
+config:
+  llmDefault: offline
+  embeddingDefault: hash:128
+  ollamaHost: ""
+  ollamaModels: gemma3:4b
+  ollamaEmbeddingModels: embeddinggemma,qwen3-embedding,all-minilm
+  maxRequestBytes: "1000000"
+  maxResponseBytes: "10000000"
+  maxBatchItems: "64"
+  rateLimitPerMinute: "600"
+  strictReadiness: "false"
+  corsOrigins: ""
+
+extraEnv: []
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 80
+
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

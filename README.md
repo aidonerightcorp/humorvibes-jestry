@@ -8,6 +8,15 @@ A public, reproducible Gemma study of humor structure. **HumorVibes** is the imp
 The original hackathon deadline has passed and no competition submission is claimed. The project
 now continues as open research: results, corrections, limitations, and extension paths are public.
 
+**Problem:** humor outcomes depend on material, delivery, audience, culture, and context, while
+most datasets and text models observe only a fragment of that system. A model score cannot decide
+what a room will find funny. **Exploration:** this project makes multilingual source provenance,
+structural forms, Gemma surprise/frame measurements, uncertainty, and corrections reproducible,
+then exposes bounded retrieval and generation tools for human-led workflows. **Practical use:** it
+can help writers search and draft, researchers design and reproduce studies, educators teach
+evidence boundaries, and builders prototype consent-based applications. Human response remains the
+claim gate.
+
 ## Start here
 
 | Public artifact | Open it | Status | What it is for |
@@ -17,7 +26,7 @@ now continues as open research: results, corrections, limitations, and extension
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
 
 The notebook is the single canonical executable write-up. It clones the immutable
-`humor-genome-wave2-v6` source tag, verifies the mounted dataset byte-for-byte and semantically,
+`humor-genome-wave2-v7` source tag, verifies the mounted dataset byte-for-byte and semantically,
 loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
 [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
 
@@ -38,6 +47,11 @@ loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross
   application contract.
 - [`docs/ADVERSARIAL_VALIDATION.md`](docs/ADVERSARIAL_VALIDATION.md): tested attack classes,
   deterministic audit commands, and security boundaries.
+- [`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md): what a
+  comedian, audience member, academic, educator, curator, or product team can use now; the missing
+  evidence; and the claim gates for stronger conclusions.
+- [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md): the canonical notebook, the role of each supporting
+  notebook, and the clarity contract for future experiments.
 
 Issues, reproductions, and research proposals are welcome. In this project, reproducing a null
 result, removing a confound, or documenting a licensing boundary is a successful contribution.
@@ -71,7 +85,7 @@ Container quick start:
 
 ```bash
 docker compose up --build --wait
-python3 examples/api_client.py
+python3 examples/remote_client.py
 docker compose down
 ```
 
@@ -80,6 +94,7 @@ To build from the current source and reproduce the static and live-container rec
 ```bash
 python3 verify_deployment.py --docker \
   --kustomize-image registry.k8s.io/kubectl:v1.36.2 \
+  --helm-image alpine/helm:4.2.0@sha256:af08f75a3130d666a50b9fc150f40987ef20b885cf67659aabf4b83a5f2c5501 \
   --out jestry_out/deployment_validation.json
 ```
 
@@ -87,7 +102,8 @@ The same API supports authenticated local or cloud Ollama, OpenAI-compatible gen
 embeddings, six configurable Ollama embedding model names, and optional sentence-transformers.
 All live model IDs are exact operator allowlists; callers cannot provide arbitrary provider URLs.
 See the [deployment guide](docs/API_AND_DEPLOYMENT.md) for Ollama keys, model configuration,
-Docker profiles, and the non-root Kubernetes base.
+Docker profiles, the non-root Kubernetes base, the Helm chart, typed remote client, and checked-in
+OpenAPI contract.
 
 ## Release at a glance
 
@@ -120,8 +136,8 @@ other humor-adjacent text; source-specific human signals are not interchangeable
   layer without bypassing provenance or verification.
 - `wave2_notebook/`: the one notebook to read and publish; older notebook directories are
   supporting experiments, not competing entry points.
-- `humorvibes/`, `Dockerfile`, `compose*.yaml`, `deploy/kubernetes/`: the SDK/API and deployment
-  surface; it is an extension layer, not a second research notebook.
+- `humorvibes/`, `Dockerfile`, `compose*.yaml`, `deploy/kubernetes/`, `deploy/helm/`: the SDK/API
+  and deployment surface; it is an extension layer, not a second research notebook.
 - `build_kaggle_export.py`, `wave2_dataset/`, `verify_wave2_release.py`: public dataset build,
   Kaggle metadata, and fail-closed validation.
 - `caption_*.py`, `style_taxonomy.py`, `corpus_census.py`: the measured Wave 2 analyses.

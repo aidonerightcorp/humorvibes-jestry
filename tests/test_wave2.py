@@ -43,6 +43,16 @@ def test_canonical_notebook_is_deterministic_public_and_schema_clean() -> None:
     assert "Start here" in opening
     assert "single canonical executable write-up" in opening
     assert "SEPARATION IS NOT ESTABLISHED" in opening
+    assert "What problem are we solving?" in opening
+    assert "What is the proposed solution or exploration?" in opening
+    assert "What did we learn?" in opening
+    assert "What can people use this for?" in opening
+    assert "humor-genome-wave2-v7" in opening
+    all_source = "\n".join("".join(cell["source"]) for cell in nb["cells"])
+    assert "humor_genome_wave2_executive_summary.json" in all_source
+    assert "## 6. What we learned" in all_source
+    assert "## 7. What people can use this for" in all_source
+    assert "model output is human laughter" in all_source
     ids = [cell.get("id") for cell in nb["cells"]]
     assert all(ids) and len(ids) == len(set(ids))
     for cell in nb["cells"]:
@@ -68,6 +78,8 @@ def test_open_project_documentation_is_linked_and_submission_docs_are_archived()
         "CONTRIBUTING.md": "Model surprisal is not funniness",
         "ROADMAP.md": "P1 — test context",
         "docs/EXPANSION_GUIDE.md": "Definition of done",
+        "docs/PRODUCT_AND_RESEARCH_USE_CASES.md": "Claim gate",
+        "docs/NOTEBOOKS.md": "Clarity contract",
     }
     for relative, phrase in required.items():
         assert relative in readme

@@ -15,6 +15,7 @@ does not change the published study or turn model output into human funniness ev
 | Compose + local Ollama | Gemma generation + EmbeddingGemma | Pulls local models | workstation or single server |
 | Compose + Ollama cloud | authenticated Ollama native API | `OLLAMA_API_KEY` | hosted inference without local weights |
 | Kubernetes | two offline/hash API replicas, ClusterIP only | No | a secure base to customize |
+| Helm | configurable version of the Kubernetes base | No by default | repeatable environment-specific installation |
 
 The offline hash backend is deterministic token hashing for integration tests and lexical
 retrieval. It is explicitly marked `semantic: false`; it is not a substitute for a semantic
@@ -42,6 +43,21 @@ matrix = service.similarity(["Even experts slip."], ["A master can blunder."])
 Importing `humorvibes` never downloads a model or makes a network request. Live providers are
 called only when the application invokes a live-model method or enables a live readiness probe.
 
+For a Python application calling an independently deployed service, use the packaged remote
+client. It uses the same bounded, redirect-free transport as the provider adapters and does not
+print its API key:
+
+```python
+from humorvibes import HumorVibesClient
+
+client = HumorVibesClient.from_env()
+capabilities = client.capabilities()
+matches = client.similarity(["expert mistake"], ["grandmaster blunder"])
+```
+
+Set `HUMORVIBES_URL` and, when enabled on the server, `HUMORVIBES_API_KEY`. The complete executable
+example is [`examples/remote_client.py`](../examples/remote_client.py).
+
 ## Local API
 
 ```bash
@@ -64,6 +80,13 @@ python3 examples/api_client.py
 Interactive OpenAPI documentation is at `http://127.0.0.1:8080/docs` while the server is
 running. Request and response schemas reject unknown fields; callers cannot override provider
 hosts, keys, or model allowlists per request.
+
+Non-Python clients can generate code from the checked-in
+[`docs/openapi.json`](openapi.json) contract. Rebuild it deterministically with:
+
+```bash
+humorvibes openapi --out docs/openapi.json
+```
 
 ## API endpoints
 
@@ -90,9 +113,9 @@ probes. TLS belongs at the reverse proxy, ingress, or service mesh boundary.
 Build and run the image directly:
 
 ```bash
-docker build -t humorvibes-research:0.3.0 .
+docker build -t humorvibes-research:0.4.0 .
 docker run --rm --read-only --tmpfs /tmp:rw,size=64m \
-  -p 127.0.0.1:8080:8080 humorvibes-research:0.3.0
+  -p 127.0.0.1:8080:8080 humorvibes-research:0.4.0
 ```
 
 Or run the hardened Compose profile:
@@ -108,12 +131,14 @@ Run the combined SDK, adversarial, Compose, Kubernetes-static, and live-containe
 ```bash
 python3 verify_deployment.py --docker \
   --kustomize-image registry.k8s.io/kubectl:v1.36.2 \
+  --helm-image alpine/helm:4.2.0@sha256:af08f75a3130d666a50b9fc150f40987ef20b885cf67659aabf4b83a5f2c5501 \
   --out jestry_out/deployment_validation.json
 ```
 
 Without `--docker`, the command still checks the SDK, adversarial contracts, Compose rendering,
 and Kubernetes manifest structure. The optional pinned kubectl image renders the Kustomize base
 without requiring a host installation or claiming that a cluster apply occurred.
+The optional pinned Helm image lints and renders the chart under the same truth boundary.
 
 With `--docker`, the verifier first rebuilds the named image from the current checkout and then
 launches it. Add `--no-build` only when deliberately validating an already-built or pulled image.
@@ -172,15 +197,15 @@ seccomp profile. The distinction among probe types follows the
 For a local `kind` cluster:
 
 ```bash
-docker build -t humorvibes-research:0.3.0 .
-kind load docker-image humorvibes-research:0.3.0
+docker build -t humorvibes-research:0.4.0 .
+kind load docker-image humorvibes-research:0.4.0
 kubectl apply -k deploy/kubernetes
 kubectl rollout status deployment/humorvibes
 kubectl port-forward service/humorvibes 8080:80
 ```
 
 Then run `python3 examples/api_client.py` in another shell. For `minikube`, use
-`minikube image load humorvibes-research:0.3.0` in place of the `kind` command.
+`minikube image load humorvibes-research:0.4.0` in place of the `kind` command.
 
 Before exposing the Service outside the cluster, require inbound authentication:
 
@@ -208,10 +233,28 @@ kubectl set env deployment/humorvibes \
   HUMORVIBES_EMBEDDING_DEFAULT=ollama:embeddinggemma
 ```
 
-For a remote cluster, push `humorvibes-research:0.3.0` to your registry, obtain the resulting
+For a remote cluster, push `humorvibes-research:0.4.0` to your registry, obtain the resulting
 digest, and replace the base image with that immutable registry reference in a deployment-specific
 Kustomize overlay. The base deliberately names the locally built image rather than claiming that
 an image has already been published to a registry.
+
+### Helm
+
+The chart exposes replicas, image tag or digest, resources, probes, provider configuration, an
+existing Secret, and optional HPA/PDB objects while preserving the non-root, read-only,
+cluster-internal defaults:
+
+```bash
+helm lint deploy/helm/humorvibes
+helm template demo deploy/helm/humorvibes
+helm upgrade --install humorvibes deploy/helm/humorvibes \
+  --set image.repository=humorvibes-research \
+  --set image.tag=0.4.0
+```
+
+Use `existingSecret` for keys. The chart intentionally does not create an Ingress or accept
+literal secrets as values. See [`deploy/helm/humorvibes/README.md`](../deploy/helm/humorvibes/README.md)
+for digest-pinned registry installation.
 
 ## Configuration reference
 
@@ -254,3 +297,9 @@ dependency check instead.
   validated before results reach an application.
 - Generation and model judging are application features, not published Gemma measurements or
   human evaluation.
+- Audience-facing personalization requires explicit, revocable input and a real consent and data
+  lifecycle. The service does not infer audience traits or supply that governance layer.
+
+Product fit and model quality are separate from deployment correctness. The persona workflows,
+success measures, and human-evidence gates are specified in
+[`PRODUCT_AND_RESEARCH_USE_CASES.md`](PRODUCT_AND_RESEARCH_USE_CASES.md).

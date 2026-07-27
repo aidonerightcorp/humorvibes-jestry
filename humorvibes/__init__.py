@@ -5,15 +5,17 @@ measurement path. Importing this package never loads a model or makes a network
 request.
 """
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 from .config import Settings
+from .client import HumorVibesClient
 from .embeddings import EmbeddingRegistry, cosine_similarity
 from .llm import LLMRegistry
 from .service import HumorVibesService
 
 __all__ = [
     "EmbeddingRegistry",
+    "HumorVibesClient",
     "HumorVibesService",
     "LLMRegistry",
     "Settings",

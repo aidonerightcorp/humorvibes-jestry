@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "humorvibes.fullname" . }}
+  labels:
+    {{- include "humorvibes.labels" . | nindent 4 }}
+data:
+  HUMORVIBES_LLM_DEFAULT: {{ .Values.config.llmDefault | quote }}
+  HUMORVIBES_EMBEDDING_DEFAULT: {{ .Values.config.embeddingDefault | quote }}
+  HUMORVIBES_OLLAMA_MODELS: {{ .Values.config.ollamaModels | quote }}
+  HUMORVIBES_OLLAMA_EMBED_MODELS: {{ .Values.config.ollamaEmbeddingModels | quote }}
+  HUMORVIBES_MAX_REQUEST_BYTES: {{ .Values.config.maxRequestBytes | quote }}
+  HUMORVIBES_MAX_RESPONSE_BYTES: {{ .Values.config.maxResponseBytes | quote }}
+  HUMORVIBES_MAX_BATCH_ITEMS: {{ .Values.config.maxBatchItems | quote }}
+  HUMORVIBES_RATE_LIMIT_PER_MINUTE: {{ .Values.config.rateLimitPerMinute | quote }}
+  HUMORVIBES_STRICT_READINESS: {{ .Values.config.strictReadiness | quote }}
+  {{- if .Values.config.ollamaHost }}
+  OLLAMA_HOST: {{ .Values.config.ollamaHost | quote }}
+  {{- end }}
+  {{- if .Values.config.corsOrigins }}
+  HUMORVIBES_CORS_ORIGINS: {{ .Values.config.corsOrigins | quote }}
+  {{- end }}

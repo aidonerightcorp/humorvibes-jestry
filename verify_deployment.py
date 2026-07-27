@@ -19,6 +19,7 @@ from typing import Any
 import yaml
 
 from humorvibes.adversarial import run_adversarial_suite
+from humorvibes.client import HumorVibesClient
 from humorvibes.config import Settings
 from humorvibes.service import HumorVibesService
 
@@ -36,6 +37,7 @@ def source_manifest() -> dict[str, Any]:
         ROOT / "deploy/kubernetes/deployment.yaml",
         ROOT / "deploy/kubernetes/kustomization.yaml",
         ROOT / "deploy/kubernetes/service.yaml",
+        ROOT / "docs/openapi.json",
         ROOT / "formats.py",
         ROOT / "humor_mesh.py",
         ROOT / "mesh_signals.py",
@@ -43,6 +45,11 @@ def source_manifest() -> dict[str, Any]:
         ROOT / "requirements-api.lock",
         ROOT / "uv.lock",
         ROOT / "verify_deployment.py",
+        *sorted(
+            path
+            for path in (ROOT / "deploy/helm/humorvibes").rglob("*")
+            if path.is_file()
+        ),
         *sorted((ROOT / "humorvibes").glob("*.py")),
     ]
     hashes = {
@@ -143,6 +150,56 @@ def verify_kustomize_container(image: str) -> dict[str, Any]:
     return {"image": image, "objects": identities, "rendered": True}
 
 
+def verify_helm_container(image: str) -> dict[str, Any]:
+    chart = "/workspace/deploy/helm/humorvibes"
+    command(
+        "docker",
+        "run",
+        "--rm",
+        "--volume",
+        f"{ROOT}:/workspace:ro",
+        "--workdir",
+        "/workspace",
+        image,
+        "lint",
+        chart,
+    )
+    rendered = command(
+        "docker",
+        "run",
+        "--rm",
+        "--volume",
+        f"{ROOT}:/workspace:ro",
+        "--workdir",
+        "/workspace",
+        image,
+        "template",
+        "receipt",
+        chart,
+    )
+    documents = [row for row in yaml.safe_load_all(rendered) if row]
+    identities = [f"{row['kind']}/{row['metadata']['name']}" for row in documents]
+    assert identities == [
+        "ConfigMap/receipt-humorvibes",
+        "Service/receipt-humorvibes",
+        "Deployment/receipt-humorvibes",
+    ]
+    deployment = documents[-1]
+    pod = deployment["spec"]["template"]["spec"]
+    container = pod["containers"][0]
+    assert pod["automountServiceAccountToken"] is False
+    assert container["securityContext"]["readOnlyRootFilesystem"] is True
+    assert container["image"] == "humorvibes-research:0.4.0"
+    return {
+        "image": image,
+        "objects": identities,
+        "linted": True,
+        "rendered": True,
+        "nonroot": pod["securityContext"]["runAsNonRoot"],
+        "readonly_root": container["securityContext"]["readOnlyRootFilesystem"],
+    }
+
+
 def json_call(base: str, path: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:
     headers = {"Accept": "application/json"}
     body = None
@@ -191,7 +248,10 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
         else:
             raise RuntimeError(f"container readiness timed out: {last_error}")
 
-        capabilities = json_call(base, "/v1/capabilities")
+        remote = HumorVibesClient(base, timeout=5)
+        capabilities = remote.capabilities()
+        remote_similarity = remote.similarity(["same text"], ["same text"])
+        openapi = json_call(base, "/openapi.json")
         embedded = json_call(base, "/v1/embed", {"texts": ["container smoke test"]})
         signals = json_call(
             base,
@@ -204,7 +264,12 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
         assert inspection["Config"]["User"] == "10001:10001"
         assert inspection["HostConfig"]["ReadonlyRootfs"] is True
         assert embedded["model_id"] == "hash:128" and embedded["count"] == 1
+        assert remote_similarity["cosine_similarity"] == [[1.0]]
+        assert openapi["info"]["version"] == "0.4.0"
         assert capabilities["truth_boundary"]["generation_is_not_human_validation"] is True
+        assert capabilities["product_use_cases"]["creative_assistance"]["claim_gate"] == (
+            "blind_or_live_human_response"
+        )
         assert signals["truth_boundary"]["teacher_forced_logprobs_measured"] is False
         return {
             "image": image,
@@ -216,8 +281,10 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
             "embedding_model": embedded["model_id"],
             "endpoints_checked": [
                 "/health/ready",
+                "/openapi.json",
                 "/v1/capabilities",
                 "/v1/embed",
+                "/v1/similarity",
                 "/v1/signals",
             ],
             "offline_signals_measured": False,
@@ -241,7 +308,7 @@ def main() -> int:
         action="store_true",
         help="also build, launch, and probe the image",
     )
-    parser.add_argument("--image", default="humorvibes-research:0.3.0")
+    parser.add_argument("--image", default="humorvibes-research:0.4.0")
     parser.add_argument(
         "--no-build",
         action="store_true",
@@ -251,6 +318,11 @@ def main() -> int:
         "--kustomize-image",
         default="",
         help="also render the manifests with kubectl from this container image",
+    )
+    parser.add_argument(
+        "--helm-image",
+        default="",
+        help="also lint and render the Helm chart with this container image",
     )
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
@@ -270,10 +342,12 @@ def main() -> int:
         )
     if args.kustomize_image:
         checks.append(check("kustomize_render", lambda: verify_kustomize_container(args.kustomize_image)))
+    if args.helm_image:
+        checks.append(check("helm_render", lambda: verify_helm_container(args.helm_image)))
     ok = all(row["ok"] for row in checks)
     receipt = {
         "receipt_type": "humorvibes_deployment_validation",
-        "receipt_version": 2,
+        "receipt_version": 3,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "ok": ok,
         "docker_executed": args.docker,
@@ -290,6 +364,7 @@ def main() -> int:
             and not args.no_build,
             "kubernetes_cluster_apply_executed": False,
             "kustomize_render_executed": bool(args.kustomize_image),
+            "helm_render_executed": bool(args.helm_image),
             "live_llm_or_semantic_embedding_called": False,
             "canonical_kaggle_measurement_changed": False,
         },

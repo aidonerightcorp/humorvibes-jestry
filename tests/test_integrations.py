@@ -11,6 +11,7 @@ from dataclasses import replace
 import pytest
 
 from humorvibes.config import Settings
+from humorvibes.client import HumorVibesClient
 from humorvibes.embeddings import (
     EmbeddingRegistry,
     HashEmbeddingBackend,
@@ -92,6 +93,48 @@ def test_ollama_key_selects_cloud_and_never_appears_in_public_config() -> None:
     assert runtime.public_summary()["ollama_key_configured"] is True
 
 
+def test_remote_client_mirrors_api_contract_without_exposing_its_key() -> None:
+    stub = StubJsonClient([
+        {"ok": True},
+        {"model_id": "hash:128", "count": 2},
+        {"cosine_similarity": [[1.0]]},
+    ])
+    client = HumorVibesClient(
+        "https://api.example.test",
+        api_key="client-secret",
+        transport=stub,
+    )
+    assert client.live() == {"ok": True}
+    assert client.embed(["one", "two"])["count"] == 2
+    assert client.similarity(["same"], ["same"])["cosine_similarity"] == [[1.0]]
+    assert "client-secret" not in repr(client)
+    assert "auth_configured=True" in repr(client)
+    assert stub.calls == [
+        ("/health/live", None),
+        ("/v1/embed", {
+            "texts": ["one", "two"],
+            "model_id": None,
+            "dimensions": None,
+        }),
+        ("/v1/similarity", {
+            "left": ["same"],
+            "right": ["same"],
+            "model_id": None,
+            "dimensions": None,
+        }),
+    ]
+
+
+def test_remote_client_environment_keeps_url_and_key_operator_scoped() -> None:
+    client = HumorVibesClient.from_env({
+        "HUMORVIBES_URL": "https://humor.example.test",
+        "HUMORVIBES_API_KEY": "environment-secret",
+    })
+    assert client.base_url == "https://humor.example.test"
+    assert client.auth_configured is True
+    assert "environment-secret" not in repr(client)
+
+
 @pytest.mark.parametrize(
     "url",
     [
@@ -122,6 +165,7 @@ def test_json_transport_adds_bearer_key_and_does_not_put_it_in_url() -> None:
     request = opener.requests[0][0]
     headers = dict(request.header_items())
     assert headers["Authorization"] == "Bearer key-value"
+    assert headers["User-agent"] == "HumorVibes/0.4"
     assert "key-value" not in request.full_url
 
 

@@ -108,7 +108,7 @@ class JsonHttpClient:
             raise IntegrationError("invalid_endpoint", "Integration endpoint path is invalid.", 500)
         headers = {
             "Accept": "application/json",
-            "User-Agent": "HumorVibes/0.3",
+            "User-Agent": "HumorVibes/0.4",
             **(extra_headers or {}),
         }
         body = None

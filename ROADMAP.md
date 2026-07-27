@@ -47,6 +47,21 @@ metric, confidence interval, leakage checks, and every attempted arm, including 
 Acceptance: annotation guidelines, consent/licence terms, sampling plan, raw disagreement, and a
 versioned schema ship before a model is ranked against the labels.
 
+## P1 — validate a writer-facing use case
+
+- [ ] Pre-register a within-writer crossover trial on matched premises with tool-assisted and
+  normal-workflow conditions.
+- [ ] Keep generated, rejected, selected, edited, rehearsed, and performed versions so selection
+  effects are visible.
+- [ ] Choose one primary endpoint in advance: blinded audience preference or time to a performed
+  draft; treat voice preservation and harmful misreadings as guardrails.
+- [ ] Randomize rehearsal order and model writer, premise, audience, and venue as grouped effects.
+- [ ] Publish null results, dropouts, opt-outs, costs, and every attempted condition.
+
+Acceptance: the trial satisfies the claim gate in
+[`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md) and supports a
+bounded statement about the sampled writers and audiences—not “the model is funny.”
+
 ## P1 — expand native multilingual structure
 
 - [ ] Add precision-oriented form rules and fixtures for Portuguese, Greek, Amharic, Japanese,
@@ -91,7 +106,7 @@ multi-million-row inventory.
 
 The initial SDK/API, authenticated Ollama/OpenAI-compatible transports, multi-model embedding
 registry, offline adversarial audit, Docker/Compose profiles, and Kubernetes base are implemented
-in 0.3.0. Useful bounded follow-ups are:
+in 0.4.0. Useful bounded follow-ups are:
 
 - [ ] Publish a signed multi-architecture image to GHCR and add a digest-pinned deployment overlay.
 - [ ] Add gateway examples for TLS, identity, global rate limiting, and request tracing.

@@ -1,0 +1,9 @@
+HumorVibes {{ .Chart.AppVersion }} is installed as {{ include "humorvibes.fullname" . }}.
+
+Check readiness:
+  kubectl port-forward service/{{ include "humorvibes.fullname" . }} 8080:{{ .Values.service.port }}
+  curl --fail http://127.0.0.1:8080/health/ready
+
+The default profile performs no model network calls. Set existingSecret and explicit
+model allowlists before enabling hosted providers. This chart does not install an
+Ingress or TLS policy; add those in an environment-specific chart or gateway layer.

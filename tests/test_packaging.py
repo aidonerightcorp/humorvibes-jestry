@@ -86,6 +86,39 @@ def test_kubernetes_config_contains_no_secret_values_and_stays_cluster_internal(
     assert "value: sk-" not in deployment_text
 
 
+def test_helm_chart_preserves_secure_defaults_and_supports_image_digests() -> None:
+    chart = load_yaml("deploy/helm/humorvibes/Chart.yaml")
+    values = load_yaml("deploy/helm/humorvibes/values.yaml")
+    schema = load_yaml("deploy/helm/humorvibes/values.schema.json")
+    deployment = (ROOT / "deploy/helm/humorvibes/templates/deployment.yaml").read_text(
+        encoding="utf-8"
+    )
+    templates = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in sorted((ROOT / "deploy/helm/humorvibes/templates").glob("*.yaml"))
+    )
+    assert chart["version"] == "0.4.0" and chart["appVersion"] == "0.4.0"
+    assert values["replicaCount"] == 2
+    assert values["service"]["type"] == "ClusterIP"
+    assert values["podSecurityContext"]["runAsNonRoot"] is True
+    assert values["securityContext"]["readOnlyRootFilesystem"] is True
+    assert values["securityContext"]["capabilities"]["drop"] == ["ALL"]
+    assert values["image"]["tag"] == "0.4.0" and values["image"]["digest"] == ""
+    digest_schema = schema["properties"]["image"]["properties"]["digest"]
+    assert "sha256" in digest_schema["pattern"]
+    assert "@{{ .Values.image.digest }}" in deployment
+    assert "automountServiceAccountToken: false" in deployment
+    assert "existingSecret" in deployment
+    assert "kind: Ingress" not in templates and "kind: Secret" not in templates
+    assert "HUMORVIBES_API_KEY" not in templates and "OLLAMA_API_KEY" not in templates
+
+
+def test_helm_documentation_has_no_unresolved_release_placeholder() -> None:
+    text = (ROOT / "deploy/helm/humorvibes/README.md").read_text(encoding="utf-8")
+    assert "REPLACE_WITH" not in text
+    assert "image.digest" in text and "docker buildx imagetools inspect" in text
+
+
 def test_legacy_ollama_embedding_scripts_no_longer_use_singular_endpoint() -> None:
     retired_endpoint = "/api/" + "embeddings"
     offenders = []
@@ -118,3 +151,5 @@ def test_deployment_verifier_builds_current_source_by_default() -> None:
     assert 'command("docker", "build", "--tag", image, ".")' in text
     assert '"built_from_current_source": build' in text
     assert '"--no-build"' in text
+    assert '"--helm-image"' in text
+    assert '"helm_render_executed"' in text

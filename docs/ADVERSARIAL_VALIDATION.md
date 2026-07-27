@@ -21,7 +21,8 @@ python3 -m pytest -q \
   tests/test_api.py \
   tests/test_packaging.py
 python3 verify_deployment.py --docker \
-  --kustomize-image registry.k8s.io/kubectl:v1.36.2
+  --kustomize-image registry.k8s.io/kubectl:v1.36.2 \
+  --helm-image alpine/helm:4.2.0@sha256:af08f75a3130d666a50b9fc150f40987ef20b885cf67659aabf4b83a5f2c5501
 ```
 
 Use `humorvibes doctor --live` separately when a real provider is configured. A live provider check
@@ -41,8 +42,8 @@ answers availability; it does not establish model quality, correctness, or funni
 - cosine dimension, finiteness, and nonzero-norm preconditions;
 - prompt/body non-reflection in validation errors and generic internal errors;
 - invalid request IDs, inbound Bearer auth, per-process rate limits, and security headers;
-- container/Kubernetes non-root identity, read-only filesystems, dropped capabilities, probes,
-  bounded resources, internal-only Service type, and absence of literal secrets;
+- container/Kubernetes/Helm non-root identity, read-only filesystems, dropped capabilities,
+  probes, bounded resources, internal-only Service type, and absence of literal secrets;
 - retired Ollama singular embedding endpoint regression.
 
 ## Deliberate boundaries

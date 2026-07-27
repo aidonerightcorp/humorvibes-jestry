@@ -7,6 +7,9 @@ reproduction is valuable here.
 
 Read [`PROJECT_STATUS.md`](PROJECT_STATUS.md) before starting. Choose a bounded item from
 [`ROADMAP.md`](ROADMAP.md), or open a research proposal using the repository issue template.
+Read [`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md) when a
+change affects a writer, audience, academic, or product claim; it defines the human-evidence gate
+and the minimum study fields.
 
 ## Licensing boundary
 
@@ -45,7 +48,8 @@ For API or deployment changes, also run:
 docker compose -f compose.yaml config --quiet
 docker compose -f compose.yaml -f compose.ollama.yaml config --quiet
 python3 verify_deployment.py --docker \
-  --kustomize-image registry.k8s.io/kubectl:v1.36.2
+  --kustomize-image registry.k8s.io/kubectl:v1.36.2 \
+  --helm-image alpine/helm:4.2.0@sha256:af08f75a3130d666a50b9fc150f40987ef20b885cf67659aabf4b83a5f2c5501
 ```
 
 Do not commit provider keys, literal Kubernetes Secrets, model caches, or corpus rows as
@@ -112,6 +116,11 @@ State the hypothesis, unit of analysis, split strategy, controls, primary metric
 method, stopping rule, and expected receipt before running the expensive arm. Keep exploratory
 and confirmatory results visibly distinct. Prefer group-held-out splits whenever rows share a
 contest, source, author, prompt, or other context.
+
+For a real-world pilot, also define the user, decision being improved, existing baseline, consent
+and retention policy, adverse outcomes, opt-out path, and exact claim gate. Product usage logs are
+not automatically research consent, and demographic proxies must not substitute for audience
+members' explicit preferences.
 
 ## Required checks
 

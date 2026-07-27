@@ -16,7 +16,7 @@ FROM python:${PYTHON_VERSION}-slim AS runtime
 LABEL org.opencontainers.image.title="HumorVibes Research API" \
       org.opencontainers.image.description="Validated LLM, embedding, and humor-research integration API" \
       org.opencontainers.image.source="https://github.com/aidonerightcorp/humorvibes-jestry" \
-      org.opencontainers.image.version="0.3.0"
+      org.opencontainers.image.version="0.4.0"
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1 \
     PYTHONDONTWRITEBYTECODE=1 \

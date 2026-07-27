@@ -6,9 +6,10 @@ not include active keys, private model responses, or unpublished corpus rows in 
 
 ## Supported surface
 
-The current deployable integration package is `humorvibes-research` 0.3.x on Python 3.10-3.12.
+The current deployable integration package is `humorvibes-research` 0.4.x on Python 3.10-3.12.
 The historical research scripts remain auditable, but only the `humorvibes` SDK/API, Dockerfile,
-Compose files, and `deploy/kubernetes` manifests are treated as an application-serving boundary.
+Compose files, `deploy/kubernetes` manifests, and `deploy/helm` chart are treated as an
+application-serving boundary.
 
 ## Deployment expectations
 

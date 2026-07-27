@@ -36,11 +36,44 @@ class HumorVibesService:
             "llm_models": self.llms.capabilities(),
             "embedding_models": self.embeddings.capabilities(),
             "humor_formats": list_formats(),
+            "product_use_cases": {
+                "creative_assistance": {
+                    "status": "available_with_human_selection",
+                    "for": ["comedian", "writer", "editor"],
+                    "appropriate_outputs": [
+                        "candidate_variations",
+                        "format_constrained_drafts",
+                        "precedent_retrieval_clues",
+                    ],
+                    "claim_gate": "blind_or_live_human_response",
+                },
+                "research_reproduction": {
+                    "status": "available",
+                    "for": ["academic", "student", "data_curator"],
+                    "appropriate_outputs": [
+                        "corpus_receipts",
+                        "model_instrument_measurements",
+                        "grouped_evaluation_examples",
+                    ],
+                    "claim_gate": "preregistered_external_replication",
+                },
+                "audience_personalization": {
+                    "status": "experimental_requires_opt_in_data",
+                    "for": ["audience_member", "performer", "product_builder"],
+                    "appropriate_outputs": [
+                        "user_controlled_preferences",
+                        "consented_feedback_summaries",
+                    ],
+                    "claim_gate": "consented_held_out_audience_evaluation",
+                },
+            },
             "truth_boundary": {
                 "generation_is_not_human_validation": True,
                 "embedding_similarity_is_not_proof_of_novelty": True,
                 "offline_signals_are_not_measured": True,
                 "canonical_kaggle_measurement_is_immutable": True,
+                "audience_traits_must_not_be_inferred": True,
+                "personalization_requires_opt_in_data": True,
             },
         }
 

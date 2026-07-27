@@ -12,25 +12,28 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public and ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 
-The notebook uses the immutable source tag `humor-genome-wave2-v6`. GitHub `main` may move as
+The notebook uses the immutable source tag `humor-genome-wave2-v7`. GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
 move underneath an existing run.
 
 ## Application and deployment extension
 
-The repository now also contains a separate `humorvibes-research` 0.3.0 application layer:
+The repository now also contains a separate `humorvibes-research` 0.4.0 application layer:
 
 - an importable Python SDK and a schema-first FastAPI service;
 - authenticated native Ollama (local or cloud) and OpenAI-compatible generation;
 - validated hash, Ollama, OpenAI-compatible, and optional sentence-transformers embeddings;
 - exact model allowlists, bounded requests/responses, secret-safe errors, Prometheus text metrics,
   and a deterministic adversarial audit;
+- a typed dependency-free remote client and checked-in OpenAPI contract for application
+  integration;
 - a multi-stage non-root Docker image, hardened offline/local-Ollama/cloud-Ollama Compose profiles,
-  and a two-replica non-root Kubernetes Kustomize base.
+  a two-replica non-root Kubernetes Kustomize base, and a configurable Helm chart.
 
 The local image was built and launched with a read-only root filesystem; its readiness, capability,
 embedding, and signal-boundary checks passed. Compose rendering, the Kubernetes security/probe
-contracts, and a kubectl 1.36.2 Kustomize render also passed. The machine-readable receipt is
+contracts, a kubectl 1.36.2 Kustomize render, and a Helm 4.2.0 lint/render also passed. The
+machine-readable receipt is
 [`jestry_out/deployment_validation.json`](jestry_out/deployment_validation.json).
 
 Those statements do **not** claim a public container-registry image, a hosted public API, a live
@@ -56,6 +59,9 @@ environment. This extension does not alter the immutable Kaggle notebook or its 
 - The release has source-controlled dataset and notebook metadata, deterministic notebook
   generation, automated tests, semantic release checks, and a machine-readable publication
   receipt at [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
+- The notebook opens with the problem, proposed exploration, controlling results, use cases, and
+  limitations, and emits a machine-readable executive-summary artifact. The supporting notebook
+  map is documented in [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md).
 
 ## What is deliberately not claimed
 
@@ -87,6 +93,18 @@ python3 verify_wave2_release.py --root kaggle_wave2_public
 
 The local corpus is not required to read or verify the public release. It is required only to
 rebuild the public slice from the complete research inventory.
+
+## What people can use this for
+
+The corpus, notebook, SDK/API, and deployment surfaces can support precedent search and candidate
+variation for writers, reproducible experiment design for academics, evidence-boundary teaching,
+provenance audits, and consent-based application prototypes. They do not replace a comedian's
+selection, an audience's response, a native speaker's judgment, or a preregistered human study.
+
+[`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md) defines the
+persona-specific workflows, minimum study schema, success measures, and claim gates. The
+highest-value next experiment is a preregistered within-writer crossover trial with blinded,
+opt-in audience evaluation—not a larger model-only ranking.
 
 ## Where help is useful
 

@@ -55,6 +55,12 @@ def main() -> int:
     )
     adversarial.add_argument("--out", type=Path, help="also write the JSON receipt to this path")
 
+    openapi = sub.add_parser(
+        "openapi",
+        help="write the deterministic OpenAPI contract for app/client generation",
+    )
+    openapi.add_argument("--out", type=Path, default=Path("docs/openapi.json"))
+
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
     if args.command == "serve":
@@ -75,6 +81,12 @@ def main() -> int:
                 encoding="utf-8",
             )
         return 0 if receipt["ok"] else 1
+
+    if args.command == "openapi":
+        from .openapi import export_openapi
+
+        print(export_openapi(args.out))
+        return 0
 
     service = HumorVibesService()
     try:
