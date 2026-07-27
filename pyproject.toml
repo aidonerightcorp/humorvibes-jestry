@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "humorvibes-research"
-version = "0.6.0"
+version = "0.7.0"
 description = "Deployable integrations and API for the Humor Genome Wave 2 research project"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -29,6 +29,10 @@ api = [
 ]
 local-embeddings = [
   "sentence-transformers>=3,<6",
+]
+telemetry = [
+  "opentelemetry-sdk>=1.30,<2",
+  "opentelemetry-exporter-otlp-proto-http>=1.30,<2",
 ]
 dev = [
   "httpx2>=2.9,<3",

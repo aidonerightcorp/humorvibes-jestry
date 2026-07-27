@@ -268,7 +268,12 @@ class LLMRegistry:
         return [asdict(spec) for spec, _ in self._models.values()]
 
     def probe_default(self) -> dict[str, Any]:
-        selected = self.settings.default_llm
+        return self.probe(self.settings.default_llm)
+
+    def probe(self, model_id: str | None = None) -> dict[str, Any]:
+        """Probe the selected provider without silently changing the selected model."""
+
+        selected = model_id or self.settings.default_llm
         if selected == "offline":
             return {"ok": True, "provider": "offline", "note": "generation disabled by configuration"}
         row = self._models.get(selected)

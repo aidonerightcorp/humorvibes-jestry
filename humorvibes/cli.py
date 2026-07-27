@@ -161,6 +161,13 @@ def main() -> int:
     multimodal_benchmark.add_argument("--root", type=Path, required=True)
     multimodal_benchmark.add_argument("--out", type=Path)
 
+    provider_audit = sub.add_parser(
+        "provider-audit",
+        help="record configured, reachable, executable, and quality-validated provider gates",
+    )
+    provider_audit.add_argument("--live", action="store_true")
+    provider_audit.add_argument("--out", type=Path)
+
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
     if args.command == "serve":
@@ -267,6 +274,15 @@ def main() -> int:
                 encoding="utf-8",
             )
         return 0
+
+    if args.command == "provider-audit":
+        from .provider_audit import audit_providers, write_provider_audit
+
+        payload = audit_providers(live=args.live)
+        _dump(payload)
+        if args.out:
+            write_provider_audit(args.out, payload)
+        return 0 if payload["ok"] else 1
 
     if args.command in {
         "controls-info",

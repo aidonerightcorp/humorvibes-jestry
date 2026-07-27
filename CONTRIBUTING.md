@@ -40,7 +40,7 @@ When dependency metadata changes, refresh both locks and review the diff before 
 
 ```bash
 uv lock
-uv export --frozen --extra api --no-dev --no-emit-project --no-hashes \
+uv export --frozen --extra api --extra telemetry --no-dev --no-emit-project --no-hashes \
   --output-file requirements-api.lock
 ```
 

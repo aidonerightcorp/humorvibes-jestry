@@ -14,6 +14,7 @@ from typing import Annotated, Any
 from . import __version__
 from .config import Settings
 from .errors import IntegrationError
+from .observability import Metrics, Telemetry
 from .service import HumorVibesService
 
 try:
@@ -105,39 +106,6 @@ class _RateLimiter:
             return True
 
 
-class _Metrics:
-    def __init__(self) -> None:
-        self.started = time.time()
-        self.requests = 0
-        self.errors = 0
-        self.by_status: dict[int, int] = defaultdict(int)
-        self._lock = threading.Lock()
-
-    def record(self, status: int) -> None:
-        with self._lock:
-            self.requests += 1
-            self.by_status[status] += 1
-            if status >= 400:
-                self.errors += 1
-
-    def text(self) -> str:
-        with self._lock:
-            lines = [
-                "# HELP humorvibes_requests_total HTTP requests handled.",
-                "# TYPE humorvibes_requests_total counter",
-                f"humorvibes_requests_total {self.requests}",
-                "# HELP humorvibes_errors_total HTTP responses with status >= 400.",
-                "# TYPE humorvibes_errors_total counter",
-                f"humorvibes_errors_total {self.errors}",
-                "# HELP humorvibes_uptime_seconds Process uptime.",
-                "# TYPE humorvibes_uptime_seconds gauge",
-                f"humorvibes_uptime_seconds {max(0, int(time.time() - self.started))}",
-            ]
-            for status, count in sorted(self.by_status.items()):
-                lines.append(f'humorvibes_responses_total{{status="{status}"}} {count}')
-            return "\n".join(lines) + "\n"
-
-
 class _BodyLimitMiddleware:
     """Bound chunked and fixed-length bodies before Pydantic parses them."""
 
@@ -198,11 +166,15 @@ def create_app(
     runtime_settings = settings or Settings.from_env()
     runtime_service = service or HumorVibesService(runtime_settings)
     limiter = _RateLimiter(runtime_settings.rate_limit_per_minute)
-    metrics = _Metrics()
+    metrics = Metrics(runtime_settings)
+    telemetry = Telemetry(runtime_settings)
 
     @asynccontextmanager
     async def lifespan(_: FastAPI):
-        yield
+        try:
+            yield
+        finally:
+            telemetry.shutdown()
 
     app = FastAPI(
         title="HumorVibes Integration API",
@@ -217,6 +189,7 @@ def create_app(
     app.state.settings = runtime_settings
     app.state.service = runtime_service
     app.state.metrics = metrics
+    app.state.telemetry = telemetry
 
     if runtime_settings.cors_origins:
         app.add_middleware(
@@ -230,6 +203,8 @@ def create_app(
 
     @app.middleware("http")
     async def request_boundary(request: Request, call_next):
+        started = time.monotonic()
+        request_span = telemetry.start_request(request.method, dict(request.headers))
         request_id = request.headers.get("X-Request-ID", "")
         if not request_id or len(request_id) > 128 or not all(ch.isalnum() or ch in "-_." for ch in request_id):
             request_id = uuid.uuid4().hex
@@ -245,7 +220,11 @@ def create_app(
                     status_code=413,
                 )
                 response.headers["X-Request-ID"] = request_id
-                metrics.record(413)
+                elapsed_ms = (time.monotonic() - started) * 1000
+                metrics.record(413, elapsed_ms)
+                request_span.finish(413, elapsed_ms)
+                if request_span.trace_id:
+                    response.headers["X-Trace-ID"] = request_span.trace_id
                 return response
         client_key = request.client.host if request.client else "unknown"
         if request.url.path.startswith("/v1/") and not limiter.allow(client_key):
@@ -255,14 +234,23 @@ def create_app(
             )
             response.headers["Retry-After"] = "60"
             response.headers["X-Request-ID"] = request_id
-            metrics.record(429)
+            elapsed_ms = (time.monotonic() - started) * 1000
+            metrics.record(429, elapsed_ms)
+            request_span.finish(429, elapsed_ms)
+            if request_span.trace_id:
+                response.headers["X-Trace-ID"] = request_span.trace_id
             return response
         request.state.request_id = request_id
         response = await call_next(request)
         response.headers["X-Request-ID"] = request_id
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Cache-Control"] = "no-store"
-        metrics.record(response.status_code)
+        elapsed_ms = (time.monotonic() - started) * 1000
+        metrics.record(response.status_code, elapsed_ms)
+        route = getattr(request.scope.get("route"), "path", "_unmatched")
+        request_span.finish(response.status_code, elapsed_ms, route)
+        if request_span.trace_id:
+            response.headers["X-Trace-ID"] = request_span.trace_id
         return response
 
     def require_api_key(

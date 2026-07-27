@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import re
 from pathlib import Path
 
@@ -24,6 +26,7 @@ def test_dockerfile_is_multi_stage_nonroot_and_health_checked() -> None:
     assert 'ENTRYPOINT ["humorvibes-api"]' in text
     assert "HUMORVIBES_HOST=0.0.0.0" in text
     assert "requirements-api.lock" in text and "--requirement requirements-api.lock" in text
+    assert "python:3.12-slim@sha256:" in text
     assert "COPY ." not in text
     assert "OLLAMA_API_KEY" not in text
 
@@ -76,6 +79,44 @@ def test_kubernetes_deployment_has_probes_resources_and_restricted_identity() ->
     assert container["securityContext"]["capabilities"]["drop"] == ["ALL"]
 
 
+def test_kubernetes_base_is_default_deny_on_egress() -> None:
+    policy = load_yaml("deploy/kubernetes/networkpolicy.yaml")
+    assert policy["kind"] == "NetworkPolicy"
+    assert set(policy["spec"]["policyTypes"]) == {"Ingress", "Egress"}
+    assert policy["spec"]["egress"] == []
+    kustomization = load_yaml("deploy/kubernetes/kustomization.yaml")
+    assert "networkpolicy.yaml" in kustomization["resources"]
+
+
+def test_envoy_gateway_example_has_tls_identity_global_limit_and_no_secrets() -> None:
+    text = (ROOT / "deploy/gateway/envoy-gateway.yaml").read_text(encoding="utf-8")
+    rows = list(yaml.safe_load_all(text))
+    by_kind = {row["kind"]: row for row in rows}
+    assert set(by_kind) == {
+        "Gateway",
+        "HTTPRoute",
+        "SecurityPolicy",
+        "BackendTrafficPolicy",
+        "ClientTrafficPolicy",
+    }
+    listener = by_kind["Gateway"]["spec"]["listeners"][0]
+    assert listener["protocol"] == "HTTPS" and listener["tls"]["mode"] == "Terminate"
+    assert by_kind["SecurityPolicy"]["spec"]["apiKeyAuth"]["extractFrom"][0]["headers"] == ["x-api-key"]
+    rate = by_kind["BackendTrafficPolicy"]["spec"]["rateLimit"]
+    assert rate["local"]["rules"] and rate["global"]["rules"]
+    assert by_kind["ClientTrafficPolicy"]["spec"]["tls"]["minVersion"] == "1.3"
+    assert "stringData:" not in text and "supersecret" not in text
+
+
+def test_container_publish_workflow_is_multiarch_sbom_and_attested() -> None:
+    text = (ROOT / ".github/workflows/publish-container.yml").read_text(encoding="utf-8")
+    assert "linux/amd64,linux/arm64" in text
+    assert "provenance: mode=max" in text and "sbom: true" in text
+    assert "packages: write" in text and "attestations: write" in text and "id-token: write" in text
+    assert "subject-digest: ${{ steps.build.outputs.digest }}" in text
+    assert "@v" not in "\n".join(line for line in text.splitlines() if "uses:" in line)
+
+
 def test_kubernetes_config_contains_no_secret_values_and_stays_cluster_internal() -> None:
     config = load_yaml("deploy/kubernetes/configmap.yaml")
     assert all("KEY" not in key and "SECRET" not in key for key in config["data"])
@@ -97,13 +138,13 @@ def test_helm_chart_preserves_secure_defaults_and_supports_image_digests() -> No
         path.read_text(encoding="utf-8")
         for path in sorted((ROOT / "deploy/helm/humorvibes/templates").glob("*.yaml"))
     )
-    assert chart["version"] == "0.6.0" and chart["appVersion"] == "0.6.0"
+    assert chart["version"] == "0.7.0" and chart["appVersion"] == "0.7.0"
     assert values["replicaCount"] == 2
     assert values["service"]["type"] == "ClusterIP"
     assert values["podSecurityContext"]["runAsNonRoot"] is True
     assert values["securityContext"]["readOnlyRootFilesystem"] is True
     assert values["securityContext"]["capabilities"]["drop"] == ["ALL"]
-    assert values["image"]["tag"] == "0.6.0" and values["image"]["digest"] == ""
+    assert values["image"]["tag"] == "0.7.0" and values["image"]["digest"] == ""
     digest_schema = schema["properties"]["image"]["properties"]["digest"]
     assert "sha256" in digest_schema["pattern"]
     assert "@{{ .Values.image.digest }}" in deployment
@@ -135,7 +176,7 @@ def test_container_runtime_lock_matches_uv_export() -> None:
 
     rendered = subprocess.run(
         [
-            "uv", "export", "--frozen", "--extra", "api", "--no-dev",
+            "uv", "export", "--frozen", "--extra", "api", "--extra", "telemetry", "--no-dev",
             "--no-emit-project", "--no-hashes",
         ],
         cwd=ROOT,
@@ -159,3 +200,44 @@ def test_ci_container_audit_reuses_the_compose_image_without_version_drift() -> 
     workflow = (ROOT / ".github/workflows/app-contracts.yml").read_text(encoding="utf-8")
     assert "docker compose run --rm --no-deps --entrypoint humorvibes api adversarial" in workflow
     assert not re.search(r"--entrypoint humorvibes humorvibes-research:[^ ]+ adversarial", workflow)
+
+
+def test_release_metadata_is_versioned_citable_and_archive_ready() -> None:
+    citation = load_yaml("CITATION.cff")
+    archive = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
+    security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+    release = (ROOT / "RELEASE_NOTES_v0.7.0.md").read_text(encoding="utf-8")
+    assert citation["cff-version"] == "1.2.0"
+    assert citation["version"] == "0.7.0" and citation["license"] == "Apache-2.0"
+    assert citation["repository-code"] == "https://github.com/aidonerightcorp/humorvibes-jestry"
+    assert archive["license"] == "Apache-2.0" and archive["upload_type"] == "software"
+    assert archive["creators"] and archive["related_identifiers"]
+    assert "0.7.x" in security and "Python 3.10-3.14" in security
+    assert "186 tests pass" in release and "DOI is not fabricated" in release
+
+
+def test_release_candidate_receipt_resolves_every_recorded_digest() -> None:
+    candidate = json.loads(
+        (ROOT / "jestry_out/v0_7_0_release_candidate.json").read_text(encoding="utf-8")
+    )
+    deployment = json.loads(
+        (ROOT / "jestry_out/deployment_validation.json").read_text(encoding="utf-8")
+    )
+    assert candidate["ok"] is True
+    assert candidate["release"]["state"] == "validated_release_candidate"
+    assert candidate["verification"]["deployment"]["source_tree_sha256"] == deployment[
+        "source"
+    ]["source_tree_sha256"]
+    recorded: dict[str, str] = {}
+    recorded.update(candidate["verification"]["clean_install"]["receipt_sha256"])
+    recorded["jestry_out/deployment_validation.json"] = candidate["verification"][
+        "deployment"
+    ]["receipt_sha256"]
+    recorded["jestry_out/provider_compatibility_offline.json"] = candidate["verification"][
+        "provider_compatibility"
+    ]["offline_receipt_sha256"]
+    recorded["jestry_out/provider_compatibility_live.json"] = candidate["verification"][
+        "provider_compatibility"
+    ]["live_receipt_sha256"]
+    for relative, expected in recorded.items():
+        assert hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() == expected

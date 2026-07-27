@@ -21,19 +21,20 @@ public versions, downloaded hashes, and terminal notebook status.
 
 ## Application and deployment extension
 
-The repository now also contains a separate `humorvibes-research` 0.6.0 application layer:
+The repository now also contains a separate `humorvibes-research` 0.7.0 application layer:
 
 - an importable Python SDK and a schema-first FastAPI service;
 - authenticated native Ollama (local or cloud) and OpenAI-compatible generation;
 - validated hash, Ollama, OpenAI-compatible, and optional sentence-transformers embeddings;
-- exact model allowlists, bounded requests/responses, secret-safe errors, Prometheus text metrics,
-  and a deterministic adversarial audit;
+- exact model allowlists, bounded requests/responses, secret-safe errors, Prometheus plus optional
+  low-cardinality StatsD metrics, body-free OTLP traces, and a deterministic adversarial audit;
 - a typed dependency-free remote client and checked-in OpenAPI contract for application
   integration;
 - a strict, privacy-minimized writer-study protocol, synthetic contract fixture, paired analyzer,
   writer-clustered uncertainty, evidence ladder, and local claim-gated receipt;
 - a multi-stage non-root Docker image, hardened offline/local-Ollama/cloud-Ollama Compose profiles,
-  a two-replica non-root Kubernetes Kustomize base, and a configurable Helm chart.
+  a default-deny two-replica Kubernetes Kustomize base, configurable Helm chart, and a separately
+  rendered Envoy Gateway TLS/identity/global-rate-limit example.
 
 The local image was built and launched with a read-only root filesystem; its readiness, capability,
 embedding, and signal-boundary checks passed. Compose rendering, the Kubernetes security/probe

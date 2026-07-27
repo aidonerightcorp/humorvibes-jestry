@@ -1,8 +1,8 @@
 # HumorVibes Helm chart
 
 This chart packages the same non-root, read-only API workload as the Kustomize base while exposing
-image, replicas, resources, probes, provider configuration, an existing Secret, optional HPA, and
-optional PodDisruptionBudget values.
+image, replicas, resources, probes, provider/observability configuration, an existing Secret,
+default-deny NetworkPolicy, optional HPA, and optional PodDisruptionBudget values.
 
 Render without a cluster:
 
@@ -16,7 +16,7 @@ Install a locally or registry-published image:
 ```bash
 helm upgrade --install humorvibes deploy/helm/humorvibes \
   --set image.repository=humorvibes-research \
-  --set image.tag=0.6.0
+  --set image.tag=0.7.0
 ```
 
 For a registry image, resolve its real digest first and pass it without storing a mutable tag in
@@ -24,7 +24,7 @@ the rendered workload:
 
 ```bash
 IMAGE_REPOSITORY=registry.example/humorvibes-research
-IMAGE_DIGEST=$(docker buildx imagetools inspect "$IMAGE_REPOSITORY:0.6.0" \
+IMAGE_DIGEST=$(docker buildx imagetools inspect "$IMAGE_REPOSITORY:0.7.0" \
   --format '{{json .Manifest.Digest}}' | tr -d '"')
 test -n "$IMAGE_DIGEST"
 helm upgrade --install humorvibes deploy/helm/humorvibes \

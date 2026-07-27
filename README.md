@@ -41,6 +41,10 @@ separate causal-design lab with its own downloadable verification and publicatio
   findings, written for readers who do not need the implementation history.
 - [`PROJECT_STATUS.md`](PROJECT_STATUS.md): what is public and complete, what is not claimed, and
   how to verify the release.
+- [`CHANGELOG.md`](CHANGELOG.md) and [`RELEASE_NOTES_v0.7.0.md`](RELEASE_NOTES_v0.7.0.md): the
+  application release history and the exact 0.7.0 verification boundary.
+- [`CITATION.cff`](CITATION.cff): cite the software release; also cite the exact Kaggle artifact
+  version used in an analysis.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): local setup, evidence rules, tests, and pull-request
   expectations.
 - [`ROADMAP.md`](ROADMAP.md): prioritized, contribution-sized research and maintenance work.
@@ -77,6 +81,8 @@ separate causal-design lab with its own downloadable verification and publicatio
 
 Issues, reproductions, and research proposals are welcome. In this project, reproducing a null
 result, removing a confound, or documenting a licensing boundary is a successful contribution.
+Community expectations and support routes are in [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) and
+[`SUPPORT.md`](SUPPORT.md).
 Repository code and documentation are licensed under Apache-2.0. The new project-controlled Open
 Controls payload is separately dedicated under CC0-1.0; imported dataset rows retain their exact
 recorded source licences and are not relicensed by the repository licence.
@@ -127,7 +133,8 @@ python3 verify_deployment.py --docker \
 ```
 
 The same API supports authenticated local or cloud Ollama, OpenAI-compatible generation and
-embeddings, six configurable Ollama embedding model names, and optional sentence-transformers.
+embeddings, six configurable Ollama embedding model names, optional sentence-transformers,
+body-free OTLP traces, Prometheus/StatsD metrics, and a separately rendered Envoy Gateway edge.
 All live model IDs are exact operator allowlists; callers cannot provide arbitrary provider URLs.
 See the [deployment guide](docs/API_AND_DEPLOYMENT.md) for Ollama keys, model configuration,
 Docker profiles, the non-root Kubernetes base, the Helm chart, typed remote client, and checked-in

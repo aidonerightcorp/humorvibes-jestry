@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: runtime
-    image: humorvibes-research:0.6.0
+    image: humorvibes-research:0.7.0
     init: true
     ports:
       - "${HUMORVIBES_BIND_ADDRESS:-127.0.0.1}:${HUMORVIBES_PORT:-8080}:8080"
@@ -15,6 +15,11 @@ services:
       HUMORVIBES_EMBEDDING_DEFAULT: hash:128
       HUMORVIBES_MAX_REQUEST_BYTES: "${HUMORVIBES_MAX_REQUEST_BYTES:-1000000}"
       HUMORVIBES_RATE_LIMIT_PER_MINUTE: "${HUMORVIBES_RATE_LIMIT_PER_MINUTE:-120}"
+      HUMORVIBES_STATSD_HOST: "${HUMORVIBES_STATSD_HOST:-}"
+      HUMORVIBES_STATSD_PORT: "${HUMORVIBES_STATSD_PORT:-8125}"
+      HUMORVIBES_OTEL_TRACES_ENDPOINT: "${HUMORVIBES_OTEL_TRACES_ENDPOINT:-}"
+      HUMORVIBES_OTEL_SERVICE_NAME: "${HUMORVIBES_OTEL_SERVICE_NAME:-humorvibes-api}"
+      HUMORVIBES_OTEL_SAMPLE_RATIO: "${HUMORVIBES_OTEL_SAMPLE_RATIO:-0.1}"
     read_only: true
     tmpfs:
       - /tmp:size=64m,mode=1777

@@ -1,0 +1,84 @@
+{
+  "receipt_type": "humorvibes_release_candidate",
+  "receipt_version": 1,
+  "generated_at": "2026-07-27T17:15:08Z",
+  "release": {
+    "package": "humorvibes-research",
+    "version": "0.7.0",
+    "expected_git_tag": "v0.7.0",
+    "state": "validated_release_candidate"
+  },
+  "verification": {
+    "tests": {
+      "passed": 186,
+      "failed": 0
+    },
+    "adversarial_contracts": {
+      "passed": 26,
+      "total": 26
+    },
+    "clean_install": {
+      "all_ok": true,
+      "package_version": "0.7.0",
+      "python_runtimes": [
+        "3.10.20",
+        "3.11.15",
+        "3.12.13",
+        "3.13.13",
+        "3.14.4"
+      ],
+      "receipt_sha256": {
+        "jestry_out/clean_install_smoke_3_10.json": "324f4ddac74878043c9d0fb23884e4228a458940bf3c70e51f8c18a2f81b27ba",
+        "jestry_out/clean_install_smoke_3_11.json": "ef531549cb4cf067d9bdb6383dd99e9abace45654c953f3aac9ec25ca10a44a8",
+        "jestry_out/clean_install_smoke_3_12.json": "7c906ba373f1f44455c6cedf5f6d94f4a65fad1fb4748b0077e7b04930e8d498",
+        "jestry_out/clean_install_smoke_3_13.json": "6fca704b4938de5a469137bf90c7a5668d46c50173fb15cb654657d4e9c3fb3e",
+        "jestry_out/clean_install_smoke_3_14.json": "15f15e79824cca7e1c1da7ed2892f3e85abc9099800a4407fd54b535805a0089"
+      }
+    },
+    "deployment": {
+      "ok": true,
+      "current_source_image_built": true,
+      "current_source_image_started": true,
+      "runtime_user": "10001:10001",
+      "readonly_root": true,
+      "endpoints_checked": 9,
+      "kustomize_rendered": true,
+      "helm_linted_and_rendered": true,
+      "source_tree_sha256": "24522d159466cd5bf77696fcf3349663a16afaafcf1ca86a3db7ef065724a580",
+      "receipt_sha256": "e4342f304b434b1d052e4ede25c5f0be16ed8b858b5b1789ab5c310c45fd2bd4"
+    },
+    "provider_compatibility": {
+      "models_configured": 8,
+      "operations_executed": 1,
+      "quality_validated_models": 0,
+      "configured_secrets_absent_from_receipt": true,
+      "offline_receipt_sha256": "fc14e27f0844f39b6474fbf6c63b8f901cd60dc3b367f16daf9e3d9d35a6b65b",
+      "live_receipt_sha256": "fce8954b97db6e040e41ef4726a11b8fc5bbcfcceb55c775e95dcc3579c84a65"
+    },
+    "research_contracts": {
+      "multimodal_benchmark_receipt_sha256": "49e8ffa0e21b4972c9e520f18b9c5d1c1367c7789126060d4f96492bc84af33c",
+      "hard_retrieval_tfidf_receipt_sha256": "06a28b68843691cd54801b6edb330b2c17fbaf720aebd3f4dd9a66ce24b74796",
+      "public_surface_audit_sha256": "1ed64fe8127dadf5bc64b4efb8c985d855a005b5cff44db4a9064cd3d5d3b913"
+    }
+  },
+  "public_research_surfaces": {
+    "wave2_dataset_version": 7,
+    "wave2_notebook_version": 14,
+    "open_controls_dataset_version": 4,
+    "open_controls_notebook_version": 3,
+    "wave2_publication_receipt_sha256": "69db1b9dbcb7183f0c65abaf77fde59911970a1600b7ecc3685beecc9ec15790",
+    "open_controls_publication_receipt_sha256": "42bc07b0d6a02f115aa164b9cc8c7ea19e745897b2b1775a6a849a68fce22883"
+  },
+  "truth_boundary": {
+    "canonical_kaggle_measurement_changed": false,
+    "model_surprisal_is_human_funniness": false,
+    "synthetic_controls_are_human_evidence": false,
+    "semantic_provider_quality_established": false,
+    "public_registry_container_verified": false,
+    "hosted_api_verified": false,
+    "kubernetes_cluster_apply_executed": false,
+    "human_writer_or_audience_trial_completed": false,
+    "doi_minted": false
+  },
+  "ok": true
+}

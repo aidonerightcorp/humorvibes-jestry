@@ -121,12 +121,15 @@ multi-million-row inventory.
 
 The initial SDK/API, authenticated Ollama/OpenAI-compatible transports, multi-model embedding
 registry, offline adversarial audit, Docker/Compose profiles, Kubernetes base, and local real-world
-study workbench and bounded Open Controls endpoints are implemented in 0.6.0. Useful follow-ups are:
+study workbench, hard retrieval and multimodal contracts, body-free telemetry, and bounded Open
+Controls endpoints are implemented in 0.7.0. Useful follow-ups are:
 
 - [ ] Publish a signed multi-architecture image to GHCR and add a digest-pinned deployment overlay.
-- [ ] Add gateway examples for TLS, identity, global rate limiting, and request tracing.
+- [x] Add a separately rendered Envoy Gateway 1.8.3 example for TLS 1.3, API-key identity,
+  local and Redis-backed global rate limiting, W3C trace context, and secret-safe operations.
 - [ ] Add optional streaming generation with disconnect/cancellation and backpressure tests.
-- [ ] Add an external metrics backend and OpenTelemetry spans without logging prompts or keys.
+- [x] Add opt-in low-cardinality StatsD export and OTLP/HTTP spans with W3C context while
+  explicitly excluding bodies, keys, user IDs, and provider URLs.
 - [ ] Add live compatibility jobs for a version matrix of Ollama and two OpenAI-compatible servers.
 - [ ] Benchmark configured embedding models on frozen multilingual retrieval fixtures before
   recommending a default semantic model.
