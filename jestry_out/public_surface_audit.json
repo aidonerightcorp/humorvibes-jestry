@@ -1,0 +1,145 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "manifest_sha256": "a5159c806f885bc3cf320a5b88691f49060ee7d89946472cebe60cd5dfe33d20",
+        "path": "jestry_out/wave2_publication.json"
+      },
+      "name": "wave2.local_receipt",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "http_status": 200,
+        "is_private": false
+      },
+      "name": "wave2.anonymous_dataset",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "http_status": 200
+      },
+      "name": "wave2.anonymous_notebook",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "http_status": 200,
+        "tag": "humor-genome-wave2-v9"
+      },
+      "name": "wave2.anonymous_source_tag",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "current_version_number": 7,
+        "status": "ready"
+      },
+      "name": "wave2.dataset_ready",
+      "ok": true
+    },
+    {
+      "evidence": "taylorsamarel/humor-genome-wave-2-reproducible-gemma-study has status \"KernelWorkerStatus.COMPLETE\"",
+      "name": "wave2.notebook_complete",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "refs": [
+          "37235f855c4e7e1b6fd1dce4ff5a9bf16e626785\trefs/tags/humor-genome-wave2-v9",
+          "9380f45f9da81848fa326b9891bd21a1b1991669\trefs/tags/humor-genome-wave2-v9^{}"
+        ],
+        "tag": "humor-genome-wave2-v9"
+      },
+      "name": "wave2.remote_tag_resolves",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "bytes": 771,
+        "expected_sha256": "a5159c806f885bc3cf320a5b88691f49060ee7d89946472cebe60cd5dfe33d20",
+        "observed_sha256": "a5159c806f885bc3cf320a5b88691f49060ee7d89946472cebe60cd5dfe33d20"
+      },
+      "name": "wave2.downloaded_manifest",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "manifest_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2",
+        "path": "jestry_out/open_controls_publication.json"
+      },
+      "name": "open_controls.local_receipt",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "http_status": 200,
+        "is_private": false
+      },
+      "name": "open_controls.anonymous_dataset",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "http_status": 200
+      },
+      "name": "open_controls.anonymous_notebook",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "http_status": 200,
+        "tag": "humor-genome-open-controls-v1"
+      },
+      "name": "open_controls.anonymous_source_tag",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "current_version_number": 3,
+        "status": "ready"
+      },
+      "name": "open_controls.dataset_ready",
+      "ok": true
+    },
+    {
+      "evidence": "taylorsamarel/humor-genome-open-controls-causal-design-lab has status \"KernelWorkerStatus.COMPLETE\"",
+      "name": "open_controls.notebook_complete",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "refs": [
+          "1179cb1e5b3b6472968074a75a7400867d752a80\trefs/tags/humor-genome-open-controls-v1",
+          "4e7579b77d7a45de65e8ec8f4ae2bffb4abcbba3\trefs/tags/humor-genome-open-controls-v1^{}"
+        ],
+        "tag": "humor-genome-open-controls-v1"
+      },
+      "name": "open_controls.remote_tag_resolves",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "bytes": 2509,
+        "expected_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2",
+        "observed_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2"
+      },
+      "name": "open_controls.downloaded_manifest",
+      "ok": true
+    }
+  ],
+  "generated_at": "2026-07-27T16:04:53.717696+00:00",
+  "mode": {
+    "live": true,
+    "manifest_downloads": true,
+    "mutates_remote_state": false
+  },
+  "ok": true,
+  "receipt_type": "humorvibes_public_surface_audit",
+  "receipt_version": 1,
+  "truth_boundary": {
+    "not_verified": "scientific validity, human funniness, provider quality, or future availability",
+    "verified": "visibility, terminal service state, public tag resolution, and declared manifest identity"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "api_import": true,
+  "doctor_ok": true,
+  "licenses_present": true,
+  "ok": true,
+  "open_controls_maximum_rows": 120000,
+  "package_version": "0.6.0",
+  "python_requested": "3.10",
+  "python_runtime": "3.10.20",
+  "sample_rows": 4
+}

@@ -13,10 +13,10 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
   project-controlled Open Controls data; keep mixed-provenance imports on per-row licences.
 - [x] Publish Open Controls as a separately licensed Kaggle dataset and COMPLETE notebook; verify
   a fresh download, remote source, terminal output, anonymous access, and cross-surface receipt.
-- [ ] Add a read-only cross-surface audit command that checks GitHub visibility, Kaggle dataset
+- [x] Add a read-only cross-surface audit command that checks GitHub visibility, Kaggle dataset
   readiness, notebook completion, source tag, manifest hash, and anonymous HTTP access, then
   writes one receipt. **Good first issue.**
-- [ ] Add a small dependency smoke test in a clean virtual environment and document the supported
+- [x] Add a small dependency smoke test in a clean virtual environment and document the supported
   Python range. **Good first issue.**
 - [ ] Archive a citable release snapshot through Zenodo or an equivalent DOI service after the
   first outside contribution.

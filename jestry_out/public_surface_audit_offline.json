@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "manifest_sha256": "a5159c806f885bc3cf320a5b88691f49060ee7d89946472cebe60cd5dfe33d20",
+        "path": "jestry_out/wave2_publication.json"
+      },
+      "name": "wave2.local_receipt",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "manifest_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2",
+        "path": "jestry_out/open_controls_publication.json"
+      },
+      "name": "open_controls.local_receipt",
+      "ok": true
+    }
+  ],
+  "generated_at": "2026-07-27T16:04:27.584055+00:00",
+  "mode": {
+    "live": false,
+    "manifest_downloads": false,
+    "mutates_remote_state": false
+  },
+  "ok": true,
+  "receipt_type": "humorvibes_public_surface_audit",
+  "receipt_version": 1,
+  "truth_boundary": {
+    "not_verified": "scientific validity, human funniness, provider quality, or future availability",
+    "verified": "visibility, terminal service state, public tag resolution, and declared manifest identity"
+  }
+}
