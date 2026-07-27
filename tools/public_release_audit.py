@@ -38,7 +38,7 @@ SURFACES = (
         "receipt": "jestry_out/open_controls_publication.json",
         "dataset": "taylorsamarel/humor-genome-open-controls",
         "notebook": "taylorsamarel/humor-genome-open-controls-causal-design-lab",
-        "tag": "humor-genome-open-controls-v1",
+        "tag": "humor-genome-open-controls-v2",
     },
 )
 
