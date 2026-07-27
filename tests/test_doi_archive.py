@@ -198,3 +198,4 @@ def test_checked_in_preflight_is_complete_but_does_not_claim_a_doi() -> None:
     assert "tools/build_doi_archive.py" in workflow
     assert "tools/verify_doi_archive.py" in workflow
     assert "doi_v0_7_0_preflight/SHA256SUMS" in workflow
+    assert "fetch-depth: 0" in workflow
