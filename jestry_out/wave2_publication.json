@@ -1,7 +1,7 @@
 {
   "receipt_type": "humor_genome_wave2_publication",
-  "receipt_version": 3,
-  "verified_utc": "2026-07-27T02:48:45Z",
+  "receipt_version": 4,
+  "verified_utc": "2026-07-27T03:47:18Z",
   "project_state": {
     "competition_deadline_passed": true,
     "competition_submission_claimed": false,
@@ -9,13 +9,14 @@
   },
   "github": {
     "url": "https://github.com/aidonerightcorp/humorvibes-jestry",
-    "main_commit_at_live_verification": "9bf5a7711a68b1443b63f60b6b05b95b839c7293",
-    "source_tag": "humor-genome-wave2-v7",
-    "source_tag_commit": "9bf5a7711a68b1443b63f60b6b05b95b839c7293",
+    "main_commit_at_live_verification": "9380f45f9da81848fa326b9891bd21a1b1991669",
+    "source_tag": "humor-genome-wave2-v9",
+    "source_tag_commit": "9380f45f9da81848fa326b9891bd21a1b1991669",
     "visibility": "public",
     "anonymous_http_status": 200,
+    "tag_anonymous_http_status": 200,
     "application_contracts_ci": {
-      "url": "https://github.com/aidonerightcorp/humorvibes-jestry/actions/runs/30232730335",
+      "url": "https://github.com/aidonerightcorp/humorvibes-jestry/actions/runs/30235172162",
       "conclusion": "success",
       "python_package_and_contracts": "success",
       "container_build_and_smoke_test": "success"
@@ -40,7 +41,7 @@
     "expectation_violation_frames": 2581,
     "data_card_sha256": "4e78807e4c87e510bdfd1949e6905a49da45bcc887b70e94bc1060b5589bc7bb",
     "manifest_sha256": "a5159c806f885bc3cf320a5b88691f49060ee7d89946472cebe60cd5dfe33d20",
-    "remote_files_observed_utc": "2026-07-27T02:48:45Z",
+    "remote_files_observed_utc": "2026-07-27T03:47:18Z",
     "remote_files": {
       "DATA_CARD.md": 5073,
       "aligned_phrases.jsonl": 2247343,
@@ -53,19 +54,27 @@
   },
   "notebook": {
     "url": "https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study",
-    "version_pushed": 12,
+    "version_pushed": 14,
     "status": "COMPLETE",
     "is_private": false,
     "anonymous_http_status": 200,
-    "source_commit_printed_by_run": "9bf5a7711a68b1443b63f60b6b05b95b839c7293",
-    "source_tag_printed_by_run": "humor-genome-wave2-v7",
-    "local_source_notebook_sha256": "c23e7f6efcf30e95f48755a4aa3a2b03cd7cbb9d408de018bb38969c2159d5dc",
-    "raw_kaggle_log_sha256": "ed516714a903e2af49d1750db00979d6fc01522e9585a8545684b2074fcd935e",
+    "source_commit_printed_by_run": "9380f45f9da81848fa326b9891bd21a1b1991669",
+    "source_tag_printed_by_run": "humor-genome-wave2-v9",
+    "local_source_notebook_sha256": "91f7f4e4f6eebd409e6f39214f8bfbd788bc8efb134f954a1f8f1213030e2150",
+    "pulled_kaggle_source_sha256": "a4c00dacd5f335a5f0e8da07d37c4e6cc38b259f18b6cdef9dfdcb65bf7e29fc",
+    "normalized_cell_source_sha256": "ed93f9f9d66b60384f875fa19ed78d8f1347765df7dcadd8e4450a461f0733ee",
+    "local_and_pulled_cell_sources_match": true,
+    "raw_kaggle_log_sha256": "e52276319331e9721d1a5d232d4172f931f86ac71afcff9d24bae14d1ea611c2",
+    "published_output_files": [
+      "humor_genome_wave2_executive_summary.json"
+    ],
+    "accidental_source_checkout_in_output": false,
     "executive_summary_output": {
       "filename": "humor_genome_wave2_executive_summary.json",
-      "sha256": "1a422e6d2326f76ecac18a8335bfba3e6f1d641906283767e85dba063bec2d6c",
+      "sha256": "e7116d10b5fc3a7058783c1a397019bd0056bb91750b0a5d57118d14b8299630",
       "schema_version": 1,
       "release_verification": "PASS",
+      "synthetic_study_claim_prohibited": true,
       "next_evidence_gate": "preregistered within-writer crossover trial with blinded opt-in audience evaluation"
     },
     "device": "cpu",
@@ -91,26 +100,57 @@
       "protocol_receipt": "PASS"
     }
   },
+  "research_foundation": {
+    "document": "docs/RESEARCH_FOUNDATIONS.md",
+    "theory_document": "THEORY.md",
+    "evidence_chain_figure": "docs/figures/surprise-to-product.svg",
+    "evidence_ladder_figure": "docs/figures/evidence-ladder.svg",
+    "primary_references_listed": 11,
+    "brain_as_surprise_reduction_engine_status": "motivating shorthand, not a settled biological result",
+    "quantities_kept_separate": [
+      "token_surprisal",
+      "prediction_error",
+      "resolution_or_comprehension",
+      "amusement_or_funniness",
+      "laughter_or_behavior"
+    ]
+  },
+  "real_world_study_workbench": {
+    "document": "docs/REAL_WORLD_STUDY_WORKBENCH.md",
+    "implementation": "humorvibes/studies.py",
+    "demo_receipt": "jestry_out/study_demo_receipt.json",
+    "demo_receipt_sha256": "028d83f413c0661046868f59de15a0e7015fd331160377aa5efa7a703f6f5318",
+    "data_origin": "synthetic_contract_fixture",
+    "apparent_synthetic_effect": 0.45,
+    "claim_ready": false,
+    "evidence_level": "L1_OFFLINE_CONTRACT",
+    "independent_bootstrap_unit": "writer",
+    "http_study_data_upload_endpoint_exists": false,
+    "human_product_advantage_established": false
+  },
   "local_verification": {
     "full_release_verifier_result": "PASS",
     "fresh_public_download_verifier_result": "PASS",
-    "full_pytest_result": "118 passed",
+    "full_pytest_result": "131 passed",
     "semantic_release_gate": "PASS",
     "manifest_payloads": 6,
     "markdown_missing_local_targets": 0,
     "github_issue_forms_parsed": 3,
     "fresh_wheel_import_result": "PASS",
-    "local_documentation_missing_targets": 0
+    "fresh_wheel_version": "0.5.0",
+    "mesh_signals_sha256": "85d6638471bc277cfa6702fb775ffe8ee188b2220af689166be8b98d6693195b",
+    "notebook_output_file_count": 1
   },
   "application_release": {
-    "package_version": "0.4.0",
-    "openapi_sha256": "0c5238360a8c60afb5f34775964bfe44ce41be46d5c33be8b6d659ac34b94011",
+    "package_version": "0.5.0",
+    "openapi_sha256": "d59cb29efa6274d7b06ec89f7c47280770813c49b661472e5d2b0b06b8cf1573",
     "deployment_receipt": "jestry_out/deployment_validation.json",
+    "deployment_receipt_sha256": "a52f6f3adc8c7b09e96622a31b0909880ac75ee7128f9a93daf447ca6e8c2160",
     "deployment_receipt_version": 3,
     "deployment_verifier_result": "PASS",
-    "adversarial_contracts": "16/16 passed",
-    "local_container_image_id": "sha256:e5c2ceecfddcf1279a1861735034ac1014231dda907ef7b4ea87f4e19449948a",
-    "container_built_from_current_source": true,
+    "adversarial_contracts": "21/21 passed",
+    "local_container_image_id": "sha256:7cbd155ab23360a19745897c4d4e7d077e673c6c6c97ad9f3d12081db7f19b23",
+    "container_built_from_current_application_source": true,
     "kustomize_render_executed": true,
     "helm_lint_and_render_executed": true,
     "public_container_registry_image_verified": false,

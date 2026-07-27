@@ -23,12 +23,12 @@ claim gate.
 
 | Public artifact | Open it | Status | What it is for |
 | --- | --- | --- | --- |
-| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, v12 COMPLETE | Read the write-up and rerun every public measurement |
+| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, v14 COMPLETE | Read the write-up and rerun every public measurement |
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
 
 The notebook is the single canonical executable write-up. It clones the immutable
-`humor-genome-wave2-v7` source tag, verifies the mounted dataset byte-for-byte and semantically,
+`humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
 loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
 [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
 

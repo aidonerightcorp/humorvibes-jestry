@@ -4,23 +4,29 @@
 
 The canonical evidence is now consolidated and public:
 
-- repository: https://github.com/aidonerightcorp/humorvibes-jestry at commit
-  `9bf5a7711a68b1443b63f60b6b05b95b839c7293`, source tag `humor-genome-wave2-v7`;
+- repository: https://github.com/aidonerightcorp/humorvibes-jestry at immutable notebook commit
+  `9380f45f9da81848fa326b9891bd21a1b1991669`, source tag `humor-genome-wave2-v9`;
 - dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2, latest public files,
   121,670 fail-closed redistributable rows, public and ready. Kaggle's public metadata endpoint
   and file listing now agree on dataset version 7;
 - executable write-up:
   https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study,
-  public and COMPLETE; notebook version 12 was pushed from source tag v7 and its live log is
+  public and COMPLETE; notebook version 14 was pushed from source tag v9 and its live log is
   recorded in the publication receipt.
 
 The notebook verifies six mounted payload hashes and the semantic release gate, runs Gemma 2 on
 CPU, reproduces S=3.188 over ten tokens against the pinned 3.19 instrument check, and verifies the
 full form-study receipt before printing `SEPARATION IS NOT ESTABLISHED`. It now opens with an
-executive problem/solution/learning/use summary and emits
+executive problem/solution/learning/use summary, cites the predictive-processing and humor-research
+starting points, renders the model-to-human claim boundary, and emits
 `humor_genome_wave2_executive_summary.json`, whose next evidence gate is a preregistered
 within-writer crossover trial with blinded, opt-in audience evaluation. Machine-readable public
 state is in `jestry_out/wave2_publication.json`.
+
+The notebook also runs the deterministic writer-study contract fixture. Its apparent synthetic
+effect is +0.45, while `claim_ready` remains false by construction. The v14 output audit found one
+published data file—the executive summary—after moving the temporary GitHub checkout out of
+`/kaggle/working`.
 
 The public repository also carries the 0.5.0 Python SDK/API, remote client, OpenAPI contract,
 Docker/Compose/Kustomize/Helm packaging, and a green public CI run. This is deployable source, not
