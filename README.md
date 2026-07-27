@@ -1,18 +1,76 @@
-# HumorVibes
+# Humor Genome Wave 2
 
-A Gemma-powered humor engine for the Build with Gemma: Humor Genome NYC hackathon.
+A public, reproducible Gemma study of humor structure. **HumorVibes** is the implementation name;
+**Humor Genome Wave 2** is the canonical research release.
 
-**One canonical public deliverable:** the complete corpus audit, style analysis, human-label
-bounds, held-out caption-model result, and live Gemma measurement are consolidated in
-`wave2_notebook/humor_genome_wave2.ipynb`. It clones this repository, verifies the attached
-release byte-for-byte and semantically, then runs the Gemma instrument. The repository is the
-implementation and receipt ledger; the Kaggle page is the single executable write-up. Its source
-checkout is pinned to the immutable `humor-genome-wave2-v4` tag rather than whatever `main` becomes.
+## Start here
 
-*(Formerly "Punchline Mesh" — a few internal Kaggle slugs keep the old name for stability:
-the `punchline-mesh-src` dataset and already-running kernel sessions.)*
+| Public artifact | Open it | Status | What it is for |
+| --- | --- | --- | --- |
+| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma) | Public, COMPLETE | Read the write-up and rerun every public measurement |
+| Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
+| Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
 
-Theory first: see `THEORY.md`, a derivative of Karl Friston's "Your Brain Is a Detective
+The notebook is the single canonical executable write-up. It clones the immutable
+`humor-genome-wave2-v5` source tag, verifies the mounted dataset byte-for-byte and semantically,
+loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
+[`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
+
+## Release at a glance
+
+- **3,164,600 rows** in the full local research inventory, spanning 217 source families and 62
+  language labels.
+- **121,670 rows** in the public, deterministic, rights-filtered slice; 2,693,272 rows remain in
+  the census but are not republished verbatim.
+- **7,913 aligned translation pairs** and **2,581 expectation/violation frames**.
+- Gemma instrument check: **S = 3.188 over 10 tokens** against the pinned 3.19 reference.
+- Full form study: **0/10** joke-form intervals strictly above the proverb control and 10/10
+  overlapping it — **SEPARATION IS NOT ESTABLISHED**.
+- Contest-held-out caption model: Spearman **0.1555**, or **37.8%** of the measured text-only bound.
+
+`S` is model surprisal, not funniness. The dataset mixes jokes, captions, proverbs, idioms, and
+other humor-adjacent text; source-specific human signals are not interchangeable grades.
+
+## How the three public artifacts fit together
+
+| Layer | Contract |
+| --- | --- |
+| Dataset | Publishes only explicitly redistributable text, plus a full-corpus census and hashes |
+| Notebook | Verifies those files, runs Gemma, and displays the controlling statistical receipts |
+| Repository | Builds both artifacts and preserves code, tests, provenance, negative results, and publication receipts |
+
+## Canonical repository map
+
+- `wave2_notebook/`: the one notebook to read and publish; older notebook directories are
+  supporting experiments, not competing entry points.
+- `build_kaggle_export.py`, `wave2_dataset/`, `verify_wave2_release.py`: public dataset build,
+  Kaggle metadata, and fail-closed validation.
+- `caption_*.py`, `style_taxonomy.py`, `corpus_census.py`: the measured Wave 2 analyses.
+- `jestry_out/`: compact, versioned receipts; `wave2_publication.json` is the release index.
+- `RESULTS.md`, `STYLES.md`, `DATA_SOURCES.md`: detailed findings, taxonomy, and source provenance.
+- `research_out/` and the other notebook folders: historical/supporting experiments retained for
+  auditability. They are not required to understand the canonical release.
+
+## Reproduce the public release
+
+```bash
+git clone https://github.com/aidonerightcorp/humorvibes-jestry.git
+cd humorvibes-jestry
+python3 -m pytest -q tests/test_wave2.py
+python3 wave2_notebook/build_wave2_notebook.py
+
+kaggle datasets download -d taylorsamarel/humor-genome-wave2 \
+  --unzip -p kaggle_wave2_public
+python3 verify_wave2_release.py --root kaggle_wave2_public
+```
+
+## Project background and additional systems
+
+The repository began as a broader Gemma-powered humor engine for the Build with Gemma: Humor
+Genome NYC hackathon. It was formerly called "Punchline Mesh", so a few historical Kaggle slugs
+retain that name for stability.
+
+The theory is developed in `THEORY.md`, a derivative of Karl Friston's "Your Brain Is a Detective
 Minimizing Surprise" (youtube.com/watch?v=g69Lj3huRvw). The brain is a mesh of dynamic neural
 networks (weighted edges, sparse ATP-budgeted firing, tunable paths) supervised by a meta-model
 that minimizes surprise. A joke is a controlled prediction error with a cheap, permitted
@@ -43,7 +101,7 @@ Bad surprise is poorly defined, a bad surprise is a surprise that contradicts wi
 
 HumorVibes treats that definition as a first-class evaluation constraint, not as a synonym for offense, randomness, factual error, or incoherence.
 
-## Run
+## Additional prototype tools
 
 Offline deterministic demo:
 

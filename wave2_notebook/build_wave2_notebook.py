@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = "https://github.com/aidonerightcorp/humorvibes-jestry"
-REPO_REF = "humor-genome-wave2-v4"
+REPO_REF = "humor-genome-wave2-v5"
 
 # The controlling definition of bad surprise, verbatim. It is quoted rather than
 # paraphrased everywhere in this project because paraphrasing it changes what
@@ -37,11 +37,28 @@ B_DEFINITION = (
 CELLS: list[tuple[str, str]] = [
     # ---------------------------------------------------------------- writeup
     ("markdown",
-     "# HumorVibes — the Humor Genome, wave 2\n\n"
-     "### Humor as affordable surprise, measured with Gemma, over a corpus grown "
-     "from 23,885 items to 3,164,600\n\n"
-     "This notebook is the write-up. Theory, method, data provenance, results and "
-     "limits are here, next to the code that produces every number quoted.\n\n"
+     "# Humor Genome Wave 2\n\n"
+     "### A public, reproducible Gemma study of humor as affordable surprise\n\n"
+     "> **Start here.** This is the single canonical executable write-up. **HumorVibes** is "
+     "the implementation name; **Humor Genome Wave 2** is the research release.\n\n"
+     "**Public inputs and source**\n\n"
+     "- Dataset: [Humor Genome Wave 2 — Public Research Corpus]"
+     "(https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2)\n"
+     "- Code and receipts: [aidonerightcorp/humorvibes-jestry]"
+     "(https://github.com/aidonerightcorp/humorvibes-jestry)\n"
+     "- Immutable source for this run: `humor-genome-wave2-v5`\n\n"
+     "The notebook verifies every mounted dataset payload before analysis, loads the attached "
+     "Gemma 2 checkpoint, checks the instrument against a pinned reference, and then displays "
+     "the controlling statistical receipts.\n\n"
+     "**Results at a glance**\n\n"
+     "- Full inventory: **3,164,600 rows**; public rights-filtered slice: **121,670 rows**.\n"
+     "- Gemma instrument: **S = 3.188 over 10 tokens**, agreeing with the pinned 3.19.\n"
+     "- Form study: **0/10** intervals strictly above the proverb control; "
+     "**SEPARATION IS NOT ESTABLISHED**.\n"
+     "- Held-out caption model: **rho = 0.1555**, or **37.8%** of the measured text-only bound.\n\n"
+     "These are measurements of model predictability and source-specific human signals, not a "
+     "funniness leaderboard. The notebook proceeds from release audit → corpus/style analysis → "
+     "multilingual artifacts → live Gemma measurement → human-label bounds → limitations.\n\n"
      "---\n\n"
      "## The theory\n\n"
      "Starting point: Friston's account of the brain as a system minimising surprise. "
@@ -630,7 +647,12 @@ CELLS: list[tuple[str, str]] = [
      "produced nothing. It now checkpoints each measurement as it lands.\n\n"
      "Full source inventory, dead links and parser debt: `SOURCE_SWEEP_2026-07-26.md`. "
      "Theory and falsifiable predictions: `THEORY.md`. Charter: "
-     "`JESTRY-CHARTER-AND-CONSTITUTION-2026-07-23.md`."),
+     "`JESTRY-CHARTER-AND-CONSTITUTION-2026-07-23.md`.\n\n"
+     "### Audit this release\n\n"
+     "- [GitHub source and tests](https://github.com/aidonerightcorp/humorvibes-jestry)\n"
+     "- [Public dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2)\n"
+     "- [Machine-readable publication receipt]"
+     "(https://github.com/aidonerightcorp/humorvibes-jestry/blob/main/jestry_out/wave2_publication.json)"),
 ]
 
 

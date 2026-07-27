@@ -39,12 +39,24 @@ def test_canonical_notebook_is_deterministic_public_and_schema_clean() -> None:
     subprocess.run([sys.executable, str(builder)], check=True, capture_output=True)
     assert hashlib.sha256(notebook.read_bytes()).hexdigest() == first
     nb = json.loads(notebook.read_text(encoding="utf-8"))
+    opening = "".join(nb["cells"][0]["source"])
+    assert "Start here" in opening
+    assert "single canonical executable write-up" in opening
+    assert "SEPARATION IS NOT ESTABLISHED" in opening
     ids = [cell.get("id") for cell in nb["cells"]]
     assert all(ids) and len(ids) == len(set(ids))
     for cell in nb["cells"]:
         if cell["cell_type"] == "code":
             ast.parse("".join(cell["source"]))
     assert json.loads(metadata.read_text(encoding="utf-8"))["is_private"] is False
+    assert "Reproducible Gemma Study" in json.loads(
+        metadata.read_text(encoding="utf-8"))["title"]
+
+    dataset_metadata = json.loads((root / "wave2_dataset" /
+                                   "dataset-metadata.json").read_text(encoding="utf-8"))
+    assert dataset_metadata["isPrivate"] is False
+    assert dataset_metadata["id"] == "taylorsamarel/humor-genome-wave2"
+    assert "Public Research Corpus" in dataset_metadata["title"]
 
 
 def test_caption_model_checkpoint_is_atomic(monkeypatch, tmp_path: Path) -> None:
@@ -291,7 +303,10 @@ def test_streaming_export_is_reproducible_and_includes_urdu_pairs(tmp_path: Path
     assert header["schema_version"] == 3
     assert header["eligible_from"] == 4
     card = (out / "DATA_CARD.md").read_text(encoding="utf-8")
-    assert "5-item humor research corpus" in card
+    assert "5-item research inventory" in card
+    assert "Start here" in card
+    assert "Quick start on Kaggle" in card
+    assert "Main row schema" in card
     manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
     assert "dataset-metadata.json" not in manifest
     assert (out / "dataset-metadata.json").exists()
@@ -335,6 +350,30 @@ def test_release_export_fails_loudly_on_malformed_json(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match=r"broken\.jsonl:2"):
         export.build(1, paths=[source], out_dir=tmp_path / "export")
+
+
+def test_export_cli_reports_the_requested_output_directory(
+        monkeypatch, tmp_path: Path, capsys) -> None:
+    corpora = tmp_path / "corpora"
+    corpora.mkdir()
+    _write_jsonl(corpora / "fixture.jsonl", [
+        {"text": "A sufficiently long public-domain joke for export.",
+         "source": "fixture", "license": "Public domain",
+         "meta": {"language": "en"}},
+    ])
+    out = tmp_path / "published"
+    metadata = tmp_path / "dataset-metadata.json"
+    metadata.write_text(
+        '{"title":"fixture","id":"owner/fixture","isPrivate":false,'
+        '"licenses":[{"name":"other"}]}\n', encoding="utf-8")
+    monkeypatch.setattr(sys, "argv", [
+        "build_kaggle_export.py", "--per-family", "1",
+        "--corpora-dir", str(corpora), "--out-dir", str(out),
+        "--metadata-template", str(metadata),
+    ])
+    assert export.main() == 0
+    assert f"-> {out}" in capsys.readouterr().out
+    assert (out / "manifest.json").exists()
 
 
 def test_exact_digest_index_reads_only_text_identity(tmp_path: Path) -> None:

@@ -40,6 +40,7 @@ import style_taxonomy as st
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "kaggle_wave2"
+DATASET_METADATA_TEMPLATE = ROOT / "wave2_dataset" / "dataset-metadata.json"
 
 
 def _key(text: str) -> str:
@@ -83,10 +84,54 @@ def _translation_en(rec: dict[str, Any]) -> Any:
 def _data_card(summary: dict[str, Any], census: dict[str, Any]) -> str:
     largest = max(summary["families"].values(), default=0)
     largest_share = largest / summary["exported_rows"] if summary["exported_rows"] else 0.0
-    return f"""# Humor Genome, wave 2 — data card
+    excluded_total = sum(summary["excluded_by_licence_class"].values())
+    return f"""# Humor Genome Wave 2 — public research dataset
 
-A deterministic, source-stratified slice of a {census['items']:,}-item humor research corpus,
-plus the two derived artifacts that carry most of its research value.
+This is the public data layer for the
+[Humor Genome Wave 2 executable Gemma study](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma).
+It contains a deterministic, rights-filtered, source-stratified slice of a
+{census['items']:,}-item research inventory, plus translation pairs, annotated frames, a full
+census, exact build parameters, and a cryptographic manifest.
+
+## Start here
+
+| If you want to… | Use |
+| --- | --- |
+| Analyze public text with provenance and structural labels | `corpus_sample.jsonl` |
+| Study non-English phrases with English counterparts | `aligned_phrases.jsonl` |
+| Study expectation and violation without inferring the frame | `expectation_violation_frames.jsonl` |
+| Audit what exists in the full local inventory, including unpublished material | `census.json` |
+| Reproduce counts and selection policy | `export_summary.json` |
+| Verify every mounted byte before analysis | `manifest.json` |
+
+## Release summary
+
+- Full research inventory: **{census['items']:,} rows**.
+- Explicitly redistribution-eligible before stratification: **{summary['eligible_rows']:,} rows**.
+- Public slice: **{summary['exported_rows']:,} rows** across
+  **{summary['languages_in_export']} language labels**.
+- Not republished verbatim: **{excluded_total:,} rows**; they remain represented in the census.
+- Derived public artifacts: **{summary['aligned_phrase_pairs']:,} aligned phrase pairs** and
+  **{summary['expectation_violation_frames']:,} expectation/violation frames**.
+
+This is not a random sample and not a universal funniness benchmark. Its purpose is public,
+auditable research without allowing one caption archive or unclear redistribution rights to
+dominate the release.
+
+## Quick start on Kaggle
+
+```python
+import json
+from pathlib import Path
+
+root = next(Path("/kaggle/input").rglob("corpus_sample.jsonl")).parent
+with (root / "corpus_sample.jsonl").open(encoding="utf-8") as fh:
+    header = json.loads(next(fh))["_meta"]
+    first = json.loads(next(fh))
+
+print(header)
+print(first["text"], first["source"], first["license"])
+```
 
 ## Files
 
@@ -98,6 +143,18 @@ plus the two derived artifacts that carry most of its research value.
 | `census.json` | full-corpus counts by source family, language, and licence class |
 | `export_summary.json` | exact selection counts and parameters |
 | `manifest.json` | SHA-256 and byte length of every published payload file |
+
+## Main row schema
+
+| field | meaning |
+| --- | --- |
+| `text` | verbatim public text |
+| `source`, `license`, `licence_class` | per-row provenance and release decision |
+| `language` | source-provided or normalized language label |
+| `form` | deterministic structural-template label |
+| `domain` | lexical topic guess, not ground truth |
+| `meta` | source-specific metadata, including declared style where available |
+| `funniness_label` | optional source-specific human signal; scales differ across families |
 
 ## Selection
 
@@ -132,13 +189,18 @@ the exact per-row licence and attribution terms.
 - The multilingual supply contains many proverbs/idioms as well as jokes. Phrase rows are not
   silently presented as human-graded comedy.
 
-Full methods and the dead-source ledger:
-https://github.com/aidonerightcorp/humorvibes-jestry
+## Related public artifacts
+
+- Executable write-up: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma
+- Source, methods, tests, and receipts: https://github.com/aidonerightcorp/humorvibes-jestry
+- Machine-readable publication receipt:
+  https://github.com/aidonerightcorp/humorvibes-jestry/blob/main/jestry_out/wave2_publication.json
 """
 
 
 def build(per_family: int, *, paths: Iterable[Path] | None = None,
-          out_dir: Path | None = None) -> dict[str, Any]:
+          out_dir: Path | None = None,
+          metadata_template: Path | None = None) -> dict[str, Any]:
     if per_family <= 0:
         raise ValueError("per_family must be positive")
     out_dir = out_dir or OUT
@@ -276,8 +338,9 @@ def build(per_family: int, *, paths: Iterable[Path] | None = None,
             encoding="utf-8")
         (stage / "DATA_CARD.md").write_text(_data_card(summary, census), encoding="utf-8")
         metadata = out_dir / "dataset-metadata.json"
-        if metadata.exists():
-            (stage / metadata.name).write_bytes(metadata.read_bytes())
+        metadata_source = metadata_template or metadata
+        if metadata_source.exists():
+            (stage / metadata.name).write_bytes(metadata_source.read_bytes())
 
         manifest: dict[str, dict[str, Any]] = {}
         for path in sorted(stage.iterdir()):
@@ -338,15 +401,24 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--per-family", type=int, default=12000)
+    ap.add_argument("--corpora-dir", type=Path, default=st.CORPORA,
+                    help="directory containing source JSONL files")
+    ap.add_argument("--out-dir", type=Path, default=OUT,
+                    help="directory to receive the Kaggle payload")
+    ap.add_argument("--metadata-template", type=Path,
+                    default=DATASET_METADATA_TEMPLATE,
+                    help="source-controlled Kaggle dataset metadata JSON")
     a = ap.parse_args()
-    s = build(a.per_family)
+    source_paths = sorted(a.corpora_dir.glob("*.jsonl"))
+    s = build(a.per_family, paths=source_paths, out_dir=a.out_dir,
+              metadata_template=a.metadata_template)
     print(json.dumps({k: v for k, v in s.items() if k != "families"},
                      ensure_ascii=False, indent=1))
     print("\nlargest families in export:")
     for k, v in sorted(s["families"].items(), key=lambda kv: -kv[1])[:12]:
         print(f"  {k[:58]:<58} {v:>7,}")
-    tot = sum(p.stat().st_size for p in OUT.glob("*") if p.is_file())
-    print(f"\nexport size: {tot / 1e6:.1f} MB -> {OUT}")
+    tot = sum(p.stat().st_size for p in a.out_dir.glob("*") if p.is_file())
+    print(f"\nexport size: {tot / 1e6:.1f} MB -> {a.out_dir}")
     return 0
 
 
