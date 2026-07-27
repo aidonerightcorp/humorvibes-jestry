@@ -27,7 +27,7 @@ claim gate.
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v4 ready; notebook v3 COMPLETE | Use 120,000 CC0 procedural controls and frozen easy/hard retrieval tracks without confusing them with human evidence |
-| Application release | [GitHub release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0) + [public container](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public 0.7.0; two-platform digest verified | Integrate the bounded SDK/API or deploy the signed, SBOM/provenance-bearing image |
+| Application release | [GitHub release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1) + [public container](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public 0.7.1 patch; two-platform image publication | Integrate the bounded SDK/API or deploy the signed, SBOM/provenance-bearing image |
 
 The Wave 2 notebook is the canonical executable write-up for the observational study. It clones the immutable
 `humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
@@ -42,8 +42,8 @@ separate causal-design lab with its own downloadable verification and publicatio
   findings, written for readers who do not need the implementation history.
 - [`PROJECT_STATUS.md`](PROJECT_STATUS.md): what is public and complete, what is not claimed, and
   how to verify the release.
-- [`CHANGELOG.md`](CHANGELOG.md) and [`RELEASE_NOTES_v0.7.0.md`](RELEASE_NOTES_v0.7.0.md): the
-  application release history and the exact 0.7.0 verification boundary.
+- [`CHANGELOG.md`](CHANGELOG.md) and [`RELEASE_NOTES_v0.7.1.md`](RELEASE_NOTES_v0.7.1.md): the
+  application release history and the exact 0.7.1 patch boundary.
 - [`CITATION.cff`](CITATION.cff): cite the software release; also cite the exact Kaggle artifact
   version used in an analysis.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): local setup, evidence rules, tests, and pull-request

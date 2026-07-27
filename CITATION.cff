@@ -7,10 +7,10 @@ type: software
 authors:
   - family-names: Amarel
     given-names: "Taylor S."
-version: 0.7.0
+version: 0.7.1
 date-released: 2026-07-27
 repository-code: "https://github.com/aidonerightcorp/humorvibes-jestry"
-url: "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0"
+url: "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1"
 license: Apache-2.0
 keywords:
   - humor research
@@ -24,4 +24,3 @@ abstract: >-
   model surprisal as funniness. It includes rights-filtered data, executable Kaggle notebooks,
   deterministic CC0 controls, adversarial and multimodal contracts, human-study launch tooling,
   provider-neutral integrations, an API, and container-orchestration manifests.
-

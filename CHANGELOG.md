@@ -5,6 +5,8 @@ study revisions remain separately identified by their dataset/notebook versions 
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-07-27
+
 ### Documentation
 
 - Recorded the independently verified public 0.7.0 GHCR manifest, two platform digests,
@@ -57,5 +59,6 @@ study revisions remain separately identified by their dataset/notebook versions 
 - The local ephemeral cluster proof is not a hosted Kubernetes deployment; no completed human
   trial is claimed.
 
+[0.7.1]: https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1
 [0.7.0]: https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0
-[Unreleased]: https://github.com/aidonerightcorp/humorvibes-jestry/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/aidonerightcorp/humorvibes-jestry/compare/v0.7.1...HEAD

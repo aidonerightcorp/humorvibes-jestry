@@ -5,7 +5,7 @@ measurement path. Importing this package never loads a model or makes a network
 request.
 """
 
-__version__ = "0.7.0"
+__version__ = "0.7.1"
 
 from .config import Settings
 from .client import HumorVibesClient

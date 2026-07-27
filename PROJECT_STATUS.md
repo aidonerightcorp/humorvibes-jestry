@@ -12,7 +12,7 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
-| Application package | [v0.7.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public multi-architecture image pinned by manifest digest; provenance, SBOM, anonymous pull, and hardened runtime verified |
+| Application package | [v0.7.1 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Patch source includes the live-cluster fix; multi-architecture publication remains provenance- and SBOM-bearing |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
@@ -22,7 +22,7 @@ public versions, downloaded hashes, and terminal notebook status.
 
 ## Application and deployment extension
 
-The repository now also contains a separate `humorvibes-research` 0.7.0 application layer:
+The repository now also contains a separate `humorvibes-research` 0.7.1 application layer:
 
 - an importable Python SDK and a schema-first FastAPI service;
 - authenticated native Ollama (local or cloud) and OpenAI-compatible generation;
