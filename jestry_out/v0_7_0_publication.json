@@ -1,0 +1,97 @@
+{
+  "receipt_type": "humorvibes_public_software_release",
+  "receipt_version": 1,
+  "generated_at": "2026-07-27T17:23:44Z",
+  "source": {
+    "repository": "https://github.com/aidonerightcorp/humorvibes-jestry",
+    "release_url": "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.0",
+    "tag": "v0.7.0",
+    "annotated_tag_object": "19c5f54c37cf2e05423941b7f7cd2eb911b70d35",
+    "commit": "9a58dac4a81fbb512e1c939dce1a979facc7a078",
+    "release_candidate_receipt_sha256": "6d5dee42f99f5f53ee2402045b35535cdf8d8803a8d87f60b54ce7458ed2a0af",
+    "local_deployment_receipt_sha256": "e4342f304b434b1d052e4ede25c5f0be16ed8b858b5b1789ab5c310c45fd2bd4"
+  },
+  "container": {
+    "package_url": "https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry",
+    "repository": "ghcr.io/aidonerightcorp/humorvibes-jestry",
+    "tag": "0.7.0",
+    "manifest_digest": "sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8",
+    "media_type": "application/vnd.oci.image.index.v1+json",
+    "visibility": "public",
+    "anonymous_pull_verified": true,
+    "platforms": [
+      {
+        "os": "linux",
+        "architecture": "amd64",
+        "digest": "sha256:7850e6bb3049f99acd6253745f22ae3c03c3d6989dc0bba8516a500ede6c8e82",
+        "attestation_manifest_digest": "sha256:489fa99833bcdf29554cf77062b873ae232aaf5c03c8df138da157f48145cdd1",
+        "spdx_sbom_digest": "sha256:1f797f63299067e1beca0af5acaa9b7905dc277b5ab0c55b64d4306b822cf57c",
+        "buildkit_provenance_digest": "sha256:c8470c71024e81e42d3d5fc168ea94797832865af2f08b132ae45724166f07b5"
+      },
+      {
+        "os": "linux",
+        "architecture": "arm64",
+        "digest": "sha256:65a28c6a70cdc0a9e4a6da0c7494e722c222a3bdbf8251e775e566636566fd5a",
+        "attestation_manifest_digest": "sha256:c052e797641ae50c953603ecb97ade590aa622f7cd49fb7ddf8d052f207f28fd",
+        "spdx_sbom_digest": "sha256:fb91819a0e9a6055c9c7aa9567c160069bd4e21295ac075696eb6ad6d6a33616",
+        "buildkit_provenance_digest": "sha256:e003b7bc389faa42ab537243670f64b2a16af0dda08d6e87f96f8789daa11de3"
+      }
+    ],
+    "build": {
+      "workflow_run": "https://github.com/aidonerightcorp/humorvibes-jestry/actions/runs/30288759649",
+      "conclusion": "success",
+      "buildkit_provenance": "mode=max",
+      "buildkit_sbom": true,
+      "registry_spdx_sbom_attestations_verified": true,
+      "github_registry_attestation": true
+    },
+    "attestation_verification": {
+      "verified": true,
+      "predicate_type": "https://slsa.dev/provenance/v1",
+      "source_repository_visibility_at_signing": "public",
+      "source_repository_digest": "9a58dac4a81fbb512e1c939dce1a979facc7a078",
+      "source_repository_ref": "refs/tags/v0.7.0",
+      "workflow": ".github/workflows/publish-container.yml",
+      "workflow_trigger": "push",
+      "runner_environment": "github-hosted",
+      "transparency_log": "https://rekor.sigstore.dev"
+    },
+    "runtime_verification": {
+      "digest_used": true,
+      "ready": true,
+      "package_version": "0.7.0",
+      "openapi_version": "0.7.0",
+      "runtime_user": "10001:10001",
+      "readonly_root": true,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "no_new_privileges": true,
+      "embedding_model": "hash:128",
+      "embedding_count": 1,
+      "generation_is_not_human_validation": true
+    }
+  },
+  "deployment_contracts": {
+    "kustomize_overlay": "deploy/overlays/ghcr",
+    "kustomize_digest_render_verified": true,
+    "helm_digest_render_verified": true,
+    "kubernetes_cluster_apply_executed": false
+  },
+  "research_surfaces": {
+    "wave2_dataset_version": 7,
+    "wave2_notebook_version": 14,
+    "open_controls_dataset_version": 4,
+    "open_controls_notebook_version": 3
+  },
+  "truth_boundary": {
+    "public_container_registry_release_verified": true,
+    "hosted_api_verified": false,
+    "kubernetes_cluster_apply_executed": false,
+    "live_semantic_provider_quality_established": false,
+    "human_writer_or_audience_trial_completed": false,
+    "model_surprisal_is_human_funniness": false,
+    "doi_minted": false
+  },
+  "ok": true
+}

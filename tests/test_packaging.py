@@ -88,6 +88,39 @@ def test_kubernetes_base_is_default_deny_on_egress() -> None:
     assert "networkpolicy.yaml" in kustomization["resources"]
 
 
+def test_public_ghcr_overlay_and_receipt_pin_the_verified_manifest() -> None:
+    expected = "sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8"
+    overlay = load_yaml("deploy/overlays/ghcr/kustomization.yaml")
+    publication = json.loads(
+        (ROOT / "jestry_out/v0_7_0_publication.json").read_text(encoding="utf-8")
+    )
+    assert overlay["resources"] == ["../../kubernetes"]
+    assert overlay["images"] == [
+        {
+            "name": "humorvibes-research",
+            "newName": "ghcr.io/aidonerightcorp/humorvibes-jestry",
+            "digest": expected,
+        }
+    ]
+    assert publication["container"]["manifest_digest"] == expected
+    assert publication["container"]["visibility"] == "public"
+    assert publication["container"]["anonymous_pull_verified"] is True
+    assert {(row["os"], row["architecture"]) for row in publication["container"]["platforms"]} == {
+        ("linux", "amd64"),
+        ("linux", "arm64"),
+    }
+    assert publication["container"]["attestation_verification"]["verified"] is True
+    assert publication["container"]["build"]["registry_spdx_sbom_attestations_verified"] is True
+    assert all(
+        row["spdx_sbom_digest"].startswith("sha256:")
+        for row in publication["container"]["platforms"]
+    )
+    assert publication["container"]["runtime_verification"]["runtime_user"] == "10001:10001"
+    assert publication["deployment_contracts"]["kustomize_overlay"] == "deploy/overlays/ghcr"
+    assert publication["deployment_contracts"]["helm_digest_render_verified"] is True
+    assert publication["truth_boundary"]["kubernetes_cluster_apply_executed"] is False
+
+
 def test_envoy_gateway_example_has_tls_identity_global_limit_and_no_secrets() -> None:
     text = (ROOT / "deploy/gateway/envoy-gateway.yaml").read_text(encoding="utf-8")
     rows = list(yaml.safe_load_all(text))

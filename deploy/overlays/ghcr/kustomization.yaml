@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../kubernetes
+images:
+  - name: humorvibes-research
+    newName: ghcr.io/aidonerightcorp/humorvibes-jestry
+    digest: sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8
+
