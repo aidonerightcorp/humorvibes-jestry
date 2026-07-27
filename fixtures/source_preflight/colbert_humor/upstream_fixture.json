@@ -1,0 +1,63 @@
+{
+  "dataset_metadata": {
+    "id": "CreativeLang/ColBERT_Humor_Detection",
+    "sha": "2bb7d6bce15e42c2a3cf2be8305fa3049929d3ac",
+    "cardData": {
+      "license": "cc-by-2.0"
+    }
+  },
+  "first_rows": {
+    "features": [
+      {
+        "feature_idx": 0,
+        "name": "text",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 1,
+        "name": "humor",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      }
+    ],
+    "rows": [
+      {
+        "row_idx": 0,
+        "row": {
+          "text": "Joe biden rules out 2020 bid: 'guys, i'm not running'",
+          "humor": false
+        },
+        "truncated_cells": []
+      },
+      {
+        "row_idx": 1,
+        "row": {
+          "text": "Watch: darvish gave hitter whiplash with slow pitch",
+          "humor": false
+        },
+        "truncated_cells": []
+      },
+      {
+        "row_idx": 2,
+        "row": {
+          "text": "What do you call a turtle without its shell? dead.",
+          "humor": true
+        },
+        "truncated_cells": []
+      },
+      {
+        "row_idx": 3,
+        "row": {
+          "text": "5 reasons the 2016 election feels so personal",
+          "humor": false
+        },
+        "truncated_cells": []
+      }
+    ]
+  }
+}
