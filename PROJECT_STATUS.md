@@ -16,6 +16,28 @@ The notebook uses the immutable source tag `humor-genome-wave2-v6`. GitHub `main
 documentation and follow-up research improve; the code executed by the public notebook cannot
 move underneath an existing run.
 
+## Application and deployment extension
+
+The repository now also contains a separate `humorvibes-research` 0.3.0 application layer:
+
+- an importable Python SDK and a schema-first FastAPI service;
+- authenticated native Ollama (local or cloud) and OpenAI-compatible generation;
+- validated hash, Ollama, OpenAI-compatible, and optional sentence-transformers embeddings;
+- exact model allowlists, bounded requests/responses, secret-safe errors, Prometheus text metrics,
+  and a deterministic adversarial audit;
+- a multi-stage non-root Docker image, hardened offline/local-Ollama/cloud-Ollama Compose profiles,
+  and a two-replica non-root Kubernetes Kustomize base.
+
+The local image was built and launched with a read-only root filesystem; its readiness, capability,
+embedding, and signal-boundary checks passed. Compose rendering, the Kubernetes security/probe
+contracts, and a kubectl 1.36.2 Kustomize render also passed. The machine-readable receipt is
+[`jestry_out/deployment_validation.json`](jestry_out/deployment_validation.json).
+
+Those statements do **not** claim a public container-registry image, a hosted public API, a live
+Kubernetes cluster deployment, or a live LLM/semantic-embedding quality result. The Kubernetes
+manifests were statically validated because no cluster client is installed in the verification
+environment. This extension does not alter the immutable Kaggle notebook or its measurements.
+
 ## What is complete
 
 - The public dataset is deterministic, source-stratified, and deny-first on redistribution
@@ -72,7 +94,8 @@ Start with [`ROADMAP.md`](ROADMAP.md) for prioritized work, [`CONTRIBUTING.md`](
 for the evidence and pull-request contract, and [`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md)
 for exact extension paths. The best near-term contributions are multimodal caption baselines,
 human-annotated setup/frame/punchline data, native-form rules for under-covered languages,
-licence-verified sources, and small reproducibility improvements.
+licence-verified sources, embedding-model bake-offs on frozen multilingual fixtures, live provider
+compatibility checks, and small reproducibility improvements.
 
 ## One remaining owner decision
 

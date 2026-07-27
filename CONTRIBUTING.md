@@ -28,7 +28,29 @@ source .venv/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements-dev.txt
 python3 -m pytest -q
+humorvibes adversarial
 ```
+
+When dependency metadata changes, refresh both locks and review the diff before building:
+
+```bash
+uv lock
+uv export --frozen --extra api --no-dev --no-emit-project --no-hashes \
+  --output-file requirements-api.lock
+```
+
+For API or deployment changes, also run:
+
+```bash
+docker compose -f compose.yaml config --quiet
+docker compose -f compose.yaml -f compose.ollama.yaml config --quiet
+python3 verify_deployment.py --docker \
+  --kustomize-image registry.k8s.io/kubectl:v1.36.2
+```
+
+Do not commit provider keys, literal Kubernetes Secrets, model caches, or corpus rows as
+integration fixtures. Use malformed stub responses for adversarial tests and keep live-provider
+diagnostics opt-in.
 
 The public release verifier does not require the private local corpus:
 

@@ -1,0 +1,11 @@
+**
+!.dockerignore
+!Dockerfile
+!pyproject.toml
+!requirements-api.lock
+!README.md
+!formats.py
+!humor_mesh.py
+!mesh_signals.py
+!humorvibes/
+!humorvibes/**

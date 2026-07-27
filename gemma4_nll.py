@@ -36,15 +36,16 @@ unchanged on top of this provider.
 """
 from __future__ import annotations
 
-import json
 import os
 import time
-import urllib.error
-import urllib.request
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Any
 
-from mesh_signals import OfflineStub, OllamaProvider, SurprisalProfile
+from humorvibes.config import Settings
+from humorvibes.errors import IntegrationError
+from humorvibes.http import JsonHttpClient
+from humorvibes.signal_providers import OllamaSignalProvider
+from mesh_signals import OfflineStub, SurprisalProfile
 
 import re as _re
 
@@ -98,12 +99,24 @@ class Gemma4ForcedNLLProvider:
 
     def __init__(self, model: str | None = None, host: str | None = None,
                  auto_prefix_rewrite: bool = True) -> None:
+        settings = Settings.from_env()
         self.model = model or os.environ.get("GEMMA_MODEL", "gemma4")
-        self.host = (host or os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")).rstrip("/")
+        self.host = (host or settings.ollama_host).rstrip("/")
         self.think = False
         self.auto_prefix_rewrite = auto_prefix_rewrite  # sweeps control layout themselves
-        self._gen = OllamaProvider()
-        self._gen.model = self.model
+        runtime = replace(settings, ollama_host=self.host)
+        self._client = JsonHttpClient(
+            runtime.ollama_host,
+            api_key=runtime.ollama_api_key,
+            timeout=180,
+            max_response_bytes=runtime.max_response_bytes,
+            allow_insecure_remote=runtime.allow_insecure_remote,
+        )
+        self._gen = OllamaSignalProvider(
+            model=self.model,
+            host=self.host,
+            api_key=runtime.ollama_api_key,
+        )
         self._path_cache: dict[str, list[str]] = {}       # continuation -> token path
         self._base_profiles: dict[str, ForcedProfile] = {}  # continuation -> base pass
         self.calls = 0
@@ -121,18 +134,11 @@ class Gemma4ForcedNLLProvider:
             "top_logprobs": TOP_K,
             "options": {"num_predict": 1, "temperature": 0},
         }
-        req = urllib.request.Request(
-            f"{self.host}/api/generate",
-            data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
-            method="POST",
-        )
         for attempt in range(retries + 1):
             try:
-                with urllib.request.urlopen(req, timeout=180) as resp:
-                    data = json.loads(resp.read().decode("utf-8"))
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
-                self.last_error = f"{type(exc).__name__}: {exc} (attempt {attempt + 1})"
+                data = self._client.request("/api/generate", payload=payload)
+            except IntegrationError as exc:
+                self.last_error = f"{exc.code} (attempt {attempt + 1})"
                 time.sleep(0.4 * (attempt + 1))
                 continue
             lp = data.get("logprobs") or []

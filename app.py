@@ -9,7 +9,8 @@ import streamlit as st
 import compiled_humor
 from formats import FORMATS, format_generation_prompt
 from gemma_client import GemmaClient, read_prompt
-from mesh_signals import compute_signals, get_provider, sparkline, split_setup_punchline
+from humorvibes.signal_providers import get_signal_provider as get_provider
+from mesh_signals import compute_signals, sparkline, split_setup_punchline
 from humor_datacenter.audience import AudienceState, LiveResponse, adaptation_plan
 from humor_datacenter.demo import build_demo_datacenter, datacenter_context
 from humor_datacenter.market import market_gaps, style_shift_from_text

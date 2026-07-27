@@ -32,15 +32,23 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import time
-import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+from humorvibes.config import Settings
+
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "jestry_out"
-HOST = "http://127.0.0.1:11434"
-BACKENDS = ["embeddinggemma", "nomic-embed-text", "all-minilm"]
+RUNTIME = Settings.from_env()
+HOST = RUNTIME.ollama_host
+BACKENDS = [
+    part.strip() for part in os.environ.get(
+        "HUMORVIBES_EMBEDDING_BAKEOFF_MODELS",
+        "embeddinggemma,qwen3-embedding,all-minilm,nomic-embed-text,mxbai-embed-large,bge-m3",
+    ).split(",") if part.strip()
+]
 
 # Fixed probe set. The originals and family members are drawn from the project's
 # own curated multilingual canon, so provenance is known for every line.
@@ -80,20 +88,20 @@ PARAPHRASE_PAIRS = [
 
 
 def embed(model: str, texts: list[str], timeout: float = 180.0) -> list[list[float]] | None:
-    vecs: list[list[float]] = []
-    for t in texts:
-        body = json.dumps({"model": model, "prompt": t}).encode()
-        req = urllib.request.Request(f"{HOST}/api/embeddings", data=body,
-                                     headers={"Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                v = json.loads(r.read()).get("embedding")
-        except Exception:
-            return None
-        if not v:
-            return None
-        vecs.append(v)
-    return vecs
+    from dataclasses import replace
+
+    from humorvibes.embeddings import OllamaEmbeddingBackend
+    from humorvibes.errors import IntegrationError
+
+    settings = replace(
+        RUNTIME,
+        ollama_host=HOST,
+        request_timeout_seconds=timeout,
+    )
+    try:
+        return OllamaEmbeddingBackend(settings, model).embed(texts).vectors
+    except IntegrationError:
+        return None
 
 
 def cos(a: list[float], b: list[float]) -> float:

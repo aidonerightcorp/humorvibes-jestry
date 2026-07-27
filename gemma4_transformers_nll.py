@@ -65,8 +65,8 @@ class Gemma4TransformersProvider:
         self.last_error: str | None = None
         self.load_seconds: float | None = None
         # generation and judging are delegated; this class is an instrument only
-        from mesh_signals import OllamaProvider
-        self._gen = OllamaProvider()
+        from humorvibes.signal_providers import OllamaSignalProvider
+        self._gen = OllamaSignalProvider()
         self._gen.model = os.environ.get("GEMMA_MODEL", "gemma4")
 
     def _ensure(self) -> bool:

@@ -5,10 +5,7 @@ Default provider is Ollama because it is simple to run locally:
 """
 from __future__ import annotations
 
-import json
 import os
-import urllib.error
-import urllib.request
 from pathlib import Path
 
 
@@ -27,7 +24,16 @@ class GemmaClient:
         self.think = os.environ.get("GEMMA_THINK", "0").strip().lower() in {
             "1", "true", "yes", "on"
         }
+        self.last_error = ""
+        self._ollama = None
         self._tf = None
+        if self.provider == "ollama":
+            from humorvibes.config import Settings
+            from humorvibes.llm import OllamaLLM
+
+            settings = Settings.from_env()
+            self.ollama_host = settings.ollama_host
+            self._ollama = OllamaLLM(settings)
         if self.provider == "transformers":
             try:
                 from mesh_signals import TransformersProvider
@@ -46,23 +52,16 @@ class GemmaClient:
             return out or None
         if self.provider != "ollama":
             return None
-        payload = {
-            "model": self.model,
-            "prompt": prompt,
-            "stream": False,
-            "think": self.think,
-            "format": "json",
-            "options": {"temperature": temperature, "num_predict": 720},
-        }
-        req = urllib.request.Request(
-            f"{self.ollama_host}/api/generate",
-            data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
-            method="POST",
-        )
+        from humorvibes.errors import IntegrationError
+
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            self.last_error = ""
+            result = self._ollama.generate(
+                f"ollama:{self.model}", self.model, prompt,
+                temperature=temperature, max_tokens=720,
+                json_mode=True, think=self.think,
+            )
+        except IntegrationError as exc:
+            self.last_error = exc.code
             return None
-        return str(data.get("response", "")).strip()
+        return result.text or None

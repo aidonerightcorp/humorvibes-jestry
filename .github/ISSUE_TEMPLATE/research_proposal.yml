@@ -16,6 +16,7 @@ body:
         - Multilingual form taxonomy
         - Source acquisition and provenance
         - Gemma or model instrumentation
+        - Application integration or deployment
         - Release reproducibility
         - Documentation or contributor experience
     validations:

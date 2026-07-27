@@ -27,7 +27,7 @@ import json
 import os
 import urllib.error
 import urllib.request
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from statistics import mean, pstdev
 from typing import Any
 
@@ -115,16 +115,26 @@ def _http_json(url: str, payload: dict[str, Any], headers: dict[str, str], timeo
 
 
 def _call_openai_compatible(model: str, prompt: str, base_url: str = "", key_env: str = "") -> str:
+    from humorvibes.config import Settings
+    from humorvibes.errors import IntegrationError
+    from humorvibes.llm import OpenAICompatibleLLM
+
     base = (base_url or os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")).rstrip("/")
     key = os.environ.get(key_env or "OPENAI_API_KEY", "")
-    data = _http_json(
-        f"{base}/chat/completions",
-        {"model": model, "messages": [{"role": "user", "content": prompt}], "temperature": 0.3},
-        {"Authorization": f"Bearer {key}"},
-    )
+    client = OpenAICompatibleLLM(replace(
+        Settings.from_env(),
+        openai_base_url=base,
+        openai_api_key=key,
+        openai_models=(model,),
+    ))
     try:
-        return data["choices"][0]["message"]["content"]
-    except (KeyError, IndexError, TypeError):
+        return client.generate(
+            f"openai:{model}", model, prompt,
+            temperature=0.3, max_tokens=400,
+            json_mode=True, think=False,
+        ).text
+    except IntegrationError as exc:
+        LAST_HTTP_ERROR[f"{base}/chat/completions"] = exc.code
         return ""
 
 
@@ -142,14 +152,20 @@ def _call_anthropic(model: str, prompt: str) -> str:
 
 
 def _call_ollama(model: str, prompt: str) -> str:
-    host = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
-    data = _http_json(
-        f"{host}/api/generate",
-        {"model": model, "prompt": prompt, "stream": False, "options": {"temperature": 0.3}},
-        {},
-        timeout=180,
-    )
-    return str((data or {}).get("response", ""))
+    from humorvibes.config import Settings
+    from humorvibes.errors import IntegrationError
+    from humorvibes.llm import OllamaLLM
+
+    settings = Settings.from_env()
+    try:
+        return OllamaLLM(settings).generate(
+            f"ollama:{model}", model, prompt,
+            temperature=0.3, max_tokens=400,
+            json_mode=True, think=False,
+        ).text
+    except IntegrationError as exc:
+        LAST_HTTP_ERROR[f"{settings.ollama_host}/api/generate"] = exc.code
+        return ""
 
 
 def available_judges() -> list[PanelJudge]:

@@ -142,7 +142,7 @@ def analyze(
 
 
 if __name__ == "__main__":
-    from mesh_signals import get_provider
+    from humorvibes.signal_providers import get_signal_provider as get_provider
     p = get_provider()
     for j in [
         "I told my therapist about my fear of speed bumps. She said I'm slowly getting over it.",

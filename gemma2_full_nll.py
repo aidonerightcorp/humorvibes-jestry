@@ -28,7 +28,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from mesh_signals import OfflineStub, OllamaProvider, SurprisalProfile
+from humorvibes.signal_providers import OllamaSignalProvider
+from mesh_signals import OfflineStub, SurprisalProfile
 
 VENV_PY = Path.home() / ".venvs" / "jestry-nll" / "bin" / "python"
 GGUF = Path(os.environ.get(
@@ -91,7 +92,7 @@ class Gemma2FullNLLProvider:
     def __init__(self) -> None:
         self.model = "gemma-2-2b-it-Q4_K_M.gguf (llama.cpp)"
         self.think = False
-        self._gen = OllamaProvider()          # gemma4 stays generator + judge
+        self._gen = OllamaSignalProvider()    # gemma4 stays generator + judge
         # OllamaProvider defaults to gemma3:4b, which is NOT installed here —
         # leaving it caused every persona judgment to silently return
         # "no judge available" (2026-07-24 adversarial finding: the B-gate

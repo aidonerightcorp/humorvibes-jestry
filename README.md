@@ -1,5 +1,7 @@
 # Humor Genome Wave 2
 
+[![Application contracts](https://github.com/aidonerightcorp/humorvibes-jestry/actions/workflows/app-contracts.yml/badge.svg)](https://github.com/aidonerightcorp/humorvibes-jestry/actions/workflows/app-contracts.yml)
+
 A public, reproducible Gemma study of humor structure. **HumorVibes** is the implementation name;
 **Humor Genome Wave 2** is the canonical research release.
 
@@ -30,12 +32,62 @@ loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross
 - [`ROADMAP.md`](ROADMAP.md): prioritized, contribution-sized research and maintenance work.
 - [`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md): exact paths for adding sources, languages,
   labels, model instruments, experiments, and public releases.
+- [`docs/API_AND_DEPLOYMENT.md`](docs/API_AND_DEPLOYMENT.md): Python SDK, FastAPI, Docker,
+  Compose, local/cloud Ollama, Kubernetes, authentication, and configuration.
+- [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md): supported LLM/embedding providers and the
+  application contract.
+- [`docs/ADVERSARIAL_VALIDATION.md`](docs/ADVERSARIAL_VALIDATION.md): tested attack classes,
+  deterministic audit commands, and security boundaries.
 
 Issues, reproductions, and research proposals are welcome. In this project, reproducing a null
 result, removing a confound, or documenting a licensing boundary is a successful contribution.
 The repository is public but does not yet carry a project-level code licence; the maintainer must
 choose one before outside code reuse is unambiguous. Dataset rows retain their recorded source
 licences.
+
+## Use it in an application
+
+The published research notebook remains immutable, while a separate `humorvibes` package exposes
+the reusable tooling as an SDK and FastAPI service. Its default profile makes no network calls:
+generation is explicitly disabled and embeddings use deterministic `hash:128` token vectors.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -e ".[api]"
+humorvibes doctor
+humorvibes adversarial
+humorvibes-api
+```
+
+```bash
+curl --fail http://127.0.0.1:8080/health/ready
+curl --fail -X POST http://127.0.0.1:8080/v1/similarity \
+  -H 'Content-Type: application/json' \
+  -d '{"left":["Even experts slip."],"right":["A master can blunder."]}'
+```
+
+Container quick start:
+
+```bash
+docker compose up --build --wait
+python3 examples/api_client.py
+docker compose down
+```
+
+To build from the current source and reproduce the static and live-container receipt:
+
+```bash
+python3 verify_deployment.py --docker \
+  --kustomize-image registry.k8s.io/kubectl:v1.36.2 \
+  --out jestry_out/deployment_validation.json
+```
+
+The same API supports authenticated local or cloud Ollama, OpenAI-compatible generation and
+embeddings, six configurable Ollama embedding model names, and optional sentence-transformers.
+All live model IDs are exact operator allowlists; callers cannot provide arbitrary provider URLs.
+See the [deployment guide](docs/API_AND_DEPLOYMENT.md) for Ollama keys, model configuration,
+Docker profiles, and the non-root Kubernetes base.
 
 ## Release at a glance
 
@@ -68,6 +120,8 @@ other humor-adjacent text; source-specific human signals are not interchangeable
   layer without bypassing provenance or verification.
 - `wave2_notebook/`: the one notebook to read and publish; older notebook directories are
   supporting experiments, not competing entry points.
+- `humorvibes/`, `Dockerfile`, `compose*.yaml`, `deploy/kubernetes/`: the SDK/API and deployment
+  surface; it is an extension layer, not a second research notebook.
 - `build_kaggle_export.py`, `wave2_dataset/`, `verify_wave2_release.py`: public dataset build,
   Kaggle metadata, and fail-closed validation.
 - `caption_*.py`, `style_taxonomy.py`, `corpus_census.py`: the measured Wave 2 analyses.

@@ -87,6 +87,28 @@ uncertainty rather than a table of unqualified means.
 Acceptance: a contributor can test a parser and release policy on fixtures without downloading the
 multi-million-row inventory.
 
+## P2 — productionize the integration surface
+
+The initial SDK/API, authenticated Ollama/OpenAI-compatible transports, multi-model embedding
+registry, offline adversarial audit, Docker/Compose profiles, and Kubernetes base are implemented
+in 0.3.0. Useful bounded follow-ups are:
+
+- [ ] Publish a signed multi-architecture image to GHCR and add a digest-pinned deployment overlay.
+- [ ] Add gateway examples for TLS, identity, global rate limiting, and request tracing.
+- [ ] Add optional streaming generation with disconnect/cancellation and backpressure tests.
+- [ ] Add an external metrics backend and OpenTelemetry spans without logging prompts or keys.
+- [ ] Add live compatibility jobs for a version matrix of Ollama and two OpenAI-compatible servers.
+- [ ] Benchmark configured embedding models on frozen multilingual retrieval fixtures before
+  recommending a default semantic model.
+- [ ] Add a vector-database adapter protocol with conformance tests for SQLite, pgvector, and
+  Qdrant; preserve model/dimension identity in every collection.
+- [ ] Add a deployment-specific Kubernetes overlay only after its ingress controller, secret
+  manager, registry, and egress policy are named.
+
+Acceptance: each adapter has a no-network fake, an opt-in live test, explicit capability metadata,
+bounded inputs/outputs, secret-redaction tests, and a receipt that distinguishes configured,
+reachable, and quality-validated states.
+
 ## P3 — exploratory systems
 
 - [ ] Compare retrieval over surface wording versus explicit comic frames.

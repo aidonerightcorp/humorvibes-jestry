@@ -32,9 +32,8 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 import time
-import urllib.error
-import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -77,6 +76,7 @@ def _sha(text: str) -> str:
 # ---------------------------------------------------------------------------
 class HashEmbedBackend:
     name = "hash-128"
+    cache_key = "hash-128-v1"
     semantic = False
 
     def embed(self, texts: list[str]) -> list[list[float]] | None:
@@ -87,24 +87,26 @@ class OllamaEmbedBackend:
     semantic = True
 
     def __init__(self, model: str | None = None, host: str | None = None) -> None:
+        from dataclasses import replace
+        from humorvibes.config import Settings
+        from humorvibes.embeddings import OllamaEmbeddingBackend
+
+        settings = Settings.from_env()
         self.model = model or os.environ.get("EMBED_MODEL", "embeddinggemma")
-        self.host = (host or os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")).rstrip("/")
+        self.host = (host or settings.ollama_host).rstrip("/")
         self.name = f"ollama:{self.model}"
+        self.cache_key = f"{self.name}:{_sha(self.host)}"
+        self._backend = OllamaEmbeddingBackend(
+            replace(settings, ollama_host=self.host), self.model
+        )
 
     def embed(self, texts: list[str]) -> list[list[float]] | None:
-        payload = {"model": self.model, "input": texts}
-        req = urllib.request.Request(f"{self.host}/api/embed",
-                                     data=json.dumps(payload).encode("utf-8"),
-                                     headers={"Content-Type": "application/json"}, method="POST")
+        from humorvibes.errors import IntegrationError
+
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            return self._backend.embed(texts).vectors
+        except IntegrationError:
             return None
-        vecs = data.get("embeddings")
-        if not isinstance(vecs, list) or len(vecs) != len(texts):
-            return None
-        return vecs
 
     def available(self) -> bool:
         return self.embed(["ping"]) is not None
@@ -166,7 +168,9 @@ class PrecedentIndex:
         self.backend = backend or pick_backend()
         self.out_dir = out_dir
         self.corpora_dir = corpora_dir
-        self.cache_path = out_dir / f"precedent_index_{self.backend.name.replace(':', '_')}.json"
+        cache_key = str(getattr(self.backend, "cache_key", self.backend.name))
+        safe_key = re.sub(r"[^A-Za-z0-9_.-]+", "_", cache_key)
+        self.cache_path = out_dir / f"precedent_index_{safe_key}.json"
         self.items: dict[str, dict[str, Any]] = {}
         self._load_cache()
         self._collect()

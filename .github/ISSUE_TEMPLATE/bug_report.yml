@@ -12,6 +12,9 @@ body:
       label: Affected surface
       options:
         - GitHub source or tests
+        - Python SDK or API
+        - Docker, Compose, or Kubernetes
+        - LLM or embedding integration
         - Kaggle dataset
         - Kaggle notebook
         - Documentation

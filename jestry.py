@@ -30,9 +30,7 @@ import json
 import os
 import re
 import time
-import urllib.error
-import urllib.request
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -40,7 +38,8 @@ from compiled_humor import BANNED_TARGET_TERMS, JokeProgram, load_program, run_p
 from formats import FORMATS
 from humor_datacenter.mechanisms import COMEDY_MECHANISMS
 from humor_mesh import extract_candidates
-from mesh_signals import OfflineStub, compute_signals, get_provider, split_setup_punchline
+from humorvibes.signal_providers import get_signal_provider as get_provider
+from mesh_signals import OfflineStub, compute_signals, split_setup_punchline
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "jestry_out"
@@ -602,24 +601,30 @@ def ollama_generate_with_usage(prompt: str, *, model: str | None = None,
                                temperature: float = 0.75, max_tokens: int = 640,
                                host: str | None = None) -> dict[str, Any]:
     """Direct generation call that keeps token counts and digests for receipts."""
+    from humorvibes.config import Settings
+    from humorvibes.errors import IntegrationError
+    from humorvibes.llm import OllamaLLM
+
     model = model or os.environ.get("GEMMA_MODEL", "gemma4")
-    host = (host or os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")).rstrip("/")
-    payload = {"model": model, "prompt": prompt, "stream": False, "think": False,
-               "options": {"temperature": temperature, "num_predict": max_tokens}}
-    req = urllib.request.Request(f"{host}/api/generate",
-                                 data=json.dumps(payload).encode("utf-8"),
-                                 headers={"Content-Type": "application/json"}, method="POST")
+    settings = Settings.from_env()
+    if host:
+        settings = replace(settings, ollama_host=host.rstrip("/"))
+    client = OllamaLLM(settings)
     t0 = time.time()
     try:
-        with urllib.request.urlopen(req, timeout=300) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
-        return {"ok": False, "error": f"{type(exc).__name__}: {exc}", "model": model,
+        result = client.generate(
+            f"ollama:{model}", model, prompt,
+            temperature=temperature, max_tokens=max_tokens,
+            json_mode=False, think=False,
+        )
+    except IntegrationError as exc:
+        return {"ok": False, "error": exc.code, "model": model,
                 "prompt_sha256": _sha(prompt)}
-    return {"ok": True, "model": model, "response": str(data.get("response", "")).strip(),
-            "prompt_sha256": _sha(prompt), "output_sha256": _sha(str(data.get("response", ""))),
-            "prompt_tokens": data.get("prompt_eval_count"), "output_tokens": data.get("eval_count"),
-            "wall_s": round(time.time() - t0, 2), "thinking_enabled": False}
+    return {"ok": True, "model": model, "response": result.text,
+            "prompt_sha256": _sha(prompt), "output_sha256": _sha(result.text),
+            "prompt_tokens": result.prompt_tokens, "output_tokens": result.output_tokens,
+            "wall_s": round(time.time() - t0, 2), "thinking_enabled": False,
+            "finish_reason": result.finish_reason}
 
 
 # ---------------------------------------------------------------------------

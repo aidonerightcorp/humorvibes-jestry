@@ -44,17 +44,23 @@ abstract-idea anchor, which gives a continuous score rather than a bucket.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import math
+import os
 import re
-import urllib.request
 from pathlib import Path
+
+from humorvibes.config import Settings
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "jestry_out"
-HOST = "http://127.0.0.1:11434"
-EMB_MODEL = "embeddinggemma"
-ANCHOR_CACHE = OUT / "taxonomy_anchor_cache.json"
+RUNTIME = Settings.from_env()
+HOST = RUNTIME.ollama_host
+EMB_MODEL = os.environ.get("EMBED_MODEL", "embeddinggemma")
+_CACHE_MODEL = re.sub(r"[^A-Za-z0-9_.-]+", "_", EMB_MODEL)
+_CACHE_HOST = hashlib.sha256(HOST.encode("utf-8")).hexdigest()[:8]
+ANCHOR_CACHE = OUT / f"taxonomy_anchor_cache_{_CACHE_MODEL}_{_CACHE_HOST}.json"
 
 # Anchors are phrases, not bare words: "a place such as a city, country or room"
 # separates far more cleanly than the single token "place", which is itself an
@@ -88,20 +94,20 @@ SUFFIX_POS = [
 
 
 def embed(texts: list[str], timeout: float = 120.0) -> list[list[float]] | None:
-    out = []
-    for t in texts:
-        body = json.dumps({"model": EMB_MODEL, "prompt": t}).encode()
-        req = urllib.request.Request(f"{HOST}/api/embeddings", data=body,
-                                     headers={"Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                v = json.loads(r.read()).get("embedding")
-        except Exception:
-            return None
-        if not v:
-            return None
-        out.append(v)
-    return out
+    from dataclasses import replace
+
+    from humorvibes.embeddings import OllamaEmbeddingBackend
+    from humorvibes.errors import IntegrationError
+
+    settings = replace(
+        RUNTIME,
+        ollama_host=HOST,
+        request_timeout_seconds=timeout,
+    )
+    try:
+        return OllamaEmbeddingBackend(settings, EMB_MODEL).embed(texts).vectors
+    except IntegrationError:
+        return None
 
 
 def cos(a, b) -> float:

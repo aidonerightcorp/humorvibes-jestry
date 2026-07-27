@@ -22,7 +22,8 @@ import compiled_humor
 from formats import FORMATS, format_critique_prompt, format_generation_prompt, list_formats
 from humor_mesh import extract_candidates
 from llm_panel import available_judges, convergence_report, run_panel
-from mesh_signals import compute_signals, get_provider, sparkline, split_setup_punchline
+from humorvibes.signal_providers import get_signal_provider as get_provider
+from mesh_signals import compute_signals, sparkline, split_setup_punchline
 
 
 def cmd_formats(_: argparse.Namespace) -> int:

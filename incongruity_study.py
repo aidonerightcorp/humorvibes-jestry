@@ -44,6 +44,7 @@ reported as dying.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import io
 import json
 import math
@@ -60,6 +61,9 @@ import pandas as pd
 
 from humor_features import (WORD, benjamini_hochberg, build_frequencies, features,
                             perm_p, spearman, syllables)
+from humorvibes.config import Settings
+from humorvibes.embeddings import OllamaEmbeddingBackend, cosine_similarity
+from humorvibes.errors import IntegrationError
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "jestry_out"
@@ -78,9 +82,27 @@ def ensure_zip() -> Path:
         ZIP_PATH.write_bytes(r.read())
     return ZIP_PATH
 MARKER = re.compile(r"<([^/>]*)/>")
-HOST = "http://127.0.0.1:11434"
-EMB_MODEL = "embeddinggemma"
-CACHE = OUT / "word_embeddings_cache.json"
+RUNTIME = Settings.from_env()
+EMB_MODEL = os.environ.get("HUMORVIBES_INCONGRUITY_EMBED_MODEL", "embeddinggemma")
+_CACHE_ID = hashlib.sha256(
+    f"ollama:{EMB_MODEL}@{RUNTIME.ollama_host}".encode("utf-8")
+).hexdigest()[:12]
+CACHE = OUT / f"word_embeddings_cache_{_CACHE_ID}.json"
+
+
+def _save_embedding_cache(cache: dict[str, list[float]]) -> None:
+    CACHE.write_text(
+        json.dumps(
+            {
+                "schema_version": 2,
+                "model_id": f"ollama:{EMB_MODEL}",
+                "host_sha256": hashlib.sha256(RUNTIME.ollama_host.encode("utf-8")).hexdigest(),
+                "vectors": cache,
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
 
 
 def embed_words(words: list[str], batch_log: int = 500) -> dict[str, list[float]]:
@@ -88,35 +110,33 @@ def embed_words(words: list[str], batch_log: int = 500) -> dict[str, list[float]
     cache: dict[str, list[float]] = {}
     if CACHE.exists():
         try:
-            cache = json.loads(CACHE.read_text(encoding="utf-8"))
-        except Exception:
+            payload = json.loads(CACHE.read_text(encoding="utf-8"))
+            if payload.get("model_id") == f"ollama:{EMB_MODEL}" and isinstance(payload.get("vectors"), dict):
+                cache = payload["vectors"]
+        except (OSError, json.JSONDecodeError, AttributeError):
             cache = {}
     todo = [w for w in words if w not in cache]
     print(f"  vocabulary {len(words)}, cached {len(words) - len(todo)}, to embed {len(todo)}")
     t0 = time.time()
-    for i, w in enumerate(todo, 1):
-        body = json.dumps({"model": EMB_MODEL, "prompt": w}).encode()
-        req = urllib.request.Request(f"{HOST}/api/embeddings", data=body,
-                                     headers={"Content-Type": "application/json"})
+    backend = OllamaEmbeddingBackend(RUNTIME, EMB_MODEL)
+    batch_size = min(64, RUNTIME.max_batch_items)
+    for start in range(0, len(todo), batch_size):
+        batch = todo[start:start + batch_size]
         try:
-            with urllib.request.urlopen(req, timeout=120) as r:
-                v = json.loads(r.read()).get("embedding")
-            if v:
-                cache[w] = v
-        except Exception as exc:
-            print(f"    embed failed on {w!r}: {type(exc).__name__}")
-        if i % batch_log == 0:
-            print(f"    {i}/{len(todo)} ({time.time() - t0:.0f}s)", flush=True)
-            CACHE.write_text(json.dumps(cache), encoding="utf-8")
-    CACHE.write_text(json.dumps(cache), encoding="utf-8")
+            result = backend.embed(batch)
+            cache.update(zip(batch, result.vectors))
+        except IntegrationError as exc:
+            print(f"    embedding batch failed at {start}: {exc.code}")
+        completed = min(start + len(batch), len(todo))
+        if completed % batch_log < batch_size or completed == len(todo):
+            print(f"    {completed}/{len(todo)} ({time.time() - t0:.0f}s)", flush=True)
+            _save_embedding_cache(cache)
+    _save_embedding_cache(cache)
     return cache
 
 
 def cos(a: list[float], b: list[float]) -> float:
-    dot = sum(x * y for x, y in zip(a, b))
-    na = math.sqrt(sum(x * x for x in a))
-    nb = math.sqrt(sum(y * y for y in b))
-    return dot / (na * nb) if na and nb else 0.0
+    return cosine_similarity(a, b)
 
 
 def load_rows(limit: int | None) -> list[dict]:

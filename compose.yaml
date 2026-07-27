@@ -1,0 +1,31 @@
+name: humorvibes
+
+services:
+  api:
+    build:
+      context: .
+      target: runtime
+    image: humorvibes-research:0.3.0
+    init: true
+    ports:
+      - "${HUMORVIBES_BIND_ADDRESS:-127.0.0.1}:${HUMORVIBES_PORT:-8080}:8080"
+    environment:
+      HUMORVIBES_API_KEY: "${HUMORVIBES_API_KEY:-}"
+      HUMORVIBES_LLM_DEFAULT: offline
+      HUMORVIBES_EMBEDDING_DEFAULT: hash:128
+      HUMORVIBES_MAX_REQUEST_BYTES: "${HUMORVIBES_MAX_REQUEST_BYTES:-1000000}"
+      HUMORVIBES_RATE_LIMIT_PER_MINUTE: "${HUMORVIBES_RATE_LIMIT_PER_MINUTE:-120}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health/ready', timeout=3).read()"]
+      interval: 15s
+      timeout: 4s
+      retries: 5
+      start_period: 10s

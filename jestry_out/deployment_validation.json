@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "passed": 16,
+        "total": 16
+      },
+      "name": "adversarial_contracts",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "embedding_count": 2,
+        "embedding_model": "hash:128",
+        "ready": true
+      },
+      "name": "offline_sdk",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "local_ollama_overlay": "valid",
+        "offline_profile": "valid"
+      },
+      "name": "compose_render",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "nonroot": true,
+        "objects": [
+          "ConfigMap",
+          "Deployment",
+          "Service",
+          "Kustomization"
+        ],
+        "readonly_root": true,
+        "replicas": 2,
+        "service_type": "ClusterIP"
+      },
+      "name": "kubernetes_static_contract",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "built_from_current_source": true,
+        "embedding_model": "hash:128",
+        "endpoints_checked": [
+          "/health/ready",
+          "/v1/capabilities",
+          "/v1/embed",
+          "/v1/signals"
+        ],
+        "image": "humorvibes-research:0.3.0",
+        "image_id": "sha256:209ffef6ccfc5ffc2f4bafadef5f70fc5de15915b3daaf2fb842c1a8484cb398",
+        "offline_signals_measured": false,
+        "readonly_root": true,
+        "ready": true,
+        "user": "10001:10001"
+      },
+      "name": "container_runtime",
+      "ok": true
+    },
+    {
+      "evidence": {
+        "image": "registry.k8s.io/kubectl:v1.36.2",
+        "objects": [
+          "ConfigMap/humorvibes-config",
+          "Service/humorvibes",
+          "Deployment/humorvibes"
+        ],
+        "rendered": true
+      },
+      "name": "kustomize_render",
+      "ok": true
+    }
+  ],
+  "docker_build_executed": true,
+  "docker_executed": true,
+  "environment": {
+    "docker_compose": "5.1.4",
+    "python": "3.12.13"
+  },
+  "generated_at": "2026-07-27T01:57:17.691402+00:00",
+  "ok": true,
+  "receipt_type": "humorvibes_deployment_validation",
+  "receipt_version": 2,
+  "source": {
+    "files": {
+      ".dockerignore": "e214262cc2c6d896f2941bb203ac0429db98036683479a9ecf22613a2db839a9",
+      "Dockerfile": "d98a376389484dfdc3c813ed6e38d2852169dd65b8012c0d04a208058aca2c21",
+      "compose.ollama-cloud.yaml": "7e91f8f322174b7e242032fb2883edb0526fb72e5f369dbd3fad52b21271009b",
+      "compose.ollama.yaml": "8b96a490ef3c26ffaabf4362d0393585d1ea93dd9cf4711b34da8757118ef610",
+      "compose.yaml": "8453c5e1fffafc03b0426e6f822d3ff667751aaba5e5934a6a7077e55b82177e",
+      "deploy/kubernetes/configmap.yaml": "d354dc55624cdabafe791f0f402722d6c280ed74e97c8e238e79ec2bc2985af9",
+      "deploy/kubernetes/deployment.yaml": "e9a045aefb5e1166e8e9ca047f1e7f1fdb3a7ea559e2dbf431381912eac4195f",
+      "deploy/kubernetes/kustomization.yaml": "39ae5bacf7f70a2210e637211eb47be5d6d6e8b8387b61da292bdd00fb652825",
+      "deploy/kubernetes/service.yaml": "40d44d4188eaa65533c00e1cca6a076f7b86e7371584d793a273ff1ec8924318",
+      "formats.py": "098b073b0b74281ad7a9170e6b43dc53280eb436a8cebb32fe562e462436b82f",
+      "humor_mesh.py": "3b02ead236028a41eb525ef976f480a5b20d9be720c6cae121d92e22a4aead62",
+      "humorvibes/__init__.py": "791350b4512915d41b9d33edf8a034ab3813ee30802f486d59a8160ddcaa6117",
+      "humorvibes/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "humorvibes/adversarial.py": "c88872b9e8ecd57f0e5fccabf39cae803f0c45ee8a6cd3f0691b9734b92a6c7f",
+      "humorvibes/api.py": "9614ac3a4b8fb091bcbc537c2b1d2cac3d70b08475615842f8cef84f00113718",
+      "humorvibes/cli.py": "3615973e79e0f62dd56b82057b1efb675d5b258ec381178b69465f31c39e2aba",
+      "humorvibes/config.py": "f2844d91f5b7d7c4a408fd1cf0401f19060a4f1e806779995e25b8596d5ff357",
+      "humorvibes/embeddings.py": "e4c8e19cc4e700d8e742f5e832752e0d58305644fcc9218abcc949adf18e2e23",
+      "humorvibes/errors.py": "cfddefc28ecdcfa0a3a846bfe57c472e7478d29bf7e7115cf3fec14abd7273d5",
+      "humorvibes/http.py": "7d05599d652ca8a71bb083ee2dd9f89edf7bd2565e2e6d5d48c40c3715aa3a22",
+      "humorvibes/llm.py": "ca81b495a37ffe702384c1266d483949bc8acc0b1ce1f8af6644e313879732b2",
+      "humorvibes/service.py": "df93cd127d0c19b9d2e2bf2c1d8fabc29c809accb912fc9db48857987eb66701",
+      "humorvibes/signal_providers.py": "2eb4674b21094b271bb4b44f6eb06837c11c4440745ca68376738284ccfa420c",
+      "mesh_signals.py": "85d6638471bc277cfa6702fb775ffe8ee188b2220af689166be8b98d6693195b",
+      "pyproject.toml": "1320651b228ef79c1ee33923267a5952be0f937bfd22cdcc37836cc17d1fc003",
+      "requirements-api.lock": "8ee9f087c401b739ccb5c26ec0245c060b2385df6ff386f7ba3fbe977f179d20",
+      "uv.lock": "ca6ffee279b78eade08ed546e55a0c7ad4be305de1ad8d1665b01993749fb266",
+      "verify_deployment.py": "cff44876e9384cf361208cc422748177133e86da5f5e413cbf2697bf331fe612"
+    },
+    "source_tree_sha256": "6eb9b3b8162d7d991886ed418b043eac3697407ae1738c02b5eed160937ee66c"
+  },
+  "truth_boundary": {
+    "canonical_kaggle_measurement_changed": false,
+    "container_image_built_from_current_source": true,
+    "container_registry_publication_verified": false,
+    "kubernetes_cluster_apply_executed": false,
+    "kustomize_render_executed": true,
+    "live_llm_or_semantic_embedding_called": false
+  }
+}
