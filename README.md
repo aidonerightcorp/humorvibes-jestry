@@ -46,6 +46,8 @@ separate causal-design lab with its own downloadable verification and publicatio
   application release history and the exact 0.7.1 patch boundary.
 - [`CITATION.cff`](CITATION.cff): cite the software release; also cite the exact Kaggle artifact
   version used in an analysis.
+- [`docs/DOI_ARCHIVE.md`](docs/DOI_ARCHIVE.md): whole-tag archive checksums, the anonymous DOI
+  verifier, current no-DOI status, and the exact owner-account publication gate.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): local setup, evidence rules, tests, and pull-request
   expectations.
 - [`ROADMAP.md`](ROADMAP.md): prioritized, contribution-sized research and maintenance work.

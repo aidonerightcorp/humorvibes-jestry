@@ -6,6 +6,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+jestry_out/doi_v0_7_0_preflight/*.zip
 jestry_out/precedent_index_ollama_embeddinggemma.json
 # exported embedding matrices: large and rebuildable from the index in one
 # command (comedy_primitives_dataset.py); the JSONL files and card do ship
