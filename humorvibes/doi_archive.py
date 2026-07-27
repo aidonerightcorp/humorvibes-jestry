@@ -1,8 +1,8 @@
-"""Deterministic source-archive construction and DOI-record verification.
+"""Reproducible source-archive construction and DOI-record verification.
 
 The builder operates on an immutable annotated Git tag, not the working tree. The
-verifier compares every source file by digest so a Zenodo ZIP and a local TAR.GZ
-can prove the same tree even though their container bytes differ.
+verifier compares every source file by digest so ZIP/TAR containers from different
+toolchains can prove the same tree even when their outer bytes differ.
 """
 
 from __future__ import annotations
@@ -343,7 +343,7 @@ def build_doi_archive(
     out_dir: Path,
     overwrite: bool = False,
 ) -> dict[str, Any]:
-    """Build a deterministic whole-tag archive and deposit-ready metadata bundle."""
+    """Build a whole-tag archive and canonical deposit-ready source inventory."""
 
     repo_root = Path(repo_root).resolve()
     out_dir = Path(out_dir).resolve()
@@ -434,7 +434,8 @@ def build_doi_archive(
         "truth_boundary": {
             "archive_preflight_is_doi": False,
             "reserved_doi_is_published_doi": False,
-            "allowed_claim": "the exact tagged source and metadata are deterministically deposit-ready",
+            "archive_container_sha256_is_cross_toolchain_identity": False,
+            "allowed_claim": "the exact tagged source and metadata are deposit-ready and identified by the per-file inventory",
         },
     }
     targets["receipt"].write_bytes(_json_bytes(receipt))

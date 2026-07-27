@@ -46,8 +46,11 @@ jobs:
           uv run python tools/verify_doi_archive.py \
             --root /tmp/humorvibes-doi-v0.7.0
           diff -u \
-            jestry_out/doi_v0_7_0_preflight/SHA256SUMS \
-            /tmp/humorvibes-doi-v0.7.0/SHA256SUMS
+            jestry_out/doi_v0_7_0_preflight/source_inventory.json \
+            /tmp/humorvibes-doi-v0.7.0/source_inventory.json
+          diff -u \
+            jestry_out/doi_v0_7_0_preflight/zenodo_deposition_metadata.json \
+            /tmp/humorvibes-doi-v0.7.0/zenodo_deposition_metadata.json
       - name: Reject whitespace damage
         run: git diff --check
       - name: Run network-free adversarial audit

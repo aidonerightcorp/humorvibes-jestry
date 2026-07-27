@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a deterministic whole-tag DOI deposition bundle."""
+"""Build a whole-tag DOI bundle with a canonical per-file source identity."""
 
 from __future__ import annotations
 

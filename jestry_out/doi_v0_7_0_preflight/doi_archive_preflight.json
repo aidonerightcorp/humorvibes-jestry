@@ -65,7 +65,8 @@
     "version": "0.7.0"
   },
   "truth_boundary": {
-    "allowed_claim": "the exact tagged source and metadata are deterministically deposit-ready",
+    "allowed_claim": "the exact tagged source and metadata are deposit-ready and identified by the per-file inventory",
+    "archive_container_sha256_is_cross_toolchain_identity": false,
     "archive_preflight_is_doi": false,
     "reserved_doi_is_published_doi": false
   }
