@@ -1,0 +1,123 @@
+{
+  "receipt_type": "humorvibes_public_software_release",
+  "receipt_version": 1,
+  "generated_at": "2026-07-27T18:11:55Z",
+  "source": {
+    "repository": "https://github.com/aidonerightcorp/humorvibes-jestry",
+    "release_url": "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1",
+    "tag": "v0.7.1",
+    "annotated_tag_object": "be0c31df43909e4afe7bcb7090482404a19577d8",
+    "commit": "877fa1f759e230ea651333fbbf4e71721cee4017",
+    "release_notes_sha256": "2f1f20a779900675f2b9f5fe115ff37cdc785418efe112a51a0e3f13b4197ac2",
+    "deployment_validation_sha256": "ba9e4788778fc6355cf7b364f464f7b1b9a000a861163eaf8b95a7d175eb6ea1",
+    "ephemeral_kubernetes_smoke_sha256": "fde4e526973e0cb5bc0bc3520164a5e4991a5217afeb5b2618fc4d4aff1fb253"
+  },
+  "container": {
+    "package_url": "https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry",
+    "repository": "ghcr.io/aidonerightcorp/humorvibes-jestry",
+    "tag": "0.7.1",
+    "manifest_digest": "sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0",
+    "media_type": "application/vnd.oci.image.index.v1+json",
+    "visibility": "public",
+    "anonymous_pull_verified": true,
+    "platforms": [
+      {
+        "os": "linux",
+        "architecture": "amd64",
+        "digest": "sha256:ab321a5b8cf80fdbccaeb487b8f7897670b41506fea043f93a47529c6d28d0ab",
+        "attestation_manifest_digest": "sha256:1b6b6ad3325deac3ac3be2e4a90476449733e824b8d53366c7f167099dd6986c",
+        "spdx_sbom_digest": "sha256:8f7b2f407bf2003cc0b1ab5de0e2cbd79133ffe9bdf8ef95fcdf8d47470a6370",
+        "buildkit_provenance_digest": "sha256:8e54c7bb91084c083a7b43e505c5b2660fef3a507ac74b8667ffd9b794fb763c"
+      },
+      {
+        "os": "linux",
+        "architecture": "arm64",
+        "digest": "sha256:4d45c95680b2fdea3f6e03ae551cad35b45d958b2b5acd14fa44aacd32750973",
+        "attestation_manifest_digest": "sha256:f45af8036ae8abf4b3a2e98528b84a26e46360e84289c7799b40a749c555afab",
+        "spdx_sbom_digest": "sha256:51f27277254bd8554b24c24f3df304445ee55f7905c7208307d467ce6191a112",
+        "buildkit_provenance_digest": "sha256:c0f359b9e4d0c174c871cfe737f8c2926f3714410ea18ad2a93d7f3f8bb6736e"
+      }
+    ],
+    "build": {
+      "workflow_run": "https://github.com/aidonerightcorp/humorvibes-jestry/actions/runs/30291906640",
+      "conclusion": "success",
+      "duration": "4m43s",
+      "buildkit_provenance": "mode=max",
+      "buildkit_sbom": true,
+      "registry_spdx_sbom_attestations_verified": true,
+      "github_registry_attestation": true
+    },
+    "attestation_verification": {
+      "verified": true,
+      "predicate_type": "https://slsa.dev/provenance/v1",
+      "source_repository_visibility_at_signing": "public",
+      "source_repository_digest": "877fa1f759e230ea651333fbbf4e71721cee4017",
+      "source_repository_ref": "refs/tags/v0.7.1",
+      "workflow": ".github/workflows/publish-container.yml",
+      "workflow_trigger": "push",
+      "runner_environment": "github-hosted",
+      "transparency_log": "https://rekor.sigstore.dev"
+    },
+    "runtime_verification": {
+      "digest_used": true,
+      "ready": true,
+      "package_version": "0.7.1",
+      "openapi_version": "0.7.1",
+      "openapi_path_count": 14,
+      "runtime_user": "10001:10001",
+      "readonly_root": true,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "no_new_privileges": true,
+      "embedding_model": "hash:128",
+      "embedding_count": 1,
+      "embedding_dimensions": 128,
+      "generation_is_not_human_validation": true,
+      "anonymous_runtime_cleanup_verified": true
+    }
+  },
+  "deployment_contracts": {
+    "kustomize_overlay": "deploy/overlays/ghcr",
+    "kustomize_digest_render_verified": true,
+    "helm_digest_render_verified": true,
+    "kubernetes_cluster_apply_executed": true,
+    "kubernetes_apply_scope": "ephemeral local kind cluster",
+    "kustomize_ephemeral_kind_apply_verified": true,
+    "helm_ephemeral_kind_install_verified": true,
+    "hosted_cluster_apply_executed": false,
+    "service_link_regression_recurred": false
+  },
+  "verification": {
+    "source_tests_passed": 188,
+    "adversarial_contracts_passed": 26,
+    "adversarial_contracts_total": 26,
+    "clean_install_python_versions": [
+      "3.10",
+      "3.11",
+      "3.12",
+      "3.13",
+      "3.14"
+    ],
+    "pull_request": "https://github.com/aidonerightcorp/humorvibes-jestry/pull/15",
+    "main_ci_run": "https://github.com/aidonerightcorp/humorvibes-jestry/actions/runs/30291805624"
+  },
+  "research_surfaces": {
+    "wave2_dataset_version": 7,
+    "wave2_notebook_version": 14,
+    "open_controls_dataset_version": 4,
+    "open_controls_notebook_version": 3,
+    "canonical_measurements_changed": false
+  },
+  "truth_boundary": {
+    "public_container_registry_release_verified": true,
+    "hosted_api_verified": false,
+    "local_ephemeral_kubernetes_apply_verified": true,
+    "hosted_production_cluster_verified": false,
+    "live_semantic_provider_quality_established": false,
+    "human_writer_or_audience_trial_completed": false,
+    "model_surprisal_is_human_funniness": false,
+    "doi_minted": false
+  },
+  "ok": true
+}

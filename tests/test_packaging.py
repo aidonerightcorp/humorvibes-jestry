@@ -114,22 +114,13 @@ def test_kubernetes_base_is_default_deny_on_egress() -> None:
     assert "networkpolicy.yaml" in kustomization["resources"]
 
 
-def test_public_ghcr_overlay_and_receipt_pin_the_verified_manifest() -> None:
+def test_v070_publication_receipts_preserve_the_verified_historical_manifest() -> None:
     expected = "sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8"
-    overlay = load_yaml("deploy/overlays/ghcr/kustomization.yaml")
     publication = json.loads(
         (ROOT / "jestry_out/v0_7_0_publication.json").read_text(encoding="utf-8")
     )
     kind_smoke_path = ROOT / "jestry_out/v0_7_0_kind_smoke.json"
     kind_smoke = json.loads(kind_smoke_path.read_text(encoding="utf-8"))
-    assert overlay["resources"] == ["../../kubernetes"]
-    assert overlay["images"] == [
-        {
-            "name": "humorvibes-research",
-            "newName": "ghcr.io/aidonerightcorp/humorvibes-jestry",
-            "digest": expected,
-        }
-    ]
     assert publication["container"]["manifest_digest"] == expected
     assert publication["container"]["visibility"] == "public"
     assert publication["container"]["anonymous_pull_verified"] is True
@@ -163,6 +154,63 @@ def test_public_ghcr_overlay_and_receipt_pin_the_verified_manifest() -> None:
     assert kind_smoke["cleanup"]["cluster_deleted"] is True
     assert kind_smoke["truth_boundary"]["hosted_production_cluster_verified"] is False
     assert publication["truth_boundary"]["local_ephemeral_kubernetes_apply_verified"] is True
+    assert publication["truth_boundary"]["hosted_production_cluster_verified"] is False
+
+
+def test_current_public_ghcr_overlay_and_v071_receipts_are_consistent() -> None:
+    expected = "sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0"
+    overlay_path = ROOT / "deploy/overlays/ghcr/kustomization.yaml"
+    overlay = load_yaml("deploy/overlays/ghcr/kustomization.yaml")
+    publication = json.loads(
+        (ROOT / "jestry_out/v0_7_1_publication.json").read_text(encoding="utf-8")
+    )
+    kind_smoke_path = ROOT / "jestry_out/v0_7_1_kind_smoke.json"
+    kind_smoke = json.loads(kind_smoke_path.read_text(encoding="utf-8"))
+    deployment_path = ROOT / "jestry_out/v0_7_1_deployment_validation.json"
+    release_notes_path = ROOT / "RELEASE_NOTES_v0.7.1.md"
+    assert overlay["resources"] == ["../../kubernetes"]
+    assert overlay["images"] == [
+        {
+            "name": "humorvibes-research",
+            "newName": "ghcr.io/aidonerightcorp/humorvibes-jestry",
+            "digest": expected,
+        }
+    ]
+    assert publication["source"]["tag"] == "v0.7.1"
+    assert publication["source"]["commit"] == "877fa1f759e230ea651333fbbf4e71721cee4017"
+    assert publication["source"]["release_notes_sha256"] == hashlib.sha256(
+        release_notes_path.read_bytes()
+    ).hexdigest()
+    assert publication["source"]["deployment_validation_sha256"] == hashlib.sha256(
+        deployment_path.read_bytes()
+    ).hexdigest()
+    assert publication["source"]["ephemeral_kubernetes_smoke_sha256"] == hashlib.sha256(
+        kind_smoke_path.read_bytes()
+    ).hexdigest()
+    assert publication["container"]["manifest_digest"] == expected
+    assert publication["container"]["visibility"] == "public"
+    assert publication["container"]["anonymous_pull_verified"] is True
+    assert publication["container"]["runtime_verification"]["package_version"] == "0.7.1"
+    assert {(row["os"], row["architecture"]) for row in publication["container"]["platforms"]} == {
+        ("linux", "amd64"),
+        ("linux", "arm64"),
+    }
+    assert all(
+        row["spdx_sbom_digest"].startswith("sha256:")
+        for row in publication["container"]["platforms"]
+    )
+    assert publication["container"]["attestation_verification"]["verified"] is True
+    assert publication["deployment_contracts"]["service_link_regression_recurred"] is False
+    assert kind_smoke["container"]["manifest_digest"] == expected
+    assert kind_smoke["regression_context"]["failure_recurred"] is False
+    assert kind_smoke["kustomize"]["overlay_kustomization_sha256"] == hashlib.sha256(
+        overlay_path.read_bytes()
+    ).hexdigest()
+    assert kind_smoke["kustomize"]["ready_replicas"] == 2
+    assert kind_smoke["kustomize"]["restart_count"] == 0
+    assert kind_smoke["helm"]["ready_replicas"] == 2
+    assert kind_smoke["helm"]["restart_count"] == 0
+    assert kind_smoke["cleanup"]["cluster_deleted"] is True
     assert publication["truth_boundary"]["hosted_production_cluster_verified"] is False
 
 

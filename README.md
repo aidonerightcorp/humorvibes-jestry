@@ -27,7 +27,7 @@ claim gate.
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v4 ready; notebook v3 COMPLETE | Use 120,000 CC0 procedural controls and frozen easy/hard retrieval tracks without confusing them with human evidence |
-| Application release | [GitHub release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1) + [public container](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public 0.7.1 patch; two-platform image publication | Integrate the bounded SDK/API or deploy the signed, SBOM/provenance-bearing image |
+| Application release | [GitHub release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1) + [public container](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public 0.7.1 patch; two-platform digest verified | Integrate the bounded SDK/API or deploy the signed, SBOM/provenance-bearing image |
 
 The Wave 2 notebook is the canonical executable write-up for the observational study. It clones the immutable
 `humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
@@ -122,7 +122,7 @@ Container quick start:
 docker run --rm --read-only --tmpfs /tmp:rw,size=64m \
   --cap-drop ALL --security-opt no-new-privileges:true \
   -p 127.0.0.1:8080:8080 \
-  ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8
+  ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0
 ```
 
 Or build the current checkout with Compose:
@@ -134,12 +134,12 @@ docker compose down
 ```
 
 The public image's anonymous pull, platforms, attestation, labels, hardened runtime, and API were
-independently checked in [`jestry_out/v0_7_0_publication.json`](jestry_out/v0_7_0_publication.json).
+independently checked in [`jestry_out/v0_7_1_publication.json`](jestry_out/v0_7_1_publication.json).
 The acyclic digest overlay is at [`deploy/overlays/ghcr`](deploy/overlays/ghcr). Both that overlay
 and the Helm chart were then installed in a disposable `kind` cluster against the exact public
 digest: two replicas became ready with zero restarts and the live Service checks passed. The run,
 including the service-link collision it uncovered and the verified cleanup, is recorded in
-[`jestry_out/v0_7_0_kind_smoke.json`](jestry_out/v0_7_0_kind_smoke.json). This is local cluster
+[`jestry_out/v0_7_1_kind_smoke.json`](jestry_out/v0_7_1_kind_smoke.json). This is local cluster
 proof, not a hosted-production claim.
 
 To build from the current source and reproduce the static and live-container receipt:

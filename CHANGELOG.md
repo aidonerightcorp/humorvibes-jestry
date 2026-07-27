@@ -14,6 +14,9 @@ study revisions remain separately identified by their dataset/notebook versions 
   overlay.
 - Recorded reproducible Kustomize and Helm installs of the exact public digest in a disposable
   `kind` cluster, live Service checks, runtime security checks, and verified cluster cleanup.
+- Published the v0.7.1 multi-architecture image with SPDX SBOMs, SLSA provenance, GitHub registry
+  attestation, anonymous pull/runtime proof, and a second Kustomize/Helm cluster run showing that
+  the Service-link failure did not recur.
 
 ### Fixed
 

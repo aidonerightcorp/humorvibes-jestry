@@ -38,19 +38,20 @@ The repository now also contains a separate `humorvibes-research` 0.7.1 applicat
   rendered Envoy Gateway TLS/identity/global-rate-limit example.
 
 The local image was built and launched with a read-only root filesystem; its readiness, capability,
-embedding, and signal-boundary checks passed. The public 0.7.0 GHCR digest was then anonymously
+embedding, and signal-boundary checks passed. The public 0.7.1 GHCR digest was then anonymously
 pulled, verified as `linux/amd64` plus `linux/arm64`, checked against its GitHub/Sigstore
 attestation, and run with the same non-root/read-only controls. Compose rendering, the Kubernetes
 security/probe contracts, a kubectl 1.36.2 Kustomize render, and a Helm 4.2.0 lint/render also
-passed. A disposable `kind` 0.32.0 cluster then exposed a render-only gap: Kubernetes Service
-links replaced the numeric `HUMORVIBES_PORT` with a `tcp://...` value. Disabling Service links in
-both deployment paths fixed the collision. The exact public digest subsequently reached two ready,
-zero-restart replicas through both Kustomize and Helm, and live health, version, embedding,
-similarity, signals, study-template, and Open Controls requests passed through the Services. The
-cluster was deleted after verification. The controlling receipts are
+passed. The first disposable `kind` 0.32.0 run exposed a render-only gap: Kubernetes Service links
+replaced the numeric `HUMORVIBES_PORT` with a `tcp://...` value. Disabling Service links in both
+deployment paths fixed the collision. The v0.7.1 patch source and exact public digest were then
+tested again: Kustomize and Helm each reached two ready, zero-restart replicas, all live health,
+version, embedding, similarity, signals, study-template, and Open Controls requests passed, and the
+collision did not recur. Both disposable clusters were deleted after verification. The controlling
+receipts are
 [`jestry_out/deployment_validation.json`](jestry_out/deployment_validation.json) and
-[`jestry_out/v0_7_0_publication.json`](jestry_out/v0_7_0_publication.json), with the cluster-level
-evidence in [`jestry_out/v0_7_0_kind_smoke.json`](jestry_out/v0_7_0_kind_smoke.json).
+[`jestry_out/v0_7_1_publication.json`](jestry_out/v0_7_1_publication.json), with the cluster-level
+evidence in [`jestry_out/v0_7_1_kind_smoke.json`](jestry_out/v0_7_1_kind_smoke.json).
 
 Those statements do **not** claim a hosted public API, a hosted production Kubernetes deployment,
 or a live LLM/semantic-embedding quality result. The verified cluster was local and ephemeral; it
