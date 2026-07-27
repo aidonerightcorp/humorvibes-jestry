@@ -102,6 +102,7 @@ humorvibes doctor
 humorvibes adversarial
 humorvibes study-demo
 humorvibes multimodal-fixture --out-dir /tmp/humorvibes-multimodal --contests 30
+humorvibes multimodal-human-contract --out /tmp/human-multimodal-contract.json
 humorvibes-api
 ```
 

@@ -121,6 +121,7 @@ Run the complete synthetic contract before touching human or third-party materia
 ```bash
 humorvibes multimodal-fixture --out-dir /tmp/humorvibes-mm --contests 30
 humorvibes multimodal-benchmark --root /tmp/humorvibes-mm
+humorvibes multimodal-human-contract --out /tmp/human-mm-contract.json
 ```
 
 Then follow [`MULTIMODAL_BENCHMARK.md`](MULTIMODAL_BENCHMARK.md). Preserve its manifest fields,
@@ -130,6 +131,12 @@ human-observed target only after consent, rights, raw vote provenance, and the l
 reviewable. Never copy a third-party drawing into the repository just because it is reachable on
 the web. A real run requires its own versioned receipt; it must not overwrite the procedural
 positive-control receipt.
+
+For a real cohort, install `.[multimodal]` and run `multimodal-human-validate` before
+`multimodal-human-benchmark`. The former recomputes image byte and perceptual hashes, verifies
+every local rights/evidence digest, rejects direct participant identity, and holds the external
+rights-and-research-review gate closed. A dataset-level licence is not a substitute for one
+rights-ledger row per asset.
 
 ## 5. Add or compare a model instrument
 

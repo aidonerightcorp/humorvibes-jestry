@@ -1,0 +1,47 @@
+{
+  "automatic_failures": [
+    "missing or unknown asset licence",
+    "rights evidence or source snapshot hash mismatch",
+    "exact image duplication",
+    "near-duplicate image crossing a split",
+    "canonical scene group crossing a split",
+    "synthetic or model-derived target",
+    "direct participant identity field",
+    "feature dimension or content digest drift"
+  ],
+  "receipt_type": "humorvibes_human_multimodal_contract",
+  "required_files": [
+    "human_multimodal_manifest.json",
+    "caption_candidates.jsonl",
+    "rights_ledger.jsonl"
+  ],
+  "required_human_evidence": [
+    "human_observed target origin",
+    "rating count and standard error per caption",
+    "protocol and consent evidence digests",
+    "declared audience population and collection dates"
+  ],
+  "required_image_evidence": [
+    "image_sha256",
+    "perceptual_hash=dhash-64-v1",
+    "canonical_scene_group_id",
+    "asset-specific rights ledger row"
+  ],
+  "required_manifest_sections": [
+    "cohort_id",
+    "data_origin",
+    "source_snapshot",
+    "label_protocol",
+    "feature_names",
+    "feature_provenance",
+    "images",
+    "content_digest"
+  ],
+  "schema_version": 1,
+  "truth_boundary": {
+    "external_rights_and_research_review_required": true,
+    "machine_validation_authenticates_human_identity": false,
+    "machine_validation_is_legal_advice": false,
+    "machine_validation_proves_consent": false
+  }
+}
