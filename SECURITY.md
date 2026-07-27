@@ -8,7 +8,7 @@ corpus rows in a public report.
 
 ## Supported surface
 
-The current deployable integration package is `humorvibes-research` 0.7.x on Python 3.10-3.14.
+The current deployable integration package is `humorvibes-research` 0.8.x on Python 3.10-3.14.
 The historical research scripts remain auditable, but only the `humorvibes` SDK/API, Dockerfile,
 Compose files, `deploy/kubernetes` manifests, and `deploy/helm` chart are treated as an
 application-serving boundary.

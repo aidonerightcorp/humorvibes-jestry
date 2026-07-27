@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   packages: write
   id-token: write
   attestations: write
@@ -37,9 +37,38 @@ jobs:
         run: |
           set -euo pipefail
           version=$(python3 -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            tag_version="${GITHUB_REF_NAME#v}"
+            test "$version" = "$tag_version"
+          fi
           created=$(git show -s --format=%cI HEAD)
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "created=$created" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.11.16"
+
+      - name: Build and isolate-check Python release artifacts
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv build
+          wheel=$(find dist -maxdepth 1 -type f -name '*.whl' -print -quit)
+          test -n "$wheel"
+          python -m venv /tmp/humorvibes-release-smoke
+          /tmp/humorvibes-release-smoke/bin/python -m pip install --disable-pip-version-check "$wheel"
+          /tmp/humorvibes-release-smoke/bin/python -c \
+            'import humorvibes; assert humorvibes.__version__ == "${{ steps.build-metadata.outputs.version }}"'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@96fe6ef7f33517b61c61be40b68a1882f3264fb8 # v4.2.0
@@ -105,3 +134,86 @@ jobs:
             echo "BuildKit provenance: mode=max"
             echo "BuildKit SBOM attestation: enabled"
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Build release manifest and notes
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          RELEASE_VERSION: ${{ steps.build-metadata.outputs.version }}
+          IMAGE_DIGEST: ${{ steps.build.outputs.digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          version = os.environ["RELEASE_VERSION"]
+          digest = os.environ["IMAGE_DIGEST"]
+          tag = f"v{version}"
+          notes_path = Path(f"RELEASE_NOTES_{tag}.md")
+          if not notes_path.is_file():
+              raise SystemExit(f"missing {notes_path}")
+          assets = {}
+          for path in sorted(Path("dist").iterdir()):
+              if path.is_file():
+                  assets[path.name] = {
+                      "bytes": path.stat().st_size,
+                      "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                  }
+          manifest = {
+              "receipt_type": "humorvibes_github_release_manifest",
+              "receipt_version": 1,
+              "source": {"tag": tag, "commit": os.environ["GITHUB_SHA"], "version": version},
+              "container": {
+                  "image": "ghcr.io/aidonerightcorp/humorvibes-jestry",
+                  "manifest_digest": digest,
+                  "platforms": ["linux/amd64", "linux/arm64"],
+                  "buildkit_provenance": "mode=max",
+                  "spdx_sbom": True,
+                  "github_registry_attestation": True,
+              },
+              "python_assets": assets,
+              "truth_boundary": {
+                  "github_workflow_completed_at_manifest_write": False,
+                  "anonymous_pull_verified": False,
+                  "human_outcome_claimed": False,
+                  "doi_claimed": False,
+              },
+          }
+          manifest_path = Path(f"release-manifest-{tag}.json")
+          manifest_path.write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+          )
+          body = notes_path.read_text(encoding="utf-8").rstrip()
+          body += (
+              "\n\n## Published container\n\n"
+              f"`ghcr.io/aidonerightcorp/humorvibes-jestry@{digest}`\n\n"
+              "Platforms: `linux/amd64`, `linux/arm64`. The tag workflow produced BuildKit "
+              "provenance, SPDX SBOM attestations, and a GitHub registry attestation. "
+              "Anonymous pull and runtime verification are recorded separately after publication.\n"
+          )
+          Path("/tmp/humorvibes-release-body.md").write_text(body, encoding="utf-8")
+          PY
+
+      - name: Publish GitHub release and assets
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ steps.build-metadata.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="v${RELEASE_VERSION}"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release edit "$tag" --repo "$GITHUB_REPOSITORY" \
+              --title "HumorVibes Research ${RELEASE_VERSION}" \
+              --notes-file /tmp/humorvibes-release-body.md
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --verify-tag \
+              --title "HumorVibes Research ${RELEASE_VERSION}" \
+              --notes-file /tmp/humorvibes-release-body.md
+          fi
+          gh release upload "$tag" --repo "$GITHUB_REPOSITORY" --clobber \
+            dist/* "RELEASE_NOTES_${tag}.md" "release-manifest-${tag}.json"

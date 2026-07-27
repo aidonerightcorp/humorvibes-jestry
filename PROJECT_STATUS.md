@@ -1,8 +1,9 @@
 # Project status
 
 Humor Genome Wave 2 is a public, reproducible research project. The Build with Gemma: Humor
-Genome NYC deadline has passed, and **no competition submission is claimed**. The work continues
-as an open project whose current evidence can be read, rerun, challenged, and extended.
+Genome NYC deadline has passed, and **no competition submission is claimed**. Version 0.8.0 is the
+formal closeout of the initial build phase. The repository remains maintained and open to bounded,
+evidence-bearing contributions; see [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md).
 
 ## Public release
 
@@ -12,7 +13,7 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
-| Application package | [v0.7.1 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Patch source includes the live-cluster fix; multi-architecture publication remains provenance- and SBOM-bearing |
+| Application package | [v0.8.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Formal closeout source; tagged publication must pass multi-architecture, provenance, SBOM, anonymous-pull, and runtime gates |
 | Academic archive | [DOI archive preflight](docs/DOI_ARCHIVE.md) | Exact v0.7.0 source is deposit-ready and identified by a complete per-file inventory; no public Zenodo record or DOI is claimed yet |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
@@ -23,7 +24,7 @@ public versions, downloaded hashes, and terminal notebook status.
 
 ## Application and deployment extension
 
-The repository now also contains a separate `humorvibes-research` 0.7.1 application layer:
+The repository now also contains a separate `humorvibes-research` 0.8.0 application layer:
 
 - an importable Python SDK and a schema-first FastAPI service;
 - authenticated native Ollama (local or cloud) and OpenAI-compatible generation;
@@ -33,7 +34,11 @@ The repository now also contains a separate `humorvibes-research` 0.7.1 applicat
 - a typed dependency-free remote client and checked-in OpenAPI contract for application
   integration;
 - a strict, privacy-minimized writer-study protocol, synthetic contract fixture, paired analyzer,
-  writer-clustered uncertainty, evidence ladder, and local claim-gated receipt;
+  writer-clustered uncertainty, hierarchical launch sensitivity, evidence ladder, and local
+  claim-gated receipt;
+- fail-closed source-spec, native-review, and rights/consent-aware human-multimodal preflights;
+- a pinned five-arm Ollama/TEI provider matrix on frozen hard-retrieval and seven-language tasks;
+- a complete v0.7.0 archive inventory and anonymous DOI-record verifier that does not claim a DOI;
 - a multi-stage non-root Docker image, hardened offline/local-Ollama/cloud-Ollama Compose profiles,
   a default-deny two-replica Kubernetes Kustomize base, configurable Helm chart, and a separately
   rendered Envoy Gateway TLS/identity/global-rate-limit example.
@@ -55,9 +60,22 @@ receipts are
 evidence in [`jestry_out/v0_7_1_kind_smoke.json`](jestry_out/v0_7_1_kind_smoke.json).
 
 Those statements do **not** claim a hosted public API, a hosted production Kubernetes deployment,
-or a live LLM/semantic-embedding quality result. The verified cluster was local and ephemeral; it
+or a universal semantic-embedding quality result. The verified cluster was local and ephemeral; it
 did not exercise DNS, TLS, a gateway controller, an external secret manager, autoscaling, or a
-remote provider. This extension does not alter the immutable Kaggle notebook or its measurements.
+remote provider. The provider matrix measures two frozen retrieval proxies and does not measure
+human funniness. This extension does not alter the immutable Kaggle notebook or its measurements.
+
+## Closeout state
+
+The source, public notebooks and datasets, package/API, container and orchestration contracts,
+contributor preflights, research limitations, and machine-readable receipts are complete for the
+initial delivery. Routine speculative expansion is closed. Maintenance, security fixes,
+reproductions, native-reviewed fixtures, rights-cleared human studies, and bounded integrations
+remain welcome under their existing public evidence gates.
+
+Open writer, multimodal, native-language, DOI, streaming, vector-store, and production-cluster
+issues are future research or environment work—not hidden release failures. They remain open
+because the required human, rights, owner-account, or named-environment evidence does not exist.
 
 ## What is complete
 

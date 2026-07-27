@@ -206,7 +206,7 @@ def verify_helm_container(image: str) -> dict[str, Any]:
     container = pod["containers"][0]
     assert pod["automountServiceAccountToken"] is False
     assert container["securityContext"]["readOnlyRootFilesystem"] is True
-    assert container["image"] == "humorvibes-research:0.7.1"
+    assert container["image"] == "humorvibes-research:0.8.0"
     return {
         "image": image,
         "objects": identities,
@@ -289,7 +289,7 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
         assert inspection["HostConfig"]["ReadonlyRootfs"] is True
         assert embedded["model_id"] == "hash:128" and embedded["count"] == 1
         assert remote_similarity["cosine_similarity"] == [[1.0]]
-        assert openapi["info"]["version"] == "0.7.1"
+        assert openapi["info"]["version"] == "0.8.0"
         assert capabilities["truth_boundary"]["generation_is_not_human_validation"] is True
         assert capabilities["product_use_cases"]["creative_assistance"]["claim_gate"] == (
             "blind_or_live_human_response"
@@ -340,7 +340,7 @@ def main() -> int:
         action="store_true",
         help="also build, launch, and probe the image",
     )
-    parser.add_argument("--image", default="humorvibes-research:0.7.1")
+    parser.add_argument("--image", default="humorvibes-research:0.8.0")
     parser.add_argument(
         "--no-build",
         action="store_true",

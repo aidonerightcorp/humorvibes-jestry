@@ -28,11 +28,12 @@ effect is +0.45, while `claim_ready` remains false by construction. The v14 outp
 published data file—the executive summary—after moving the temporary GitHub checkout out of
 `/kaggle/working`.
 
-The public repository also carries the 0.7.1 Python SDK/API, remote client, OpenAPI contract,
+The public repository also carries the 0.8.0 Python SDK/API, remote client, OpenAPI contract,
 Docker/Compose/Kustomize/Helm packaging, and green public CI. The public multi-architecture GHCR
 image has SBOM/provenance attestations; its digest was run directly and through both Kustomize and
-Helm in a disposable local cluster. This is deployable source and local-cluster evidence, not a
-claim that a hosted API, hosted production cluster, human outcome, or semantic-model quality result
+Helm in a disposable local cluster. The separate five-arm provider matrix is real proxy-task
+evidence but not a human humor result or universal model ranking. This is deployable source and
+local-cluster evidence, not a claim that a hosted API, hosted production cluster, or human outcome
 exists.
 
 The remainder of this packet preserves earlier evidence and limitations. Statements below about

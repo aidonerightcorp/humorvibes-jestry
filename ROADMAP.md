@@ -1,12 +1,16 @@
-# Open project roadmap
+# Maintained project roadmap
 
 This roadmap turns the research backlog into contribution-sized outcomes. Priorities reflect
 scientific value and dependency order, not promises about dates. Completed historical experiments
-remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs here.
+remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs here. Version 0.8.0
+closes the initial build phase. [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md) defines the stable
+handoff and the evidence required to reopen active development.
 
 ## P0 — keep the public release reproducible
 
 - [x] Publish one canonical dataset, notebook, and repository.
+- [x] Cut a citable 0.8.0 closeout source release containing the final research-infrastructure
+  integration and explicit future-work boundaries.
 - [x] Pin the notebook to an immutable source tag and verify mounted payload hashes.
 - [x] Publish project status, narrative write-up, contribution rules, and expansion instructions.
 - [x] Add Apache-2.0 for repository code and documentation plus a separate CC0-1.0 dedication for

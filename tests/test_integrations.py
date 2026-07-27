@@ -193,7 +193,7 @@ def test_json_transport_adds_bearer_key_and_does_not_put_it_in_url() -> None:
     request = opener.requests[0][0]
     headers = dict(request.header_items())
     assert headers["Authorization"] == "Bearer key-value"
-    assert headers["User-agent"] == "HumorVibes/0.7.1"
+    assert headers["User-agent"] == "HumorVibes/0.8.0"
     assert "key-value" not in request.full_url
 
 
