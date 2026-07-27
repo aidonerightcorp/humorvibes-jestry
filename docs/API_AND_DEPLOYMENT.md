@@ -162,12 +162,12 @@ or private-network destinations unless the operator explicitly enables insecure 
 
 ## Docker
 
-The public 0.7.0 image is available by its independently verified multi-architecture digest:
+The public 0.7.1 image is available by its independently verified multi-architecture digest:
 
 ```bash
-docker pull ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8
+docker pull ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0
 gh attestation verify \
-  oci://ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8 \
+  oci://ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0 \
   --repo aidonerightcorp/humorvibes-jestry
 ```
 
@@ -176,7 +176,7 @@ SLSA provenance identity, SBOM setting, OCI labels, non-root/read-only runtime, 
 Use [`deploy/overlays/ghcr`](../deploy/overlays/ghcr) to render the base with
 that exact digest. The overlay and Helm chart were also installed against that digest in a
 disposable `kind` cluster; the complete result and cleanup receipt is
-[`jestry_out/v0_7_0_kind_smoke.json`](../jestry_out/v0_7_0_kind_smoke.json).
+[`jestry_out/v0_7_1_kind_smoke.json`](../jestry_out/v0_7_1_kind_smoke.json).
 
 Build and run the image directly:
 
@@ -220,7 +220,7 @@ choices follow the general single-process container pattern in the
 Tagged releases trigger [the pinned container publication workflow](../.github/workflows/publish-container.yml).
 It builds `linux/amd64` and `linux/arm64`, publishes to GHCR, attaches BuildKit provenance and an
 SBOM, creates a GitHub/Sigstore provenance attestation, and prints the immutable manifest digest.
-The 0.7.0 publication passed those gates and is pinned above; future versions must repeat them
+The 0.7.1 publication passed those gates and is pinned above; future versions must repeat them
 before their digest enters an overlay.
 
 ### Local Ollama Compose profile

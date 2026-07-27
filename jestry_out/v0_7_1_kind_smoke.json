@@ -1,0 +1,150 @@
+{
+  "receipt_type": "humorvibes_ephemeral_kubernetes_smoke",
+  "receipt_version": 1,
+  "generated_at": "2026-07-27T18:10:50Z",
+  "source": {
+    "repository": "https://github.com/aidonerightcorp/humorvibes-jestry",
+    "release_url": "https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.7.1",
+    "tag": "v0.7.1",
+    "annotated_tag_object": "be0c31df43909e4afe7bcb7090482404a19577d8",
+    "commit": "877fa1f759e230ea651333fbbf4e71721cee4017",
+    "deployment_validation_sha256": "ba9e4788778fc6355cf7b364f464f7b1b9a000a861163eaf8b95a7d175eb6ea1"
+  },
+  "container": {
+    "reference": "ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0",
+    "manifest_digest": "sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0",
+    "anonymous_cluster_pull_succeeded": true,
+    "observed_image_id": "ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0"
+  },
+  "tools": {
+    "kind": {
+      "version": "v0.32.0",
+      "platform": "linux/amd64",
+      "binary_sha256": "50030de23cf40a18505f20426f6a8506bedf13c6e509244bd1fa9463721b0f54"
+    },
+    "kubernetes": {
+      "server_version": "v1.36.1",
+      "node_image": "kindest/node:v1.36.1@sha256:3489c7674813ba5d8b1a9977baea8a6e553784dab7b84759d1014dbd78f7ebd5"
+    },
+    "kubectl": {
+      "version": "v1.36.2",
+      "kustomize_version": "v5.8.1"
+    },
+    "helm": {
+      "version": "v4.2.0",
+      "container": "alpine/helm:4.2.0@sha256:af08f75a3130d666a50b9fc150f40987ef20b885cf67659aabf4b83a5f2c5501"
+    }
+  },
+  "regression_context": {
+    "prior_receipt": "jestry_out/v0_7_0_kind_smoke.json",
+    "prior_failure": "Kubernetes Service-link injection shadowed the numeric HUMORVIBES_PORT setting.",
+    "guard": "Both Kustomize and Helm set spec.template.spec.enableServiceLinks=false.",
+    "failure_recurred": false,
+    "observed_listen_port": "8080",
+    "service_link_collision_absent": true
+  },
+  "kustomize": {
+    "overlay": "deploy/overlays/ghcr",
+    "rendered_manifest_sha256": "906e8dd0acd8e52643971072bb81f36c3e695effad1b85ec2561fe12a708a360",
+    "deployment_template_sha256": "853e9128426eba281336f6c1718974f843d67508502930ad075571ecfcdadc4c",
+    "overlay_kustomization_sha256": "53e1ce72977b61bd90b98b8feb190aeb2f88a8941eddcdc9615bbb9610c67d20",
+    "apply_executed": true,
+    "rollout_succeeded": true,
+    "replicas": 2,
+    "ready_replicas": 2,
+    "available_replicas": 2,
+    "updated_replicas": 2,
+    "restart_count": 0,
+    "ready_service_endpoints": 2,
+    "runtime_security": {
+      "uid": 10001,
+      "gid": 10001,
+      "run_as_non_root": true,
+      "read_only_root_verified": true,
+      "allow_privilege_escalation": false,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "seccomp_profile": "RuntimeDefault",
+      "automount_service_account_token": false,
+      "service_links_enabled": false
+    },
+    "network_policy": {
+      "policy_types": [
+        "Ingress",
+        "Egress"
+      ],
+      "same_namespace_ingress_port": 8080,
+      "default_deny_egress": true
+    },
+    "live_service_checks": {
+      "transport": "kubectl port-forward to the ClusterIP Service",
+      "passed": 10,
+      "failed": 0,
+      "paths": [
+        "GET /health/live",
+        "GET /health/ready",
+        "GET /version",
+        "GET /v1/capabilities",
+        "POST /v1/embed",
+        "POST /v1/similarity",
+        "POST /v1/signals",
+        "GET /v1/research/study-template",
+        "GET /v1/open-controls/metadata",
+        "POST /v1/open-controls/sample"
+      ],
+      "package_version": "0.7.1",
+      "embedding_model": "hash:128",
+      "embedding_dimensions": 128,
+      "embedding_validated": true,
+      "surprisal_is_not_funniness": true,
+      "human_rated_open_controls": false
+    }
+  },
+  "helm": {
+    "chart": "deploy/helm/humorvibes",
+    "release": "humorvibes",
+    "namespace": "humorvibes-helm-proof",
+    "rendered_manifest_sha256": "432b285c31651300ff52ed2a9a380b00084f998a5ceeb64324b595140b894779",
+    "deployment_template_sha256": "a1836b05ef214f37047aa055916c85989b4731eed1db043765c1e4461f4345cd",
+    "install_executed": true,
+    "status": "deployed",
+    "replicas": 2,
+    "ready_replicas": 2,
+    "available_replicas": 2,
+    "updated_replicas": 2,
+    "restart_count": 0,
+    "service_links_enabled": false,
+    "automount_service_account_token": false,
+    "read_only_root_filesystem": true,
+    "live_checks": {
+      "passed": 4,
+      "failed": 0,
+      "paths": [
+        "GET /health/live",
+        "GET /health/ready",
+        "GET /version",
+        "POST /v1/embed"
+      ]
+    }
+  },
+  "cleanup": {
+    "cluster_name": "humorvibes-v071-proof",
+    "cluster_type": "ephemeral local kind-on-Docker",
+    "cluster_deleted": true,
+    "remaining_kind_clusters": 0
+  },
+  "truth_boundary": {
+    "local_ephemeral_kubernetes_apply_verified": true,
+    "kustomize_install_verified": true,
+    "helm_install_verified": true,
+    "hosted_api_verified": false,
+    "hosted_production_cluster_verified": false,
+    "gateway_dns_tls_or_external_secret_verified": false,
+    "live_semantic_provider_quality_established": false,
+    "human_writer_or_audience_trial_completed": false,
+    "model_surprisal_is_human_funniness": false,
+    "doi_minted": false
+  },
+  "ok": true
+}

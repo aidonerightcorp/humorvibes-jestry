@@ -32,12 +32,12 @@ helm upgrade --install humorvibes deploy/helm/humorvibes \
   --set-string image.digest="$IMAGE_DIGEST"
 ```
 
-The independently verified public 0.7.0 identity can be installed directly:
+The independently verified public 0.7.1 identity can be installed directly:
 
 ```bash
 helm upgrade --install humorvibes deploy/helm/humorvibes \
   --set-string image.repository=ghcr.io/aidonerightcorp/humorvibes-jestry \
-  --set-string image.digest=sha256:012c589ebd3feb59b565ac8e1e36c8322f4f00755299ff7e40cb53f4001d70e8
+  --set-string image.digest=sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0
 ```
 
 For inbound API authentication or provider keys, create a Secret separately and pass only its
