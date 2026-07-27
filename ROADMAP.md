@@ -18,7 +18,7 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
   writes one receipt. **Good first issue.**
 - [x] Add a small dependency smoke test in a clean virtual environment and document the supported
   Python range. **Good first issue.**
-- [ ] Archive v0.7.0 through Zenodo and record a real DOI. The deterministic 510-file archive,
+- [ ] Archive v0.7.0 through Zenodo and record a real DOI. The canonical 510-file inventory,
   deposit metadata, checksums, local verifier, and anonymous public-record verifier are complete;
   owner-account repository enablement and published-record verification remain open in issue #9.
 - [x] Add a deterministic human-study launch pack with prospective writer-level precision,

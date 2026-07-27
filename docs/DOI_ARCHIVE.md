@@ -10,7 +10,7 @@ honestly inferred from source files. Issue
 
 The reproducibility work before that external action is complete. The archive builder reads 100%
 of the immutable `v0.7.0` Git tag—not the current checkout—validates `CITATION.cff` and
-`.zenodo.json`, creates a deterministic ZIP, inventories every file, and emits checksums and
+`.zenodo.json`, creates one source ZIP, inventories every file, and emits checksums and
 deposit-ready metadata. The verifier reopens the archive without extracting it and compares every
 file digest. Its live mode also downloads a published Zenodo archive anonymously and accepts ZIP
 or TAR packaging only when its normalized file inventory is identical to the tag.
@@ -25,13 +25,19 @@ or TAR packaging only when its normalized file inventory is identical to the tag
 | Git tree | `3208dc48e7c36a7696520f7c3044c6d3bbf29890` |
 | tracked source | 510 files; 60,695,692 bytes |
 | normalized inventory digest | `20296c5cbfd7960a8000b545ff6e28f2cbd21082301129d8e6f9f194e499cdbc` |
-| deterministic archive | 23,308,329 bytes; SHA-256 `5b62f01ffb89d5e8bb67a5572fac687e406aecc01f57458a6a19b27929cbe526` |
+| reference ZIP build | 23,308,329 bytes; SHA-256 `5b62f01ffb89d5e8bb67a5572fac687e406aecc01f57458a6a19b27929cbe526` |
 | creator metadata | `Amarel, Taylor S.` in both metadata files |
 | licence | Apache-2.0 in both metadata files |
 
 The compact checked-in evidence is in
-[`jestry_out/doi_v0_7_0_preflight`](../jestry_out/doi_v0_7_0_preflight). The 22.9 MB archive is
+[`jestry_out/doi_v0_7_0_preflight`](../jestry_out/doi_v0_7_0_preflight). The 23.3 MB archive is
 intentionally rebuilt rather than nested inside later source releases.
+
+The outer ZIP checksum records the exact reference container built for deposit; it is not the
+cross-toolchain source identity. Git/ZIP versions may package identical files into different
+container bytes. The controlling identity is the normalized 510-file digest above, and CI compares
+that complete inventory plus deposition metadata. The local verifier still checks each build's
+own outer checksum before checking every member.
 
 ## Rebuild and verify every tagged file
 
@@ -88,4 +94,5 @@ Open a new pull request that adds the audit receipt and the returned concept/ver
 retain the Kaggle dataset/notebook identifiers. Close issue #9 only after an anonymous rerun of the
 receipt succeeds.
 
-Until then the precise claim is: **v0.7.0 is deterministically deposit-ready; no DOI is claimed.**
+Until then the precise claim is: **the exact v0.7.0 file inventory is deposit-ready; no DOI is
+claimed.**

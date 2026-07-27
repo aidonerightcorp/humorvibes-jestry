@@ -26,8 +26,8 @@
     },
     {
       "evidence": {
-        "expected": "ab0562d105c996fcf064fd7de7ebbc4684a71063c95e378a4d322a8a3aaff538",
-        "observed": "ab0562d105c996fcf064fd7de7ebbc4684a71063c95e378a4d322a8a3aaff538"
+        "expected": "24e1d8543d1873cd56c9bfb5759088d2239114a581e1a84f2b47cb461f953727",
+        "observed": "24e1d8543d1873cd56c9bfb5759088d2239114a581e1a84f2b47cb461f953727"
       },
       "name": "checksum.doi_archive_preflight.json",
       "ok": true
@@ -91,7 +91,8 @@
     "version": "0.7.0"
   },
   "truth_boundary": {
-    "allowed_claim": "the exact tagged source and metadata are deterministically deposit-ready",
+    "allowed_claim": "the exact tagged source and metadata are deposit-ready and identified by the per-file inventory",
+    "archive_container_sha256_is_cross_toolchain_identity": false,
     "archive_preflight_is_doi": false,
     "reserved_doi_is_published_doi": false
   }

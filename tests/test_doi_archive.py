@@ -1,10 +1,11 @@
-"""Whole-tag archive determinism, provenance, and fail-closed verification."""
+"""Whole-tag archive repeatability, provenance, and fail-closed verification."""
 
 from __future__ import annotations
 
 import io
 import hashlib
 import json
+import re
 import subprocess
 import zipfile
 from pathlib import Path
@@ -75,7 +76,7 @@ license: Apache-2.0
     return root
 
 
-def test_whole_tag_archive_is_deterministic_and_verifiable(tmp_path: Path) -> None:
+def test_whole_tag_archive_repeats_in_one_toolchain_and_is_verifiable(tmp_path: Path) -> None:
     root = _repository(tmp_path)
     first = tmp_path / "first"
     second = tmp_path / "second"
@@ -193,9 +194,11 @@ def test_checked_in_preflight_is_complete_but_does_not_claim_a_doi() -> None:
     inventory_sha = hashlib.sha256((root / "source_inventory.json").read_bytes()).hexdigest()
     assert inventory_sha == receipt["artifacts"]["source_inventory"]["sha256"]
     assert receipt["external_publication"]["doi_claimed"] is False
-    assert "no DOI is claimed" in (ROOT / "docs" / "DOI_ARCHIVE.md").read_text()
+    archive_doc = re.sub(r"\s+", " ", (ROOT / "docs" / "DOI_ARCHIVE.md").read_text())
+    assert "no DOI is claimed" in archive_doc
     workflow = (ROOT / ".github" / "workflows" / "app-contracts.yml").read_text()
     assert "tools/build_doi_archive.py" in workflow
     assert "tools/verify_doi_archive.py" in workflow
-    assert "doi_v0_7_0_preflight/SHA256SUMS" in workflow
+    assert "doi_v0_7_0_preflight/source_inventory.json" in workflow
+    assert "doi_v0_7_0_preflight/zenodo_deposition_metadata.json" in workflow
     assert "fetch-depth: 0" in workflow
