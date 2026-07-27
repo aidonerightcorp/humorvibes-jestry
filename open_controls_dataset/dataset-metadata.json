@@ -1,7 +1,7 @@
 {
   "title": "Humor Genome Open Controls",
-  "subtitle": "120K matched controls for surprise, repair, retrieval, and study design",
-  "description": "A deterministic, CC0 corpus of 120,000 matched four-arm text controls for testing expected continuations, unresolved surprise, compact lexical repair, and over-explanation. Includes leakage-safe template-family splits, retrieval qrels, strict schemas, provenance, adversarial audits, and SHA-256 manifests. These are synthetic experimental controls, not human ratings or funniness labels.",
+  "subtitle": "120K matched controls with easy and entity-masked hard retrieval tracks",
+  "description": "A deterministic, CC0 corpus of 120,000 matched four-arm text controls for testing expected continuations, unresolved surprise, compact lexical repair, and over-explanation. Includes leakage-safe template-family splits, original and entity/pivot-masked hard retrieval qrels, explicit hard negatives, strict schemas, provenance, adversarial audits, and SHA-256 manifests. These are synthetic experimental controls, not human ratings or funniness labels.",
   "id": "taylorsamarel/humor-genome-open-controls",
   "licenses": [
     {
@@ -37,6 +37,18 @@
     {
       "path": "retrieval_qrels.jsonl",
       "description": "Exact query-to-document relevance mapping."
+    },
+    {
+      "path": "hard_retrieval_queries.jsonl",
+      "description": "Entity- and pivot-masked semantic queries with family-disjoint splits."
+    },
+    {
+      "path": "hard_retrieval_negatives.jsonl",
+      "description": "Same-frame and same-context hard negatives inside each query split."
+    },
+    {
+      "path": "hard_retrieval_manifest.json",
+      "description": "Hard-track content digest, leakage audit, relation origin, counts, and truth boundary."
     },
     {
       "path": "manifest.json",

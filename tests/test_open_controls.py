@@ -293,6 +293,26 @@ def test_small_release_build_and_independent_verifier(tmp_path: Path) -> None:
     assert verify(out)["ok"] is False
 
 
+def test_release_with_two_contexts_includes_recomputed_hard_track(tmp_path: Path) -> None:
+    out = tmp_path / "release-with-hard-retrieval"
+    receipt = builder.build(
+        out_dir=out,
+        families=60,
+        configs=1,
+        variants=2,
+        seed=DEFAULT_SEED,
+        generator_commit="d" * 40,
+        metadata_template=ROOT / "open_controls_dataset" / "dataset-metadata.json",
+        parquet=False,
+    )
+    assert receipt["summary"]["hard_retrieval"]["enabled"] is True
+    verified = verify(out)
+    assert verified["ok"] is True
+    assert verified["checks"]["hard_retrieval_contract"] is True
+    assert verified["checks"]["hard_retrieval_baselines"] is True
+    assert verified["hard_retrieval"]["maximum_content_token_jaccard"] < 0.11
+
+
 def test_notebook_builder_is_deterministic_and_every_code_cell_compiles(tmp_path: Path) -> None:
     subprocess.run([sys.executable, "open_controls_notebook/build_open_controls_notebook.py"], cwd=ROOT, check=True)
     path = ROOT / "open_controls_notebook" / "humor_genome_open_controls.ipynb"

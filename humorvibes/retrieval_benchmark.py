@@ -319,6 +319,7 @@ def evaluate_retrieval(
     *,
     model_id: str = "lexical:tfidf",
     registry: EmbeddingRegistry | None = None,
+    record_duration: bool = True,
 ) -> dict[str, Any]:
     """Evaluate a lexical or configured embedding model against frozen hard qrels."""
 
@@ -448,7 +449,6 @@ def evaluate_retrieval(
             "content_digest", _canonical_digest(dataset)
         ),
         "model": model,
-        "duration_seconds": time.perf_counter() - started,
         "metrics_by_split": {
             split: metrics(rows) for split, rows in sorted(per_split.items())
         },
@@ -460,6 +460,8 @@ def evaluate_retrieval(
             "allowed_claim": "measured retrieval performance on frozen generator-lineage relations",
         },
     }
+    if record_duration:
+        result["duration_seconds"] = time.perf_counter() - started
     result["receipt_digest"] = _canonical_digest(
         {key: value for key, value in result.items() if key != "duration_seconds"}
     )
