@@ -20,7 +20,9 @@ kubectl apply -k deploy/overlays/ghcr
 kubectl rollout status deployment/humorvibes
 ```
 
-This is a registry-identity overlay, not proof of a cluster deployment. It deliberately preserves
-the base offline/hash configuration and deny-all egress. Add gateway, DNS, certificate, secret,
-provider, and telemetry policy only in a separate overlay for a named target cluster.
-
+This registry-identity overlay was applied to an ephemeral `kind` cluster and the live Service was
+smoke-tested; the machine-readable evidence is in
+[`../../../jestry_out/v0_7_0_kind_smoke.json`](../../../jestry_out/v0_7_0_kind_smoke.json). This is
+local deployment proof, not a hosted-production claim. The overlay deliberately preserves the base
+offline/hash configuration and deny-all egress. Add gateway, DNS, certificate, secret, provider,
+and telemetry policy only in a separate overlay for a named target cluster.

@@ -3,7 +3,8 @@
 This Kustomize base runs the locally built `humorvibes-research:0.7.0` image in offline/hash mode.
 It is intentionally a `ClusterIP` service with no Ingress and no committed Secret. Its
 NetworkPolicy allows port 8080 from same-namespace pods and denies all egress, matching the
-default offline/hash profile.
+default offline/hash profile. Service-link environment injection is disabled so the Service name
+cannot overwrite the application's numeric `HUMORVIBES_PORT` setting with a `tcp://...` value.
 
 ```bash
 docker build -t humorvibes-research:0.7.0 .
@@ -28,5 +29,6 @@ kubectl kustomize deploy/overlays/ghcr
 kubectl apply -k deploy/overlays/ghcr
 ```
 
-Rendering this overlay is verified; applying it still requires a named cluster and does not happen
-as part of repository CI.
+The public digest overlay has also been applied to a disposable `kind` cluster and exercised through
+the live Service; see [`../../jestry_out/v0_7_0_kind_smoke.json`](../../jestry_out/v0_7_0_kind_smoke.json).
+That local smoke proof is not a claim that a hosted production cluster exists.

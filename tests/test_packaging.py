@@ -67,6 +67,7 @@ def test_kubernetes_deployment_has_probes_resources_and_restricted_identity() ->
     assert deployment["kind"] == "Deployment"
     spec = deployment["spec"]["template"]["spec"]
     assert spec["automountServiceAccountToken"] is False
+    assert spec["enableServiceLinks"] is False
     assert spec["securityContext"]["runAsNonRoot"] is True
     assert spec["securityContext"]["seccompProfile"]["type"] == "RuntimeDefault"
     container = spec["containers"][0]
@@ -94,6 +95,8 @@ def test_public_ghcr_overlay_and_receipt_pin_the_verified_manifest() -> None:
     publication = json.loads(
         (ROOT / "jestry_out/v0_7_0_publication.json").read_text(encoding="utf-8")
     )
+    kind_smoke_path = ROOT / "jestry_out/v0_7_0_kind_smoke.json"
+    kind_smoke = json.loads(kind_smoke_path.read_text(encoding="utf-8"))
     assert overlay["resources"] == ["../../kubernetes"]
     assert overlay["images"] == [
         {
@@ -118,7 +121,24 @@ def test_public_ghcr_overlay_and_receipt_pin_the_verified_manifest() -> None:
     assert publication["container"]["runtime_verification"]["runtime_user"] == "10001:10001"
     assert publication["deployment_contracts"]["kustomize_overlay"] == "deploy/overlays/ghcr"
     assert publication["deployment_contracts"]["helm_digest_render_verified"] is True
-    assert publication["truth_boundary"]["kubernetes_cluster_apply_executed"] is False
+    assert publication["deployment_contracts"]["kubernetes_cluster_apply_executed"] is True
+    assert publication["deployment_contracts"]["kubernetes_apply_scope"] == (
+        "ephemeral local kind cluster"
+    )
+    assert publication["deployment_contracts"]["hosted_cluster_apply_executed"] is False
+    assert publication["source"]["ephemeral_kubernetes_smoke_sha256"] == hashlib.sha256(
+        kind_smoke_path.read_bytes()
+    ).hexdigest()
+    assert kind_smoke["adversarial_finding"]["initial_rollout_succeeded"] is False
+    assert kind_smoke["kustomize"]["rollout_succeeded_after_remediation"] is True
+    assert kind_smoke["kustomize"]["ready_replicas"] == 2
+    assert kind_smoke["kustomize"]["restart_count_after_remediation"] == 0
+    assert kind_smoke["helm"]["status"] == "deployed"
+    assert kind_smoke["helm"]["ready_replicas"] == 2
+    assert kind_smoke["cleanup"]["cluster_deleted"] is True
+    assert kind_smoke["truth_boundary"]["hosted_production_cluster_verified"] is False
+    assert publication["truth_boundary"]["local_ephemeral_kubernetes_apply_verified"] is True
+    assert publication["truth_boundary"]["hosted_production_cluster_verified"] is False
 
 
 def test_envoy_gateway_example_has_tls_identity_global_limit_and_no_secrets() -> None:
@@ -182,6 +202,7 @@ def test_helm_chart_preserves_secure_defaults_and_supports_image_digests() -> No
     assert "sha256" in digest_schema["pattern"]
     assert "@{{ .Values.image.digest }}" in deployment
     assert "automountServiceAccountToken: false" in deployment
+    assert "enableServiceLinks: false" in deployment
     assert "existingSecret" in deployment
     assert "kind: Ingress" not in templates and "kind: Secret" not in templates
     assert "HUMORVIBES_API_KEY" not in templates and "OLLAMA_API_KEY" not in templates
