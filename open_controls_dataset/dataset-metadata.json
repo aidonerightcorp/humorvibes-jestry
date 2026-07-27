@@ -13,8 +13,7 @@
     "nlp",
     "linguistics",
     "psychology",
-    "text",
-    "synthetic data"
+    "text"
   ],
   "expectedUpdateFrequency": "never",
   "userSpecifiedSources": "Deterministically generated from project-controlled lexical frames. No imported jokes, LLM calls, network calls, human-authored rows, or human ratings are included.",
