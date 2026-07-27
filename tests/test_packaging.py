@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import tomllib
 from pathlib import Path
 
 import yaml
@@ -37,6 +38,30 @@ def test_docker_context_is_allowlist_shaped() -> None:
     assert "!humorvibes/**" in lines
     assert "!requirements-api.lock" in lines
     assert "!formats.py" in lines and "!humor_mesh.py" in lines and "!mesh_signals.py" in lines
+
+
+def test_current_application_version_is_consistent_across_release_surfaces() -> None:
+    expected = "0.7.1"
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    package_text = (ROOT / "humorvibes/__init__.py").read_text(encoding="utf-8")
+    dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
+    compose = load_yaml("compose.yaml")
+    deployment = load_yaml("deploy/kubernetes/deployment.yaml")
+    chart = load_yaml("deploy/helm/humorvibes/Chart.yaml")
+    values = load_yaml("deploy/helm/humorvibes/values.yaml")
+    citation = load_yaml("CITATION.cff")
+    openapi = json.loads((ROOT / "docs/openapi.json").read_text(encoding="utf-8"))
+    assert project["project"]["version"] == expected
+    assert f'__version__ = "{expected}"' in package_text
+    assert f"ARG VERSION={expected}" in dockerfile
+    assert compose["services"]["api"]["image"] == f"humorvibes-research:{expected}"
+    assert deployment["spec"]["template"]["spec"]["containers"][0]["image"] == (
+        f"humorvibes-research:{expected}"
+    )
+    assert chart["version"] == expected and chart["appVersion"] == expected
+    assert values["image"]["tag"] == expected
+    assert citation["version"] == expected
+    assert openapi["info"]["version"] == expected
 
 
 def test_compose_defaults_are_local_offline_and_hardened() -> None:
@@ -191,13 +216,13 @@ def test_helm_chart_preserves_secure_defaults_and_supports_image_digests() -> No
         path.read_text(encoding="utf-8")
         for path in sorted((ROOT / "deploy/helm/humorvibes/templates").glob("*.yaml"))
     )
-    assert chart["version"] == "0.7.0" and chart["appVersion"] == "0.7.0"
+    assert chart["version"] == "0.7.1" and chart["appVersion"] == "0.7.1"
     assert values["replicaCount"] == 2
     assert values["service"]["type"] == "ClusterIP"
     assert values["podSecurityContext"]["runAsNonRoot"] is True
     assert values["securityContext"]["readOnlyRootFilesystem"] is True
     assert values["securityContext"]["capabilities"]["drop"] == ["ALL"]
-    assert values["image"]["tag"] == "0.7.0" and values["image"]["digest"] == ""
+    assert values["image"]["tag"] == "0.7.1" and values["image"]["digest"] == ""
     digest_schema = schema["properties"]["image"]["properties"]["digest"]
     assert "sha256" in digest_schema["pattern"]
     assert "@{{ .Values.image.digest }}" in deployment
@@ -243,11 +268,21 @@ def test_container_runtime_lock_matches_uv_export() -> None:
 
 def test_deployment_verifier_builds_current_source_by_default() -> None:
     text = (ROOT / "verify_deployment.py").read_text(encoding="utf-8")
+    receipt = json.loads(
+        (ROOT / "jestry_out/v0_7_1_deployment_validation.json").read_text(encoding="utf-8")
+    )
+    checks = {row["name"]: row for row in receipt["checks"]}
     assert 'command("docker", "build", "--tag", image, ".")' in text
     assert '"built_from_current_source": build' in text
     assert '"--no-build"' in text
     assert '"--helm-image"' in text
     assert '"helm_render_executed"' in text
+    assert receipt["ok"] is True and receipt["docker_build_executed"] is True
+    assert checks["container_runtime"]["evidence"]["image"] == "humorvibes-research:0.7.1"
+    assert checks["container_runtime"]["evidence"]["user"] == "10001:10001"
+    assert checks["container_runtime"]["evidence"]["readonly_root"] is True
+    assert checks["adversarial_contracts"]["evidence"] == {"passed": 26, "total": 26}
+    assert receipt["truth_boundary"]["container_registry_publication_verified"] is False
 
 
 def test_ci_container_audit_reuses_the_compose_image_without_version_drift() -> None:
@@ -260,14 +295,14 @@ def test_release_metadata_is_versioned_citable_and_archive_ready() -> None:
     citation = load_yaml("CITATION.cff")
     archive = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
     security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-    release = (ROOT / "RELEASE_NOTES_v0.7.0.md").read_text(encoding="utf-8")
+    release = (ROOT / "RELEASE_NOTES_v0.7.1.md").read_text(encoding="utf-8")
     assert citation["cff-version"] == "1.2.0"
-    assert citation["version"] == "0.7.0" and citation["license"] == "Apache-2.0"
+    assert citation["version"] == "0.7.1" and citation["license"] == "Apache-2.0"
     assert citation["repository-code"] == "https://github.com/aidonerightcorp/humorvibes-jestry"
     assert archive["license"] == "Apache-2.0" and archive["upload_type"] == "software"
     assert archive["creators"] and archive["related_identifiers"]
     assert "0.7.x" in security and "Python 3.10-3.14" in security
-    assert "186 tests pass" in release and "DOI is not fabricated" in release
+    assert "188 tests pass" in release and "DOI is not fabricated" in release
 
 
 def test_release_candidate_receipt_resolves_every_recorded_digest() -> None:

@@ -397,7 +397,7 @@
     "description": "This API exposes generation, validated embeddings, similarity, and explicitly scoped HumorVibes signals. Model output is not human funniness evidence.",
     "summary": "Deployable LLM, embedding, and humor-research integration surface",
     "title": "HumorVibes Integration API",
-    "version": "0.7.0"
+    "version": "0.7.1"
   },
   "openapi": "3.1.0",
   "paths": {
