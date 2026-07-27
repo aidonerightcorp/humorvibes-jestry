@@ -1,5 +1,8 @@
 # Open Controls release descriptor
 
+The current public artifact is [Humor Genome Open Controls](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls):
+Kaggle version 3 is ready, CC0-1.0, and a fresh download passes the independent verifier.
+
 `build_open_controls.py` creates the complete Kaggle payload in `kaggle_open_controls/`.
 The generated directory is intentionally ignored by Git because its canonical public copy is the
 Kaggle dataset; source, schemas, a 32-row sample, tests, and verification code remain in Git.

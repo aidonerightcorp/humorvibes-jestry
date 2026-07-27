@@ -1,9 +1,9 @@
 # Notebook guide
 
-## The one notebook to read first
+## The observational notebook to read first
 
 [`wave2_notebook/humor_genome_wave2.ipynb`](../wave2_notebook/humor_genome_wave2.ipynb) is the
-single canonical executable research release and the notebook published publicly on Kaggle. It
+canonical executable Wave 2 study and the notebook published publicly on Kaggle. It
 states the problem, proposed exploration, controlling findings, outputs, practical uses, and
 limitations before exposing implementation detail. It also names the predictive-processing
 starting point, cites its scientific lineage, renders the model-to-human evidence boundary, and
@@ -13,6 +13,11 @@ asserts the controlling values and writes a JSON artifact on Kaggle.
 The source of that notebook is
 [`wave2_notebook/build_wave2_notebook.py`](../wave2_notebook/build_wave2_notebook.py). Edit the
 builder, rebuild the notebook, and commit both; do not hand-edit generated cells.
+
+The separate [Open Controls Causal Design Lab](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab)
+is the promoted executable for the synthetic four-arm corpus. It verifies all mounted payloads,
+reports generator artifacts, runs a retrieval baseline, and explicitly stops short of human
+funniness or brain-mechanism claims.
 
 ## Supporting notebooks
 
@@ -31,7 +36,7 @@ project's development history. They do not override the canonical Wave 2 conclus
 | `panel_lab/panel_lab.ipynb` | Panel and frame comparison experiment |
 | `validate_ratings/validate_notebook.ipynb` | Model signals compared with available human ratings |
 | `zoo_lab/zoo_lab.ipynb` | Multi-model-family and invariance exploration |
-| `open_controls_notebook/humor_genome_open_controls.ipynb` | Public Open Controls integrity, artifact, and retrieval lab; synthetic evidence only |
+| [`open_controls_notebook/humor_genome_open_controls.ipynb`](../open_controls_notebook/humor_genome_open_controls.ipynb) | [Public Open Controls](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) integrity, artifact, and retrieval lab; synthetic evidence only |
 
 ## Clarity contract
 

@@ -11,11 +11,13 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public; version 14 is COMPLETE and is the canonical executable write-up |
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
-| Open causal controls | Humor Genome Open Controls | 120,000 deterministic CC0 procedural rows, separate from observed and human-rated evidence |
+| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 3 is ready; public notebook version 2 is COMPLETE; 120,000 deterministic CC0 procedural rows |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
-move underneath an existing run.
+move underneath an existing run. The separate control release is pinned by
+`humor-genome-open-controls-v1`; its publication receipt records the dataset generator commit,
+public versions, downloaded hashes, and terminal notebook status.
 
 ## Application and deployment extension
 
@@ -68,7 +70,10 @@ environment. This extension does not alter the immutable Kaggle notebook or its 
   map is documented in [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md).
 - Open Controls adds a separate 120,000-row four-arm corpus, strict data/human/model schemas,
   grouped splits, exact and long-phrase overlap checks, retrieval qrels, a bounded SDK/API, a
-  standalone verifier, and a public-notebook builder. It contains no human ratings.
+  standalone verifier, and a public-notebook builder. A fresh anonymous Kaggle download passes
+  all 11 semantic/provenance gates, and notebook v2 completed against all 17 manifested files.
+  It contains no human-authored or human-rated rows. See
+  [`jestry_out/open_controls_publication.json`](jestry_out/open_controls_publication.json).
 
 ## What is deliberately not claimed
 
@@ -96,6 +101,11 @@ python3 wave2_notebook/build_wave2_notebook.py
 kaggle datasets download -d taylorsamarel/humor-genome-wave2 \
   --unzip -p kaggle_wave2_public
 python3 verify_wave2_release.py --root kaggle_wave2_public
+
+kaggle datasets download -d taylorsamarel/humor-genome-open-controls \
+  --unzip -p kaggle_open_controls_public
+python3 verify_open_controls_release.py --root kaggle_open_controls_public
+kaggle kernels status taylorsamarel/humor-genome-open-controls-causal-design-lab
 ```
 
 The local corpus is not required to read or verify the public release. It is required only to

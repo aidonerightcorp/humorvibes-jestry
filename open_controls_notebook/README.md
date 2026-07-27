@@ -1,5 +1,9 @@
 # Open Controls notebook
 
+The current public run is [Humor Genome Open Controls - Causal Design Lab](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab):
+Kaggle version 2 is public and `COMPLETE`. Its downloaded receipt verifies 17 manifested files
+and preserves `claim_ready_for_human_funniness=false`.
+
 The notebook is generated from `build_open_controls_notebook.py` so its prose, code, and public
 metadata remain reviewable. It makes no network or model call. It verifies every mounted payload,
 recomputes the surface-artifact audit, runs a TF-IDF retrieval baseline, and writes one compact

@@ -26,12 +26,14 @@ claim gate.
 | Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, v14 COMPLETE | Read the write-up and rerun every public measurement |
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
-| Open causal controls | `Humor Genome Open Controls` release | Release pipeline added | Use 120,000 CC0 procedural four-arm controls without confusing them with human evidence |
+| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v3 ready; notebook v2 COMPLETE | Use 120,000 CC0 procedural four-arm controls without confusing them with human evidence |
 
-The notebook is the single canonical executable write-up. It clones the immutable
+The Wave 2 notebook is the canonical executable write-up for the observational study. It clones the immutable
 `humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
 loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
-[`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
+[`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json). Open Controls is a
+separate causal-design lab with its own downloadable verification and publication receipt at
+[`jestry_out/open_controls_publication.json`](jestry_out/open_controls_publication.json).
 
 ## Read, verify, or help
 
@@ -64,7 +66,8 @@ loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross
 - [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md): the canonical notebook, the role of each supporting
   notebook, and the clarity contract for future experiments.
 - [`docs/OPEN_CONTROLS.md`](docs/OPEN_CONTROLS.md): the 120,000-row deterministic CC0 control
-  corpus, adversarial gates, human/model evidence lanes, API, schemas, and release procedure.
+  corpus, public dataset/notebook, adversarial gates, human/model evidence lanes, API, schemas,
+  and release procedure.
 
 Issues, reproductions, and research proposals are welcome. In this project, reproducing a null
 result, removing a confound, or documenting a licensing boundary is a successful contribution.
@@ -130,6 +133,8 @@ OpenAPI contract.
 - **121,670 rows** in the public, deterministic, rights-filtered slice; 2,693,272 rows remain in
   the census but are not republished verbatim.
 - **7,913 aligned translation pairs** and **2,581 expectation/violation frames**.
+- **120,000 separate CC0 procedural controls** in four matched arms; no human-authored or
+  human-rated rows.
 - Gemma instrument check: **S = 3.188 over 10 tokens** against the pinned 3.19 reference.
 - Full form study: **0/10** joke-form intervals strictly above the proverb control and 10/10
   overlapping it — **SEPARATION IS NOT ESTABLISHED**.
@@ -138,12 +143,14 @@ OpenAPI contract.
 `S` is model surprisal, not funniness. The dataset mixes jokes, captions, proverbs, idioms, and
 other humor-adjacent text; source-specific human signals are not interchangeable grades.
 
-## How the three public artifacts fit together
+## How the public artifacts fit together
 
 | Layer | Contract |
 | --- | --- |
-| Dataset | Publishes only explicitly redistributable text, plus a full-corpus census and hashes |
-| Notebook | Verifies those files, runs Gemma, and displays the controlling statistical receipts |
+| Wave 2 dataset | Publishes only explicitly redistributable observed text, plus a full-corpus census and hashes |
+| Wave 2 notebook | Verifies those files, runs Gemma, and displays the controlling observational receipts |
+| Open Controls dataset | Publishes deterministic matched alternatives, grouped splits, qrels, schemas, and audit receipts under CC0 |
+| Open Controls notebook | Verifies all mounted bytes and runs artifact and retrieval baselines without upgrading them to human evidence |
 | Repository | Builds both artifacts and preserves code, tests, provenance, negative results, and publication receipts |
 
 ## Canonical repository map
@@ -181,6 +188,15 @@ python3 wave2_notebook/build_wave2_notebook.py
 kaggle datasets download -d taylorsamarel/humor-genome-wave2 \
   --unzip -p kaggle_wave2_public
 python3 verify_wave2_release.py --root kaggle_wave2_public
+```
+
+Verify the separate Open Controls release without access to the private research inventory:
+
+```bash
+kaggle datasets download -d taylorsamarel/humor-genome-open-controls \
+  --unzip -p kaggle_open_controls_public
+python3 verify_open_controls_release.py --root kaggle_open_controls_public
+kaggle kernels status taylorsamarel/humor-genome-open-controls-causal-design-lab
 ```
 
 ## Project background and additional systems

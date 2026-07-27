@@ -83,6 +83,11 @@ exact and 12-word overlap screening against 3.16 million readable corpus records
 manifest verification. It contains zero human-authored and zero human-rated rows. Its labels say
 how the generator was constructed, not what an audience experienced.
 
+The [public dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls)
+and [COMPLETE executable notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab)
+were independently downloaded after publication; their hashes and terminal state are recorded in
+[`jestry_out/open_controls_publication.json`](jestry_out/open_controls_publication.json).
+
 This makes Open Controls useful for application fixtures, grouped evaluation, embedding bakeoffs,
 and preparing a preregistered study. The next evidentiary step is to randomize and blind the arms,
 then collect expectedness, surprise, resolution, funniness, familiarity, comprehensibility, and

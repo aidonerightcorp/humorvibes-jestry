@@ -5,6 +5,18 @@ observational Wave 2 corpus cannot support. It is deliberately synthetic and del
 
 ![Open Controls evidence lanes](figures/open-controls-evidence-lanes.svg)
 
+## Public release
+
+| Artifact | Public location | Verified state |
+| --- | --- | --- |
+| Dataset | [Humor Genome Open Controls](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) | Kaggle version 3, ready; fresh download passed all 11 release checks |
+| Executed analysis | [Open Controls Causal Design Lab](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Kaggle version 2, COMPLETE; 17 manifested files verified |
+| Source | [`humor-genome-open-controls-v1`](https://github.com/aidonerightcorp/humorvibes-jestry/tree/humor-genome-open-controls-v1) | Immutable generator, verifier, notebook, API, tests, and publication receipt |
+
+Kaggle version numbers include publication retries; the semantic corpus release is v1. The
+machine-readable cross-surface evidence is
+[`jestry_out/open_controls_publication.json`](../jestry_out/open_controls_publication.json).
+
 ## Problem and proposed solution
 
 Most humor corpora contain only the final text. A researcher cannot tell whether a response came
@@ -27,7 +39,7 @@ is a brain measure.
 
 ## Release scale
 
-The complete v1 release contains:
+The complete semantic v1 release contains:
 
 ```text
 300 premise families

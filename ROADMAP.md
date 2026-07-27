@@ -11,6 +11,8 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
 - [x] Publish project status, narrative write-up, contribution rules, and expansion instructions.
 - [x] Add Apache-2.0 for repository code and documentation plus a separate CC0-1.0 dedication for
   project-controlled Open Controls data; keep mixed-provenance imports on per-row licences.
+- [x] Publish Open Controls as a separately licensed Kaggle dataset and COMPLETE notebook; verify
+  a fresh download, remote source, terminal output, anonymous access, and cross-surface receipt.
 - [ ] Add a read-only cross-surface audit command that checks GitHub visibility, Kaggle dataset
   readiness, notebook completion, source tag, manifest hash, and anonymous HTTP access, then
   writes one receipt. **Good first issue.**

@@ -1,0 +1,93 @@
+{
+  "dataset": {
+    "anonymous_http_status": 200,
+    "downloaded_verification_receipt_sha256": "b55a8fe56d8c73e2cf29007babc80647cbaf044c856ec116d4efdff969709cb0",
+    "downloaded_verifier_checks": [
+      "counterfactual_arms",
+      "dataset_id",
+      "manifest",
+      "no_model_calls",
+      "public_kaggle_metadata",
+      "published_audit_matches",
+      "reference_overlap_gate",
+      "retrieval_contract",
+      "row_count",
+      "semantic_audit",
+      "truth_boundary"
+    ],
+    "downloaded_verifier_ok": true,
+    "exact_reference_matches": 0,
+    "files_verified": 17,
+    "kaggle_status": "ready",
+    "kaggle_version": 3,
+    "license_spdx": "CC0-1.0",
+    "long_phrase_reference_matches": 0,
+    "manifest_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2",
+    "parquet_sha256": "f6df71b58fc394effb5009b82f033390b0809ad6ab63afc84c0b3863e67d3d75",
+    "premise_families": 300,
+    "public": true,
+    "reference_rows_scanned": 3164600,
+    "release_metadata_sha256": "4675d7a38815bf59fdbcc16085209f103c49cbc9d79a725bb41785ed1c6a0b68",
+    "rows": 120000,
+    "slug": "taylorsamarel/humor-genome-open-controls",
+    "surface_only_arm_accuracy": 0.5519083333333333,
+    "url": "https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls"
+  },
+  "generated_at": "2026-07-27T15:20:11Z",
+  "notebook": {
+    "anonymous_http_status": 200,
+    "cells": 14,
+    "claim_ready_for_human_funniness": false,
+    "downloaded_log_sha256": "d0424125fe6b7c65aa8c74225daef4c9f3ccb40c56e5da3a594cc0c41ba10b07",
+    "downloaded_receipt_sha256": "362ba169057d28a841fb0b8335c2f093d2e066b7ca5f8a8c5e595cafab077676",
+    "kaggle_version": 2,
+    "manifest_files_verified": 17,
+    "public": true,
+    "remote_source_semantic_match": true,
+    "rows": 120000,
+    "runtime_environment_warning_classes": [
+      "Kaggle debugger frozen-modules warning",
+      "mistune invalid-escape SyntaxWarning",
+      "nbconvert invalid-escape SyntaxWarning"
+    ],
+    "runtime_environment_warning_instances": 4,
+    "slug": "taylorsamarel/humor-genome-open-controls-causal-design-lab",
+    "source_owned_execution_errors": 0,
+    "source_owned_execution_warnings": 0,
+    "status": "COMPLETE",
+    "url": "https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab"
+  },
+  "receipt_type": "humor_genome_open_controls_publication",
+  "receipt_version": 1,
+  "software": {
+    "container_image": "humorvibes-research:0.6.0",
+    "container_image_id": "sha256:ad5f5bfb4725f7ca6c21d3a55e80a8bb58977bae91fedd218f0f7334fcf8c5d4",
+    "container_nonroot": true,
+    "container_readonly_root": true,
+    "deployment_checks_ok": true,
+    "deployment_source_tree_sha256": "1d14275868f570b6ba4ee665b740571cddcd2d48784b0e428b72a7dc5e82d8df",
+    "fresh_wheel_import_ok": true,
+    "package_version": "0.6.0",
+    "tests_passed": 155
+  },
+  "source": {
+    "branch": "agent/open-controls-corpus",
+    "branch_anonymous_http_status": 200,
+    "branch_head_before_publication_receipt": "b14e1eeb59dff6b4d4b6c31cdfd730fe04de6e79",
+    "branch_url": "https://github.com/aidonerightcorp/humorvibes-jestry/tree/agent/open-controls-corpus",
+    "code_license_spdx": "Apache-2.0",
+    "dataset_generator_commit": "a1aed30671416fb35735df31161fe78a33de99af",
+    "generator_source_sha256": "58abeab1d14d6b278b01d6cad9ddacdf6188264cd06a83c535b2a616e46c3e61",
+    "release_tag": "humor-genome-open-controls-v1",
+    "repository_url": "https://github.com/aidonerightcorp/humorvibes-jestry"
+  },
+  "truth_boundary": {
+    "allowed_claim": "The public bytes reproduce a deterministic project-controlled synthetic-control corpus and its declared retrieval benchmark.",
+    "brain_mechanism_established": false,
+    "human_authored_rows": 0,
+    "human_funniness_established": false,
+    "human_rated_rows": 0,
+    "live_llm_quality_validated": false,
+    "worldwide_originality_guaranteed": false
+  }
+}
