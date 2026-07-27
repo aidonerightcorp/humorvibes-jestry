@@ -119,6 +119,11 @@ Verify the upstream source, schema, licence, and a real response before register
 per-row provenance and upstream labels. Ambiguous redistribution rights are acceptable for local
 research inventory only; the exporter will and must fail closed.
 
+Start with `python3 source_spec_preflight.py`. It runs from committed fixtures without a network
+connection or corpus write. Use `--live` only after the fixture passes, and include the body-free
+receipt in the pull request. The exact workflow and failure gates are in
+[`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md).
+
 Never commit multi-hundred-megabyte generated corpus payloads. Commit the source specification,
 parser, fixtures, tests, compact receipts, and documentation. Publish an updated public payload
 only through the release process.

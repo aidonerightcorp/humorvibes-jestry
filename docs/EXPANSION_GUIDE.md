@@ -24,6 +24,38 @@ Start with a real upstream fetch, its dataset card or terms, and the exact serve
 enters `wave2_specs.json` only after those checks. The existing `chinese_memes` lane is a concrete
 smoke-test example:
 
+Run the committed no-network preflight before learning the large harvest pipeline:
+
+```bash
+python3 source_spec_preflight.py
+```
+
+That command validates the four-row CC BY 2.0 fixture in
+`fixtures/source_preflight/colbert_humor/`, compares the shared parser output byte-for-byte with
+the committed expectation, checks unique upstream row IDs, applies the deny-first licence policy,
+prints a body-free receipt, and writes nothing to `corpora/`. The expected final gates are
+`ok: true`, `parser.expected_fixture_match: true`, and
+`release_decision.export_eligible: true`.
+
+After the fixture passes, explicitly opt into a bounded live check:
+
+```bash
+python3 source_spec_preflight.py --live --limit 4 --timeout 15 \
+  --out jestry_out/source_spec_preflight_live.json
+```
+
+Live mode contacts only `huggingface.co` and `datasets-server.huggingface.co`, accepts at most 25
+rows and two megabytes per response, uses strict UTF-8/JSON decoding, compares the observed
+dataset identity and licence ID with the source spec, records response hashes, and still never
+adds corpus rows. Research-only sources may pass parser/provenance validation while correctly
+returning `export_eligible: false`. Missing or contradictory licence evidence, schema drift,
+empty data, duplicate row IDs, malformed JSON, invalid encoding, or expectation drift fail closed.
+
+For a new Hugging Face source, copy that three-file fixture shape into a directory named for the
+actual source key, replace it with a bounded observed response and exact expected normalized rows,
+and pass those three concrete paths through `--spec`, `--fixture`, and `--expected`. Attach the
+resulting receipt to the pull request, then register the reviewed spec in `wave2_specs.json`.
+
 ```bash
 python3 harvest_wave2.py list
 python3 harvest_wave2.py hf --arg chinese_memes --limit 25
@@ -53,6 +85,7 @@ python3 harvest_wave2.py hf --arg "$source_key" --limit 200
 
 Source acceptance checklist:
 
+- the offline source-spec preflight and, when applicable, bounded live preflight pass;
 - a live response was observed and dated;
 - field mapping matches the response, including headerless or nested schemas;
 - per-row provenance and licence are preserved;

@@ -105,7 +105,7 @@ uncertainty rather than a table of unqualified means.
 
 ## P2 — make data contribution easier
 
-- [ ] Add a command that validates one proposed source spec against a small live sample and emits
+- [x] Add a command that validates one proposed source spec against a small live sample and emits
   a reviewable provenance/licence receipt. **Good first issue.**
 - [ ] Add tiny committed fixture corpora for each supported ingestion shape. **Good first issue.**
 - [ ] Generate a machine-readable schema reference from the exporter and test it against all

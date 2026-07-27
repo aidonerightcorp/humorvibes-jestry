@@ -51,6 +51,8 @@ separate causal-design lab with its own downloadable verification and publicatio
 - [`ROADMAP.md`](ROADMAP.md): prioritized, contribution-sized research and maintenance work.
 - [`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md): exact paths for adding sources, languages,
   labels, model instruments, experiments, and public releases.
+- [`source_spec_preflight.py`](source_spec_preflight.py): offline-first, no-write schema,
+  provenance, licence, duplicate, and export-policy gate for one proposed Hugging Face source.
 - [`docs/API_AND_DEPLOYMENT.md`](docs/API_AND_DEPLOYMENT.md): Python SDK, FastAPI, Docker,
   Compose, local/cloud Ollama, Kubernetes, authentication, and configuration.
 - [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md): supported LLM/embedding providers and the
