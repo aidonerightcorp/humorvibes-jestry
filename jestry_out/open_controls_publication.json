@@ -68,6 +68,12 @@
     "deployment_checks_ok": true,
     "deployment_source_tree_sha256": "1d14275868f570b6ba4ee665b740571cddcd2d48784b0e428b72a7dc5e82d8df",
     "fresh_wheel_import_ok": true,
+    "github_actions": {
+      "container_build_and_smoke_test": "SUCCESS",
+      "python_package_and_contracts": "SUCCESS",
+      "run_id": 30280106327,
+      "validated_commit": "c26940c1aed893a907c4b6672295c4afd86bd200"
+    },
     "package_version": "0.6.0",
     "tests_passed": 156
   },
@@ -79,10 +85,16 @@
     "code_license_spdx": "Apache-2.0",
     "dataset_generator_commit": "a1aed30671416fb35735df31161fe78a33de99af",
     "generator_source_sha256": "58abeab1d14d6b278b01d6cad9ddacdf6188264cd06a83c535b2a616e46c3e61",
+    "pull_request": {
+      "draft": true,
+      "number": 1,
+      "state": "OPEN",
+      "url": "https://github.com/aidonerightcorp/humorvibes-jestry/pull/1"
+    },
     "release_tag": "humor-genome-open-controls-v1",
     "repository_url": "https://github.com/aidonerightcorp/humorvibes-jestry"
   },
-  "updated_at": "2026-07-27T15:27:34Z",
+  "updated_at": "2026-07-27T15:29:00Z",
   "truth_boundary": {
     "allowed_claim": "The public bytes reproduce a deterministic project-controlled synthetic-control corpus and its declared retrieval benchmark.",
     "brain_mechanism_established": false,
