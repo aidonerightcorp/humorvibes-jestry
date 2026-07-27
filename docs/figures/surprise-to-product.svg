@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">From predictive processing to a bounded product claim</title>
+  <desc id="desc">Five connected stages distinguish scientific framing, project hypotheses, model measurements, human outcomes, and product claims. A red boundary before human outcomes marks the point model evidence cannot cross.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#30475e"/></marker>
+    <style>
+      .box{stroke-width:2;rx:16}.h{font:700 20px system-ui,sans-serif;fill:#172033}.t{font:16px system-ui,sans-serif;fill:#263248}.small{font:14px system-ui,sans-serif;fill:#4b5568}.arrow{stroke:#30475e;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="#f8fafc"/>
+  <text x="600" y="42" text-anchor="middle" class="h" font-size="26">Evidence chain: an analogy is not yet an audience claim</text>
+  <rect class="box" x="34" y="104" width="196" height="222" fill="#e8f1ff" stroke="#557bb7"/>
+  <text x="132" y="140" text-anchor="middle" class="h">Scientific framing</text>
+  <text x="54" y="178" class="t"><tspan x="54">Predictive coding</tspan><tspan x="54" dy="27">Information theory</tspan><tspan x="54" dy="27">Free-energy principle</tspan></text>
+  <text x="54" y="282" class="small"><tspan x="54">Starting framework;</tspan><tspan x="54" dy="22">not proof of humor</tspan></text>
+  <line class="arrow" x1="230" y1="215" x2="270" y2="215"/>
+  <rect class="box" x="272" y="104" width="196" height="222" fill="#f3edff" stroke="#7961a8"/>
+  <text x="370" y="140" text-anchor="middle" class="h">Comic hypothesis</text>
+  <text x="292" y="178" class="t"><tspan x="292">S: surprise</tspan><tspan x="292" dy="27">R: resolution</tspan><tspan x="292" dy="27">E: repair efficiency</tspan><tspan x="292" dy="27">B: bad surprise</tspan></text>
+  <text x="292" y="300" class="small">Falsifiable proposal</text>
+  <line class="arrow" x1="468" y1="215" x2="508" y2="215"/>
+  <rect class="box" x="510" y="104" width="196" height="222" fill="#e7f7f5" stroke="#3b8b82"/>
+  <text x="608" y="140" text-anchor="middle" class="h">Model instruments</text>
+  <text x="530" y="178" class="t"><tspan x="530">Frozen checkpoint</tspan><tspan x="530" dy="27">Token NLL</tspan><tspan x="530" dy="27">Controlled ablations</tspan><tspan x="530" dy="27">Uncertainty</tspan></text>
+  <text x="530" y="300" class="small">Model-specific evidence</text>
+  <line class="arrow" x1="706" y1="215" x2="746" y2="215"/>
+  <line x1="730" y1="78" x2="730" y2="365" stroke="#c63c45" stroke-width="4" stroke-dasharray="10 8"/>
+  <text x="730" y="390" text-anchor="middle" class="h" fill="#a3242d">HUMAN CLAIM GATE</text>
+  <text x="730" y="416" text-anchor="middle" class="small">No model score crosses this boundary alone</text>
+  <rect class="box" x="748" y="104" width="196" height="222" fill="#fff4dc" stroke="#bf8930"/>
+  <text x="846" y="140" text-anchor="middle" class="h">Human outcomes</text>
+  <text x="768" y="178" class="t"><tspan x="768">Comprehension</tspan><tspan x="768" dy="27">Amusement</tspan><tspan x="768" dy="27">Laughter / choice</tspan><tspan x="768" dy="27">Harm / regret</tspan></text>
+  <text x="768" y="300" class="small">Population + context</text>
+  <line class="arrow" x1="944" y1="215" x2="984" y2="215"/>
+  <rect class="box" x="986" y="104" width="180" height="222" fill="#eaf7ea" stroke="#4d8c55"/>
+  <text x="1076" y="140" text-anchor="middle" class="h">Product claim</text>
+  <text x="1006" y="178" class="t"><tspan x="1006">Named use case</tspan><tspan x="1006" dy="27">Named comparison</tspan><tspan x="1006" dy="27">Effect + interval</tspan><tspan x="1006" dy="27">Known population</tspan></text>
+  <text x="1006" y="300" class="small">Bounded, reversible</text>
+  <rect x="205" y="458" width="790" height="42" rx="21" fill="#172033"/>
+  <text x="600" y="485" text-anchor="middle" font-family="system-ui,sans-serif" font-size="17" fill="#fff">Current public result: Gemma surprisal instrument works; human or product advantage is not established.</text>
+</svg>

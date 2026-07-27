@@ -1,0 +1,135 @@
+{
+  "checks": [
+    {
+      "evidence": "public summary exposes only configured=true/false",
+      "name": "secrets_absent_from_public_settings",
+      "passed": true
+    },
+    {
+      "evidence": "host=https://ollama.com",
+      "name": "ollama_key_selects_tls_cloud_endpoint",
+      "passed": true
+    },
+    {
+      "evidence": "provider credentials remain separately scoped",
+      "name": "ollama_key_is_not_reused_as_openai_credential",
+      "passed": true
+    },
+    {
+      "evidence": "observed=invalid_base_url; expected=invalid_base_url",
+      "name": "base_url_rejects_embedded_credentials",
+      "passed": true
+    },
+    {
+      "evidence": "observed=insecure_remote_url; expected=insecure_remote_url",
+      "name": "base_url_rejects_public_plain_http",
+      "passed": true
+    },
+    {
+      "evidence": "observed=invalid_base_url; expected=invalid_base_url",
+      "name": "base_url_rejects_path_traversal",
+      "passed": true
+    },
+    {
+      "evidence": "observed=invalid_endpoint; expected=invalid_endpoint",
+      "name": "endpoint_rejects_query_injection",
+      "passed": true
+    },
+    {
+      "evidence": "observed=embedding_count_mismatch; expected=embedding_count_mismatch",
+      "name": "embedding_count_mismatch_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "observed=embedding_dimension_mismatch; expected=embedding_dimension_mismatch",
+      "name": "embedding_dimension_drift_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "observed=nonfinite_embedding_value; expected=nonfinite_embedding_value",
+      "name": "embedding_nan_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "observed=invalid_embedding_value; expected=invalid_embedding_value",
+      "name": "embedding_boolean_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "observed=zero_embedding_vector; expected=zero_embedding_vector",
+      "name": "embedding_zero_vector_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "observed=embedding_dimension_mismatch; expected=embedding_dimension_mismatch",
+      "name": "cosine_dimension_mismatch_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "observed=unknown_llm_model; expected=unknown_llm_model",
+      "name": "llm_model_allowlist_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "observed=unknown_embedding_model; expected=unknown_embedding_model",
+      "name": "embedding_model_allowlist_fails_closed",
+      "passed": true
+    },
+    {
+      "evidence": "two repeated multilingual batches matched exactly",
+      "name": "offline_hash_embedding_is_deterministic_and_unicode_aware",
+      "passed": true
+    },
+    {
+      "evidence": "positive synthetic fixture remained L1_OFFLINE_CONTRACT",
+      "name": "synthetic_positive_effect_cannot_authorize_human_claim",
+      "passed": true
+    },
+    {
+      "evidence": "observed=forbidden_study_field; expected=forbidden_study_field",
+      "name": "study_export_rejects_raw_material",
+      "passed": true
+    },
+    {
+      "evidence": "observed=duplicate_response_id; expected=duplicate_response_id",
+      "name": "study_export_rejects_duplicate_responses",
+      "passed": true
+    },
+    {
+      "evidence": "observed=invalid_study_value; expected=invalid_study_value",
+      "name": "study_export_rejects_nonfinite_ratings",
+      "passed": true
+    },
+    {
+      "evidence": "observed=incomplete_paired_block; expected=incomplete_paired_block",
+      "name": "study_export_rejects_incomplete_paired_blocks",
+      "passed": true
+    }
+  ],
+  "model_downloads": 0,
+  "network_calls": 0,
+  "ok": true,
+  "passed": 21,
+  "receipt_type": "humorvibes_adversarial_integration_audit",
+  "receipt_version": 1,
+  "scope": {
+    "covered": [
+      "secret exposure",
+      "URL and endpoint validation",
+      "model allowlists",
+      "embedding response corruption",
+      "cosine preconditions",
+      "deterministic offline embeddings",
+      "synthetic-evidence claim gates",
+      "study schema, privacy, finiteness, uniqueness, and paired-design validation"
+    ],
+    "not_covered": [
+      "live provider availability",
+      "model quality",
+      "human funniness",
+      "human-study recruitment, consent operations, and external replication",
+      "cluster-level denial-of-service"
+    ]
+  },
+  "total": 21
+}

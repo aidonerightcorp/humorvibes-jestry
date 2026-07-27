@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 
 import pytest
 
@@ -47,12 +48,16 @@ def test_canonical_notebook_is_deterministic_public_and_schema_clean() -> None:
     assert "What is the proposed solution or exploration?" in opening
     assert "What did we learn?" in opening
     assert "What can people use this for?" in opening
-    assert "humor-genome-wave2-v7" in opening
+    assert "humor-genome-wave2-v8" in opening
     all_source = "\n".join("".join(cell["source"]) for cell in nb["cells"])
     assert "humor_genome_wave2_executive_summary.json" in all_source
     assert "## 6. What we learned" in all_source
     assert "## 7. What people can use this for" in all_source
     assert "model output is human laughter" in all_source
+    assert "surprise-reduction engine" in all_source
+    assert "docs/RESEARCH_FOUNDATIONS.md" in all_source
+    assert "synthetic_demo_receipt" in all_source
+    assert "claim ready:" in all_source
     ids = [cell.get("id") for cell in nb["cells"]]
     assert all(ids) and len(ids) == len(set(ids))
     for cell in nb["cells"]:
@@ -79,6 +84,8 @@ def test_open_project_documentation_is_linked_and_submission_docs_are_archived()
         "ROADMAP.md": "P1 — test context",
         "docs/EXPANSION_GUIDE.md": "Definition of done",
         "docs/PRODUCT_AND_RESEARCH_USE_CASES.md": "Claim gate",
+        "docs/RESEARCH_FOUNDATIONS.md": "Five quantities that must not be collapsed",
+        "docs/REAL_WORLD_STUDY_WORKBENCH.md": "claim_ready: true",
         "docs/NOTEBOOKS.md": "Clarity contract",
     }
     for relative, phrase in required.items():
@@ -91,6 +98,31 @@ def test_open_project_documentation_is_linked_and_submission_docs_are_archived()
         assert "archive" in opening or "historical" in opening
     assert "<YOUR-VIDEO-URL-HERE>" not in (
         root / "SUBMISSION_PASTE_PACK.md").read_text(encoding="utf-8")
+
+
+def test_research_foundation_sources_and_accessible_diagrams_are_present() -> None:
+    root = Path(__file__).resolve().parents[1]
+    foundation = (root / "docs/RESEARCH_FOUNDATIONS.md").read_text(encoding="utf-8")
+    for source in (
+        "doi.org/10.1038/nrn2787",
+        "doi.org/10.1038/4580",
+        "aclanthology.org/N01-1021",
+        "doi.org/10.1016/j.cognition.2013.02.013",
+        "doi.org/10.1177/0956797610376073",
+        "doi.org/10.1016/0022-0965(72)90074-4",
+    ):
+        assert source in foundation
+    assert "not interchangeable" in foundation
+    assert "0 of 10" in foundation
+    for relative in (
+        "docs/figures/surprise-to-product.svg",
+        "docs/figures/evidence-ladder.svg",
+    ):
+        svg = root / relative
+        parsed = ET.parse(svg).getroot()
+        assert parsed.tag.endswith("svg")
+        assert any(child.tag.endswith("title") and (child.text or "").strip() for child in parsed)
+        assert any(child.tag.endswith("desc") and (child.text or "").strip() for child in parsed)
 
 
 def test_caption_model_checkpoint_is_atomic(monkeypatch, tmp_path: Path) -> None:

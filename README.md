@@ -17,6 +17,8 @@ can help writers search and draft, researchers design and reproduce studies, edu
 evidence boundaries, and builders prototype consent-based applications. Human response remains the
 claim gate.
 
+![From predictive-processing framework to a bounded product claim](docs/figures/surprise-to-product.svg)
+
 ## Start here
 
 | Public artifact | Open it | Status | What it is for |
@@ -50,6 +52,14 @@ loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross
 - [`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md): what a
   comedian, audience member, academic, educator, curator, or product team can use now; the missing
   evidence; and the claim gates for stronger conclusions.
+- [`docs/RESEARCH_FOUNDATIONS.md`](docs/RESEARCH_FOUNDATIONS.md): the sourced starting point,
+  definitions, intellectual lineage, evidence map, falsifiable predictions, and the precise sense
+  in which “surprise reduction” is a framework rather than a completed result.
+- [`docs/REAL_WORLD_STUDY_WORKBENCH.md`](docs/REAL_WORLD_STUDY_WORKBENCH.md): the executable,
+  privacy-minimized writer crossover protocol, local analyzer, evidence ladder, and remaining
+  human-study infrastructure. The checked-in
+  [`study_demo_receipt.json`](jestry_out/study_demo_receipt.json) proves the synthetic positive
+  effect remains non-claim-ready.
 - [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md): the canonical notebook, the role of each supporting
   notebook, and the clarity contract for future experiments.
 
@@ -71,6 +81,7 @@ source .venv/bin/activate
 python3 -m pip install -e ".[api]"
 humorvibes doctor
 humorvibes adversarial
+humorvibes study-demo
 humorvibes-api
 ```
 
@@ -169,13 +180,14 @@ Genome NYC hackathon. It was formerly called "Punchline Mesh", so a few historic
 retain that name for stability.
 
 The theory is developed in `THEORY.md`, a derivative of Karl Friston's "Your Brain Is a Detective
-Minimizing Surprise" (youtube.com/watch?v=g69Lj3huRvw). The brain is a mesh of dynamic neural
-networks (weighted edges, sparse ATP-budgeted firing, tunable paths) supervised by a meta-model
-that minimizes surprise. A joke is a controlled prediction error with a cheap, permitted
-repair: surprising (S), resolvable through a hidden frame (R), affordable (E), and never
-colliding with override-authority meta-meshes (B, the canonical bad-surprise definition below).
-Gemma is an instrument here, not an oracle. S/R/E are read off its logits
-(`mesh_signals.py`), not self-reported.
+Minimizing Surprise" framing and the wider predictive-processing literature. “The brain is a
+surprise-reduction engine” is the project's motivating shorthand, not a settled biological claim.
+The project hypothesizes that a joke can be a controlled prediction error with a compact,
+audience-permitted repair: surprising (S), resolvable through a hidden frame (R), affordable (E),
+and low in audience-relative bad surprise (B). Gemma is an instrument here, not an oracle. The
+public notebook has pinned `S`; `R/E/B` remain proposed constructs requiring ablations and human
+validation. See the [sourced foundation](docs/RESEARCH_FOUNDATIONS.md) for the evidence map and
+primary references.
 
 The prototype implements one loop:
 

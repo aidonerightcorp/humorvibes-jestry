@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="570" viewBox="0 0 1100 570" role="img" aria-labelledby="title desc">
+  <title id="title">HumorVibes evidence ladder</title>
+  <desc id="desc">Five ascending evidence levels map capability, offline evaluation, opt-in pilot, preregistered held-out study, and external replication to increasingly specific allowed claims.</desc>
+  <style>.h{font:700 25px system-ui,sans-serif;fill:#172033}.l{font:700 18px system-ui,sans-serif;fill:#172033}.t{font:15px system-ui,sans-serif;fill:#263248}.w{fill:#fff}.step{stroke:#30475e;stroke-width:2}</style>
+  <rect width="1100" height="570" fill="#f8fafc"/>
+  <text x="550" y="40" text-anchor="middle" class="h">Evidence ladder: what each result permits you to say</text>
+  <path class="step" fill="#e8f1ff" d="M55 458h190v72H55z"/><text x="72" y="485" class="l">L0 Capability</text><text x="72" y="510" class="t">“The system ran.”</text>
+  <path class="step" fill="#e7f7f5" d="M245 382h190v148H245z"/><text x="262" y="414" class="l">L1 Offline benchmark</text><text x="262" y="440" class="t"><tspan x="262">“On frozen data and</tspan><tspan x="262" dy="21">this instrument…”</tspan></text>
+  <path class="step" fill="#f3edff" d="M435 298h190v232H435z"/><text x="452" y="330" class="l">L2 Opt-in pilot</text><text x="452" y="356" class="t"><tspan x="452">“Feasible for these</tspan><tspan x="452" dy="21">participants; exploratory</tspan><tspan x="452" dy="21">outcomes were…”</tspan></text>
+  <path class="step" fill="#fff4dc" d="M625 205h190v325H625z"/><text x="642" y="237" class="l">L3 Held-out study</text><text x="642" y="263" class="t"><tspan x="642">“In the preregistered</tspan><tspan x="642" dy="21">population and context,</tspan><tspan x="642" dy="21">the named outcome changed</tspan><tspan x="642" dy="21">by effect + interval.”</tspan></text>
+  <path class="step" fill="#eaf7ea" d="M815 100h230v430H815z"/><text x="832" y="132" class="l">L4 External replication</text><text x="832" y="158" class="t"><tspan x="832">“The bounded result</tspan><tspan x="832" dy="21">replicated across the</tspan><tspan x="832" dy="21">named new populations,</tspan><tspan x="832" dy="21">contexts, or teams.”</tspan></text>
+  <line x1="55" y1="550" x2="1045" y2="550" stroke="#c63c45" stroke-width="3"/>
+  <text x="550" y="566" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#a3242d">No level authorizes “universally funny,” audience-trait inference, or a safety guarantee.</text>
+</svg>

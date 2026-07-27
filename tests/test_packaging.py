@@ -97,13 +97,13 @@ def test_helm_chart_preserves_secure_defaults_and_supports_image_digests() -> No
         path.read_text(encoding="utf-8")
         for path in sorted((ROOT / "deploy/helm/humorvibes/templates").glob("*.yaml"))
     )
-    assert chart["version"] == "0.4.0" and chart["appVersion"] == "0.4.0"
+    assert chart["version"] == "0.5.0" and chart["appVersion"] == "0.5.0"
     assert values["replicaCount"] == 2
     assert values["service"]["type"] == "ClusterIP"
     assert values["podSecurityContext"]["runAsNonRoot"] is True
     assert values["securityContext"]["readOnlyRootFilesystem"] is True
     assert values["securityContext"]["capabilities"]["drop"] == ["ALL"]
-    assert values["image"]["tag"] == "0.4.0" and values["image"]["digest"] == ""
+    assert values["image"]["tag"] == "0.5.0" and values["image"]["digest"] == ""
     digest_schema = schema["properties"]["image"]["properties"]["digest"]
     assert "sha256" in digest_schema["pattern"]
     assert "@{{ .Values.image.digest }}" in deployment

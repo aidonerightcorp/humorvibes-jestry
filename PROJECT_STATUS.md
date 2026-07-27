@@ -18,7 +18,7 @@ move underneath an existing run.
 
 ## Application and deployment extension
 
-The repository now also contains a separate `humorvibes-research` 0.4.0 application layer:
+The repository now also contains a separate `humorvibes-research` 0.5.0 application layer:
 
 - an importable Python SDK and a schema-first FastAPI service;
 - authenticated native Ollama (local or cloud) and OpenAI-compatible generation;
@@ -27,6 +27,8 @@ The repository now also contains a separate `humorvibes-research` 0.4.0 applicat
   and a deterministic adversarial audit;
 - a typed dependency-free remote client and checked-in OpenAPI contract for application
   integration;
+- a strict, privacy-minimized writer-study protocol, synthetic contract fixture, paired analyzer,
+  writer-clustered uncertainty, evidence ladder, and local claim-gated receipt;
 - a multi-stage non-root Docker image, hardened offline/local-Ollama/cloud-Ollama Compose profiles,
   a two-replica non-root Kubernetes Kustomize base, and a configurable Helm chart.
 
@@ -60,7 +62,8 @@ environment. This extension does not alter the immutable Kaggle notebook or its 
   generation, automated tests, semantic release checks, and a machine-readable publication
   receipt at [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
 - The notebook opens with the problem, proposed exploration, controlling results, use cases, and
-  limitations, and emits a machine-readable executive-summary artifact. The supporting notebook
+  limitations, includes a sourced predictive-processing-to-product evidence map, and emits a
+  machine-readable executive-summary artifact. The supporting notebook
   map is documented in [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md).
 
 ## What is deliberately not claimed
@@ -104,7 +107,9 @@ selection, an audience's response, a native speaker's judgment, or a preregister
 [`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md) defines the
 persona-specific workflows, minimum study schema, success measures, and claim gates. The
 highest-value next experiment is a preregistered within-writer crossover trial with blinded,
-opt-in audience evaluation—not a larger model-only ranking.
+opt-in audience evaluation—not a larger model-only ranking. The runnable local contract is in
+[`docs/REAL_WORLD_STUDY_WORKBENCH.md`](docs/REAL_WORLD_STUDY_WORKBENCH.md); its synthetic demo is
+explicitly not evidence of advantage.
 
 ## Where help is useful
 

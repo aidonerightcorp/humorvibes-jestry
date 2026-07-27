@@ -1,0 +1,79 @@
+{
+  "allowed_claim": "The deterministic study contract and analyzer executed on synthetic data.",
+  "analysis_digest": "f6fbc217597262f79246b25de07fae008146093cc2a3047574a7b1cb6a903652",
+  "bootstrap": {
+    "independent_unit": "writer",
+    "method": "percentile writer-cluster bootstrap over writer-level mean paired effects",
+    "repetitions": 5000,
+    "seed": 20260726
+  },
+  "claim_gate": {
+    "checks": {
+      "consent_required": true,
+      "held_out_required": true,
+      "human_observed": false,
+      "lower_interval_exceeds_minimum_effect": true,
+      "minimum_audiences": false,
+      "minimum_premises": false,
+      "minimum_ratings": true,
+      "minimum_writers": false,
+      "preregistered": false
+    },
+    "claim_ready": false,
+    "failed": [
+      "human_observed",
+      "preregistered",
+      "minimum_writers",
+      "minimum_premises",
+      "minimum_audiences"
+    ]
+  },
+  "confidence_interval_95": [
+    0.44999999999999996,
+    0.4500000000000001
+  ],
+  "data_origin": "synthetic_contract_fixture",
+  "effect_direction": "assisted_minus_control",
+  "estimate": 0.45,
+  "evidence_level": "L1_OFFLINE_CONTRACT",
+  "harm_or_regret": {
+    "count": 0,
+    "rate": 0.0
+  },
+  "minimally_important_difference": 0.25,
+  "primary_outcome": "audience_rating",
+  "receipt_type": "humorvibes_real_world_study_analysis",
+  "receipt_version": 1,
+  "schema_version": "1.0",
+  "secondary_descriptives": {
+    "assisted": {
+      "materials": 12,
+      "mean_material_rating": 3.4499999999999997,
+      "mean_minutes_to_draft": 35.5,
+      "performance_rate": 0.5,
+      "selection_rate": 1.0
+    },
+    "control": {
+      "materials": 12,
+      "mean_material_rating": 3.0,
+      "mean_minutes_to_draft": 43.5,
+      "performance_rate": 0.0,
+      "selection_rate": 0.5
+    }
+  },
+  "study_id": "writer-assistance-crossover-v1",
+  "truth_boundary": {
+    "ratings_are_aggregated_before_writer_cluster_bootstrap": true,
+    "raw_material_or_identity_accepted": false,
+    "synthetic_data_authorizes_human_claim": false,
+    "universal_funniness_claim_authorized": false
+  },
+  "units": {
+    "audiences": 8,
+    "materials": 24,
+    "paired_writer_premise_blocks": 12,
+    "ratings": 192,
+    "venues": 2,
+    "writers": 6
+  }
+}

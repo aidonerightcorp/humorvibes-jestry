@@ -44,13 +44,18 @@ answers availability; it does not establish model quality, correctness, or funni
 - invalid request IDs, inbound Bearer auth, per-process rate limits, and security headers;
 - container/Kubernetes/Helm non-root identity, read-only filesystems, dropped capabilities,
   probes, bounded resources, internal-only Service type, and absence of literal secrets;
-- retired Ollama singular embedding endpoint regression.
+- retired Ollama singular embedding endpoint regression;
+- synthetic positive effects attempting to cross a human-evidence claim gate;
+- study exports containing raw material or direct identity, unknown fields, duplicate IDs,
+  non-finite ratings, missing permission/consent/holdout, or incomplete paired blocks.
 
 ## Deliberate boundaries
 
 The suite does not claim coverage of provider-side compromise, model prompt injection, semantic
 embedding quality, distributed denial-of-service, TLS termination, identity lifecycle, supply-chain
-signing, or human safety/funniness validation. The base Kubernetes manifests do not include an
+signing, or human safety/funniness validation. Study-contract tests do not replace ethics review,
+recruitment, consent operations, randomization delivery, or external replication. The base
+Kubernetes manifests do not include an
 Ingress, global rate limiter, external secret operator, or network policy because those depend on
 the target cluster. Add them in a deployment-specific overlay rather than pretending one generic
 manifest fits every environment.

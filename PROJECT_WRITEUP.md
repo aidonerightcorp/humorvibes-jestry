@@ -38,6 +38,13 @@ means “less predictable to this checkpoint under this split,” not “funnier
 proxies introduce their own model and annotation assumptions, so the release does not collapse
 them into one universal humor number.
 
+“The brain is a surprise-reduction engine” is the motivating shorthand, not a biological result
+of this project. Predictive coding, the free-energy principle, information-theoretic surprisal,
+token negative log-likelihood, human comprehension, amusement, and laughter occupy different
+levels of explanation. [`docs/RESEARCH_FOUNDATIONS.md`](docs/RESEARCH_FOUNDATIONS.md) defines those
+terms, traces the primary literature, and maps each link in the theory to current evidence and
+missing tests.
+
 ## Building a corpus that can support honest questions
 
 The full local inventory contains 3,164,600 rows in 217 source families with 62 language labels.
@@ -141,7 +148,13 @@ The text-only bound rests on repeated generic captions and a stated additive var
 The safety and resolution dimensions still need stronger human annotation and audience-specific
 validation.
 
-The most valuable next experiment is multimodal: give a model the caption and drawing, hold out
+For the writer-facing product, the most valuable next experiment is a preregistered within-writer
+crossover with paired premises and held-out, consenting audiences. The repository now supplies the
+strict protocol, privacy-minimized schemas, synthetic fixture, writer-clustered analysis, and claim
+gate in [`docs/REAL_WORLD_STUDY_WORKBENCH.md`](docs/REAL_WORLD_STUDY_WORKBENCH.md). It supplies no
+human observations, and its deliberately positive synthetic fixture remains non-claim-ready.
+
+For the caption research, the most valuable next experiment is multimodal: give a model the caption and drawing, hold out
 whole contests, and test whether it moves beyond the text-only result without leaking contest
 identity. Other high-priority work includes reliability-weighted training, human-authored frame
 annotations, native-form taxonomies for under-covered languages, larger pre-registered form

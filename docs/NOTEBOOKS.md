@@ -5,7 +5,9 @@
 [`wave2_notebook/humor_genome_wave2.ipynb`](../wave2_notebook/humor_genome_wave2.ipynb) is the
 single canonical executable research release and the notebook published publicly on Kaggle. It
 states the problem, proposed exploration, controlling findings, outputs, practical uses, and
-limitations before exposing implementation detail. Its final machine-readable executive summary
+limitations before exposing implementation detail. It also names the predictive-processing
+starting point, cites its scientific lineage, renders the model-to-human evidence boundary, and
+runs the synthetic study-contract gate. Its final machine-readable executive summary
 asserts the controlling values and writes a JSON artifact on Kaggle.
 
 The source of that notebook is
@@ -42,6 +44,7 @@ them from code:
 5. What files or machine-readable outputs were produced?
 6. What can a writer, audience member, academic, educator, curator, or builder safely use now?
 7. What evidence is still required before a stronger claim is allowed?
+8. Which claims are prior literature, project hypotheses, model measurements, or human outcomes?
 
 The controlling conclusion must appear before secondary observations. Point-estimate rankings do
 not supersede interval results, model surprisal does not become funniness, and successful execution

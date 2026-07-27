@@ -2,8 +2,8 @@
   "checks": [
     {
       "evidence": {
-        "passed": 16,
-        "total": 16
+        "passed": 21,
+        "total": 21
       },
       "name": "adversarial_contracts",
       "ok": true
@@ -12,7 +12,9 @@
       "evidence": {
         "embedding_count": 2,
         "embedding_model": "hash:128",
-        "ready": true
+        "ready": true,
+        "synthetic_study_claim_ready": false,
+        "synthetic_study_evidence_level": "L1_OFFLINE_CONTRACT"
       },
       "name": "offline_sdk",
       "ok": true
@@ -51,10 +53,11 @@
           "/v1/capabilities",
           "/v1/embed",
           "/v1/similarity",
-          "/v1/signals"
+          "/v1/signals",
+          "/v1/research/study-template"
         ],
-        "image": "humorvibes-research:0.4.0",
-        "image_id": "sha256:e5c2ceecfddcf1279a1861735034ac1014231dda907ef7b4ea87f4e19449948a",
+        "image": "humorvibes-research:0.5.0",
+        "image_id": "sha256:7cbd155ab23360a19745897c4d4e7d077e673c6c6c97ad9f3d12081db7f19b23",
         "offline_signals_measured": false,
         "readonly_root": true,
         "ready": true,
@@ -99,19 +102,19 @@
     "docker_compose": "5.1.4",
     "python": "3.12.13"
   },
-  "generated_at": "2026-07-27T02:39:30.628787+00:00",
+  "generated_at": "2026-07-27T03:29:44.483277+00:00",
   "ok": true,
   "receipt_type": "humorvibes_deployment_validation",
   "receipt_version": 3,
   "source": {
     "files": {
       ".dockerignore": "e214262cc2c6d896f2941bb203ac0429db98036683479a9ecf22613a2db839a9",
-      "Dockerfile": "e289f996308ae668661582a7e2b2a833f90e2f0bf7bea8efac988314b5d28ca7",
+      "Dockerfile": "5cd8aec6ca62ba3a86fe35ae80935655a3941d368a1cc88d26bc827d1448aee8",
       "compose.ollama-cloud.yaml": "7e91f8f322174b7e242032fb2883edb0526fb72e5f369dbd3fad52b21271009b",
       "compose.ollama.yaml": "8b96a490ef3c26ffaabf4362d0393585d1ea93dd9cf4711b34da8757118ef610",
-      "compose.yaml": "938edab3e1432e72c15be92e4b0a3ad4e588eb66437d36b9a50ca5edd6ede64f",
-      "deploy/helm/humorvibes/Chart.yaml": "f97ee05b41893aee41ca12349301ca4ac1bc563ef21025b0a66ff6b4a73fc9f5",
-      "deploy/helm/humorvibes/README.md": "7055edf3e39607a2108dcbe3bbd4582d9b103a1dfda179ea0ba133a20441fda2",
+      "compose.yaml": "f6835ff56b628edbe801f8fb2ec7fa126c2dc6f95f453e00f8b2e82ef337ffa4",
+      "deploy/helm/humorvibes/Chart.yaml": "5d707351a7179980566396148590904ff3a458217e3670df9182be38eae78e9c",
+      "deploy/helm/humorvibes/README.md": "296b9411effd79a303000d683fea7951258312cf0b7d98a59748f73145efb478",
       "deploy/helm/humorvibes/templates/NOTES.txt": "ecdbb2fe885d8f5fa96321fb357f56bb588fc2d2cda4fc7c602080c522d42c95",
       "deploy/helm/humorvibes/templates/_helpers.tpl": "050bba67dd3ae923e640b3ca84644ebf5b14bd6ecd66ac2b11af455277c0e636",
       "deploy/helm/humorvibes/templates/configmap.yaml": "afa4722ace1691bb46a297498322c4eb553bc989f6748bb74a7170c0639ebcb9",
@@ -120,35 +123,36 @@
       "deploy/helm/humorvibes/templates/pdb.yaml": "ca51af660969c6dcb2ea0917f45d2003798e430a1d21b8f34fcc9b214892bc0d",
       "deploy/helm/humorvibes/templates/service.yaml": "6bbcd869f0c9e4f35ae69c54e65a85f324317bf653a001431f5433622aca275c",
       "deploy/helm/humorvibes/values.schema.json": "6765049b412a3ad82b4fdc500ff0569078f8329ef207f393292a08b8b708c70d",
-      "deploy/helm/humorvibes/values.yaml": "c213cc4a9ffa149e09651226c74a63629416831f283cbfe35a970d79550b354d",
+      "deploy/helm/humorvibes/values.yaml": "f1d37cb52163629b8afa6ff9650903d8997c96d5e6ca283c3610cf247b42015d",
       "deploy/kubernetes/configmap.yaml": "d354dc55624cdabafe791f0f402722d6c280ed74e97c8e238e79ec2bc2985af9",
-      "deploy/kubernetes/deployment.yaml": "d97edd4ff0eb559f1c28858d5348e5c787a70af5337e24b5a705321fca919b75",
+      "deploy/kubernetes/deployment.yaml": "e81704c24dd37c5caa96d686c3a9be41568723eab1c4d99c845950bcdbdd8c9f",
       "deploy/kubernetes/kustomization.yaml": "39ae5bacf7f70a2210e637211eb47be5d6d6e8b8387b61da292bdd00fb652825",
       "deploy/kubernetes/service.yaml": "40d44d4188eaa65533c00e1cca6a076f7b86e7371584d793a273ff1ec8924318",
-      "docs/openapi.json": "0c5238360a8c60afb5f34775964bfe44ce41be46d5c33be8b6d659ac34b94011",
+      "docs/openapi.json": "d59cb29efa6274d7b06ec89f7c47280770813c49b661472e5d2b0b06b8cf1573",
       "formats.py": "098b073b0b74281ad7a9170e6b43dc53280eb436a8cebb32fe562e462436b82f",
       "humor_mesh.py": "3b02ead236028a41eb525ef976f480a5b20d9be720c6cae121d92e22a4aead62",
-      "humorvibes/__init__.py": "4015ec46ab2bcd0b4d946848ea231a9ed994ed4ea67b5b5c71665cfa3a3e9e2c",
+      "humorvibes/__init__.py": "06d90f8dc63603b001e09358e9f454c4734a0d0e0c639e0058739701e6d69a38",
       "humorvibes/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
-      "humorvibes/adversarial.py": "c88872b9e8ecd57f0e5fccabf39cae803f0c45ee8a6cd3f0691b9734b92a6c7f",
-      "humorvibes/api.py": "9614ac3a4b8fb091bcbc537c2b1d2cac3d70b08475615842f8cef84f00113718",
-      "humorvibes/cli.py": "c71171ecf703db12502d3d1c199cd9f28c9b7087676b9131cb73134a37344d3f",
-      "humorvibes/client.py": "9abfd1b0f076f24c9f9326cc4ff4b7b40707ffef9beac6b1c66cfaffb0d92b8c",
+      "humorvibes/adversarial.py": "34f790ac00d63ab63146e3d3a37f9fa18a8bec132398ec9acd6b83428e164155",
+      "humorvibes/api.py": "d2c7bafdf45404888d1aae613e1e6cc48c8862bc90f8e9a5902a9a78cc8ecdf7",
+      "humorvibes/cli.py": "159d23a31436671a4245dbdebbbd3efcf602b4c8a89986814320fafb654bdaf7",
+      "humorvibes/client.py": "5e9da7fbe1827985c90ef3d44083537707472f3e92e12cd4b472c5027c1ef0d9",
       "humorvibes/config.py": "90459a129d2707b39137f2110f6a3f8ee27b11688b506436917994d4afbd5729",
       "humorvibes/embeddings.py": "e4c8e19cc4e700d8e742f5e832752e0d58305644fcc9218abcc949adf18e2e23",
       "humorvibes/errors.py": "2a8c598797812fb587a5d087a9677dcac17cfcb4b6dd58acdba8704201ca0ba4",
       "humorvibes/http.py": "0055a33cd5cb55130bece4412bb42240babfa523a00057c49f23058efe46fc25",
       "humorvibes/llm.py": "ca81b495a37ffe702384c1266d483949bc8acc0b1ce1f8af6644e313879732b2",
       "humorvibes/openapi.py": "542e45dccf1e593a492b76216f6d4488f5b5fd1b2848f439f647f118c68939c4",
-      "humorvibes/service.py": "106bda2aea608aa51e92b836249b6f9a39e7bdb325b14555f57be70a98162cce",
+      "humorvibes/service.py": "5487ca2fdafb6be7a5ade6fcfbc0cbde43cc673ceddefe975a1841c5a97f48a3",
       "humorvibes/signal_providers.py": "2eb4674b21094b271bb4b44f6eb06837c11c4440745ca68376738284ccfa420c",
+      "humorvibes/studies.py": "e58201b725f16ac885f7a57271813515ef2874de1dd1ba7ede516f38367c983e",
       "mesh_signals.py": "85d6638471bc277cfa6702fb775ffe8ee188b2220af689166be8b98d6693195b",
-      "pyproject.toml": "91b55cb2ddd4d011a5ad2831b3cbecc67bc17117ef934a8d61c21b8b890fc0fd",
+      "pyproject.toml": "de557eec596cfd8f3acb4c41ecc1924eba288882ce140031e8344a105d670e96",
       "requirements-api.lock": "8ee9f087c401b739ccb5c26ec0245c060b2385df6ff386f7ba3fbe977f179d20",
-      "uv.lock": "ca61e9349f38988fdab2ceacd5399146f9289ebdbf268506ef7fd6e2f0057e92",
-      "verify_deployment.py": "cb0a321883cff049dcf1dccce22a1a2960219d3fb19800023eb443cbea4b85ec"
+      "uv.lock": "ba4f833a001054121112c213598ef45a8a4527014a55254ab89debdb15eb00c6",
+      "verify_deployment.py": "0b651f9923a6c200c7ce40f365a1d51f1c91acdde22d9a6ea00aa3f49d630099"
     },
-    "source_tree_sha256": "f07c5003e4ab80831e1ad7e87039fc27c1b25a713b5634b0b1ebd6bd796bed98"
+    "source_tree_sha256": "3e9b4f5430c752ed3d7cc250e5814c320f5f01b18cd1ca531f0ab71d874911f6"
   },
   "truth_boundary": {
     "canonical_kaggle_measurement_changed": false,

@@ -61,6 +61,31 @@ def main() -> int:
     )
     openapi.add_argument("--out", type=Path, default=Path("docs/openapi.json"))
 
+    study_protocol = sub.add_parser(
+        "study-protocol",
+        help="write the frozen privacy-minimized writer-study protocol",
+    )
+    study_protocol.add_argument("--out", type=Path, help="write JSON instead of only printing it")
+    study_protocol.add_argument(
+        "--human-observed",
+        action="store_true",
+        help="mark the protocol for real human observations; preregistration is still required",
+    )
+
+    study_demo = sub.add_parser(
+        "study-demo",
+        help="run the study analyzer on synthetic contract data (never claim-ready)",
+    )
+    study_demo.add_argument("--out", type=Path, help="also write the JSON receipt")
+
+    study_analyze = sub.add_parser(
+        "study-analyze",
+        help="analyze a local privacy-minimized study bundle against a frozen protocol",
+    )
+    study_analyze.add_argument("--protocol", type=Path, required=True)
+    study_analyze.add_argument("--bundle", type=Path, required=True)
+    study_analyze.add_argument("--out", type=Path, help="also write the JSON receipt")
+
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
     if args.command == "serve":
@@ -86,6 +111,39 @@ def main() -> int:
         from .openapi import export_openapi
 
         print(export_openapi(args.out))
+        return 0
+
+    if args.command in {"study-protocol", "study-demo", "study-analyze"}:
+        from .studies import (
+            analyze_study,
+            default_study_protocol,
+            synthetic_demo_receipt,
+        )
+
+        try:
+            if args.command == "study-protocol":
+                payload = default_study_protocol(
+                    data_origin="human_observed" if args.human_observed else "synthetic_contract_fixture"
+                )
+            elif args.command == "study-demo":
+                payload = synthetic_demo_receipt()
+            else:
+                protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
+                bundle = json.loads(args.bundle.read_text(encoding="utf-8"))
+                payload = analyze_study(protocol, bundle)
+        except (OSError, json.JSONDecodeError) as exc:
+            _dump({"error": {"code": "invalid_study_file", "message": str(exc)}})
+            return 2
+        except IntegrationError as exc:
+            _dump({"error": exc.public()})
+            return 2
+        _dump(payload)
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(
+                json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
         return 0
 
     service = HumorVibesService()

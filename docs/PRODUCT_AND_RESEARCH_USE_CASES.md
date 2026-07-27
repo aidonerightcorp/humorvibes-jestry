@@ -27,6 +27,11 @@ The practical loop is **retrieve → generate or edit → diagnose → test with
 result and context**. The human test is the decision gate; model outputs help create and organize
 candidates.
 
+The conceptual chain and its scientific sources are documented in
+[`RESEARCH_FOUNDATIONS.md`](RESEARCH_FOUNDATIONS.md). The project begins from predictive processing
+and incongruity-resolution, proposes a compact repair model, measures only model-specific quantities
+where an instrument exists, and requires human outcomes before a usefulness claim.
+
 ## Important variables the current text study does not observe
 
 Useful humor conclusions need more than joke text. A real-world study should deliberately capture
@@ -60,7 +65,10 @@ variations with `/v1/humor/generate`; let the writer annotate keep/reject/reason
 selected version with the writer's normal process in a blinded rehearsal.
 
 **Current state:** integration and candidate tooling are available. Quality advantage is not
-established.
+established. A strict local protocol, synthetic contract fixture, paired analyzer, writer-clustered
+bootstrap, and claim gate are now executable; see
+[`REAL_WORLD_STUDY_WORKBENCH.md`](REAL_WORLD_STUDY_WORKBENCH.md). The synthetic demo is not evidence
+of advantage.
 
 **Test:** randomized within-writer crossover study. Measure minutes to a performer-selected draft,
 fraction performed, blind audience response, edit distance from the performer's final wording,

@@ -135,6 +135,15 @@ def test_remote_client_environment_keeps_url_and_key_operator_scoped() -> None:
     assert "environment-secret" not in repr(client)
 
 
+def test_remote_client_discovers_study_template_without_uploading_rows() -> None:
+    stub = StubJsonClient([
+        {"privacy_boundary": {"analysis_upload_endpoint": False}},
+    ])
+    client = HumorVibesClient(transport=stub)
+    assert client.study_template()["privacy_boundary"]["analysis_upload_endpoint"] is False
+    assert stub.calls == [("/v1/research/study-template", None)]
+
+
 @pytest.mark.parametrize(
     "url",
     [

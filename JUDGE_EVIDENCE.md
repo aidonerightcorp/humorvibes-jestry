@@ -22,7 +22,7 @@ executive problem/solution/learning/use summary and emits
 within-writer crossover trial with blinded, opt-in audience evaluation. Machine-readable public
 state is in `jestry_out/wave2_publication.json`.
 
-The public repository also carries the 0.4.0 Python SDK/API, remote client, OpenAPI contract,
+The public repository also carries the 0.5.0 Python SDK/API, remote client, OpenAPI contract,
 Docker/Compose/Kustomize/Helm packaging, and a green public CI run. This is deployable source, not
 a claim that a public container image, hosted API, live Kubernetes cluster, or model-quality result
 exists.

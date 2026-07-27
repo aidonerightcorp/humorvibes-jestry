@@ -22,6 +22,7 @@ from humorvibes.adversarial import run_adversarial_suite
 from humorvibes.client import HumorVibesClient
 from humorvibes.config import Settings
 from humorvibes.service import HumorVibesService
+from humorvibes.studies import synthetic_demo_receipt
 
 ROOT = Path(__file__).resolve().parent
 
@@ -83,10 +84,18 @@ def verify_sdk() -> dict[str, Any]:
     service = HumorVibesService(Settings.from_env({}))
     embedded = service.embed(["comic timing", "timing a joke"])
     compared = service.similarity(["same text"], ["same text"])
+    study = synthetic_demo_receipt()
     assert service.ready()["ok"]
     assert embedded["model_id"] == "hash:128" and embedded["count"] == 2
     assert compared["cosine_similarity"] == [[1.0]]
-    return {"ready": True, "embedding_model": "hash:128", "embedding_count": 2}
+    assert study["claim_gate"]["claim_ready"] is False
+    return {
+        "ready": True,
+        "embedding_model": "hash:128",
+        "embedding_count": 2,
+        "synthetic_study_evidence_level": study["evidence_level"],
+        "synthetic_study_claim_ready": False,
+    }
 
 
 def verify_adversarial() -> dict[str, Any]:
@@ -189,7 +198,7 @@ def verify_helm_container(image: str) -> dict[str, Any]:
     container = pod["containers"][0]
     assert pod["automountServiceAccountToken"] is False
     assert container["securityContext"]["readOnlyRootFilesystem"] is True
-    assert container["image"] == "humorvibes-research:0.4.0"
+    assert container["image"] == "humorvibes-research:0.5.0"
     return {
         "image": image,
         "objects": identities,
@@ -258,6 +267,7 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
             "/v1/signals",
             {"setup": "A setup establishes a frame.", "punchline": "Then the frame turns."},
         )
+        study_template = json_call(base, "/v1/research/study-template")
         inspection = json.loads(command("docker", "inspect", name))[0]
         if built_image_id:
             assert inspection["Image"] == built_image_id
@@ -265,12 +275,13 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
         assert inspection["HostConfig"]["ReadonlyRootfs"] is True
         assert embedded["model_id"] == "hash:128" and embedded["count"] == 1
         assert remote_similarity["cosine_similarity"] == [[1.0]]
-        assert openapi["info"]["version"] == "0.4.0"
+        assert openapi["info"]["version"] == "0.5.0"
         assert capabilities["truth_boundary"]["generation_is_not_human_validation"] is True
         assert capabilities["product_use_cases"]["creative_assistance"]["claim_gate"] == (
             "blind_or_live_human_response"
         )
         assert signals["truth_boundary"]["teacher_forced_logprobs_measured"] is False
+        assert study_template["privacy_boundary"]["analysis_upload_endpoint"] is False
         return {
             "image": image,
             "image_id": inspection["Image"],
@@ -286,6 +297,7 @@ def verify_container(image: str, *, build: bool = True) -> dict[str, Any]:
                 "/v1/embed",
                 "/v1/similarity",
                 "/v1/signals",
+                "/v1/research/study-template",
             ],
             "offline_signals_measured": False,
         }
@@ -308,7 +320,7 @@ def main() -> int:
         action="store_true",
         help="also build, launch, and probe the image",
     )
-    parser.add_argument("--image", default="humorvibes-research:0.4.0")
+    parser.add_argument("--image", default="humorvibes-research:0.5.0")
     parser.add_argument(
         "--no-build",
         action="store_true",

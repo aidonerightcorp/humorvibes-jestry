@@ -53,6 +53,7 @@ from humorvibes import HumorVibesClient
 client = HumorVibesClient.from_env()
 capabilities = client.capabilities()
 matches = client.similarity(["expert mistake"], ["grandmaster blunder"])
+study_contract = client.study_template()  # discovery only; human rows stay local
 ```
 
 Set `HUMORVIBES_URL` and, when enabled on the server, `HUMORVIBES_API_KEY`. The complete executable
@@ -103,6 +104,18 @@ humorvibes openapi --out docs/openapi.json
 | POST | `/v1/embed` | validated batch embeddings |
 | POST | `/v1/similarity` | bounded cosine-similarity matrix |
 | POST | `/v1/signals` | existing S/R/E/B signal surface with measured state attached |
+| GET | `/v1/research/study-template` | privacy-minimized writer-study contract and truth boundary; no data upload |
+
+Run the study protocol and analyzer locally. The service deliberately does not accept human-study
+rows over HTTP:
+
+```bash
+humorvibes study-protocol --human-observed --out protocol.json
+humorvibes study-demo --out synthetic_receipt.json
+humorvibes study-analyze --protocol protocol.json --bundle privacy_minimized_bundle.json
+```
+
+See [`REAL_WORLD_STUDY_WORKBENCH.md`](REAL_WORLD_STUDY_WORKBENCH.md) before collecting data.
 
 When `HUMORVIBES_API_KEY` is set, all `/v1/*` routes and `/metrics` require
 `Authorization: Bearer <key>`. Health and version routes stay unauthenticated for orchestrator
@@ -113,9 +126,9 @@ probes. TLS belongs at the reverse proxy, ingress, or service mesh boundary.
 Build and run the image directly:
 
 ```bash
-docker build -t humorvibes-research:0.4.0 .
+docker build -t humorvibes-research:0.5.0 .
 docker run --rm --read-only --tmpfs /tmp:rw,size=64m \
-  -p 127.0.0.1:8080:8080 humorvibes-research:0.4.0
+  -p 127.0.0.1:8080:8080 humorvibes-research:0.5.0
 ```
 
 Or run the hardened Compose profile:
@@ -197,15 +210,15 @@ seccomp profile. The distinction among probe types follows the
 For a local `kind` cluster:
 
 ```bash
-docker build -t humorvibes-research:0.4.0 .
-kind load docker-image humorvibes-research:0.4.0
+docker build -t humorvibes-research:0.5.0 .
+kind load docker-image humorvibes-research:0.5.0
 kubectl apply -k deploy/kubernetes
 kubectl rollout status deployment/humorvibes
 kubectl port-forward service/humorvibes 8080:80
 ```
 
 Then run `python3 examples/api_client.py` in another shell. For `minikube`, use
-`minikube image load humorvibes-research:0.4.0` in place of the `kind` command.
+`minikube image load humorvibes-research:0.5.0` in place of the `kind` command.
 
 Before exposing the Service outside the cluster, require inbound authentication:
 
@@ -233,7 +246,7 @@ kubectl set env deployment/humorvibes \
   HUMORVIBES_EMBEDDING_DEFAULT=ollama:embeddinggemma
 ```
 
-For a remote cluster, push `humorvibes-research:0.4.0` to your registry, obtain the resulting
+For a remote cluster, push `humorvibes-research:0.5.0` to your registry, obtain the resulting
 digest, and replace the base image with that immutable registry reference in a deployment-specific
 Kustomize overlay. The base deliberately names the locally built image rather than claiming that
 an image has already been published to a registry.
@@ -249,7 +262,7 @@ helm lint deploy/helm/humorvibes
 helm template demo deploy/helm/humorvibes
 helm upgrade --install humorvibes deploy/helm/humorvibes \
   --set image.repository=humorvibes-research \
-  --set image.tag=0.4.0
+  --set image.tag=0.5.0
 ```
 
 Use `existingSecret` for keys. The chart intentionally does not create an Ingress or accept

@@ -63,6 +63,11 @@ class HumorVibesClient:
     def capabilities(self) -> dict[str, Any]:
         return self._transport.request("/v1/capabilities")
 
+    def study_template(self) -> dict[str, Any]:
+        """Fetch the privacy-minimized study contract; analysis remains local."""
+
+        return self._transport.request("/v1/research/study-template")
+
     def generate(
         self,
         prompt: str,

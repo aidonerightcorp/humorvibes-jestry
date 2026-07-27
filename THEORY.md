@@ -1,32 +1,39 @@
 # The Humor Genome Theory: Comedy as Affordable Surprise in a Mesh of Predictive Networks
 
-*The theoretical foundation of HumorVibes. This document is the canonical statement of the theory;
-the writeup summarizes it, `mesh_signals.py` implements it, and the Kaggle notebook demonstrates it.*
+*The theoretical foundation of HumorVibes. This is a falsifiable project model, not a settled account
+of the brain or a claim that the current notebook has validated human funniness. The sourced scientific
+lineage and evidence map live in [`docs/RESEARCH_FOUNDATIONS.md`](docs/RESEARCH_FOUNDATIONS.md); the
+writeup summarizes the model, `mesh_signals.py` implements proposed signals, and the Kaggle notebook
+demonstrates the narrower Gemma-surprisal instrument.*
 
-## 1. Origin: the brain as a surprise-minimizing mesh
+![From predictive processing to a bounded product claim](docs/figures/surprise-to-product.svg)
 
-This work is a derivative of the framing in Karl Friston's talk **"Your Brain Is a Detective Minimizing
-Surprise"** (https://www.youtube.com/watch?v=g69Lj3huRvw) and the free-energy principle behind it,
-restated in network terms:
+## 1. Origin: predictive processing as a starting framework
 
-- The brain is **a network of dynamic neural networks** - meshes of sub-networks, not one monolith.
-- Connections carry **strengths**; not all nodes fire at once. Activation is **sparse**, because dense
-  firing in a 3D volume of tissue is metabolically impossible - **ATP is the budget**, so the system
-  routes cheap, narrow paths through the mesh rather than lighting everything up.
-- These meshes are **tunable**: paths and connections get strengthened by use and prediction success,
-  minimized or broken by disuse and prediction failure. Communication between meshes is itself learned.
-- Above the meshes sits a **supervisor - a model of models (a meta-model) whose objective is to reduce
-  surprise**. It continuously predicts what the sub-networks will report next, and it treats prediction
-  error as a cost to be minimized, either by updating the model or by acting on the world.
+This work began from the memorable shorthand that the brain is a “surprise-reduction engine.” More
+precisely, it draws on predictive coding and predictive-processing accounts, plus Karl Friston's
+[free-energy principle](https://doi.org/10.1038/nrn2787). Those are broad scientific frameworks; they
+do not establish this humor theory. The network language below is the project's working abstraction:
+
+- Neural processing is distributed across interacting, resource-constrained systems rather than one
+  monolithic interpreter. “Mesh” is the project's metaphor for those interacting systems.
+- Predictive-coding models describe hierarchical predictions and residual errors; Rao and Ballard's
+  [visual-cortex model](https://doi.org/10.1038/4580) is an early concrete example.
+- Expectations are tunable through learning and context. The project uses “path strength” as an
+  intuition for why one interpretation becomes dominant and another remains available.
+- “Supervisor” and “meta-mesh” are explanatory constructs in this theory, not identified brain modules.
+  They stand for higher-level expectations and commitments that constrain lower-level interpretations.
 
 Two consequences matter for humor:
 
-1. **Every moment of comprehension is a bet.** The supervisor pre-activates the expected continuation -
-   a narrow, cheap, high-strength path. That bet is what a joke's setup manipulates.
-2. **Some meshes outrank others.** Deep meta-meshes - identity, morality, worldview, the frames a person
-   uses to interpret everything else - have such strong connection weights that they can **override
-   logic itself**. They are the primary machinery a mind uses to reduce surprise. The supervisor will
-   not accept an interpretation that contradicts them, no matter how locally clever it is.
+1. **Comprehension involves graded expectations.** Psycholinguistic surprisal research links contextual
+   word probability to processing difficulty ([Hale, 2001](https://aclanthology.org/N01-1021/);
+   [Smith & Levy, 2013](https://doi.org/10.1016/j.cognition.2013.02.013)). A joke's setup can manipulate
+   those expectations.
+2. **Interpretations are constrained by prior knowledge, values, relationship, and context.** The theory
+   hypothesizes that some commitments resist a locally available reframe. Whether that produces threat,
+   offense, confusion, or amusement must be measured with the named audience; it cannot be read directly
+   from a language model.
 
 ## 2. The theory: a joke is a controlled prediction error with a cheap, permitted repair
 
@@ -46,8 +53,10 @@ A joke has two parts: a **setup** C and a **punchline** P.
   the ones with override power over logic - the supervisor refuses the reframe. The prediction error
   never resolves as play; it resolves as threat, offense, or anger. This is **bad surprise (B)**.
 
-**Laughter is the reward signal for a cheap, successful, permitted re-route after a deliberate
-prediction error.** All four conditions are necessary:
+**Project hypothesis:** amusement becomes more likely when a deliberate prediction error has a compact,
+successful, audience-permitted re-route. Laughter is one possible social and physiological response,
+not a humor-specific ground-truth signal; people laugh without humor and experience humor without
+audible laughter. The proposed failure signatures are:
 
 | Condition fails | Experience | Signal signature |
 |---|---|---|
@@ -75,12 +84,12 @@ sharp political joke can be a *good* surprise for an audience whose meta-meshes 
 re-route. Bad surprise is **audience-relative by construction**, which is why every measurement below
 is persona-conditioned.
 
-## 3. Why a language model makes this computable
+## 3. What a language model makes computable—and what it does not
 
-A causal language model **is** a predictive mesh: its next-token distribution is exactly the
-supervisor's bet about what comes next, and its negative log-probabilities are **measured surprise**,
-token by token. This turns the theory's quantities from metaphors into numbers we read off Gemma's
-logits - we never ask the model "was that surprising?", we **measure** it:
+A causal language model exposes a next-token distribution, so its negative log-probabilities provide
+an exact, reproducible measure of **model surprisal**, token by token. This is an instrument for one
+level of the theory, not a biological equivalent of a listener. We never ask the model “was that
+surprising?” when teacher-forced logits are available; we measure what that frozen model assigned:
 
 - **S - surprise**: mean/max token surprisal (negative log-probability, in nats) of the punchline
   given the setup: `S = NLL(P | C)`. High S = real prediction error.
@@ -90,14 +99,16 @@ logits - we never ask the model "was that surprising?", we **measure** it:
   the re-route.
 - **E - efficiency**: resolution per token of repair: `E = R / len(F)`. The ATP constraint: a joke
   whose frame needs a paragraph is a joke that costs too much to get.
-- **B - bad surprise**: persona-conditioned. Each audience is a differently-tuned mesh; we condition
+- **B - bad surprise**: proposed and persona-conditioned. Each audience is a differently-tuned mesh; we condition
   the same measurements on a persona preamble (their values, context, in-group knowledge) and ask the
   model - under the canonical definition above - whether the *frame itself* collides with a
   high-authority internal model for that audience. B combines the judged collision with the measured
   persona shift in S.
 
-Small Gemma models are the right instrument: a 2B–4B model running sparsely on a single GPU is,
-by construction, **a predictive mesh on a metabolic budget** - the same regime the theory describes.
+Small Gemma models are tractable, inspectable language instruments for this project. Their computational
+constraints are an analogy to resource-bounded cognition, not evidence that transformers and brains
+operate in “the same regime.” In the current public notebook, only `S` has a completed pinned model
+measurement. `R`, `E`, and `B` remain constructs to validate against controlled ablations and people.
 
 ### Multiple meshes: model-audiences and portability
 

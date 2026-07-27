@@ -355,6 +355,12 @@ def create_app(
     def signals(payload: SignalsRequest) -> dict[str, Any]:
         return runtime_service.signals(**payload.model_dump())
 
+    @app.get("/v1/research/study-template", dependencies=auth, tags=["research"])
+    def research_study_template() -> dict[str, Any]:
+        """Discover the local analyzer contract; human study rows are not uploaded here."""
+
+        return runtime_service.study_template()
+
     return app
 
 

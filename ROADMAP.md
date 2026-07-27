@@ -49,6 +49,9 @@ versioned schema ship before a model is ranked against the labels.
 
 ## P1 — validate a writer-facing use case
 
+- [x] Ship a strict, privacy-minimized protocol schema, deterministic synthetic contract fixture,
+  paired analyzer, writer-clustered bootstrap, and evidence-gated receipt. This validates the
+  workflow; it is not a human result.
 - [ ] Pre-register a within-writer crossover trial on matched premises with tool-assisted and
   normal-workflow conditions.
 - [ ] Keep generated, rejected, selected, edited, rehearsed, and performed versions so selection
@@ -58,8 +61,8 @@ versioned schema ship before a model is ranked against the labels.
 - [ ] Randomize rehearsal order and model writer, premise, audience, and venue as grouped effects.
 - [ ] Publish null results, dropouts, opt-outs, costs, and every attempted condition.
 
-Acceptance: the trial satisfies the claim gate in
-[`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md) and supports a
+Acceptance: the trial satisfies the executable claim gate in
+[`docs/REAL_WORLD_STUDY_WORKBENCH.md`](docs/REAL_WORLD_STUDY_WORKBENCH.md) and supports a
 bounded statement about the sampled writers and audiences—not “the model is funny.”
 
 ## P1 — expand native multilingual structure
@@ -105,8 +108,8 @@ multi-million-row inventory.
 ## P2 — productionize the integration surface
 
 The initial SDK/API, authenticated Ollama/OpenAI-compatible transports, multi-model embedding
-registry, offline adversarial audit, Docker/Compose profiles, and Kubernetes base are implemented
-in 0.4.0. Useful bounded follow-ups are:
+registry, offline adversarial audit, Docker/Compose profiles, Kubernetes base, and local real-world
+study workbench are implemented in 0.5.0. Useful bounded follow-ups are:
 
 - [ ] Publish a signed multi-architecture image to GHCR and add a digest-pinned deployment overlay.
 - [ ] Add gateway examples for TLS, identity, global rate limiting, and request tracing.

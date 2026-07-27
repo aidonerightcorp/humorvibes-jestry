@@ -33,10 +33,11 @@ def test_liveness_readiness_version_and_openapi_are_available() -> None:
         assert api.get("/health/live").json()["ok"] is True
         ready = api.get("/health/ready")
         assert ready.status_code == 200 and ready.json()["ok"] is True
-        assert api.get("/version").json()["version"] == "0.4.0"
+        assert api.get("/version").json()["version"] == "0.5.0"
         schema = api.get("/openapi.json").json()
         assert schema["info"]["title"] == "HumorVibes Integration API"
         assert "/v1/embed" in schema["paths"]
+        assert "/v1/research/study-template" in schema["paths"]
 
 
 def test_standalone_server_defaults_to_loopback(monkeypatch) -> None:
@@ -58,9 +59,10 @@ def test_checked_in_openapi_contract_matches_the_runtime_schema() -> None:
     root = Path(__file__).resolve().parents[1]
     checked_in = json.loads((root / "docs/openapi.json").read_text(encoding="utf-8"))
     assert checked_in == openapi_schema()
-    assert checked_in["info"]["version"] == "0.4.0"
+    assert checked_in["info"]["version"] == "0.5.0"
     assert "/v1/generate" in checked_in["paths"]
     assert "/v1/embed" in checked_in["paths"]
+    assert "/v1/research/study-template" in checked_in["paths"]
     assert "OLLAMA_API_KEY" not in json.dumps(checked_in)
 
 
@@ -89,6 +91,7 @@ def test_capabilities_are_secret_free_and_truth_scoped() -> None:
     assert payload["truth_boundary"]["generation_is_not_human_validation"] is True
     assert payload["truth_boundary"]["audience_traits_must_not_be_inferred"] is True
     assert payload["truth_boundary"]["personalization_requires_opt_in_data"] is True
+    assert payload["truth_boundary"]["synthetic_study_data_cannot_authorize_a_human_claim"] is True
     assert payload["product_use_cases"]["creative_assistance"]["status"] == (
         "available_with_human_selection"
     )
@@ -98,6 +101,21 @@ def test_capabilities_are_secret_free_and_truth_scoped() -> None:
     assert payload["product_use_cases"]["audience_personalization"]["status"] == (
         "experimental_requires_opt_in_data"
     )
+    assert payload["product_use_cases"]["writer_assistance_evaluation"]["status"] == (
+        "executable_protocol_no_human_advantage_claimed"
+    )
+
+
+def test_study_template_is_static_privacy_minimized_and_authenticated() -> None:
+    with client(runtime(api_key="inbound-secret")) as api:
+        assert api.get("/v1/research/study-template").status_code == 401
+        response = api.get("/v1/research/study-template", headers=auth())
+    assert response.status_code == 200
+    body = response.json()
+    assert body["privacy_boundary"]["analysis_upload_endpoint"] is False
+    assert body["truth_boundary"]["synthetic_fixture_can_authorize_claim"] is False
+    assert "email" not in body["material_record"]
+    assert "raw_text" not in body["material_record"]
 
 
 def test_hash_embedding_and_similarity_work_without_network_or_model() -> None:

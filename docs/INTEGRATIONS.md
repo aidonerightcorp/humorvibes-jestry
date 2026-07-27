@@ -87,9 +87,10 @@ The standard-library client in `examples/api_client.py` is dependency-free. The 
 in `examples/sdk_client.py` runs offline and is suitable for a CI smoke test.
 The packaged `HumorVibesClient` and `examples/remote_client.py` provide the same dependency-free
 HTTP surface for Python applications, while `docs/openapi.json` is the versioned language-neutral
-contract.
+contract. `GET /v1/research/study-template` exposes the writer-study schema for discovery but has
+no upload counterpart; sensitive study operations and privacy-minimized analysis stay local.
 
 Provider reachability and model quality are different gates. Before recommending an embedding
 model, benchmark it on frozen relevance judgments for the intended languages and forms. Before
 claiming generated material helps writers or audiences, run the consented held-out human tests in
-[`PRODUCT_AND_RESEARCH_USE_CASES.md`](PRODUCT_AND_RESEARCH_USE_CASES.md).
+[`REAL_WORLD_STUDY_WORKBENCH.md`](REAL_WORLD_STUDY_WORKBENCH.md).

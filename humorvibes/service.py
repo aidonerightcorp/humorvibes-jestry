@@ -66,6 +66,17 @@ class HumorVibesService:
                     ],
                     "claim_gate": "consented_held_out_audience_evaluation",
                 },
+                "writer_assistance_evaluation": {
+                    "status": "executable_protocol_no_human_advantage_claimed",
+                    "for": ["comedian", "writer", "academic", "product_builder"],
+                    "appropriate_outputs": [
+                        "privacy_minimized_study_template",
+                        "paired_writer_premise_analysis",
+                        "writer_clustered_uncertainty",
+                        "evidence_gated_receipt",
+                    ],
+                    "claim_gate": "preregistered_held_out_human_effect_above_minimum",
+                },
             },
             "truth_boundary": {
                 "generation_is_not_human_validation": True,
@@ -74,8 +85,16 @@ class HumorVibesService:
                 "canonical_kaggle_measurement_is_immutable": True,
                 "audience_traits_must_not_be_inferred": True,
                 "personalization_requires_opt_in_data": True,
+                "synthetic_study_data_cannot_authorize_a_human_claim": True,
             },
         }
+
+    def study_template(self) -> dict[str, Any]:
+        """Return the static real-world evaluation contract without accepting study data."""
+
+        from .studies import study_template
+
+        return study_template()
 
     def generate(
         self,

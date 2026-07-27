@@ -18,6 +18,7 @@ from .embeddings import (
 from .errors import IntegrationError
 from .http import JsonHttpClient, normalize_base_url
 from .llm import LLMRegistry
+from .studies import analyze_study, default_study_protocol, synthetic_study_bundle, validate_study_bundle
 
 
 @dataclass(frozen=True)
@@ -130,6 +131,50 @@ def run_adversarial_suite() -> dict[str, Any]:
         "two repeated multilingual batches matched exactly",
     ))
 
+    protocol = default_study_protocol()
+    synthetic_receipt = analyze_study(protocol, synthetic_study_bundle(protocol))
+    checks.append(AuditCheck(
+        "synthetic_positive_effect_cannot_authorize_human_claim",
+        synthetic_receipt["estimate"] > 0.25
+        and synthetic_receipt["claim_gate"]["claim_ready"] is False,
+        "positive synthetic fixture remained L1_OFFLINE_CONTRACT",
+    ))
+
+    raw_text_bundle = synthetic_study_bundle(protocol)
+    raw_text_bundle["materials"][0]["raw_text"] = "must-not-enter-analysis"
+    checks.append(_expect_error(
+        "study_export_rejects_raw_material",
+        "forbidden_study_field",
+        lambda: validate_study_bundle(protocol, raw_text_bundle),
+    ))
+
+    duplicate_bundle = synthetic_study_bundle(protocol)
+    duplicate_bundle["audience_responses"][1]["response_id"] = duplicate_bundle["audience_responses"][0]["response_id"]
+    checks.append(_expect_error(
+        "study_export_rejects_duplicate_responses",
+        "duplicate_response_id",
+        lambda: validate_study_bundle(protocol, duplicate_bundle),
+    ))
+
+    nonfinite_bundle = synthetic_study_bundle(protocol)
+    nonfinite_bundle["audience_responses"][0]["rating"] = math.nan
+    checks.append(_expect_error(
+        "study_export_rejects_nonfinite_ratings",
+        "invalid_study_value",
+        lambda: validate_study_bundle(protocol, nonfinite_bundle),
+    ))
+
+    incomplete_bundle = synthetic_study_bundle(protocol)
+    removed_material = incomplete_bundle["materials"].pop(0)["material_id"]
+    incomplete_bundle["audience_responses"] = [
+        row for row in incomplete_bundle["audience_responses"] if row["material_id"] != removed_material
+    ]
+    checks.append(_expect_error(
+        "study_export_rejects_incomplete_paired_blocks",
+        "incomplete_paired_block",
+        lambda: validate_study_bundle(protocol, incomplete_bundle),
+    ))
+
     passed = sum(check.passed for check in checks)
     return {
         "receipt_type": "humorvibes_adversarial_integration_audit",
@@ -148,11 +193,14 @@ def run_adversarial_suite() -> dict[str, Any]:
                 "embedding response corruption",
                 "cosine preconditions",
                 "deterministic offline embeddings",
+                "synthetic-evidence claim gates",
+                "study schema, privacy, finiteness, uniqueness, and paired-design validation",
             ],
             "not_covered": [
                 "live provider availability",
                 "model quality",
                 "human funniness",
+                "human-study recruitment, consent operations, and external replication",
                 "cluster-level denial-of-service",
             ],
         },
