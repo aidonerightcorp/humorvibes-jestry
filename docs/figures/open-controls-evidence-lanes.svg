@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Humor Genome evidence lanes and claim gates</title>
+  <desc id="desc">Four separate source lanes feed bounded uses. Only consented human observations can support human response claims.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0b1020}.panel{fill:#141c33;stroke:#53658d;stroke-width:2}.control{fill:#173b3a;stroke:#50c8b4;stroke-width:3}
+      .human{fill:#35254d;stroke:#c599ff;stroke-width:2}.model{fill:#3a2b20;stroke:#e5a35b;stroke-width:2}.wave{fill:#1d2d48;stroke:#67a5ff;stroke-width:2}
+      .gate{fill:#401f2b;stroke:#ff7898;stroke-width:3}.use{fill:#18283a;stroke:#7a90b8;stroke-width:2}
+      .h1{font:700 30px system-ui,sans-serif;fill:#f4f7ff}.h2{font:700 18px system-ui,sans-serif;fill:#f4f7ff}
+      .body{font:15px system-ui,sans-serif;fill:#d7def0}.small{font:13px system-ui,sans-serif;fill:#b9c5df}.arrow{stroke:#8ea2c9;stroke-width:3;fill:none;marker-end:url(#m)}
+    </style>
+    <marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8ea2c9"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text class="h1" x="60" y="55">Evidence lanes never silently merge</text>
+  <text class="body" x="60" y="84">Origin determines the strongest honest claim. More rows do not move evidence across a gate.</text>
+
+  <rect class="panel wave" x="55" y="125" rx="16" width="255" height="205"/>
+  <text class="h2" x="78" y="160">Imported Wave 2</text>
+  <text class="body" x="78" y="194"><tspan x="78" dy="0">Observed public text</tspan><tspan x="78" dy="25">Per-record license</tspan><tspan x="78" dy="25">Source-specific labels</tspan><tspan x="78" dy="25">No collection-wide license</tspan></text>
+  <text class="small" x="78" y="305">Use: provenance-aware corpus research</text>
+
+  <rect class="panel control" x="335" y="125" rx="16" width="255" height="205"/>
+  <text class="h2" x="358" y="160">Procedural controls</text>
+  <text class="body" x="358" y="194"><tspan x="358" dy="0">120,000 matched rows</tspan><tspan x="358" dy="25">Clock-free generator</tspan><tspan x="358" dy="25">CC0 project payload</tspan><tspan x="358" dy="25">No human labels</tspan></text>
+  <text class="small" x="358" y="305">Use: fixtures, controls, benchmarks</text>
+
+  <rect class="panel human" x="615" y="125" rx="16" width="255" height="205"/>
+  <text class="h2" x="638" y="160">Human-original</text>
+  <text class="body" x="638" y="194"><tspan x="638" dy="0">Authorship attestation</tspan><tspan x="638" dy="25">Explicit CC0 affirmation</tspan><tspan x="638" dy="25">Consent version</tspan><tspan x="638" dy="25">Pseudonymous key</tspan></text>
+  <text class="small" x="638" y="305">Status: schema ready, no fake records</text>
+
+  <rect class="panel model" x="895" y="125" rx="16" width="255" height="205"/>
+  <text class="h2" x="918" y="160">Model candidates</text>
+  <text class="body" x="918" y="194"><tspan x="918" dy="0">Provider + exact model</tspan><tspan x="918" dy="25">Prompt hash + parameters</tspan><tspan x="918" dy="25">Overlap and rights review</tspan><tspan x="918" dy="25">Quarantined by default</tspan></text>
+  <text class="small" x="918" y="305">Not human authored or automatically free</text>
+
+  <path class="arrow" d="M182 330 V400 H330"/><path class="arrow" d="M462 330 V400 H430"/>
+  <path class="arrow" d="M742 330 V400 H770"/><path class="arrow" d="M1022 330 V400 H870"/>
+
+  <rect class="panel use" x="245" y="400" rx="16" width="710" height="110"/>
+  <text class="h2" x="275" y="438">Bounded current uses</text>
+  <text class="body" x="275" y="470">Retrieval · embedding bakeoffs · deterministic API fixtures · experimental stimuli · provenance research</text>
+  <text class="small" x="275" y="494">Model and generator outputs can prepare a study; they cannot substitute for its participants.</text>
+
+  <path class="arrow" d="M600 510 V552"/>
+  <rect class="panel gate" x="260" y="552" rx="16" width="680" height="115"/>
+  <text class="h2" x="290" y="590">Human-response claim gate</text>
+  <text class="body" x="290" y="621">Preregistered protocol · consent · blinded randomization · clustered uncertainty · held-out audience</text>
+  <text class="small" x="290" y="646">Only this lane can support claims about funniness, audience benefit, or real-world writer effects.</text>
+</svg>

@@ -68,6 +68,22 @@ class HumorVibesClient:
 
         return self._transport.request("/v1/research/study-template")
 
+    def open_controls_metadata(self) -> dict[str, Any]:
+        return self._transport.request("/v1/open-controls/metadata")
+
+    def open_controls_sample(
+        self,
+        *,
+        count: int = 8,
+        seed: int = 20_260_727,
+        arm: str | None = None,
+        split: str | None = None,
+    ) -> dict[str, Any]:
+        return self._transport.request(
+            "/v1/open-controls/sample",
+            payload={"count": count, "seed": seed, "arm": arm, "split": split},
+        )
+
     def generate(
         self,
         prompt: str,

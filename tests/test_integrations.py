@@ -144,6 +144,25 @@ def test_remote_client_discovers_study_template_without_uploading_rows() -> None
     assert stub.calls == [("/v1/research/study-template", None)]
 
 
+def test_remote_client_exposes_bounded_open_controls_contract() -> None:
+    stub = StubJsonClient([
+        {"maximum_rows": 120_000},
+        {"count": 2, "rows": []},
+    ])
+    client = HumorVibesClient(transport=stub)
+    assert client.open_controls_metadata()["maximum_rows"] == 120_000
+    assert client.open_controls_sample(count=2, arm="surprising_resolved", split="test")["count"] == 2
+    assert stub.calls == [
+        ("/v1/open-controls/metadata", None),
+        ("/v1/open-controls/sample", {
+            "count": 2,
+            "seed": 20_260_727,
+            "arm": "surprising_resolved",
+            "split": "test",
+        }),
+    ]
+
+
 @pytest.mark.parametrize(
     "url",
     [

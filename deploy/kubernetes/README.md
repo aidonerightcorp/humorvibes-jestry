@@ -1,11 +1,11 @@
 # Kubernetes base
 
-This Kustomize base runs the locally built `humorvibes-research:0.5.0` image in offline/hash mode.
+This Kustomize base runs the locally built `humorvibes-research:0.6.0` image in offline/hash mode.
 It is intentionally a `ClusterIP` service with no Ingress and no committed Secret.
 
 ```bash
-docker build -t humorvibes-research:0.5.0 .
-kind load docker-image humorvibes-research:0.5.0
+docker build -t humorvibes-research:0.6.0 .
+kind load docker-image humorvibes-research:0.6.0
 kubectl apply -k deploy/kubernetes
 kubectl rollout status deployment/humorvibes
 kubectl port-forward service/humorvibes 8080:80

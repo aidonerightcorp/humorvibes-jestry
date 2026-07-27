@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: runtime
-    image: humorvibes-research:0.5.0
+    image: humorvibes-research:0.6.0
     init: true
     ports:
       - "${HUMORVIBES_BIND_ADDRESS:-127.0.0.1}:${HUMORVIBES_PORT:-8080}:8080"

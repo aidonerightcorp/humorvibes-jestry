@@ -1,0 +1,15 @@
+{
+  "id": "taylorsamarel/humor-genome-open-controls-causal-design-lab",
+  "title": "Humor Genome Open Controls - Causal Design Lab",
+  "code_file": "humor_genome_open_controls.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [
+    "taylorsamarel/humor-genome-open-controls"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}

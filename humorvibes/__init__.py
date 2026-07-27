@@ -5,12 +5,13 @@ measurement path. Importing this package never loads a model or makes a network
 request.
 """
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 from .config import Settings
 from .client import HumorVibesClient
 from .embeddings import EmbeddingRegistry, cosine_similarity
 from .llm import LLMRegistry
+from .open_controls import generation_contract, sample_rows
 from .service import HumorVibesService
 
 __all__ = [
@@ -20,4 +21,6 @@ __all__ = [
     "LLMRegistry",
     "Settings",
     "cosine_similarity",
+    "generation_contract",
+    "sample_rows",
 ]

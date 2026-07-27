@@ -9,8 +9,10 @@ remain in [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md); current work belongs her
 - [x] Publish one canonical dataset, notebook, and repository.
 - [x] Pin the notebook to an immutable source tag and verify mounted payload hashes.
 - [x] Publish project status, narrative write-up, contribution rules, and expansion instructions.
-- [ ] Select and add a repository-level code licence. This is a maintainer decision; public access
-  alone does not grant reuse rights. Keep the mixed-provenance dataset's per-row licences separate.
+- [x] Add Apache-2.0 for repository code and documentation plus a separate CC0-1.0 dedication for
+  project-controlled Open Controls data; keep mixed-provenance imports on per-row licences.
+- [x] Publish Open Controls as a separately licensed Kaggle dataset and COMPLETE notebook; verify
+  a fresh download, remote source, terminal output, anonymous access, and cross-surface receipt.
 - [ ] Add a read-only cross-surface audit command that checks GitHub visibility, Kaggle dataset
   readiness, notebook completion, source tag, manifest hash, and anonymous HTTP access, then
   writes one receipt. **Good first issue.**
@@ -109,7 +111,7 @@ multi-million-row inventory.
 
 The initial SDK/API, authenticated Ollama/OpenAI-compatible transports, multi-model embedding
 registry, offline adversarial audit, Docker/Compose profiles, Kubernetes base, and local real-world
-study workbench are implemented in 0.5.0. Useful bounded follow-ups are:
+study workbench and bounded Open Controls endpoints are implemented in 0.6.0. Useful follow-ups are:
 
 - [ ] Publish a signed multi-architecture image to GHCR and add a digest-pinned deployment overlay.
 - [ ] Add gateway examples for TLS, identity, global rate limiting, and request tracing.
