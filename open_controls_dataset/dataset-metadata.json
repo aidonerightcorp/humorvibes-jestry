@@ -1,10 +1,51 @@
 {
   "title": "Humor Genome Open Controls",
+  "subtitle": "120K matched controls for surprise, repair, retrieval, and study design",
+  "description": "A deterministic, CC0 corpus of 120,000 matched four-arm text controls for testing expected continuations, unresolved surprise, compact lexical repair, and over-explanation. Includes leakage-safe template-family splits, retrieval qrels, strict schemas, provenance, adversarial audits, and SHA-256 manifests. These are synthetic experimental controls, not human ratings or funniness labels.",
   "id": "taylorsamarel/humor-genome-open-controls",
   "licenses": [
     {
       "name": "CC0-1.0"
     }
   ],
-  "isPrivate": false
+  "isPrivate": false,
+  "keywords": [
+    "nlp",
+    "linguistics",
+    "psychology",
+    "text",
+    "synthetic data"
+  ],
+  "expectedUpdateFrequency": "never",
+  "userSpecifiedSources": "Deterministically generated from project-controlled lexical frames. No imported jokes, LLM calls, network calls, human-authored rows, or human ratings are included.",
+  "resources": [
+    {
+      "path": "open_controls.parquet",
+      "description": "Analysis-ready copy of all 120,000 matched synthetic-control rows."
+    },
+    {
+      "path": "open_controls.jsonl",
+      "description": "Canonical line-delimited representation of the same 120,000 rows."
+    },
+    {
+      "path": "retrieval_queries.jsonl",
+      "description": "Mechanism-focused queries for embedding and reranking evaluation."
+    },
+    {
+      "path": "retrieval_documents.jsonl",
+      "description": "One compact-repair document per premise family."
+    },
+    {
+      "path": "retrieval_qrels.jsonl",
+      "description": "Exact query-to-document relevance mapping."
+    },
+    {
+      "path": "manifest.json",
+      "description": "SHA-256 and byte-length manifest for every downloadable payload file."
+    },
+    {
+      "path": "DATASET_CARD.md",
+      "description": "Executive summary, evidence boundaries, design, limitations, and responsible-use guidance."
+    }
+  ]
 }

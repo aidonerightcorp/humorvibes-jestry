@@ -151,6 +151,7 @@ starting hypothesis; it does not prove a brain mechanism or audience response.
 | `human-contribution.schema.json` | Original-contribution consent and CC0 attestation contract |
 | `model-candidate.schema.json` | Quarantined model-output provenance contract |
 | `release_summary.json` | Build parameters and controlling truth boundary |
+| `release-metadata.json` | Downloadable Kaggle identity, visibility intent, licence, and discovery metadata |
 | `manifest.json` | SHA-256 and byte length for every payload file |
 
 ## Scale and independence
@@ -334,6 +335,18 @@ def build(
         (stage / "DATASET_CARD.md").write_text(card, encoding="utf-8")
         (stage / "README.md").write_text(card, encoding="utf-8")
 
+        if metadata_template is not None:
+            metadata = json.loads(metadata_template.read_text(encoding="utf-8"))
+        else:
+            metadata = {
+                "title": DATASET_TITLE,
+                "id": f"taylorsamarel/{DATASET_ID}",
+                "licenses": [{"name": DATA_LICENSE}],
+            }
+        # Kaggle consumes and removes its reserved dataset-metadata.json upload control.
+        # Preserve an independently verifiable copy inside the downloadable payload.
+        _json(stage / "release-metadata.json", metadata)
+
         manifest_files: dict[str, dict[str, Any]] = {}
         for path in sorted(stage.iterdir()):
             if path.name in {"manifest.json", "dataset-metadata.json"} or not path.is_file():
@@ -345,14 +358,6 @@ def build(
             "files": manifest_files,
         })
 
-        if metadata_template is not None:
-            metadata = json.loads(metadata_template.read_text(encoding="utf-8"))
-        else:
-            metadata = {
-                "title": DATASET_TITLE,
-                "id": f"taylorsamarel/{DATASET_ID}",
-                "licenses": [{"name": DATA_LICENSE}],
-            }
         _json(stage / "dataset-metadata.json", metadata)
 
         out_dir.mkdir(parents=True, exist_ok=True)

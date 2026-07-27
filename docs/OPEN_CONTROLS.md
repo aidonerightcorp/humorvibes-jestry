@@ -58,6 +58,9 @@ python3 verify_open_controls_release.py --root kaggle_open_controls
 The build is clock-free. Selection, item IDs, splits, unresolved continuations, and file order are
 derived from the declared seed and source. The builder emits JSONL and Parquet, strict schemas,
 retrieval qrels, audit receipts, source provenance, licensing, and SHA-256/byte manifests.
+`release-metadata.json` preserves the public dataset identity and discovery metadata inside the
+downloadable manifest. Kaggle consumes its reserved `dataset-metadata.json` upload-control file,
+so the verifier deliberately does not require that reserved file after download.
 
 For a small network-free inspection through the installed package:
 
@@ -196,7 +199,7 @@ project's overlap and content gates are research safeguards, not legal advice or
 ```bash
 python3 build_open_controls.py --reference-dir corpora
 python3 verify_open_controls_release.py --root kaggle_open_controls
-kaggle datasets create -p kaggle_open_controls
+kaggle datasets create --public -p kaggle_open_controls
 
 python3 open_controls_notebook/build_open_controls_notebook.py
 kaggle kernels push -p open_controls_notebook

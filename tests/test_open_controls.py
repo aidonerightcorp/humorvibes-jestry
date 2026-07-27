@@ -281,6 +281,13 @@ def test_small_release_build_and_independent_verifier(tmp_path: Path) -> None:
     assert verified["rows"] == 288
     assert verified["checks"]["published_audit_matches"] is True
 
+    # Kaggle consumes its reserved upload-control file. A fresh download must
+    # remain independently verifiable without that non-payload file.
+    (out / "dataset-metadata.json").unlink()
+    verified_download = verify(out)
+    assert verified_download["ok"] is True
+    assert verified_download["checks"]["public_kaggle_metadata"] is True
+
     with (out / "DATASET_CARD.md").open("a", encoding="utf-8") as fh:
         fh.write("tampered\n")
     assert verify(out)["ok"] is False

@@ -38,7 +38,7 @@ def verify(root: Path) -> dict[str, Any]:
         "DATASET_CARD.md",
         "README.md",
         "manifest.json",
-        "dataset-metadata.json",
+        "release-metadata.json",
     }
     missing = sorted(name for name in required if not (root / name).is_file())
     if missing:
@@ -50,7 +50,7 @@ def verify(root: Path) -> dict[str, Any]:
     summary = json.loads((root / "release_summary.json").read_text(encoding="utf-8"))
     published_audit = json.loads((root / "audit.json").read_text(encoding="utf-8"))
     reference = json.loads((root / "reference_overlap.json").read_text(encoding="utf-8"))
-    metadata = json.loads((root / "dataset-metadata.json").read_text(encoding="utf-8"))
+    metadata = json.loads((root / "release-metadata.json").read_text(encoding="utf-8"))
     provenance = json.loads((root / "provenance.json").read_text(encoding="utf-8"))
 
     accumulator = AuditAccumulator()
