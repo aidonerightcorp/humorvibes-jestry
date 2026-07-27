@@ -167,6 +167,26 @@ def main() -> int:
     multimodal_benchmark.add_argument("--root", type=Path, required=True)
     multimodal_benchmark.add_argument("--out", type=Path)
 
+    human_multimodal_validate = sub.add_parser(
+        "multimodal-human-validate",
+        help="fail-closed validation of a rights-evidenced human multimodal cohort",
+    )
+    human_multimodal_validate.add_argument("--root", type=Path, required=True)
+    human_multimodal_validate.add_argument("--out", type=Path)
+
+    human_multimodal_benchmark = sub.add_parser(
+        "multimodal-human-benchmark",
+        help="evaluate three comparable arms after the human cohort preflight passes",
+    )
+    human_multimodal_benchmark.add_argument("--root", type=Path, required=True)
+    human_multimodal_benchmark.add_argument("--out", type=Path)
+
+    human_multimodal_contract = sub.add_parser(
+        "multimodal-human-contract",
+        help="print the evidence contract without inventing a human cohort",
+    )
+    human_multimodal_contract.add_argument("--out", type=Path)
+
     provider_audit = sub.add_parser(
         "provider-audit",
         help="record configured, reachable, executable, and quality-validated provider gates",
@@ -286,6 +306,36 @@ def main() -> int:
                 json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
                 encoding="utf-8",
             )
+        return 0
+
+    if args.command in {
+        "multimodal-human-contract",
+        "multimodal-human-validate",
+        "multimodal-human-benchmark",
+    }:
+        from .human_multimodal import (
+            evaluate_human_multimodal_bundle,
+            human_multimodal_contract,
+            validate_human_multimodal_bundle,
+            write_human_multimodal_receipt,
+        )
+
+        try:
+            if args.command == "multimodal-human-contract":
+                payload = human_multimodal_contract()
+            elif args.command == "multimodal-human-validate":
+                payload = validate_human_multimodal_bundle(args.root)
+            else:
+                payload = evaluate_human_multimodal_bundle(args.root)
+        except IntegrationError as exc:
+            _dump({"error": exc.public()})
+            return 2
+        except (OSError, json.JSONDecodeError) as exc:
+            _dump({"error": {"code": "invalid_human_multimodal_file", "message": str(exc)}})
+            return 2
+        _dump(payload)
+        if args.out:
+            write_human_multimodal_receipt(args.out, payload)
         return 0
 
     if args.command == "provider-audit":

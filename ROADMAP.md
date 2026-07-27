@@ -36,6 +36,10 @@ download the public data, and pass `verify_wave2_release.py` without access to t
   splits, exact and canonical-scene image identity gates, identical held-out rows for text-only,
   image-only, and fusion arms, contest bootstrap intervals, calibration, error slices, and an
   explicit synthetic-evidence claim gate.
+- [x] Add a fail-closed human-cohort preflight and evaluator that verifies asset-level rights
+  evidence, source snapshots, exact and perceptual image hashes, privacy-minimized human-label
+  provenance, feature revisions, whole-contest grouping, and identical held-out rows. Software
+  validation deliberately leaves the independent legal/research review gate open.
 - [ ] Build a caption-plus-drawing baseline with whole contests held out.
 - [ ] Compare text-only, image-only, and multimodal arms on exactly the same contests.
 - [ ] Add drawing hashes and leakage checks so duplicated or near-duplicated images cannot cross

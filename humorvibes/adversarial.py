@@ -17,6 +17,7 @@ from .embeddings import (
 )
 from .errors import IntegrationError
 from .http import JsonHttpClient, normalize_base_url
+from .human_multimodal import human_multimodal_contract
 from .llm import LLMRegistry
 from .multimodal_benchmark import build_synthetic_multimodal_fixture
 from .studies import analyze_study, default_study_protocol, synthetic_study_bundle, validate_study_bundle
@@ -225,6 +226,14 @@ def run_adversarial_suite() -> dict[str, Any]:
         and multimodal["manifest"]["truth_boundary"]["human_ratings"] == 0,
         "rights-safe contract data remained explicitly synthetic and unrated",
     ))
+    human_multimodal = human_multimodal_contract()
+    checks.append(AuditCheck(
+        "human_multimodal_schema_cannot_self_authorize_rights_or_consent",
+        human_multimodal["truth_boundary"]["external_rights_and_research_review_required"] is True
+        and human_multimodal["truth_boundary"]["machine_validation_is_legal_advice"] is False
+        and human_multimodal["truth_boundary"]["machine_validation_proves_consent"] is False,
+        "the executable schema preserves external legal, consent, and research review gates",
+    ))
 
     passed = sum(check.passed for check in checks)
     return {
@@ -247,7 +256,7 @@ def run_adversarial_suite() -> dict[str, Any]:
                 "synthetic-evidence claim gates",
                 "study schema, privacy, finiteness, uniqueness, and paired-design validation",
                 "prospective-study claim gates and private-keyed blinding separation",
-                "multimodal image identity and synthetic-evidence gates",
+                "multimodal image identity, synthetic-evidence, rights, and consent gates",
             ],
             "not_covered": [
                 "live provider availability",
