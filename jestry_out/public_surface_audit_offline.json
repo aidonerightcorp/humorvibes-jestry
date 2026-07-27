@@ -10,14 +10,14 @@
     },
     {
       "evidence": {
-        "manifest_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2",
+        "manifest_sha256": "480d94a3bb73d09ba8c85b3f04e01dee355bf794eca47f95fe58a4ffb2998427",
         "path": "jestry_out/open_controls_publication.json"
       },
       "name": "open_controls.local_receipt",
       "ok": true
     }
   ],
-  "generated_at": "2026-07-27T16:04:27.584055+00:00",
+  "generated_at": "2026-07-27T16:43:12.979146+00:00",
   "mode": {
     "live": false,
     "manifest_downloads": false,

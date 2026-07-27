@@ -11,12 +11,12 @@ as an open project whose current evidence can be read, rerun, challenged, and ex
 | Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public; version 14 is COMPLETE and is the canonical executable write-up |
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
-| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 3 is ready; public notebook version 2 is COMPLETE; 120,000 deterministic CC0 procedural rows |
+| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
 move underneath an existing run. The separate control release is pinned by
-`humor-genome-open-controls-v1`; its publication receipt records the dataset generator commit,
+`humor-genome-open-controls-v2`; its publication receipt records the dataset generator commit,
 public versions, downloaded hashes, and terminal notebook status.
 
 ## Application and deployment extension
@@ -69,11 +69,16 @@ environment. This extension does not alter the immutable Kaggle notebook or its 
   machine-readable executive-summary artifact. The supporting notebook
   map is documented in [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md).
 - Open Controls adds a separate 120,000-row four-arm corpus, strict data/human/model schemas,
-  grouped splits, exact and long-phrase overlap checks, retrieval qrels, a bounded SDK/API, a
-  standalone verifier, and a public-notebook builder. A fresh anonymous Kaggle download passes
-  all 11 semantic/provenance gates, and notebook v2 completed against all 17 manifested files.
+  grouped splits, exact and long-phrase overlap checks, easy and entity-masked hard retrieval
+  qrels, a bounded SDK/API, a standalone verifier, and a public-notebook builder. A fresh
+  anonymous Kaggle download passes all 14 semantic/provenance gates, and notebook v3 completed
+  against all 24 manifested files.
   It contains no human-authored or human-rated rows. See
   [`jestry_out/open_controls_publication.json`](jestry_out/open_controls_publication.json).
+- The multimodal lane now has an executable 30-contest, 600-caption procedural SVG positive
+  control with image-identity gates and exactly comparable text/image/fusion arms. Its high
+  fusion score is expected from the synthetic generator and is explicitly not human evidence.
+  See [`docs/MULTIMODAL_BENCHMARK.md`](docs/MULTIMODAL_BENCHMARK.md).
 
 ## What is deliberately not claimed
 

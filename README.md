@@ -66,6 +66,9 @@ separate causal-design lab with its own downloadable verification and publicatio
   effect remains non-claim-ready; the
   [`launch_receipt.json`](jestry_out/study_launch_example_v1/launch_receipt.json) proves the
   complete precollection pack also remains non-claim-ready.
+- [`docs/MULTIMODAL_BENCHMARK.md`](docs/MULTIMODAL_BENCHMARK.md): the rights-safe procedural
+  caption-plus-drawing fixture, whole-contest split and image-leakage contract, identical
+  text/image/fusion evaluation arms, and the evidence gate for replacing it with human data.
 - [`docs/NOTEBOOKS.md`](docs/NOTEBOOKS.md): the canonical notebook, the role of each supporting
   notebook, and the clarity contract for future experiments.
 - [`docs/OPEN_CONTROLS.md`](docs/OPEN_CONTROLS.md): the 120,000-row deterministic CC0 control
@@ -91,6 +94,7 @@ python3 -m pip install -e ".[api]"
 humorvibes doctor
 humorvibes adversarial
 humorvibes study-demo
+humorvibes multimodal-fixture --out-dir /tmp/humorvibes-multimodal --contests 30
 humorvibes-api
 ```
 

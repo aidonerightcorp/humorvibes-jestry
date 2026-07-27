@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Multimodal caption evidence lanes</title>
+  <desc id="desc">Rights-cleared images and within-contest captions enter grouped splits, feed identical text, image, and fusion evaluation arms, then pass through leakage and human-evidence gates before a bounded claim.</desc>
+  <rect width="1200" height="560" fill="#f8f6ef"/>
+  <style>
+    .box { fill: #ffffff; stroke: #25364a; stroke-width: 2; rx: 14; }
+    .gate { fill: #fff3d6; stroke: #9a6515; stroke-width: 2; rx: 14; }
+    .claim { fill: #e7f4ec; stroke: #237447; stroke-width: 2; rx: 14; }
+    .title { font: 700 25px system-ui, sans-serif; fill: #172333; }
+    .label { font: 700 18px system-ui, sans-serif; fill: #172333; }
+    .copy { font: 15px system-ui, sans-serif; fill: #38495b; }
+    .arrow { stroke: #52677f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#52677f"/>
+    </marker>
+  </defs>
+
+  <text x="54" y="48" class="title">One drawing is one group; all arms score the same held-out captions</text>
+
+  <rect x="50" y="90" width="230" height="145" class="box"/>
+  <text x="75" y="125" class="label">Evidence-bearing inputs</text>
+  <text x="75" y="158" class="copy">Rights and provenance</text>
+  <text x="75" y="184" class="copy">Image bytes + signatures</text>
+  <text x="75" y="210" class="copy">Raw within-contest votes</text>
+
+  <rect x="360" y="90" width="220" height="145" class="box"/>
+  <text x="390" y="125" class="label">Grouped split</text>
+  <text x="390" y="158" class="copy">Train / validation / test</text>
+  <text x="390" y="184" class="copy">by stable contest ID</text>
+  <text x="390" y="210" class="copy">no image identity crossing</text>
+
+  <path d="M280 162 H360" class="arrow"/>
+
+  <rect x="690" y="65" width="190" height="100" class="box"/>
+  <text x="730" y="103" class="label">Text only</text>
+  <text x="716" y="133" class="copy">caption features</text>
+  <rect x="690" y="200" width="190" height="100" class="box"/>
+  <text x="725" y="238" class="label">Image only</text>
+  <text x="719" y="268" class="copy">drawing features</text>
+  <rect x="690" y="335" width="190" height="100" class="box"/>
+  <text x="748" y="373" class="label">Fusion</text>
+  <text x="715" y="403" class="copy">text × image features</text>
+
+  <path d="M580 150 C630 150 635 115 690 115" class="arrow"/>
+  <path d="M580 162 H640 V250 H690" class="arrow"/>
+  <path d="M580 175 C630 175 635 385 690 385" class="arrow"/>
+
+  <rect x="960" y="125" width="190" height="250" class="gate"/>
+  <text x="1005" y="160" class="label">Claim gate</text>
+  <text x="985" y="198" class="copy">same row digest?</text>
+  <text x="985" y="226" class="copy">leakage checks pass?</text>
+  <text x="985" y="254" class="copy">human target?</text>
+  <text x="985" y="282" class="copy">contest uncertainty?</text>
+  <text x="985" y="310" class="copy">rights auditable?</text>
+  <text x="985" y="338" class="copy">all failed arms kept?</text>
+
+  <path d="M880 115 C920 115 920 175 960 175" class="arrow"/>
+  <path d="M880 250 H960" class="arrow"/>
+  <path d="M880 385 C920 385 920 325 960 325" class="arrow"/>
+
+  <rect x="360" y="465" width="520" height="65" class="claim"/>
+  <text x="389" y="493" class="label">Bounded conclusion</text>
+  <text x="389" y="518" class="copy">Names the sampled drawings, captions, audience, metric, uncertainty, and exclusions.</text>
+  <path d="M1055 375 C1055 495 930 498 880 498" class="arrow"/>
+</svg>

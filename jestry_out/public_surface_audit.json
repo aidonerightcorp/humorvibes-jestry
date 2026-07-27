@@ -66,7 +66,7 @@
     },
     {
       "evidence": {
-        "manifest_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2",
+        "manifest_sha256": "480d94a3bb73d09ba8c85b3f04e01dee355bf794eca47f95fe58a4ffb2998427",
         "path": "jestry_out/open_controls_publication.json"
       },
       "name": "open_controls.local_receipt",
@@ -90,14 +90,14 @@
     {
       "evidence": {
         "http_status": 200,
-        "tag": "humor-genome-open-controls-v1"
+        "tag": "humor-genome-open-controls-v2"
       },
       "name": "open_controls.anonymous_source_tag",
       "ok": true
     },
     {
       "evidence": {
-        "current_version_number": 3,
+        "current_version_number": 4,
         "status": "ready"
       },
       "name": "open_controls.dataset_ready",
@@ -111,25 +111,25 @@
     {
       "evidence": {
         "refs": [
-          "1179cb1e5b3b6472968074a75a7400867d752a80\trefs/tags/humor-genome-open-controls-v1",
-          "4e7579b77d7a45de65e8ec8f4ae2bffb4abcbba3\trefs/tags/humor-genome-open-controls-v1^{}"
+          "706e5cc4c93df94314fd226fe07196d29d398b2d\trefs/tags/humor-genome-open-controls-v2",
+          "f36533785259a4ae49df7b166f8338f62321f121\trefs/tags/humor-genome-open-controls-v2^{}"
         ],
-        "tag": "humor-genome-open-controls-v1"
+        "tag": "humor-genome-open-controls-v2"
       },
       "name": "open_controls.remote_tag_resolves",
       "ok": true
     },
     {
       "evidence": {
-        "bytes": 2509,
-        "expected_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2",
-        "observed_sha256": "ae9108d0fb5314f299f43e4387b64ee09fbe88d8de603f19c91a4c65aded9bd2"
+        "bytes": 3575,
+        "expected_sha256": "480d94a3bb73d09ba8c85b3f04e01dee355bf794eca47f95fe58a4ffb2998427",
+        "observed_sha256": "480d94a3bb73d09ba8c85b3f04e01dee355bf794eca47f95fe58a4ffb2998427"
       },
       "name": "open_controls.downloaded_manifest",
       "ok": true
     }
   ],
-  "generated_at": "2026-07-27T16:04:53.717696+00:00",
+  "generated_at": "2026-07-27T16:43:12.867122+00:00",
   "mode": {
     "live": true,
     "manifest_downloads": true,

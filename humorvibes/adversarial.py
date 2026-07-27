@@ -18,6 +18,7 @@ from .embeddings import (
 from .errors import IntegrationError
 from .http import JsonHttpClient, normalize_base_url
 from .llm import LLMRegistry
+from .multimodal_benchmark import build_synthetic_multimodal_fixture
 from .studies import analyze_study, default_study_protocol, synthetic_study_bundle, validate_study_bundle
 from .study_launch import build_launch_pack, deterministic_randomization
 
@@ -210,6 +211,21 @@ def run_adversarial_suite() -> dict[str, Any]:
         ),
     ))
 
+    multimodal = build_synthetic_multimodal_fixture(contests=20)
+    multimodal_images = multimodal["manifest"]["images"]
+    checks.append(AuditCheck(
+        "procedural_multimodal_fixture_has_no_image_identity_leakage",
+        len({row["image_sha256"] for row in multimodal_images}) == len(multimodal_images)
+        and len({row["perceptual_signature"] for row in multimodal_images}) == len(multimodal_images),
+        "exact SVG hashes and canonical scene signatures were unique across contest groups",
+    ))
+    checks.append(AuditCheck(
+        "synthetic_multimodal_fixture_cannot_authorize_human_claim",
+        multimodal["manifest"]["truth_boundary"]["claim_ready_for_multimodal_humor"] is False
+        and multimodal["manifest"]["truth_boundary"]["human_ratings"] == 0,
+        "rights-safe contract data remained explicitly synthetic and unrated",
+    ))
+
     passed = sum(check.passed for check in checks)
     return {
         "receipt_type": "humorvibes_adversarial_integration_audit",
@@ -231,6 +247,7 @@ def run_adversarial_suite() -> dict[str, Any]:
                 "synthetic-evidence claim gates",
                 "study schema, privacy, finiteness, uniqueness, and paired-design validation",
                 "prospective-study claim gates and private-keyed blinding separation",
+                "multimodal image identity and synthetic-evidence gates",
             ],
             "not_covered": [
                 "live provider availability",
@@ -238,6 +255,7 @@ def run_adversarial_suite() -> dict[str, Any]:
                 "human funniness",
                 "human-study recruitment, consent operations, and external replication",
                 "cluster-level denial-of-service",
+                "real caption drawings, human multimodal judgments, and model quality",
             ],
         },
     }

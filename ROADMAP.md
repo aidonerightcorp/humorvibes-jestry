@@ -32,6 +32,10 @@ download the public data, and pass `verify_wave2_release.py` without access to t
 
 ## P1 — test context instead of asking text to carry it
 
+- [x] Ship a rights-safe procedural SVG positive-control fixture and evaluator with whole-contest
+  splits, exact and canonical-scene image identity gates, identical held-out rows for text-only,
+  image-only, and fusion arms, contest bootstrap intervals, calibration, error slices, and an
+  explicit synthetic-evidence claim gate.
 - [ ] Build a caption-plus-drawing baseline with whole contests held out.
 - [ ] Compare text-only, image-only, and multimodal arms on exactly the same contests.
 - [ ] Add drawing hashes and leakage checks so duplicated or near-duplicated images cannot cross

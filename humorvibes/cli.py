@@ -146,6 +146,21 @@ def main() -> int:
     retrieval_benchmark.add_argument("--model", default="lexical:tfidf")
     retrieval_benchmark.add_argument("--out", type=Path)
 
+    multimodal_fixture = sub.add_parser(
+        "multimodal-fixture",
+        help="build and evaluate the rights-safe procedural multimodal contract fixture",
+    )
+    multimodal_fixture.add_argument("--out-dir", type=Path, required=True)
+    multimodal_fixture.add_argument("--contests", type=int, default=30)
+    multimodal_fixture.add_argument("--force", action="store_true")
+
+    multimodal_benchmark = sub.add_parser(
+        "multimodal-benchmark",
+        help="validate and evaluate text, image, and fusion arms on one frozen fixture",
+    )
+    multimodal_benchmark.add_argument("--root", type=Path, required=True)
+    multimodal_benchmark.add_argument("--out", type=Path)
+
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
     if args.command == "serve":
@@ -209,6 +224,37 @@ def main() -> int:
                 )
         except (OSError, json.JSONDecodeError) as exc:
             _dump({"error": {"code": "invalid_retrieval_file", "message": str(exc)}})
+            return 2
+        except IntegrationError as exc:
+            _dump({"error": exc.public()})
+            return 2
+        _dump(payload)
+        if getattr(args, "out", None):
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(
+                json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+        return 0
+
+    if args.command in {"multimodal-fixture", "multimodal-benchmark"}:
+        from .multimodal_benchmark import (
+            build_synthetic_multimodal_fixture,
+            evaluate_multimodal_fixture,
+            write_benchmark_receipt,
+            write_multimodal_fixture,
+        )
+
+        try:
+            if args.command == "multimodal-fixture":
+                fixture = build_synthetic_multimodal_fixture(contests=args.contests)
+                write_multimodal_fixture(args.out_dir, fixture, overwrite=args.force)
+                payload = evaluate_multimodal_fixture(args.out_dir)
+                write_benchmark_receipt(args.out_dir, payload)
+            else:
+                payload = evaluate_multimodal_fixture(args.root)
+        except (OSError, json.JSONDecodeError) as exc:
+            _dump({"error": {"code": "invalid_multimodal_file", "message": str(exc)}})
             return 2
         except IntegrationError as exc:
             _dump({"error": exc.public()})

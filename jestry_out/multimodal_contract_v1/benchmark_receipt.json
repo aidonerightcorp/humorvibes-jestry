@@ -1,0 +1,354 @@
+{
+  "arms": {
+    "fusion": {
+      "calibration": [
+        {
+          "bin": 1,
+          "mean_prediction": 0.33823115623841865,
+          "mean_target": 0.33525891666666663,
+          "rows": 12
+        },
+        {
+          "bin": 2,
+          "mean_prediction": 0.3972173739365479,
+          "mean_target": 0.3951721666666667,
+          "rows": 12
+        },
+        {
+          "bin": 3,
+          "mean_prediction": 0.42800972775700985,
+          "mean_target": 0.431642,
+          "rows": 12
+        },
+        {
+          "bin": 4,
+          "mean_prediction": 0.5086597869663366,
+          "mean_target": 0.51710175,
+          "rows": 12
+        },
+        {
+          "bin": 5,
+          "mean_prediction": 0.6042454714384367,
+          "mean_target": 0.6066935,
+          "rows": 12
+        }
+      ],
+      "error_slices": {
+        "repeated_caption": {
+          "false": {
+            "mean_absolute_error": 0.01031790232079221,
+            "pooled_spearman": 0.9870820668693009,
+            "rows": 48
+          },
+          "true": {
+            "mean_absolute_error": 0.010405190671518924,
+            "pooled_spearman": 0.916083916083916,
+            "rows": 12
+          }
+        },
+        "strategy": {
+          "compact_repair": {
+            "mean_absolute_error": 0.01061643617731083,
+            "pooled_spearman": 0.8928571428571429,
+            "rows": 15
+          },
+          "incongruous": {
+            "mean_absolute_error": 0.008603042892129768,
+            "pooled_spearman": 0.95,
+            "rows": 15
+          },
+          "literal": {
+            "mean_absolute_error": 0.010837848354498126,
+            "pooled_spearman": 0.8928571428571429,
+            "rows": 15
+          },
+          "overexplained": {
+            "mean_absolute_error": 0.01128411253981149,
+            "pooled_spearman": 0.9285714285714286,
+            "rows": 15
+          }
+        },
+        "vote_count_band": {
+          "140-200": {
+            "mean_absolute_error": 0.010892450254562161,
+            "pooled_spearman": 0.9924812030075187,
+            "rows": 20
+          },
+          "24-79": {
+            "mean_absolute_error": 0.009853645454188487,
+            "pooled_spearman": 0.9901185770750988,
+            "rows": 23
+          },
+          "80-139": {
+            "mean_absolute_error": 0.010331691112863221,
+            "pooled_spearman": 0.9705882352941176,
+            "rows": 17
+          }
+        }
+      },
+      "evaluated_row_digest": "f27ed4c97de1766046a88e33ed9ec36234ef1bd5a796d9b9f9ec9f860fb0218c",
+      "feature_dimensions": 44,
+      "metrics": {
+        "contest_bootstrap_95pct_ci": [
+          0.9819548872180451,
+          0.9954887218045113
+        ],
+        "contests": 3,
+        "mean_absolute_error": 0.010335359990937553,
+        "median_within_contest_spearman": 0.98796992481203,
+        "pooled_spearman": 0.9893303695470964,
+        "rows": 60
+      }
+    },
+    "image_only": {
+      "calibration": [
+        {
+          "bin": 1,
+          "mean_prediction": 0.4547014979046986,
+          "mean_target": 0.45818508333333335,
+          "rows": 12
+        },
+        {
+          "bin": 2,
+          "mean_prediction": 0.4547904779405349,
+          "mean_target": 0.45741575,
+          "rows": 12
+        },
+        {
+          "bin": 3,
+          "mean_prediction": 0.45496843801220743,
+          "mean_target": 0.4643683333333333,
+          "rows": 12
+        },
+        {
+          "bin": 4,
+          "mean_prediction": 0.4557549472850822,
+          "mean_target": 0.43843441666666666,
+          "rows": 12
+        },
+        {
+          "bin": 5,
+          "mean_prediction": 0.45614820192151956,
+          "mean_target": 0.46746475,
+          "rows": 12
+        }
+      ],
+      "error_slices": {
+        "repeated_caption": {
+          "false": {
+            "mean_absolute_error": 0.08011538332609243,
+            "pooled_spearman": 0.022101883848402715,
+            "rows": 48
+          },
+          "true": {
+            "mean_absolute_error": 0.09677477297307095,
+            "pooled_spearman": -0.02956561979945413,
+            "rows": 12
+          }
+        },
+        "strategy": {
+          "compact_repair": {
+            "mean_absolute_error": 0.13712895405385814,
+            "pooled_spearman": 0.01889822365046136,
+            "rows": 15
+          },
+          "incongruous": {
+            "mean_absolute_error": 0.06385364594614189,
+            "pooled_spearman": -0.01889822365046136,
+            "rows": 15
+          },
+          "literal": {
+            "mean_absolute_error": 0.08997197927947521,
+            "pooled_spearman": 0.01889822365046136,
+            "rows": 15
+          },
+          "overexplained": {
+            "mean_absolute_error": 0.042834465742477304,
+            "pooled_spearman": 0.0944911182523068,
+            "rows": 15
+          }
+        },
+        "vote_count_band": {
+          "140-200": {
+            "mean_absolute_error": 0.08912287600743724,
+            "pooled_spearman": -0.0794487818892643,
+            "rows": 20
+          },
+          "24-79": {
+            "mean_absolute_error": 0.07244507971626266,
+            "pooled_spearman": 0.08591172242938984,
+            "rows": 23
+          },
+          "80-139": {
+            "mean_absolute_error": 0.09165537186508835,
+            "pooled_spearman": 0.11512331768319865,
+            "rows": 17
+          }
+        }
+      },
+      "evaluated_row_digest": "f27ed4c97de1766046a88e33ed9ec36234ef1bd5a796d9b9f9ec9f860fb0218c",
+      "feature_dimensions": 12,
+      "metrics": {
+        "contest_bootstrap_95pct_ci": [
+          0.0,
+          0.0
+        ],
+        "contests": 3,
+        "mean_absolute_error": 0.08344726125548814,
+        "median_within_contest_spearman": 0.0,
+        "pooled_spearman": 0.02593085040064623,
+        "rows": 60
+      }
+    },
+    "text_only": {
+      "calibration": [
+        {
+          "bin": 1,
+          "mean_prediction": 0.28075117503861635,
+          "mean_target": 0.35566775,
+          "rows": 12
+        },
+        {
+          "bin": 2,
+          "mean_prediction": 0.40007219301403835,
+          "mean_target": 0.398761,
+          "rows": 12
+        },
+        {
+          "bin": 3,
+          "mean_prediction": 0.4788583628466605,
+          "mean_target": 0.4721375833333334,
+          "rows": 12
+        },
+        {
+          "bin": 4,
+          "mean_prediction": 0.5258812020463788,
+          "mean_target": 0.45260849999999997,
+          "rows": 12
+        },
+        {
+          "bin": 5,
+          "mean_prediction": 0.6261325358043061,
+          "mean_target": 0.6066935,
+          "rows": 12
+        }
+      ],
+      "error_slices": {
+        "repeated_caption": {
+          "false": {
+            "mean_absolute_error": 0.05301265959716927,
+            "pooled_spearman": 0.8309059988547741,
+            "rows": 48
+          },
+          "true": {
+            "mean_absolute_error": 0.055272194237944584,
+            "pooled_spearman": 0.7341169790488018,
+            "rows": 12
+          }
+        },
+        "strategy": {
+          "compact_repair": {
+            "mean_absolute_error": 0.020001974986487127,
+            "pooled_spearman": 0.9056042444793684,
+            "rows": 15
+          },
+          "incongruous": {
+            "mean_absolute_error": 0.09725801223082824,
+            "pooled_spearman": 0.971069611550166,
+            "rows": 15
+          },
+          "literal": {
+            "mean_absolute_error": 0.07411201486220492,
+            "pooled_spearman": 0.9056042444793684,
+            "rows": 15
+          },
+          "overexplained": {
+            "mean_absolute_error": 0.022486264021777044,
+            "pooled_spearman": 0.9274260335029676,
+            "rows": 15
+          }
+        },
+        "vote_count_band": {
+          "140-200": {
+            "mean_absolute_error": 0.05396568061279348,
+            "pooled_spearman": 0.7892978850521247,
+            "rows": 20
+          },
+          "24-79": {
+            "mean_absolute_error": 0.0632775439765327,
+            "pooled_spearman": 0.7965344934020233,
+            "rows": 23
+          },
+          "80-139": {
+            "mean_absolute_error": 0.039598639282549315,
+            "pooled_spearman": 0.9032794457290394,
+            "rows": 17
+          }
+        }
+      },
+      "evaluated_row_digest": "f27ed4c97de1766046a88e33ed9ec36234ef1bd5a796d9b9f9ec9f860fb0218c",
+      "feature_dimensions": 12,
+      "metrics": {
+        "contest_bootstrap_95pct_ci": [
+          0.8225563909774436,
+          0.8706766917293233
+        ],
+        "contests": 3,
+        "mean_absolute_error": 0.053464566525324324,
+        "median_within_contest_spearman": 0.8451127819548873,
+        "pooled_spearman": 0.8470102600454716,
+        "rows": 60
+      }
+    }
+  },
+  "benchmark_version": "1.0.0",
+  "comparability": {
+    "evaluated_row_digest": "f27ed4c97de1766046a88e33ed9ec36234ef1bd5a796d9b9f9ec9f860fb0218c",
+    "grouping_unit": "contest_id",
+    "identical_held_out_rows": true,
+    "image_only_cannot_rank_captions_within_one_fixed_image": true
+  },
+  "fixture_validation": {
+    "captions": 600,
+    "content_digest": "23356965509b4f502d56a6e7c55a0f50760948964d93bff1dd39994ccf95a2b8",
+    "contest_group_split_crossings": 0,
+    "contests": 30,
+    "exact_image_duplicates": 0,
+    "image_hashes_verified": 30,
+    "near_duplicate_scene_signatures": 0,
+    "ok": true
+  },
+  "real_data_reporting_requirements": {
+    "arms": [
+      "text_only",
+      "image_only",
+      "fusion"
+    ],
+    "grouping_unit": "contest_id",
+    "primary_metric": "median within-contest Spearman on the held-out test split",
+    "real_bounds_apply_to_this_synthetic_fixture": false,
+    "real_caption_label_ceiling": 0.8262,
+    "real_caption_text_only_bound": 0.411,
+    "same_rows_for_every_arm": true,
+    "text_only_bound_applies_to": [
+      "text_only"
+    ],
+    "uncertainty": "deterministic percentile bootstrap over held-out contests"
+  },
+  "receipt_type": "humorvibes_multimodal_benchmark",
+  "receipt_version": 1,
+  "split_counts": {
+    "test": 60,
+    "train": 480,
+    "validation": 60
+  },
+  "status": "VERIFIED_SYNTHETIC_MULTIMODAL_CONTRACT",
+  "truth_boundary": {
+    "allowed_claim": "the same-contest multimodal evaluation, leakage, calibration, slicing, and receipt machinery executes end to end",
+    "claim_ready_for_multimodal_humor": false,
+    "data_origin": "deterministic_procedural_synthetic_fixture",
+    "human_authored_captions": 0,
+    "human_ratings": 0,
+    "model_comparison_is_product_evidence": false
+  }
+}
