@@ -1,0 +1,82 @@
+{
+  "claim_ready_for_human_funniness": false,
+  "dataset_id": "humor-genome-open-controls",
+  "generator_commit": "e87f251ac18272a74622ebf2fdb50c1dbfc700e1",
+  "hard_retrieval_digest": "9124e2e3fb32721f4445a4ddb518257f470bc659bcc96dc61e2f2fa89688b7f2",
+  "hard_retrieval_hash_128": {
+    "MRR": 0.0524071946596324,
+    "Recall@1": 0.01,
+    "Recall@10": 0.11666666666666667,
+    "Recall@5": 0.06666666666666667,
+    "beats_same_context_hard_negative_rate": 0.44,
+    "beats_same_frame_hard_negative_rate": 0.51,
+    "median_rank": 83.0,
+    "queries": 300
+  },
+  "hard_retrieval_max_content_jaccard": 0.10638297872340426,
+  "hard_retrieval_tfidf": [
+    {
+      "MRR": 0.0761152125190136,
+      "Recall@1": 0.03333333333333333,
+      "Recall@10": 0.13333333333333333,
+      "Recall@5": 0.09166666666666666,
+      "beats_same_context_hard_negative_rate": 0.3958333333333333,
+      "beats_same_frame_hard_negative_rate": 0.6416666666666667,
+      "median_rank": 61.0,
+      "queries": 240,
+      "split": "train"
+    },
+    {
+      "MRR": 0.23890994928150616,
+      "Recall@1": 0.13333333333333333,
+      "Recall@10": 0.5,
+      "Recall@5": 0.3333333333333333,
+      "beats_same_context_hard_negative_rate": 0.43333333333333335,
+      "beats_same_frame_hard_negative_rate": 0.5333333333333333,
+      "median_rank": 10.5,
+      "queries": 30,
+      "split": "validation"
+    },
+    {
+      "MRR": 0.28890780563345597,
+      "Recall@1": 0.13333333333333333,
+      "Recall@10": 0.6,
+      "Recall@5": 0.4666666666666667,
+      "beats_same_context_hard_negative_rate": 0.5666666666666667,
+      "beats_same_frame_hard_negative_rate": 0.6333333333333333,
+      "median_rank": 6.5,
+      "queries": 30,
+      "split": "test"
+    }
+  ],
+  "human_authored_rows": 0,
+  "human_rated_rows": 0,
+  "manifest_files_verified": 24,
+  "premise_families": 300,
+  "retrieval_baseline": [
+    {
+      "MRR": 1.0,
+      "Recall@1": 1.0,
+      "Recall@10": 1.0,
+      "queries": 240,
+      "split": "train"
+    },
+    {
+      "MRR": 0.8055555555555556,
+      "Recall@1": 0.6666666666666666,
+      "Recall@10": 1.0,
+      "queries": 30,
+      "split": "validation"
+    },
+    {
+      "MRR": 1.0,
+      "Recall@1": 1.0,
+      "Recall@10": 1.0,
+      "queries": 30,
+      "split": "test"
+    }
+  ],
+  "rows": 120000,
+  "status": "VERIFIED_SYNTHETIC_CONTROL_RELEASE",
+  "surface_only_arm_accuracy": 0.5519083333333333
+}
