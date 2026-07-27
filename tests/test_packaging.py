@@ -153,3 +153,9 @@ def test_deployment_verifier_builds_current_source_by_default() -> None:
     assert '"--no-build"' in text
     assert '"--helm-image"' in text
     assert '"helm_render_executed"' in text
+
+
+def test_ci_container_audit_reuses_the_compose_image_without_version_drift() -> None:
+    workflow = (ROOT / ".github/workflows/app-contracts.yml").read_text(encoding="utf-8")
+    assert "docker compose run --rm --no-deps --entrypoint humorvibes api adversarial" in workflow
+    assert not re.search(r"--entrypoint humorvibes humorvibes-research:[^ ]+ adversarial", workflow)

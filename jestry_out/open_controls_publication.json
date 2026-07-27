@@ -64,11 +64,12 @@
     "container_image_id": "sha256:ad5f5bfb4725f7ca6c21d3a55e80a8bb58977bae91fedd218f0f7334fcf8c5d4",
     "container_nonroot": true,
     "container_readonly_root": true,
+    "github_actions_image_version_drift_regression_test": true,
     "deployment_checks_ok": true,
     "deployment_source_tree_sha256": "1d14275868f570b6ba4ee665b740571cddcd2d48784b0e428b72a7dc5e82d8df",
     "fresh_wheel_import_ok": true,
     "package_version": "0.6.0",
-    "tests_passed": 155
+    "tests_passed": 156
   },
   "source": {
     "branch": "agent/open-controls-corpus",
@@ -81,6 +82,7 @@
     "release_tag": "humor-genome-open-controls-v1",
     "repository_url": "https://github.com/aidonerightcorp/humorvibes-jestry"
   },
+  "updated_at": "2026-07-27T15:27:34Z",
   "truth_boundary": {
     "allowed_claim": "The public bytes reproduce a deterministic project-controlled synthetic-control corpus and its declared retrieval benchmark.",
     "brain_mechanism_established": false,

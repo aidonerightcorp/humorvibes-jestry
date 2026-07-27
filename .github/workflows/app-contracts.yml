@@ -72,7 +72,4 @@ jobs:
             -d '{"texts":["container contract"]}' \
             http://127.0.0.1:8080/v1/embed
       - name: Run adversarial audit inside image
-        run: >-
-          docker run --rm --read-only --tmpfs /tmp:rw,size=64m,mode=1777
-          --cap-drop=ALL --security-opt=no-new-privileges
-          --entrypoint humorvibes humorvibes-research:0.5.0 adversarial
+        run: docker compose run --rm --no-deps --entrypoint humorvibes api adversarial
