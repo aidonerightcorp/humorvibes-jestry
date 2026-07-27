@@ -59,6 +59,28 @@ def test_canonical_notebook_is_deterministic_public_and_schema_clean() -> None:
     assert "Public Research Corpus" in dataset_metadata["title"]
 
 
+def test_open_project_documentation_is_linked_and_submission_docs_are_archived() -> None:
+    root = Path(__file__).resolve().parents[1]
+    readme = (root / "README.md").read_text(encoding="utf-8")
+    required = {
+        "PROJECT_STATUS.md": "no competition submission is claimed",
+        "PROJECT_WRITEUP.md": "SEPARATION IS NOT ESTABLISHED",
+        "CONTRIBUTING.md": "Model surprisal is not funniness",
+        "ROADMAP.md": "P1 — test context",
+        "docs/EXPANSION_GUIDE.md": "Definition of done",
+    }
+    for relative, phrase in required.items():
+        assert relative in readme
+        assert phrase in (root / relative).read_text(encoding="utf-8")
+
+    for relative in ("WRITEUP.md", "RESEARCH_ROADMAP.md",
+                     "SUBMISSION_STEPS.md", "SUBMISSION_PASTE_PACK.md"):
+        opening = (root / relative).read_text(encoding="utf-8")[:700].lower()
+        assert "archive" in opening or "historical" in opening
+    assert "<YOUR-VIDEO-URL-HERE>" not in (
+        root / "SUBMISSION_PASTE_PACK.md").read_text(encoding="utf-8")
+
+
 def test_caption_model_checkpoint_is_atomic(monkeypatch, tmp_path: Path) -> None:
     monkeypatch.setattr(caption_model, "OUT", tmp_path)
     report = {"status": "core_complete", "results": {"rho": 0.1}}

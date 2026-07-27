@@ -1,6 +1,11 @@
-# Humor Genome NYC - Submission Steps
+# Archived Humor Genome NYC submission steps
 
-> **2026-07-26 final public state:** the single canonical implementation is
+> **Archive, not an active checklist.** The competition deadline passed and no submission is
+> claimed. Do not follow the deadline or visibility instructions below. Current public state lives
+> in [`PROJECT_STATUS.md`](PROJECT_STATUS.md); the canonical executable study is the
+> [public Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study).
+
+> **2026-07-26 historical publication snapshot:** the single canonical implementation was
 > https://github.com/aidonerightcorp/humorvibes-jestry at
 > `humor-genome-wave2-v4` (`abb7fab`); the fail-closed dataset is public and ready at
 > https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2 (version 5); and the

@@ -1,0 +1,56 @@
+name: Research or data proposal
+description: Propose one bounded experiment, source, taxonomy, or analysis contribution.
+title: "Proposal: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read CONTRIBUTING.md and docs/EXPANSION_GUIDE.md first. A useful proposal identifies the evidence that could disconfirm it.
+  - type: dropdown
+    id: lane
+    attributes:
+      label: Contribution lane
+      options:
+        - Human labels or evaluation
+        - Multimodal context
+        - Multilingual form taxonomy
+        - Source acquisition and provenance
+        - Gemma or model instrumentation
+        - Release reproducibility
+        - Documentation or contributor experience
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Question and smallest useful increment
+      description: State one bounded outcome that can be reviewed independently.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Data, provenance, and licence
+      description: Identify sources, redistribution status, human-label meaning, and any context groups.
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Proposed protocol
+      description: Include split, controls, primary metric, uncertainty method, and leakage checks.
+    validations:
+      required: true
+  - type: textarea
+    id: receipt
+    attributes:
+      label: Definition of done and receipt
+      description: Name the test, report, or machine-readable receipt that would demonstrate completion.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Likely confounds and negative outcomes
+    validations:
+      required: true

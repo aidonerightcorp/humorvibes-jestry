@@ -5,12 +5,15 @@
 The canonical evidence is now consolidated and public:
 
 - repository: https://github.com/aidonerightcorp/humorvibes-jestry at commit
-  `abb7fabfd74d461f58fe1439d883dabda267068c`, source tag `humor-genome-wave2-v4`;
-- dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2, version 5,
-  121,670 fail-closed redistributable rows, public and ready;
+  `1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922`, source tag `humor-genome-wave2-v6`;
+- dataset: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2, latest public files,
+  121,670 fail-closed redistributable rows, public and ready. Kaggle's public metadata endpoint
+  still reports version 5 while its file listing shows the refreshed 2026-07-27 payload, so no
+  unobserved version number is inferred;
 - executable write-up:
   https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study,
-  public and COMPLETE; the exact current version is recorded in the publication receipt.
+  public and COMPLETE; notebook version 11 was pushed from source tag v6 and its live log is
+  recorded in the publication receipt.
 
 The notebook verifies six mounted payload hashes and the semantic release gate, runs Gemma 2 on
 CPU, reproduces S=3.188 over ten tokens against the pinned 3.19 instrument check, and verifies the

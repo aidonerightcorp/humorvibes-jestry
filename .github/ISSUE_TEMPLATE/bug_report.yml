@@ -1,0 +1,55 @@
+name: Bug or reproducibility failure
+description: Report a code, data-contract, documentation, or reproduction problem.
+title: "Bug: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for making the project more reliable. Do not include private corpus text, API keys, or account credentials.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      options:
+        - GitHub source or tests
+        - Kaggle dataset
+        - Kaggle notebook
+        - Documentation
+        - Research receipt or claim
+        - Ingestion or taxonomy
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: Include the exact error or mismatch and the file, command, or public URL involved.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction commands
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Revision or public version
+      description: Git commit or tag, Kaggle notebook version, or dataset version when known.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Python version, and relevant package or model versions.
+    validations:
+      required: true

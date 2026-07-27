@@ -3,6 +3,9 @@
 A public, reproducible Gemma study of humor structure. **HumorVibes** is the implementation name;
 **Humor Genome Wave 2** is the canonical research release.
 
+The original hackathon deadline has passed and no competition submission is claimed. The project
+now continues as open research: results, corrections, limitations, and extension paths are public.
+
 ## Start here
 
 | Public artifact | Open it | Status | What it is for |
@@ -15,6 +18,24 @@ The notebook is the single canonical executable write-up. It clones the immutabl
 `humor-genome-wave2-v6` source tag, verifies the mounted dataset byte-for-byte and semantically,
 loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
 [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
+
+## Read, verify, or help
+
+- [`PROJECT_WRITEUP.md`](PROJECT_WRITEUP.md): the polished research narrative and controlling
+  findings, written for readers who do not need the implementation history.
+- [`PROJECT_STATUS.md`](PROJECT_STATUS.md): what is public and complete, what is not claimed, and
+  how to verify the release.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): local setup, evidence rules, tests, and pull-request
+  expectations.
+- [`ROADMAP.md`](ROADMAP.md): prioritized, contribution-sized research and maintenance work.
+- [`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md): exact paths for adding sources, languages,
+  labels, model instruments, experiments, and public releases.
+
+Issues, reproductions, and research proposals are welcome. In this project, reproducing a null
+result, removing a confound, or documenting a licensing boundary is a successful contribution.
+The repository is public but does not yet carry a project-level code licence; the maintainer must
+choose one before outside code reuse is unambiguous. Dataset rows retain their recorded source
+licences.
 
 ## Release at a glance
 
@@ -41,6 +62,10 @@ other humor-adjacent text; source-specific human signals are not interchangeable
 
 ## Canonical repository map
 
+- `PROJECT_STATUS.md`, `PROJECT_WRITEUP.md`, `CONTRIBUTING.md`, `ROADMAP.md`: the current public
+  project entry points. Deadline-era submission packets are retained only as historical records.
+- `docs/EXPANSION_GUIDE.md`: the maintainer and contributor playbook for extending each research
+  layer without bypassing provenance or verification.
 - `wave2_notebook/`: the one notebook to read and publish; older notebook directories are
   supporting experiments, not competing entry points.
 - `build_kaggle_export.py`, `wave2_dataset/`, `verify_wave2_release.py`: public dataset build,
@@ -56,6 +81,9 @@ other humor-adjacent text; source-specific human signals are not interchangeable
 ```bash
 git clone https://github.com/aidonerightcorp/humorvibes-jestry.git
 cd humorvibes-jestry
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements-dev.txt
 python3 -m pytest -q tests/test_wave2.py
 python3 wave2_notebook/build_wave2_notebook.py
 

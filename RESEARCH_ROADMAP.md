@@ -1,4 +1,7 @@
-# HumorVibes Research Roadmap
+# Historical HumorVibes research backlog
+
+> This file preserves the original prototype and post-submission research backlog. Current,
+> contribution-sized priorities live in [`ROADMAP.md`](ROADMAP.md).
 
 This is the working backlog for turning HumorVibes from a joke generator into a humor study and adaptation system.
 

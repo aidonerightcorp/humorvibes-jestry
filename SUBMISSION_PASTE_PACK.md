@@ -1,7 +1,10 @@
-# SUBMISSION PASTE PACK — Humor Genome NYC
-# DEADLINE: the authenticated Kaggle API reports 2026-07-26 04:00 UTC
-# (two agreeing fields, re-queried 2026-07-24 23:48 UTC). Older notes said
-# 07-25 04:00 UTC. Work to the EARLIER date and confirm in the UI.
+# Archived submission paste pack — Humor Genome NYC
+
+> **Archive, not an active checklist.** The deadline passed and no submission is claimed. This
+> file preserves the prepared competition copy for provenance. Read [`PROJECT_STATUS.md`](PROJECT_STATUS.md)
+> and [`PROJECT_WRITEUP.md`](PROJECT_WRITEUP.md) for the maintained project.
+
+Historical deadline recorded at the time: 2026-07-26 04:00 UTC.
 
 Everything below is copy-paste ready. Order of operations at
 https://www.kaggle.com/competitions/humor-genome-nyc → **Writeups tab → New Writeup**.
@@ -36,7 +39,7 @@ https://www.kaggle.com/code/taylorsamarel/humorvibes-corpus-lab
 https://www.kaggle.com/code/taylorsamarel/humorvibes-panel-lab
 https://www.kaggle.com/code/taylorsamarel/humorvibes-validate-ratings
 https://www.kaggle.com/code/taylorsamarel/humorvibes-ablation-court
-<YOUR-VIDEO-URL-HERE>
+No public demo video was published before the deadline.
 ```
 
 The GitHub repo is ALREADY PUBLIC (repo requirement satisfied — no visibility

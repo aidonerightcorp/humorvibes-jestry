@@ -1,17 +1,25 @@
 {
   "receipt_type": "humor_genome_wave2_publication",
-  "receipt_version": 1,
-  "verified_utc": "2026-07-26T22:24:19Z",
+  "receipt_version": 2,
+  "verified_utc": "2026-07-27T00:33:50Z",
+  "project_state": {
+    "competition_deadline_passed": true,
+    "competition_submission_claimed": false,
+    "maintenance_mode": "open_research_project"
+  },
   "github": {
     "url": "https://github.com/aidonerightcorp/humorvibes-jestry",
-    "main_commit_at_live_verification": "abb7fabfd74d461f58fe1439d883dabda267068c",
-    "source_tag": "humor-genome-wave2-v4",
-    "source_tag_commit": "abb7fabfd74d461f58fe1439d883dabda267068c",
+    "main_commit_at_live_verification": "1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922",
+    "source_tag": "humor-genome-wave2-v6",
+    "source_tag_commit": "1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922",
+    "visibility": "public",
     "anonymous_http_status": 200
   },
   "dataset": {
     "url": "https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2",
-    "version": 5,
+    "title": "Humor Genome Wave 2 - Public Research Corpus",
+    "public_api_version_observed": 5,
+    "version_observation_note": "The public metadata endpoint still reported version 5 while the public file listing showed the refreshed 2026-07-27 files. No unobserved version number is inferred.",
     "status": "ready",
     "is_private": false,
     "anonymous_http_status": 200,
@@ -25,9 +33,11 @@
     "source_families_in_public_slice": 166,
     "aligned_phrase_pairs": 7913,
     "expectation_violation_frames": 2581,
-    "manifest_sha256": "39bfb4e1340fc11cc25c62c4db8f73fc2a86c51b166252cfdbc31d0cd3ac813e",
+    "data_card_sha256": "4e78807e4c87e510bdfd1949e6905a49da45bcc887b70e94bc1060b5589bc7bb",
+    "manifest_sha256": "a5159c806f885bc3cf320a5b88691f49060ee7d89946472cebe60cd5dfe33d20",
+    "remote_files_observed_utc": "2026-07-27T00:31:36Z",
     "remote_files": {
-      "DATA_CARD.md": 2500,
+      "DATA_CARD.md": 5073,
       "aligned_phrases.jsonl": 2247343,
       "census.json": 5106,
       "corpus_sample.jsonl": 65190241,
@@ -37,15 +47,15 @@
     }
   },
   "notebook": {
-    "url": "https://www.kaggle.com/code/taylorsamarel/humor-genome-wave2-gemma",
-    "version": 9,
+    "url": "https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study",
+    "version_pushed": 11,
     "status": "COMPLETE",
     "is_private": false,
     "anonymous_http_status": 200,
-    "source_commit_printed_by_run": "abb7fabfd74d461f58fe1439d883dabda267068c",
-    "source_tag_printed_by_run": "humor-genome-wave2-v4",
-    "local_source_notebook_sha256": "53e158297de76c6203e1954aada7e8179cb8c0c75017a187878c6c8ba9f3855d",
-    "raw_kaggle_log_sha256": "748aeabd4fc7c84987c278462af7d449940428f3b013e972870b52f75fe5ac59",
+    "source_commit_printed_by_run": "1e2143e20adb3d33d8f5a09cd8d28b0a5acbd922",
+    "source_tag_printed_by_run": "humor-genome-wave2-v6",
+    "local_source_notebook_sha256": "be60442971afbe8d50f615b9a6d1bd545e75cc5081c5213fa3aaa47c3b6f78ba",
+    "raw_kaggle_log_sha256": "f5e04f1754153adabe098576e97919901427e945c6042e69189f0906de6294aa",
     "device": "cpu",
     "instrument": {
       "measured_s": 3.188,
@@ -61,7 +71,7 @@
     },
     "caption_model": {
       "label_ceiling": 0.8262,
-      "text_only_bound": 0.4110,
+      "text_only_bound": 0.411,
       "held_out_contest_spearman": 0.1555,
       "fraction_of_text_only_bound": 0.378,
       "captions": 215465,
@@ -70,10 +80,12 @@
     }
   },
   "local_verification": {
-    "full_verifier_receipt_utc": "2026-07-26T17:52:35-04:00",
-    "full_verifier_result": "ALL GREEN",
-    "full_pytest_result": "62 passed in 11.37s",
-    "wave2_tests_at_release_commit": "20 passed in 1.34s",
-    "semantic_release_gate": "PASS"
+    "full_release_verifier_result": "PASS",
+    "fresh_public_download_verifier_result": "PASS",
+    "full_pytest_result": "64 passed",
+    "semantic_release_gate": "PASS",
+    "manifest_payloads": 6,
+    "markdown_missing_local_targets": 0,
+    "github_issue_forms_parsed": 3
   }
 }

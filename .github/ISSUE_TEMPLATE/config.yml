@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the executable study
+    url: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study
+    about: Check the canonical methods, results, and limitations before proposing a duplicate experiment.
+  - name: Inspect the public dataset
+    url: https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2
+    about: Review the data card, files, provenance fields, and release policy.

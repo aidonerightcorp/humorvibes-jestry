@@ -1,4 +1,11 @@
-# HumorVibes: Humor as Affordable Surprise, Measured with Gemma
+# Archived competition write-up: HumorVibes
+
+> This 1,500-word-limit document is preserved as the hackathon-era submission draft. The deadline
+> passed and no competition submission is claimed. Read the current open-project narrative in
+> [`PROJECT_WRITEUP.md`](PROJECT_WRITEUP.md), then use the canonical public notebook for executable
+> evidence.
+
+## Humor as Affordable Surprise, Measured with Gemma
 
 ## Subtitle
 
