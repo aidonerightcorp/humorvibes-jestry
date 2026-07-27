@@ -36,6 +36,16 @@ jobs:
         run: uv sync --frozen --extra api --extra dev
       - name: Run repository tests
         run: uv run pytest -q
+      - name: Rebuild and verify the complete v0.7.0 DOI source identity
+        run: |
+          uv run python tools/build_doi_archive.py \
+            --tag v0.7.0 \
+            --out-dir /tmp/humorvibes-doi-v0.7.0
+          uv run python tools/verify_doi_archive.py \
+            --root /tmp/humorvibes-doi-v0.7.0
+          diff -u \
+            jestry_out/doi_v0_7_0_preflight/SHA256SUMS \
+            /tmp/humorvibes-doi-v0.7.0/SHA256SUMS
       - name: Reject whitespace damage
         run: git diff --check
       - name: Run network-free adversarial audit

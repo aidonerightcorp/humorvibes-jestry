@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Amarel, Taylor S."
+      }
+    ],
+    "description": "A public research release and deployable toolkit for studying humor structure without treating model surprisal as funniness. Includes rights-filtered data, executable Kaggle studies, deterministic CC0 controls, adversarial and multimodal contracts, human-study launch tooling, provider-neutral integrations, an API, and deployment manifests.",
+    "keywords": [
+      "humor research",
+      "Gemma",
+      "reproducible research",
+      "multilingual NLP",
+      "human evaluation",
+      "FastAPI"
+    ],
+    "license": "Apache-2.0",
+    "publication_date": "2026-07-27",
+    "related_identifiers": [
+      {
+        "identifier": "https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2",
+        "relation": "isSupplementedBy",
+        "scheme": "url"
+      },
+      {
+        "identifier": "https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study",
+        "relation": "isSupplementedBy",
+        "scheme": "url"
+      },
+      {
+        "identifier": "https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls",
+        "relation": "isSupplementedBy",
+        "scheme": "url"
+      }
+    ],
+    "title": "Humor Genome Wave 2: reproducible humor-structure research and integration toolkit",
+    "upload_type": "software",
+    "version": "0.7.0"
+  }
+}
