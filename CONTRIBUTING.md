@@ -111,7 +111,9 @@ suite and include the command output in the pull request.
 Add structural form rules only with positive and negative fixtures from the target language.
 Report precision-oriented coverage by language before and after the change. Keep lexical domain
 labels separate from structural form and source-declared style. See
-[`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md).
+[`docs/EXPANSION_GUIDE.md`](docs/EXPANSION_GUIDE.md). Native-language changes also follow
+[`docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md`](docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md) and must pass
+`humorvibes native-fixture-validate`; one pull request may cover only one language and form.
 
 ### Source acquisition
 

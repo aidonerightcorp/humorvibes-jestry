@@ -168,6 +168,13 @@ def main() -> int:
     provider_audit.add_argument("--live", action="store_true")
     provider_audit.add_argument("--out", type=Path)
 
+    native_fixture = sub.add_parser(
+        "native-fixture-validate",
+        help="validate one human-reviewed language/form fixture bundle",
+    )
+    native_fixture.add_argument("path", type=Path)
+    native_fixture.add_argument("--out", type=Path)
+
     sub.add_parser("serve", help="run the FastAPI server")
     args = parser.parse_args()
     if args.command == "serve":
@@ -283,6 +290,22 @@ def main() -> int:
         if args.out:
             write_provider_audit(args.out, payload)
         return 0 if payload["ok"] else 1
+
+    if args.command == "native-fixture-validate":
+        from .native_fixtures import (
+            validate_native_fixture_file,
+            write_native_fixture_receipt,
+        )
+
+        try:
+            payload = validate_native_fixture_file(args.path)
+        except IntegrationError as exc:
+            _dump({"error": exc.public()})
+            return 2
+        _dump(payload)
+        if args.out:
+            write_native_fixture_receipt(args.out, payload)
+        return 0
 
     if args.command in {
         "controls-info",

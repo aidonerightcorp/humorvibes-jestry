@@ -57,6 +57,9 @@ separate causal-design lab with its own downloadable verification and publicatio
   application contract.
 - [`docs/ADVERSARIAL_VALIDATION.md`](docs/ADVERSARIAL_VALIDATION.md): tested attack classes,
   deterministic audit commands, and security boundaries.
+- [`docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md`](docs/NATIVE_LANGUAGE_CONTRIBUTIONS.md): one-language
+  review bundles, privacy-minimized human attestations, licence gates, fixture counts, and the
+  body-free validation receipt.
 - [`docs/PRODUCT_AND_RESEARCH_USE_CASES.md`](docs/PRODUCT_AND_RESEARCH_USE_CASES.md): what a
   comedian, audience member, academic, educator, curator, or product team can use now; the missing
   evidence; and the claim gates for stronger conclusions.

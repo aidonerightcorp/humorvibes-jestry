@@ -82,6 +82,16 @@ For non-English additions, include a note from a competent speaker or reviewer. 
 English templates are not evidence of a native form. Script-aware minimum length and Unicode word
 boundaries need explicit regression cases.
 
+Use the complete one-language review contract in
+[`NATIVE_LANGUAGE_CONTRIBUTIONS.md`](NATIVE_LANGUAGE_CONTRIBUTIONS.md). The validator requires 20
+positives, 20 hard negatives, explicit fixture rights, a pseudonymous human attestation,
+before/after coverage, manual false-positive review, and aligned-pair consistency when applicable:
+
+```bash
+humorvibes native-fixture-validate /tmp/native-review.json \
+  --out /tmp/native-review-receipt.json
+```
+
 Do not use `shaggy_dog` in domain-by-form analysis: it is a length proxy. Exclude generic forms
 when claiming a meaningful domain/form pairing.
 
