@@ -1,14 +1,17 @@
 """Regression tests for the post-closeout wave-1 receipts, figures, and docs.
 
 Network-free and corpus-free: everything asserted here reads committed files.
-If a study is rerun and a number legitimately moves, the receipt, these pins,
-and the documents quoting the number must change together — that coupling is
-the point (evidence rule 8 in CLAUDE_CODE_HANDOFF.md).
+Pins are EXACT where documents quote exact numbers (2026-07-28 referee round:
+loose bands let quoted claims drift silently). If a study is rerun and a number
+legitimately moves, the receipt, these pins, and every document quoting the
+number must change together — that coupling is the point.
 """
 from __future__ import annotations
 
 import json
 from pathlib import Path
+
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "jestry_out"
@@ -30,18 +33,31 @@ def test_declared_style_receipt_pins() -> None:
     assert cal["pass"] is True
     assert cal["measured"]["tokens"] == 10
     assert abs(cal["measured"]["S"] - 3.19) <= cal["tolerance"]
+
     f = d["findings"]
     assert f["groups_strictly_above_control"] == 0
     assert f["groups_strictly_below_control"] == 0
-    assert 0.05 < f["any_difference_permutation_p"] < 1.0
+    # docs quote p = 0.45; the study is seeded and deterministic
+    assert f["any_difference_among_styles_permutation_p"] == pytest.approx(0.44988)
+    assert "control is not part" in f["permutation_note"]
+
+    # the power analysis is the finding (referee round): the criterion could
+    # not have fired, and the receipt must keep saying so
+    crit = f["separation_criterion"]
+    assert crit["could_have_fired_at_this_n"] is False
+    assert crit["largest_observed_group_ci_low"] < crit["requires_group_ci_low_above"]
+    assert "underpowered" in d["verdict"].lower()
+    assert f["length_confound"]["pearson_mean_tokens_vs_mean_S_across_groups"] == pytest.approx(-0.631)
+
+    # screening must show pre-filter counts, not survivors only
+    s = d["screening"]
+    assert s["candidates_after_screen_all_styles"]["legal"] == 10
+    assert s["candidates_after_screen_all_styles"]["medical"] == 9
+    assert set(s["styles_dropped_below_threshold"]) == {"legal", "medical"}
     assert len(d["groups"]) == 7
     for stats in d["groups"].values():
         assert stats["n"] == 12
-        lo, hi = stats["ci95"]
-        assert lo < stats["mean_S"] < hi
-        # aggregates + hashes only — reddit text must never enter this receipt
         assert all(len(h) == 16 for h in stats["item_hashes"])
-    assert "not_verified" in d["truth_boundary"]
     text = json.dumps(d)
     assert "[deleted]" not in text and "[removed]" not in text
 
@@ -52,30 +68,65 @@ def test_divisiveness_receipt_pins() -> None:
     s = d["screening"]
     assert s["rows_raw"] == 2_186_939
     assert s["dropped_count_mismatch"] == 7_061
+    assert s["dropped_mean_mismatch"] == 5_544
+    assert s["kept_votes_ge_20"] == 2_068_094
+
     overall = d["label_reliability"]["overall"]
-    # divisiveness is a real label, but LESS reliable than the mean —
-    # the honest ordering this study exists to record
-    assert overall["conflict"]["median_spearman_brown"] > 0.4
-    assert overall["mean"]["median_spearman_brown"] > overall["conflict"]["median_spearman_brown"]
+    # docs quote ~0.51 (conflict) vs ~0.67 (mean); SB only over positive-r
+    assert overall["conflict"]["median_spearman_brown"] == pytest.approx(0.512, abs=1e-4)
+    assert overall["mean"]["median_spearman_brown"] == pytest.approx(0.6686, abs=1e-4)
+    assert overall["mean"]["median_raw_split_half"] is not None
+    for which in ("mean", "conflict", "entropy"):
+        assert overall[which]["estimable"] is True
+
+    # referee round: SB is invalid for non-positive r — the 40-80 bin must be
+    # marked not estimable, never published as a negative "reliability"
+    low_bin = d["label_reliability"]["by_vote_bin"]["40-80"]
+    for which in ("mean", "conflict", "entropy"):
+        assert low_bin[which]["estimable"] is False
+        assert low_bin[which]["median_spearman_brown"] is None
+
+    # vote bins are outcome strata; the coupling that makes them so is receipted
+    assert d["votes_mean_within_contest_spearman_median"] > 0.9
+    assert "vote_bins_are_outcome_strata" in d["reliability_caveats"]
+    assert "disjoint_split_downward_bias" in d["reliability_caveats"]
+
     ratios = d["predicted_over_ceiling"]
-    for key in ("mean", "conflict", "entropy"):
-        assert 0.05 < ratios[key] < 0.5, "predictability should stay far below ceiling"
+    assert ratios["mean"] == pytest.approx(0.1855, abs=1e-4)
+    assert ratios["conflict"] == pytest.approx(0.1732, abs=1e-4)
+    assert "population" in d["predicted_over_ceiling_note"]
     assert "not_verified" in d["truth_boundary"]
 
 
 def test_demographic_norms_receipt_pins() -> None:
     d = load("demographic_norms_study.json")
     agree = d["cross_dataset_overall_agreement"]
-    assert agree["shared_words"] > 4_000
-    assert 0.35 < agree["spearman_mean_vs_p_funny"] < 0.5
+    assert agree["shared_words"] == 4_739
+    assert agree["spearman_mean_vs_p_funny"] == pytest.approx(0.4141, abs=1e-4)
+
     gaps = d["engelthaler_gaps"]
-    assert gaps["sex"]["words_tested"] == 4_997
-    assert gaps["sex"]["significant_q05"] <= 20
+    # referee round: Welch t, not normal z — docs quote 2/4,997 and 0/4,997
+    assert gaps["sex"]["test"].startswith("Welch")
+    assert gaps["sex"]["significant_q05"] == 2
     assert gaps["age"]["significant_q05"] == 0
-    # the implication must state the mostly-null outcome, not the hyped one
+    assert gaps["sex"]["implied_per_word_gap_reliability"] < 0.1
+    assert gaps["age"]["implied_per_word_gap_reliability"] == 0.0
+    # ranked word lists are reliability-zero noise and must never come back
+    assert "top_positive" not in gaps["sex"] and "top_negative" not in gaps["sex"]
+
+    cross = d["cross_dataset_gap_agreement"]
+    for gap in ("sex_gap", "age_gap"):
+        assert "no attainable measurement" in cross[gap]["measurement_verdict"]
+        assert "attenuation_ceiling" in cross[gap]
+    assert "direction_note" in cross["age_gap"]
+
+    hyp = d["hand_coded_dimension_gap_tests"]
+    assert hyp["bh_family_size"] == 12
+    top = hyp["rows"][0]
+    assert (top["dimension"], top["target"]) == ("sexc", "age_gap")
+    assert top["q_bh"] < 0.01
     imp = d["persona_b_implication"]
-    assert "WEAK" in imp or "weak" in imp
-    assert "mostly" in imp.lower()
+    assert "NOT DETECTABLE" in imp.upper()
 
 
 def test_ported_word_type_receipt() -> None:
@@ -96,7 +147,6 @@ def test_ported_three_corpus_receipt() -> None:
     s = survivors[0]
     assert s["feature"] == "punch_rarity_max"
     assert s["all_survive_fdr"] is True
-    # the sign is the finding: negative in every corpus
     assert all(v < 0 for v in s["rho"].values())
 
 
@@ -112,9 +162,16 @@ def test_wave1_figures_exist_and_receipted() -> None:
         assert path.exists() and path.stat().st_size > min_bytes, name
     assert d["atlas"]["points"] == 23_779
     assert len(d["atlas"]["embeddings_sha256"]) == 64
-    # figure values come from receipts, not hand-typed
+    # referee round: the atlas is a corpus map, and says so; no operator paths
+    assert "caveat" in d["atlas"]
+    assert "/home/" not in json.dumps(d)
+    # every displayed value is cross-checked against its source receipt
     ceil = load("caption_ceiling.json")["headline"]["median_ceiling"]
+    bound = load("caption_portability.json")["results"]["text_only_predictor_bound"]
+    model = load("caption_model.json")["results"]["within_contest_median_spearman"]
     assert abs(d["waterfall"]["ceiling"] - ceil) < 1e-12
+    assert abs(d["waterfall"]["bound"] - bound) < 1e-12
+    assert abs(d["waterfall"]["model"] - model) < 1e-12
 
 
 def test_notebook_refresh_receipt() -> None:
@@ -125,10 +182,14 @@ def test_notebook_refresh_receipt() -> None:
     assert k["wave2"]["in_run_form_study"]["strictly_above_control"] == 0
     assert k["open_controls"]["terminal_status"] == "COMPLETE"
     assert k["ceiling_demo"]["terminal_status"] == "COMPLETE"
+    assert k["ceiling_demo"]["version_pushed"] >= 4
+    assert k["ceiling_demo"]["served_source_matches_committed_cells"] is True
     assert d["source_tag"]["name"] == "humor-genome-wave2-v10"
 
 
-def test_thesis_doc_quotes_canonical_numbers() -> None:
+def test_thesis_doc_matches_receipts() -> None:
+    """The scoreboard's quoted values must exist AND match the receipts —
+    a substring check alone lets a rerun leave the doc stale."""
     text = (ROOT / "docs" / "THESIS_AND_EVIDENCE.md").read_text()
     for needle in (
         "0.8262",
@@ -136,7 +197,15 @@ def test_thesis_doc_quotes_canonical_numbers() -> None:
         "0.1555",
         "ρ = 0.033",
         "0/7",
+        "Underpowered — separation not established",
+        "Not detectable at these per-word n",
+        "2/4,997",
         "surprise-reduction engine",
         "supersedes no",
     ):
         assert needle in text, f"THESIS_AND_EVIDENCE.md lost canonical marker: {needle}"
+    declared = load("declared_style_study.json")
+    p = declared["findings"]["any_difference_among_styles_permutation_p"]
+    assert f"p = {round(p, 2)}" in text
+    demo = load("demographic_norms_study.json")
+    assert f"{demo['engelthaler_gaps']['sex']['significant_q05']}/4,997" in text

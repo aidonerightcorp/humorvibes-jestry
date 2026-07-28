@@ -560,23 +560,33 @@ enters any public receipt (aggregates and sha256 item hashes only).
   zero annotation cost) × 12 items, against the same wiktionary-proverb control recipe as the
   published form study, on the certified instrument (calibration re-verified in-run: S = 3.1899
   over 10 tokens; zero instrument errors). Result: **0/7 style CIs separate from the control in
-  either direction; any-difference permutation p = 0.45** — the form-study null replicates on an
-  independent label axis. Style labels are confounded with community norms and length culture;
-  this is a regime null, not a style-quality claim.
+  either direction**, but the 2026-07-28 referee round showed the criterion could not have fired
+  at n=12/group (it requires a group CI-low above 5.999; largest observed 4.740) — so the honest
+  label is **underpowered, not established**. A separate any-difference test among the seven
+  styles (control excluded) gives p = 0.45. Token length is an uncontrolled covariate
+  (r ≈ −0.63 across group means); style labels are additionally confounded with community norms.
+  This is a bounded regime probe, not a style-quality claim.
 - **Caption divisiveness study** (`jestry_out/divisiveness_study.json`): first use of the SHAPE
   of the 3-bin vote histogram. Integrity screen dropped 7,061 votes≠sum rows and 5,544
   impossible-mean rows (never averaged over). Pole-conflict `C = 2*sqrt(p_nf*p_f)` is a real
-  label — split-half Spearman–Brown **0.51** overall at ≥40 votes, **0.53** at 160+ votes,
-  versus **0.67 / 0.62** for the mean — but contest-held-out text features predict it at
-  **~17% of its own ceiling versus ~19% for the mean**: the shape of disagreement is measurable,
-  and no easier. Low-vote bins are unstable and reported per bin in the receipt.
+  label overall — split-half Spearman–Brown **~0.51** versus **~0.67** for the mean on the
+  ≥40-vote sample — but contest-held-out text features predict it at **~17% of its own ceiling
+  versus ~19% for the mean**: the shape of disagreement is measurable, and no easier. The
+  2026-07-28 referee round corrected the per-bin cells: vote bins are outcome-conditioned strata
+  (votes track the mean at ρ ≈ 0.99 within contest), Spearman–Brown is invalid for non-positive
+  split-half r, and low-vote bins are receipted as **not estimable** rather than as negative
+  "reliabilities".
 - **Demographic humor norms** (`jestry_out/demographic_norms_study.json`): two independent
   word-level crowds agree on what is funny (Engelthaler norms vs cockamamie votes, ρ = **0.414**
-  [0.389, 0.439] on 4,739 shared words), but single-word demographic gaps are mostly noise at
-  these per-word sample sizes: **9/4,997** sex gaps and **0/4,997** age gaps survive BH-FDR, and
-  cross-dataset gap-agreement CIs include zero. One dimension-level signal survives (sexual-
-  connotation words skew toward younger raters, ρ = 0.136, q = 0.002). Persona-conditioning of B
-  keeps only weak lexical support — a clean mostly-negative result, kept visible.
+  [0.389, 0.439] on 4,739 shared words), but single-word demographic gaps are **not detectable
+  at these per-word sample sizes**: per-word gap reliability is ≈ 0.06 (sex) and ≈ 0 (age), so
+  **2/4,997** sex gaps and **0/4,997** age gaps survive Welch-t + BH-FDR (the earlier 9/4,997
+  used a normal-z reference that per-word n cannot support — corrected 2026-07-28), and the
+  cross-dataset gap arm has no attainable signal at these reliabilities (attenuation ceiling
+  ≈ 0.16/0; the negative age point is reported, not absorbed). One dimension-level signal
+  survives in the declared 12-test family (sexual-connotation words skew younger, ρ = 0.136,
+  q = 0.008). No ranked word lists are published — at reliability ≈ 0 they would be noise
+  presented as findings. Persona-conditioning of B keeps only weak lexical support.
 - **Figures that existed only as prose** now live in `docs/figures/`: the caption ceiling
   waterfall, the cross-corpus transfer 2×2, and the Humor Genome Atlas (t-SNE of the 23,779-item
   surface channel, coordinates only, faceted by language). Build receipt:
@@ -590,6 +600,36 @@ enters any public receipt (aggregates and sha256 item hashes only).
   explainer (label ceiling, reliability-vs-votes, portability, the kept form null) was rebuilt as
   a static edition (no live session cells) and published:
   <https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support>, version 1,
-  terminal COMPLETE, anonymously readable (HTTP 200 read-back). It displays previously receipted
+  terminal COMPLETE, anonymously readable (HTTP 200 read-back); now at version 4, built
+  from the repository's `ceiling_demo/` (`jestry_out/notebook_refresh_publication.json`). It displays previously receipted
   numbers only. Receipt: `jestry_out/ceiling_demo_publication.json`.
 - Tenet-by-tenet placement of all of the above: `docs/THESIS_AND_EVIDENCE.md`.
+
+## 2026-07-28 adversarial methods review (referee round)
+
+Two independent reviewers (methods/statistics and consistency) audited the post-closeout waves,
+including recomputing every quoted number from receipts and source data. Transcription integrity
+was perfect — zero doc-vs-receipt drift across 27 checked numbers — but the referee found real
+estimator and status-label defects, all corrected in place and receipted:
+
+- **Spearman–Brown on negative split-half r** produced sign-flipped, amplified per-bin
+  "reliabilities" in the divisiveness study; SB is now withheld for non-positive r, raw medians
+  are always reported, and outcome-conditioned vote strata are named as such.
+- **A normal-z reference on tiny per-word n** inflated the demographic sex-gap count from the
+  true 2 to 9; Welch t is now used, ranked word lists (reliability ≈ 0 noise with demographic
+  loadings) were removed, and the cross-dataset arm is receipted as having no attainable signal.
+- **Two "null" labels overstated underpowered designs**: the declared-style separation criterion
+  could not have fired at n=12/group, and the demographic word-level result is "not detectable",
+  not "absent". Both relabeled everywhere, with the power analysis in the receipts.
+- **The permutation p was mis-scoped in prose** (it tests among-styles differences, control
+  excluded) and **screening was survivor-only** (pre-filter candidate counts now receipted,
+  including `legal` 10 and `medical` 9 below threshold).
+- Verified clean by the same review: the permutation test itself (exact one-way F under equal n),
+  sha256-ordered sampling, BH implementation, GroupKFold splits, transfer-matrix orientation,
+  figure-value provenance, and the 0.8262 caption ceiling (whose split-half arm is conservative —
+  the referee's independent-halves check explains the receipt's own flagged estimator
+  disagreement).
+
+None of the three studies' conclusions reversed; what changed is that the receipts now state
+exactly what each design could and could not have found. The full referee report is preserved in
+the pull-request record.

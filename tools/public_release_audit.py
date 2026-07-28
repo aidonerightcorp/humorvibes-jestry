@@ -31,7 +31,7 @@ SURFACES = (
         "receipt": "jestry_out/wave2_publication.json",
         "dataset": "taylorsamarel/humor-genome-wave2",
         "notebook": "taylorsamarel/humor-genome-wave-2-reproducible-gemma-study",
-        "tag": "humor-genome-wave2-v9",
+        "tag": "humor-genome-wave2-v10",
     },
     {
         "name": "open_controls",

@@ -1,11 +1,12 @@
 {
   "receipt_type": "caption_divisiveness_study",
   "receipt_version": 1,
-  "ts": "2026-07-28T01:52:27+00:00",
+  "ts": "2026-07-28T03:42:19+00:00",
   "status": "complete",
   "source": "nextml caption-contest 3-bin vote histograms via data_cache/caption_index.parquet",
   "definitions": {
     "conflict": "C = 2*sqrt(p_not_funny * p_funny); 0 = a pole is empty, 1 = even split between opposite poles",
+    "ridge_caveat": "Ridge(alpha=2.0) untuned and shared across feature sets; the text-vs-mean comparison is conditional on that choice",
     "entropy": "3-bin Shannon entropy / log(3)",
     "mean": "(1*nf + 2*sf + 3*f) / votes"
   },
@@ -16,113 +17,157 @@
     "kept_votes_ge_20": 2068094
   },
   "seed": 20260727,
+  "votes_mean_within_contest_spearman_median": 0.9278,
+  "reliability_caveats": {
+    "vote_bins_are_outcome_strata": "vote count within a contest is a near-deterministic rank proxy for the mean, so per-bin cells condition on the outcome; the OVERALL row is the quotable one",
+    "disjoint_split_downward_bias": "complementary vote-dealing biases split-half r downward vs independent half-samples under range restriction; SB values are conservative where reported and withheld where raw r <= 0"
+  },
   "label_reliability": {
     "overall": {
       "mean": {
-        "median_spearman_brown": 0.6674,
-        "iqr": [
-          0.5926,
-          0.7267
+        "median_raw_split_half": 0.5008,
+        "median_spearman_brown": 0.6686,
+        "iqr_raw": [
+          0.4211,
+          0.5708
         ],
-        "contests": 352
+        "contests": 352,
+        "contests_negative_r": 3,
+        "estimable": true
       },
       "conflict": {
-        "median_spearman_brown": 0.5074,
-        "iqr": [
-          0.4352,
-          0.5784
+        "median_raw_split_half": 0.3399,
+        "median_spearman_brown": 0.512,
+        "iqr_raw": [
+          0.2781,
+          0.4068
         ],
-        "contests": 348
+        "contests": 348,
+        "contests_negative_r": 9,
+        "estimable": true
       },
       "entropy": {
-        "median_spearman_brown": 0.675,
-        "iqr": [
-          0.6079,
-          0.7346
+        "median_raw_split_half": 0.5095,
+        "median_spearman_brown": 0.6763,
+        "iqr_raw": [
+          0.4367,
+          0.5806
         ],
-        "contests": 351
+        "contests": 351,
+        "contests_negative_r": 1,
+        "estimable": true
       }
     },
     "by_vote_bin": {
       "40-80": {
         "captions": 59022,
         "mean": {
-          "median_spearman_brown": -0.2854,
-          "iqr": [
-            -0.7356,
-            0.0036
+          "median_raw_split_half": -0.1249,
+          "median_spearman_brown": null,
+          "iqr_raw": [
+            -0.2689,
+            0.0018
           ],
-          "contests": 263
+          "contests": 263,
+          "contests_negative_r": 196,
+          "estimable": false,
+          "note": "not estimable at this vote count: the raw split-half median is <= 0 (outcome-conditioned stratum + disjoint-split downward bias), so no Spearman-Brown value is reported"
         },
         "conflict": {
-          "median_spearman_brown": -0.03,
-          "iqr": [
-            -0.2201,
-            0.0675
+          "median_raw_split_half": -0.0148,
+          "median_spearman_brown": null,
+          "iqr_raw": [
+            -0.0991,
+            0.0349
           ],
-          "contests": 262
+          "contests": 262,
+          "contests_negative_r": 153,
+          "estimable": false,
+          "note": "not estimable at this vote count: the raw split-half median is <= 0 (outcome-conditioned stratum + disjoint-split downward bias), so no Spearman-Brown value is reported"
         },
         "entropy": {
-          "median_spearman_brown": -0.2413,
-          "iqr": [
-            -0.5496,
-            0.0354
+          "median_raw_split_half": -0.1077,
+          "median_spearman_brown": null,
+          "iqr_raw": [
+            -0.2156,
+            0.018
           ],
-          "contests": 263
+          "contests": 263,
+          "contests_negative_r": 186,
+          "estimable": false,
+          "note": "not estimable at this vote count: the raw split-half median is <= 0 (outcome-conditioned stratum + disjoint-split downward bias), so no Spearman-Brown value is reported"
         }
       },
       "80-160": {
         "captions": 66526,
         "mean": {
-          "median_spearman_brown": 0.0664,
-          "iqr": [
-            -0.5792,
-            0.3824
+          "median_raw_split_half": 0.0343,
+          "median_spearman_brown": 0.3675,
+          "iqr_raw": [
+            -0.2246,
+            0.2364
           ],
-          "contests": 298
+          "contests": 298,
+          "contests_negative_r": 139,
+          "estimable": true
         },
         "conflict": {
-          "median_spearman_brown": 0.1173,
-          "iqr": [
-            -0.1171,
-            0.2373
+          "median_raw_split_half": 0.0623,
+          "median_spearman_brown": 0.208,
+          "iqr_raw": [
+            -0.0553,
+            0.1346
           ],
-          "contests": 298
+          "contests": 298,
+          "contests_negative_r": 101,
+          "estimable": true
         },
         "entropy": {
-          "median_spearman_brown": 0.1137,
-          "iqr": [
-            -0.4536,
-            0.3986
+          "median_raw_split_half": 0.0603,
+          "median_spearman_brown": 0.3774,
+          "iqr_raw": [
+            -0.1849,
+            0.2489
           ],
-          "contests": 298
+          "contests": 298,
+          "contests_negative_r": 131,
+          "estimable": true
         }
       },
       "160-plus": {
         "captions": 24452,
         "mean": {
-          "median_spearman_brown": 0.6174,
-          "iqr": [
-            0.5017,
-            0.7297
+          "median_raw_split_half": 0.4465,
+          "median_spearman_brown": 0.6213,
+          "iqr_raw": [
+            0.3348,
+            0.5744
           ],
-          "contests": 178
+          "contests": 178,
+          "contests_negative_r": 1,
+          "estimable": true
         },
         "conflict": {
-          "median_spearman_brown": 0.5271,
-          "iqr": [
-            0.4218,
-            0.6134
+          "median_raw_split_half": 0.3579,
+          "median_spearman_brown": 0.5323,
+          "iqr_raw": [
+            0.2673,
+            0.4424
           ],
-          "contests": 177
+          "contests": 177,
+          "contests_negative_r": 3,
+          "estimable": true
         },
         "entropy": {
-          "median_spearman_brown": 0.6362,
-          "iqr": [
-            0.53,
-            0.7375
+          "median_raw_split_half": 0.4665,
+          "median_spearman_brown": 0.6371,
+          "iqr_raw": [
+            0.3605,
+            0.5841
           ],
-          "contests": 178
+          "contests": 178,
+          "contests_negative_r": 1,
+          "estimable": true
         }
       }
     },
@@ -186,10 +231,11 @@
     "rows_used": 240000,
     "contests_used": 360
   },
+  "predicted_over_ceiling_note": "numerator population votes>=20, denominator reliability population votes>=40 (documented mismatch, ~6.8% of numerator rows outside denominator population); the ratio is the noise-ceiling convention on the rho scale, not a variance share",
   "predicted_over_ceiling": {
-    "mean": 0.1858,
-    "conflict": 0.1748,
-    "entropy": 0.1732
+    "mean": 0.1855,
+    "conflict": 0.1732,
+    "entropy": 0.1729
   },
   "truth_boundary": {
     "verified": "split-half reliability and contest-held-out text predictability of three statistics of one publication's caption-vote histograms",

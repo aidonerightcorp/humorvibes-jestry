@@ -107,7 +107,8 @@ def split_half_reliability(df: pd.DataFrame, rng: np.random.Generator,
             halves[which].append(pair)
         contests.append(contest_arr[i])
         v = votes[i]
-        bins.append(next(idx for idx, (lo, hi) in enumerate(VOTE_BINS) if lo <= v < hi))
+        bins.append(next((idx for idx, (lo, hi) in enumerate(VOTE_BINS) if lo <= v < hi),
+                         len(VOTE_BINS) - 1))
     frame = pd.DataFrame({
         "contest": contests, "bin": bins,
         **{f"{w}_a": [p[0] for p in halves[w]] for w in halves},
@@ -115,22 +116,45 @@ def split_half_reliability(df: pd.DataFrame, rng: np.random.Generator,
     })
 
     def summarize(sub: pd.DataFrame) -> dict:
+        """Per-contest split-half r, Spearman-Brown ONLY where r > 0.
+
+        SB (2r/(1+r)) is a reliability correction for parallel halves and is
+        meaningless (and explosively wrong) for r <= 0 — applying it to the
+        low-vote bins produced sign-flipped, magnitude-amplified artifacts
+        (referee finding, 2026-07-28). Raw medians are always reported; SB is
+        reported only over the positive-r contests, and a bin whose raw median
+        is not positive is marked not estimable. The complementary (disjoint)
+        split is also biased DOWNWARD relative to independent half-samples
+        under range restriction; that bias note travels with the receipt.
+        """
         out = {}
         for which in ("mean", "conflict", "entropy"):
-            rs = []
+            raw = []
             for _, grp in sub.groupby("contest"):
                 if len(grp) < min_per_contest:
                     continue
                 r = spearmanr(grp[f"{which}_a"], grp[f"{which}_b"]).statistic
                 if np.isfinite(r):
-                    rs.append(2 * r / (1 + r) if r > -1 else np.nan)
-            rs = [r for r in rs if np.isfinite(r)]
+                    raw.append(float(r))
+            pos = [r for r in raw if r > 0]
+            med_raw = float(np.median(raw)) if raw else None
+            estimable = bool(med_raw is not None and med_raw > 0)
             out[which] = {
-                "median_spearman_brown": round(float(np.median(rs)), 4) if rs else None,
-                "iqr": [round(float(np.percentile(rs, 25)), 4),
-                        round(float(np.percentile(rs, 75)), 4)] if rs else None,
-                "contests": len(rs),
+                "median_raw_split_half": round(med_raw, 4) if med_raw is not None else None,
+                "median_spearman_brown": (
+                    round(float(np.median([2 * r / (1 + r) for r in pos])), 4)
+                    if estimable and pos else None),
+                "iqr_raw": [round(float(np.percentile(raw, 25)), 4),
+                            round(float(np.percentile(raw, 75)), 4)] if raw else None,
+                "contests": len(raw),
+                "contests_negative_r": len(raw) - len(pos),
+                "estimable": estimable,
             }
+            if not estimable:
+                out[which]["note"] = ("not estimable at this vote count: the raw "
+                                       "split-half median is <= 0 (outcome-conditioned "
+                                       "stratum + disjoint-split downward bias), so no "
+                                       "Spearman-Brown value is reported")
         return out
 
     result = {"overall": summarize(frame), "by_vote_bin": {}}
@@ -164,12 +188,11 @@ def heldout_predictability(df: pd.DataFrame, rng: np.random.Generator,
     vec = HashingVectorizer(analyzer="char_wb", ngram_range=(3, 5),
                             n_features=2**18, alternate_sign=False, norm="l2")
     X = vec.transform(texts)
-    lengths = np.column_stack([
+    lengths_raw = np.column_stack([
         [len(t) for t in texts],
         [t.count(" ") + 1 for t in texts],
         [t.count('"') + t.count("'") for t in texts],
     ]).astype(np.float64)
-    lengths = (lengths - lengths.mean(axis=0)) / (lengths.std(axis=0) + 1e-9)
 
     targets = {
         "mean": work["mean_exact"].to_numpy(),
@@ -181,9 +204,13 @@ def heldout_predictability(df: pd.DataFrame, rng: np.random.Generator,
     for name, y in targets.items():
         per_contest_r: dict[str, list[float]] = {"text": [], "length_only": []}
         for tr, te in gkf.split(X, y, groups):
+            # standardize length features on the TRAIN fold only (no test leakage)
+            mu, sd = lengths_raw[tr].mean(axis=0), lengths_raw[tr].std(axis=0) + 1e-9
+            len_tr = (lengths_raw[tr] - mu) / sd
+            len_te = (lengths_raw[te] - mu) / sd
             for feat_name, model, Xtr, Xte in (
                 ("text", Ridge(alpha=2.0, solver="sparse_cg"), X[tr], X[te]),
-                ("length_only", Ridge(alpha=2.0), lengths[tr], lengths[te]),
+                ("length_only", Ridge(alpha=2.0), len_tr, len_te),
             ):
                 model.fit(Xtr, y[tr])
                 pred = model.predict(Xte)
@@ -247,6 +274,18 @@ def main() -> int:
 
     print(f"rows raw={n_raw} kept={n_screened} count_mismatch={n_count_mismatch} "
           f"mean_mismatch={n_mean_mismatch}", flush=True)
+    # (referee finding) vote count is a near-deterministic within-contest rank
+    # proxy for the mean, so vote bins are strata OF THE OUTCOME, not neutral
+    # noise-matched groups. Measure and receipt the coupling.
+    couple = []
+    for _, grp in df.groupby("contest"):
+        if len(grp) >= 200:
+            r = spearmanr(grp["votes"], grp["mean_exact"]).statistic
+            if np.isfinite(r):
+                couple.append(float(r))
+    votes_mean_coupling = round(float(np.median(couple)), 4) if couple else None
+    print(f"votes<->mean within-contest coupling (median spearman): "
+          f"{votes_mean_coupling}", flush=True)
     print("reliability pass...", flush=True)
     reliability = split_half_reliability(df, rng, args.reliability_cap, min_per_contest=50)
     print("predictability pass...", flush=True)
@@ -267,6 +306,8 @@ def main() -> int:
         "definitions": {
             "conflict": "C = 2*sqrt(p_not_funny * p_funny); 0 = a pole is empty, "
                         "1 = even split between opposite poles",
+            "ridge_caveat": "Ridge(alpha=2.0) untuned and shared across feature sets; "
+                            "the text-vs-mean comparison is conditional on that choice",
             "entropy": "3-bin Shannon entropy / log(3)",
             "mean": "(1*nf + 2*sf + 3*f) / votes",
         },
@@ -277,8 +318,22 @@ def main() -> int:
             "kept_votes_ge_20": n_screened,
         },
         "seed": args.seed,
+        "votes_mean_within_contest_spearman_median": votes_mean_coupling,
+        "reliability_caveats": {
+            "vote_bins_are_outcome_strata": "vote count within a contest is a "
+                "near-deterministic rank proxy for the mean, so per-bin cells "
+                "condition on the outcome; the OVERALL row is the quotable one",
+            "disjoint_split_downward_bias": "complementary vote-dealing biases "
+                "split-half r downward vs independent half-samples under range "
+                "restriction; SB values are conservative where reported and "
+                "withheld where raw r <= 0",
+        },
         "label_reliability": reliability,
         "heldout_predictability": predictability,
+        "predicted_over_ceiling_note": "numerator population votes>=20, denominator "
+            "reliability population votes>=40 (documented mismatch, ~6.8% of numerator "
+            "rows outside denominator population); the ratio is the noise-ceiling "
+            "convention on the rho scale, not a variance share",
         "predicted_over_ceiling": {
             which: ratio(predictability.get(which, {}), reliability["overall"].get(which, {}))
             for which in ("mean", "conflict", "entropy")

@@ -34,6 +34,6 @@
       "relation": "isSupplementedBy",
       "scheme": "url"
     }
-  ]
+  ],
+  "notes": "Version pinned to 0.7.0 deliberately: the archive deposit target is the frozen v0.7.0 tag whose per-file inventory is CI-verified (docs/DOI_ARCHIVE.md); the application release is 0.8.0."
 }
-

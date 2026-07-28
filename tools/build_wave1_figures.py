@@ -72,7 +72,9 @@ def fig_waterfall() -> dict:
     rows = [
         ("Perfect agreement", 1.0, "reference bound", "ref"),
         ("Label ceiling", ceil, "crowd self-agreement, 2.05M captions", "solid"),
-        ("Text-only bound", bound, f"{port['portable_share']:.0%} of standing travels with the words", "tint"),
+        ("Text-only bound", bound,
+         f"~{port['portable_share']:.0%} of the label-permitted signal is in the words "
+         f"({port['cross_context_spearman']:.0%} of observed standing)", "tint"),
         ("Current text model", got, f"{model['contests_above_chance']}/{model['contests_scored']} contests above chance", "tint"),
     ]
     fig, ax = plt.subplots(figsize=(9.2, 3.7), dpi=150)
@@ -123,9 +125,9 @@ def fig_transfer() -> dict:
     ])
     fig, ax = plt.subplots(figsize=(5.6, 5.0), dpi=150)
     fig.patch.set_facecolor(SURFACE)
-    im = ax.imshow(mat, cmap="Blues", vmin=-0.02, vmax=0.55)
+    im = ax.imshow(mat, cmap="RdBu", vmin=-0.55, vmax=0.55)
     for (i, j), val in np.ndenumerate(mat):
-        dark = mat[i, j] > 0.30
+        dark = abs(mat[i, j]) > 0.30
         ax.text(j, i, f"{val:+.3f}", ha="center", va="center", fontsize=15,
                 fontweight="bold", color="#ffffff" if dark else INK)
     ax.set_xticks([0, 1], ["Humicroedit", "r/Jokes"])
@@ -137,9 +139,13 @@ def fig_transfer() -> dict:
         s.set_color(GRID)
     ax.set_title("The structural model does not transfer\n(held-out Spearman ρ)",
                  loc="left", fontsize=12, color=INK, pad=12)
-    fig.text(0.02, 0.015,
+    fig.text(0.02, 0.035,
              '"The 0.51 describes Humicroedit, not humor." — cross_corpus_transfer.json',
              fontsize=7.5, color=MUTED)
+    fig.text(0.02, 0.008,
+             "The collapse is Humicroedit→Reddit; the r/Jokes-trained arm retains 56% of its "
+             "own within-corpus ρ.",
+             fontsize=7, color=MUTED)
     cbar = fig.colorbar(im, ax=ax, shrink=0.8)
     cbar.ax.tick_params(colors=MUTED, labelsize=8)
     cbar.outline.set_color(GRID)
@@ -181,8 +187,9 @@ def fig_atlas(data_root: Path, seed: int) -> dict:
     panels = [("All items", None)] + [(l, l) for l in top8]
     for ax, (title, lang) in zip(axes.flat, panels):
         ax.set_facecolor(SURFACE)
-        ax.scatter(coords[:, 0], coords[:, 1], s=1.2, c=UNDERLAY,
-                   alpha=0.22, linewidths=0, rasterized=True)
+        underlay_alpha = 0.32 if lang is None else 0.22
+        ax.scatter(coords[:, 0], coords[:, 1], s=1.4, c=UNDERLAY,
+                   alpha=underlay_alpha, linewidths=0, rasterized=True)
         n = len(coords)
         if lang is not None:
             mask = langs_arr == lang
@@ -197,9 +204,14 @@ def fig_atlas(data_root: Path, seed: int) -> dict:
             s.set_color(GRID)
     fig.suptitle("The Humor Genome Atlas — surface channel, by language",
                  x=0.065, ha="left", fontsize=16, color=INK, y=0.985)
-    fig.text(0.065, 0.955,
+    fig.text(0.065, 0.958,
              "t-SNE of 23,779 registry items (EmbeddingGemma, 768d). Coordinates only — "
              "no corpus text is shown; research-only rows stay research-only.",
+             fontsize=9.5, color=MUTED)
+    fig.text(0.065, 0.941,
+             "Caveat: the projection is dominated by language/source (facets are near-disjoint "
+             "blobs) — this maps the corpus, not humor structure; t-SNE cluster sizes and "
+             "distances are not metric.",
              fontsize=9.5, color=MUTED)
     fig.subplots_adjust(left=0.03, right=0.985, top=0.925, bottom=0.03,
                         hspace=0.16, wspace=0.06)
@@ -215,7 +227,10 @@ def fig_atlas(data_root: Path, seed: int) -> dict:
         "languages_top8": {l: counts[l] for l in top8},
         "tsne": {"perplexity": 40, "init": "pca", "seed": seed, "pca_components": 50},
         "embeddings_sha256": sha256_file(emb_path),
-        "coords_saved_to_research_tree": str(coords_out),
+        "coords_archived": "research tree jestry_out/genome_atlas_coords_wave1.npz "
+                            "(not committed; embeddings identified by sha256 above)",
+        "caveat": "projection dominated by language/source — a corpus map, not a "
+                   "humor-structure result; t-SNE distances are not metric",
     }
 
 
