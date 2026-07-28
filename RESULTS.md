@@ -631,5 +631,7 @@ estimator and status-label defects, all corrected in place and receipted:
   disagreement).
 
 None of the three studies' conclusions reversed; what changed is that the receipts now state
-exactly what each design could and could not have found. The full referee report is preserved in
-the pull-request record.
+exactly what each design could and could not have found. The full verbatim referee reports are
+preserved in [`docs/REFEREE_REPORT_2026-07-28.md`](docs/REFEREE_REPORT_2026-07-28.md); the
+narrative record of the whole maintenance era is
+[`docs/POST_CLOSEOUT_RECORD.md`](docs/POST_CLOSEOUT_RECORD.md).

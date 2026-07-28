@@ -95,7 +95,9 @@ documentation reconciliation, refreshed public notebooks (wave2 v15, Open Contro
 ceiling explainer v4 — all terminal COMPLETE and independently read back), made every
 published notebook reproducible from this repository, and closed with an adversarial
 referee round (#38) that corrected estimator-level defects and relabeled two
-underpowered designs honestly. None of it moved a claim boundary:
+underpowered designs honestly. The narrative record is
+[`docs/POST_CLOSEOUT_RECORD.md`](docs/POST_CLOSEOUT_RECORD.md); the verbatim referee reports
+are [`docs/REFEREE_REPORT_2026-07-28.md`](docs/REFEREE_REPORT_2026-07-28.md). None of it moved a claim boundary:
 the nulls stayed visible, no human evidence was produced, and the application release
 remains v0.8.0. The project is closed, maintained, reproducible, and consistent across
 every public surface.
