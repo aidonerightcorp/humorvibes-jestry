@@ -1,0 +1,252 @@
+{
+  "receipt_type": "declared_style_surprisal_study",
+  "receipt_version": 1,
+  "ts": "2026-07-28T01:53:34+00:00",
+  "status": "complete",
+  "instrument": "gemma-2-2b-it-Q4_K_M.gguf (llama.cpp)",
+  "calibration": {
+    "expected_S": 3.19,
+    "expected_tokens": 10,
+    "measured": {
+      "S": 3.1899,
+      "tokens": 10
+    },
+    "tolerance": 0.02,
+    "pass": true
+  },
+  "design": {
+    "styles_source": "arctic-shift subreddit self-labels (community-declared)",
+    "control": "wiktionary record_kind=proverb (en), split_setup_punchline \u2014 same recipe as the published Wave 2 form study",
+    "per_group": 12,
+    "seed": 20260727,
+    "selection": "screened candidates ordered by sha256(text), first N per group",
+    "signal": "S = mean full-vocab NLL per punchline token, base measurement only (no frames, no generator model)"
+  },
+  "screening": {
+    "absurd": 2237,
+    "anti_joke": 2352,
+    "clean": 2337,
+    "dad_joke": 2743,
+    "general": 1618,
+    "pun": 208,
+    "science": 457
+  },
+  "groups": {
+    "absurd": {
+      "n": 12,
+      "mean_S": 4.966,
+      "median_S": 4.0936,
+      "ci95": [
+        3.7048,
+        6.9224
+      ],
+      "mean_tokens": 10.8,
+      "separates_above_control": false,
+      "separates_below_control": false,
+      "item_hashes": [
+        "000221a3c03e961d",
+        "0010b18442caf1ce",
+        "00244cab6fd5ba90",
+        "002e7904e6f5ba68",
+        "007499c3f0e9b8d5",
+        "00795e4bfa913840",
+        "00b5edb00573c4d0",
+        "00be64810c29754e",
+        "00c034b3b38c004b",
+        "00da62f19736d209",
+        "014394ff9df86624",
+        "014b6f49a532c424"
+      ]
+    },
+    "anti_joke": {
+      "n": 12,
+      "mean_S": 6.1445,
+      "median_S": 5.8538,
+      "ci95": [
+        4.7401,
+        7.7385
+      ],
+      "mean_tokens": 7.8,
+      "separates_above_control": false,
+      "separates_below_control": false,
+      "item_hashes": [
+        "0002a225ea2b75cc",
+        "001d8584d0378bea",
+        "001e682b79048739",
+        "005d9f6523935988",
+        "00a11b39ae64ede7",
+        "00dccaed649f0582",
+        "00f8818453e89909",
+        "0116a979a397fa2e",
+        "014d70f82e3a2579",
+        "01695766fc45cecb",
+        "0176e857437a2593",
+        "019a143ec88e2c10"
+      ]
+    },
+    "clean": {
+      "n": 12,
+      "mean_S": 6.5716,
+      "median_S": 4.9973,
+      "ci95": [
+        4.4183,
+        9.3294
+      ],
+      "mean_tokens": 9.8,
+      "separates_above_control": false,
+      "separates_below_control": false,
+      "item_hashes": [
+        "0008b875d06a61ae",
+        "0024f47b78d46d36",
+        "002bbb4ece573e3f",
+        "0030521946284d58",
+        "003ab249bbf04b93",
+        "00480a83b5b71f84",
+        "0079bc92ea3be9ee",
+        "00a41ecaa9a67c9a",
+        "00b2fbb11ff73aba",
+        "00c09527cb05faf6",
+        "00d3c5bb62bcac4a",
+        "00fbfe40d2147b43"
+      ]
+    },
+    "dad_joke": {
+      "n": 12,
+      "mean_S": 5.2403,
+      "median_S": 4.567,
+      "ci95": [
+        4.0545,
+        6.4801
+      ],
+      "mean_tokens": 9.4,
+      "separates_above_control": false,
+      "separates_below_control": false,
+      "item_hashes": [
+        "0026633b8114625f",
+        "0032b748a7bc41cf",
+        "0038b98da3f7c125",
+        "004f9fd47f2865f1",
+        "0079ecf3892cfafe",
+        "0089f301aabb33e4",
+        "008f2472c734377d",
+        "009cce799bb6ff46",
+        "00b97cdf4df91b59",
+        "00bc48fce951d8e5",
+        "00dca31d02c99f38",
+        "00dd996d5186fd1a"
+      ]
+    },
+    "general": {
+      "n": 12,
+      "mean_S": 4.4199,
+      "median_S": 4.1724,
+      "ci95": [
+        3.5339,
+        5.4607
+      ],
+      "mean_tokens": 16.5,
+      "separates_above_control": false,
+      "separates_below_control": false,
+      "item_hashes": [
+        "0007699d7e3c84d4",
+        "0016ee9a56c280dd",
+        "001bf3bdc6b9160d",
+        "00319cd90f7409b0",
+        "003537a7dc727732",
+        "004c881bee4c1db3",
+        "008ef511fc637601",
+        "00ca045e42704e1c",
+        "00cd0196e34e5b51",
+        "0100c4b12438c616",
+        "01153de5f09fa6e2",
+        "013fb700c29e56fa"
+      ]
+    },
+    "pun": {
+      "n": 12,
+      "mean_S": 4.6942,
+      "median_S": 4.492,
+      "ci95": [
+        4.0091,
+        5.4501
+      ],
+      "mean_tokens": 9.2,
+      "separates_above_control": false,
+      "separates_below_control": false,
+      "item_hashes": [
+        "00e831f1bd249914",
+        "00ec0f505cb81371",
+        "01901ab48a269bc6",
+        "02b2320fc9cf8734",
+        "034304cc7faf3ca5",
+        "03dc7e30e6ce1486",
+        "047357c063629566",
+        "04f3a08d6d419754",
+        "0554edcf5ad44425",
+        "09091465f9592f00",
+        "0b5fc3bc5951d9db",
+        "0c68e62e4f800335"
+      ]
+    },
+    "science": {
+      "n": 12,
+      "mean_S": 4.7106,
+      "median_S": 4.0121,
+      "ci95": [
+        3.4385,
+        6.3444
+      ],
+      "mean_tokens": 12.8,
+      "separates_above_control": false,
+      "separates_below_control": false,
+      "item_hashes": [
+        "0018ebdfac1ff0c3",
+        "009eae43d639cb79",
+        "0114b7dc1f79fe1f",
+        "01b0e95d83e0eb39",
+        "01c93c5ecde00e1f",
+        "02d50e83fb3ab3e2",
+        "037532398dbbb383",
+        "04665618c6b290f9",
+        "05446732a19b43c3",
+        "056f23dd560145f0",
+        "0570f1fbe15d195e",
+        "0578e8ef6b79f5b1"
+      ]
+    }
+  },
+  "control_proverb": {
+    "n": 12,
+    "mean_S": 4.1441,
+    "ci95": [
+      2.6116,
+      5.999
+    ],
+    "item_hashes": [
+      "0022757cfb96a2cb",
+      "0052cbd6445c8926",
+      "0056d6ee69820141",
+      "005f6c427954b1f3",
+      "0089a499b2d2bcda",
+      "00a1b38dcfe07c89",
+      "00b35c7d737b2a1d",
+      "0105f4886444052a",
+      "01116f024db85353",
+      "011ed1f44481daa1",
+      "0138426c5e7bc974",
+      "014419188dd5b9cc"
+    ]
+  },
+  "findings": {
+    "groups_strictly_above_control": 0,
+    "groups_strictly_below_control": 0,
+    "any_difference_permutation_p": 0.44988,
+    "permutation_iters": 20000
+  },
+  "instrument_errors": 0,
+  "truth_boundary": {
+    "verified": "surprisal regimes of community-declared style groups on the certified instrument, with uncertainty",
+    "not_verified": "human funniness, style quality, or a causal style effect \u2014 the subreddit label is confounded with community norms, moderation, and length culture"
+  },
+  "data_note": "Reddit rows are research-only; this receipt stores aggregates and sha256 item hashes only. Row-level text stays in the local research tree checkpoint."
+}

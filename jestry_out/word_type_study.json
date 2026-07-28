@@ -1,0 +1,156 @@
+{
+  "receipt_type": "word_type_study",
+  "receipt_version": 1,
+  "ts": "2026-07-25T12:43:52",
+  "question": "does the KIND of word swapped in predict how funny the result is?",
+  "dataset": "Humicroedit task-1 train, one-word substitutions into real headlines",
+  "n_rows": 9652,
+  "skipped_unclassified": 0,
+  "pooled_mean_grade": 0.9356,
+  "classifier": "word_taxonomy sentence-framed embedding anchors (validated 8/8 on known cases against 4/8 for bare-word framing) + morphology part of speech",
+  "by_semantic_category": [
+    {
+      "label": "body part",
+      "n": 1271,
+      "mean_grade": 1.1402,
+      "delta_vs_pooled": 0.2046,
+      "perm_p": 0.0002
+    },
+    {
+      "label": "food",
+      "n": 1414,
+      "mean_grade": 1.0607,
+      "delta_vs_pooled": 0.1251,
+      "perm_p": 0.0002
+    },
+    {
+      "label": "animal",
+      "n": 2208,
+      "mean_grade": 0.982,
+      "delta_vs_pooled": 0.0464,
+      "perm_p": 0.0002
+    },
+    {
+      "label": "person",
+      "n": 698,
+      "mean_grade": 0.8419,
+      "delta_vs_pooled": -0.0937,
+      "perm_p": 0.0002
+    },
+    {
+      "label": "object",
+      "n": 1882,
+      "mean_grade": 0.8295,
+      "delta_vs_pooled": -0.1061,
+      "perm_p": 0.0002
+    },
+    {
+      "label": "place",
+      "n": 492,
+      "mean_grade": 0.8289,
+      "delta_vs_pooled": -0.1067,
+      "perm_p": 0.0002
+    },
+    {
+      "label": "occupation",
+      "n": 257,
+      "mean_grade": 0.8169,
+      "delta_vs_pooled": -0.1187,
+      "perm_p": 0.0012
+    },
+    {
+      "label": "abstract",
+      "n": 363,
+      "mean_grade": 0.8124,
+      "delta_vs_pooled": -0.1232,
+      "perm_p": 0.0002
+    },
+    {
+      "label": "quality",
+      "n": 222,
+      "mean_grade": 0.8014,
+      "delta_vs_pooled": -0.1342,
+      "perm_p": 0.0007
+    },
+    {
+      "label": "action",
+      "n": 845,
+      "mean_grade": 0.7973,
+      "delta_vs_pooled": -0.1383,
+      "perm_p": 0.0002
+    }
+  ],
+  "by_part_of_speech": [
+    {
+      "label": "verb_ing",
+      "n": 582,
+      "mean_grade": 0.9769,
+      "delta_vs_pooled": 0.0413,
+      "perm_p": 0.075
+    },
+    {
+      "label": "other",
+      "n": 4588,
+      "mean_grade": 0.9601,
+      "delta_vs_pooled": 0.0246,
+      "perm_p": 0.0007
+    },
+    {
+      "label": "adverb",
+      "n": 33,
+      "mean_grade": 0.9394,
+      "delta_vs_pooled": 0.0038,
+      "perm_p": 0.9785
+    },
+    {
+      "label": "plural_noun",
+      "n": 2615,
+      "mean_grade": 0.9372,
+      "delta_vs_pooled": 0.0016,
+      "perm_p": 0.8683
+    },
+    {
+      "label": "adjective",
+      "n": 682,
+      "mean_grade": 0.9012,
+      "delta_vs_pooled": -0.0344,
+      "perm_p": 0.1017
+    },
+    {
+      "label": "abstract_noun",
+      "n": 386,
+      "mean_grade": 0.8601,
+      "delta_vs_pooled": -0.0755,
+      "perm_p": 0.007
+    },
+    {
+      "label": "agent_noun",
+      "n": 576,
+      "mean_grade": 0.8433,
+      "delta_vs_pooled": -0.0923,
+      "perm_p": 0.0005
+    },
+    {
+      "label": "verb_ed",
+      "n": 168,
+      "mean_grade": 0.7423,
+      "delta_vs_pooled": -0.1933,
+      "perm_p": 0.0002
+    }
+  ],
+  "predictive_lift": {
+    "structural_only": {
+      "held_out_spearman": 0.1137,
+      "held_out_r2": -0.0181
+    },
+    "structural_plus_type": {
+      "held_out_spearman": 0.2296,
+      "held_out_r2": 0.0515
+    },
+    "spearman_lift": 0.1159,
+    "n_struct_features": 30,
+    "n_type_features": 25
+  },
+  "caveats": "category labels come from an embedding classifier that is right about 10 of 12 on a hand-checked demo, so category means inherit its errors; groups smaller than 30 rows are dropped rather than reported; perm p is against the pooled mean and is NOT corrected across the categories shown, so treat a single starred row as a lead rather than a result",
+  "runtime_s": 1228.8
+}

@@ -1,5 +1,9 @@
 # Comedy data: scraping engines, gathering, and datasets
 
+*Status: source-landscape notes from the July 2026 build. Inventory numbers are superseded by
+SOURCE_SWEEP_2026-07-26.md; the validation promised in §5 below has since RUN — see the executed
+result note in that section.*
+
 What HumorVibes already gathers, the full landscape of comedy datasets, and — the real prize —
 the **labeled** ones that let us *validate* the measured genome against human laughter.
 
@@ -62,8 +66,14 @@ POPQUORN (demographic-conditioned ratings — directly feeds persona-relative B)
 
 ## 5. The high-value next build (validation)
 
-`validate_against_ratings.py` (queued): load a labeled set (HaHackathon or rJokes), measure each
+`validate_against_ratings.py` (executed): load a labeled set (HaHackathon or rJokes), measure each
 item's genome on the Kaggle instrument, and report **correlation(laugh_score, human_rating)** plus
 per-signal correlations (does R track funniness? does the residual-surprise recalibration improve
 the fit?). That turns "we measured it" into "our measurement predicts human laughter at r = X" — the
 single strongest sentence the writeup could contain.
+
+This validation has since run, twice, and the honest result is the project's controlling negative:
+the combined S/R/E/B ablation court against human preference measured Spearman ρ = 0.033 (95% CI
+[−0.126, 0.207]; RESULTS.md, jestry_out receipts), and a laugh-score correlation pass read Pearson
++0.108 / Spearman +0.115. The measurement predicts human ratings at close to chance on that arena —
+which is why every downstream document treats S/R/E/B as instruments, not as funniness.

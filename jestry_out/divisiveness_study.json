@@ -1,0 +1,199 @@
+{
+  "receipt_type": "caption_divisiveness_study",
+  "receipt_version": 1,
+  "ts": "2026-07-28T01:52:27+00:00",
+  "status": "complete",
+  "source": "nextml caption-contest 3-bin vote histograms via data_cache/caption_index.parquet",
+  "definitions": {
+    "conflict": "C = 2*sqrt(p_not_funny * p_funny); 0 = a pole is empty, 1 = even split between opposite poles",
+    "entropy": "3-bin Shannon entropy / log(3)",
+    "mean": "(1*nf + 2*sf + 3*f) / votes"
+  },
+  "screening": {
+    "rows_raw": 2186939,
+    "dropped_count_mismatch": 7061,
+    "dropped_mean_mismatch": 5544,
+    "kept_votes_ge_20": 2068094
+  },
+  "seed": 20260727,
+  "label_reliability": {
+    "overall": {
+      "mean": {
+        "median_spearman_brown": 0.6674,
+        "iqr": [
+          0.5926,
+          0.7267
+        ],
+        "contests": 352
+      },
+      "conflict": {
+        "median_spearman_brown": 0.5074,
+        "iqr": [
+          0.4352,
+          0.5784
+        ],
+        "contests": 348
+      },
+      "entropy": {
+        "median_spearman_brown": 0.675,
+        "iqr": [
+          0.6079,
+          0.7346
+        ],
+        "contests": 351
+      }
+    },
+    "by_vote_bin": {
+      "40-80": {
+        "captions": 59022,
+        "mean": {
+          "median_spearman_brown": -0.2854,
+          "iqr": [
+            -0.7356,
+            0.0036
+          ],
+          "contests": 263
+        },
+        "conflict": {
+          "median_spearman_brown": -0.03,
+          "iqr": [
+            -0.2201,
+            0.0675
+          ],
+          "contests": 262
+        },
+        "entropy": {
+          "median_spearman_brown": -0.2413,
+          "iqr": [
+            -0.5496,
+            0.0354
+          ],
+          "contests": 263
+        }
+      },
+      "80-160": {
+        "captions": 66526,
+        "mean": {
+          "median_spearman_brown": 0.0664,
+          "iqr": [
+            -0.5792,
+            0.3824
+          ],
+          "contests": 298
+        },
+        "conflict": {
+          "median_spearman_brown": 0.1173,
+          "iqr": [
+            -0.1171,
+            0.2373
+          ],
+          "contests": 298
+        },
+        "entropy": {
+          "median_spearman_brown": 0.1137,
+          "iqr": [
+            -0.4536,
+            0.3986
+          ],
+          "contests": 298
+        }
+      },
+      "160-plus": {
+        "captions": 24452,
+        "mean": {
+          "median_spearman_brown": 0.6174,
+          "iqr": [
+            0.5017,
+            0.7297
+          ],
+          "contests": 178
+        },
+        "conflict": {
+          "median_spearman_brown": 0.5271,
+          "iqr": [
+            0.4218,
+            0.6134
+          ],
+          "contests": 177
+        },
+        "entropy": {
+          "median_spearman_brown": 0.6362,
+          "iqr": [
+            0.53,
+            0.7375
+          ],
+          "contests": 178
+        }
+      }
+    },
+    "captions_sampled": 150000
+  },
+  "heldout_predictability": {
+    "mean": {
+      "text": {
+        "median_within_contest_spearman": 0.124,
+        "iqr": [
+          0.09,
+          0.1549
+        ],
+        "contest_folds": 360
+      },
+      "length_only": {
+        "median_within_contest_spearman": 0.0574,
+        "iqr": [
+          0.0197,
+          0.105
+        ],
+        "contest_folds": 360
+      }
+    },
+    "conflict": {
+      "text": {
+        "median_within_contest_spearman": 0.0887,
+        "iqr": [
+          0.0555,
+          0.1149
+        ],
+        "contest_folds": 357
+      },
+      "length_only": {
+        "median_within_contest_spearman": 0.0319,
+        "iqr": [
+          -0.0058,
+          0.0627
+        ],
+        "contest_folds": 357
+      }
+    },
+    "entropy": {
+      "text": {
+        "median_within_contest_spearman": 0.1169,
+        "iqr": [
+          0.0838,
+          0.1457
+        ],
+        "contest_folds": 359
+      },
+      "length_only": {
+        "median_within_contest_spearman": 0.0571,
+        "iqr": [
+          0.0165,
+          0.1025
+        ],
+        "contest_folds": 359
+      }
+    },
+    "rows_used": 240000,
+    "contests_used": 360
+  },
+  "predicted_over_ceiling": {
+    "mean": 0.1858,
+    "conflict": 0.1748,
+    "entropy": 0.1732
+  },
+  "truth_boundary": {
+    "verified": "split-half reliability and contest-held-out text predictability of three statistics of one publication's caption-vote histograms",
+    "not_verified": "offensiveness, moderation risk, general controversy, funniness, or behavior of any other audience"
+  },
+  "data_note": "Caption text is research-only and does not appear in this receipt."
+}

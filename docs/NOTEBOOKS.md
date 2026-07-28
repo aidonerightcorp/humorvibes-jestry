@@ -1,9 +1,13 @@
 # Notebook guide
 
+*Role: which notebook is canonical and what a promoted notebook must show. Audience: readers choosing where to start.*
+
 ## The observational notebook to read first
 
 [`wave2_notebook/humor_genome_wave2.ipynb`](../wave2_notebook/humor_genome_wave2.ipynb) is the
-canonical executable Wave 2 study and the notebook published publicly on Kaggle. It
+canonical executable Wave 2 study and the notebook published publicly on Kaggle as
+[Humor Genome Wave 2 Reproducible Gemma Study](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study)
+(version 14, COMPLETE; public dataset version 7). It
 states the problem, proposed exploration, controlling findings, outputs, practical uses, and
 limitations before exposing implementation detail. It also names the predictive-processing
 starting point, cites its scientific lineage, renders the model-to-human evidence boundary, and

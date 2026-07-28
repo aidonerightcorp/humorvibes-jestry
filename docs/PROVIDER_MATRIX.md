@@ -1,17 +1,21 @@
 # Semantic provider and retrieval-quality matrix
 
+*Role: one frozen retrieval-quality run with failed arms preserved. Audience: anyone choosing an embedding model. Not a default recommendation.*
+
 ## Executive summary
 
 An embedding endpoint can be configured yet unreachable, reachable yet schema-incompatible, or
 compatible yet poor on the project task. HumorVibes now measures those states separately and
 publishes failed arms alongside successful ones. The first live matrix executed five exact
 model/interface combinations on two byte-identical retrieval tracks. All five completed, across
-two independently implemented servers: Ollama 0.24.0 and Hugging Face Text Embeddings Inference
-(TEI) 1.9.0.
+two independently implemented local servers: Ollama 0.24.0 and Hugging Face Text Embeddings
+Inference (TEI) 1.9.0. A separate hosted-endpoint compatibility probe the same week failed closed
+(401s) — see docs/INTEGRATIONS.md; the two receipts describe different hosts, not a contradiction.
 
-EmbeddingGemma had the highest MRR and nDCG@10 on both proxy tasks in this one hardware/run
-cohort. That is evidence for these frozen retrieval relations, not a general model recommendation
-and not evidence about funniness. The checked-in receipt deliberately makes no default selection.
+EmbeddingGemma had the highest MRR (mean reciprocal rank) and nDCG@10 (normalized discounted
+cumulative gain at 10) on both proxy tasks in this one hardware/run cohort. That is evidence for
+these frozen retrieval relations, not a general model recommendation and not evidence about
+funniness. The checked-in receipt deliberately makes no default selection.
 
 ## What was measured
 
@@ -26,7 +30,8 @@ marks the book public domain in the USA. The manifest retains that jurisdiction 
 snapshot SHA-256, selection method, per-language split counts, and exact output digest.
 
 Every result reports MRR, Recall@1/5/10, nDCG@10, deterministic query-bootstrap 95% intervals,
-split/language slices, failure counts, batch latency, throughput, and query/document/qrel hashes.
+split/language slices, failure counts, batch latency, throughput, and query/document/qrel
+(query-relevance judgment) hashes.
 
 ## Live results on 2026-07-27
 
@@ -55,10 +60,11 @@ about Danish language quality.
 
 The machine-readable inputs and result are:
 
-- [`provider_matrix_live_v1.json`](../provider_matrix_live_v1.json): exact model/server digests,
-  request schemas, dimensions, timeouts, hardware declarations, and frozen benchmark digests;
-- [`provider_matrix_live_v1.json`](../jestry_out/provider_matrix_live_v1.json): aggregate live
-  receipt with no vectors, text bodies, or credentials;
+- [spec: `provider_matrix_live_v1.json`](../provider_matrix_live_v1.json): exact model/server
+  digests, request schemas, dimensions, timeouts, hardware declarations, and frozen benchmark
+  digests;
+- [receipt: `jestry_out/provider_matrix_live_v1.json`](../jestry_out/provider_matrix_live_v1.json):
+  aggregate live receipt with no vectors, text bodies, or credentials;
 - [`crosslingual_retrieval_v1`](../jestry_out/crosslingual_retrieval_v1): balanced public-domain
   query/document/qrel bytes and manifest;
 - [`provider_matrix.py`](../humorvibes/provider_matrix.py): fail-closed runner;

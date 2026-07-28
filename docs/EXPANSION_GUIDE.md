@@ -1,5 +1,7 @@
 # Expansion guide
 
+*Role: the layer-by-layer contribution playbook. Audience: contributors.*
+
 This guide is for extending Humor Genome Wave 2 without weakening its provenance, licensing, or
 evidence boundaries. All commands are run from the repository root.
 
@@ -21,8 +23,7 @@ new model makes any observed difference uninterpretable.
 ## 2. Add or validate a source
 
 Start with a real upstream fetch, its dataset card or terms, and the exact served fields. A source
-enters `wave2_specs.json` only after those checks. The existing `chinese_memes` lane is a concrete
-smoke-test example:
+enters `wave2_specs.json` only after those checks.
 
 Run the committed no-network preflight before learning the large harvest pipeline:
 
@@ -55,6 +56,8 @@ For a new Hugging Face source, copy that three-file fixture shape into a directo
 actual source key, replace it with a bounded observed response and exact expected normalized rows,
 and pass those three concrete paths through `--spec`, `--fixture`, and `--expected`. Attach the
 resulting receipt to the pull request, then register the reviewed spec in `wave2_specs.json`.
+
+The existing `chinese_memes` lane is a concrete smoke-test example.
 
 ```bash
 python3 harvest_wave2.py list

@@ -1,5 +1,7 @@
 # The Jestry Charter and Constitution v1.0
 
+*Archive (hackathon era, July 2026): preserved for provenance. Current project state: PROJECT_STATUS.md.*
+
 **The HumorVibes verified laugh-reuse and construction layer**
 **Charter date:** 2026-07-23
 **Status:** canonical layer charter; implementation choices remain versioned

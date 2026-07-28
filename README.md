@@ -34,7 +34,9 @@ claim gate.
 The Wave 2 notebook is the canonical executable write-up for the observational study. It clones the immutable
 `humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
 loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
-[`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json). Open Controls is a
+[`jestry_out/v0_8_0_publication.json`](jestry_out/v0_8_0_publication.json);
+[`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json) scopes the Wave 2 Kaggle
+surfaces specifically (its application block predates 0.8.0). Open Controls is a
 separate causal-design lab with its own downloadable verification and publication receipt at
 [`jestry_out/open_controls_publication.json`](jestry_out/open_controls_publication.json).
 
@@ -50,6 +52,10 @@ separate causal-design lab with its own downloadable verification and publicatio
   application release history and the exact 0.8.0 closeout boundary.
 - [`CITATION.cff`](CITATION.cff): cite the software release; also cite the exact Kaggle artifact
   version used in an analysis.
+- [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md): the surprise-reduction thesis
+  stated hierarchically — every tenet tied to its instrument, its receipt, and its current status.
+  The reconciliation map when THEORY.md and RESEARCH_FOUNDATIONS.md seem to disagree; reading
+  order for `docs/` is in [`docs/README.md`](docs/README.md).
 - [`docs/DOI_ARCHIVE.md`](docs/DOI_ARCHIVE.md): whole-tag archive checksums, the anonymous DOI
   verifier, current no-DOI status, and the exact owner-account publication gate.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): local setup, evidence rules, tests, and pull-request
@@ -185,16 +191,34 @@ OpenAPI contract.
   language labels.
 - **121,670 rows** in the public, deterministic, rights-filtered slice; 2,693,272 rows remain in
   the census but are not republished verbatim.
-- **7,913 aligned translation pairs** and **2,581 expectation/violation frames**.
+- **7,913 aligned translation pairs** and **2,581 expectation/violation annotation rows**
+  (covering 705 annotated cartoons, ≈3.7 annotation rows per cartoon).
 - **120,000 separate CC0 procedural controls** in four matched arms; no human-authored or
   human-rated rows.
 - Gemma instrument check: **S = 3.188 over 10 tokens** against the pinned 3.19 reference.
 - Full form study: **0/10** joke-form intervals strictly above the proverb control and 10/10
   overlapping it — **SEPARATION IS NOT ESTABLISHED**.
 - Contest-held-out caption model: Spearman **0.1555**, or **37.8%** of the measured text-only bound.
+- Cross-corpus transfer: the strongest structural model (within-Humicroedit **0.5075**) scores
+  **−0.0091** on a different joke population — the 0.51 describes Humicroedit, not humor. Exactly
+  one of 30 features (`punch_rarity_max`, ρ ≈ −0.05…−0.09, *negative*) survives sign+FDR in all
+  three corpora.
+- Post-closeout wave 1 (2026-07-27): declared-style surprisal replicates the form-study null
+  (**0/7** community-labeled styles separate from the proverb control, permutation p = 0.45);
+  caption divisiveness is a real label (reliability 0.51) but no more text-predictable than the
+  mean; word-level demographic humor gaps are mostly noise (9/4,997 sex, 0/4,997 age survive FDR).
+  Tenet-by-tenet status: [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).
 
 `S` is model surprisal, not funniness. The dataset mixes jokes, captions, proverbs, idioms, and
 other humor-adjacent text; source-specific human signals are not interchangeable grades.
+
+Mini-glossary for first-time readers: **S/R/E/B** = measured surprise, resolution (surprisal drop
+under the true frame), efficiency (resolution per repair token), and persona-relative bad
+surprise; **mesh** = the predictive-network framing in `THEORY.md`; **laugh region** = the
+receipted S/R/E acceptance band of the certified instrument; **Jestry** = the governed
+reuse-before-generation layer (18-law charter); **been-done** = dual-channel precedent search
+(surface wording + comic frame); **groaner** = a measured-then-rejected outcome retained in the
+ledger.
 
 ## How the public artifacts fit together
 
@@ -222,7 +246,8 @@ other humor-adjacent text; source-specific human signals are not interchangeable
   `open_controls_notebook/`: separate CC0 procedural-control build, semantic verifier, public
   dataset descriptor, and executable causal-design notebook.
 - `caption_*.py`, `style_taxonomy.py`, `corpus_census.py`: the measured Wave 2 analyses.
-- `jestry_out/`: compact, versioned receipts; `wave2_publication.json` is the release index.
+- `jestry_out/`: compact, versioned receipts; `v0_8_0_publication.json` is the latest release
+  index, `wave2_publication.json` the Wave 2 Kaggle-surface index.
 - `RESULTS.md`, `STYLES.md`, `DATA_SOURCES.md`: detailed findings, taxonomy, and source provenance.
 - `research_out/` and the other notebook folders: historical/supporting experiments retained for
   auditability. They are not required to understand the canonical release.
@@ -355,7 +380,8 @@ Provider selection: `GEMMA_PROVIDER=offline|ollama|transformers` (offline is the
 transformers provider auto-selects only inside Kaggle). The Kaggle demo notebook
 (`build_notebook.py` → `notebook.ipynb`) runs everything against real Gemma logits. Its latest
 pinned output is the verified CPU-fallback run; CUDA is used only when the notebook's probe passes:
-https://www.kaggle.com/code/taylorsamarel/humorvibes-measuring-jokes-with-gemma
+https://www.kaggle.com/code/taylorsamarel/humorvibes-measuring-jokes-with-gemma (a **private**
+kernel — the URL is recorded for provenance and resolves only for the maintainer).
 
 Reproducibility state (2026-07-12): an authenticated read-only audit re-pulled all six private
 Kaggle kernels. All were COMPLETE; normalized source cells matched the local builders and every
@@ -455,7 +481,7 @@ Notebook: https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproduc
   contest-held-out structural model. Compact measured receipts live under `jestry_out/`.
 - `verify_wave2_release.py` / `verify_jestry.py`: semantic release checks and 16 cross-receipt gates.
 - `wave2_notebook/`: deterministic notebook builder, checked-in notebook, and Kaggle metadata.
-- `RESEARCH_ROADMAP.md`: concrete study backlog for building the prototype into a stronger hackathon entry.
+- `RESEARCH_ROADMAP.md`: historical prototype-era backlog (hackathon closed); current priorities live in `ROADMAP.md`.
 - `JUDGE_EVIDENCE.md`: claim-by-claim receipt map, negative results, and private/public gates.
 - `ablation_lab/`: source-pinned private ablation kernel builder, tests, and receipt-gated
   harvester; versions 1–3 are excluded from evidence and only the harvested v4 result counts.

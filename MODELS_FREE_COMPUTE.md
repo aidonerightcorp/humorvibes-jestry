@@ -1,5 +1,7 @@
 # Free model & compute map (verified 2026-07-04)
 
+*Archive (hackathon era, July 2026): preserved for provenance. Current project state: PROJECT_STATUS.md.*
+
 What can run where, for free, and what each slot is good for in our pipelines.
 Two distinct roles (THEORY.md): the **instrument** needs teacher-forced logprobs and hidden
 states → must run as local weights (Kaggle transformers). **Judges/writers/compilers** only need

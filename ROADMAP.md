@@ -131,7 +131,7 @@ multi-million-row inventory.
 The initial SDK/API, authenticated Ollama/OpenAI-compatible transports, multi-model embedding
 registry, offline adversarial audit, Docker/Compose profiles, Kubernetes base, and local real-world
 study workbench, hard retrieval and multimodal contracts, body-free telemetry, and bounded Open
-Controls endpoints are implemented in 0.7.0. Useful follow-ups are:
+Controls endpoints were implemented in 0.7.0 and ship in 0.8.0. Useful follow-ups are:
 
 - [x] Publish an attested multi-architecture image to GHCR, independently verify anonymous pull,
   platforms, provenance, hardened runtime, and API, then add a digest-pinned deployment overlay.

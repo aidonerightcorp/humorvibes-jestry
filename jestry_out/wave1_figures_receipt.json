@@ -1,0 +1,46 @@
+{
+  "receipt_type": "wave1_figures",
+  "receipt_version": 1,
+  "ts": "2026-07-28T01:51:27+00:00",
+  "waterfall": {
+    "file": "caption-ceiling-waterfall.svg",
+    "ceiling": 0.8262266476511767,
+    "bound": 0.41097445176069036,
+    "model": 0.1555
+  },
+  "transfer": {
+    "file": "cross-corpus-transfer.svg",
+    "matrix": [
+      [
+        0.5075,
+        -0.0091
+      ],
+      [
+        0.0907,
+        0.1631
+      ]
+    ]
+  },
+  "atlas": {
+    "file": "genome-atlas-languages.png",
+    "points": 23779,
+    "languages_top8": {
+      "en": 10781,
+      "ru": 4893,
+      "es": 2066,
+      "de": 608,
+      "it": 603,
+      "pt": 602,
+      "ar": 601,
+      "ro": 601
+    },
+    "tsne": {
+      "perplexity": 40,
+      "init": "pca",
+      "seed": 20260727,
+      "pca_components": 50
+    },
+    "embeddings_sha256": "37614b2748edab287e2bcfddf310f17bf8945f168588deeae65f791e75d28c2e",
+    "coords_saved_to_research_tree": "/home/username/new_algo/comps/build-with-gemma-humor-genome-nyc/jestry_out/genome_atlas_coords_wave1.npz"
+  }
+}

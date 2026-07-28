@@ -24,6 +24,11 @@ human product outcome.
 - The form study does not establish separation: zero of ten joke-form confidence intervals sit
   strictly above the proverb control interval, and all ten overlap it.
 - The caption study is weak on text alone and does not bound a system that can see the drawing.
+- Structural features that fit one corpus are not humor features: the within-Humicroedit 0.5075
+  model transfers at −0.0091, and the sole three-corpus survivor (`punch_rarity_max`) carries a
+  negative sign. Post-closeout wave 1 (2026-07-27) reinforced rather than moved these boundaries
+  — declared-style S regimes: 0/7 separate (p = 0.45); divisiveness: reliable, not easier;
+  word-level demographic gaps: mostly null. Scoreboard: `docs/THESIS_AND_EVIDENCE.md`.
 - The surprise-reduction account is a falsifiable design framework, not a completed brain model.
 - Synthetic controls and provider benchmarks establish executable contracts and proxy-task
   behavior. They do not establish funniness, audience suitability, cultural validity, or writer

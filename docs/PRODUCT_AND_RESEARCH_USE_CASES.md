@@ -1,5 +1,7 @@
 # From humor measurements to useful decisions
 
+*Role: persona workflows and the claim gate. Audience: anyone about to write product copy.*
+
 ## The problem
 
 Writers, audiences, researchers, and product teams all ask some version of “does this humor
@@ -15,7 +17,7 @@ taste or identify a universally funny joke.
 
 ## The proposed solution
 
-The project combines four layers without collapsing their evidence boundaries:
+The project combines five layers without collapsing their evidence boundaries:
 
 1. A provenance-rich multilingual corpus and a rights-filtered public slice.
 2. Structural labels and retrieval features for finding relevant forms and precedents.

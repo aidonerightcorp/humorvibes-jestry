@@ -1,5 +1,10 @@
 # Claude Code handoff: HumorVibes Research
 
+*Role: maintainer/agent operating procedure for the maintainer's machine — the absolute paths
+below are that machine's and are intentionally kept. Outside contributors start at
+[`CONTRIBUTING.md`](CONTRIBUTING.md); the evidence hierarchy lives in
+[`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 This is the operational handoff for continuing Humor Genome Wave 2 and the `humorvibes-research`
 application after the formal v0.8.0 closeout. Read this file, then read
 [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md), [`PROJECT_STATUS.md`](PROJECT_STATUS.md), and
@@ -88,6 +93,11 @@ These findings must remain visible in code, notebooks, documentation, and downst
 - The caption study is weak on text alone: median within-contest Spearman correlation is `0.1555`.
   The measured text-only bound is `0.4110`, while the label ceiling is `0.8262`. A text-only result
   does not bound a system that can see the drawing.
+- The strongest structural model does not transfer (within-Humicroedit `0.5075` → `-0.0091` on
+  Reddit); the sole three-corpus survivor is `punch_rarity_max` with a negative sign. Wave-1
+  post-closeout receipts (2026-07-27) replicate the null pattern: declared-style 0/7 separate
+  (permutation p = 0.45), divisiveness reliable but not easier to predict, word-level demographic
+  gaps mostly null. Per-tenet status: `docs/THESIS_AND_EVIDENCE.md`.
 - The surprise-reduction account remains a falsifiable design framework, not proof that a model
   understands humor or that the brain is fully explained by prediction error.
 - Synthetic controls, generated fixtures, API checks, and provider retrieval benchmarks validate

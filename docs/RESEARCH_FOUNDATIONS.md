@@ -1,5 +1,7 @@
 # Research foundations: from prediction to a testable humor claim
 
+*Role: the scientific grounding and limits — the rules every claim is bound by. Audience: reviewers and researchers. Companion: ../THEORY.md proposes the generative model; docs/THESIS_AND_EVIDENCE.md keeps the tenet-by-tenet score.*
+
 This document supplies the conceptual starting point that the executable notebook previously
 compressed into a few paragraphs. It distinguishes established measurements, broad scientific
 frameworks, project hypotheses, and product claims. That distinction is central: an attractive
@@ -119,7 +121,8 @@ For setup `C`, punchline `P`, and a candidate alternate-frame hint `F`, the proj
 - `R = NLL(P | C) - NLL(P | C + F)`: model surprisal reduction after adding a frame hint;
 - `E = R / tokens(F)`: model resolution per hint token;
 - `B`: an audience-relative hypothesis about a repair colliding with strongly held interpretive
-  commitments.
+  commitments (shorthand — the controlling verbatim definition, which includes the override-logic
+  criterion, is the quoted block in ../THEORY.md §2 and is never paraphrased into gates).
 
 Only `S` has a completed, pinned public Gemma measurement in the canonical notebook. The current
 form experiment finds **0 of 10** joke-form confidence intervals strictly above the proverb
@@ -152,7 +155,7 @@ horror, offense, boredom, and simple novelty. A useful theory must distinguish t
 | Language users form graded expectations | Psycholinguistic surprisal and reading-time studies | Frozen Gemma exposes token probabilities | Grounded, but model-to-human transfer is unvalidated here |
 | Setups can create an expectation that punchlines violate | Incongruity research | Annotated expectation/violation frames; form taxonomy | Plausible representation, not a causal result |
 | A compact alternate frame can resolve the violation | Incongruity-resolution literature | Frame hints and proposed `R/E` instruments | Proposed; construct validation needed |
-| A resolved violation becomes benign/permitted | Benign-violation and appraisal accounts | Canonical `B` definition and persona-conditioned design | Proposed; prompts are not human measurement |
+| A resolved violation becomes benign/permitted | Benign-violation and appraisal accounts | Verbatim canonical `B` definition (../THEORY.md §2) and persona-conditioned design | Proposed; prompts are not human measurement |
 | These mechanisms improve amusement | Human humor research | No preregistered project human mechanism study yet | Not established |
 | Tool assistance improves a writer or audience outcome | Human-computer interaction question | SDK/API and study protocol now runnable | Capability exists; advantage not established |
 
@@ -191,6 +194,12 @@ Bad conclusions erase the evidence boundary:
 > The AI understands humor. This score predicts what people find funny.
 
 The evidence ladder below is enforced in the study analyzer and should also govern product copy.
+The four rungs, lowest to highest: (1) an API call succeeded; (2) an offline benchmark succeeded;
+(3) a preregistered held-out human study succeeded; (4) an independent external replication
+succeeded. The evidence_level codes in study receipts climb the same direction without mapping
+1:1: `L1_OFFLINE_CONTRACT` sits at rung 2 (an offline contract, no humans), `L2_HUMAN_PILOT` is
+an intermediate human pilot below preregistration, and `L3_PREREGISTERED_HELD_OUT` and
+`L4_EXTERNAL_REPLICATION` correspond to rungs 3 and 4.
 
 ![Evidence ladder and allowed claims](figures/evidence-ladder.svg)
 

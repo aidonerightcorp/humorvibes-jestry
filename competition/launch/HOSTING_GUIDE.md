@@ -30,6 +30,13 @@ self-attacks on every run (punchline-reuse cap, genuine/control text overlap = 0
 boring-tail diversity) and refuses to write exploitable data. To scale up first:
 `python3 harvest_supply.py keyless --limit 200` (network), then rebuild.
 
+> **Dated note (2026-07-27):** against the post-wave-2 local corpus (2.7M+ rows with bulk lanes),
+> the rebuild is now REFUSED by the builder's own self-attack — bulk reddit lanes contribute
+> `[deleted]` / `Period.` / `...` punchlines that would reopen the reuse exploit. That refusal is
+> the control working. **The tracked `competition/data/` freeze in this repository is the
+> verified launch payload**; host from it directly and skip the rebuild step unless the builder's
+> candidate screen is first extended to the bulk lanes.
+
 Current verified build (2026-07-24):
 
 | file | sha256 | rows (CSV records) |

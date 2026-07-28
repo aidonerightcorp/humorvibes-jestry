@@ -1,5 +1,7 @@
 # API and deployment guide
 
+*Role: how to run the service. Audience: operators. Downstream of the research; changes nothing measured.*
+
 HumorVibes now has one application-facing service layer that can be imported as a Python SDK,
 served through FastAPI, built as a non-root container, run with Docker Compose, or scheduled on
 Kubernetes. It is separate from the immutable Kaggle measurement path: deploying this service
@@ -240,9 +242,10 @@ docker compose -f compose.yaml -f compose.ollama.yaml down
 ```
 
 Override `OLLAMA_MODEL` or `OLLAMA_EMBED_MODEL` before starting when those models are already
-approved for your environment. The profile pins the verified Ollama `0.32.4` release rather than
-floating on `latest`; production deployments should additionally pin the image digest. Model IDs
-remain an exact server-side allowlist.
+approved for your environment. The Compose profile pins the verified Ollama `0.32.4` container
+image (the local benchmark host in docs/PROVIDER_MATRIX.md ran 0.24.0 — different hosts, both
+recorded) rather than floating on `latest`; production deployments should additionally pin the
+image digest. Model IDs remain an exact server-side allowlist.
 
 ### Ollama cloud profile and API key
 

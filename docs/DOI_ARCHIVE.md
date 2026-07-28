@@ -1,9 +1,14 @@
 # DOI archive: exact source, current state, and publication gate
 
+*Role: deposit-readiness for the frozen v0.7.0 tag (issue #9). Audience: the repository owner. No DOI is claimed.*
+
 ## Executive summary
 
 The v0.7.0 software release is ready for an owner-controlled archive deposit, but it does **not**
-yet have a DOI. An anonymous Zenodo search on 2026-07-27 returned zero matching records, no Zenodo
+yet have a DOI. v0.7.0 remains the deposit target because its per-file inventory digest is already
+frozen and CI-verified; v0.8.0 gets archived after issue
+[#9](https://github.com/aidonerightcorp/humorvibes-jestry/issues/9) closes on the earlier tag.
+An anonymous Zenodo search on 2026-07-27 returned zero matching records, no Zenodo
 credential is available in the project environment, and repository-account linking cannot be
 honestly inferred from source files. Issue
 [#9](https://github.com/aidonerightcorp/humorvibes-jestry/issues/9) therefore remains open.

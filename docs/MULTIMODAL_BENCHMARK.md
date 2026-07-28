@@ -1,5 +1,7 @@
 # Multimodal caption benchmark
 
+*Role: the rights-safe caption+drawing experiment contract (issue #4). Audience: anyone proposing a multimodal arm. The checked-in run is a procedural positive control, not a result.*
+
 ## Executive summary
 
 Humor in a caption contest is a relation between words, a drawing, and an audience. A text-only
@@ -142,3 +144,5 @@ The shortest clean route is a small, preregistered cohort made from project-crea
 commissioned drawings. Obtain an explicit redistributable caption licence during submission,
 collect independent audience ratings, freeze whole contests, then run the two commands above.
 Publish only privacy-minimized aggregates and the exact evidence files approved for release.
+The rights-cleared human cohort this contract awaits is issue
+[#4](https://github.com/aidonerightcorp/humorvibes-jestry/issues/4).
