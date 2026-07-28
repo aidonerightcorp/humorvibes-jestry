@@ -300,6 +300,10 @@ These are binding for future work:
 
 ## Post-closeout maintenance log
 
+The narrative record of this era is [`docs/POST_CLOSEOUT_RECORD.md`](docs/POST_CLOSEOUT_RECORD.md);
+the verbatim referee reports behind PR #38 are
+[`docs/REFEREE_REPORT_2026-07-28.md`](docs/REFEREE_REPORT_2026-07-28.md).
+
 The closeout did not freeze the repository; it froze the claims. Four bounded waves have
 landed since v0.8.0, none changing the application package:
 

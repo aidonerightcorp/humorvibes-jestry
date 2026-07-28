@@ -10,3 +10,4 @@ Every file below carries a role banner; this is the order that makes them build 
 6. [REAL_WORLD_STUDY_WORKBENCH.md](REAL_WORLD_STUDY_WORKBENCH.md) → [MULTIMODAL_BENCHMARK.md](MULTIMODAL_BENCHMARK.md) → [NATIVE_LANGUAGE_CONTRIBUTIONS.md](NATIVE_LANGUAGE_CONTRIBUTIONS.md) (the three human-gated lanes: issues #3, #4, #5/#20–#26)
 7. [API_AND_DEPLOYMENT.md](API_AND_DEPLOYMENT.md) → [INTEGRATIONS.md](INTEGRATIONS.md) → [PROVIDER_MATRIX.md](PROVIDER_MATRIX.md) → [ADVERSARIAL_VALIDATION.md](ADVERSARIAL_VALIDATION.md)
 8. [EXPANSION_GUIDE.md](EXPANSION_GUIDE.md) → [DOI_ARCHIVE.md](DOI_ARCHIVE.md)
+9. [POST_CLOSEOUT_RECORD.md](POST_CLOSEOUT_RECORD.md) → [REFEREE_REPORT_2026-07-28.md](REFEREE_REPORT_2026-07-28.md) — the maintenance-era narrative and the verbatim adversarial review behind its corrections
