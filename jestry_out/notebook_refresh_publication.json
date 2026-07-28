@@ -11,7 +11,7 @@
   "kernels": {
     "wave2": {
       "ref": "taylorsamarel/humor-genome-wave-2-reproducible-gemma-study",
-      "version_pushed": 15,
+      "version_pushed": 16,
       "terminal_status": "COMPLETE",
       "served_source_matches_committed_cells": true,
       "executed_outputs_downloaded": [
@@ -33,7 +33,8 @@
         "overlap_control": 10,
         "strictly_above_control": 0,
         "verdict": "SEPARATION IS NOT ESTABLISHED"
-      }
+      },
+      "note": "v16 pushed after the 2026-07-28 referee round corrected section 7's quoted numbers (underpowered label, 2/4,997 Welch, divisiveness strata caveat); served source byte-matches the committed notebook; the executed run re-reproduced S = 3.188 agreement and the 0/10 form null"
     },
     "open_controls": {
       "ref": "taylorsamarel/humor-genome-open-controls-causal-design-lab",

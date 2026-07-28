@@ -14,7 +14,7 @@ evidence-bearing contributions; see [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md)
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 4 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
 | Application package | [v0.8.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public closeout release; wheel/sdist, multi-architecture image, provenance, SPDX SBOM, anonymous pull, and runtime gates passed |
-| Label-ceiling explainer | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support) | Public static edition, version 4 COMPLETE (2026-07-28); built deterministically from the repository's `ceiling_demo/` (content-only determinism) and byte-verified against the served source; displays previously receipted ceiling/portability/null results only — `jestry_out/ceiling_demo_publication.json` |
+| Label-ceiling explainer | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support) | Public static edition, version 4 COMPLETE (2026-07-28); built deterministically from the repository's `ceiling_demo/` (content-only determinism) and byte-verified against the served source — `jestry_out/notebook_refresh_publication.json` (`ceiling_demo_publication.json` is the v1-era record); displays previously receipted ceiling/portability/null results only — `jestry_out/ceiling_demo_publication.json` |
 | Academic archive | [DOI archive preflight](docs/DOI_ARCHIVE.md) | Exact v0.7.0 source is deposit-ready and identified by a complete per-file inventory; no public Zenodo record or DOI is claimed yet |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v10` (the v14 run remains pinned to `humor-genome-wave2-v9`; neither tag moves). GitHub `main` may move as
@@ -103,11 +103,14 @@ because the required human, rights, owner-account, or named-environment evidence
   a different joke population, and exactly one of 30 features (`punch_rarity_max`, with a
   *negative* sign) survives sign+FDR across three corpora
   (`jestry_out/cross_corpus_transfer.json`, `jestry_out/three_corpus_study.json`).
-- Post-closeout wave 1 (2026-07-27) added five receipts without changing any claim boundary:
-  declared-style surprisal replicates the form-study null (0/7, permutation p = 0.45), caption
-  divisiveness is reliable but no more predictable than the mean, word-level demographic gaps are
-  mostly noise, and three receipt-backed figures now exist under `docs/figures/`. The
-  tenet-by-tenet scoreboard is `docs/THESIS_AND_EVIDENCE.md`.
+- Post-closeout wave 1 (2026-07-27; revised after an adversarial methods review 2026-07-28)
+  added five receipts without changing any claim boundary: declared-style surprisal finds 0/7
+  separations but is receipted as UNDERPOWERED at n=12/group (the criterion could not have
+  fired; among-styles permutation p = 0.45); caption divisiveness is reliable overall but no
+  more predictable than the mean (low-vote bins are not estimable); word-level demographic gaps
+  are not detectable at these per-word n (2/4,997 sex under Welch-t+FDR); three receipt-backed
+  figures exist under `docs/figures/`. The tenet-by-tenet scoreboard is
+  `docs/THESIS_AND_EVIDENCE.md`.
 - The release has source-controlled dataset and notebook metadata, deterministic notebook
   generation, automated tests, semantic release checks, and a machine-readable publication
   receipt at [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).
@@ -118,7 +121,7 @@ because the required human, rights, owner-account, or named-environment evidence
 - Open Controls adds a separate 120,000-row four-arm corpus, strict data/human/model schemas,
   grouped splits, exact and long-phrase overlap checks, easy and entity-masked hard retrieval
   qrels, a bounded SDK/API, a standalone verifier, and a public-notebook builder. A fresh
-  anonymous Kaggle download passes all 14 semantic/provenance gates, and notebook v3 completed
+  anonymous Kaggle download passes all 14 semantic/provenance gates, and notebook v4 completed
   against all 24 manifested files.
   It contains no human-authored or human-rated rows. See
   [`jestry_out/open_controls_publication.json`](jestry_out/open_controls_publication.json).

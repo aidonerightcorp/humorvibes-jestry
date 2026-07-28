@@ -5,6 +5,19 @@ study revisions remain separately identified by their dataset/notebook versions 
 
 ## [Unreleased]
 
+Research-infrastructure changes only; the application package remains 0.8.0.
+
+- Post-closeout wave 1 (#34): three receipted studies (declared-style 0/7 null,
+  caption divisiveness, demographic norms), ported word-type/three-corpus receipts,
+  three receipt-backed figures, `docs/THESIS_AND_EVIDENCE.md` scoreboard, and a
+  two-audit reconciliation of every public document.
+- Notebook refresh (#35, #36): thesis-in-one-screen at the top of all three public
+  notebooks, receipted follow-ups section, immutable source tag
+  `humor-genome-wave2-v10`, publication receipt for wave2 v15 / Open Controls v4.
+- Closeout wave (#37): `ceiling_demo/` ported into the repository with a
+  content-deterministic static build and tests; ceiling explainer v4 published from
+  the repo and byte-verified; post-closeout maintenance log recorded.
+
 ## [0.8.0] - 2026-07-27
 
 ### Added

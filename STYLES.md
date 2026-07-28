@@ -145,11 +145,14 @@ A separate smaller run comparing six *declared style* arms (military, medical, l
 jest-book, riddles) put all six above the control **on the mean** — but that comparison used
 point estimates with no uncertainty and left no receipt, and ranking means at n=6 manufactures a
 separation the data does not contain. The interval-based verdict is the one to believe — and the
-receipted follow-up agrees: the 2026-07-27 declared-style study
+receipted follow-up agrees, with its power stated honestly: the 2026-07-27 declared-style study
 (`jestry_out/declared_style_study.json`; seven subreddit-declared styles × 12 items on the
 certified instrument, same proverb-control recipe) found **0/7 style CIs separated from the
-control in either direction, any-difference permutation p = 0.45**. The form-study null
-replicates on an independent, zero-annotation label axis.
+control in either direction — but at n=12/group the separation criterion could not have fired
+(it requires a group CI-low above 5.999; the largest observed is 4.740), so this is
+'underpowered, not established' rather than a tested absence.** A separate any-difference test
+among the seven styles (control excluded) gives p = 0.45, and token length is an uncontrolled
+covariate (r ≈ −0.63 across groups).
 
 So: the ordering is a hypothesis worth more measurement, not a finding. S is model surprisal,
 **not funniness** — these items carry no human grade, so nothing here says any form is funnier.

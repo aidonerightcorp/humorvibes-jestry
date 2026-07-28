@@ -203,10 +203,12 @@ OpenAPI contract.
   **−0.0091** on a different joke population — the 0.51 describes Humicroedit, not humor. Exactly
   one of 30 features (`punch_rarity_max`, ρ ≈ −0.05…−0.09, *negative*) survives sign+FDR in all
   three corpora.
-- Post-closeout wave 1 (2026-07-27): declared-style surprisal replicates the form-study null
-  (**0/7** community-labeled styles separate from the proverb control, permutation p = 0.45);
-  caption divisiveness is a real label (reliability 0.51) but no more text-predictable than the
-  mean; word-level demographic humor gaps are mostly noise (9/4,997 sex, 0/4,997 age survive FDR).
+- Post-closeout wave 1 (2026-07-27, referee-revised 2026-07-28): declared-style surprisal —
+  **0/7** styles separate from the proverb control, but the design is underpowered at n=12/group
+  (the criterion could not have fired; among-styles permutation p = 0.45); caption divisiveness
+  is a real label (reliability ~0.51 overall) but no more text-predictable than the mean;
+  word-level demographic gaps are **not detectable at these per-word n** (2/4,997 sex under
+  Welch-t+FDR, 0/4,997 age; per-word reliability ≈ 0).
   Tenet-by-tenet status: [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).
 
 `S` is model surprisal, not funniness. The dataset mixes jokes, captions, proverbs, idioms, and
@@ -239,7 +241,8 @@ ledger.
 - `wave2_notebook/`: the one notebook to read and publish; older notebook directories are
   supporting experiments, not competing entry points.
 - `ceiling_demo/`: deterministic builder and committed static notebook for the public
-  label-ceiling explainer (receipts embedded at build time; no live-session machinery).
+  label-ceiling explainer (receipts embedded at build time; the published static edition has
+  no live-session machinery — the builder's non-static mode still emits local tunnel cells).
 - `humorvibes/`, `Dockerfile`, `compose*.yaml`, `deploy/kubernetes/`, `deploy/helm/`: the SDK/API
   and deployment surface; it is an extension layer, not a second research notebook.
 - `build_kaggle_export.py`, `wave2_dataset/`, `verify_wave2_release.py`: public dataset build,

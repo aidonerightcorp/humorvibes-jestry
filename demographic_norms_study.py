@@ -38,7 +38,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scipy.stats import norm, spearmanr
+from scipy.stats import spearmanr, t as t_dist
 
 MIN_VOTES_PER_SIDE = 8
 
@@ -120,22 +120,39 @@ def load_cockamamie(path: Path) -> tuple[pd.DataFrame, dict, dict]:
     return pd.DataFrame(rows), raw["word_features"], demo
 
 
-def gap_block(df: pd.DataFrame, gap: str, se: str) -> dict:
-    sub = df.dropna(subset=[gap, se])
-    z = (sub[gap] / sub[se].replace(0, np.nan)).to_numpy()
-    z = z[np.isfinite(z)]
-    p = 2 * norm.sf(np.abs(z))
+def gap_block(df: pd.DataFrame, gap: str, se: str,
+              sd_a: str, n_a: str, sd_b: str, n_b: str) -> dict:
+    """Per-word gap tests with a Welch t reference (per-word n is tiny — a
+    normal-z reference inflated 9 apparent sex gaps to significance where
+    Welch leaves 2; referee finding, 2026-07-28). No per-word ranked word
+    lists are published: the implied per-word gap reliability (1 - mean
+    sampling variance / observed gap variance) is ~0, so raw top-N lists
+    would be noise presented as findings."""
+    sub = df.dropna(subset=[gap, se, sd_a, n_a, sd_b, n_b])
+    se_vals = sub[se].replace(0, np.nan)
+    tstat = (sub[gap] / se_vals).to_numpy()
+    va = sub[sd_a].to_numpy() ** 2 / sub[n_a].to_numpy()
+    vb = sub[sd_b].to_numpy() ** 2 / sub[n_b].to_numpy()
+    with np.errstate(divide="ignore", invalid="ignore"):
+        df_welch = (va + vb) ** 2 / (
+            va ** 2 / np.maximum(sub[n_a].to_numpy() - 1, 1)
+            + vb ** 2 / np.maximum(sub[n_b].to_numpy() - 1, 1))
+    mask = np.isfinite(tstat) & np.isfinite(df_welch) & (df_welch > 0)
+    p = 2 * t_dist.sf(np.abs(tstat[mask]), df_welch[mask])
     q = bh_qvalues(np.asarray(p))
     sig = int((q < 0.05).sum())
-    top_pos = sub.nlargest(15, gap)[["word", gap]].round(4).to_dict("records")
-    top_neg = sub.nsmallest(15, gap)[["word", gap]].round(4).to_dict("records")
+    obs_var = float(sub[gap].var())
+    mean_samp_var = float((se_vals ** 2).mean())
+    reliability = max(0.0, 1.0 - mean_samp_var / obs_var) if obs_var > 0 else 0.0
     return {
-        "words_tested": int(len(sub)),
+        "words_tested": int(mask.sum()),
         "mean_abs_gap": round(float(sub[gap].abs().mean()), 4),
         "significant_q05": sig,
-        "share_significant": round(sig / max(1, len(sub)), 4),
-        "top_positive": top_pos,
-        "top_negative": top_neg,
+        "share_significant": round(sig / max(1, int(mask.sum())), 4),
+        "test": "Welch t (per-word df), BH-FDR",
+        "implied_per_word_gap_reliability": round(reliability, 4),
+        "reliability_note": "1 - mean(SE^2)/var(gap); near zero, so per-word "
+                             "rankings are not publishable and none are included",
     }
 
 
@@ -154,6 +171,8 @@ def main() -> int:
     overall = merged.dropna(subset=["mean", "p_funny"])
     r_overall = spearmanr(overall["mean"], overall["p_funny"]).statistic if len(overall) >= 10 else np.nan
 
+    gap_sex = gap_block(eng, "sex_gap", "sex_se", "sd_M", "n_M", "sd_F", "n_F")
+    gap_age = gap_block(eng, "age_gap", "age_se", "sd_young", "n_young", "sd_old", "n_old")
     cross = {}
     for gap in ("sex_gap", "age_gap"):
         sub = merged.dropna(subset=[f"{gap}_eng", f"{gap}_cock"])
@@ -165,8 +184,39 @@ def main() -> int:
             cross[gap] = {"shared_words": int(len(sub)),
                           "spearman": None,
                           "note": "insufficient overlap after per-side vote floors"}
+    # Attenuation honesty (referee finding): with per-word gap reliabilities
+    # this low, the attainable cross-dataset correlation is bounded near zero,
+    # so this arm CANNOT measure agreement — "CIs include zero" is a statement
+    # about the instrument, not about the world. The negative age point is
+    # reported rather than absorbed.
+    rel_eng = {"sex_gap": gap_sex["implied_per_word_gap_reliability"],
+               "age_gap": gap_age["implied_per_word_gap_reliability"]}
+    cock_rel = {}
+    for gap in ("sex_gap", "age_gap"):
+        sub = cock.dropna(subset=[gap])
+        obs_var = float(sub[gap].var()) if len(sub) > 2 else 0.0
+        # binomial sampling variance of a proportion difference at the vote floor
+        p_bar = float(cock["p_funny"].mean())
+        samp = 2 * p_bar * (1 - p_bar) / MIN_VOTES_PER_SIDE
+        cock_rel[gap] = round(max(0.0, 1.0 - samp / obs_var), 4) if obs_var > 0 else 0.0
+    for gap in ("sex_gap", "age_gap"):
+        ceiling = (max(0.0, rel_eng[gap]) * max(0.0, cock_rel[gap])) ** 0.5
+        cross[gap]["per_word_gap_reliability"] = {"engelthaler": rel_eng[gap],
+                                                   "cockamamie_approx": cock_rel[gap]}
+        cross[gap]["attenuation_ceiling"] = round(ceiling, 4)
+        observed = cross[gap].get("spearman")
+        at_ceiling = observed is not None and ceiling > 0 and abs(observed) >= 0.8 * ceiling
+        cross[gap]["measurement_verdict"] = (
+            "no attainable measurement — the attenuation ceiling at these "
+            "reliabilities is at or below the noise floor (or the observed value "
+            "sits at its own ceiling); this arm cannot distinguish agreement "
+            "from disagreement"
+            if ceiling < 0.15 or at_ceiling else "interpretable with caution")
+    cross["age_gap"]["direction_note"] = (
+        "the observed age point is negative (leans toward cross-crowd "
+        "disagreement); reported, not absorbed into 'includes zero'")
 
-    feat_rows = []
+    sanity_rows, feat_rows = [], []
     fdim = pd.DataFrame(features)
     fdim.index = fdim.index.str.lower()
     joined = cock.set_index("word").join(fdim, how="inner")
@@ -176,18 +226,20 @@ def main() -> int:
             if len(sub) < 30:
                 continue
             res = spearmanr(sub[dim], sub[target])
-            feat_rows.append({"dimension": dim, "target": target, "n": int(len(sub)),
-                              "spearman": round(float(res.statistic), 4),
-                              "p": float(res.pvalue)})
-    if feat_rows:
-        q = bh_qvalues(np.array([r["p"] for r in feat_rows]))
-        for row, qv in zip(feat_rows, q):
-            row["q_bh"] = round(float(qv), 5)
-            row["p"] = round(row["p"], 6)
-            row["ci95"] = spearman_ci(row["spearman"], row["n"])
-    feat_rows.sort(key=lambda r: r["q_bh"])
-    gap_sex = gap_block(eng, "sex_gap", "sex_se")
-    gap_age = gap_block(eng, "age_gap", "age_se")
+            row = {"dimension": dim, "target": target, "n": int(len(sub)),
+                   "spearman": round(float(res.statistic), 4),
+                   "p": float(res.pvalue)}
+            (sanity_rows if target == "p_funny" else feat_rows).append(row)
+    # BH families declared separately (referee finding): the 6 dimension->p_funny
+    # checks are sanity anchors, the 12 dimension->gap tests are the hypotheses.
+    for rows in (sanity_rows, feat_rows):
+        if rows:
+            q = bh_qvalues(np.array([r["p"] for r in rows]))
+            for row, qv in zip(rows, q):
+                row["q_bh"] = round(float(qv), 5)
+                row["p"] = round(row["p"], 6)
+                row["ci95"] = spearman_ci(row["spearman"], row["n"])
+            rows.sort(key=lambda r: r["q_bh"])
     gap_sex_sig, gap_age_sig = gap_sex["significant_q05"], gap_age["significant_q05"]
 
     receipt = {
@@ -199,7 +251,10 @@ def main() -> int:
             "engelthaler_hills": {"words": int(len(eng)),
                                   "fields": "mean/sd/n by sex and by age (published norms)"},
             "cockamamie": {"words_with_votes": int(len(cock)), **demo,
-                           "vote_floor_per_side": MIN_VOTES_PER_SIDE},
+                           "vote_floor_per_side": MIN_VOTES_PER_SIDE,
+                           "batch_union_note": "votes are unioned across batches; a "
+                           "worker voting differently across batches lands in both "
+                           "sides (909/120,000 words affected, ~0.76%)"},
         },
         "cross_dataset_overall_agreement": {
             "shared_words": int(len(overall)),
@@ -208,17 +263,20 @@ def main() -> int:
         },
         "engelthaler_gaps": {"sex": gap_sex, "age": gap_age},
         "cross_dataset_gap_agreement": cross,
-        "hand_coded_dimension_correlations": feat_rows,
+        "hand_coded_dimension_gap_tests": {"bh_family_size": len(feat_rows),
+                                            "rows": feat_rows},
+        "hand_coded_dimension_p_funny_sanity": {"bh_family_size": len(sanity_rows),
+                                                 "rows": sanity_rows},
         "persona_b_implication": (
             f"Two independent crowds agree substantially on which WORDS are funny "
             f"(rho={float(r_overall):.3f}), but single-word demographic GAPS mostly do not "
             f"survive FDR ({gap_sex_sig}/{len(eng)} sex, {gap_age_sig}/{len(eng)} age) and "
-            f"cross-dataset gap agreement CIs include zero "
+            f"the cross-dataset gap arm has no attainable signal at these reliabilities "
             f"(sex {cross['sex_gap'].get('spearman')}, age {cross['age_gap'].get('spearman')}). "
             "The one demographic signal that survives is dimension-level: sexual-connotation "
             "words skew toward younger raters. Persona conditioning of B therefore has only "
             "WEAK lexical-level support here; validating it requires joke-level, adequately "
-            "powered human data. A clean mostly-negative result, kept visible."
+            "powered human data. The correct reading is NOT DETECTABLE AT THESE PER-WORD N, not 'no differences exist'. A clean underpowered-negative result, kept visible."
         ),
         "truth_boundary": {
             "verified": "descriptive demographic rating differences on single words in two "

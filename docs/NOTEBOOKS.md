@@ -7,7 +7,7 @@
 [`wave2_notebook/humor_genome_wave2.ipynb`](../wave2_notebook/humor_genome_wave2.ipynb) is the
 canonical executable Wave 2 study and the notebook published publicly on Kaggle as
 [Humor Genome Wave 2 Reproducible Gemma Study](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study)
-(version 15, COMPLETE; public dataset version 7; opens with the thesis in one screen and a receipted follow-ups section).. A third public surface, the display-only label-ceiling explainer [HumorVibes: What the Label Can Support](https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support) (version 4, COMPLETE), is built deterministically from `ceiling_demo/` with receipts embedded at build time — it displays stored results and never re-measures. It
+(version 15, COMPLETE; public dataset version 7; opens with the thesis in one screen and a receipted follow-ups section). It
 states the problem, proposed exploration, controlling findings, outputs, practical uses, and
 limitations before exposing implementation detail. It also names the predictive-processing
 starting point, cites its scientific lineage, renders the model-to-human evidence boundary, and
@@ -23,6 +23,12 @@ is the promoted executable for the synthetic four-arm corpus. It verifies all mo
 reports generator artifacts, runs both the easy and entity-masked hard retrieval baselines, and
 explicitly stops short of human funniness or brain-mechanism claims.
 
+A third public surface, the display-only label-ceiling explainer
+[HumorVibes: What the Label Can Support](https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support)
+(version 4, COMPLETE), is built deterministically from [`ceiling_demo/`](../ceiling_demo/)
+with receipts embedded at build time. It displays stored results and never re-measures —
+it is a reader surface, not an experiment.
+
 ## Supporting notebooks
 
 The remaining notebooks are retained because they answer narrower questions or preserve the
@@ -30,6 +36,7 @@ project's development history. They do not override the canonical Wave 2 conclus
 
 | Path | Role |
 | --- | --- |
+| `ceiling_demo/humorvibes_ceiling_demo_static.ipynb` | The published label-ceiling explainer (display-only; receipts embedded; deterministic from `ceiling_demo/build_demo_notebook.py --static`) |
 | `notebook.ipynb` | Original measuring-jokes prototype |
 | `ablation_lab/ablation_notebook.ipynb` | S/R/E/B ablation experiment and negative result |
 | `competition/launch/starter_notebook.ipynb` | Historical competition starter |

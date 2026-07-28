@@ -1,7 +1,7 @@
 {
   "receipt_type": "demographic_humor_norms_study",
   "receipt_version": 1,
-  "ts": "2026-07-28T01:35:47+00:00",
+  "ts": "2026-07-28T03:31:59+00:00",
   "status": "complete",
   "sources": {
     "engelthaler_hills": {
@@ -17,7 +17,8 @@
         "Male": 880,
         "Other": 9
       },
-      "vote_floor_per_side": 8
+      "vote_floor_per_side": 8,
+      "batch_union_note": "votes are unioned across batches; a worker voting differently across batches lands in both sides (909/120,000 words affected, ~0.76%)"
     }
   },
   "cross_dataset_overall_agreement": {
@@ -32,262 +33,20 @@
     "sex": {
       "words_tested": 4997,
       "mean_abs_gap": 0.3498,
-      "significant_q05": 9,
-      "share_significant": 0.0018,
-      "top_positive": [
-        {
-          "word": "giggle",
-          "sex_gap": 1.9206
-        },
-        {
-          "word": "beast",
-          "sex_gap": 1.6071
-        },
-        {
-          "word": "circus",
-          "sex_gap": 1.6
-        },
-        {
-          "word": "grand",
-          "sex_gap": 1.5
-        },
-        {
-          "word": "humbug",
-          "sex_gap": 1.4868
-        },
-        {
-          "word": "juju",
-          "sex_gap": 1.4206
-        },
-        {
-          "word": "county",
-          "sex_gap": 1.3913
-        },
-        {
-          "word": "slicker",
-          "sex_gap": 1.3791
-        },
-        {
-          "word": "sweat",
-          "sex_gap": 1.3708
-        },
-        {
-          "word": "ennui",
-          "sex_gap": 1.3599
-        },
-        {
-          "word": "holder",
-          "sex_gap": 1.3506
-        },
-        {
-          "word": "momma",
-          "sex_gap": 1.35
-        },
-        {
-          "word": "sod",
-          "sex_gap": 1.3333
-        },
-        {
-          "word": "burp",
-          "sex_gap": 1.3004
-        },
-        {
-          "word": "comic",
-          "sex_gap": 1.2721
-        }
-      ],
-      "top_negative": [
-        {
-          "word": "bondage",
-          "sex_gap": -1.5455
-        },
-        {
-          "word": "orgy",
-          "sex_gap": -1.5101
-        },
-        {
-          "word": "chauffeur",
-          "sex_gap": -1.475
-        },
-        {
-          "word": "birthmark",
-          "sex_gap": -1.4077
-        },
-        {
-          "word": "raccoon",
-          "sex_gap": -1.4
-        },
-        {
-          "word": "czar",
-          "sex_gap": -1.35
-        },
-        {
-          "word": "hardship",
-          "sex_gap": -1.3413
-        },
-        {
-          "word": "buzzard",
-          "sex_gap": -1.3377
-        },
-        {
-          "word": "weld",
-          "sex_gap": -1.2941
-        },
-        {
-          "word": "brand",
-          "sex_gap": -1.2905
-        },
-        {
-          "word": "corn",
-          "sex_gap": -1.2693
-        },
-        {
-          "word": "snatcher",
-          "sex_gap": -1.2444
-        },
-        {
-          "word": "banger",
-          "sex_gap": -1.2361
-        },
-        {
-          "word": "prod",
-          "sex_gap": -1.236
-        },
-        {
-          "word": "probe",
-          "sex_gap": -1.2143
-        }
-      ]
+      "significant_q05": 2,
+      "share_significant": 0.0004,
+      "test": "Welch t (per-word df), BH-FDR",
+      "implied_per_word_gap_reliability": 0.0576,
+      "reliability_note": "1 - mean(SE^2)/var(gap); near zero, so per-word rankings are not publishable and none are included"
     },
     "age": {
       "words_tested": 4997,
       "mean_abs_gap": 0.3297,
       "significant_q05": 0,
       "share_significant": 0.0,
-      "top_positive": [
-        {
-          "word": "goatee",
-          "age_gap": 1.4923
-        },
-        {
-          "word": "reform",
-          "age_gap": 1.4583
-        },
-        {
-          "word": "joint",
-          "age_gap": 1.4333
-        },
-        {
-          "word": "germ",
-          "age_gap": 1.3939
-        },
-        {
-          "word": "hunchback",
-          "age_gap": 1.3427
-        },
-        {
-          "word": "frock",
-          "age_gap": 1.3211
-        },
-        {
-          "word": "rating",
-          "age_gap": 1.2857
-        },
-        {
-          "word": "squaw",
-          "age_gap": 1.2857
-        },
-        {
-          "word": "filth",
-          "age_gap": 1.25
-        },
-        {
-          "word": "collie",
-          "age_gap": 1.232
-        },
-        {
-          "word": "squabble",
-          "age_gap": 1.1944
-        },
-        {
-          "word": "gangster",
-          "age_gap": 1.149
-        },
-        {
-          "word": "stag",
-          "age_gap": 1.1375
-        },
-        {
-          "word": "bulge",
-          "age_gap": 1.1364
-        },
-        {
-          "word": "bitch",
-          "age_gap": 1.123
-        }
-      ],
-      "top_negative": [
-        {
-          "word": "caddie",
-          "age_gap": -1.5595
-        },
-        {
-          "word": "birthright",
-          "age_gap": -1.4545
-        },
-        {
-          "word": "squint",
-          "age_gap": -1.3095
-        },
-        {
-          "word": "jingle",
-          "age_gap": -1.2833
-        },
-        {
-          "word": "burlesque",
-          "age_gap": -1.2786
-        },
-        {
-          "word": "bulkhead",
-          "age_gap": -1.2727
-        },
-        {
-          "word": "limey",
-          "age_gap": -1.2597
-        },
-        {
-          "word": "pixie",
-          "age_gap": -1.2582
-        },
-        {
-          "word": "pong",
-          "age_gap": -1.2471
-        },
-        {
-          "word": "willow",
-          "age_gap": -1.2308
-        },
-        {
-          "word": "housewife",
-          "age_gap": -1.2292
-        },
-        {
-          "word": "bathing",
-          "age_gap": -1.2269
-        },
-        {
-          "word": "kindness",
-          "age_gap": -1.2
-        },
-        {
-          "word": "ado",
-          "age_gap": -1.197
-        },
-        {
-          "word": "bubble",
-          "age_gap": -1.1901
-        }
-      ]
+      "test": "Welch t (per-word df), BH-FDR",
+      "implied_per_word_gap_reliability": 0.0,
+      "reliability_note": "1 - mean(SE^2)/var(gap); near zero, so per-word rankings are not publishable and none are included"
     }
   },
   "cross_dataset_gap_agreement": {
@@ -297,7 +56,13 @@
       "ci95": [
         -0.0134,
         0.2904
-      ]
+      ],
+      "per_word_gap_reliability": {
+        "engelthaler": 0.0576,
+        "cockamamie_approx": 0.4561
+      },
+      "attenuation_ceiling": 0.1621,
+      "measurement_verdict": "no attainable measurement \u2014 the attenuation ceiling at these reliabilities is at or below the noise floor (or the observed value sits at its own ceiling); this arm cannot distinguish agreement from disagreement"
     },
     "age_gap": {
       "shared_words": 168,
@@ -305,228 +70,243 @@
       "ci95": [
         -0.3064,
         0.0069
-      ]
+      ],
+      "per_word_gap_reliability": {
+        "engelthaler": 0.0,
+        "cockamamie_approx": 0.4479
+      },
+      "attenuation_ceiling": 0.0,
+      "measurement_verdict": "no attainable measurement \u2014 the attenuation ceiling at these reliabilities is at or below the noise floor (or the observed value sits at its own ceiling); this arm cannot distinguish agreement from disagreement",
+      "direction_note": "the observed age point is negative (leans toward cross-crowd disagreement); reported, not absorbed into 'includes zero'"
     }
   },
-  "hand_coded_dimension_correlations": [
-    {
-      "dimension": "snd",
-      "target": "p_funny",
-      "n": 1500,
-      "spearman": 0.4019,
-      "p": 0.0,
-      "q_bh": 0.0,
-      "ci95": [
-        0.3559,
-        0.4459
-      ]
-    },
-    {
-      "dimension": "scatc",
-      "target": "p_funny",
-      "n": 1500,
-      "spearman": 0.2454,
-      "p": 0.0,
-      "q_bh": 0.0,
-      "ci95": [
-        0.1943,
-        0.2952
-      ]
-    },
-    {
-      "dimension": "clq",
-      "target": "p_funny",
-      "n": 1500,
-      "spearman": 0.3441,
-      "p": 0.0,
-      "q_bh": 0.0,
-      "ci95": [
-        0.2959,
-        0.3905
-      ]
-    },
-    {
-      "dimension": "inslt",
-      "target": "p_funny",
-      "n": 1500,
-      "spearman": 0.1881,
-      "p": 0.0,
-      "q_bh": 0.0,
-      "ci95": [
-        0.1358,
-        0.2393
-      ]
-    },
-    {
-      "dimension": "sexc",
-      "target": "p_funny",
-      "n": 1500,
-      "spearman": 0.2711,
-      "p": 0.0,
-      "q_bh": 0.0,
-      "ci95": [
-        0.2207,
-        0.3201
-      ]
-    },
-    {
-      "dimension": "sexc",
-      "target": "age_gap",
-      "n": 616,
-      "spearman": 0.1364,
-      "p": 0.000686,
-      "q_bh": 0.00206,
-      "ci95": [
-        0.0533,
-        0.2176
-      ]
-    },
-    {
-      "dimension": "snd",
-      "target": "sex_gap",
-      "n": 616,
-      "spearman": 0.0941,
-      "p": 0.019505,
-      "q_bh": 0.05016,
-      "ci95": [
-        0.0105,
-        0.1764
-      ]
-    },
-    {
-      "dimension": "scatc",
-      "target": "sex_gap",
-      "n": 616,
-      "spearman": -0.0863,
-      "p": 0.032178,
-      "q_bh": 0.06007,
-      "ci95": [
-        -0.1688,
-        -0.0026
-      ]
-    },
-    {
-      "dimension": "clq",
-      "target": "age_gap",
-      "n": 616,
-      "spearman": -0.0857,
-      "p": 0.03337,
-      "q_bh": 0.06007,
-      "ci95": [
-        -0.1682,
-        -0.002
-      ]
-    },
-    {
-      "dimension": "sexc",
-      "target": "sex_gap",
-      "n": 616,
-      "spearman": -0.0859,
-      "p": 0.033058,
-      "q_bh": 0.06007,
-      "ci95": [
-        -0.1684,
-        -0.0022
-      ]
-    },
-    {
-      "dimension": "juxt",
-      "target": "age_gap",
-      "n": 616,
-      "spearman": 0.0714,
-      "p": 0.076406,
-      "q_bh": 0.12503,
-      "ci95": [
-        -0.0124,
-        0.1542
-      ]
-    },
-    {
-      "dimension": "inslt",
-      "target": "age_gap",
-      "n": 616,
-      "spearman": -0.0381,
-      "p": 0.345516,
-      "q_bh": 0.47841,
-      "ci95": [
-        -0.1214,
-        0.0458
-      ]
-    },
-    {
-      "dimension": "juxt",
-      "target": "p_funny",
-      "n": 1500,
-      "spearman": 0.025,
-      "p": 0.333405,
-      "q_bh": 0.47841,
-      "ci95": [
-        -0.0287,
-        0.0785
-      ]
-    },
-    {
-      "dimension": "scatc",
-      "target": "age_gap",
-      "n": 616,
-      "spearman": -0.027,
-      "p": 0.504122,
-      "q_bh": 0.62021,
-      "ci95": [
-        -0.1105,
-        0.0568
-      ]
-    },
-    {
-      "dimension": "clq",
-      "target": "sex_gap",
-      "n": 616,
-      "spearman": 0.0255,
-      "p": 0.528155,
-      "q_bh": 0.62021,
-      "ci95": [
-        -0.0583,
-        0.109
-      ]
-    },
-    {
-      "dimension": "inslt",
-      "target": "sex_gap",
-      "n": 616,
-      "spearman": -0.0241,
-      "p": 0.551295,
-      "q_bh": 0.62021,
-      "ci95": [
-        -0.1076,
-        0.0597
-      ]
-    },
-    {
-      "dimension": "juxt",
-      "target": "sex_gap",
-      "n": 616,
-      "spearman": -0.007,
-      "p": 0.861844,
-      "q_bh": 0.91254,
-      "ci95": [
-        -0.0907,
-        0.0768
-      ]
-    },
-    {
-      "dimension": "snd",
-      "target": "age_gap",
-      "n": 616,
-      "spearman": 0.0042,
-      "p": 0.917278,
-      "q_bh": 0.91728,
-      "ci95": [
-        -0.0795,
-        0.0879
-      ]
-    }
-  ],
-  "persona_b_implication": "Two independent crowds agree substantially on which WORDS are funny (rho=0.414), but single-word demographic GAPS mostly do not survive FDR (9/4997 sex, 0/4997 age) and cross-dataset gap agreement CIs include zero (sex 0.1418, age -0.1536). The one demographic signal that survives is dimension-level: sexual-connotation words skew toward younger raters. Persona conditioning of B therefore has only WEAK lexical-level support here; validating it requires joke-level, adequately powered human data. A clean mostly-negative result, kept visible.",
+  "hand_coded_dimension_gap_tests": {
+    "bh_family_size": 12,
+    "rows": [
+      {
+        "dimension": "sexc",
+        "target": "age_gap",
+        "n": 616,
+        "spearman": 0.1364,
+        "p": 0.000686,
+        "q_bh": 0.00823,
+        "ci95": [
+          0.0533,
+          0.2176
+        ]
+      },
+      {
+        "dimension": "snd",
+        "target": "sex_gap",
+        "n": 616,
+        "spearman": 0.0941,
+        "p": 0.019505,
+        "q_bh": 0.08009,
+        "ci95": [
+          0.0105,
+          0.1764
+        ]
+      },
+      {
+        "dimension": "scatc",
+        "target": "sex_gap",
+        "n": 616,
+        "spearman": -0.0863,
+        "p": 0.032178,
+        "q_bh": 0.08009,
+        "ci95": [
+          -0.1688,
+          -0.0026
+        ]
+      },
+      {
+        "dimension": "clq",
+        "target": "age_gap",
+        "n": 616,
+        "spearman": -0.0857,
+        "p": 0.03337,
+        "q_bh": 0.08009,
+        "ci95": [
+          -0.1682,
+          -0.002
+        ]
+      },
+      {
+        "dimension": "sexc",
+        "target": "sex_gap",
+        "n": 616,
+        "spearman": -0.0859,
+        "p": 0.033058,
+        "q_bh": 0.08009,
+        "ci95": [
+          -0.1684,
+          -0.0022
+        ]
+      },
+      {
+        "dimension": "juxt",
+        "target": "age_gap",
+        "n": 616,
+        "spearman": 0.0714,
+        "p": 0.076406,
+        "q_bh": 0.15281,
+        "ci95": [
+          -0.0124,
+          0.1542
+        ]
+      },
+      {
+        "dimension": "inslt",
+        "target": "age_gap",
+        "n": 616,
+        "spearman": -0.0381,
+        "p": 0.345516,
+        "q_bh": 0.59231,
+        "ci95": [
+          -0.1214,
+          0.0458
+        ]
+      },
+      {
+        "dimension": "scatc",
+        "target": "age_gap",
+        "n": 616,
+        "spearman": -0.027,
+        "p": 0.504122,
+        "q_bh": 0.66155,
+        "ci95": [
+          -0.1105,
+          0.0568
+        ]
+      },
+      {
+        "dimension": "clq",
+        "target": "sex_gap",
+        "n": 616,
+        "spearman": 0.0255,
+        "p": 0.528155,
+        "q_bh": 0.66155,
+        "ci95": [
+          -0.0583,
+          0.109
+        ]
+      },
+      {
+        "dimension": "inslt",
+        "target": "sex_gap",
+        "n": 616,
+        "spearman": -0.0241,
+        "p": 0.551295,
+        "q_bh": 0.66155,
+        "ci95": [
+          -0.1076,
+          0.0597
+        ]
+      },
+      {
+        "dimension": "snd",
+        "target": "age_gap",
+        "n": 616,
+        "spearman": 0.0042,
+        "p": 0.917278,
+        "q_bh": 0.91728,
+        "ci95": [
+          -0.0795,
+          0.0879
+        ]
+      },
+      {
+        "dimension": "juxt",
+        "target": "sex_gap",
+        "n": 616,
+        "spearman": -0.007,
+        "p": 0.861844,
+        "q_bh": 0.91728,
+        "ci95": [
+          -0.0907,
+          0.0768
+        ]
+      }
+    ]
+  },
+  "hand_coded_dimension_p_funny_sanity": {
+    "bh_family_size": 6,
+    "rows": [
+      {
+        "dimension": "snd",
+        "target": "p_funny",
+        "n": 1500,
+        "spearman": 0.4019,
+        "p": 0.0,
+        "q_bh": 0.0,
+        "ci95": [
+          0.3559,
+          0.4459
+        ]
+      },
+      {
+        "dimension": "scatc",
+        "target": "p_funny",
+        "n": 1500,
+        "spearman": 0.2454,
+        "p": 0.0,
+        "q_bh": 0.0,
+        "ci95": [
+          0.1943,
+          0.2952
+        ]
+      },
+      {
+        "dimension": "clq",
+        "target": "p_funny",
+        "n": 1500,
+        "spearman": 0.3441,
+        "p": 0.0,
+        "q_bh": 0.0,
+        "ci95": [
+          0.2959,
+          0.3905
+        ]
+      },
+      {
+        "dimension": "inslt",
+        "target": "p_funny",
+        "n": 1500,
+        "spearman": 0.1881,
+        "p": 0.0,
+        "q_bh": 0.0,
+        "ci95": [
+          0.1358,
+          0.2393
+        ]
+      },
+      {
+        "dimension": "sexc",
+        "target": "p_funny",
+        "n": 1500,
+        "spearman": 0.2711,
+        "p": 0.0,
+        "q_bh": 0.0,
+        "ci95": [
+          0.2207,
+          0.3201
+        ]
+      },
+      {
+        "dimension": "juxt",
+        "target": "p_funny",
+        "n": 1500,
+        "spearman": 0.025,
+        "p": 0.333405,
+        "q_bh": 0.3334,
+        "ci95": [
+          -0.0287,
+          0.0785
+        ]
+      }
+    ]
+  },
+  "persona_b_implication": "Two independent crowds agree substantially on which WORDS are funny (rho=0.414), but single-word demographic GAPS mostly do not survive FDR (2/4997 sex, 0/4997 age) and the cross-dataset gap arm has no attainable signal at these reliabilities (sex 0.1418, age -0.1536). The one demographic signal that survives is dimension-level: sexual-connotation words skew toward younger raters. Persona conditioning of B therefore has only WEAK lexical-level support here; validating it requires joke-level, adequately powered human data. The correct reading is NOT DETECTABLE AT THESE PER-WORD N, not 'no differences exist'. A clean underpowered-negative result, kept visible.",
   "truth_boundary": {
     "verified": "descriptive demographic rating differences on single words in two published crowd datasets, with FDR control and cross-dataset checks",
     "not_verified": "individual preferences, joke-level effects, causal mechanisms, or any audience outside these two rater pools"

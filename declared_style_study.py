@@ -112,7 +112,9 @@ def collect_style_candidates(data_root: Path, min_candidates: int) -> dict[str, 
             buckets.setdefault(style, []).append(
                 {"setup": setup, "punchline": punch, "key": key,
                  "subreddit": meta.get("subreddit", "")})
-    return {s: v for s, v in buckets.items() if len(v) >= min_candidates}
+    all_counts = {s: len(v) for s, v in sorted(buckets.items())}
+    kept = {s: v for s, v in buckets.items() if len(v) >= min_candidates}
+    return kept, all_counts
 
 
 def collect_control(data_root: Path, per_group: int) -> list[dict]:
@@ -233,7 +235,7 @@ def main() -> int:
         provider.close()
         return 0
 
-    buckets = collect_style_candidates(data_root, args.min_candidates)
+    buckets, all_candidate_counts = collect_style_candidates(data_root, args.min_candidates)
     control = collect_control(data_root, args.per_group)
     if len(control) < args.per_group:
         print(f"WARNING: only {len(control)} control proverbs after screening", flush=True)
@@ -299,6 +301,18 @@ def main() -> int:
             "item_hashes": sorted(r["key"] for r in rows),
         }
     perm_p = permutation_p([[r["S"] for r in v] for v in style_groups.values()], rng)
+    # Referee additions (2026-07-28): (a) the separation criterion requires a
+    # group CI lower bound above the control CI upper bound — record whether
+    # that was even reachable at this n; (b) token length is the strongest
+    # visible group-level covariate and is receipted, not buried.
+    group_ci_lows = [s["ci95"][0] for s in group_stats.values() if s["ci95"]]
+    group_tok = [s["mean_tokens"] for s in group_stats.values()]
+    group_means = [s["mean_S"] for s in group_stats.values()]
+    if len(group_means) >= 3:
+        tok_arr, s_arr = np.asarray(group_tok), np.asarray(group_means)
+        length_pearson = float(np.corrcoef(tok_arr, s_arr)[0, 1])
+    else:
+        length_pearson = None
 
     receipt = {
         "receipt_type": "declared_style_surprisal_study",
@@ -319,7 +333,13 @@ def main() -> int:
             "signal": "S = mean full-vocab NLL per punchline token, base measurement only "
                       "(no frames, no generator model)",
         },
-        "screening": {g: len(v) for g, v in sorted(buckets.items())},
+        "screening": {
+            "candidates_after_screen_all_styles": all_candidate_counts,
+            "min_candidates_threshold": args.min_candidates,
+            "styles_kept": sorted(buckets.keys()),
+            "styles_dropped_below_threshold": sorted(
+                s for s, n in all_candidate_counts.items() if n < args.min_candidates),
+        },
         "groups": group_stats,
         "control_proverb": {
             "n": len(ctrl_vals),
@@ -330,9 +350,34 @@ def main() -> int:
         "findings": {
             "groups_strictly_above_control": above,
             "groups_strictly_below_control": below,
-            "any_difference_permutation_p": round(perm_p, 5),
+            "any_difference_among_styles_permutation_p": round(perm_p, 5),
+            "permutation_note": "exact permutation F test AMONG the style groups "
+                                "only — the proverb control is not part of this test",
             "permutation_iters": 20_000,
+            "separation_criterion": {
+                "requires_group_ci_low_above": ctrl_ci[1] if ctrl_ci else None,
+                "largest_observed_group_ci_low": (round(max(group_ci_lows), 4)
+                                                   if group_ci_lows else None),
+                "could_have_fired_at_this_n": bool(
+                    ctrl_ci and group_ci_lows and max(group_ci_lows) > ctrl_ci[1]),
+                "note": "at n=12/group the control CI alone spans ~3.4 nats; the "
+                        "criterion demands roughly a +1.9-nat group uplift, larger "
+                        "than the entire observed spread of group means — this "
+                        "design is UNDERPOWERED and its 0/7 is 'not established', "
+                        "not 'tested and absent'",
+            },
+            "length_confound": {
+                "pearson_mean_tokens_vs_mean_S_across_groups": (
+                    round(length_pearson, 3) if length_pearson is not None else None),
+                "note": "token length is the strongest visible group-level "
+                        "covariate (direction matches positional surprisal decay); "
+                        "per-token mean S does not remove it and no length-matched "
+                        "control exists in this design",
+            },
         },
+        "verdict": "underpowered — separation not established at n=12/group; the "
+                   "CI criterion could not have fired, and length is an "
+                   "uncontrolled covariate",
         "instrument_errors": errors,
         "truth_boundary": {
             "verified": "surprisal regimes of community-declared style groups on the "
@@ -344,10 +389,14 @@ def main() -> int:
         "data_note": "Reddit rows are research-only; this receipt stores aggregates and "
                      "sha256 item hashes only. Row-level text stays in the local research "
                      "tree checkpoint.",
+        "dedup_note": "global text dedup is first-file-wins in alphabetical harvest-file "
+                      "order, so a joke cross-posted to several style subreddits is "
+                      "assigned to whichever file sorts first",
     }
     Path(args.out).write_text(json.dumps(receipt, indent=2) + "\n")
     print(f"wrote {args.out}: {len(style_groups)} style groups, "
-          f"above={above} below={below} perm_p={perm_p:.5f}", flush=True)
+          f"above={above} below={below} among-styles perm_p={perm_p:.5f} "
+          f"(underpowered design — see findings.separation_criterion)", flush=True)
     return 0
 
 

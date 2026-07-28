@@ -1,4 +1,8 @@
-"""Generate the HumorVibes display demo notebook: charts + a live tunnelled dashboard.
+"""Generate the HumorVibes display demo notebook.
+
+The PUBLISHED artifact is the --static edition: deterministic from receipt content,
+no server, no tunnel, committed beside this builder and pinned by tests. A live
+tunnelled variant (the builder's default mode) exists as a local-session tool only.
 
 Two things this deliberately does NOT do:
 
@@ -36,7 +40,7 @@ PORT = 8081
 NTFY_TOPIC = "humorvibes-ceiling-demo-q7r2m9"
 
 # Dark-mode categorical slots 1-3 from the validated reference palette, checked
-# with scripts/validate_palette.js --mode dark against surface #1a1a19:
+# with the external dataviz palette validator (--mode dark, surface #1a1a19):
 # all six checks PASS (worst adjacent CVD dE 9.4, normal-vision 26.5).
 SERIES = ["#3987e5", "#d95926", "#199e70"]
 SURFACE = "#1a1a19"
