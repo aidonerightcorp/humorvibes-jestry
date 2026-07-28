@@ -14,6 +14,10 @@ Research-infrastructure changes only; the application package remains 0.8.0.
 - Notebook refresh (#35, #36): thesis-in-one-screen at the top of all three public
   notebooks, receipted follow-ups section, immutable source tag
   `humor-genome-wave2-v10`, publication receipt for wave2 v15 / Open Controls v4.
+- Referee round (#38): adversarial methods + consistency review applied — invalid
+  Spearman–Brown uses withheld, Welch-t gap tests (9→2/4,997), underpowered designs
+  relabeled with receipted power analyses, reliability-zero word lists removed,
+  exact regression pins; wave2 notebook v16 published and independently read back.
 - Closeout wave (#37): `ceiling_demo/` ported into the repository with a
   content-deterministic static build and tests; ceiling explainer v4 published from
   the repo and byte-verified; post-closeout maintenance log recorded.

@@ -9,7 +9,7 @@ and how another contributor can continue without reconstructing the project hist
 
 | Surface | Stable identity | Use |
 | --- | --- | --- |
-| Wave 2 study | Kaggle notebook v15, source tag `humor-genome-wave2-v10` (v14 stays pinned to v9) | Canonical executable observational write-up |
+| Wave 2 study | Kaggle notebook v16, source tag `humor-genome-wave2-v10` (v14 stays pinned to v9) | Canonical executable observational write-up |
 | Wave 2 data | Kaggle dataset v7 | Rights-filtered public corpus, census, frames, aligned phrases, and manifest |
 | Open Controls | Kaggle dataset v4 and notebook v4, source tag `humor-genome-open-controls-v2` | CC0 procedural controls and frozen retrieval tasks |
 | Application | GitHub release `v0.8.0` | SDK, FastAPI, CLI, Docker, Compose, Kubernetes, Helm, and integration contracts |
@@ -89,11 +89,13 @@ software release and the exact Kaggle dataset/notebook version used in the analy
 
 ## Post-closeout maintenance record
 
-Bounded maintenance waves since v0.8.0 (PRs #34–#36 plus the closeout wave) added
+Bounded maintenance waves since v0.8.0 (PRs #34–#38) added
 receipted studies, figures, the `docs/THESIS_AND_EVIDENCE.md` scoreboard, a full
 documentation reconciliation, refreshed public notebooks (wave2 v15, Open Controls v4,
-ceiling explainer v4 — all terminal COMPLETE and independently read back), and made every
-published notebook reproducible from this repository. None of it moved a claim boundary:
+ceiling explainer v4 — all terminal COMPLETE and independently read back), made every
+published notebook reproducible from this repository, and closed with an adversarial
+referee round (#38) that corrected estimator-level defects and relabeled two
+underpowered designs honestly. None of it moved a claim boundary:
 the nulls stayed visible, no human evidence was produced, and the application release
 remains v0.8.0. The project is closed, maintained, reproducible, and consistent across
 every public surface.

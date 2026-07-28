@@ -25,10 +25,10 @@ not create speculative work merely to keep the project active.
 - Release commit: `5ca7b020a8a4b9d7ca3d82f85dc87aff704254d0`
 - Validated post-publication baseline before this handoff:
   `7929b534b88c927f0e0f8ddfa49b962da1b490d7`
-- Validated baseline at the 2026-07-28 post-closeout refresh: `bb24900` (PR #36 merge)
-  plus the closeout-wave PR that records this line; re-verify with the standard commands
-  rather than trusting either hash
-- Immutable Wave 2 notebook source tags: `humor-genome-wave2-v10` (current, notebook v15) and `humor-genome-wave2-v9` (v14 run); neither moves
+- Validated baseline at the 2026-07-28 post-closeout refresh: `bb24900` (PR #36 merge);
+  after the adversarial referee round: `18aaf4d` (PR #38 merge). Re-verify with the
+  standard commands rather than trusting any hash
+- Immutable Wave 2 notebook source tags: `humor-genome-wave2-v10` (current; notebook v16) and `humor-genome-wave2-v9` (v14 run); neither moves
 - Immutable Open Controls source tag: `humor-genome-open-controls-v2`
 
 The large artifact tree at
@@ -120,7 +120,7 @@ These findings must remain visible in code, notebooks, documentation, and downst
 | Surface | Verified public identity | State |
 | --- | --- | --- |
 | Wave 2 dataset | <https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2> | Dataset v7, ready |
-| Wave 2 executable study | <https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study> | Notebook v15, `COMPLETE` |
+| Wave 2 executable study | <https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study> | Notebook v16, `COMPLETE` |
 | Open Controls dataset | <https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls> | Dataset v4, ready |
 | Open Controls study | <https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab> | Notebook v4, `COMPLETE` |
 | Application release | <https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0> | Public wheel, sdist, release notes, and manifest |
@@ -308,6 +308,7 @@ landed since v0.8.0, none changing the application package:
 | #34 | Wave 1: three receipted studies (declared-style 0/7 null, divisiveness no-free-lunch, demographic mostly-null), ported word-type/three-corpus receipts, three flagship figures, `docs/THESIS_AND_EVIDENCE.md`, two-audit doc reconciliation, public ceiling explainer |
 | #35 | Notebook refresh: thesis-in-one-screen at the top of all three public notebooks, receipted follow-ups section, immutable tag `humor-genome-wave2-v10` |
 | #36 | Publication record: wave2 v15 / Open Controls v4 / ceiling v2 (at the time; superseded to v4 by #37) verified terminal + read back; doc version bumps |
+| #38 | Adversarial referee round (methods + consistency): Spearman–Brown withheld for non-positive r, Welch t on per-word gaps (9→2/4,997), underpowered labels with receipted power analyses, ranked noise-lists removed, exact test pins; wave2 notebook v16 pushed and read back |
 | #37 | `ceiling_demo/` ported into the repo with a deterministic static build and tests; ceiling v4 pushed from the repo and byte-verified; this log |
 
 ## Known caveats that are not hidden

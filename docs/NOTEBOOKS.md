@@ -7,7 +7,7 @@
 [`wave2_notebook/humor_genome_wave2.ipynb`](../wave2_notebook/humor_genome_wave2.ipynb) is the
 canonical executable Wave 2 study and the notebook published publicly on Kaggle as
 [Humor Genome Wave 2 Reproducible Gemma Study](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study)
-(version 15, COMPLETE; public dataset version 7; opens with the thesis in one screen and a receipted follow-ups section). It
+(version 16, COMPLETE; public dataset version 7; opens with the thesis in one screen and a receipted, referee-corrected follow-ups section). It
 states the problem, proposed exploration, controlling findings, outputs, practical uses, and
 limitations before exposing implementation detail. It also names the predictive-processing
 starting point, cites its scientific lineage, renders the model-to-human evidence boundary, and
