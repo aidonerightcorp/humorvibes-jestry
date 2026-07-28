@@ -238,6 +238,8 @@ ledger.
   layer without bypassing provenance or verification.
 - `wave2_notebook/`: the one notebook to read and publish; older notebook directories are
   supporting experiments, not competing entry points.
+- `ceiling_demo/`: deterministic builder and committed static notebook for the public
+  label-ceiling explainer (receipts embedded at build time; no live-session machinery).
 - `humorvibes/`, `Dockerfile`, `compose*.yaml`, `deploy/kubernetes/`, `deploy/helm/`: the SDK/API
   and deployment surface; it is an extension layer, not a second research notebook.
 - `build_kaggle_export.py`, `wave2_dataset/`, `verify_wave2_release.py`: public dataset build,

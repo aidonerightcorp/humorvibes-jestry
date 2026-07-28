@@ -43,9 +43,11 @@
     },
     "ceiling_demo": {
       "ref": "taylorsamarel/humorvibes-what-the-label-can-support",
-      "version_pushed": 2,
+      "version_pushed": 4,
       "terminal_status": "COMPLETE",
-      "anonymous_http_status": 200
+      "anonymous_http_status": 200,
+      "served_source_matches_committed_cells": true,
+      "note": "v4 pushed from the repository's ceiling_demo/ after the static build was made deterministic from receipt CONTENT alone (checkout mtimes excluded); served source byte-matches the committed notebook"
     }
   },
   "readback_note": "Anonymous kernel pages are JS shells (~8.7 KB), so content verification used authenticated source pulls (cell-source byte-comparison against the committed notebooks) plus independent download of the executed wave2 outputs. Anonymous HTTP 200 confirmed on all three pages.",
