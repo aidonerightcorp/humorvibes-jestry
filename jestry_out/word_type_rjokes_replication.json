@@ -1,0 +1,447 @@
+{
+  "receipt_type": "word_type_rjokes_replication",
+  "receipt_version": 1,
+  "ts": "2026-07-28T18:36:02+00:00",
+  "status": "complete",
+  "seed": 20260728,
+  "question": "do the Humicroedit word-type findings (body-part/concrete words land higher; word-type features add held-out predictive power) replicate on r/Jokes, the population where the structural model collapsed (cross_corpus_transfer 0.508 -> -0.009)?",
+  "dataset": {
+    "file": "harvest_local_20260726_2.jsonl",
+    "file_sha256_16": "08c3bdafdfcb0ed8",
+    "meta_n": 98516,
+    "rows_raw": 98516,
+    "rows_kept": 98516,
+    "exact_duplicate_rows_kept": 0,
+    "source": "reddit:r/Jokes (bulk), en, score >= 0",
+    "outcome": "log1p(upvote score): a POPULARITY PROXY confounded by timing and visibility, NOT a funniness grade (cross_corpus_transfer caveat inherited); transfer_study used the monotone-equivalent log2(1+score)"
+  },
+  "classifier_provenance": {
+    "instrument": "word_taxonomy sentence-framed embedding anchors (embeddinggemma, frame 'This word refers to {}.'), anchor cache and word-type cache shared with the original study and extended in place",
+    "hand_check_reliability": "original receipt: right about 10 of 12 on a hand-checked demo",
+    "content_vocab": 34072,
+    "cached_before": 34072,
+    "newly_classified": 0,
+    "endpoint_parity": null,
+    "coverage_before": {
+      "vocab": 1.0,
+      "token_occurrences": 1.0,
+      "rows_with_ge1_classified_word": 0.9925
+    },
+    "coverage_after": {
+      "vocab": 1.0,
+      "token_occurrences": 1.0,
+      "rows_with_ge1_classified_word": 0.9925
+    }
+  },
+  "pre_registration": {
+    "written_before_any_outcome_group_statistic": true,
+    "quantities_seen_so_far": "outcome marginal sd and n, and label-marginal category/POS counts; no category-outcome or feature-outcome statistic yet",
+    "seed": 20260728,
+    "outcome": "log1p(reddit upvote score) \u2014 POPULARITY PROXY, not a funniness grade",
+    "unit_reconstruction": "original = single swapped word per Humicroedit row; here = modal semantic category over punchline content words (ties: summed anchor similarity, then alphabetical)",
+    "H1": "'body part' dominant-category mean outcome minus pooled mean > 0 (sign replication of Humicroedit +0.2046); tested by label permutation, 10000 shuffles, statistic |group mean - pooled mean|, two-sided p, BH within family A; replication claim requires delta>0 AND BH-significant",
+    "H2": "word-type block (24 features) lifts held-out tied-midrank Spearman over the 30 structural features; 5-fold CV, HistGradientBoostingRegressor(max_iter=300, learning_rate=0.06) both arms; replication claim requires mean per-fold lift > 0 AND 95% bootstrap CI over folds (10000 resamples) excluding 0",
+    "H3": "secondary: Spearman(punchline mean concreteness, outcome) > 0; permutation p, 10000 shuffles, two-sided report, claim requires rho>0 and p<0.05",
+    "family_A_semantic_categories_n_ge_300": {
+      "person": 10196,
+      "place": 4427,
+      "object": 42179,
+      "abstract": 3572,
+      "action": 7646,
+      "quality": 2775,
+      "animal": 10944,
+      "body part": 8221,
+      "food": 6198,
+      "occupation": 1624
+    },
+    "family_B_pos_descriptive_n_ge_300": {
+      "adverb": 1403,
+      "adjective": 6374,
+      "abstract_noun": 1651,
+      "agent_noun": 4501,
+      "verb_ing": 612,
+      "verb_ed": 952,
+      "plural_noun": 4354,
+      "other": 77935
+    },
+    "alpha": 0.05,
+    "mde_at_realized_n": {
+      "definition": "two-sided alpha .05, power .80: 2.802*sd(y)*sqrt(1/k - 1/N)",
+      "sd_y": 1.5657,
+      "N": 97782,
+      "per_category_delta": {
+        "person": 0.0411,
+        "place": 0.0644,
+        "object": 0.0161,
+        "abstract": 0.072,
+        "action": 0.0482,
+        "quality": 0.0821,
+        "animal": 0.0395,
+        "body part": 0.0463,
+        "food": 0.0539,
+        "occupation": 0.108
+      },
+      "H3_spearman_mde": 0.009,
+      "H2_note": "an honest fold-lift MDE needs the fold variance, which does not exist before the CV runs; the pre-registered decision rule above is therefore the commitment, not a power number"
+    },
+    "structural_features": [
+      "setup_chars",
+      "punch_chars",
+      "setup_words",
+      "punch_words",
+      "word_ratio",
+      "setup_syllables",
+      "punch_syllables",
+      "syllable_ratio",
+      "punch_syl_per_word",
+      "setup_mean_wordlen",
+      "punch_mean_wordlen",
+      "sentences",
+      "questions",
+      "exclaims",
+      "quotes",
+      "digits",
+      "caps_words",
+      "type_token_ratio",
+      "echo_frac",
+      "punch_alliteration",
+      "punch_assonance",
+      "pair_alliteration",
+      "pair_assonance",
+      "punch_rarity_mean",
+      "punch_rarity_max",
+      "punch_rarity_final",
+      "setup_rarity_mean",
+      "setup_rarity_max",
+      "setup_rarity_final",
+      "end_rhyme"
+    ],
+    "type_features": [
+      "dom_is_person",
+      "dom_is_place",
+      "dom_is_object",
+      "dom_is_abstract",
+      "dom_is_action",
+      "dom_is_quality",
+      "dom_is_animal",
+      "dom_is_body_part",
+      "dom_is_food",
+      "dom_is_occupation",
+      "dom_pos_adverb",
+      "dom_pos_adjective",
+      "dom_pos_abstract_noun",
+      "dom_pos_agent_noun",
+      "dom_pos_verb_ing",
+      "dom_pos_verb_ed",
+      "dom_pos_plural_noun",
+      "dom_pos_proper_noun",
+      "dom_pos_function",
+      "dom_pos_other",
+      "punch_mean_concreteness",
+      "punch_final_concreteness",
+      "punch_mean_category_margin",
+      "dominant_share"
+    ],
+    "excluded_by_construction": "dom_pos_proper_noun and dom_pos_function cannot fire: tokens are lowercased and function words are removed before classification; columns kept as constant zeros for block parity"
+  },
+  "pooled_mean_log1p_score": 1.9283,
+  "n_rows_built": 97782,
+  "skipped_no_classified_word": 734,
+  "by_semantic_category": [
+    {
+      "label": "occupation",
+      "n": 1624,
+      "mean_log1p_score": 2.0185,
+      "delta_vs_pooled": 0.0902,
+      "perm_p": 0.0185,
+      "bh_significant_at_05": true,
+      "mde_delta": 0.108,
+      "humicroedit_delta": -0.1187,
+      "humicroedit_n": 257,
+      "sign_match_vs_humicroedit": false
+    },
+    {
+      "label": "object",
+      "n": 42179,
+      "mean_log1p_score": 2.0069,
+      "delta_vs_pooled": 0.0786,
+      "perm_p": 0.0001,
+      "bh_significant_at_05": true,
+      "mde_delta": 0.0161,
+      "humicroedit_delta": -0.1061,
+      "humicroedit_n": 1882,
+      "sign_match_vs_humicroedit": false
+    },
+    {
+      "label": "quality",
+      "n": 2775,
+      "mean_log1p_score": 1.976,
+      "delta_vs_pooled": 0.0477,
+      "perm_p": 0.10389,
+      "bh_significant_at_05": false,
+      "mde_delta": 0.0821,
+      "humicroedit_delta": -0.1342,
+      "humicroedit_n": 222,
+      "sign_match_vs_humicroedit": false
+    },
+    {
+      "label": "action",
+      "n": 7646,
+      "mean_log1p_score": 1.9659,
+      "delta_vs_pooled": 0.0377,
+      "perm_p": 0.029,
+      "bh_significant_at_05": true,
+      "mde_delta": 0.0482,
+      "humicroedit_delta": -0.1383,
+      "humicroedit_n": 845,
+      "sign_match_vs_humicroedit": false
+    },
+    {
+      "label": "abstract",
+      "n": 3572,
+      "mean_log1p_score": 1.9477,
+      "delta_vs_pooled": 0.0195,
+      "perm_p": 0.44896,
+      "bh_significant_at_05": false,
+      "mde_delta": 0.072,
+      "humicroedit_delta": -0.1232,
+      "humicroedit_n": 363,
+      "sign_match_vs_humicroedit": false
+    },
+    {
+      "label": "person",
+      "n": 10196,
+      "mean_log1p_score": 1.9273,
+      "delta_vs_pooled": -0.001,
+      "perm_p": 0.94361,
+      "bh_significant_at_05": false,
+      "mde_delta": 0.0411,
+      "humicroedit_delta": -0.0937,
+      "humicroedit_n": 698,
+      "sign_match_vs_humicroedit": true
+    },
+    {
+      "label": "place",
+      "n": 4427,
+      "mean_log1p_score": 1.8723,
+      "delta_vs_pooled": -0.056,
+      "perm_p": 0.016,
+      "bh_significant_at_05": true,
+      "mde_delta": 0.0644,
+      "humicroedit_delta": -0.1067,
+      "humicroedit_n": 492,
+      "sign_match_vs_humicroedit": true
+    },
+    {
+      "label": "body part",
+      "n": 8221,
+      "mean_log1p_score": 1.8105,
+      "delta_vs_pooled": -0.1178,
+      "perm_p": 0.0001,
+      "bh_significant_at_05": true,
+      "mde_delta": 0.0463,
+      "humicroedit_delta": 0.2046,
+      "humicroedit_n": 1271,
+      "sign_match_vs_humicroedit": false
+    },
+    {
+      "label": "food",
+      "n": 6198,
+      "mean_log1p_score": 1.7725,
+      "delta_vs_pooled": -0.1557,
+      "perm_p": 0.0001,
+      "bh_significant_at_05": true,
+      "mde_delta": 0.0539,
+      "humicroedit_delta": 0.1251,
+      "humicroedit_n": 1414,
+      "sign_match_vs_humicroedit": false
+    },
+    {
+      "label": "animal",
+      "n": 10944,
+      "mean_log1p_score": 1.7675,
+      "delta_vs_pooled": -0.1608,
+      "perm_p": 0.0001,
+      "bh_significant_at_05": true,
+      "mde_delta": 0.0395,
+      "humicroedit_delta": 0.0464,
+      "humicroedit_n": 2208,
+      "sign_match_vs_humicroedit": false
+    }
+  ],
+  "delta_vector_agreement_vs_humicroedit": {
+    "n_common_categories": 10,
+    "n_sign_match": 2,
+    "delta_spearman_descriptive": -0.6848,
+    "note": "descriptive over ~10 category points; not a test"
+  },
+  "by_part_of_speech_descriptive": [
+    {
+      "label": "verb_ed",
+      "n": 952,
+      "mean_log1p_score": 2.139,
+      "delta_vs_pooled": 0.2108,
+      "perm_p": 0.0001,
+      "bh_significant_at_05": true
+    },
+    {
+      "label": "adverb",
+      "n": 1403,
+      "mean_log1p_score": 2.075,
+      "delta_vs_pooled": 0.1467,
+      "perm_p": 0.0004,
+      "bh_significant_at_05": true
+    },
+    {
+      "label": "abstract_noun",
+      "n": 1651,
+      "mean_log1p_score": 2.0311,
+      "delta_vs_pooled": 0.1028,
+      "perm_p": 0.0077,
+      "bh_significant_at_05": true
+    },
+    {
+      "label": "verb_ing",
+      "n": 612,
+      "mean_log1p_score": 1.948,
+      "delta_vs_pooled": 0.0197,
+      "perm_p": 0.75152,
+      "bh_significant_at_05": false
+    },
+    {
+      "label": "other",
+      "n": 77935,
+      "mean_log1p_score": 1.9317,
+      "delta_vs_pooled": 0.0034,
+      "perm_p": 0.17678,
+      "bh_significant_at_05": false
+    },
+    {
+      "label": "plural_noun",
+      "n": 4354,
+      "mean_log1p_score": 1.8925,
+      "delta_vs_pooled": -0.0358,
+      "perm_p": 0.12509,
+      "bh_significant_at_05": false
+    },
+    {
+      "label": "agent_noun",
+      "n": 4501,
+      "mean_log1p_score": 1.8763,
+      "delta_vs_pooled": -0.052,
+      "perm_p": 0.0215,
+      "bh_significant_at_05": true
+    },
+    {
+      "label": "adjective",
+      "n": 6374,
+      "mean_log1p_score": 1.8552,
+      "delta_vs_pooled": -0.0731,
+      "perm_p": 0.0003,
+      "bh_significant_at_05": true
+    }
+  ],
+  "concreteness": {
+    "spearman_vs_outcome": -0.009,
+    "perm_p": 0.0064,
+    "mde": 0.009
+  },
+  "predictive_lift": {
+    "design": "5-fold seeded CV (original: single 70/30 split, seed 20260725)",
+    "model": "HistGradientBoostingRegressor(max_iter=300, learning_rate=0.06) \u2014 matches original",
+    "per_fold": [
+      {
+        "fold": 1,
+        "structural_only": 0.1907,
+        "structural_plus_type": 0.1965,
+        "lift": 0.0058
+      },
+      {
+        "fold": 2,
+        "structural_only": 0.1855,
+        "structural_plus_type": 0.1875,
+        "lift": 0.002
+      },
+      {
+        "fold": 3,
+        "structural_only": 0.2026,
+        "structural_plus_type": 0.2085,
+        "lift": 0.0059
+      },
+      {
+        "fold": 4,
+        "structural_only": 0.1981,
+        "structural_plus_type": 0.2028,
+        "lift": 0.0047
+      },
+      {
+        "fold": 5,
+        "structural_only": 0.1861,
+        "structural_plus_type": 0.1919,
+        "lift": 0.0058
+      }
+    ],
+    "lift_mean": 0.0048,
+    "lift_bootstrap_ci95_over_folds": [
+      0.0033,
+      0.0058
+    ],
+    "bootstrap_note": "10000 resamples of 5 fold lifts; 5 points make a coarse CI, receipted as such",
+    "pooled_oof_spearman": {
+      "structural_only": 0.1924,
+      "structural_plus_type": 0.1973
+    },
+    "n_struct_features": 30,
+    "n_type_features": 24,
+    "humicroedit_reference": {
+      "structural_only": {
+        "held_out_spearman": 0.1137,
+        "held_out_r2": -0.0181
+      },
+      "structural_plus_type": {
+        "held_out_spearman": 0.2296,
+        "held_out_r2": 0.0515
+      },
+      "spearman_lift": 0.1159,
+      "n_struct_features": 30,
+      "n_type_features": 25
+    }
+  },
+  "verdicts": {
+    "H1_body_part_positive_delta": {
+      "replicates": false,
+      "observed": {
+        "label": "body part",
+        "n": 8221,
+        "mean_log1p_score": 1.8105,
+        "delta_vs_pooled": -0.1178,
+        "perm_p": 0.0001,
+        "bh_significant_at_05": true,
+        "mde_delta": 0.0463,
+        "humicroedit_delta": 0.2046,
+        "humicroedit_n": 1271,
+        "sign_match_vs_humicroedit": false
+      }
+    },
+    "H2_type_block_lifts_heldout_spearman": {
+      "replicates": true,
+      "lift_mean": 0.0048,
+      "ci95": [
+        0.0033,
+        0.0058
+      ]
+    },
+    "H3_concreteness_positive": {
+      "holds": false,
+      "rho": -0.009,
+      "p": 0.0064
+    }
+  },
+  "truth_boundary": {
+    "verified": "associations between embedding-assigned punchline word types and log-upvotes within one subreddit's bulk harvest, plus the held-out predictive increment of those types over 30 surface features",
+    "not_verified": "that upvotes measure funniness (popularity proxy; timing and visibility confounds); that the result generalizes beyond r/Jokes; that categories are exact (classifier ~10/12 on hand-check, and the modal-category reduction is a reconstruction, not the original single-edit-word instrument); that rarity features are corpus-independent (frequency table includes this file, outcome-blind)"
+  },
+  "caveats": "one community, one platform, popularity outcome; dominant-category labels dilute on long punchlines (median 3 content words, p95 = 16); category means inherit classifier error; per-fold lift CI rests on 5 folds; no per-word rankings are reported anywhere in this receipt by design",
+  "data_note": "no joke text appears in this receipt; dataset identified by sha256 prefix",
+  "runtime_s": 1767.5
+}

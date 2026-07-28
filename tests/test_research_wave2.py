@@ -23,7 +23,7 @@ def load(name: str) -> dict:
     assert path.exists(), f"missing receipt {name}"
     data = json.loads(path.read_text())
     assert data.get("receipt_type"), f"{name} has no receipt_type"
-    assert "preregistration" in data, f"{name} lacks a preregistration block"
+    assert ("preregistration" in data or "pre_registration" in data), f"{name} lacks a preregistration block"
     assert "not_verified" in data.get("truth_boundary", {}), name
     return data
 
@@ -69,3 +69,42 @@ def test_temporal_drift_participation_moves_label_does_not() -> None:
     assert "raw" in json.dumps(rel).lower()
     # preregistration integrity: the sha lock the agent recorded must verify
     assert len(d["preregistration_sha256"]) == 64
+
+
+def test_human_frames_negative_is_well_powered() -> None:
+    d = load("human_frames_resolution_study.json")
+    assert d["status"] == "complete"
+    assert d["instrument_errors"] == 0
+    assert d["calibration"]["pass"] is True
+    assert d["n_analyzed"] == 34
+    h1 = d["results"]["H1_rnet_top"]
+    # the tested negative: true human frame LOSES to decoys, CI excludes zero,
+    # and the criterion could fire (|mean| > MDE)
+    assert h1["mean"] == pytest.approx(-0.1069, abs=1e-3)
+    assert h1["ci95"][1] < 0
+    assert abs(h1["mean"]) > d["preregistration"]["power"]["observed_mde_95"]
+    h2 = d["results"]["H2_top_minus_bottom"]
+    assert h2["ci95"][0] < 0 < h2["ci95"][1]
+    dose = d["results"]["H3_dose_exploratory"]
+    assert dose["w3"]["R_mean"] > dose["full"]["R_mean"]
+    # the truncation is documented, not hidden
+    pc = d["plan_change"]
+    assert pc["original_n_contests"] == 53 and pc["analyzed_n_contests"] == 34
+    assert "decoy" in pc["decoy_note"]
+
+
+def test_word_type_does_not_transfer_to_rjokes() -> None:
+    d = load("word_type_rjokes_replication.json")
+    assert d["status"] == "complete"
+    v = d["verdicts"]
+    h1 = v["H1_body_part_positive_delta"]
+    assert h1["replicates"] is False
+    assert h1["observed"]["delta_vs_pooled"] == pytest.approx(-0.1178, abs=1e-3)
+    assert h1["observed"]["bh_significant_at_05"] is True
+    assert abs(h1["observed"]["delta_vs_pooled"]) > h1["observed"]["mde_delta"]
+    assert h1["observed"]["sign_match_vs_humicroedit"] is False
+    h2 = v["H2_type_block_lifts_heldout_spearman"]
+    assert h2["replicates"] is True and h2["lift_mean"] < 0.01
+    agree = d["delta_vector_agreement_vs_humicroedit"]
+    assert agree["delta_spearman_descriptive"] < 0
+    assert v["H3_concreteness_positive"]["holds"] is False

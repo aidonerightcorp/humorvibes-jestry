@@ -1,0 +1,152 @@
+{
+  "receipt_type": "human_frames_resolution_study",
+  "receipt_version": 1,
+  "ts": "2026-07-28T18:36:00+00:00",
+  "status": "complete",
+  "instrument": "gemma-2-2b-it-Q4_K_M.gguf (llama.cpp), certified",
+  "calibration": {
+    "expected_S": 3.19,
+    "measured": {
+      "mean": 3.1899,
+      "tokens": 10
+    },
+    "pass": true
+  },
+  "preregistration": {
+    "frozen_at": "2026-07-28T18:07:26+00:00",
+    "hypotheses": {
+      "H1": "mean paired R_net = mean(R_true - R_decoy) > 0 on top-decile captions (bootstrap CI + sign-flip permutation p)",
+      "H2": "within-contest R_net(top) > R_net(bottom) (paired bootstrap CI)",
+      "H3_exploratory": "dose response of R and per-token E across full/half/3-word hints (direction reported, no threshold claim)"
+    },
+    "design": {
+      "instrument": "gemma2-full-nll (certified); protocol identical to mesh_signals.compute_signals base/framed measurements",
+      "setup": "human image_description",
+      "frame": "human image_uncanny_description",
+      "decoy": "another selected contest's uncanny description (seeded derangement)",
+      "caption_arms": "top and bottom decile by crowd mean (votes >= 40, integrity-screened) \u2014 a deliberate outcome-conditioned contrast",
+      "leak_rule": "exclude items with frame-caption novel-word overlap > 0.4",
+      "n_contests_planned": 34,
+      "seed": 20260728
+    },
+    "power": {
+      "formula": "MDE(95%) ~= 1.96 * SD(paired R_net) / sqrt(n); observed SD is filled post-hoc and the criterion CAN fire iff CI excludes 0",
+      "n": 34,
+      "observed_sd_paired_rnet": 0.2162,
+      "observed_mde_95": 0.0727
+    },
+    "family": "H1 and H2 are the confirmatory family (2 tests, reported without correction as two pre-registered primary/secondary); H3 is exploratory"
+  },
+  "plan_summary": {
+    "frames_annotated": 54,
+    "index_to_contest_mapped": 54,
+    "frames_with_real_contest": 54,
+    "contests_with_usable_captions": 53,
+    "excluded_for_leak_at_planning": 0,
+    "planned": 34,
+    "mapping_note": "jmhessel 1..705 index bridged to real contest numbers via unique-normalized finalist captions; unanimous votes only"
+  },
+  "n_analyzed": 34,
+  "instrument_errors": 0,
+  "results": {
+    "H1_rnet_top": {
+      "mean": -0.1069,
+      "ci95": [
+        -0.1835,
+        -0.0414
+      ],
+      "signflip_p": 0.00365,
+      "n": 34
+    },
+    "H2_top_minus_bottom": {
+      "mean": 0.0112,
+      "ci95": [
+        -0.0686,
+        0.0871
+      ],
+      "n": 34
+    },
+    "rnet_bottom_reference": {
+      "mean": -0.1181,
+      "ci95": [
+        -0.1773,
+        -0.0621
+      ]
+    },
+    "H3_dose_exploratory": {
+      "full": {
+        "R_mean": -0.0359,
+        "R_ci95": [
+          -0.1072,
+          0.036
+        ],
+        "E_per_token_mean": -0.0022
+      },
+      "half": {
+        "R_mean": 0.1427,
+        "R_ci95": [
+          0.0678,
+          0.2354
+        ],
+        "E_per_token_mean": 0.0228
+      },
+      "w3": {
+        "R_mean": 0.1494,
+        "R_ci95": [
+          0.07,
+          0.2428
+        ],
+        "E_per_token_mean": 0.0498
+      }
+    }
+  },
+  "item_hashes": [
+    "00bebc5be79d19e1",
+    "02837c1944876b4f",
+    "0c658eb5d61e88c8",
+    "102624ac0a714fa2",
+    "11f8e31ccbdbb7d9",
+    "12f26af0dcdfae8f",
+    "172e1676eda470ed",
+    "1c63ed9164d61acf",
+    "1c8dcc518b9942ef",
+    "1de4842b42fa3db3",
+    "2499d690642faa4d",
+    "2b9449f314bf9314",
+    "2e00b312b0a9681b",
+    "35254aa9a21444e5",
+    "35c71bd7eaf46070",
+    "367461e6dd07bdb5",
+    "421c0a7b6d0ee1c3",
+    "455ae2dfc77dd775",
+    "4b8ba4b13094beae",
+    "4cc3d9cba4633096",
+    "509694b0a010c643",
+    "5b60f221d4a1852a",
+    "5c3e9040008c9150",
+    "5dad6478e152b8aa",
+    "5f128c8385e577cd",
+    "60f070e3393291d6",
+    "6f81082badfd0073",
+    "6f90a5a0d3234433",
+    "74de057f768beb42",
+    "75f7313c20144e39",
+    "769e881d85fc5d27",
+    "793733573a1dfd14",
+    "86ab8cbe5869bd1f",
+    "87a4a78ecb6deb2d"
+  ],
+  "truth_boundary": {
+    "verified": "surprisal collapse of the certified instrument under trusted HUMAN-authored frames, net of seeded decoys, with a pre-registered paired design",
+    "not_verified": "human comprehension, funniness, or generalization beyond this publication's cartoons; the top/bottom contrast conditions on the crowd mean by design; scene descriptions are annotators' text, not the drawing itself"
+  },
+  "data_note": "caption and scene text are research-only; aggregates and hashes only in this receipt \u2014 row-level values stay in the research-tree checkpoint",
+  "plan_change": {
+    "original_n_contests": 53,
+    "analyzed_n_contests": 34,
+    "cause": "host load average ~50-60 (unrelated concurrent workloads) tripled per-call instrument latency mid-run; truncated at a completed-contest boundary",
+    "method": "contests are the FIRST N of a deterministic sha256 ordering, so the analyzed set is the exact deterministic prefix of the original plan (no outcome-dependent selection); base/true/dose measurements are the original checkpointed values",
+    "decoy_note": "the decoy derangement is a function of the analyzed-set size, so decoy arms were re-measured under the final n=34 derangement (design lesson: pin decoy assignment to item identity, not set size)",
+    "consequence": "MDE at n=34 is larger than planned (see preregistration.power); criteria can still fire iff CIs exclude zero"
+  }
+}

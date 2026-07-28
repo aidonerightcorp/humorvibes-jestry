@@ -314,6 +314,7 @@ landed since v0.8.0, none changing the application package:
 | #34 | Wave 1: three receipted studies (declared-style 0/7 null, divisiveness no-free-lunch, demographic mostly-null), ported word-type/three-corpus receipts, three flagship figures, `docs/THESIS_AND_EVIDENCE.md`, two-audit doc reconciliation, public ceiling explainer |
 | #35 | Notebook refresh: thesis-in-one-screen at the top of all three public notebooks, receipted follow-ups section, immutable tag `humor-genome-wave2-v10` |
 | #36 | Publication record: wave2 v15 / Open Controls v4 / ceiling v2 (at the time; superseded to v4 by #37) verified terminal + read back; doc version bumps |
+| research wave 2 | Pre-registered second research wave on data in hand: frame sweep (every public document now carries the surprise-reduction-engine frame with its qualifier), within-contest confirmation of `punch_rarity_max`, temporal-drift study (participation drifts, the label does not), human-frames resolution study and r/Jokes word-type replication (receipts in `jestry_out/`), plus a documented-issues log in `docs/POST_CLOSEOUT_RECORD.md` |
 | #38 | Adversarial referee round (methods + consistency): Spearman–Brown withheld for non-positive r, Welch t on per-word gaps (9→2/4,997), underpowered labels with receipted power analyses, ranked noise-lists removed, exact test pins; wave2 notebook v16 pushed and read back |
 | #37 | `ceiling_demo/` ported into the repo with a deterministic static build and tests; ceiling v4 pushed from the repo and byte-verified; this log |
 

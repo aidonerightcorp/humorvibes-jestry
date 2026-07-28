@@ -65,6 +65,41 @@ No study's conclusion reversed. The corrected Wave 2 notebook was pushed and rea
 The version references and maintenance-log rows the referee round itself had staled were swept
 and fixed — the last instance of the drift class this era spent so much effort closing.
 
+**Research wave 2 — the closing wave** (same branch discipline; receipts in `jestry_out/`).
+At the maintainer's direction, a second pre-registered research wave ran on data already on
+disk, with the wave-1 referee rules binding in-script from the start: the within-contest
+confirmation of the sole cross-corpus invariant (`caption_within_contest_study.json`), the
+temporal-drift study (`caption_temporal_drift.json` — participation drifts, the label does
+not), the human-frames resolution study (`human_frames_resolution_study.json` — the "missing
+arm" with trusted human frames, plus the project's first hint-dose measurements), and the
+r/Jokes word-type replication (`word_type_rjokes_replication.json`). The same wave swept the
+motivating frame — "the brain is a surprise-reduction engine", always with its
+falsifiable-framework qualifier — into every public document that lacked it, and into both
+dataset metadata templates.
+
+**Issues encountered in wave 2, documented rather than hidden:**
+
+- The Kaggle dataset-description metadata update **silently no-ops**: the CLI reports
+  "successfully updated" while an authoritative re-download shows the field unchanged. No live
+  description was harmed (verified via page metadata before and after). Descriptions therefore
+  apply at the next legitimate dataset version — the frame is baked into both repo metadata
+  templates so that happens automatically — and the three public notebooks, which all carry
+  the frame, remain the read surfaces.
+- A host load spike (~50–60 on 16 cores from unrelated workloads) tripled instrument latency
+  mid-run; the human-frames study was truncated at a completed-contest boundary (53 planned →
+  34 analyzed, a deterministic sha-order prefix, zero outcome-dependent selection) with the
+  plan change and enlarged MDE receipted. Truncation also taught a design lesson now in the
+  receipt: the decoy derangement was a function of the analyzed-set size, so decoy arms were
+  re-measured under the final derangement while all base/true/dose measurements were reused.
+- One study agent was terminated by an account session limit mid-computation; its detached
+  process and stage checkpoints survived, and the study was resumed directly. Agent-driven
+  compute should checkpoint by stage for exactly this reason.
+- The wave-2 additions shipped without a dedicated post-wave adversarial referee pass (the
+  wave-1 pattern); the in-script referee rules and exact test pins stand in, and a referee
+  round over `caption_within_contest_study`, `caption_temporal_drift`,
+  `human_frames_resolution_study`, and `word_type_rjokes_replication` is the queued next
+  maintenance act if the project reopens.
+
 ## Final verified state
 
 - `main` green under the full locked suite and the network-free adversarial contracts; zero open

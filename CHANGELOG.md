@@ -16,6 +16,11 @@ Research-infrastructure changes only; the application package remains 0.8.0.
 - Notebook refresh (#35, #36): thesis-in-one-screen at the top of all three public
   notebooks, receipted follow-ups section, immutable source tag
   `humor-genome-wave2-v10`, publication receipt for wave2 v15 / Open Controls v4.
+- Research wave 2: pre-registered studies on data in hand (within-contest invariant
+  confirmation, temporal drift, human-frames resolution with hint-dose arm, r/Jokes
+  word-type replication), the project-wide surprise-reduction-engine frame sweep, and
+  a documented-issues log (dataset-metadata API no-op, load-spike truncation,
+  session-limit interruption) in docs/POST_CLOSEOUT_RECORD.md.
 - Referee round (#38): adversarial methods + consistency review applied — invalid
   Spearman–Brown uses withheld, Welch-t gap tests (9→2/4,997), underpowered designs
   relabeled with receipted power analyses, reliability-zero word lists removed,
