@@ -33,8 +33,11 @@ human product outcome.
 
 ## Maintenance state
 
-The initial delivery phase is closed after the v0.8.0 source, package, container, and public
-verification gates pass. The repository remains public and accepts:
+The initial delivery phase is closed. The v0.8.0 source, wheel, sdist, two-platform container,
+provenance/SBOM, anonymous-pull, hardened-runtime, and public Kaggle gates passed; the independent
+read-back is recorded in
+[`jestry_out/v0_8_0_publication.json`](jestry_out/v0_8_0_publication.json). The repository remains
+public and accepts:
 
 - security and dependency maintenance;
 - reproducibility fixes with before/after evidence;
@@ -66,12 +69,10 @@ fabricated DOI.
 ```bash
 git clone --branch v0.8.0 https://github.com/aidonerightcorp/humorvibes-jestry.git
 cd humorvibes-jestry
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -r requirements-dev.txt
-python3 -m pytest -q
-humorvibes adversarial
-python3 tools/public_release_audit.py
+uv sync --frozen --extra dev
+uv run --frozen pytest -q
+uv run --frozen humorvibes adversarial
+uv run --frozen python tools/public_release_audit.py
 ```
 
 For application use, build the local container or install the wheel attached to the GitHub

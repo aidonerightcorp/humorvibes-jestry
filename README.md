@@ -29,7 +29,7 @@ claim gate.
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v4 ready; notebook v3 COMPLETE | Use 120,000 CC0 procedural controls and frozen easy/hard retrieval tracks without confusing them with human evidence |
-| Application release | [GitHub release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) + [public container](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | 0.8.0 closeout source; tagged publication must pass the two-platform provenance/SBOM gate | Integrate the bounded SDK/API or deploy a digest-pinned attested image |
+| Application release | [GitHub release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) + [public container](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public 0.8.0 closeout; wheel/sdist and two-platform image independently verified | Integrate the bounded SDK/API or deploy the digest-pinned attested image |
 
 The Wave 2 notebook is the canonical executable write-up for the observational study. It clones the immutable
 `humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
@@ -135,14 +135,13 @@ curl --fail -X POST http://127.0.0.1:8080/v1/open-controls/sample \
   -d '{"count":4,"arm":"surprising_resolved","split":"test"}'
 ```
 
-Container quick start using the last independently verified v0.7.1 digest; release-specific
-digests supersede this command only after anonymous pull, attestation, and runtime verification:
+Container quick start using the independently verified v0.8.0 digest:
 
 ```bash
 docker run --rm --read-only --tmpfs /tmp:rw,size=64m \
   --cap-drop ALL --security-opt no-new-privileges:true \
   -p 127.0.0.1:8080:8080 \
-  ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0
+  ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:95568eb899c1a3aa51d8dc1a0884212390f9cc4e85c3aa643477a6355673f4e7
 ```
 
 Or build the current checkout with Compose:
@@ -153,14 +152,15 @@ python3 examples/remote_client.py
 docker compose down
 ```
 
-The public image's anonymous pull, platforms, attestation, labels, hardened runtime, and API were
-independently checked in [`jestry_out/v0_7_1_publication.json`](jestry_out/v0_7_1_publication.json).
-The acyclic digest overlay is at [`deploy/overlays/ghcr`](deploy/overlays/ghcr). Both that overlay
-and the Helm chart were then installed in a disposable `kind` cluster against the exact public
-digest: two replicas became ready with zero restarts and the live Service checks passed. The run,
-including the service-link collision it uncovered and the verified cleanup, is recorded in
+The public wheel/sdist, anonymous container pull, platforms, SPDX/SLSA layers, tag-pinned
+attestation, labels, hardened runtime, API, and Kaggle surfaces were independently checked in
+[`jestry_out/v0_8_0_publication.json`](jestry_out/v0_8_0_publication.json). The digest overlay is at
+[`deploy/overlays/ghcr`](deploy/overlays/ghcr). The unchanged deployment contract was last installed
+through Kustomize and Helm in the v0.7.1 disposable `kind` proof: two replicas became ready with
+zero restarts and the live Service checks passed. The run, including the service-link collision it
+uncovered and the verified cleanup, is recorded in
 [`jestry_out/v0_7_1_kind_smoke.json`](jestry_out/v0_7_1_kind_smoke.json). This is local cluster
-proof, not a hosted-production claim.
+proof, not a v0.8.0 cluster-apply or hosted-production claim.
 
 To build from the current source and reproduce the static and live-container receipt:
 

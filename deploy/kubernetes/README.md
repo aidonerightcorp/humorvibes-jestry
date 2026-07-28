@@ -20,7 +20,7 @@ external-secret integration, exact provider/telemetry egress, autoscaling, and p
 configuration. Full commands and
 the environment reference are in [`../../docs/API_AND_DEPLOYMENT.md`](../../docs/API_AND_DEPLOYMENT.md).
 
-For the public 0.7.1 image, the checked-in [`../overlays/ghcr`](../overlays/ghcr) pins the independently
+For the public 0.8.0 image, the checked-in [`../overlays/ghcr`](../overlays/ghcr) pins the independently
 verified multi-architecture manifest digest while preserving the base offline/default-deny
 contract:
 
@@ -29,6 +29,7 @@ kubectl kustomize deploy/overlays/ghcr
 kubectl apply -k deploy/overlays/ghcr
 ```
 
-The public digest overlay has also been applied to a disposable `kind` cluster and exercised through
-the live Service; see [`../../jestry_out/v0_7_1_kind_smoke.json`](../../jestry_out/v0_7_1_kind_smoke.json).
-That local smoke proof is not a claim that a hosted production cluster exists.
+The current overlay renders successfully and its image passed a hardened standalone runtime probe.
+The deployment contract's last disposable `kind` apply remains the historical v0.7.1 proof; see
+[`../../jestry_out/v0_7_1_kind_smoke.json`](../../jestry_out/v0_7_1_kind_smoke.json). No v0.8.0
+cluster apply or hosted production cluster is claimed.

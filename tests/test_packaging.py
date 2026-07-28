@@ -157,10 +157,8 @@ def test_v070_publication_receipts_preserve_the_verified_historical_manifest() -
     assert publication["truth_boundary"]["hosted_production_cluster_verified"] is False
 
 
-def test_current_public_ghcr_overlay_and_v071_receipts_are_consistent() -> None:
+def test_v071_receipts_preserve_the_historical_cluster_proof() -> None:
     expected = "sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0"
-    overlay_path = ROOT / "deploy/overlays/ghcr/kustomization.yaml"
-    overlay = load_yaml("deploy/overlays/ghcr/kustomization.yaml")
     publication = json.loads(
         (ROOT / "jestry_out/v0_7_1_publication.json").read_text(encoding="utf-8")
     )
@@ -168,14 +166,6 @@ def test_current_public_ghcr_overlay_and_v071_receipts_are_consistent() -> None:
     kind_smoke = json.loads(kind_smoke_path.read_text(encoding="utf-8"))
     deployment_path = ROOT / "jestry_out/v0_7_1_deployment_validation.json"
     release_notes_path = ROOT / "RELEASE_NOTES_v0.7.1.md"
-    assert overlay["resources"] == ["../../kubernetes"]
-    assert overlay["images"] == [
-        {
-            "name": "humorvibes-research",
-            "newName": "ghcr.io/aidonerightcorp/humorvibes-jestry",
-            "digest": expected,
-        }
-    ]
     assert publication["source"]["tag"] == "v0.7.1"
     assert publication["source"]["commit"] == "877fa1f759e230ea651333fbbf4e71721cee4017"
     assert publication["source"]["release_notes_sha256"] == hashlib.sha256(
@@ -203,15 +193,90 @@ def test_current_public_ghcr_overlay_and_v071_receipts_are_consistent() -> None:
     assert publication["deployment_contracts"]["service_link_regression_recurred"] is False
     assert kind_smoke["container"]["manifest_digest"] == expected
     assert kind_smoke["regression_context"]["failure_recurred"] is False
-    assert kind_smoke["kustomize"]["overlay_kustomization_sha256"] == hashlib.sha256(
-        overlay_path.read_bytes()
-    ).hexdigest()
+    assert kind_smoke["kustomize"]["overlay_kustomization_sha256"] == (
+        "53e1ce72977b61bd90b98b8feb190aeb2f88a8941eddcdc9615bbb9610c67d20"
+    )
     assert kind_smoke["kustomize"]["ready_replicas"] == 2
     assert kind_smoke["kustomize"]["restart_count"] == 0
     assert kind_smoke["helm"]["ready_replicas"] == 2
     assert kind_smoke["helm"]["restart_count"] == 0
     assert kind_smoke["cleanup"]["cluster_deleted"] is True
     assert publication["truth_boundary"]["hosted_production_cluster_verified"] is False
+
+
+def test_current_public_v080_release_overlay_and_receipts_are_consistent() -> None:
+    expected = "sha256:95568eb899c1a3aa51d8dc1a0884212390f9cc4e85c3aa643477a6355673f4e7"
+    overlay_path = ROOT / "deploy/overlays/ghcr/kustomization.yaml"
+    deployment_path = ROOT / "jestry_out/v0_8_0_deployment_validation.json"
+    public_surface_path = ROOT / "jestry_out/v0_8_0_public_surface_audit.json"
+    release_notes_path = ROOT / "RELEASE_NOTES_v0.8.0.md"
+    overlay = load_yaml("deploy/overlays/ghcr/kustomization.yaml")
+    publication = json.loads(
+        (ROOT / "jestry_out/v0_8_0_publication.json").read_text(encoding="utf-8")
+    )
+    deployment = json.loads(deployment_path.read_text(encoding="utf-8"))
+    public_surface = json.loads(public_surface_path.read_text(encoding="utf-8"))
+
+    assert overlay["resources"] == ["../../kubernetes"]
+    assert overlay["images"] == [
+        {
+            "name": "humorvibes-research",
+            "newName": "ghcr.io/aidonerightcorp/humorvibes-jestry",
+            "digest": expected,
+        }
+    ]
+    assert publication["source"]["tag"] == "v0.8.0"
+    assert publication["source"]["commit"] == "5ca7b020a8a4b9d7ca3d82f85dc87aff704254d0"
+    assert publication["source"]["release_notes_sha256"] == hashlib.sha256(
+        release_notes_path.read_bytes()
+    ).hexdigest()
+    assert publication["source"]["deployment_validation_sha256"] == hashlib.sha256(
+        deployment_path.read_bytes()
+    ).hexdigest()
+    assert publication["source"]["public_surface_audit_sha256"] == hashlib.sha256(
+        public_surface_path.read_bytes()
+    ).hexdigest()
+    assert publication["source"]["ghcr_overlay_sha256"] == hashlib.sha256(
+        overlay_path.read_bytes()
+    ).hexdigest()
+
+    container = publication["container"]
+    assert container["manifest_digest"] == expected
+    assert container["visibility"] == "public"
+    assert container["anonymous_pull_verified"] is True
+    assert {(row["os"], row["architecture"]) for row in container["platforms"]} == {
+        ("linux", "amd64"),
+        ("linux", "arm64"),
+    }
+    assert all(row["spdx_sbom_digest"].startswith("sha256:") for row in container["platforms"])
+    assert all(
+        row["buildkit_provenance_digest"].startswith("sha256:")
+        for row in container["platforms"]
+    )
+    assert container["attestation_verification"]["verified"] is True
+    assert container["attestation_verification"]["source_repository_ref"] == "refs/tags/v0.8.0"
+    assert container["runtime_verification"]["package_version"] == "0.8.0"
+    assert container["runtime_verification"]["runtime_user"] == "10001:10001"
+    assert container["runtime_verification"]["readonly_root"] is True
+
+    runtime_checks = {row["name"]: row for row in deployment["checks"]}
+    assert deployment["ok"] is True
+    assert runtime_checks["adversarial_contracts"]["evidence"] == {"passed": 27, "total": 27}
+    runtime = runtime_checks["container_runtime"]["evidence"]
+    assert runtime["image"] == f"ghcr.io/aidonerightcorp/humorvibes-jestry@{expected}"
+    assert runtime["ready"] is True
+    assert runtime["user"] == "10001:10001"
+    assert runtime["readonly_root"] is True
+    assert "/openapi.json" in runtime["endpoints_checked"]
+
+    assert public_surface["ok"] is True
+    assert all(check["ok"] for check in public_surface["checks"])
+    assert publication["research_surfaces"]["audit_ok"] is True
+    assert publication["deployment_contracts"]["kubernetes_cluster_apply_executed"] is False
+    assert publication["truth_boundary"]["hosted_api_verified"] is False
+    assert publication["truth_boundary"]["human_writer_or_audience_trial_completed"] is False
+    assert publication["truth_boundary"]["doi_minted"] is False
+    assert publication["ok"] is True
 
 
 def test_envoy_gateway_example_has_tls_identity_global_limit_and_no_secrets() -> None:
@@ -244,6 +309,8 @@ def test_container_publish_workflow_is_multiarch_sbom_and_attested() -> None:
     assert 'tag_version="${GITHUB_REF_NAME#v}"' in text
     assert 'test "$version" = "$tag_version"' in text
     assert "uv build" in text and "humorvibes_github_release_manifest" in text
+    assert 'Path("dist").glob("*.whl")' in text
+    assert 'Path("dist").glob("*.tar.gz")' in text
     assert 'gh release create "$tag"' in text and 'gh release upload "$tag"' in text
     assert "anonymous_pull_verified\": False" in text
     assert "@v" not in "\n".join(line for line in text.splitlines() if "uses:" in line)

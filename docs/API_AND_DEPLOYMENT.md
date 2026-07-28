@@ -162,20 +162,23 @@ or private-network destinations unless the operator explicitly enables insecure 
 
 ## Docker
 
-The public 0.7.1 image is available by its independently verified multi-architecture digest:
+The public 0.8.0 image is available by its independently verified multi-architecture digest:
 
 ```bash
-docker pull ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0
+docker pull ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:95568eb899c1a3aa51d8dc1a0884212390f9cc4e85c3aa643477a6355673f4e7
 gh attestation verify \
-  oci://ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0 \
-  --repo aidonerightcorp/humorvibes-jestry
+  oci://ghcr.io/aidonerightcorp/humorvibes-jestry@sha256:95568eb899c1a3aa51d8dc1a0884212390f9cc4e85c3aa643477a6355673f4e7 \
+  --repo aidonerightcorp/humorvibes-jestry \
+  --source-ref refs/tags/v0.8.0 \
+  --source-digest 5ca7b020a8a4b9d7ca3d82f85dc87aff704254d0
 ```
 
 Its publication receipt records the anonymous pull, `linux/amd64` and `linux/arm64` manifests,
-SLSA provenance identity, SBOM setting, OCI labels, non-root/read-only runtime, and API probe.
+per-platform SPDX/SLSA layers, tag-pinned provenance identity, OCI labels, downloaded wheel/sdist,
+non-root/read-only runtime, and API probe.
 Use [`deploy/overlays/ghcr`](../deploy/overlays/ghcr) to render the base with
-that exact digest. The overlay and Helm chart were also installed against that digest in a
-disposable `kind` cluster; the complete result and cleanup receipt is
+that exact digest. The v0.8.0 overlay renders successfully; no v0.8.0 cluster apply is claimed.
+The unchanged contract's last disposable `kind` install and cleanup proof remains the historical
 [`jestry_out/v0_7_1_kind_smoke.json`](../jestry_out/v0_7_1_kind_smoke.json).
 
 Build and run the image directly:
@@ -220,7 +223,7 @@ choices follow the general single-process container pattern in the
 Tagged releases trigger [the pinned container publication workflow](../.github/workflows/publish-container.yml).
 It builds `linux/amd64` and `linux/arm64`, publishes to GHCR, attaches BuildKit provenance and an
 SBOM, creates a GitHub/Sigstore provenance attestation, and prints the immutable manifest digest.
-The 0.7.1 publication passed those gates and is pinned above; future versions must repeat them
+The 0.8.0 publication passed those gates and is pinned above; future versions must repeat them
 before their digest enters an overlay.
 
 ### Local Ollama Compose profile
