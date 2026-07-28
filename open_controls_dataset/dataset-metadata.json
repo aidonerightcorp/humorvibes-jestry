@@ -1,7 +1,7 @@
 {
   "title": "Humor Genome Open Controls",
   "subtitle": "120K matched controls with easy and entity-masked hard retrieval tracks",
-  "description": "A deterministic, CC0 corpus of 120,000 matched four-arm text controls for testing expected continuations, unresolved surprise, compact lexical repair, and over-explanation. Includes leakage-safe template-family splits, original and entity/pivot-masked hard retrieval qrels, explicit hard negatives, strict schemas, provenance, adversarial audits, and SHA-256 manifests. These are synthetic experimental controls, not human ratings or funniness labels.",
+  "description": "A deterministic, CC0 corpus of 120,000 matched four-arm text controls for testing expected continuations, unresolved surprise, compact lexical repair, and over-explanation. Includes leakage-safe template-family splits, original and entity/pivot-masked hard retrieval qrels, explicit hard negatives, strict schemas, provenance, adversarial audits, and SHA-256 manifests. These are synthetic experimental controls, not human ratings or funniness labels.\n\nMotivating frame, project-wide: \"the brain is a surprise-reduction engine\" (predictive processing) - held as a falsifiable framework, never as a settled conclusion. Thesis and per-tenet evidence status: https://github.com/aidonerightcorp/humorvibes-jestry/blob/main/docs/THESIS_AND_EVIDENCE.md",
   "id": "taylorsamarel/humor-genome-open-controls",
   "licenses": [
     {

@@ -1,5 +1,7 @@
 # Project closeout and continuation handoff
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 HumorVibes Research 0.8.0 closes the initial build phase of Humor Genome Wave 2. The project is a
 public research and integration artifact, not a completed claim that a model understands humor or
 improves human writing. This document defines what can be treated as stable, what remains open,

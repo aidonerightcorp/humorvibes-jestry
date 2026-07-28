@@ -1,5 +1,7 @@
 # Archived competition write-up: HumorVibes
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 > This 1,500-word-limit document is preserved as the hackathon-era submission draft. The deadline
 > passed and no competition submission is claimed. Read the current open-project narrative in
 > [`PROJECT_WRITEUP.md`](PROJECT_WRITEUP.md), then use the canonical public notebook for executable

@@ -2,6 +2,8 @@
 
 *Role: the layer-by-layer contribution playbook. Audience: contributors.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 This guide is for extending Humor Genome Wave 2 without weakening its provenance, licensing, or
 evidence boundaries. All commands are run from the repository root.
 

@@ -9,6 +9,8 @@ revision is PR #38 and the correction-trail entry in [`../RESULTS.md`](../RESULT
 in this file was edited after the fact beyond formatting; where a finding was contested or
 accepted as-is, the disposition is recorded in the PR #38 description.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 Dispositions in brief: every MUST-FIX item was applied; SHOULD-FIX items were applied except
 where noted in PR #38; the ACCEPTED-AS-IS lists below are the audit trail of what was checked
 and found sound. None of the three studies' conclusions reversed.

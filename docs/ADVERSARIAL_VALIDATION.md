@@ -2,6 +2,8 @@
 
 *Role: tested attack classes and their boundaries. Audience: reviewers. A passing suite is a software contract, not a security certification or a model-quality result.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 The integration layer is tested against hostile configuration, malformed provider responses, and
 abusive HTTP inputs. This is fail-closed contract testing, not a security certification or a model
 quality benchmark.

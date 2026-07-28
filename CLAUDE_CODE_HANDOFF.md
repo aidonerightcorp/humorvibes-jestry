@@ -5,6 +5,8 @@ below are that machine's and are intentionally kept. Outside contributors start 
 [`CONTRIBUTING.md`](CONTRIBUTING.md); the evidence hierarchy lives in
 [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 This is the operational handoff for continuing Humor Genome Wave 2 and the `humorvibes-research`
 application after the formal v0.8.0 closeout. Read this file, then read
 [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md), [`PROJECT_STATUS.md`](PROJECT_STATUS.md), and

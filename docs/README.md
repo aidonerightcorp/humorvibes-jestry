@@ -1,5 +1,7 @@
 # docs/ reading order
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 Every file below carries a role banner; this is the order that makes them build on each other.
 
 1. [THESIS_AND_EVIDENCE.md](THESIS_AND_EVIDENCE.md) (start here — claims, instruments, outcomes)

@@ -2,6 +2,8 @@
 
 *Role: the executable protocol for the next evidence gate (issue #3). Audience: study teams. Not an ethics review.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 The repository now includes a complete, local analyzer for the highest-value next experiment: a
 within-writer crossover comparing unassisted and HumorVibes-assisted material. It turns the
 research roadmap into a runnable protocol while refusing to turn synthetic or underqualified data

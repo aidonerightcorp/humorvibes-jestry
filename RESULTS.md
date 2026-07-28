@@ -1,5 +1,7 @@
 # HumorVibes - Consolidated measured results (writeup source)
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 Every number traces to a receipt; the run environment (Kaggle kernel or named local host) is
 stated per section. Instrument = gemma-2-2b-it teacher-forced logprobs unless noted; R is
 null-controlled after v5.
@@ -629,6 +631,29 @@ estimator and status-label defects, all corrected in place and receipted:
   figure-value provenance, and the 0.8262 caption ceiling (whose split-half arm is conservative —
   the referee's independent-halves check explains the receipt's own flagged estimator
   disagreement).
+
+## 2026-07-28 research wave 2 (pre-registered; referee rules applied from the start)
+
+At the maintainer's direction, a second bounded research wave ran on data already on disk —
+every study froze its pre-registration block (hypotheses, family, seed, MDE) into the receipt
+BEFORE measuring, and the wave-1 referee rules (midranks, Welch, BH-in-declared-family, no SB on
+non-positive r, power-before-null, no rankings off reliability-zero statistics) were binding
+from the start.
+
+- **The sole invariant survives its own confound check** (`jestry_out/caption_within_contest_study.json`):
+  the queued within-contest re-run of the caption feature arm confirms `punch_rarity_max` at
+  **100% of its pooled magnitude** — median within-contest ρ **−0.0876** vs pooled −0.0874,
+  sign-consistent in **98.1%** of 360 contests, q = 0.0016 in the declared 30-feature family
+  (full 1,000 permutations; screens byte-match the divisiveness receipt). It is NOT a pooling
+  artifact. The re-run also shows the pooled column WAS contaminated for weak features — two
+  flip sign within contest — retroactively justifying the queue entry.
+- **Participation drifts; the label does not** (`jestry_out/caption_temporal_drift.json`):
+  across ~380 contest numbers, median votes per caption roughly doubles (trend ρ **+0.358**,
+  q < 1e-6), caption counts and vocabulary novelty creep up (both ρ ≈ +0.15, q = 0.017) — but
+  mean rating, funny-vote share, and split-half label reliability are all **flat** (raw
+  split-half r ≈ 0.50 throughout; SB applied only over positive-r contests, 8 negative-r
+  contests receive none). The crowd doubled; the label kept its meaning. Exploratory by
+  pre-registration; drift ≠ humor aging, and topicality remains unmeasured here.
 
 None of the three studies' conclusions reversed; what changed is that the receipts now state
 exactly what each design could and could not have found. The full verbatim referee reports are

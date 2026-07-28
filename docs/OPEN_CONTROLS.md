@@ -2,6 +2,8 @@
 
 *Role: the synthetic four-arm control corpus contract. Audience: experiment designers. Procedural positive control, not observational data.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 Open Controls is a separate, deterministic, project-controlled corpus for experiments that the
 observational Wave 2 corpus cannot support. It is deliberately synthetic and deliberately narrow.
 

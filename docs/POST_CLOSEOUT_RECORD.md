@@ -8,6 +8,8 @@ restated here; every number lives in its receipt and in
 The per-PR one-line log is in
 [`../CLAUDE_CODE_HANDOFF.md`](../CLAUDE_CODE_HANDOFF.md) ("Post-closeout maintenance log").*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 ## Why the closed project moved at all
 
 The v0.8.0 closeout froze the claims, not the repository. The maintainer then asked for a full
