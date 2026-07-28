@@ -100,17 +100,23 @@ def build(static: bool = False) -> Path:
     same figures, no dashboard/tunnel cells (nothing to keep alive, nothing that
     depends on a session)."""
     receipts = gather()
-    # The static public edition is deterministic: same receipts -> same bytes,
-    # so the committed notebook is reproducible and testable. Its snapshot time
-    # is the newest receipt's mtime (derived from inputs), not the wall clock.
-    # The live edition keeps a time salt because its nonce exists to
-    # fingerprint one session.
+    # The static public edition is deterministic from CONTENT alone: same
+    # receipt bytes -> same notebook bytes, on any checkout. File mtimes are
+    # checkout artifacts (CI clones stamp clone-time), so static mode drops
+    # them and takes its snapshot time from the ts fields INSIDE the receipts.
+    # The live edition keeps mtimes and a time salt because its nonce exists
+    # to fingerprint one session.
     if static:
         stamps = receipts["_provenance"]["receipt_files"]
-        if stamps:
-            receipts["_provenance"]["built_utc"] = max(
-                s["mtime_utc"] for s in stamps.values())
-        receipts["_provenance"]["note"] += "; static edition — snapshot time is the newest receipt mtime"
+        for s in stamps.values():
+            s.pop("mtime_utc", None)
+        ts_values = [v.get("ts") for k, v in receipts.items()
+                     if k != "_provenance" and isinstance(v, dict) and v.get("ts")]
+        receipts["_provenance"]["built_utc"] = (
+            max(ts_values) if ts_values else "per-receipt ts")
+        receipts["_provenance"]["note"] += (
+            "; static edition — snapshot time is the newest in-receipt ts, "
+            "file mtimes intentionally omitted")
     salt = "" if static else str(time.time())
     nonce = hashlib.sha256(
         (json.dumps(receipts["_provenance"], sort_keys=True) + salt)
@@ -142,8 +148,7 @@ def build(static: bool = False) -> Path:
         "rank humor categories. Tenet-by-tenet evidence status: "
         "[docs/THESIS_AND_EVIDENCE.md](https://github.com/aidonerightcorp/humorvibes-jestry/"
         "blob/main/docs/THESIS_AND_EVIDENCE.md).\n\n"
-        "Every number is read from a local receipt, embedded below with its sha256 and "
-        "mtime. "
+        "Every number is read from a local receipt, embedded below with its sha256. "
         + ("This is the static public edition: every figure renders from the embedded "
            "receipts, nothing depends on a live session, and the run is fully reproducible "
            "offline.\n\n"
@@ -163,7 +168,7 @@ def build(static: bool = False) -> Path:
         "NONCE = prov['nonce']\n"
         "print('built', prov['built_utc'], '| nonce', NONCE)\n"
         "for fname, s in prov['receipt_files'].items():\n"
-        "    print(f\"  {fname:<34} {s['bytes']:>8} B  sha256:{s['sha256_12']}  {s['mtime_utc']}\")\n"
+        "    print(f\"  {fname:<34} {s['bytes']:>8} B  sha256:{s['sha256_12']}  {s.get('mtime_utc', '')}\")\n"
         "if prov['missing']:\n"
         "    print('MISSING (panels for these are skipped, not faked):', prov['missing'])\n"))
 

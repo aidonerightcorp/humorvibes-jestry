@@ -307,7 +307,7 @@ landed since v0.8.0, none changing the application package:
 | #34 | Wave 1: three receipted studies (declared-style 0/7 null, divisiveness no-free-lunch, demographic mostly-null), ported word-type/three-corpus receipts, three flagship figures, `docs/THESIS_AND_EVIDENCE.md`, two-audit doc reconciliation, public ceiling explainer |
 | #35 | Notebook refresh: thesis-in-one-screen at the top of all three public notebooks, receipted follow-ups section, immutable tag `humor-genome-wave2-v10` |
 | #36 | Publication record: wave2 v15 / Open Controls v4 / ceiling v2 verified terminal + read back; doc version bumps |
-| closeout wave | `ceiling_demo/` ported into the repo with a deterministic static build and tests; ceiling v3 pushed from the repo and byte-verified; this log |
+| closeout wave | `ceiling_demo/` ported into the repo with a deterministic static build and tests; ceiling v4 pushed from the repo and byte-verified; this log |
 
 ## Known caveats that are not hidden
 

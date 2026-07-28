@@ -91,7 +91,7 @@ software release and the exact Kaggle dataset/notebook version used in the analy
 Bounded maintenance waves since v0.8.0 (PRs #34–#36 plus the closeout wave) added
 receipted studies, figures, the `docs/THESIS_AND_EVIDENCE.md` scoreboard, a full
 documentation reconciliation, refreshed public notebooks (wave2 v15, Open Controls v4,
-ceiling explainer v3 — all terminal COMPLETE and independently read back), and made every
+ceiling explainer v4 — all terminal COMPLETE and independently read back), and made every
 published notebook reproducible from this repository. None of it moved a claim boundary:
 the nulls stayed visible, no human evidence was produced, and the application release
 remains v0.8.0. The project is closed, maintained, reproducible, and consistent across
