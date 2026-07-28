@@ -2,7 +2,7 @@
 
 *Archive (hackathon era, July 2026): preserved for provenance. Current project state: PROJECT_STATUS.md.*
 
-## Public release as of 2026-07-27 (superseded by notebook v15 / tag `humor-genome-wave2-v10`)
+## Public release as of 2026-07-27 (superseded by notebook v16 / tag `humor-genome-wave2-v10`)
 
 The canonical evidence is now consolidated and public:
 
