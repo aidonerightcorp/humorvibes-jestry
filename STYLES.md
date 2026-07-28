@@ -1,5 +1,9 @@
 # Styles of joke: the three axes
 
+*Role: the three style axes (form / domain / declared) and the form-study verdict — separation is
+NOT established. Numbers here trace to `jestry_out/` receipts; tenet placement in
+`docs/THESIS_AND_EVIDENCE.md`.*
+
 The corpus began with no style axis at all. It could not answer the question anyone actually asks
 about humor — does a military joke work differently from a dad joke? — because nothing in it said
 which was which.
@@ -21,7 +25,7 @@ every item. Where that label exists, no inference is involved and no error rate 
 
 Sources with a declared style:
 
-- **24 public-domain categories** from curated volumes: military, medical, legal, Jewish,
+- **26 public-domain categories** from curated volumes: military, medical, legal, Jewish,
   Russian, German, Irish, Scottish, French, Spanish, Dutch, Italian, Finnish, Nasreddin,
   clerihew, spoonerism, parody, riddles, limerick/nonsense, epigram, epitaph, jest-book,
   wit-anthology, burlesque, wellerism, toasts.
@@ -137,10 +141,15 @@ The full run — 8 items per arm, 88 measurements, deterministic sampling, boots
 **0 of 10 joke forms have a confidence interval strictly above the proverb control's upper bound
 (5.198). All ten overlap it.**
 
-A separate smaller run comparing *declared style* arms (military, medical, legal, dad-joke,
-jest-book, riddles) put all ten joke arms above the control **on the mean** — but that comparison
-used point estimates with no uncertainty, and ranking means at n=6 manufactures a separation the
-data does not contain. The interval-based verdict is the one to believe.
+A separate smaller run comparing six *declared style* arms (military, medical, legal, dad-joke,
+jest-book, riddles) put all six above the control **on the mean** — but that comparison used
+point estimates with no uncertainty and left no receipt, and ranking means at n=6 manufactures a
+separation the data does not contain. The interval-based verdict is the one to believe — and the
+receipted follow-up agrees: the 2026-07-27 declared-style study
+(`jestry_out/declared_style_study.json`; seven subreddit-declared styles × 12 items on the
+certified instrument, same proverb-control recipe) found **0/7 style CIs separated from the
+control in either direction, any-difference permutation p = 0.45**. The form-study null
+replicates on an independent, zero-annotation label axis.
 
 So: the ordering is a hypothesis worth more measurement, not a finding. S is model surprisal,
 **not funniness** — these items carry no human grade, so nothing here says any form is funnier.

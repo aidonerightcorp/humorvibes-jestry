@@ -1,7 +1,8 @@
 # HumorVibes - Consolidated measured results (writeup source)
 
-All numbers from verified Kaggle runs (kernels cited). Instrument = gemma-2-2b-it teacher-forced
-logprobs unless noted; R is null-controlled after v5.
+Every number traces to a receipt; the run environment (Kaggle kernel or named local host) is
+stated per section. Instrument = gemma-2-2b-it teacher-forced logprobs unless noted; R is
+null-controlled after v5.
 
 ## 2026-07-12 six-kernel reproducibility audit
 
@@ -9,7 +10,9 @@ An authenticated, read-only Kaggle audit independently re-pulled the source and 
 of all six pre-existing kernels. All six were COMPLETE and private. After stripping execution
 outputs, every code/markdown cell matched the corresponding local notebook exactly; every
 research log/JSON mirrored under `research_out/kaggle/` was byte-identical to Kaggle. The audit
-also records each attached model source and the API deadline (2026-07-25 04:00 UTC). Receipt:
+also records each attached model source and the API deadline as read that day (2026-07-25 04:00
+UTC; a later authenticated query returned 2026-07-26 04:00 UTC — the discrepancy is documented in
+SUBMISSION_STEPS.md). Receipt:
 `research_out/kernel_audit_20260712.json`. This verifies provenance; it does not make the
 private notebooks public and does not count as a submission.
 
@@ -239,8 +242,10 @@ gemma-2-2b-it GGUF. Receipt: `jestry_out/gemma2_full_nll_quant_check.json`.
 - Q4_K_M reproduces the certified calibration receipt with **zero drift** on all five cases.
 - Q8_0 (fourfold precision) separates identically: all three jokes in region, both controls out.
 - Max |delta S| across quantizations 0.261, max |delta R| 0.006. The pinned speed-bumps number
-  moves 3.190 to 3.200, so **S=3.19 is not a quantization artifact**; four instruments now agree
-  (pinned Kaggle transformers, in-kernel transformers, llama.cpp Q4, llama.cpp Q8).
+  moves 3.190 to 3.200, so **S=3.19 is not a quantization artifact**; four instrument
+  implementations sit in one band of ≤0.012 nats around the pinned value (pinned Kaggle
+  transformers 3.19, in-kernel transformers 3.188, llama.cpp Q4 3.190, llama.cpp Q8 3.200) —
+  one band, not one identical number.
 
 ## 2026-07-24 silent-NaN honesty bug (found, fixed, receipted)
 
@@ -314,21 +319,25 @@ content word as a candidate payoff, not the ranking as a cut list.
 
 ## 2026-07-26 wave-2 corpus census, and the one family that matters
 
-The census (`jestry_out/corpus_census.json`, taken 12:08 UTC) reads **2,261,096 items over 486
-sources, 172 families, 46 languages and 26 licence strings**, 97.0% carrying a numeric grade. It is
-a snapshot: the final nextml harvest file landed a minute later and is not in it, so the corpus is
-larger than the census says. Anything quoted from that file should carry the timestamp.
+The mid-sweep census snapshot (taken 12:08 UTC, before the final nextml harvest file landed) read
+2,261,096 items over 486 sources, 172 families, 46 languages and 26 licence strings, 97.0%
+carrying a numeric grade. The committed `jestry_out/corpus_census.json` was rebuilt over the
+complete sweep and now reads **3,164,600 items over 767 sources, 217 families, 62 languages and
+34 licence strings**; a snapshot number quoted anywhere must carry its timestamp.
 
-The shape matters more than the size. One family is **84.2%** of the census — the NextML mirror of
-the New Yorker caption contest. Measured directly from the harvest files rather than from the
+The shape matters more than the size. One family dominated the snapshot at 84.2% and still
+dominates the full census at roughly 69–71% — the NextML mirror of the New Yorker caption
+contest. Measured directly from the harvest files rather than from the
 snapshot: **2,186,939 ranked captions over 371 contests**, median 5,631 captions per contest.
 Everything below is about that family, because it is the only corpus here that ships **the raw vote
 breakdown per item** (not_funny / somewhat_funny / funny) instead of a mean alone. A visible label
 error is what turns a prediction score from a number into a judgement.
 
-Licence classes are tracked rather than assumed: 2,168,401 research-only, 59,537 noncommercial,
-32,248 redistributable, 910 unclassified. The export's redistribution gate (G13) keys on that
-field, so the noncommercial caption bulk cannot leak into a shipped artifact by accident.
+Licence classes are tracked rather than assumed. The committed census reads 2,580,879
+research-only, 59,537 noncommercial, 511,110 redistributable, 13,074 unclassified (the smaller
+figures previously quoted here were the mid-sweep snapshot). The exporter's redistribution gate
+keys on that field, so the noncommercial caption bulk cannot leak into a shipped artifact by
+accident. (`verify_jestry.py`'s G13 is a different check — exported-dataset alignment.)
 
 ## 2026-07-26 two form labels were wrong, found before the study that would have used them
 
@@ -480,7 +489,10 @@ published Kaggle slice is SHA-256 ordered, deny-first on redistribution rights, 
 and 2,581 expectation/violation frames**. It is drawn from 471,328 licence-eligible rows. The
 caption family falls from 71.0% of the full corpus to 2.2% of the public slice; no public source
 family exceeds 9.9%. The remaining 2,693,272 rows stay in the local census but their verbatim text
-is excluded: 2,580,994 research-only, 59,537 noncommercial, and 52,741 unclassified.
+is excluded. By census licence class the full corpus reads 2,580,879 research-only, 59,537
+noncommercial, 511,110 redistributable, 13,074 unclassified — a redistributable-class row can
+still be excluded by the per-family cap and dedupe, which is why eligibility (471,328) is
+narrower than the redistributable class (511,110).
 
 The release builder now scans the corpus once with bounded per-family heaps. It fails on malformed
 JSON instead of silently dropping a row, has no clock field, stages every artifact before replacing
@@ -525,3 +537,59 @@ domain×form claim.
   variance already and nothing yet uses it.
 - **The bound is on TEXT-only models, not on models.** 0.411 falls out of the caption's context
   dependence, so the way past it is to give the model the drawing, not better text features.
+
+## 2026-07-27 post-closeout wave 1 (local host, branch agent/expansion-wave-1)
+
+Five receipts landed in one bounded maintenance wave; every study re-verified the pinned
+calibration case before measuring where the instrument was involved, and no reddit/caption text
+enters any public receipt (aggregates and sha256 item hashes only).
+
+- **Two finished receipts finally reported.** `jestry_out/word_type_study.json` (previously
+  computed, never documented): on 9,652 graded Humicroedit rows, body-part substitutions rate
+  **+0.2046** over the pooled mean (perm p = 0.0002), food **+0.1251**, animal **+0.0464**, and
+  adding 25 word-type features lifts held-out Spearman **0.1137 → 0.2296**. Category labels come
+  from an embedding classifier (~10/12 on a hand check) and the perm p is uncorrected across
+  categories. `jestry_out/three_corpus_study.json`: across Humicroedit / New Yorker / Reddit with
+  tied-midrank Spearman, permutation p, and BH-FDR per corpus, **exactly one of 30 features
+  survives with a consistent sign in all three** — `punch_rarity_max` at ρ −0.054 / −0.0874 /
+  −0.0664. The sign is *negative*: rarer punchline words correlate with slightly LESS funny,
+  which cuts against any naive "more surprise = funnier" reading. (Its New Yorker column pools
+  across contests; the within-contest re-run remains queued, as flagged below.)
+- **Declared-style surprisal study** (`jestry_out/declared_style_study.json`): seven
+  community-declared styles (arctic-shift subreddit self-labels; the community name is the label,
+  zero annotation cost) × 12 items, against the same wiktionary-proverb control recipe as the
+  published form study, on the certified instrument (calibration re-verified in-run: S = 3.1899
+  over 10 tokens; zero instrument errors). Result: **0/7 style CIs separate from the control in
+  either direction; any-difference permutation p = 0.45** — the form-study null replicates on an
+  independent label axis. Style labels are confounded with community norms and length culture;
+  this is a regime null, not a style-quality claim.
+- **Caption divisiveness study** (`jestry_out/divisiveness_study.json`): first use of the SHAPE
+  of the 3-bin vote histogram. Integrity screen dropped 7,061 votes≠sum rows and 5,544
+  impossible-mean rows (never averaged over). Pole-conflict `C = 2*sqrt(p_nf*p_f)` is a real
+  label — split-half Spearman–Brown **0.51** overall at ≥40 votes, **0.53** at 160+ votes,
+  versus **0.67 / 0.62** for the mean — but contest-held-out text features predict it at
+  **~17% of its own ceiling versus ~19% for the mean**: the shape of disagreement is measurable,
+  and no easier. Low-vote bins are unstable and reported per bin in the receipt.
+- **Demographic humor norms** (`jestry_out/demographic_norms_study.json`): two independent
+  word-level crowds agree on what is funny (Engelthaler norms vs cockamamie votes, ρ = **0.414**
+  [0.389, 0.439] on 4,739 shared words), but single-word demographic gaps are mostly noise at
+  these per-word sample sizes: **9/4,997** sex gaps and **0/4,997** age gaps survive BH-FDR, and
+  cross-dataset gap-agreement CIs include zero. One dimension-level signal survives (sexual-
+  connotation words skew toward younger raters, ρ = 0.136, q = 0.002). Persona-conditioning of B
+  keeps only weak lexical support — a clean mostly-negative result, kept visible.
+- **Figures that existed only as prose** now live in `docs/figures/`: the caption ceiling
+  waterfall, the cross-corpus transfer 2×2, and the Humor Genome Atlas (t-SNE of the 23,779-item
+  surface channel, coordinates only, faceted by language). Build receipt:
+  `jestry_out/wave1_figures_receipt.json`; builder: `tools/build_wave1_figures.py`.
+- **Operational finding:** rebuilding the Humor Vibes Open competition data against the
+  post-wave-2 corpus is now REFUSED by the builder's own self-attack (bulk lanes contribute
+  `[deleted]`/`Period.`/`...` punchlines that reopen the reuse exploit). The tracked
+  `competition/data/` freeze remains the verified launch payload; the hosting guide carries the
+  dated note. The self-attack blocking its own rebuild is the control working as designed.
+- **The ceiling-demo notebook went public.** The five-section "what the label can support"
+  explainer (label ceiling, reliability-vs-votes, portability, the kept form null) was rebuilt as
+  a static edition (no live session cells) and published:
+  <https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support>, version 1,
+  terminal COMPLETE, anonymously readable (HTTP 200 read-back). It displays previously receipted
+  numbers only. Receipt: `jestry_out/ceiling_demo_publication.json`.
+- Tenet-by-tenet placement of all of the above: `docs/THESIS_AND_EVIDENCE.md`.

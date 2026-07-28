@@ -2,6 +2,7 @@ cff-version: 1.2.0
 message: >-
   If you use the software, public controls, or study design, cite this release and the exact
   Kaggle dataset or notebook version used in your analysis.
+  (Zenodo deposit target: the frozen v0.7.0 tag — see docs/DOI_ARCHIVE.md.)
 title: "Humor Genome Wave 2: reproducible humor-structure research and integration toolkit"
 type: software
 authors:

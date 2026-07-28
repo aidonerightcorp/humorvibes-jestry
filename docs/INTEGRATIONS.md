@@ -1,5 +1,7 @@
 # Integration and model support
 
+*Role: which providers and model IDs are allowlisted, and what each live check actually reached. Audience: integrators.*
+
 The integration layer has one rule: a configured provider is a capability, not a fallback. Every
 request selects an exact allowlisted model ID, and malformed or unavailable upstreams fail with a
 sanitized structured error instead of silently switching models or inventing offline output.
@@ -62,9 +64,10 @@ For a receipt across every configured model, use `humorvibes provider-audit`. Of
 no provider request and proves only the deterministic `hash:128` operation. `--live` separately
 records provider reachability and a bounded operation attempt while leaving
 `quality_validated=false`. The checked-in 2026-07-27 live receipt is deliberately negative: the
-Ollama version endpoint was reachable, generation returned HTTP 410, all six semantic embedding
-operations returned HTTP 401, and only `hash:128` executed. That is a credential/service-state
-finding, not a semantic-model comparison.
+hosted ollama.com endpoint's version route was reachable, generation returned HTTP 410, all six
+semantic embedding operations returned HTTP 401, and only `hash:128` executed. That is a
+credential/service-state finding, not a semantic-model comparison. This run targeted the hosted
+endpoint; the local-server benchmark that completed all arms is docs/PROVIDER_MATRIX.md.
 
 ## Existing research-tool integration
 

@@ -1,5 +1,7 @@
 # HumorVibes judge evidence map
 
+*Archive (hackathon era, July 2026): preserved for provenance. Current project state: PROJECT_STATUS.md.*
+
 ## Current public release (2026-07-27)
 
 The canonical evidence is now consolidated and public:

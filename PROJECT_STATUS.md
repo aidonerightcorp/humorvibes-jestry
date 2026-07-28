@@ -14,6 +14,7 @@ evidence-bearing contributions; see [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md)
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
 | Application package | [v0.8.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public closeout release; wheel/sdist, multi-architecture image, provenance, SPDX SBOM, anonymous pull, and runtime gates passed |
+| Label-ceiling explainer | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support) | Public static edition, version 1 COMPLETE (2026-07-27); displays previously receipted ceiling/portability/null results only — `jestry_out/ceiling_demo_publication.json` |
 | Academic archive | [DOI archive preflight](docs/DOI_ARCHIVE.md) | Exact v0.7.0 source is deposit-ready and identified by a complete per-file inventory; no public Zenodo record or DOI is claimed yet |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
@@ -86,7 +87,8 @@ because the required human, rights, owner-account, or named-environment evidence
 
 - The public dataset is deterministic, source-stratified, and deny-first on redistribution
   rights. It contains 121,670 text rows, 7,913 aligned phrase pairs, 2,581
-  expectation/violation frames, a full-corpus census, an export summary, and a SHA-256 manifest.
+  expectation/violation annotation rows (covering 705 annotated cartoons), a full-corpus census,
+  an export summary, and a SHA-256 manifest.
 - The canonical notebook verifies all six mounted payloads before analysis, loads its attached
   Gemma 2 checkpoint, runs the pinned instrument check, and displays the controlling statistical
   results and limitations.
@@ -97,6 +99,15 @@ because the required human, rights, owner-account, or named-environment evidence
   separate from the proverb control, and all 10 overlap it.
 - The caption study holds out entire contests. Its median within-contest Spearman correlation is
   0.1555, compared with a measured text-only bound of 0.4110 and label ceiling of 0.8262.
+- The strongest structural model does not transfer: within-Humicroedit 0.5075 falls to −0.0091 on
+  a different joke population, and exactly one of 30 features (`punch_rarity_max`, with a
+  *negative* sign) survives sign+FDR across three corpora
+  (`jestry_out/cross_corpus_transfer.json`, `jestry_out/three_corpus_study.json`).
+- Post-closeout wave 1 (2026-07-27) added five receipts without changing any claim boundary:
+  declared-style surprisal replicates the form-study null (0/7, permutation p = 0.45), caption
+  divisiveness is reliable but no more predictable than the mean, word-level demographic gaps are
+  mostly noise, and three receipt-backed figures now exist under `docs/figures/`. The
+  tenet-by-tenet scoreboard is `docs/THESIS_AND_EVIDENCE.md`.
 - The release has source-controlled dataset and notebook metadata, deterministic notebook
   generation, automated tests, semantic release checks, and a machine-readable publication
   receipt at [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json).

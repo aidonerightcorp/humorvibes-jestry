@@ -4,7 +4,8 @@
 of the brain or a claim that the current notebook has validated human funniness. The sourced scientific
 lineage and evidence map live in [`docs/RESEARCH_FOUNDATIONS.md`](docs/RESEARCH_FOUNDATIONS.md); the
 writeup summarizes the model, `mesh_signals.py` implements proposed signals, and the Kaggle notebook
-demonstrates the narrower Gemma-surprisal instrument.*
+demonstrates the narrower Gemma-surprisal instrument. Evidence status per tenet lives in
+docs/THESIS_AND_EVIDENCE.md — this document proposes; that one keeps score.*
 
 ![From predictive processing to a bounded product claim](docs/figures/surprise-to-product.svg)
 
@@ -156,7 +157,7 @@ Applied to humor, this is not just an efficiency trick - it is what comedians al
   running gag, a game), each re-use is a cheap re-route - high E by construction. Compilation makes
   that explicit: Gemma explores frames and word banks offline; the runtime fills slots with a seeded
   RNG and pure string operations.
-- **Live performance demands determinism.** On stage (the NYC showcase's Track 3 setting), you
+- **Live performance demands determinism.** On stage (the original NYC-showcase live setting, now historical), you
   cannot let a model improvise a bad surprise. The compile pipeline measures S/R/E and runs persona
   collision checks on probe instantiations *before* freezing; the frozen artifact is auditable -
   you know every joke it can emit before it is ever performed.
@@ -282,12 +283,12 @@ Prediction: for true callbacks, quoting the source collapses punchline surprisal
 joke's own best frame-hint does for matched fresh jokes - the cache outperforms any explanation
 that must be paid for at delivery time.
 
-## 12. Two diagnostic joke classes: partisan asymmetry and causal-inference humor
+## 11. Two diagnostic joke classes: partisan asymmetry and causal-inference humor
 
-Two joke families are natural experiments that make "bad surprise is audience-relative" (§1) and
-"resolution depends on the audience's mesh" (§2) *falsifiable by construction*.
+Two joke families are natural experiments that make "bad surprise is audience-relative" (§2) and
+"resolution depends on the audience's mesh" (§3) *falsifiable by construction*.
 
-### 12a. The reversal test: partisan weapon vs. bridge
+### 11a. The reversal test: partisan weapon vs. bridge
 
 Take a joke that targets a political belief, then build its **mirror** - the same structure with
 the target swapped (left↔right, and any partisan signifiers flipped). Measure laugh and B under a
@@ -308,7 +309,7 @@ high-asymmetry AND sign-flipping. Repair is directional: retarget the identity-m
 the shared process, preserving the comic turn - this is the de-escalation doctrine (§9) applied to
 tribe instead of individual.
 
-### 12b. Correlation/causation jokes: the frame is a reasoning error
+### 11b. Correlation/causation jokes: the frame is a reasoning error
 
 A whole class of jokes has a **causal-inference fallacy as the hidden frame**: a spurious
 correlation dressed as causation ("I've worn my lucky socks to every exam I passed"), a confounder
@@ -339,7 +340,7 @@ causal-correction hint and lose laugh under a correlation-credulous persona, whi
 believe-the-fallacy jokes do the opposite - cause≠correlation understanding is a measurable
 audience axis.
 
-## 11. Temporal mechanics: cache depth, topicality half-life, and the too-soon curve
+## 12. Temporal mechanics: cache depth, topicality half-life, and the too-soon curve
 
 "Should you joke about old things or current events?" is a question about **which cache the joke
 rents**:

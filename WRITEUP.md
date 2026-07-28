@@ -146,12 +146,14 @@ format boundary. So we ran that predeclared follow-up. Re-splitting each item at
 against the old splitter and a placebo cut (n=83), doubled how often resolution registered at
 all, 19% of items to 31%, while the placebo moved nothing, and still predicted funniness no
 better. The boundary is not a splitting artifact. Separately, the pinned S=3.19 held to 0.01
-across a fourfold change in instrument precision, so it is not a quantization artifact either.
+across a fourfold change in instrument precision, so it is not a quantization artifact either. The
+largest movement anywhere in the five-case reference set was 0.261 nats
+(jestry_out/gemma2_full_nll_quant_check.json).
 
 ## Demo
 
 Live studio (Streamlit over a Kaggle kernel tunnel), URL announced per session. Public notebooks:
 measurement demo, mesh-zoo lab (invariance, frame duel, century test), corpus lab, panel lab,
 validation lab, and the v4 ablation court. Every number above traces to an artifact in
-`research_out/` or `jestry_out/`. A 13-gate verifier reproves the stack on demand; the portal is
+`research_out/` or `jestry_out/`. A 16-gate verifier reproves the stack on demand; the portal is
 browser-tested end to end. CLI: `mesh_cli.py {signals|vibe|generate|compile|live|...}`.

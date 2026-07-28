@@ -4,7 +4,8 @@
 > A six-lane sweep verified 144 fetchable HuggingFace datasets, 78 keyless API
 > endpoints, 301 Wikiquote pages across 51 language editions, and 164 Wiktionary
 > categories, each with a live status code and a row count. The corpus grew from
-> 23,885 items to **3,164,600** across 217 source families and 62 language labels. The
+> 23,885 items (the pre-sweep datacenter corpus, distinct from the 23,779-item Jestry
+> precedent index) to **3,164,600** across 217 source families and 62 language labels. The
 > deny-first deterministic public slice contains 121,670 redistributable rows and 7,913 aligned
 > non-English/English pairs. The full census remains 3,164,600 rows; records without explicit
 > redistribution permission are counted locally but their verbatim text is not published.
@@ -31,6 +32,8 @@ aligned float32 matrices, with a dataset card and a manifest of sha256 digests. 
 per collection, so a redistributor must honour each item's own field; the card spells out which lanes require checking
 upstream terms first. Gate G13 in `verify_jestry.py` reloads the export on every verification run and fails if row
 counts, license coverage, or matrix alignment drift.
+
+*The tables below are pre-sweep planning; SOURCE_SWEEP_2026-07-26.md supersedes them where they disagree.*
 
 ## High-Priority Sources
 

@@ -1,5 +1,7 @@
 # Adversarial validation
 
+*Role: tested attack classes and their boundaries. Audience: reviewers. A passing suite is a software contract, not a security certification or a model-quality result.*
+
 The integration layer is tested against hostile configuration, malformed provider responses, and
 abusive HTTP inputs. This is fail-closed contract testing, not a security certification or a model
 quality benchmark.

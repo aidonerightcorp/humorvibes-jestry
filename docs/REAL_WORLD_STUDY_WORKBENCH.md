@@ -1,5 +1,7 @@
 # Real-world study workbench
 
+*Role: the executable protocol for the next evidence gate (issue #3). Audience: study teams. Not an ethics review.*
+
 The repository now includes a complete, local analyzer for the highest-value next experiment: a
 within-writer crossover comparing unassisted and HumorVibes-assisted material. It turns the
 research roadmap into a runnable protocol while refusing to turn synthetic or underqualified data
@@ -232,4 +234,6 @@ still needs:
 
 The practical first milestone is not “prove the theory.” It is to show that independent writers
 can use the protocol, that privacy-minimized exports validate, and that the outcome and grouping
-structure match the decision a real user needs to make.
+structure match the decision a real user needs to make. This protocol is tracked as issue
+[#3](https://github.com/aidonerightcorp/humorvibes-jestry/issues/3); a null result with clean
+reporting closes it.

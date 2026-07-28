@@ -1,5 +1,7 @@
 # Humor Genome Open Controls
 
+*Role: the synthetic four-arm control corpus contract. Audience: experiment designers. Procedural positive control, not observational data.*
+
 Open Controls is a separate, deterministic, project-controlled corpus for experiments that the
 observational Wave 2 corpus cannot support. It is deliberately synthetic and deliberately narrow.
 
@@ -69,7 +71,8 @@ python3 verify_open_controls_release.py --root kaggle_open_controls
 
 The build is clock-free. Selection, item IDs, splits, unresolved continuations, and file order are
 derived from the declared seed and source. The builder emits JSONL and Parquet, strict schemas,
-retrieval qrels, audit receipts, source provenance, licensing, and SHA-256/byte manifests.
+retrieval qrels (query-relevance judgments), audit receipts, source provenance, licensing, and
+SHA-256/byte manifests.
 `release-metadata.json` preserves the public dataset identity and discovery metadata inside the
 downloadable manifest. Kaggle consumes its reserved `dataset-metadata.json` upload-control file,
 so the verifier deliberately does not require that reserved file after download.
@@ -111,8 +114,10 @@ The release fails closed on:
 
 The surface adversary uses word-count, character-count, sentence-count, comma-count, and
 colon-count bins. It is a useful artifact screen, not a semantic classifier. Its measured accuracy
-must be reported even when the release passes. The reference scan does not guarantee worldwide
-originality and does not replace trademark, privacy, or cultural review.
+must be reported even when the release passes. The released build measured 55.2% (0.5519) against
+a 25.0% four-arm chance baseline — jestry_out/open_controls_publication.json. The reference scan
+does not guarantee worldwide originality and does not replace trademark, privacy, or cultural
+review.
 
 ## Embedding and retrieval use
 

@@ -1,5 +1,9 @@
 # Styles of joke: the three axes
 
+*Historical snapshot: the mid-sweep 2,664,398-row labeling pass of 2026-07-26, kept because a
+published kernel bundle shipped it. The final pass and current numbers are in ../STYLES.md
+(3,164,600 rows); where the two disagree, that file wins.*
+
 The corpus began with no style axis at all. It could not answer the question anyone actually asks
 about humor — does a military joke work differently from a dad joke? — because nothing in it said
 which was which.

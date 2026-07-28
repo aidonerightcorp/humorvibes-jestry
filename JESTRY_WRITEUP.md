@@ -1,5 +1,10 @@
 # Jestry: a Verified Laugh-Reuse Layer, Built with Gemma
 
+*Archive (hackathon era, July 2026). Preserved for provenance; current status is in
+PROJECT_STATUS.md and the evidence scoreboard in docs/THESIS_AND_EVIDENCE.md. The
+live-portal sessions described below were ephemeral (~8 h tunnels) and none is
+running now.*
+
 ## Subtitle
 
 Comedy already runs on reuse: bits, callbacks, formats, the canon. Jestry makes that
@@ -106,7 +111,9 @@ The ladder has since climbed one rung, which sharpens that claim rather than
 overturning it. A later run was accepted on the **compose-residual** route, where
 four mechanism cards (anthropomorphism, callback tag, misdirection reversal,
 specificity) ride the prompt and constrain generation to the residual twist: laugh
-41.4 measured on the certified oracle, B-gate passed on real judgments, a sibling
+41.4 (a 0–100 weighted composite of the measured S/R/E signals and the persona-judged
+benign score under the pinned instrument — not a human-funniness estimate) measured
+on the certified oracle, B-gate passed on real judgments, a sibling
 candidate rejected in the same run for failing to re-route. Unconstrained frontier
 generation still rejects. So the honest form of the thesis is narrower and more
 interesting than "reuse beats generation": generation clears the bar when it is
@@ -114,7 +121,7 @@ constrained by reusable mechanism structure, and not when it is free.
 
 ## Verification
 
-`verify_jestry.py` gates the layer with 13 gates: the full offline test suite (42 tests, of which
+`verify_jestry.py` gates the layer with 16 gates: the full offline test suite (42 tests, of which
 30 pin the Jestry layer: registry census, policy gates, ladder selection, carried
 acceptance, groaner incompatibility edges, governed bandit promotion, funnel
 receipts, forced-NLL discovery/censoring/replay, open-world precedent verdicts, the
@@ -133,7 +140,7 @@ browser, which is how three visible defects in it were found and fixed.
 
 ## What this adds to HumorVibes
 
-The pinned competition evidence (seven private COMPLETE kernels, the honest-negative
+The pinned hackathon-era evidence (seven private COMPLETE kernels, the honest-negative
 v4 ablation court, Humicroedit ρ=0.115) is untouched; its source hashes are pinned by
 tests this layer must keep green. Jestry adds the missing economics on top: the reuse
 ledger, the provenance discipline, the precedent index, and a governed path from

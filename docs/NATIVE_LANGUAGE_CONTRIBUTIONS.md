@@ -1,5 +1,7 @@
 # Native-language form contributions
 
+*Role: the one-language-per-PR native review contract (issues #5, #20–#26). Audience: native/fluent reviewers.*
+
 The taxonomy may accept a new language-specific form only when a human who is native or fluent in
 the named locale reviews one bounded contribution. A model, machine-translation service, country
 code, or contributor name is not a reviewer.
@@ -7,7 +9,15 @@ code, or contributor name is not a reviewer.
 ## One language per pull request
 
 Each pull request must contain exactly one `language` and one narrowly scoped `form_id`. The
-current priority queue is Portuguese, Greek, Amharic, Japanese, Italian, Arabic, and Turkish.
+current priority queue is
+[Portuguese](https://github.com/aidonerightcorp/humorvibes-jestry/issues/20),
+[Greek](https://github.com/aidonerightcorp/humorvibes-jestry/issues/22),
+[Amharic](https://github.com/aidonerightcorp/humorvibes-jestry/issues/23),
+[Japanese](https://github.com/aidonerightcorp/humorvibes-jestry/issues/21),
+[Italian](https://github.com/aidonerightcorp/humorvibes-jestry/issues/24),
+[Arabic](https://github.com/aidonerightcorp/humorvibes-jestry/issues/26), and
+[Turkish](https://github.com/aidonerightcorp/humorvibes-jestry/issues/25); the umbrella tracker is
+[#5](https://github.com/aidonerightcorp/humorvibes-jestry/issues/5).
 Separate pull requests preserve reviewer accountability and make false-positive regressions easy
 to isolate.
 

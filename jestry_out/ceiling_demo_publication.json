@@ -1,0 +1,33 @@
+{
+  "receipt_type": "ceiling_demo_publication",
+  "receipt_version": 1,
+  "ts": "2026-07-28T02:09:19+00:00",
+  "kernel": {
+    "ref": "taylorsamarel/humorvibes-what-the-label-can-support",
+    "url": "https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support",
+    "version_pushed": 1,
+    "terminal_status": "COMPLETE",
+    "is_private": false,
+    "enable_internet": false
+  },
+  "independent_readback": {
+    "anonymous_http_status": 200,
+    "title_present": true,
+    "checked_from": "curl with no credentials, same day"
+  },
+  "source": {
+    "builder": "ceiling_demo/build_demo_notebook.py --static (research tree)",
+    "notebook_sha256": "b6e1a0f37e27a2ba666ad7c948c775638846340797e7763e17ace451d7fe629c",
+    "cells": 12,
+    "embedded_receipts": [
+      "caption_ceiling",
+      "caption_portability",
+      "caption_model",
+      "form_signal (0/10 null)"
+    ]
+  },
+  "truth_boundary": {
+    "verified": "public visibility, terminal COMPLETE state, and build identity of a static display notebook whose numbers are the existing committed receipts",
+    "not_verified": "no new measurement, no human evidence, no model-quality claim \u2014 the notebook displays previously receipted results only"
+  }
+}
