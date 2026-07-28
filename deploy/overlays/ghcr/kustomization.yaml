@@ -5,4 +5,4 @@ resources:
 images:
   - name: humorvibes-research
     newName: ghcr.io/aidonerightcorp/humorvibes-jestry
-    digest: sha256:b08c221c8f47056875508088d994eff673fc1357bf9b3d4d9f5ed27efe0a02a0
+    digest: sha256:95568eb899c1a3aa51d8dc1a0884212390f9cc4e85c3aa643477a6355673f4e7

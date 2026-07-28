@@ -33,8 +33,11 @@ human product outcome.
 
 ## Maintenance state
 
-The initial delivery phase is closed after the v0.8.0 source, package, container, and public
-verification gates pass. The repository remains public and accepts:
+The initial delivery phase is closed. The v0.8.0 source, wheel, sdist, two-platform container,
+provenance/SBOM, anonymous-pull, hardened-runtime, and public Kaggle gates passed; the independent
+read-back is recorded in
+[`jestry_out/v0_8_0_publication.json`](jestry_out/v0_8_0_publication.json). The repository remains
+public and accepts:
 
 - security and dependency maintenance;
 - reproducibility fixes with before/after evidence;
@@ -51,27 +54,27 @@ baseline, rights/consent plan, primary metric, uncertainty method, and machine-r
 
 | Lane | Public issue | External evidence required |
 | --- | --- | --- |
-| Writer benefit | #3 | Ethics/IRB determination, preregistration, consented writers, blinded audience ratings |
-| Human multimodal value | #4 | Rights-cleared images, consented captions, rating protocol, independent evaluation |
-| Native-language validity | #5 and #20-#26 | Native/fluent reviewers and permission-confirmed fixtures, one language per PR |
-| Academic DOI | #9 | Repository-owner Zenodo publication and anonymous public-record verification |
-| Product expansion | #7, #8, #10 | Streaming, vector storage, or named production-environment evidence |
+| Writer benefit | [#3](https://github.com/aidonerightcorp/humorvibes-jestry/issues/3) | Ethics/IRB determination, preregistration, consented writers, blinded audience ratings |
+| Human multimodal value | [#4](https://github.com/aidonerightcorp/humorvibes-jestry/issues/4) | Rights-cleared images, consented captions, rating protocol, independent evaluation |
+| Native-language validity | [#5](https://github.com/aidonerightcorp/humorvibes-jestry/issues/5) and [#20-#26](https://github.com/aidonerightcorp/humorvibes-jestry/issues?q=is%3Aissue%20state%3Aopen%20label%3Amultilingual) | Native/fluent reviewers and permission-confirmed fixtures, one language per PR |
+| Academic DOI | [#9](https://github.com/aidonerightcorp/humorvibes-jestry/issues/9) | Repository-owner Zenodo publication and anonymous public-record verification |
+| Product expansion | [#7](https://github.com/aidonerightcorp/humorvibes-jestry/issues/7), [#8](https://github.com/aidonerightcorp/humorvibes-jestry/issues/8), [#10](https://github.com/aidonerightcorp/humorvibes-jestry/issues/10) | Streaming, vector storage, or named production-environment evidence |
 
 These issues remain open because their evidence does not exist yet. Closing the initial build phase
 does not permit simulated participants, model-authored native attestations, inferred rights, or a
-fabricated DOI.
+fabricated DOI. They are grouped under the
+[`Post-closeout research and ecosystem`](https://github.com/aidonerightcorp/humorvibes-jestry/milestone/2)
+milestone, separate from delivered v0.8.0 work.
 
 ## Reproduce the closeout state
 
 ```bash
 git clone --branch v0.8.0 https://github.com/aidonerightcorp/humorvibes-jestry.git
 cd humorvibes-jestry
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -r requirements-dev.txt
-python3 -m pytest -q
-humorvibes adversarial
-python3 tools/public_release_audit.py
+uv sync --frozen --extra dev
+uv run --frozen pytest -q
+uv run --frozen humorvibes adversarial
+uv run --frozen python tools/public_release_audit.py
 ```
 
 For application use, build the local container or install the wheel attached to the GitHub

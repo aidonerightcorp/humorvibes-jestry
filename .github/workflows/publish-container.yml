@@ -155,13 +155,18 @@ jobs:
           notes_path = Path(f"RELEASE_NOTES_{tag}.md")
           if not notes_path.is_file():
               raise SystemExit(f"missing {notes_path}")
-          assets = {}
-          for path in sorted(Path("dist").iterdir()):
-              if path.is_file():
-                  assets[path.name] = {
-                      "bytes": path.stat().st_size,
-                      "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-                  }
+          asset_paths = sorted(
+              [*Path("dist").glob("*.whl"), *Path("dist").glob("*.tar.gz")]
+          )
+          if len(asset_paths) != 2:
+              raise SystemExit(f"expected one wheel and one sdist, found {asset_paths}")
+          assets = {
+              path.name: {
+                  "bytes": path.stat().st_size,
+                  "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+              }
+              for path in asset_paths
+          }
           manifest = {
               "receipt_type": "humorvibes_github_release_manifest",
               "receipt_version": 1,

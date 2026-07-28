@@ -13,7 +13,7 @@ evidence-bearing contributions; see [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md)
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
 | Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
-| Application package | [v0.8.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Formal closeout source; tagged publication must pass multi-architecture, provenance, SBOM, anonymous-pull, and runtime gates |
+| Application package | [v0.8.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public closeout release; wheel/sdist, multi-architecture image, provenance, SPDX SBOM, anonymous pull, and runtime gates passed |
 | Academic archive | [DOI archive preflight](docs/DOI_ARCHIVE.md) | Exact v0.7.0 source is deposit-ready and identified by a complete per-file inventory; no public Zenodo record or DOI is claimed yet |
 
 The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
@@ -44,23 +44,28 @@ The repository now also contains a separate `humorvibes-research` 0.8.0 applicat
   rendered Envoy Gateway TLS/identity/global-rate-limit example.
 
 The local image was built and launched with a read-only root filesystem; its readiness, capability,
-embedding, and signal-boundary checks passed. The public 0.7.1 GHCR digest was then anonymously
-pulled, verified as `linux/amd64` plus `linux/arm64`, checked against its GitHub/Sigstore
-attestation, and run with the same non-root/read-only controls. Compose rendering, the Kubernetes
+embedding, and signal-boundary checks passed. The public 0.8.0 GHCR digest was then anonymously
+pulled, verified as `linux/amd64` plus `linux/arm64`, checked against its tag- and source-pinned
+GitHub attestation and per-platform SPDX/SLSA layers, and run with the same non-root/read-only
+controls. Compose rendering, the Kubernetes
 security/probe contracts, a kubectl 1.36.2 Kustomize render, and a Helm 4.2.0 lint/render also
-passed. The first disposable `kind` 0.32.0 run exposed a render-only gap: Kubernetes Service links
+passed. The controlling v0.8.0 receipt is
+[`jestry_out/v0_8_0_publication.json`](jestry_out/v0_8_0_publication.json).
+
+The first disposable `kind` 0.32.0 run for v0.7.x exposed a render-only gap: Kubernetes Service links
 replaced the numeric `HUMORVIBES_PORT` with a `tcp://...` value. Disabling Service links in both
 deployment paths fixed the collision. The v0.7.1 patch source and exact public digest were then
 tested again: Kustomize and Helm each reached two ready, zero-restart replicas, all live health,
 version, embedding, similarity, signals, study-template, and Open Controls requests passed, and the
 collision did not recur. Both disposable clusters were deleted after verification. The controlling
-receipts are
+historical cluster receipts are
 [`jestry_out/deployment_validation.json`](jestry_out/deployment_validation.json) and
 [`jestry_out/v0_7_1_publication.json`](jestry_out/v0_7_1_publication.json), with the cluster-level
 evidence in [`jestry_out/v0_7_1_kind_smoke.json`](jestry_out/v0_7_1_kind_smoke.json).
 
 Those statements do **not** claim a hosted public API, a hosted production Kubernetes deployment,
-or a universal semantic-embedding quality result. The verified cluster was local and ephemeral; it
+or a universal semantic-embedding quality result. The verified v0.7.1 cluster was local and
+ephemeral; no v0.8.0 cluster apply is claimed. It
 did not exercise DNS, TLS, a gateway controller, an external secret manager, autoscaling, or a
 remote provider. The provider matrix measures two frozen retrieval proxies and does not measure
 human funniness. This extension does not alter the immutable Kaggle notebook or its measurements.
