@@ -117,6 +117,17 @@ def test_wave1_figures_exist_and_receipted() -> None:
     assert abs(d["waterfall"]["ceiling"] - ceil) < 1e-12
 
 
+def test_notebook_refresh_receipt() -> None:
+    d = load("notebook_refresh_publication.json")
+    k = d["kernels"]
+    assert k["wave2"]["terminal_status"] == "COMPLETE"
+    assert k["wave2"]["in_run_instrument"]["agreement"] is True
+    assert k["wave2"]["in_run_form_study"]["strictly_above_control"] == 0
+    assert k["open_controls"]["terminal_status"] == "COMPLETE"
+    assert k["ceiling_demo"]["terminal_status"] == "COMPLETE"
+    assert d["source_tag"]["name"] == "humor-genome-wave2-v10"
+
+
 def test_thesis_doc_quotes_canonical_numbers() -> None:
     text = (ROOT / "docs" / "THESIS_AND_EVIDENCE.md").read_text()
     for needle in (

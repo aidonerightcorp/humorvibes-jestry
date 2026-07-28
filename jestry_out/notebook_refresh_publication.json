@@ -1,0 +1,56 @@
+{
+  "receipt_type": "notebook_refresh_publication",
+  "receipt_version": 1,
+  "ts": "2026-07-28T02:47:59+00:00",
+  "scope": "public Kaggle notebook refresh: thesis framing up front, receipted follow-ups, tag v10",
+  "source_tag": {
+    "name": "humor-genome-wave2-v10",
+    "commit": "03e47c4352e669f7687e0b01de53dab34e07d11a",
+    "note": "humor-genome-wave2-v9 remains valid for the v14 run; neither tag moves"
+  },
+  "kernels": {
+    "wave2": {
+      "ref": "taylorsamarel/humor-genome-wave-2-reproducible-gemma-study",
+      "version_pushed": 15,
+      "terminal_status": "COMPLETE",
+      "served_source_matches_committed_cells": true,
+      "executed_outputs_downloaded": [
+        "humor_genome_wave2_executive_summary.json",
+        "run log"
+      ],
+      "executive_summary_sha256": "e7116d10b5fc3a7058783c1a397019bd0056bb91750b0a5d57118d14b8299630",
+      "in_run_instrument": {
+        "S": 3.188,
+        "agreement": true,
+        "is_funniness": false,
+        "metric": "mean punchline token NLL given setup",
+        "pinned_S": 3.19,
+        "tokens": 10
+      },
+      "in_run_form_study": {
+        "joke_forms": 10,
+        "measurements": 88,
+        "overlap_control": 10,
+        "strictly_above_control": 0,
+        "verdict": "SEPARATION IS NOT ESTABLISHED"
+      }
+    },
+    "open_controls": {
+      "ref": "taylorsamarel/humor-genome-open-controls-causal-design-lab",
+      "version_pushed": 4,
+      "terminal_status": "COMPLETE",
+      "served_source_matches_committed_cells": true
+    },
+    "ceiling_demo": {
+      "ref": "taylorsamarel/humorvibes-what-the-label-can-support",
+      "version_pushed": 2,
+      "terminal_status": "COMPLETE",
+      "anonymous_http_status": 200
+    }
+  },
+  "readback_note": "Anonymous kernel pages are JS shells (~8.7 KB), so content verification used authenticated source pulls (cell-source byte-comparison against the committed notebooks) plus independent download of the executed wave2 outputs. Anonymous HTTP 200 confirmed on all three pages.",
+  "truth_boundary": {
+    "verified": "terminal COMPLETE states, served-source identity, in-run instrument agreement (S = 3.188 vs pinned 3.19 over 10 tokens) and the preserved 0/10 form null",
+    "not_verified": "no new measurement and no human evidence \u2014 the refresh is framing, documentation, and stored-receipt display only"
+  }
+}

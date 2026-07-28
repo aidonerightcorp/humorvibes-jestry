@@ -25,14 +25,14 @@ claim gate.
 
 | Public artifact | Open it | Status | What it is for |
 | --- | --- | --- | --- |
-| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, v14 COMPLETE | Read the write-up and rerun every public measurement |
+| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public, v15 COMPLETE | Read the write-up and rerun every public measurement |
 | Research data | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public v7, ready | Load the rights-filtered corpus, aligned phrases, frames, census, and manifest |
 | Source and receipts | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public | Inspect implementation, tests, immutable source tags, and machine-readable evidence |
-| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v4 ready; notebook v3 COMPLETE | Use 120,000 CC0 procedural controls and frozen easy/hard retrieval tracks without confusing them with human evidence |
+| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) + [executed notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Dataset v4 ready; notebook v4 COMPLETE | Use 120,000 CC0 procedural controls and frozen easy/hard retrieval tracks without confusing them with human evidence |
 | Application release | [GitHub release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) + [public container](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public 0.8.0 closeout; wheel/sdist and two-platform image independently verified | Integrate the bounded SDK/API or deploy the digest-pinned attested image |
 
 The Wave 2 notebook is the canonical executable write-up for the observational study. It clones the immutable
-`humor-genome-wave2-v9` source tag, verifies the mounted dataset byte-for-byte and semantically,
+`humor-genome-wave2-v10` source tag, verifies the mounted dataset byte-for-byte and semantically,
 loads the attached Gemma 2 checkpoint, and then runs the study. The latest cross-surface receipt is
 [`jestry_out/v0_8_0_publication.json`](jestry_out/v0_8_0_publication.json);
 [`jestry_out/wave2_publication.json`](jestry_out/wave2_publication.json) scopes the Wave 2 Kaggle

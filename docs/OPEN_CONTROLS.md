@@ -12,7 +12,7 @@ observational Wave 2 corpus cannot support. It is deliberately synthetic and del
 | Artifact | Public location | Verified state |
 | --- | --- | --- |
 | Dataset | [Humor Genome Open Controls](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) | Kaggle version 4, ready; fresh download passed all 14 release checks |
-| Executed analysis | [Open Controls Causal Design Lab](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Kaggle version 3, COMPLETE; 24 manifested files verified |
+| Executed analysis | [Open Controls Causal Design Lab](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Kaggle version 4, COMPLETE; 24 manifested files verified |
 | Source | [`humor-genome-open-controls-v2`](https://github.com/aidonerightcorp/humorvibes-jestry/tree/humor-genome-open-controls-v2) | Immutable generator, verifier, notebook, API, tests, and publication receipt |
 
 Kaggle version numbers include publication retries; the semantic corpus release is v1. The
