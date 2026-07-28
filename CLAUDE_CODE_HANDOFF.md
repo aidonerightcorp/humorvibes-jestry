@@ -25,6 +25,9 @@ not create speculative work merely to keep the project active.
 - Release commit: `5ca7b020a8a4b9d7ca3d82f85dc87aff704254d0`
 - Validated post-publication baseline before this handoff:
   `7929b534b88c927f0e0f8ddfa49b962da1b490d7`
+- Validated baseline at the 2026-07-28 post-closeout refresh: `bb24900` (PR #36 merge)
+  plus the closeout-wave PR that records this line; re-verify with the standard commands
+  rather than trusting either hash
 - Immutable Wave 2 notebook source tags: `humor-genome-wave2-v10` (current, notebook v15) and `humor-genome-wave2-v9` (v14 run); neither moves
 - Immutable Open Controls source tag: `humor-genome-open-controls-v2`
 
@@ -293,6 +296,18 @@ These are binding for future work:
    scoped branch and pull request. A new immutable release receives a new tag.
 10. Never treat a successful upload or running job as publication proof. Wait for terminal state,
     download the result independently, and compare its content and hashes.
+
+## Post-closeout maintenance log
+
+The closeout did not freeze the repository; it froze the claims. Four bounded waves have
+landed since v0.8.0, none changing the application package:
+
+| PR | What it did |
+| --- | --- |
+| #34 | Wave 1: three receipted studies (declared-style 0/7 null, divisiveness no-free-lunch, demographic mostly-null), ported word-type/three-corpus receipts, three flagship figures, `docs/THESIS_AND_EVIDENCE.md`, two-audit doc reconciliation, public ceiling explainer |
+| #35 | Notebook refresh: thesis-in-one-screen at the top of all three public notebooks, receipted follow-ups section, immutable tag `humor-genome-wave2-v10` |
+| #36 | Publication record: wave2 v15 / Open Controls v4 / ceiling v2 verified terminal + read back; doc version bumps |
+| closeout wave | `ceiling_demo/` ported into the repo with a deterministic static build and tests; ceiling v3 pushed from the repo and byte-verified; this log |
 
 ## Known caveats that are not hidden
 

@@ -1,0 +1,14 @@
+{
+  "id": "taylorsamarel/humorvibes-what-the-label-can-support",
+  "title": "HumorVibes: What the Label Can Support",
+  "code_file": "humorvibes_ceiling_demo_static.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
