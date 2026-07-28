@@ -25,7 +25,7 @@ not create speculative work merely to keep the project active.
 - Release commit: `5ca7b020a8a4b9d7ca3d82f85dc87aff704254d0`
 - Validated post-publication baseline before this handoff:
   `7929b534b88c927f0e0f8ddfa49b962da1b490d7`
-- Immutable Wave 2 notebook source tag: `humor-genome-wave2-v9`
+- Immutable Wave 2 notebook source tags: `humor-genome-wave2-v10` (current, notebook v15) and `humor-genome-wave2-v9` (v14 run); neither moves
 - Immutable Open Controls source tag: `humor-genome-open-controls-v2`
 
 The large artifact tree at
@@ -116,9 +116,9 @@ These findings must remain visible in code, notebooks, documentation, and downst
 | Surface | Verified public identity | State |
 | --- | --- | --- |
 | Wave 2 dataset | <https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2> | Dataset v7, ready |
-| Wave 2 executable study | <https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study> | Notebook v14, `COMPLETE` |
+| Wave 2 executable study | <https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study> | Notebook v15, `COMPLETE` |
 | Open Controls dataset | <https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls> | Dataset v4, ready |
-| Open Controls study | <https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab> | Notebook v3, `COMPLETE` |
+| Open Controls study | <https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab> | Notebook v4, `COMPLETE` |
 | Application release | <https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0> | Public wheel, sdist, release notes, and manifest |
 | Container | <https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry> | Public `linux/amd64` and `linux/arm64` image |
 | Continuation milestone | <https://github.com/aidonerightcorp/humorvibes-jestry/milestone/2> | Open external-evidence work, not release debt |

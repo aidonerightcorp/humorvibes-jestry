@@ -9,9 +9,9 @@ and how another contributor can continue without reconstructing the project hist
 
 | Surface | Stable identity | Use |
 | --- | --- | --- |
-| Wave 2 study | Kaggle notebook v14, source tag `humor-genome-wave2-v9` | Canonical executable observational write-up |
+| Wave 2 study | Kaggle notebook v15, source tag `humor-genome-wave2-v10` (v14 stays pinned to v9) | Canonical executable observational write-up |
 | Wave 2 data | Kaggle dataset v7 | Rights-filtered public corpus, census, frames, aligned phrases, and manifest |
-| Open Controls | Kaggle dataset v4 and notebook v3, source tag `humor-genome-open-controls-v2` | CC0 procedural controls and frozen retrieval tasks |
+| Open Controls | Kaggle dataset v4 and notebook v4, source tag `humor-genome-open-controls-v2` | CC0 procedural controls and frozen retrieval tasks |
 | Application | GitHub release `v0.8.0` | SDK, FastAPI, CLI, Docker, Compose, Kubernetes, Helm, and integration contracts |
 | Research infrastructure | GitHub `main` plus source-controlled receipts | Writer-study, multilingual, multimodal, provider, source, and archive gates |
 

@@ -9,15 +9,15 @@ evidence-bearing contributions; see [`PROJECT_CLOSEOUT.md`](PROJECT_CLOSEOUT.md)
 
 | Surface | Canonical location | Current contract |
 | --- | --- | --- |
-| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public; version 14 is COMPLETE and is the canonical executable write-up |
+| Executable study | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-wave-2-reproducible-gemma-study) | Public; version 15 is COMPLETE and is the canonical executable write-up (thesis-first structure, receipted follow-ups section) |
 | Research dataset | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2) | Public version 7, ready; only explicitly redistributable text is included |
 | Source and evidence | [GitHub repository](https://github.com/aidonerightcorp/humorvibes-jestry) | Public; builders, tests, immutable notebook source tags, and receipts |
-| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 3 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
+| Open causal controls | [Kaggle dataset](https://www.kaggle.com/datasets/taylorsamarel/humor-genome-open-controls) and [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humor-genome-open-controls-causal-design-lab) | Public dataset version 4 is ready; public notebook version 4 is COMPLETE; 120,000 deterministic CC0 procedural rows plus a frozen hard-retrieval track |
 | Application package | [v0.8.0 release](https://github.com/aidonerightcorp/humorvibes-jestry/releases/tag/v0.8.0) and [GHCR image](https://github.com/users/aidonerightcorp/packages/container/package/humorvibes-jestry) | Public closeout release; wheel/sdist, multi-architecture image, provenance, SPDX SBOM, anonymous pull, and runtime gates passed |
-| Label-ceiling explainer | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support) | Public static edition, version 1 COMPLETE (2026-07-27); displays previously receipted ceiling/portability/null results only — `jestry_out/ceiling_demo_publication.json` |
+| Label-ceiling explainer | [Kaggle notebook](https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support) | Public static edition, version 2 COMPLETE (2026-07-28, adds thesis framing and cross-links); displays previously receipted ceiling/portability/null results only — `jestry_out/ceiling_demo_publication.json` |
 | Academic archive | [DOI archive preflight](docs/DOI_ARCHIVE.md) | Exact v0.7.0 source is deposit-ready and identified by a complete per-file inventory; no public Zenodo record or DOI is claimed yet |
 
-The notebook uses the immutable source tag `humor-genome-wave2-v9`. GitHub `main` may move as
+The notebook uses the immutable source tag `humor-genome-wave2-v10` (the v14 run remains pinned to `humor-genome-wave2-v9`; neither tag moves). GitHub `main` may move as
 documentation and follow-up research improve; the code executed by the public notebook cannot
 move underneath an existing run. The separate control release is pinned by
 `humor-genome-open-controls-v2`; its publication receipt records the dataset generator commit,
