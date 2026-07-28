@@ -20,7 +20,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = "https://github.com/aidonerightcorp/humorvibes-jestry"
-REPO_REF = "humor-genome-wave2-v9"
+REPO_REF = "humor-genome-wave2-v10"
 
 # The controlling definition of bad surprise, verbatim. It is quoted rather than
 # paraphrased everywhere in this project because paraphrasing it changes what
@@ -83,13 +83,41 @@ CELLS: list[tuple[str, str]] = [
      "(https://www.kaggle.com/datasets/taylorsamarel/humor-genome-wave2)\n"
      "- Code, SDK/API, and receipts: [aidonerightcorp/humorvibes-jestry]"
      "(https://github.com/aidonerightcorp/humorvibes-jestry)\n"
-     "- Immutable source for this run: `humor-genome-wave2-v9`\n"
+     "- Immutable source for this run: `humor-genome-wave2-v10`\n"
      "- Sourced foundation: [`docs/RESEARCH_FOUNDATIONS.md`]"
-     "(https://github.com/aidonerightcorp/humorvibes-jestry/blob/humor-genome-wave2-v9/docs/RESEARCH_FOUNDATIONS.md)\n\n"
+     "(https://github.com/aidonerightcorp/humorvibes-jestry/blob/humor-genome-wave2-v10/docs/RESEARCH_FOUNDATIONS.md)\n\n"
      "The notebook verifies every mounted payload before analysis, loads the attached Gemma 2 "
      "checkpoint, checks the instrument, and only then displays the controlling receipts. Read in "
      "order: **release audit → corpus → taxonomy → annotated frames → Gemma measurement → human "
-     "bounds → learnings → reuse paths → limits**."),
+     "bounds → learnings → receipted follow-ups → reuse paths → limits**."),
+
+    ("markdown",
+     "## The thesis, in one screen\n\n"
+     "**Frame (not a claim).** ‘The brain is a surprise-reduction engine’ — the "
+     "predictive-processing shorthand from Friston's free-energy tradition — motivates this "
+     "work. Nothing below asserts it as settled neuroscience.\n\n"
+     "**Thesis.** A joke is a **controlled prediction error with a cheap, audience-permitted "
+     "repair**. Six tenets, each falsifiable:\n\n"
+     "1. **T1 — setups narrow expectation**, so punchline surprisal is measurable;\n"
+     "2. **T2 — the punchline is a controlled error**, which predicts an inverted-U: raw "
+     "surprisal should *not* rank funniness;\n"
+     "3. **T3 — a working punchline carries its own repair** (an alternate frame that makes it "
+     "retro-coherent);\n"
+     "4. **T4 — the repair must be affordable** (explained jokes die);\n"
+     "5. **T5 — the repair must be permitted** by this audience (bad surprise is "
+     "audience-relative by construction);\n"
+     "6. **T6 — context dominates text** (the same words land differently per room).\n\n"
+     "**Instruments.** `S = NLL(punchline | setup)` on the pinned Gemma 2 checkpoint; `R` = the "
+     "surprisal drop under an explicit frame; `E` = `R` per frame token; `B` = "
+     "persona-conditioned bad surprise (controlling verbatim definition in the repository's "
+     "`THEORY.md`). None of the four is funniness, and the five quantities — token surprisal, "
+     "prediction error, resolution, amusement, laughter — are never collapsed.\n\n"
+     "**Status before you read on.** Only `S` has a pinned public measurement (3.19 over 10 "
+     "tokens, re-verified in this run). The controlling results here are honest boundaries: the "
+     "0/10 form null (T2 behaving as predicted), the caption ceiling triptych (T6), and the "
+     "receipted follow-ups in section 7. The tenet-by-tenet scoreboard is "
+     "[`docs/THESIS_AND_EVIDENCE.md`](https://github.com/aidonerightcorp/humorvibes-jestry/"
+     "blob/main/docs/THESIS_AND_EVIDENCE.md)."),
 
     ("markdown",
      "## Proposed solution and exploration\n\n"
@@ -818,7 +846,33 @@ CELLS: list[tuple[str, str]] = [
      "    print(f'\\nDownloadable notebook output: {summary_path}')"),
 
     ("markdown",
-     "## 7. What people can use this for\n\n"
+     "## 7. Receipted follow-ups after closeout\n\n"
+     "Four studies ran after the v0.8.0 closeout, on data already on disk, each with a committed "
+     "machine-readable receipt in the repository's `jestry_out/`. They are quoted here as stored "
+     "receipts — none of them executes in this notebook — and every one is an honest boundary:\n\n"
+     "| Follow-up | Receipt | Outcome |\n|---|---|---|\n"
+     "| Declared-style surprisal | `declared_style_study.json` | **0/7** community-declared "
+     "styles separate from the same proverb-control recipe (either direction), permutation "
+     "p = 0.45, zero instrument errors — the form null above replicates on an independent, "
+     "zero-annotation label axis. |\n"
+     "| Caption divisiveness | `divisiveness_study.json` | The vote-histogram *shape* is a real "
+     "label (split-half reliability 0.51; 0.53 at 160+ votes) but text predicts it at ~17% of "
+     "its ceiling vs ~19% for the mean — measurable, not easier. |\n"
+     "| Demographic word norms | `demographic_norms_study.json` | Two crowds agree on word "
+     "funniness (ρ = 0.414) yet single-word demographic gaps are mostly noise (9/4,997 sex, "
+     "0/4,997 age survive FDR) — persona conditioning keeps only weak lexical support. |\n"
+     "| Cross-corpus transfer | `cross_corpus_transfer.json`, `three_corpus_study.json` | The "
+     "within-Humicroedit 0.5075 model transfers at −0.0091; the sole three-corpus survivor "
+     "(`punch_rarity_max`) is *negative* — rarer punchline words read slightly less funny, "
+     "against naive ‘more surprise = funnier’. |\n\n"
+     "Companion figures (`docs/figures/`): the caption ceiling waterfall, the transfer 2×2, and "
+     "the Humor Genome Atlas. A public static explainer walks the ceiling result: "
+     "[HumorVibes: What the Label Can Support]"
+     "(https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support). "
+     "Tenet-by-tenet placement: `docs/THESIS_AND_EVIDENCE.md`."),
+
+    ("markdown",
+     "## 8. What people can use this for\n\n"
      "| Audience | Useful starting point | Appropriate use | Important caution |\n"
      "|---|---|---|---|\n"
      "| Comedian or writer | Structural forms, provenance-aware search, and the SDK/API | "
@@ -863,7 +917,7 @@ CELLS: list[tuple[str, str]] = [
 
      # ------------------------------------------------------------------ limits
     ("markdown",
-     "## 8. Boundaries, limitations, and audit\n\n"
+     "## 9. Boundaries, limitations, and audit\n\n"
      "### What this is, and is not\n\n"
      "**Is:** a research instrument spanning millions of items, dozens of language labels "
      "and hundreds of sources, with every row carrying its own source and licence, three "

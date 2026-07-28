@@ -37,6 +37,34 @@ CELLS: list[tuple[str, str]] = [
     ),
     (
         "markdown",
+        "## The thesis this corpus isolates\n\n"
+        "**Frame (not a claim).** ‘The brain is a surprise-reduction engine’ is the "
+        "predictive-processing shorthand that motivates the project; it is treated as a research "
+        "framework, never as settled neuroscience.\n\n"
+        "**Thesis.** A joke is a **controlled prediction error with a cheap, audience-permitted "
+        "repair**: a setup narrows expectation, a punchline violates it, and a compact alternate "
+        "frame makes the violation retroactively coherent — quickly, and without colliding with "
+        "anything the audience holds above logic.\n\n"
+        "**Why four arms.** Each arm switches exactly one tenet of that thesis, from the same "
+        "premise and configuration:\n\n"
+        "| Arm | What it isolates | Tenet switched |\n|---|---|---|\n"
+        "| `expected` | the narrowed expectation, honored | baseline (T1 only — no error) |\n"
+        "| `unresolved_surprise` | a violation with **no** recoverable frame | T2 without T3 "
+        "(surprise as noise) |\n"
+        "| `resolved_joke` | violation **plus** a compact repair | T2 + T3 + T4 (the thesis's "
+        "candidate structure) |\n"
+        "| `over_explained` | the same repair, spelled out at length | T4 broken (affordability "
+        "removed) |\n\n"
+        "Because every row is procedural and CC0, the arms give models and instruments a clean "
+        "causal contrast with no rights, culture, or authorship confounds — and no claim that any "
+        "row is funny. Evidence status for every tenet lives in the repository's "
+        "[`docs/THESIS_AND_EVIDENCE.md`](https://github.com/aidonerightcorp/humorvibes-jestry/"
+        "blob/main/docs/THESIS_AND_EVIDENCE.md); a public companion explainer for what crowd "
+        "labels can support is [HumorVibes: What the Label Can Support]"
+        "(https://www.kaggle.com/code/taylorsamarel/humorvibes-what-the-label-can-support).",
+    ),
+    (
+        "markdown",
         "## 1. Verify the mounted release before reading it\n\n"
         "Kaggle uploads can succeed while carrying stale or partial files. This cell discovers the dataset by "
         "its declared ID, verifies every SHA-256 and byte length, then loads the controlling summary.",
@@ -118,7 +146,9 @@ CELLS: list[tuple[str, str]] = [
         "A corpus can accidentally encode its labels through length or punctuation. The release builder groups "
         "rows by coarse surface signatures and asks how accurately the majority arm in each group predicts the "
         "label. Chance is 25%. This is intentionally a hostile diagnostic. Passing the release threshold does "
-        "not mean the text is artifact-free.",
+        "not mean the text is artifact-free. The released build measured **55.2%** against the 25.0% "
+        "four-arm chance baseline (threshold <80%) — reproduced live by the next cell and pinned in "
+        "`jestry_out/open_controls_publication.json`.",
     ),
     (
         "code",

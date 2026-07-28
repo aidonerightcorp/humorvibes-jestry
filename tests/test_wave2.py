@@ -48,11 +48,13 @@ def test_canonical_notebook_is_deterministic_public_and_schema_clean() -> None:
     assert "What is the proposed solution or exploration?" in opening
     assert "What did we learn?" in opening
     assert "What can people use this for?" in opening
-    assert "humor-genome-wave2-v9" in opening
+    assert "humor-genome-wave2-v10" in opening
     all_source = "\n".join("".join(cell["source"]) for cell in nb["cells"])
     assert "humor_genome_wave2_executive_summary.json" in all_source
     assert "## 6. What we learned" in all_source
-    assert "## 7. What people can use this for" in all_source
+    assert "## 7. Receipted follow-ups after closeout" in all_source
+    assert "## 8. What people can use this for" in all_source
+    assert "## The thesis, in one screen" in all_source
     assert "model output is human laughter" in all_source
     assert "surprise-reduction engine" in all_source
     assert "docs/RESEARCH_FOUNDATIONS.md" in all_source
