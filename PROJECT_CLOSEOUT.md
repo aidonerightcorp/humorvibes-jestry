@@ -54,15 +54,17 @@ baseline, rights/consent plan, primary metric, uncertainty method, and machine-r
 
 | Lane | Public issue | External evidence required |
 | --- | --- | --- |
-| Writer benefit | #3 | Ethics/IRB determination, preregistration, consented writers, blinded audience ratings |
-| Human multimodal value | #4 | Rights-cleared images, consented captions, rating protocol, independent evaluation |
-| Native-language validity | #5 and #20-#26 | Native/fluent reviewers and permission-confirmed fixtures, one language per PR |
-| Academic DOI | #9 | Repository-owner Zenodo publication and anonymous public-record verification |
-| Product expansion | #7, #8, #10 | Streaming, vector storage, or named production-environment evidence |
+| Writer benefit | [#3](https://github.com/aidonerightcorp/humorvibes-jestry/issues/3) | Ethics/IRB determination, preregistration, consented writers, blinded audience ratings |
+| Human multimodal value | [#4](https://github.com/aidonerightcorp/humorvibes-jestry/issues/4) | Rights-cleared images, consented captions, rating protocol, independent evaluation |
+| Native-language validity | [#5](https://github.com/aidonerightcorp/humorvibes-jestry/issues/5) and [#20-#26](https://github.com/aidonerightcorp/humorvibes-jestry/issues?q=is%3Aissue%20state%3Aopen%20label%3Amultilingual) | Native/fluent reviewers and permission-confirmed fixtures, one language per PR |
+| Academic DOI | [#9](https://github.com/aidonerightcorp/humorvibes-jestry/issues/9) | Repository-owner Zenodo publication and anonymous public-record verification |
+| Product expansion | [#7](https://github.com/aidonerightcorp/humorvibes-jestry/issues/7), [#8](https://github.com/aidonerightcorp/humorvibes-jestry/issues/8), [#10](https://github.com/aidonerightcorp/humorvibes-jestry/issues/10) | Streaming, vector storage, or named production-environment evidence |
 
 These issues remain open because their evidence does not exist yet. Closing the initial build phase
 does not permit simulated participants, model-authored native attestations, inferred rights, or a
-fabricated DOI.
+fabricated DOI. They are grouped under the
+[`Post-closeout research and ecosystem`](https://github.com/aidonerightcorp/humorvibes-jestry/milestone/2)
+milestone, separate from delivered v0.8.0 work.
 
 ## Reproduce the closeout state
 
