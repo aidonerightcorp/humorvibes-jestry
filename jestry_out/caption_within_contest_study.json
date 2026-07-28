@@ -1,0 +1,511 @@
+{
+  "receipt_type": "caption_within_contest_study",
+  "receipt_version": 1,
+  "ts": "2026-07-28T13:51:57+00:00",
+  "status": "complete",
+  "question": "do the pooled New Yorker per-feature results of three_corpus_study.py survive when the contest is held fixed?",
+  "preregistration": {
+    "written_before_results_ts": "2026-07-28T13:49:33+00:00",
+    "hypothesis": "H1: punch_rarity_max, the sole cross-corpus survivor of three_corpus_study.py (pooled caption rho -0.0874), retains a negative association with the crowd mean WITHIN contest (median within-contest rho < 0 and BH-FDR survival). The confound model predicts attenuation toward 0 once cross-contest pooling is removed. The other 29 features are re-tested under the same protocol.",
+    "primary_metric": "median within-contest tied-midrank Spearman rho vs mean_exact, plus BH-FDR survival of a within-contest permutation p (statistic = the median itself); secondary: share of contests matching the pooled sign",
+    "family_size": 30,
+    "alpha": 0.05,
+    "n_permutations": 1000,
+    "permutation_scheme": "shuffle mean_exact WITHIN each contest, contest structure preserved; two-sided p = (1 + #{|perm median| >= |obs median|}) / (1 + n_perm)",
+    "seeds": {
+      "sampling": 20260728,
+      "permutations": "numpy default_rng([20260728, 1])",
+      "validation_cells": "numpy default_rng([20260728, 2])"
+    },
+    "declared_degenerate_features": [
+      "echo_frac",
+      "end_rhyme",
+      "setup_chars",
+      "setup_mean_wordlen",
+      "setup_rarity_final",
+      "setup_rarity_max",
+      "setup_rarity_mean",
+      "setup_syllables",
+      "setup_words"
+    ],
+    "degenerate_convention": "9 of the 30 features are constant by construction in this arm (setup is empty: the cartoon has no text), so a within-contest rank correlation cannot fire for them at ANY n. They stay in the declared family at p = 1 \u2014 the pooled run's own value for them \u2014 rather than being reported as null results.",
+    "declared_collinear_identities": {
+      "word_ratio": "punch_words",
+      "syllable_ratio": "punch_syllables",
+      "pair_alliteration": "punch_alliteration",
+      "pair_assonance": "punch_assonance"
+    },
+    "minimum_detectable_effect": {
+      "back_of_envelope": "single within-contest null Spearman SE ~ 1/sqrt(n-1); median sampled per-contest n gives typical SE 0.0258; the median across C=360 contests has null SD ~ 1.2533*SE/sqrt(C) = 0.0017; two-sided detection at the BH rank-1 threshold p<=0.05/30 (z=3.14) needs |median rho| >~ 0.0054; at nominal alpha=0.05, >~ 0.0033.",
+      "typical_within_contest_se": 0.0258,
+      "null_sd_of_median": 0.00171,
+      "mde_abs_median_rho_at_bh_rank1": 0.0054,
+      "mde_abs_median_rho_nominal_05": 0.0033,
+      "resolution_statement": "permutation p floor = 1/(n_perm+1) = 0.000999, which is below the BH rank-1 cutoff 0.05/30 = 0.001667, so a single survivor CAN fire at this permutation count. Any observed |median rho| below ~0.0054 is below design resolution: a non-survival there is 'underpowered', not evidence of absence."
+    }
+  },
+  "provenance": {
+    "feature_extractor": "humor_features.features imported from the repo, byte-identical to the research-tree copy; data paths redirected to --data-root (how the original resolved them)",
+    "humor_features_sha256_16": "ad27055afeedaa55",
+    "data_root": "/home/username/new_algo/comps/build-with-gemma-humor-genome-nyc",
+    "caption_index_rows": 2186939,
+    "frequency_table": {
+      "types": 348807,
+      "tokens": 42937599,
+      "cache_key": "980aa71d17ad7af4",
+      "cache_hit": true
+    },
+    "pooled_comparison_source": "jestry_out/three_corpus_study.json (quoted, not recomputed)",
+    "spearman_engine": {
+      "method": "per-contest tied-midrank rank-Pearson (scipy.stats.rankdata method='average'), validated cell-for-cell against scipy.stats.spearmanr",
+      "validated_cells": 200,
+      "max_abs_diff_vs_scipy": 1.318e-16,
+      "degenerate_cells_nan_in_scipy_too": true
+    }
+  },
+  "screens": {
+    "rows_raw": 2186939,
+    "dropped_nonfinite_or_nonpositive": 0,
+    "dropped_count_mismatch": 7061,
+    "dropped_mean_mismatch": 5544,
+    "kept_votes_ge_20": 2068094,
+    "matches_divisiveness_study_receipt": true
+  },
+  "sampling": {
+    "contests_eligible_ge_min": 360,
+    "min_contest_rows": 200,
+    "per_contest_cap": 1500,
+    "rows_sampled": 536438,
+    "per_contest_n": {
+      "min": 331,
+      "median": 1500.0,
+      "max": 1500
+    },
+    "contests_at_cap": 355,
+    "sampling_note": "per-contest pandas .sample with random_state drawn sequentially from numpy default_rng(seed) over contests in lexicographic order"
+  },
+  "contests_with_constant_mean_excluded": 0,
+  "per_feature": [
+    {
+      "feature": "caps_words",
+      "pooled_rho_from_three_corpus_receipt": -0.0629,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0517,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8639,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "digits",
+      "pooled_rho_from_three_corpus_receipt": 0.0164,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": -0.0124,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.3333,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "echo_frac",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "end_rhyme",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "exclaims",
+      "pooled_rho_from_three_corpus_receipt": -0.1062,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0635,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.9806,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "pair_alliteration",
+      "pooled_rho_from_three_corpus_receipt": -0.028,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0397,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8472,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true,
+      "status": "identical to punch_alliteration when setup is empty (declared pre-hoc)"
+    },
+    {
+      "feature": "pair_assonance",
+      "pooled_rho_from_three_corpus_receipt": 0.0007,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": 0.0205,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.6917,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true,
+      "status": "identical to punch_assonance when setup is empty (declared pre-hoc)"
+    },
+    {
+      "feature": "punch_alliteration",
+      "pooled_rho_from_three_corpus_receipt": -0.028,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0397,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8472,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_assonance",
+      "pooled_rho_from_three_corpus_receipt": 0.0007,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": 0.0205,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.6917,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_chars",
+      "pooled_rho_from_three_corpus_receipt": -0.0388,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0609,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8694,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_mean_wordlen",
+      "pooled_rho_from_three_corpus_receipt": 0.0011,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": -0.0152,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.3417,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_rarity_final",
+      "pooled_rho_from_three_corpus_receipt": -0.0239,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0166,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.6778,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_rarity_max",
+      "pooled_rho_from_three_corpus_receipt": -0.0874,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0876,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.9806,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_rarity_mean",
+      "pooled_rho_from_three_corpus_receipt": -0.0582,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0623,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.9333,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_syl_per_word",
+      "pooled_rho_from_three_corpus_receipt": -0.0025,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": -0.0128,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.6306,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_syllables",
+      "pooled_rho_from_three_corpus_receipt": -0.0367,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0582,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8667,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "punch_words",
+      "pooled_rho_from_three_corpus_receipt": -0.0404,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0528,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8639,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "questions",
+      "pooled_rho_from_three_corpus_receipt": -0.0016,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": -0.0082,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.5861,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "quotes",
+      "pooled_rho_from_three_corpus_receipt": -0.0073,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": -0.0016,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.5139,
+      "perm_p": 0.350649,
+      "q_bh": 0.500927,
+      "survives": false
+    },
+    {
+      "feature": "sentences",
+      "pooled_rho_from_three_corpus_receipt": -0.0204,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0044,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.5639,
+      "perm_p": 0.010989,
+      "q_bh": 0.016484,
+      "survives": true
+    },
+    {
+      "feature": "setup_chars",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "setup_mean_wordlen",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "setup_rarity_final",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "setup_rarity_max",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "setup_rarity_mean",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "setup_syllables",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "setup_words",
+      "pooled_rho_from_three_corpus_receipt": 0.0,
+      "pooled_survives_fdr": false,
+      "median_within_contest_rho": null,
+      "n_contests_used": 0,
+      "sign_consistent_share": null,
+      "perm_p": 1.0,
+      "q_bh": 1.0,
+      "survives": false,
+      "status": "degenerate_constant_in_caption_arm (declared pre-hoc; p=1 by convention)"
+    },
+    {
+      "feature": "syllable_ratio",
+      "pooled_rho_from_three_corpus_receipt": -0.0367,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0582,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8667,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true,
+      "status": "identical to punch_syllables when setup is empty (declared pre-hoc)"
+    },
+    {
+      "feature": "type_token_ratio",
+      "pooled_rho_from_three_corpus_receipt": 0.0343,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": 0.0352,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8389,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true
+    },
+    {
+      "feature": "word_ratio",
+      "pooled_rho_from_three_corpus_receipt": -0.0404,
+      "pooled_survives_fdr": true,
+      "median_within_contest_rho": -0.0528,
+      "n_contests_used": 360,
+      "sign_consistent_share": 0.8639,
+      "perm_p": 0.000999,
+      "q_bh": 0.001577,
+      "survives": true,
+      "status": "identical to punch_words when setup is empty (declared pre-hoc)"
+    }
+  ],
+  "degenerate_features": {
+    "declared_pre_hoc": [
+      "echo_frac",
+      "end_rhyme",
+      "setup_chars",
+      "setup_mean_wordlen",
+      "setup_rarity_final",
+      "setup_rarity_max",
+      "setup_rarity_mean",
+      "setup_syllables",
+      "setup_words"
+    ],
+    "observed": [
+      "echo_frac",
+      "end_rhyme",
+      "setup_chars",
+      "setup_mean_wordlen",
+      "setup_rarity_final",
+      "setup_rarity_max",
+      "setup_rarity_mean",
+      "setup_syllables",
+      "setup_words"
+    ],
+    "observed_matches_declared": true
+  },
+  "within_contest_fdr_survivors": [
+    "caps_words",
+    "digits",
+    "exclaims",
+    "pair_alliteration",
+    "pair_assonance",
+    "punch_alliteration",
+    "punch_assonance",
+    "punch_chars",
+    "punch_mean_wordlen",
+    "punch_rarity_final",
+    "punch_rarity_max",
+    "punch_rarity_mean",
+    "punch_syl_per_word",
+    "punch_syllables",
+    "punch_words",
+    "questions",
+    "sentences",
+    "syllable_ratio",
+    "type_token_ratio",
+    "word_ratio"
+  ],
+  "pooled_fdr_survivors_for_reference": [
+    "caps_words",
+    "exclaims",
+    "pair_alliteration",
+    "punch_alliteration",
+    "punch_chars",
+    "punch_rarity_final",
+    "punch_rarity_max",
+    "punch_rarity_mean",
+    "punch_syllables",
+    "punch_words",
+    "sentences",
+    "syllable_ratio",
+    "type_token_ratio",
+    "word_ratio"
+  ],
+  "punch_rarity_max_verdict": "punch_rarity_max: pooled caption rho -0.0874 (pooled FDR survivor); within contest, median within-contest rho -0.0876 across 360 contests, 98.1% of contests matching the pooled sign, permutation p 0.000999, q_BH 0.001577 \u2014 survives FDR in the 30-feature family; the effect holds within contest at 100% of the pooled magnitude \u2014 it is not a cross-contest pooling artifact.",
+  "truth_boundary": {
+    "verified": "within-contest rank association between 30 deterministic surface features and the crowd mean rating of ONE publication's caption contest (screened votes>=20 rows); this is within-one-publication caption behavior",
+    "not_verified": "humor in general, other audiences, other formats, causal claims, or any setup-side feature \u2014 the cartoon has no text, so setup-side features are structurally untestable here"
+  },
+  "caveats": [
+    "per-contest sampling cap of 1,500 rows (seeded, receipted); results are conditional on that cap",
+    "the family is the 30 features exactly as declared; 9 structurally constant features enter BH at p=1 (the pooled run's own convention), which only makes the correction more conservative for the 21 testable features",
+    "word_ratio, syllable_ratio, pair_alliteration and pair_assonance are exact duplicates of punch_words, punch_syllables, punch_alliteration and punch_assonance in this arm (empty setup) \u2014 21 testable features carry at most 17 distinct signals",
+    "the word-frequency table is the research tree's CURRENT corpus (cache 980aa71d17ad7af4), which postdates the 2026-07-25 pooled run \u2014 the corpus grew on 2026-07-26, including the caption harvest itself \u2014 so rarity features here use a larger frequency table than the pooled numbers did; the pooled column is quoted from the committed receipt, not recomputed",
+    "the pooled arm sampled the first 60k cached rows at votes>=40 and held out 30%; this arm uses the certified caption_index at votes>=20 with integrity screens across all contests \u2014 a documented population difference on top of the pooling difference under test",
+    "permutation resolution: p floor 0.000999 with 1000 permutations",
+    "no caption text appears in this receipt or in the row checkpoint"
+  ],
+  "runtime_s": 149.2
+}

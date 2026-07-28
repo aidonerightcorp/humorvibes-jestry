@@ -1,5 +1,7 @@
 # HumorVibes - Consolidated measured results (writeup source)
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 Every number traces to a receipt; the run environment (Kaggle kernel or named local host) is
 stated per section. Instrument = gemma-2-2b-it teacher-forced logprobs unless noted; R is
 null-controlled after v5.
@@ -629,6 +631,48 @@ estimator and status-label defects, all corrected in place and receipted:
   figure-value provenance, and the 0.8262 caption ceiling (whose split-half arm is conservative —
   the referee's independent-halves check explains the receipt's own flagged estimator
   disagreement).
+
+## 2026-07-28 research wave 2 (pre-registered; referee rules applied from the start)
+
+At the maintainer's direction, a second bounded research wave ran on data already on disk —
+every study froze its pre-registration block (hypotheses, family, seed, MDE) into the receipt
+BEFORE measuring, and the wave-1 referee rules (midranks, Welch, BH-in-declared-family, no SB on
+non-positive r, power-before-null, no rankings off reliability-zero statistics) were binding
+from the start.
+
+- **The sole invariant survives its own confound check** (`jestry_out/caption_within_contest_study.json`):
+  the queued within-contest re-run of the caption feature arm confirms `punch_rarity_max` at
+  **100% of its pooled magnitude** — median within-contest ρ **−0.0876** vs pooled −0.0874,
+  sign-consistent in **98.1%** of 360 contests, q = 0.0016 in the declared 30-feature family
+  (full 1,000 permutations; screens byte-match the divisiveness receipt). It is NOT a pooling
+  artifact. The re-run also shows the pooled column WAS contaminated for weak features — two
+  flip sign within contest — retroactively justifying the queue entry.
+- **Human frames do not rescue R on captions — the missing arm returns a tested negative**
+  (`jestry_out/human_frames_resolution_study.json`): on the certified instrument, with the
+  first trusted (crowd-annotated) frames in the project, the TRUE uncanny description produces
+  LESS surprisal collapse than a seeded decoy (paired R_net = **−0.107**, CI [−0.184, −0.041],
+  sign-flip p = 0.004, n = 34, MDE 0.073 — the criterion genuinely fired), with no
+  top-vs-bottom-decile discrimination (+0.011 [−0.069, 0.087]). The first hint-dose (T4)
+  measurements show the full frame adds nothing (R ≈ −0.04) while a 3-word prefix collapses
+  most (+0.149 [0.070, 0.243]) — mechanical priming, not comprehension. The receipted format
+  boundary holds even against human frames in the caption domain. Plan truncated 53 → 34
+  contests under a host load spike (deterministic prefix; decoy-derangement lesson receipted).
+- **"Concrete nouns are funnier" does not transfer** (`jestry_out/word_type_rjokes_replication.json`):
+  on 98k r/Jokes rows, body-part punchline words rate **−0.118 BELOW** the pooled mean (perm
+  p = 0.0001, BH-significant, MDE 0.046) versus **+0.205 above** on Humicroedit — a sign flip
+  on the wave-1 result's most quotable category; the 10-category delta vectors anti-correlate
+  across corpora (descriptive ρ = −0.68, 2/10 sign matches). The type-feature lift keeps its
+  sign but shrinks ~24× (+0.0048 [0.0033, 0.0058] vs +0.116). Word-type effects are
+  corpus-local, mirroring the structural model's transfer collapse; the wave-1 caveat
+  "not transfer-tested" now has its tested answer. Outcome is a popularity proxy (log-score),
+  receipted as such.
+- **Participation drifts; the label does not** (`jestry_out/caption_temporal_drift.json`):
+  across ~380 contest numbers, median votes per caption roughly doubles (trend ρ **+0.358**,
+  q < 1e-6), caption counts and vocabulary novelty creep up (both ρ ≈ +0.15, q = 0.017) — but
+  mean rating, funny-vote share, and split-half label reliability are all **flat** (raw
+  split-half r ≈ 0.50 throughout; SB applied only over positive-r contests, 8 negative-r
+  contests receive none). The crowd doubled; the label kept its meaning. Exploratory by
+  pre-registration; drift ≠ humor aging, and topicality remains unmeasured here.
 
 None of the three studies' conclusions reversed; what changed is that the receipts now state
 exactly what each design could and could not have found. The full verbatim referee reports are

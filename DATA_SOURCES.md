@@ -1,5 +1,7 @@
 # Humor Datacenter Sources
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 > **2026-07-26 — see `SOURCE_SWEEP_2026-07-26.md` for the current inventory.**
 > A six-lane sweep verified 144 fetchable HuggingFace datasets, 78 keyless API
 > endpoints, 301 Wikiquote pages across 51 language editions, and 164 Wiktionary

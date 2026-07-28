@@ -2,6 +2,8 @@
 
 *HumorVibes / Jestry research note, 2026-07-24. Every number below traces to a receipt file in this repo; paths are given inline. Nothing here is an estimate.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 ## Summary
 
 We measure jokes as controlled prediction error with a cheap permitted repair, using teacher-forced negative log likelihood from small Gemma models. Building and hardening that instrument produced five findings that are more general than this project: a transport-level copy attractor in raw-mode frame conditioning, a censoring failure that makes top-K logprob APIs unusable as humor meters, an EOS boundary artifact that silently deletes logprobs, a format boundary that limits which text shapes the meter can read at all, and a corrupt-weights failure in which a model returned NaN for every logit while a receipt still called the result measured. Each was caught by a calibration or adversarial receipt, not by intuition. Sections 7 and 8 add an executed follow-up to the format boundary and the dataset the whole apparatus now exports.

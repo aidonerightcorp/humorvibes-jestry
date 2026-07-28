@@ -2,6 +2,8 @@
 
 *Role: which providers and model IDs are allowlisted, and what each live check actually reached. Audience: integrators.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 The integration layer has one rule: a configured provider is a capability, not a fallback. Every
 request selects an exact allowlisted model ID, and malformed or unavailable upstreams fail with a
 sanitized structured error instead of silently switching models or inventing offline output.

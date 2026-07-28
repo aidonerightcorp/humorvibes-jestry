@@ -2,6 +2,8 @@
 
 *Role: persona workflows and the claim gate. Audience: anyone about to write product copy.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 ## The problem
 
 Writers, audiences, researchers, and product teams all ask some version of “does this humor

@@ -2,6 +2,8 @@
 
 *Role: the one-language-per-PR native review contract (issues #5, #20–#26). Audience: native/fluent reviewers.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 The taxonomy may accept a new language-specific form only when a human who is native or fluent in
 the named locale reviews one bounded contribution. A model, machine-translation service, country
 code, or contributor name is not a reviewer.

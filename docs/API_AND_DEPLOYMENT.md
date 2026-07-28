@@ -2,6 +2,8 @@
 
 *Role: how to run the service. Audience: operators. Downstream of the research; changes nothing measured.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 HumorVibes now has one application-facing service layer that can be imported as a Python SDK,
 served through FastAPI, built as a non-root container, run with Docker Compose, or scheduled on
 Kubernetes. It is separate from the immutable Kaggle measurement path: deploying this service

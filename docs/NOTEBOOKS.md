@@ -2,6 +2,8 @@
 
 *Role: which notebook is canonical and what a promoted notebook must show. Audience: readers choosing where to start.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 ## The observational notebook to read first
 
 [`wave2_notebook/humor_genome_wave2.ipynb`](../wave2_notebook/humor_genome_wave2.ipynb) is the

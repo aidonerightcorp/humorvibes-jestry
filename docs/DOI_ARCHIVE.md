@@ -2,6 +2,8 @@
 
 *Role: deposit-readiness for the frozen v0.7.0 tag (issue #9). Audience: the repository owner. No DOI is claimed.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 ## Executive summary
 
 The v0.7.0 software release is ready for an owner-controlled archive deposit, but it does **not**

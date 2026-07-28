@@ -2,6 +2,8 @@
 
 *Role: one frozen retrieval-quality run with failed arms preserved. Audience: anyone choosing an embedding model. Not a default recommendation.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 ## Executive summary
 
 An embedding endpoint can be configured yet unreachable, reachable yet schema-incompatible, or

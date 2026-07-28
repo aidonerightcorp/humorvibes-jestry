@@ -2,6 +2,8 @@
 
 *Archive (hackathon era, July 2026): preserved for provenance. Current project state: PROJECT_STATUS.md.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 ## Public release as of 2026-07-27 (superseded by notebook v16 / tag `humor-genome-wave2-v10`)
 
 The canonical evidence is now consolidated and public:

@@ -4,6 +4,8 @@
 SOURCE_SWEEP_2026-07-26.md; the validation promised in §5 below has since RUN — see the executed
 result note in that section.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 What HumorVibes already gathers, the full landscape of comedy datasets, and — the real prize —
 the **labeled** ones that let us *validate* the measured genome against human laughter.
 

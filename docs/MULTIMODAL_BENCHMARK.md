@@ -2,6 +2,8 @@
 
 *Role: the rights-safe caption+drawing experiment contract (issue #4). Audience: anyone proposing a multimodal arm. The checked-in run is a procedural positive control, not a result.*
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`THESIS_AND_EVIDENCE.md`](THESIS_AND_EVIDENCE.md).*
+
 ## Executive summary
 
 Humor in a caption contest is a relation between words, a drawing, and an audience. A text-only

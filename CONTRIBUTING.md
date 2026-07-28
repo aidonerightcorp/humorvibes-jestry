@@ -1,5 +1,7 @@
 # Contributing to Humor Genome Wave 2
 
+*Motivating frame, project-wide: “the brain is a surprise-reduction engine” (predictive processing) — held as a falsifiable framework, never as a settled conclusion; the thesis and its evidence status live in [`docs/THESIS_AND_EVIDENCE.md`](docs/THESIS_AND_EVIDENCE.md).*
+
 Contributions are welcome across research design, data provenance, multilingual taxonomy,
 statistics, model instrumentation, documentation, and reproducibility. A contribution does not
 need to make a metric go up. A clean negative result, a removed confound, or a smaller reliable
